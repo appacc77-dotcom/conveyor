@@ -86,6 +86,20 @@ const signature = (selector) =>
     return parts.join('\n');
   }, selector);
 
+// Отпечаток самого переключателя: меняется ли его вид, когда он открывает
+// состояние. Иначе пользователь не видит, что меню открыто.
+const controlSignature = (handle) =>
+  handle.evaluate((el) => {
+    const parts = [];
+    const walk = (node) => {
+      const cs = getComputedStyle(node);
+      parts.push(`${node.tagName}|${node.className}|${cs.transform}|${cs.opacity}|${cs.backgroundColor}`);
+      for (const child of node.children) walk(child);
+    };
+    walk(el);
+    return parts.join('\n');
+  });
+
 const sections = await page.evaluate((onlySel) => {
   // Секция — самый внешний узел с data-figma-node внутри <section>: вложенные
   // узлы проверять бессмысленно, их состояние меняется снаружи.
@@ -122,11 +136,13 @@ for (const section of sections) {
   const initial = await signature(section.selector);
   let alive = false;
   let ariaOnly = [];
+  let blind = [];
   let inert = [];
 
   for (const control of controls) {
     const label = (await control.evaluate((el) => (el.textContent ?? '').trim().slice(0, 24) || el.getAttribute('aria-label') || el.tagName.toLowerCase())).trim();
     const ariaBefore = await control.evaluate((el) => el.getAttribute('aria-expanded'));
+    const selfBefore = await controlSignature(control);
     try {
       await control.click({ timeout: 2000 });
     } catch {
@@ -137,6 +153,13 @@ for (const section of sections) {
 
     const now = await signature(section.selector);
     const ariaAfter = await control.evaluate((el) => el.getAttribute('aria-expanded'));
+    const selfAfter = await controlSignature(control);
+
+    // Переключатель обязан показать своё состояние: крестик вместо полос,
+    // повёрнутый шеврон, другая иконка. Иначе открытие не читается.
+    if (ariaBefore !== null && ariaAfter !== null && ariaBefore !== ariaAfter && selfBefore === selfAfter) {
+      blind.push(label);
+    }
 
     if (now !== initial) {
       alive = true;
@@ -148,11 +171,12 @@ for (const section of sections) {
     }
   }
 
-  dead += ariaOnly.length;
-  pretenders += ariaOnly.length;
-  const status = ariaOnly.length ? 'ПРИТВОРЯЕТСЯ' : alive ? 'живой' : 'СТАТИЧНЫЙ';
+  dead += ariaOnly.length + blind.length;
+  pretenders += ariaOnly.length + blind.length;
+  const status = ariaOnly.length ? 'ПРИТВОРЯЕТСЯ' : blind.length ? 'МОЛЧАЛИВЫЙ ПЕРЕКЛЮЧАТЕЛЬ' : alive ? 'живой' : 'СТАТИЧНЫЙ';
   console.log(`${section.name.padEnd(18)} элементов ${String(controls.length).padStart(2)} · ${status}`);
   for (const label of ariaOnly) console.log(`   «${label}» — меняет только aria, на экране ничего`);
+  for (const label of blind) console.log(`   «${label}» — открывает состояние, но сам не меняется`);
   if (!alive && !ariaOnly.length) console.log(`   нажатия не меняют ничего: ${inert.slice(0, 3).join(', ')}`);
   if (!alive && !ariaOnly.length) dead += 1;
 
