@@ -5,6 +5,7 @@ import Pain from '../components/Pain.astro';
 import Banner from '../components/Banner.astro';
 import Header from '../components/Header.astro';
 import Formats from '../components/Formats.astro';
+import Entry from '../components/Entry.astro';
 
 const painItems = [
   {
@@ -78,6 +79,16 @@ const painItems = [
       items={painItems}
     />
 
+    <Entry
+      title="С чего начать"
+      lead="Бережно и точно. Ясность в том, что с тобой происходит."
+      name="Точка входа"
+      desc="Первая встреча. Ты увидишь, из какого состояния сейчас строится твоя жизнь, и почувствуешь, как звучит эта работа, прежде чем идти дальше."
+      meta={['Онлайн', '30 минут']}
+      ctaLabel="Начать с точки входа"
+      secondaryLabel="Форматы работы"
+      photoText={['Рядом,', 'даже на расстоянии']}
+    />
     <Formats
       title="Форматы работы"
       lead="Форматы различаются по глубине запроса, длительности и степени сопровождения."
