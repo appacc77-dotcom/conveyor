@@ -7,6 +7,7 @@ import Header from '../components/Header.astro';
 import Formats from '../components/Formats.astro';
 import Entry from '../components/Entry.astro';
 import Method from '../components/Method.astro';
+import Quiz from '../components/Quiz.astro';
 import AirPhoto from '../components/AirPhoto.astro';
 
 const painItems = [
@@ -87,6 +88,16 @@ const painItems = [
       turn="Но существует выход из предначертанного."
       title="Там, где начинается новый выбор"
       ctaLabel="Как это работает"
+    />
+
+    <Quiz
+      title="Диагностика состояния"
+      segments={[
+        { text: 'Тест ', style: 'script-l' },
+        { text: 'поможет увидеть, что сейчас управляет твоим состоянием и жизнью', style: 'body' },
+      ]}
+      ctaLabel="понять себя"
+      meta={['Бесплатно', '2-3 минуты']}
     />
 
     <Entry

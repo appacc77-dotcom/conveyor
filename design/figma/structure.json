@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-06T18:34:46.455Z",
+  "at": "2026-11-06T18:40:58.583Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 7,
+    "green": 8,
     "measured": 0,
     "red": 0,
-    "exported": 39,
+    "exported": 38,
     "todo": 0
   },
   "assetsTotal": {
@@ -57,7 +57,7 @@
             "mean": 1.76,
             "over16": 0.98,
             "over48": 0.56,
-            "at": "2026-11-06T18:00:14.756Z"
+            "at": "2026-11-06T18:36:21.922Z"
           },
           "assets": {
             "nodes": 14,
@@ -192,7 +192,7 @@
             "mean": 1.87,
             "over16": 1.55,
             "over48": 0.98,
-            "at": "2026-11-06T18:34:24.425Z"
+            "at": "2026-11-06T18:36:24.932Z"
           },
           "assets": {
             "nodes": 16,
@@ -221,11 +221,24 @@
           "slug": "home-quiz",
           "dir": "design/figma/pages/home/quiz",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 12,
+            "nodes": 17,
+            "coverage": 100,
+            "worstDelta": 1,
+            "at": "2026-11-06T18:40:08.762Z"
+          },
+          "pixel": {
+            "mean": 2.23,
+            "over16": 2.54,
+            "over48": 1.79,
+            "at": "2026-11-06T18:40:20.012Z"
+          },
           "assets": {
             "nodes": 17,
             "images": 1,
@@ -239,7 +252,7 @@
           },
           "images": {
             "figma": "/structure/home-quiz-figma.png",
-            "site": null
+            "site": "/structure/home-quiz-site.png"
           }
         },
         {
@@ -583,7 +596,7 @@
             "mean": 3.83,
             "over16": 5.94,
             "over48": 1.97,
-            "at": "2026-11-06T18:00:17.382Z"
+            "at": "2026-11-06T18:36:23.286Z"
           },
           "assets": {
             "nodes": 29,
@@ -604,10 +617,10 @@
       ],
       "counts": {
         "total": 15,
-        "green": 7,
+        "green": 8,
         "measured": 0,
         "red": 0,
-        "exported": 8,
+        "exported": 7,
         "todo": 0
       }
     },
