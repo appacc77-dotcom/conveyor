@@ -158,13 +158,13 @@ for (const el of measured.elements) {
       continue;
     }
     const abs = absolute(node, rootId);
-    // Ширина текстового узла в Figma — следствие метрик шрифта и переносов,
-    // а не дизайн-решение: сверяем позицию и высоту, ширину показываем для справки.
-    const checkWidth = node.type !== 'TEXT';
+    // Ширину текста сверяем: блоки ограничены max-width из спеки, поэтому
+    // совпадает и ширина, и точки переноса. Если у блока ширины нет — он
+    // растянется на колонку и ворота это покажут.
     const worst = Math.max(
       Math.abs(el.x - abs.x),
       Math.abs(el.y - abs.y),
-      checkWidth ? Math.abs(el.w - node.w) : 0,
+      Math.abs(el.w - node.w),
       Math.abs(el.h - node.h),
     );
     const ok = worst <= tol;

@@ -28,19 +28,6 @@ const { title, lead, script, ctaLabel, ctaHref, items } = Astro.props;
 ---
 
 <section class="pain" data-figma-node="79:116">
-  <!-- Коррекция фона считается в линейном RGB, как в Figma: CSS brightness()
-       работает в sRGB и выжигает светлые каналы в 255. -->
-  <svg class="pain__defs" aria-hidden="true" focusable="false">
-    <defs>
-      <filter id="pain-bg-filter" color-interpolation-filters="linearRGB">
-        <feComponentTransfer>
-          <feFuncR type="linear" slope="1.363"></feFuncR>
-          <feFuncG type="linear" slope="1.691"></feFuncG>
-          <feFuncB type="linear" slope="2.299"></feFuncB>
-        </feComponentTransfer>
-      </filter>
-    </defs>
-  </svg>
 
   <div class="pain__container" data-figma-node="79:117">
     <div class="pain__text" data-figma-node="79:118">
@@ -84,14 +71,8 @@ const { title, lead, script, ctaLabel, ctaHref, items } = Astro.props;
     /* imageTransform: [[0,526, 0, 0], [0, 0,598, 0,1717]] */
     background-size: 190.07% 167.32%;
     background-position: 0% 42.68%;
-    /* filters узла: exposure +0,35 → ×2^0,35, saturation −0,13 → ×0,87 */
-    filter: url(#pain-bg-filter);
-  }
-
-  .pain__defs {
-    position: absolute;
-    width: 0;
-    height: 0;
+    /* Настройки заливки (exposure +0,35, saturation −0,13) запечены в сам файл
+       через tools/bake-image.mjs: в CSS они дают другой результат. */
   }
 
   .pain__container {
@@ -111,11 +92,15 @@ const { title, lead, script, ctaLabel, ctaHref, items } = Astro.props;
     gap: var(--space-l);
   }
 
+  /* Ширины текстовых блоков из макета: с ними переносы строк совпадают
+     с Figma. Без них лид ломается после «опоры,» вместо «нет». */
   .pain__title {
+    max-width: 539px;
     color: var(--color-text-heading);
   }
 
   .pain__lead {
+    max-width: 473px;
     color: var(--color-text-secondary);
   }
 
