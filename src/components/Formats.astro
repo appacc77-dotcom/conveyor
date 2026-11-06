@@ -64,19 +64,18 @@ const { title, lead, note, slide, tabs } = Astro.props;
         <article
           class:list={['format-tab', tab.active && 'format-tab--active', tab.divider && 'format-tab--divided']}
           data-figma-node={tab.node}
+          data-tab
         >
-          <div class="format-tab__head">
+          <div class="format-tab__head" data-tab-head>
             <span class="format-tab__number t-number">{tab.number}</span>
             <h3 class:list={['format-tab__title', tab.active ? 't-h5' : 't-h6']}>{tab.title}</h3>
           </div>
 
-          {tab.active && tab.desc && <p class="format-tab__desc t-body-s">{tab.desc}</p>}
+          {tab.desc && <p class="format-tab__desc t-body-s">{tab.desc}</p>}
 
-          {tab.active && (
-            <div class="format-tab__cta">
-              <BtnPrimary href="#" label="Перейти к записи" theme="light" size="L" caps compact />
-            </div>
-          )}
+          <div class="format-tab__cta">
+            <BtnPrimary href="#" label="Перейти к записи" theme="light" size="L" caps compact />
+          </div>
 
           <div class="format-tab__meta">
             <span class="format-tab__pill">
@@ -255,12 +254,30 @@ const { title, lead, note, slide, tabs } = Astro.props;
     color: var(--color-text-heading);
   }
 
+  /* t-h6 у неактивных, t-h5 у активной — класс ставит и снимает скрипт,
+     но начальное состояние задано и без него. */
+  .format-tab--active .format-tab__title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  /* Описание и кнопка есть у всех вкладок, но видны только у активной:
+     без этого переключение по клику невозможно — разметки нет. */
   .format-tab__desc {
+    display: none;
     margin: 0;
     color: var(--color-text-primary);
   }
 
   .format-tab__cta {
+    display: none;
+  }
+
+  .format-tab--active .format-tab__desc {
+    display: block;
+  }
+
+  .format-tab--active .format-tab__cta {
     display: flex;
   }
 
@@ -297,3 +314,42 @@ const { title, lead, note, slide, tabs } = Astro.props;
     color: var(--color-text-secondary);
   }
 </style>
+
+<script>
+  // Вкладки форматов: клик и стрелки переключают активную, счётчик показывает
+  // позицию. Описание и кнопка есть у всех вкладок, показ решает класс.
+  const section = document.querySelector('.formats');
+  if (section) {
+    const tabs = [...section.querySelectorAll('[data-tab]')];
+    const counter = section.querySelector('.formats__counter-text');
+    const [prev, next] = section.querySelectorAll('.formats__arrow');
+    let index = tabs.findIndex((tab) => tab.classList.contains('format-tab--active'));
+    if (index < 0) index = 0;
+
+    const render = () => {
+      tabs.forEach((tab, i) => {
+        const active = i === index;
+        tab.classList.toggle('format-tab--active', active);
+        const title = tab.querySelector('.format-tab__title');
+        title.classList.toggle('t-h5', active);
+        title.classList.toggle('t-h6', !active);
+      });
+      if (counter) counter.textContent = `${index + 1}/${tabs.length}`;
+    };
+
+    const go = (delta) => {
+      index = (index + delta + tabs.length) % tabs.length;
+      render();
+    };
+
+    tabs.forEach((tab, i) =>
+      tab.addEventListener('click', () => {
+        index = i;
+        render();
+      }),
+    );
+    prev?.addEventListener('click', () => go(-1));
+    next?.addEventListener('click', () => go(1));
+    render();
+  }
+</script>
