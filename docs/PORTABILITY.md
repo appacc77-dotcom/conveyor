@@ -14,8 +14,8 @@
 ## Установка
 
 ```bash
-npm ci
-npx playwright install chromium
+npm run setup
+npm run setup:browsers
 npm run build
 npm run smoke
 npm run dev
@@ -59,8 +59,8 @@ DSH. Порт меняется через `SMOKE_PORT`.
 ## Проверка переноса
 
 ```bash
-npm ci
-npx playwright install chromium
+npm run setup
+npm run setup:browsers
 npm run build
 npm run smoke
 npm run previews:once   # при запущенном npm run dev

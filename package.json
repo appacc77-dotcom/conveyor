@@ -11,8 +11,9 @@
     "previews:watch": "node scripts/structure-previews.mjs",
     "previews:blocks": "node scripts/structure-blocks.mjs",
     "smoke": "npm run build && node scripts/smoke.mjs",
-    "setup": "npm ci && npx playwright install chromium",
-    "audit:paths": "node scripts/audit-paths.mjs"
+    "setup": "npm ci",
+    "audit:paths": "node scripts/audit-paths.mjs",
+    "setup:browsers": "npx playwright install chromium"
   },
   "devDependencies": {
     "astro": "^7.4.5",

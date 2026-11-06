@@ -10,8 +10,8 @@
 Нужны Node.js ≥ 20 и npm.
 
 ```bash
-npm ci
-npx playwright install chromium
+npm run setup
+npm run setup:browsers
 npm run dev      # http://127.0.0.1:4321/
 npm run build    # dist/
 npm run smoke    # build + статический сервер + Chromium 1440/390
