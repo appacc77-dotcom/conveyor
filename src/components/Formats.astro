@@ -38,15 +38,24 @@ interface Tab {
   divider?: boolean;
 }
 
+interface Slide {
+  image: string;
+  /** background-size и position, посчитанные из imageTransform узла. */
+  size: string;
+  position: string;
+}
+
 interface Props {
   title: string;
   lead: string;
   note: string;
   slide: string;
   tabs: Tab[];
+  /** Картинки слайдера по порядку вкладок: у каждого формата своя. */
+  slides?: Slide[];
 }
 
-const { title, lead, note, slide, tabs } = Astro.props;
+const { title, lead, note, slide, tabs, slides = [] } = Astro.props;
 ---
 
 <section class="formats" id="home-formats" data-figma-node="102:220">
@@ -57,6 +66,18 @@ const { title, lead, note, slide, tabs } = Astro.props;
 
   <div class="formats__panel" data-figma-node="102:224">
     <div class="formats__slider" data-figma-node="102:225">
+      {/* По слою на формат: в файле у каждого инстанса секции своя картинка.
+          Переключение — кросс-фейд, а не подмена фона. */}
+      <div class="formats__slides">
+        {slides.map((item, index) => (
+          <div
+            class:list={['formats__slide', index === 0 && 'formats__slide--active']}
+            data-slide={index}
+            style={`background-image:url('${item.image}');background-size:${item.size};background-position:${item.position}`}
+          ></div>
+        ))}
+      </div>
+
       <button class="formats__arrow" type="button" aria-label="Предыдущий слайд" data-figma-node="102:228">
         <img src="/svg/slider-arrow-prev.svg" alt="" width="48" height="48" />
       </button>
@@ -163,13 +184,34 @@ const { title, lead, note, slide, tabs } = Astro.props;
     height: 420px;
     padding: var(--space-xl) var(--space-l);
     border-radius: var(--radius-m);
-    background-image: url('/img/formats-slider.png');
+    overflow: hidden;
+  }
+
+  /* Слои картинок лежат друг на друге; виден только активный. */
+  .formats__slides {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-m);
+    overflow: hidden;
+  }
+
+  .formats__slide {
+    position: absolute;
+    inset: 0;
     background-repeat: no-repeat;
-    /* imageTransform: [[1, 0, 0.00004], [0, 0.5953, 0.2029]]
-       ширина 100 %, высота 100 %/0.5953 = 167.97 %,
-       сдвиг по y 0.2029/(1−0.5953) = 50.15 %, по x сдвига нет. */
-    background-size: 100% 167.97%;
-    background-position: 0% 50.15%;
+    opacity: 0;
+    transition: opacity var(--motion-slow) var(--ease-out);
+  }
+
+  .formats__slide--active {
+    opacity: 1;
+  }
+
+  /* Стрелки и счётчик — над слоями. */
+  .formats__arrow,
+  .formats__counter {
+    position: relative;
+    z-index: 1;
   }
 
   .formats__arrow {
@@ -276,17 +318,15 @@ const { title, lead, note, slide, tabs } = Astro.props;
   }
 
   /* Ширина из узлов: 129 у активной (две строки), 176 у остальных. */
-  /* Коробка заголовка из узлов: 176×50 у остальных, 129×56 у активной.
-     Высота задана явно: текст «Точка входа» помещается в строку, но в макете
-     коробка двухстрочная — иначе съезжает всё ниже на 24 px. */
+  /* Ширина — по содержимому, но не шире свободного места: в макете у короткого
+     «Точка входа» 129, у длинного «Индивидуальная мастер-сессия» 263.
+     Высота задана: 50 у обычных, 56 у активной — иначе съезжает всё ниже. */
   .format-tab__title {
-    width: 176px;
     height: 50px;
     color: var(--color-text-heading);
   }
 
   .format-tab--active .format-tab__title {
-    width: 129px;
     height: 56px;
   }
 
@@ -397,7 +437,10 @@ const { title, lead, note, slide, tabs } = Astro.props;
     let index = tabs.findIndex((tab) => tab.classList.contains('format-tab--active'));
     if (index < 0) index = 0;
 
+    const slides = [...section.querySelectorAll('[data-slide]')];
+
     const render = () => {
+      slides.forEach((slide, i) => slide.classList.toggle('formats__slide--active', i === index));
       tabs.forEach((tab, i) => {
         const active = i === index;
         tab.classList.toggle('format-tab--active', active);
