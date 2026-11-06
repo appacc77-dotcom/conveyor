@@ -123,6 +123,8 @@ const measured = await page.evaluate((rootNodeId) => {
       w: +r.width.toFixed(2),
       h: +r.height.toFixed(2),
       hidden: style.display === 'none' || style.visibility === 'hidden',
+      // Ширина задана явно из спеки — поправка на трекинг не нужна.
+      fixedWidth: el.style.width !== '',
       tag: el.tagName.toLowerCase(),
       cls: String(el.className ?? '').slice(0, 40),
     });
@@ -167,6 +169,9 @@ for (const el of measured.elements) {
     // шире на один трекинг, хотя «чернила» совпадают. Сравниваем по чернилам.
     const ink = (() => {
       if (node.type !== 'TEXT' || node.sizing?.h !== 'HUG' || !node.letterSpacing) return el.w;
+      // Ширина взята из узла спеки — коробка уже равна эталону: поправка
+      // на трекинг (браузер добавляет его после последней буквы) только врёт.
+      if (el.fixedWidth) return el.w;
       const ls = node.letterSpacing;
       const trim = ls.unit === 'PERCENT' ? (ls.value / 100) * node.fontSize : ls.value;
       return el.w - trim;

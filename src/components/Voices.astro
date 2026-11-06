@@ -1,0 +1,326 @@
+---
+/**
+ * Voices — секция `voices` (116:246), фрейм `main` (79:103).
+ *
+ * Геометрия с живого узла: 1440×920, фон-фотография, заголовок и карусель
+ * отзывов: карточка 672×482, следующая видна частично.
+ *
+ * Раскладка из спеки:
+ *   voices          — VERTICAL, gap 48, pad 96/24, MIN/CENTER
+ *   container       — VERTICAL, gap 48, pad 0/0/0/64, MIN/MIN, 1280
+ *   voices-track    — HORIZONTAL, gap 48, MIN/MIN
+ *   voice-card      — VERTICAL, gap 24, pad 48, радиус 16, белый
+ *   slider-controls — HORIZONTAL, gap 4, SPACE_BETWEEN, 1216
+ *
+ * Третья карточка в макете стоит на x = −720: это клон для прокрутки. При
+ * статичной сборке он не нужен — карточки идут подряд, за край уходит третья.
+ */
+
+interface Voice {
+  /** Координата карточки в макете: 0, 720 и −720 (третья стоит слева). */
+  x: number;
+  /** Стоит вне потока слева — так в макете устроена прокрутка по кругу. */
+  clone?: boolean;
+  label: string;
+  source: string;
+  quote: string;
+  author: string;
+  /** Ширина подписи из узла: браузер набирает на доли пикселя уже. */
+  authorWidth: number;
+  labelWidth: number;
+  nodes: { card: string; body: string; head: string; label: string; source: string; mark: string; quote: string; author: string };
+}
+
+interface Props {
+  title: string;
+  lead: string;
+  voices: Voice[];
+}
+
+const { title, lead, voices } = Astro.props;
+/** Слайды — карточки без клона; точек столько же, сколько слайдов. */
+const slides = voices;
+---
+
+<section class="voices" id="home-voices" data-figma-node="116:246">
+  <div class="voices__container" data-figma-node="116:247">
+    <div class="voices__heading" data-figma-node="116:248">
+      <h2 class="voices__title t-h2" data-figma-node="116:249">{title}</h2>
+      <p class="voices__lead t-body" data-figma-node="116:250">{lead}</p>
+    </div>
+
+    <div class="voices__viewport">
+    <div class="voices__track" data-figma-node="116:251" data-slider-track>
+      {voices.map((voice) => (
+        <article
+          class:list={['voice', voice.clone && 'voice--clone']}
+          data-offset={voice.x}
+          data-figma-node={voice.nodes.card}
+        >
+          <div class="voice__body" data-figma-node={voice.nodes.body}>
+            <div class="voice__head" data-figma-node={voice.nodes.head}>
+              <span
+                class="voice__label t-eyebrow-s"
+                style={`width:${voice.labelWidth}px`}
+                data-figma-node={voice.nodes.label}
+              >{voice.label}</span>
+              <span class="voice__source t-caption" data-figma-node={voice.nodes.source}>{voice.source}</span>
+            </div>
+
+            <img
+              class="voice__mark"
+              src="/svg/quote-mark.svg"
+              alt=""
+              width="18"
+              height="24"
+              data-figma-node={voice.nodes.mark}
+            />
+
+            <p class="voice__quote t-quote" data-figma-node={voice.nodes.quote}>{voice.quote}</p>
+          </div>
+
+          <p
+            class="voice__author t-body-s"
+            style={`width:${voice.authorWidth}px`}
+            data-figma-node={voice.nodes.author}
+          >{voice.author}</p>
+        </article>
+      ))}
+    </div>
+    </div>
+
+    <div class="voices__controls" data-figma-node="116:254">
+      <div class="voices__dots" data-figma-node="116:255">
+        {slides.map((_, index) => (
+          <button
+            class:list={['voices__dot', index === 0 && 'voices__dot--active']}
+            type="button"
+            aria-label={`Отзыв ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+
+      <div class="voices__arrows" data-figma-node="116:268">
+        <button class="voices__arrow" type="button" aria-label="Предыдущий отзыв" data-figma-node="116:269">
+          <img src="/svg/slider-arrow-prev.svg" alt="" width="48" height="48" />
+        </button>
+        <button class="voices__arrow" type="button" aria-label="Следующий отзыв" data-figma-node="116:270">
+          <img src="/svg/slider-arrow-next.svg" alt="" width="48" height="48" />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* voices (116:246): scaleMode CROP, m00 = 0.8934, m11 = 0.9338 →
+     размер 111.93 % × 107.09 %, сдвиг 22.55 % × 58.18 %. */
+  .voices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-4xl) var(--space-l);
+    overflow: hidden;
+    background-color: var(--color-bg-page);
+    background-image: url('/img/voices-bg.png');
+    background-repeat: no-repeat;
+    background-size: 111.93% 107.09%;
+    background-position: 22.55% 58.18%;
+  }
+
+  .voices__container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2xl);
+    width: 100%;
+    max-width: var(--container-max);
+    /* Только левый отступ 64: в макете контейнер 728 равен сумме детей,
+       нижний паддинг в высоту не входит. */
+    padding: 0 0 0 var(--space-3xl);
+  }
+
+  .voices__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-s);
+  }
+
+  .voices__title {
+    color: var(--color-text-heading);
+  }
+
+  .voices__lead {
+    max-width: 711px;
+    color: var(--color-text-primary);
+  }
+
+  /* voices-track (116:251): карточки в ряд с зазором 48; за край уходит
+     следующая — как в макете. */
+  /* Окно не обрезает: в макете клон третьей карточки виден слева у края
+     секции, а сама секция уже обрезает всё за 1440. */
+  .voices__viewport {
+    width: 100%;
+  }
+
+  .voices__track {
+    position: relative;
+    display: flex;
+    gap: var(--space-2xl);
+    width: max-content;
+  }
+
+  /* Клон третьей карточки: в макете он стоит за левым краем на −720 —
+     нужен для прокрутки, в статике не виден. */
+  .voice--clone {
+    position: absolute;
+    top: 0;
+    left: -720px;
+  }
+
+  .voice {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-l);
+    width: 672px;
+    min-height: 482px;
+    padding: var(--space-2xl);
+    border-radius: var(--radius-l);
+    background: var(--color-bg-surface);
+  }
+
+  /* Тело карточки тянется: в макете у всех трёх карточек высота 343,
+     хотя текст разной длины — значит оно занимает остаток высоты. */
+  .voice__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: var(--space-l);
+  }
+
+  /* Шапка по содержимому: в макете 164–198, а не на всю ширину карточки. */
+  .voice__head {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  /* Ширина из узла, но браузер набирает на 0.6 px шире — без запрета
+     переноса подпись ломается на две строки и карточка растёт. */
+  .voice__label {
+    white-space: nowrap;
+    color: var(--color-accent-muted);
+  }
+
+  .voice__source {
+    color: var(--color-text-secondary);
+  }
+
+  .voice__mark {
+    display: block;
+    width: 18px;
+    height: 24px;
+  }
+
+  /* Цитата фиксированной высоты 224 из узла: у всех трёх карточек одинаково,
+     хотя строк разное число. Без неё тело выходит на 1 px выше. */
+  .voice__quote {
+    margin: 0;
+    height: 224px;
+    color: var(--color-text-primary);
+  }
+
+  /* Подпись автора не растягивается: в макете ширина по содержимому. */
+  .voice__author {
+    align-self: flex-start;
+    margin: 0;
+    color: var(--color-text-deep);
+  }
+
+  .voices__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1216px;
+    max-width: 100%;
+  }
+
+  /* Ширина из макета: там 12 точек под 12 отзывов, в файле их три.
+     Контейнер держим по макету, точек столько, сколько слайдов. */
+  .voices__dots {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    width: 296px;
+  }
+
+  /* Точка-листик 21×15: активная залита, остальные контуром. */
+  .voices__dot {
+    flex: none;
+    width: 21px;
+    height: 15px;
+    padding: 0;
+    border: 0;
+    background: url('/svg/dot-leaf-default.svg') no-repeat center / 21px 15px;
+    cursor: pointer;
+  }
+
+  .voices__dot--active {
+    background-image: url('/svg/dot-leaf-active.svg');
+  }
+
+  .voices__arrows {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+  }
+
+  .voices__arrow {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  // Слайдер отзывов: стрелки и точки двигают ленту на ширину карточки с зазором.
+  const root = document.querySelector('.voices');
+  if (root) {
+    const track = root.querySelector('[data-slider-track]');
+    const slides = [...track.querySelectorAll('.voice')];
+    const dots = [...root.querySelectorAll('.voices__dot')];
+    const [prev, next] = root.querySelectorAll('.voices__arrow');
+    // У каждой карточки своя координата в макете: 0, 720 и −720. Чтобы
+    // показать слайд, сдвигаем ленту на его координату со знаком минус.
+    const offsets = slides.map((slide) => Number(slide.dataset.offset) || 0);
+    let index = 0;
+
+    const render = () => {
+      track.style.transform = `translateX(${-offsets[index]}px)`;
+      dots.forEach((dot, i) => dot.classList.toggle('voices__dot--active', i === index));
+      slides.forEach((slide, i) => slide.setAttribute('aria-hidden', String(i !== index)));
+    };
+
+    const go = (delta) => {
+      index = (index + delta + slides.length) % slides.length;
+      render();
+    };
+
+    prev?.addEventListener('click', () => go(-1));
+    next?.addEventListener('click', () => go(1));
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => {
+        index = i;
+        render();
+      }),
+    );
+    render();
+  }
+</script>

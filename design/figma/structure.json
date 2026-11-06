@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-06T18:59:54.412Z",
+  "at": "2026-11-06T19:09:32.767Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 10,
+    "green": 11,
     "measured": 0,
     "red": 0,
-    "exported": 36,
+    "exported": 35,
     "todo": 0
   },
   "assetsTotal": {
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-06T18:00:19.513Z"
+            "at": "2026-11-06T19:06:04.568Z"
           },
           "pixel": {
             "mean": 1.76,
@@ -96,7 +96,7 @@
             "nodes": 5,
             "coverage": 100,
             "worstDelta": 0.29000000000002046,
-            "at": "2026-11-06T18:00:21.527Z"
+            "at": "2026-11-06T19:06:05.577Z"
           },
           "pixel": {
             "mean": 3.06,
@@ -141,7 +141,7 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.730000000000004,
-            "at": "2026-11-06T18:00:20.509Z"
+            "at": "2026-11-06T19:06:03.496Z"
           },
           "pixel": {
             "mean": 4.14,
@@ -186,7 +186,7 @@
             "nodes": 16,
             "coverage": 100,
             "worstDelta": 0.9199999999999875,
-            "at": "2026-11-06T18:33:39.948Z"
+            "at": "2026-11-06T19:05:56.885Z"
           },
           "pixel": {
             "mean": 1.87,
@@ -231,7 +231,7 @@
             "nodes": 17,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-06T18:40:08.762Z"
+            "at": "2026-11-06T19:06:01.326Z"
           },
           "pixel": {
             "mean": 2.23,
@@ -276,7 +276,7 @@
             "nodes": 21,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-06T18:45:50.489Z"
+            "at": "2026-11-06T19:05:59.104Z"
           },
           "pixel": {
             "mean": 1.24,
@@ -321,7 +321,7 @@
             "nodes": 25,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-06T18:59:27.569Z"
+            "at": "2026-11-06T19:06:02.440Z"
           },
           "pixel": {
             "mean": 2.13,
@@ -366,7 +366,7 @@
             "nodes": 23,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-06T18:26:32.016Z"
+            "at": "2026-11-06T19:05:57.985Z"
           },
           "pixel": {
             "mean": 5.1,
@@ -411,7 +411,7 @@
             "nodes": 76,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-06T18:00:23.517Z"
+            "at": "2026-11-06T19:06:00.200Z"
           },
           "pixel": {
             "mean": 4.55,
@@ -446,11 +446,24 @@
           "slug": "home-voices",
           "dir": "design/figma/pages/home/voices",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 35,
+            "nodes": 70,
+            "coverage": 100,
+            "worstDelta": 0.5300000000000011,
+            "at": "2026-11-06T19:08:15.095Z"
+          },
+          "pixel": {
+            "mean": 4.9,
+            "over16": 12.76,
+            "over48": 0.51,
+            "at": "2026-11-06T19:08:16.161Z"
+          },
           "assets": {
             "nodes": 70,
             "images": 1,
@@ -464,7 +477,7 @@
           },
           "images": {
             "figma": "/structure/home-voices-figma.png",
-            "site": null
+            "site": "/structure/home-voices-site.png"
           }
         },
         {
@@ -616,7 +629,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-06T18:00:22.513Z"
+            "at": "2026-11-06T19:06:06.593Z"
           },
           "pixel": {
             "mean": 3.83,
@@ -643,10 +656,10 @@
       ],
       "counts": {
         "total": 15,
-        "green": 10,
+        "green": 11,
         "measured": 0,
         "red": 0,
-        "exported": 5,
+        "exported": 4,
         "todo": 0
       }
     },
