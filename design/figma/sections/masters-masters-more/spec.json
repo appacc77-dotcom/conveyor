@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:54:24.689Z"
+    "at": "2026-11-06T16:58:10.995Z"
   },
   "section": {
     "id": "256:374",
@@ -42,7 +42,11 @@
       {
         "node": "I257:470;257:439;837:2905",
         "component": "arrow-quiet",
-        "file": "design/figma/assets/svg/arrow-quiet.svg",
+        "variant": {
+          "color": "accent",
+          "direction": "right"
+        },
+        "file": "design/figma/assets/svg/arrow-quiet-accent-right.svg",
         "bytes": 3789
       }
     ]

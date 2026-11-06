@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-06T16:49:49.613Z",
+  "at": "2026-11-06T16:59:33.689Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -13,8 +13,8 @@
     "todo": 0
   },
   "assetsTotal": {
-    "files": 67,
-    "bytes": 69533879
+    "files": 75,
+    "bytes": 69569354
   },
   "pages": [
     {
@@ -50,13 +50,13 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-06T16:49:37.909Z"
+            "at": "2026-11-06T16:59:17.772Z"
           },
           "pixel": {
             "mean": 1.76,
             "over16": 0.98,
             "over48": 0.56,
-            "at": "2026-11-06T16:49:38.883Z"
+            "at": "2026-11-06T16:59:19.692Z"
           },
           "assets": {
             "nodes": 14,
@@ -125,7 +125,7 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.6900000000000546,
-            "at": "2026-11-06T16:49:19.329Z"
+            "at": "2026-11-06T16:59:18.768Z"
           },
           "pixel": {
             "mean": 4.14,
@@ -324,8 +324,8 @@
             "images": 3,
             "png": 3,
             "jpg": 0,
-            "svg": 2,
-            "bytes": 6709691,
+            "svg": 3,
+            "bytes": 6728910,
             "bound": 71,
             "effects": 0,
             "fills": 23
@@ -355,8 +355,8 @@
             "images": 1,
             "png": 1,
             "jpg": 0,
-            "svg": 3,
-            "bytes": 1974342,
+            "svg": 5,
+            "bytes": 1994001,
             "bound": 52,
             "effects": 0,
             "fills": 8
@@ -448,8 +448,8 @@
             "images": 2,
             "png": 2,
             "jpg": 0,
-            "svg": 1,
-            "bytes": 4456519,
+            "svg": 3,
+            "bytes": 4464005,
             "bound": 33,
             "effects": 0,
             "fills": 20
@@ -510,8 +510,8 @@
             "images": 1,
             "png": 1,
             "jpg": 0,
-            "svg": 3,
-            "bytes": 2787345,
+            "svg": 4,
+            "bytes": 2791320,
             "bound": 22,
             "effects": 1,
             "fills": 3
@@ -564,8 +564,8 @@
             "images": 3,
             "png": 2,
             "jpg": 1,
-            "svg": 2,
-            "bytes": 6509085,
+            "svg": 3,
+            "bytes": 6513060,
             "bound": 55,
             "effects": 2,
             "fills": 18
@@ -688,8 +688,8 @@
             "images": 1,
             "png": 1,
             "jpg": 0,
-            "svg": 3,
-            "bytes": 2787356,
+            "svg": 4,
+            "bytes": 2791332,
             "bound": 22,
             "effects": 1,
             "fills": 3
@@ -897,8 +897,8 @@
             "images": 1,
             "png": 1,
             "jpg": 0,
-            "svg": 3,
-            "bytes": 2787355,
+            "svg": 4,
+            "bytes": 2791330,
             "bound": 22,
             "effects": 1,
             "fills": 3
@@ -951,8 +951,8 @@
             "images": 2,
             "png": 2,
             "jpg": 0,
-            "svg": 3,
-            "bytes": 4978064,
+            "svg": 4,
+            "bytes": 4982039,
             "bound": 25,
             "effects": 1,
             "fills": 4
@@ -982,8 +982,8 @@
             "images": 5,
             "png": 4,
             "jpg": 1,
-            "svg": 4,
-            "bytes": 10234302,
+            "svg": 5,
+            "bytes": 10234758,
             "bound": 88,
             "effects": 0,
             "fills": 18
@@ -1106,8 +1106,8 @@
             "images": 2,
             "png": 2,
             "jpg": 0,
-            "svg": 4,
-            "bytes": 4748683,
+            "svg": 5,
+            "bytes": 4752671,
             "bound": 92,
             "effects": 3,
             "fills": 27
@@ -1222,8 +1222,8 @@
             "images": 1,
             "png": 1,
             "jpg": 0,
-            "svg": 5,
-            "bytes": 2181544,
+            "svg": 6,
+            "bytes": 2181867,
             "bound": 61,
             "effects": 0,
             "fills": 6
@@ -1253,8 +1253,8 @@
             "images": 1,
             "png": 1,
             "jpg": 0,
-            "svg": 3,
-            "bytes": 2787355,
+            "svg": 4,
+            "bytes": 2791330,
             "bound": 22,
             "effects": 1,
             "fills": 3
@@ -1431,8 +1431,8 @@
             "images": 1,
             "png": 1,
             "jpg": 0,
-            "svg": 3,
-            "bytes": 2787355,
+            "svg": 4,
+            "bytes": 2791330,
             "bound": 22,
             "effects": 1,
             "fills": 3
@@ -1609,8 +1609,8 @@
             "images": 1,
             "png": 1,
             "jpg": 0,
-            "svg": 3,
-            "bytes": 2787355,
+            "svg": 4,
+            "bytes": 2791330,
             "bound": 22,
             "effects": 1,
             "fills": 3

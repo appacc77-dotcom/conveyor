@@ -115,14 +115,30 @@ for (const icon of section.icons) {
   const fetched = runTemplate('fetch-svg.template.js', { __NODE_ID__: icon.id });
   const svg = fetched.result?.svg;
   if (!svg) continue;
+  // Вариант в имени: arrow-quiet + {color: white, direction: right} →
+  // arrow-quiet-white-right.svg. Иначе разные стрелки перезапишут друг друга.
+  const variant = icon.props
+    ? Object.values(icon.props)
+        .filter((v) => typeof v === 'string' && v.length < 20)
+        .map((v) => slugify(v))
+        .filter(Boolean)
+        .join('-')
+    : '';
   let base = slugify(icon.componentName || icon.name) || icon.id.replace(':', '-');
+  if (variant) base = `${base}-${variant}`;
   let name = `${base}.svg`;
   let n = 2;
   while (usedNames.has(name)) name = `${base}-${n++}.svg`;
   usedNames.add(name);
   const abs = join(assetsRoot, 'svg', name);
   if (!existsSync(abs)) writeFileSync(abs, svg.trim() + '\n');
-  icons.push({ node: icon.id, component: icon.componentName, file: rel(abs), bytes: svg.length });
+  icons.push({
+    node: icon.id,
+    component: icon.componentName,
+    variant: icon.props ?? null,
+    file: rel(abs),
+    bytes: svg.length,
+  });
 }
 
 // --- 6. Спека --------------------------------------------------------------

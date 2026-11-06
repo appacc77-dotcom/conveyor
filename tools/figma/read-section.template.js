@@ -193,17 +193,23 @@ for (const c of iconCandidates) {
     name: c.name,
     componentId,
     componentName,
+    // Варианты одного набора различаются геометрией: у arrow-quiet восемь
+    // сочетаний color × direction. Без них все стрелки получают один SVG.
+    props: c.node.componentProperties
+      ? Object.fromEntries(Object.entries(c.node.componentProperties).map(([k, v]) => [k, v.value]))
+      : null,
     w: c.w,
     h: c.h,
     depth: c.depth,
   });
 }
 
-// Уникальные иконки по компоненту: один SVG на набор, а не на каждый инстанс.
+// Уникальные иконки по компоненту И варианту: один SVG на сочетание свойств.
 const uniqueIcons = [];
 const seenIcon = new Set();
 for (const i of icons) {
-  const key = i.componentId ?? i.id;
+  const variant = i.props ? JSON.stringify(i.props) : "";
+  const key = `${i.componentId ?? i.id}|${variant}`;
   if (seenIcon.has(key)) continue;
   seenIcon.add(key);
   uniqueIcons.push(i);

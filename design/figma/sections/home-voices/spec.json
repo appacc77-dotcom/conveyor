@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:54:09.993Z"
+    "at": "2026-11-06T16:57:55.512Z"
   },
   "section": {
     "id": "116:246",
@@ -13,7 +13,7 @@
   "counts": {
     "nodes": 70,
     "images": 1,
-    "icons": 3,
+    "icons": 5,
     "iconInstances": 17
   },
   "assets": {
@@ -30,20 +30,45 @@
       {
         "node": "I116:252;105:227",
         "component": "quote-mark",
+        "variant": {},
         "file": "design/figma/assets/svg/quote-mark.svg",
         "bytes": 293
       },
       {
         "node": "116:256",
         "component": "dot-leaf",
-        "file": "design/figma/assets/svg/dot-leaf.svg",
+        "variant": {
+          "state": "active"
+        },
+        "file": "design/figma/assets/svg/dot-leaf-active.svg",
         "bytes": 228
+      },
+      {
+        "node": "116:257",
+        "component": "dot-leaf",
+        "variant": {
+          "state": "default"
+        },
+        "file": "design/figma/assets/svg/dot-leaf-default.svg",
+        "bytes": 435
       },
       {
         "node": "116:269",
         "component": "slider-arrow",
-        "file": "design/figma/assets/svg/slider-arrow.svg",
+        "variant": {
+          "direction": "prev"
+        },
+        "file": "design/figma/assets/svg/slider-arrow-prev.svg",
         "bytes": 19232
+      },
+      {
+        "node": "116:270",
+        "component": "slider-arrow",
+        "variant": {
+          "direction": "next"
+        },
+        "file": "design/figma/assets/svg/slider-arrow-next.svg",
+        "bytes": 19224
       }
     ]
   },

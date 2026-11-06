@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:54:54.429Z"
+    "at": "2026-11-06T16:58:42.470Z"
   },
   "section": {
     "id": "414:2107",
@@ -13,7 +13,7 @@
   "counts": {
     "nodes": 119,
     "images": 2,
-    "icons": 4,
+    "icons": 5,
     "iconInstances": 15
   },
   "assets": {
@@ -36,26 +36,43 @@
       {
         "node": "427:1171",
         "component": "accordeon",
+        "variant": {},
         "file": "design/figma/assets/svg/accordeon.svg",
         "bytes": 920
       },
       {
         "node": "427:1185",
         "component": "arrow-quiet 180",
+        "variant": {},
         "file": "design/figma/assets/svg/arrow-quiet-180.svg",
         "bytes": 3774
       },
       {
         "node": "I427:1185;144:75",
         "component": "arrow-quiet 90/Variant2",
+        "variant": {},
         "file": "design/figma/assets/svg/arrow-quiet-90-variant2.svg",
         "bytes": 3774
       },
       {
         "node": "I427:1185;144:75;144:72",
         "component": "arrow-quiet",
-        "file": "design/figma/assets/svg/arrow-quiet.svg",
+        "variant": {
+          "color": "accent",
+          "direction": "right"
+        },
+        "file": "design/figma/assets/svg/arrow-quiet-accent-right.svg",
         "bytes": 3774
+      },
+      {
+        "node": "I427:1232;14:128",
+        "component": "arrow-quiet",
+        "variant": {
+          "color": "white",
+          "direction": "right"
+        },
+        "file": "design/figma/assets/svg/arrow-quiet-white-right.svg",
+        "bytes": 3988
       }
     ]
   },
