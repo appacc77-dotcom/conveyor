@@ -29,7 +29,8 @@ Figma → спецификация → компоненты → страницы
 1. `docs/decisions.md` — принятые решения. Выше кода.
 2. Живой файл: `figma-agent` к открытому документу (`fileKey` в
    `design/figma/project.json`).
-3. `design/figma/live/*.json` — снимки файла: структура, дизайн-система, реальность.
+3. `design/figma/live/*.json` — снимки файла: структура, дизайн-система, реальность,
+   полный дамп `document.json`.
 4. `design/figma/sections/<section>/spec.json` — числа секции для замера (P2).
 5. `design/figma/sections/<section>/crop.png` — эталон, экспортированный с узла (P3).
 6. Код `src/` — реализация, не истина.
@@ -120,6 +121,7 @@ column: "review" }`. `board.json` руками не править: плагин
 
 ```bash
 npm run intake                                 # снимок живого файла; exit 1 при чужом файле
+npm run document                               # полный дамп: переменные, стили, все узлы со свойствами
 npm run export -- <nodeId> --name <slug>       # кроп + ассеты + spec.json секции
 npm run ds:tokens                              # токены и типографика из живого файла
 npm run build                                  # dist/
@@ -195,6 +197,8 @@ npm run structure                              # пересобрать /structu
 
 Не «норма», а список того, чего нет и что нельзя обойти:
 
+- вёрстка не воспроизводит эффекты: 34 узла с `BACKGROUND_BLUR` (шапка) и 6 с
+  `DROP_SHADOW` есть в файле, но не в CSS — `backdrop-filter` и тени не собраны;
 - `measure` проверен на одной секции (hero): 8 узлов из 14 размечено,
   обязательные покрыты на 100 %; на остальных 13 секциях — не проверялся;
 - G1 не закрыт: из 54 наборов дизайн-системы размечены три (btn-primary,

@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:32:19.406Z"
+    "at": "2026-11-06T16:41:09.874Z"
   },
   "section": {
     "id": "116:246",
@@ -99,6 +99,16 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
+      },
+      "sizing": {
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:11",
+        "paddingLeft": "VariableID:2:9",
+        "paddingTop": "VariableID:2:13",
+        "paddingRight": "VariableID:2:9",
+        "paddingBottom": "VariableID:2:13"
       }
     },
     {
@@ -122,6 +132,19 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "limits": {
+        "maxW": 1280
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:11",
+        "paddingLeft": "VariableID:2:12",
+        "maxWidth": "VariableID:42:34"
       }
     },
     {
@@ -145,6 +168,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:7"
       }
     },
     {
@@ -178,7 +209,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:25"
+        ]
+      }
     },
     {
       "id": "116:250",
@@ -211,7 +251,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "116:251",
@@ -234,6 +283,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:11"
       }
     },
     {
@@ -279,7 +336,27 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "sizing": {
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:9",
+        "paddingLeft": "VariableID:2:11",
+        "paddingTop": "VariableID:2:11",
+        "paddingRight": "VariableID:2:11",
+        "paddingBottom": "VariableID:2:11",
+        "topLeftRadius": "VariableID:2:18",
+        "topRightRadius": "VariableID:2:18",
+        "bottomLeftRadius": "VariableID:2:18",
+        "bottomRightRadius": "VariableID:2:18",
+        "fills": [
+          "VariableID:745:1208"
+        ],
+        "strokes": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "I116:252;121:297",
@@ -302,6 +379,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:9"
       }
     },
     {
@@ -325,6 +410,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:6"
       }
     },
     {
@@ -358,7 +451,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "I116:252;105:223",
@@ -391,7 +493,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:27"
+        ]
+      }
     },
     {
       "id": "I116:252;105:227",
@@ -402,7 +513,8 @@
       "x": 0,
       "y": 71,
       "w": 18,
-      "h": 24
+      "h": 24,
+      "clips": false
     },
     {
       "id": "I116:252;105:227;104:271",
@@ -424,7 +536,12 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "bound": {
+        "fills": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "I116:252;105:230",
@@ -457,7 +574,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "I116:252;105:231",
@@ -490,7 +616,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:49:53"
+        ]
+      }
     },
     {
       "id": "116:253",
@@ -535,7 +670,27 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "sizing": {
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:9",
+        "paddingLeft": "VariableID:2:11",
+        "paddingTop": "VariableID:2:11",
+        "paddingRight": "VariableID:2:11",
+        "paddingBottom": "VariableID:2:11",
+        "topLeftRadius": "VariableID:2:18",
+        "topRightRadius": "VariableID:2:18",
+        "bottomLeftRadius": "VariableID:2:18",
+        "bottomRightRadius": "VariableID:2:18",
+        "fills": [
+          "VariableID:745:1208"
+        ],
+        "strokes": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "I116:253;121:297",
@@ -558,6 +713,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:9"
       }
     },
     {
@@ -581,6 +744,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:6"
       }
     },
     {
@@ -614,7 +785,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "I116:253;105:223",
@@ -647,7 +827,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:27"
+        ]
+      }
     },
     {
       "id": "I116:253;105:227",
@@ -658,7 +847,8 @@
       "x": 0,
       "y": 71,
       "w": 18,
-      "h": 24
+      "h": 24,
+      "clips": false
     },
     {
       "id": "I116:253;105:227;104:271",
@@ -680,7 +870,12 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "bound": {
+        "fills": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "I116:253;105:230",
@@ -713,7 +908,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "I116:253;105:231",
@@ -746,7 +950,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:49:53"
+        ]
+      }
     },
     {
       "id": "767:3468",
@@ -791,7 +1004,27 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "sizing": {
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:9",
+        "paddingLeft": "VariableID:2:11",
+        "paddingTop": "VariableID:2:11",
+        "paddingRight": "VariableID:2:11",
+        "paddingBottom": "VariableID:2:11",
+        "topLeftRadius": "VariableID:2:18",
+        "topRightRadius": "VariableID:2:18",
+        "bottomLeftRadius": "VariableID:2:18",
+        "bottomRightRadius": "VariableID:2:18",
+        "fills": [
+          "VariableID:745:1208"
+        ],
+        "strokes": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "I767:3468;121:297",
@@ -814,6 +1047,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:9"
       }
     },
     {
@@ -837,6 +1078,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:6"
       }
     },
     {
@@ -870,7 +1119,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "I767:3468;105:223",
@@ -903,7 +1161,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:27"
+        ]
+      }
     },
     {
       "id": "I767:3468;105:227",
@@ -914,7 +1181,8 @@
       "x": 0,
       "y": 71,
       "w": 18,
-      "h": 24
+      "h": 24,
+      "clips": false
     },
     {
       "id": "I767:3468;105:227;104:271",
@@ -936,7 +1204,12 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "bound": {
+        "fills": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "I767:3468;105:230",
@@ -969,7 +1242,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "I767:3468;105:231",
@@ -1002,7 +1284,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:49:53"
+        ]
+      }
     },
     {
       "id": "116:254",
@@ -1025,7 +1316,12 @@
         ],
         "primary": "SPACE_BETWEEN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "116:255",
@@ -1048,6 +1344,14 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:6"
       }
     },
     {
@@ -1070,7 +1374,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:256;104:222",
@@ -1092,7 +1397,12 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "bound": {
+        "fills": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:257",
@@ -1114,7 +1424,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:257;104:229",
@@ -1135,7 +1446,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:258",
@@ -1157,7 +1473,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:258;104:229",
@@ -1178,7 +1495,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:259",
@@ -1200,7 +1522,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:259;104:229",
@@ -1221,7 +1544,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:260",
@@ -1243,7 +1571,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:260;104:229",
@@ -1264,7 +1593,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:261",
@@ -1286,7 +1620,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:261;104:229",
@@ -1307,7 +1642,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:262",
@@ -1329,7 +1669,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:262;104:229",
@@ -1350,7 +1691,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:263",
@@ -1372,7 +1718,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:263;104:229",
@@ -1393,7 +1740,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:264",
@@ -1415,7 +1767,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:264;104:229",
@@ -1436,7 +1789,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:265",
@@ -1458,7 +1816,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:265;104:229",
@@ -1479,7 +1838,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:266",
@@ -1501,7 +1865,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:266;104:229",
@@ -1522,7 +1887,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:267",
@@ -1544,7 +1914,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I116:267;104:229",
@@ -1565,7 +1936,12 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "bound": {
+        "strokes": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "116:268",
@@ -1588,6 +1964,14 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:8"
       }
     },
     {
@@ -1623,7 +2007,16 @@
         "primary": "MIN",
         "counter": "CENTER"
       },
-      "radius": 999
+      "radius": 999,
+      "sizing": {
+        "h": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "fills": [
+          "VariableID:745:1208"
+        ]
+      }
     },
     {
       "id": "I116:269;709:1589",
@@ -1646,7 +2039,12 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "I116:269;709:1590",
@@ -1668,7 +2066,13 @@
           }
         }
       ],
-      "strokeWeight": 2
+      "strokeWeight": 2,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I116:269;709:1591",
@@ -1690,7 +2094,13 @@
           }
         }
       ],
-      "strokeWeight": 2
+      "strokeWeight": 2,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I116:269;709:1592",
@@ -1711,7 +2121,13 @@
           }
         }
       ],
-      "strokeWeight": 1.5
+      "strokeWeight": 1.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "116:270",
@@ -1746,7 +2162,16 @@
         "primary": "MIN",
         "counter": "CENTER"
       },
-      "radius": 999
+      "radius": 999,
+      "sizing": {
+        "h": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "fills": [
+          "VariableID:745:1208"
+        ]
+      }
     },
     {
       "id": "I116:270;11:17",
@@ -1769,7 +2194,12 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "I116:270;11:14",
@@ -1791,7 +2221,13 @@
           }
         }
       ],
-      "strokeWeight": 2
+      "strokeWeight": 2,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I116:270;11:13",
@@ -1813,7 +2249,13 @@
           }
         }
       ],
-      "strokeWeight": 2
+      "strokeWeight": 2,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I116:270;11:15",
@@ -1834,7 +2276,13 @@
           }
         }
       ],
-      "strokeWeight": 1.5
+      "strokeWeight": 1.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     }
   ]
 }

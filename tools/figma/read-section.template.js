@@ -86,12 +86,58 @@ function walk(n, depth) {
       primary: n.primaryAxisAlignItems,
       counter: n.counterAxisAlignItems,
     };
+    if (n.layoutWrap && n.layoutWrap !== "NO_WRAP") o.autoLayout.wrap = n.layoutWrap;
   }
 
   if ("cornerRadius" in n && n.cornerRadius) o.radius = n.cornerRadius;
   if ("strokes" in n && Array.isArray(n.strokes) && n.strokes.length) {
     o.strokes = n.strokes.map((s) => ({ type: s.type, color: rgba(s.color) }));
     o.strokeWeight = n.strokeWeight;
+    if (n.strokeAlign && n.strokeAlign !== "INSIDE") o.strokeAlign = n.strokeAlign;
+  }
+
+  // Эффекты: размытие фона (шапка) и тени карточек. Без них вёрстка «плоская».
+  if ("effects" in n && Array.isArray(n.effects) && n.effects.length) {
+    o.effects = n.effects
+      .filter((e) => e.visible !== false)
+      .map((e) => ({
+        type: e.type,
+        radius: e.radius,
+        ...(e.offset ? { offset: { x: +e.offset.x.toFixed(1), y: +e.offset.y.toFixed(1) } } : {}),
+        ...(e.color ? { color: rgba(e.color) } : {}),
+        ...(e.spread ? { spread: e.spread } : {}),
+      }));
+    if (!o.effects.length) delete o.effects;
+  }
+
+  // Как узел ведёт себя в раскладке: FILL — тянется, HUG — по содержимому.
+  if ("layoutSizingHorizontal" in n) {
+    const sizing = {};
+    if (n.layoutSizingHorizontal !== "FIXED") sizing.h = n.layoutSizingHorizontal;
+    if (n.layoutSizingVertical !== "FIXED") sizing.v = n.layoutSizingVertical;
+    if (Object.keys(sizing).length) o.sizing = sizing;
+  }
+  if (n.clipsContent === false) o.clips = false;
+  if (n.opacity !== 1) o.opacity = +n.opacity.toFixed(3);
+  if ("minWidth" in n && (n.maxWidth != null || n.minWidth != null)) {
+    o.limits = {};
+    if (n.minWidth != null) o.limits.minW = n.minWidth;
+    if (n.maxWidth != null) o.limits.maxW = n.maxWidth;
+  }
+
+  // Привязки к переменным: чем на самом деле задан отступ или цвет.
+  const bound = n.boundVariables;
+  if (bound && Object.keys(bound).length) {
+    o.bound = Object.fromEntries(
+      Object.entries(bound).map(([k, v]) => [k, Array.isArray(v) ? v.map((x) => x.id) : v?.id ?? v]),
+    );
+  }
+  if (n.description && n.description.trim()) o.description = n.description.trim();
+  try {
+    const ann = n.annotations;
+    if (ann && ann.length) o.annotations = ann.map((a) => a.label ?? a.labelMarkdown ?? "");
+  } catch (e) {
+    /* аннотации есть не во всех версиях плагина */
   }
 
   nodes.push(o);

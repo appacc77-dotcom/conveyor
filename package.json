@@ -8,6 +8,7 @@
     "setup": "npm ci",
     "setup:browsers": "npx playwright install chromium",
     "intake": "node tools/intake.mjs",
+    "document": "node tools/document.mjs",
     "export": "node tools/export-section.mjs",
     "export:all": "node tools/export-all.mjs",
     "structure": "node tools/structure.mjs",

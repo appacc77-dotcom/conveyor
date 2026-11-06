@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:32:44.238Z"
+    "at": "2026-11-06T16:41:35.273Z"
   },
   "section": {
     "id": "282:759",
@@ -98,7 +98,18 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "paddingTop": "VariableID:2:12",
+        "paddingBottom": "VariableID:2:9",
+        "strokes": [
+          "VariableID:49:55"
+        ]
+      }
     },
     {
       "id": "I282:759;146:404",
@@ -121,6 +132,20 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "limits": {
+        "maxW": 1280
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:8",
+        "paddingLeft": "VariableID:2:12",
+        "paddingRight": "VariableID:2:12",
+        "maxWidth": "VariableID:42:34"
       }
     },
     {
@@ -144,6 +169,15 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:13",
+        "paddingBottom": "VariableID:2:8"
       }
     },
     {
@@ -167,6 +201,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:10"
       }
     },
     {
@@ -189,7 +231,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I282:759;147:417;28:2051",
@@ -233,7 +276,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;146:406",
@@ -256,6 +308,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:9"
       }
     },
     {
@@ -289,7 +349,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:431",
@@ -312,6 +381,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:7"
       }
     },
     {
@@ -345,7 +422,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:426",
@@ -378,7 +464,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:427",
@@ -411,7 +506,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:428",
@@ -444,7 +548,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:429",
@@ -477,7 +590,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:430",
@@ -510,7 +632,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:432",
@@ -533,6 +664,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:9"
       }
     },
     {
@@ -566,7 +705,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:434",
@@ -589,6 +737,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:7"
       }
     },
     {
@@ -622,7 +778,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:436",
@@ -655,7 +820,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:437",
@@ -688,7 +862,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:438",
@@ -721,7 +904,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:441",
@@ -743,7 +935,15 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:49:55"
+        ]
+      }
     },
     {
       "id": "I282:759;148:443",
@@ -766,7 +966,12 @@
         ],
         "primary": "SPACE_BETWEEN",
         "counter": "MIN"
-      }
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "I282:759;148:444",
@@ -799,7 +1004,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:449",
@@ -822,6 +1036,14 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:9"
       }
     },
     {
@@ -855,7 +1077,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:446",
@@ -888,7 +1119,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:447",
@@ -921,7 +1161,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     },
     {
       "id": "I282:759;148:448",
@@ -954,7 +1203,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:28"
+        ]
+      }
     }
   ]
 }

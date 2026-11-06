@@ -56,13 +56,18 @@ function countAssets(spec) {
   const icons = spec.assets?.icons ?? [];
   const byExt = (list, ext) => list.filter((a) => a.file.toLowerCase().endsWith(ext)).length;
   const bytes = [...images, ...icons].reduce((s, a) => s + (a.bytes ?? 0), 0);
+  const nodes = spec.nodes ?? [];
   return {
-    nodes: spec.counts?.nodes ?? spec.nodes?.length ?? 0,
+    nodes: spec.counts?.nodes ?? nodes.length,
     images: images.length,
     png: byExt(images, '.png'),
     jpg: byExt(images, '.jpg'),
     svg: icons.length,
     bytes,
+    // Что Figma знает сверх геометрии: токены, эффекты, поведение в раскладке.
+    bound: nodes.filter((n) => n.bound).length,
+    effects: nodes.filter((n) => n.effects).length,
+    fills: nodes.filter((n) => n.sizing?.h === 'FILL').length,
   };
 }
 

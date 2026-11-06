@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:33:13.336Z"
+    "at": "2026-11-06T16:42:04.534Z"
   },
   "section": {
     "id": "383:287",
@@ -89,6 +89,18 @@
         ],
         "primary": "MAX",
         "counter": "CENTER"
+      },
+      "sizing": {
+        "h": "FILL"
+      },
+      "bound": {
+        "paddingLeft": "VariableID:2:9",
+        "paddingTop": "VariableID:2:12",
+        "paddingRight": "VariableID:2:9",
+        "paddingBottom": "VariableID:2:12",
+        "fills": [
+          "VariableID:706:447"
+        ]
       }
     },
     {
@@ -112,6 +124,17 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "limits": {
+        "maxW": 1280
+      },
+      "bound": {
+        "maxWidth": "VariableID:42:34"
       }
     },
     {
@@ -135,6 +158,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:10"
       }
     },
     {
@@ -168,7 +199,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "383:758",
@@ -201,7 +241,15 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:20"
+        ]
+      }
     }
   ]
 }

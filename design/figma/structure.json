@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-06T16:34:10.052Z",
+  "at": "2026-11-06T16:42:21.278Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -62,7 +62,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 2,
-            "bytes": 75031
+            "bytes": 75031,
+            "bound": 11,
+            "effects": 0,
+            "fills": 2
           },
           "images": {
             "figma": "/structure/home-hero-figma.png",
@@ -90,7 +93,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 179207
+            "bytes": 179207,
+            "bound": 5,
+            "effects": 0,
+            "fills": 2
           },
           "images": {
             "figma": "/structure/home-banner-founder-figma.png",
@@ -131,7 +137,10 @@
             "png": 1,
             "jpg": 1,
             "svg": 1,
-            "bytes": 2883055
+            "bytes": 2883055,
+            "bound": 31,
+            "effects": 0,
+            "fills": 20
           },
           "images": {
             "figma": "/structure/home-pain-figma.png",
@@ -159,7 +168,10 @@
             "png": 0,
             "jpg": 0,
             "svg": 1,
-            "bytes": 3781
+            "bytes": 3781,
+            "bound": 13,
+            "effects": 0,
+            "fills": 4
           },
           "images": {
             "figma": "/structure/home-method-figma.png",
@@ -187,7 +199,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 1,
-            "bytes": 63778
+            "bytes": 63778,
+            "bound": 14,
+            "effects": 0,
+            "fills": 4
           },
           "images": {
             "figma": "/structure/home-quiz-figma.png",
@@ -215,7 +230,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 1,
-            "bytes": 1963959
+            "bytes": 1963959,
+            "bound": 19,
+            "effects": 0,
+            "fills": 4
           },
           "images": {
             "figma": "/structure/home-about-founder-figma.png",
@@ -243,7 +261,10 @@
             "png": 3,
             "jpg": 0,
             "svg": 0,
-            "bytes": 3751718
+            "bytes": 3751718,
+            "bound": 21,
+            "effects": 0,
+            "fills": 11
           },
           "images": {
             "figma": "/structure/home-process-figma.png",
@@ -271,7 +292,10 @@
             "png": 1,
             "jpg": 1,
             "svg": 1,
-            "bytes": 2944546
+            "bytes": 2944546,
+            "bound": 21,
+            "effects": 0,
+            "fills": 6
           },
           "images": {
             "figma": "/structure/home-entry-figma.png",
@@ -299,7 +323,10 @@
             "png": 3,
             "jpg": 0,
             "svg": 2,
-            "bytes": 6709691
+            "bytes": 6709691,
+            "bound": 71,
+            "effects": 0,
+            "fills": 23
           },
           "images": {
             "figma": "/structure/home-formats-figma.png",
@@ -327,7 +354,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 3,
-            "bytes": 1974342
+            "bytes": 1974342,
+            "bound": 52,
+            "effects": 0,
+            "fills": 8
           },
           "images": {
             "figma": "/structure/home-voices-figma.png",
@@ -355,7 +385,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 1,
-            "bytes": 2716934
+            "bytes": 2716934,
+            "bound": 16,
+            "effects": 0,
+            "fills": 4
           },
           "images": {
             "figma": "/structure/home-library-figma.png",
@@ -383,7 +416,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 77325
+            "bytes": 77325,
+            "bound": 0,
+            "effects": 0,
+            "fills": 0
           },
           "images": {
             "figma": "/structure/home-air-photo-figma.png",
@@ -411,7 +447,10 @@
             "png": 2,
             "jpg": 0,
             "svg": 1,
-            "bytes": 4456519
+            "bytes": 4456519,
+            "bound": 33,
+            "effects": 0,
+            "fills": 20
           },
           "images": {
             "figma": "/structure/home-faq-figma.png",
@@ -439,7 +478,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 205035
+            "bytes": 205035,
+            "bound": 28,
+            "effects": 0,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/home-footer-figma.png",
@@ -467,7 +509,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 3,
-            "bytes": 2787345
+            "bytes": 2787345,
+            "bound": 22,
+            "effects": 1,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/home-header-figma.png",
@@ -516,7 +561,10 @@
             "png": 2,
             "jpg": 1,
             "svg": 2,
-            "bytes": 6509085
+            "bytes": 6509085,
+            "bound": 55,
+            "effects": 2,
+            "fills": 18
           },
           "images": {
             "figma": "/structure/masters-founder-hero-figma.png",
@@ -544,7 +592,10 @@
             "png": 3,
             "jpg": 0,
             "svg": 3,
-            "bytes": 7410571
+            "bytes": 7410571,
+            "bound": 45,
+            "effects": 2,
+            "fills": 14
           },
           "images": {
             "figma": "/structure/masters-masters-team-figma.png",
@@ -572,7 +623,10 @@
             "png": 0,
             "jpg": 3,
             "svg": 1,
-            "bytes": 210468
+            "bytes": 210468,
+            "bound": 32,
+            "effects": 0,
+            "fills": 19
           },
           "images": {
             "figma": "/structure/masters-masters-more-figma.png",
@@ -600,7 +654,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 205035
+            "bytes": 205035,
+            "bound": 28,
+            "effects": 0,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/masters-footer-figma.png",
@@ -628,7 +685,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 3,
-            "bytes": 2787356
+            "bytes": 2787356,
+            "bound": 22,
+            "effects": 1,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/masters-header-figma.png",
@@ -677,7 +737,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 1,
-            "bytes": 2300561
+            "bytes": 2300561,
+            "bound": 8,
+            "effects": 0,
+            "fills": 2
           },
           "images": {
             "figma": "/structure/library-library-hero-figma.png",
@@ -705,7 +768,10 @@
             "png": 1,
             "jpg": 1,
             "svg": 1,
-            "bytes": 2873483
+            "bytes": 2873483,
+            "bound": 13,
+            "effects": 0,
+            "fills": 6
           },
           "images": {
             "figma": "/structure/library-library-book-figma.png",
@@ -733,7 +799,10 @@
             "png": 1,
             "jpg": 1,
             "svg": 1,
-            "bytes": 6410115
+            "bytes": 6410115,
+            "bound": 16,
+            "effects": 0,
+            "fills": 5
           },
           "images": {
             "figma": "/structure/library-library-journal-figma.png",
@@ -761,7 +830,10 @@
             "png": 0,
             "jpg": 4,
             "svg": 1,
-            "bytes": 3915417
+            "bytes": 3915417,
+            "bound": 46,
+            "effects": 0,
+            "fills": 21
           },
           "images": {
             "figma": "/structure/library-library-issues-figma.png",
@@ -789,7 +861,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 205035
+            "bytes": 205035,
+            "bound": 28,
+            "effects": 0,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/library-footer-figma.png",
@@ -817,7 +892,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 3,
-            "bytes": 2787355
+            "bytes": 2787355,
+            "bound": 22,
+            "effects": 1,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/library-header-figma.png",
@@ -866,7 +944,10 @@
             "png": 2,
             "jpg": 0,
             "svg": 3,
-            "bytes": 4978064
+            "bytes": 4978064,
+            "bound": 25,
+            "effects": 1,
+            "fills": 4
           },
           "images": {
             "figma": "/structure/practice-hero-figma.png",
@@ -894,7 +975,10 @@
             "png": 4,
             "jpg": 1,
             "svg": 4,
-            "bytes": 10234302
+            "bytes": 10234302,
+            "bound": 88,
+            "effects": 0,
+            "fills": 18
           },
           "images": {
             "figma": "/structure/practice-practice-free-figma.png",
@@ -922,7 +1006,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 1,
-            "bytes": 63786
+            "bytes": 63786,
+            "bound": 12,
+            "effects": 0,
+            "fills": 1
           },
           "images": {
             "figma": "/structure/practice-quiz-figma.png",
@@ -950,7 +1037,10 @@
             "png": 2,
             "jpg": 6,
             "svg": 3,
-            "bytes": 17451645
+            "bytes": 17451645,
+            "bound": 157,
+            "effects": 0,
+            "fills": 29
           },
           "images": {
             "figma": "/structure/practice-practice-pay-figma.png",
@@ -978,7 +1068,10 @@
             "png": 1,
             "jpg": 7,
             "svg": 3,
-            "bytes": 4188672
+            "bytes": 4188672,
+            "bound": 177,
+            "effects": 0,
+            "fills": 31
           },
           "images": {
             "figma": "/structure/practice-kody-practice-pay-figma.png",
@@ -1006,7 +1099,10 @@
             "png": 2,
             "jpg": 0,
             "svg": 4,
-            "bytes": 4748683
+            "bytes": 4748683,
+            "bound": 92,
+            "effects": 3,
+            "fills": 27
           },
           "images": {
             "figma": "/structure/practice-practice-package-figma.png",
@@ -1034,7 +1130,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 4,
-            "bytes": 2728218
+            "bytes": 2728218,
+            "bound": 25,
+            "effects": 0,
+            "fills": 5
           },
           "images": {
             "figma": "/structure/practice-info-section-figma.png",
@@ -1062,7 +1161,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 205035
+            "bytes": 205035,
+            "bound": 28,
+            "effects": 0,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/practice-footer-figma.png",
@@ -1111,7 +1213,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 5,
-            "bytes": 2181544
+            "bytes": 2181544,
+            "bound": 61,
+            "effects": 0,
+            "fills": 6
           },
           "images": {
             "figma": "/structure/quiz-quiz-section-figma.png",
@@ -1139,7 +1244,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 3,
-            "bytes": 2787355
+            "bytes": 2787355,
+            "bound": 22,
+            "effects": 1,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/quiz-header-figma.png",
@@ -1167,7 +1275,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 205035
+            "bytes": 205035,
+            "bound": 28,
+            "effects": 0,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/quiz-footer-figma.png",
@@ -1216,7 +1327,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 0,
-            "bytes": 3114278
+            "bytes": 3114278,
+            "bound": 5,
+            "effects": 0,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/booking-booking-hero-figma.png",
@@ -1244,7 +1358,10 @@
             "png": 0,
             "jpg": 0,
             "svg": 2,
-            "bytes": 34311
+            "bytes": 34311,
+            "bound": 127,
+            "effects": 0,
+            "fills": 56
           },
           "images": {
             "figma": "/structure/booking-booking-formats-figma.png",
@@ -1272,7 +1389,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 205035
+            "bytes": 205035,
+            "bound": 28,
+            "effects": 0,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/booking-footer-figma.png",
@@ -1300,7 +1420,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 3,
-            "bytes": 2787355
+            "bytes": 2787355,
+            "bound": 22,
+            "effects": 1,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/booking-header-figma.png",
@@ -1349,7 +1472,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 0,
-            "bytes": 1886434
+            "bytes": 1886434,
+            "bound": 4,
+            "effects": 0,
+            "fills": 2
           },
           "images": {
             "figma": "/structure/method-method-hero-figma.png",
@@ -1377,7 +1503,10 @@
             "png": 0,
             "jpg": 0,
             "svg": 0,
-            "bytes": 0
+            "bytes": 0,
+            "bound": 18,
+            "effects": 0,
+            "fills": 8
           },
           "images": {
             "figma": "/structure/method-method-about-figma.png",
@@ -1405,7 +1534,10 @@
             "png": 2,
             "jpg": 0,
             "svg": 0,
-            "bytes": 5091940
+            "bytes": 5091940,
+            "bound": 10,
+            "effects": 0,
+            "fills": 4
           },
           "images": {
             "figma": "/structure/method-method-cta-figma.png",
@@ -1433,7 +1565,10 @@
             "png": 0,
             "jpg": 1,
             "svg": 0,
-            "bytes": 205035
+            "bytes": 205035,
+            "bound": 28,
+            "effects": 0,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/method-footer-figma.png",
@@ -1461,7 +1596,10 @@
             "png": 1,
             "jpg": 0,
             "svg": 3,
-            "bytes": 2787355
+            "bytes": 2787355,
+            "bound": 22,
+            "effects": 1,
+            "fills": 3
           },
           "images": {
             "figma": "/structure/method-header-figma.png",

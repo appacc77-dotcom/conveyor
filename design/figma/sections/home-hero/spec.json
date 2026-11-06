@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:32:04.968Z"
+    "at": "2026-11-06T16:40:51.989Z"
   },
   "section": {
     "id": "79:105",
@@ -63,6 +63,9 @@
         ],
         "primary": "MAX",
         "counter": "MIN"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:8"
       }
     },
     {
@@ -116,6 +119,16 @@
         ],
         "primary": "SPACE_BETWEEN",
         "counter": "MAX"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "FILL"
+      },
+      "bound": {
+        "paddingLeft": "VariableID:2:12",
+        "paddingTop": "VariableID:2:12",
+        "paddingRight": "VariableID:2:12",
+        "paddingBottom": "VariableID:2:12"
       }
     },
     {
@@ -138,7 +151,12 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "bound": {
+        "fills": [
+          "VariableID:706:447"
+        ]
+      }
     },
     {
       "id": "79:107",
@@ -161,6 +179,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:10"
       }
     },
     {
@@ -194,7 +220,18 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:20"
+        ],
+        "textRangeFills": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "79:109",
@@ -227,7 +264,19 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:20"
+        ],
+        "textRangeFills": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "79:110",
@@ -262,7 +311,26 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "radius": 4
+      "radius": 4,
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:7",
+        "paddingLeft": "VariableID:2:8",
+        "paddingTop": "VariableID:2:7",
+        "paddingRight": "VariableID:2:8",
+        "paddingBottom": "VariableID:2:7",
+        "topLeftRadius": "VariableID:2:16",
+        "topRightRadius": "VariableID:2:16",
+        "bottomLeftRadius": "VariableID:2:16",
+        "bottomRightRadius": "VariableID:2:16",
+        "fills": [
+          "VariableID:2:31"
+        ]
+      }
     },
     {
       "id": "I79:110;695:1531",
@@ -295,7 +363,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "I79:110;695:1532",
@@ -318,7 +395,8 @@
         ],
         "primary": "CENTER",
         "counter": "CENTER"
-      }
+      },
+      "clips": false
     },
     {
       "id": "I79:110;695:1532;967:2413",
@@ -350,7 +428,13 @@
           }
         }
       ],
-      "strokeWeight": 1.5
+      "strokeWeight": 1.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "I79:110;695:1532;13:123",
@@ -372,7 +456,13 @@
           }
         }
       ],
-      "strokeWeight": 3
+      "strokeWeight": 3,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "79:113",
@@ -394,7 +484,8 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "clips": false
     },
     {
       "id": "I79:113;34:108",
@@ -415,7 +506,13 @@
           }
         }
       ],
-      "strokeWeight": 1.5
+      "strokeWeight": 1.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:20"
+        ]
+      }
     }
   ]
 }

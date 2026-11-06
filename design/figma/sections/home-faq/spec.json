@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:32:24.207Z"
+    "at": "2026-11-06T16:41:14.887Z"
   },
   "section": {
     "id": "148:508",
@@ -93,6 +93,12 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
+      },
+      "bound": {
+        "paddingLeft": "VariableID:2:9",
+        "paddingTop": "VariableID:2:14",
+        "paddingRight": "VariableID:2:9",
+        "paddingBottom": "VariableID:2:14"
       }
     },
     {
@@ -116,6 +122,18 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "limits": {
+        "maxW": 1280
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:11",
+        "maxWidth": "VariableID:42:34"
       }
     },
     {
@@ -139,6 +157,13 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "v": "FILL"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:12"
       }
     },
     {
@@ -162,6 +187,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:11"
       }
     },
     {
@@ -185,7 +218,12 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
-      }
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "148:513",
@@ -218,7 +256,15 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:25"
+        ]
+      }
     },
     {
       "id": "148:514",
@@ -241,7 +287,12 @@
         ],
         "primary": "MIN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "148:515",
@@ -274,7 +325,15 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:25"
+        ]
+      }
     },
     {
       "id": "148:516",
@@ -307,7 +366,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:49:53"
+        ]
+      }
     },
     {
       "id": "148:517",
@@ -361,7 +429,23 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "radius": 4
+      "radius": 4,
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:7",
+        "paddingLeft": "VariableID:2:8",
+        "paddingTop": "VariableID:2:7",
+        "paddingRight": "VariableID:2:8",
+        "paddingBottom": "VariableID:2:7",
+        "topLeftRadius": "VariableID:2:16",
+        "topRightRadius": "VariableID:2:16",
+        "bottomLeftRadius": "VariableID:2:16",
+        "bottomRightRadius": "VariableID:2:16"
+      }
     },
     {
       "id": "I148:517;4:16",
@@ -394,7 +478,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "HUG",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "I148:517;14:128",
@@ -417,7 +510,8 @@
         ],
         "primary": "CENTER",
         "counter": "CENTER"
-      }
+      },
+      "clips": false
     },
     {
       "id": "I148:517;14:128;967:2413",
@@ -449,7 +543,13 @@
           }
         }
       ],
-      "strokeWeight": 1.5
+      "strokeWeight": 1.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "I148:517;14:128;13:123",
@@ -471,7 +571,13 @@
           }
         }
       ],
-      "strokeWeight": 3
+      "strokeWeight": 3,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:20"
+        ]
+      }
     },
     {
       "id": "148:518",
@@ -494,6 +600,14 @@
         ],
         "primary": "MIN",
         "counter": "MIN"
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false,
+      "bound": {
+        "itemSpacing": "VariableID:2:8"
       }
     },
     {
@@ -529,7 +643,25 @@
         "primary": "MIN",
         "counter": "MIN"
       },
-      "radius": 12
+      "radius": 12,
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:9",
+        "paddingLeft": "VariableID:2:9",
+        "paddingTop": "VariableID:2:8",
+        "paddingRight": "VariableID:2:9",
+        "paddingBottom": "VariableID:2:8",
+        "topLeftRadius": "VariableID:2:17",
+        "topRightRadius": "VariableID:2:17",
+        "bottomLeftRadius": "VariableID:2:17",
+        "bottomRightRadius": "VariableID:2:17",
+        "fills": [
+          "VariableID:709:1577"
+        ]
+      }
     },
     {
       "id": "I148:519;141:320",
@@ -552,7 +684,12 @@
         ],
         "primary": "SPACE_BETWEEN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "I148:519;140:349",
@@ -585,7 +722,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "I148:519;756:1883",
@@ -608,7 +754,8 @@
         ],
         "primary": "CENTER",
         "counter": "CENTER"
-      }
+      },
+      "clips": false
     },
     {
       "id": "I148:519;756:1883;756:1691",
@@ -640,7 +787,13 @@
           }
         }
       ],
-      "strokeWeight": 2.25
+      "strokeWeight": 2.25,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:519;756:1883;755:2853",
@@ -662,7 +815,13 @@
           }
         }
       ],
-      "strokeWeight": 4.5
+      "strokeWeight": 4.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:519;140:350",
@@ -695,7 +854,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:49:53"
+        ]
+      }
     },
     {
       "id": "148:520",
@@ -729,7 +897,25 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:9",
+        "paddingLeft": "VariableID:2:9",
+        "paddingTop": "VariableID:2:8",
+        "paddingRight": "VariableID:2:9",
+        "paddingBottom": "VariableID:2:8",
+        "topLeftRadius": "VariableID:2:17",
+        "topRightRadius": "VariableID:2:17",
+        "bottomLeftRadius": "VariableID:2:17",
+        "bottomRightRadius": "VariableID:2:17",
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:520;144:357",
@@ -752,7 +938,12 @@
         ],
         "primary": "SPACE_BETWEEN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "I148:520;144:358",
@@ -785,7 +976,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "I148:520;755:2882",
@@ -808,7 +1008,8 @@
         ],
         "primary": "CENTER",
         "counter": "CENTER"
-      }
+      },
+      "clips": false
     },
     {
       "id": "I148:520;755:2882;756:1690",
@@ -840,7 +1041,13 @@
           }
         }
       ],
-      "strokeWeight": 2.25
+      "strokeWeight": 2.25,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:520;755:2882;755:2850",
@@ -862,7 +1069,13 @@
           }
         }
       ],
-      "strokeWeight": 4.5
+      "strokeWeight": 4.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "148:521",
@@ -896,7 +1109,25 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:9",
+        "paddingLeft": "VariableID:2:9",
+        "paddingTop": "VariableID:2:8",
+        "paddingRight": "VariableID:2:9",
+        "paddingBottom": "VariableID:2:8",
+        "topLeftRadius": "VariableID:2:17",
+        "topRightRadius": "VariableID:2:17",
+        "bottomLeftRadius": "VariableID:2:17",
+        "bottomRightRadius": "VariableID:2:17",
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:521;144:357",
@@ -919,7 +1150,12 @@
         ],
         "primary": "SPACE_BETWEEN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "I148:521;144:358",
@@ -952,7 +1188,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "I148:521;755:2882",
@@ -975,7 +1220,8 @@
         ],
         "primary": "CENTER",
         "counter": "CENTER"
-      }
+      },
+      "clips": false
     },
     {
       "id": "I148:521;755:2882;756:1690",
@@ -1007,7 +1253,13 @@
           }
         }
       ],
-      "strokeWeight": 2.25
+      "strokeWeight": 2.25,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:521;755:2882;755:2850",
@@ -1029,7 +1281,13 @@
           }
         }
       ],
-      "strokeWeight": 4.5
+      "strokeWeight": 4.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "148:522",
@@ -1063,7 +1321,25 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:9",
+        "paddingLeft": "VariableID:2:9",
+        "paddingTop": "VariableID:2:8",
+        "paddingRight": "VariableID:2:9",
+        "paddingBottom": "VariableID:2:8",
+        "topLeftRadius": "VariableID:2:17",
+        "topRightRadius": "VariableID:2:17",
+        "bottomLeftRadius": "VariableID:2:17",
+        "bottomRightRadius": "VariableID:2:17",
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:522;144:357",
@@ -1086,7 +1362,12 @@
         ],
         "primary": "SPACE_BETWEEN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "I148:522;144:358",
@@ -1119,7 +1400,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "I148:522;755:2882",
@@ -1142,7 +1432,8 @@
         ],
         "primary": "CENTER",
         "counter": "CENTER"
-      }
+      },
+      "clips": false
     },
     {
       "id": "I148:522;755:2882;756:1690",
@@ -1174,7 +1465,13 @@
           }
         }
       ],
-      "strokeWeight": 2.25
+      "strokeWeight": 2.25,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:522;755:2882;755:2850",
@@ -1196,7 +1493,13 @@
           }
         }
       ],
-      "strokeWeight": 4.5
+      "strokeWeight": 4.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "148:523",
@@ -1230,7 +1533,25 @@
           }
         }
       ],
-      "strokeWeight": 1
+      "strokeWeight": 1,
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "itemSpacing": "VariableID:2:9",
+        "paddingLeft": "VariableID:2:9",
+        "paddingTop": "VariableID:2:8",
+        "paddingRight": "VariableID:2:9",
+        "paddingBottom": "VariableID:2:8",
+        "topLeftRadius": "VariableID:2:17",
+        "topRightRadius": "VariableID:2:17",
+        "bottomLeftRadius": "VariableID:2:17",
+        "bottomRightRadius": "VariableID:2:17",
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:523;144:357",
@@ -1253,7 +1574,12 @@
         ],
         "primary": "SPACE_BETWEEN",
         "counter": "CENTER"
-      }
+      },
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "clips": false
     },
     {
       "id": "I148:523;144:358",
@@ -1286,7 +1612,16 @@
             "a": 1
           }
         }
-      ]
+      ],
+      "sizing": {
+        "h": "FILL",
+        "v": "HUG"
+      },
+      "bound": {
+        "fills": [
+          "VariableID:2:26"
+        ]
+      }
     },
     {
       "id": "I148:523;755:2882",
@@ -1309,7 +1644,8 @@
         ],
         "primary": "CENTER",
         "counter": "CENTER"
-      }
+      },
+      "clips": false
     },
     {
       "id": "I148:523;755:2882;756:1690",
@@ -1341,7 +1677,13 @@
           }
         }
       ],
-      "strokeWeight": 2.25
+      "strokeWeight": 2.25,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     },
     {
       "id": "I148:523;755:2882;755:2850",
@@ -1363,7 +1705,13 @@
           }
         }
       ],
-      "strokeWeight": 4.5
+      "strokeWeight": 4.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
     }
   ]
 }

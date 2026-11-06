@@ -207,6 +207,8 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
                     <li><b>{s.assets.nodes}</b> узлов</li>
                     <li><b>{s.assets.images}</b> фото</li>
                     <li><b>{s.assets.svg}</b> svg</li>
+                    {s.assets.bound > 0 && <li class="assets__figma"><b>{s.assets.bound}</b> на токенах</li>}
+                    {s.assets.effects > 0 && <li class="assets__figma"><b>{s.assets.effects}</b> эффектов</li>}
                     <li>{size(s.assets.bytes)}</li>
                   </ul>
                 )}
@@ -773,6 +775,14 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
   .assets b {
     font-weight: 600;
     color: var(--color-text-primary);
+  }
+
+  .assets__figma {
+    color: var(--color-accent);
+  }
+
+  .assets__figma b {
+    color: var(--color-accent);
   }
 
   .nums {
