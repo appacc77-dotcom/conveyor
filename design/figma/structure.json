@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-06T17:14:08.130Z",
+  "at": "2026-11-06T17:14:31.403Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -71,7 +71,7 @@
             "fills": 2
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-hero-figma.png",
             "site": "/structure/home-hero-site.png"
           }
         },
@@ -103,7 +103,7 @@
             "fills": 2
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-banner-founder-figma.png",
             "site": null
           }
         },
@@ -148,7 +148,7 @@
             "fills": 20
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-pain-figma.png",
             "site": "/structure/home-pain-site.png"
           }
         },
@@ -180,7 +180,7 @@
             "fills": 4
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-method-figma.png",
             "site": null
           }
         },
@@ -212,7 +212,7 @@
             "fills": 4
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-quiz-figma.png",
             "site": null
           }
         },
@@ -244,7 +244,7 @@
             "fills": 4
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-about-founder-figma.png",
             "site": null
           }
         },
@@ -276,7 +276,7 @@
             "fills": 11
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-process-figma.png",
             "site": null
           }
         },
@@ -308,7 +308,7 @@
             "fills": 6
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-entry-figma.png",
             "site": null
           }
         },
@@ -340,7 +340,7 @@
             "fills": 23
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-formats-figma.png",
             "site": null
           }
         },
@@ -372,7 +372,7 @@
             "fills": 8
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-voices-figma.png",
             "site": null
           }
         },
@@ -404,7 +404,7 @@
             "fills": 4
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-library-figma.png",
             "site": null
           }
         },
@@ -436,7 +436,7 @@
             "fills": 0
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-air-photo-figma.png",
             "site": null
           }
         },
@@ -468,7 +468,7 @@
             "fills": 20
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-faq-figma.png",
             "site": null
           }
         },
@@ -500,7 +500,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-footer-figma.png",
             "site": null
           }
         },
@@ -532,7 +532,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/home-header-figma.png",
             "site": null
           }
         }
@@ -587,7 +587,7 @@
             "fills": 18
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/masters-founder-hero-figma.png",
             "site": null
           }
         },
@@ -619,7 +619,7 @@
             "fills": 14
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/masters-masters-team-figma.png",
             "site": null
           }
         },
@@ -651,7 +651,7 @@
             "fills": 19
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/masters-masters-more-figma.png",
             "site": null
           }
         },
@@ -683,7 +683,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/masters-footer-figma.png",
             "site": null
           }
         },
@@ -715,7 +715,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/masters-header-figma.png",
             "site": null
           }
         }
@@ -770,7 +770,7 @@
             "fills": 2
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/library-library-hero-figma.png",
             "site": null
           }
         },
@@ -802,7 +802,7 @@
             "fills": 6
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/library-library-book-figma.png",
             "site": null
           }
         },
@@ -834,7 +834,7 @@
             "fills": 5
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/library-library-journal-figma.png",
             "site": null
           }
         },
@@ -866,7 +866,7 @@
             "fills": 21
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/library-library-issues-figma.png",
             "site": null
           }
         },
@@ -898,7 +898,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/library-footer-figma.png",
             "site": null
           }
         },
@@ -930,7 +930,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/library-header-figma.png",
             "site": null
           }
         }
@@ -985,7 +985,7 @@
             "fills": 4
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/practice-hero-figma.png",
             "site": null
           }
         },
@@ -1017,7 +1017,7 @@
             "fills": 18
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/practice-practice-free-figma.png",
             "site": null
           }
         },
@@ -1049,7 +1049,7 @@
             "fills": 1
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/practice-quiz-figma.png",
             "site": null
           }
         },
@@ -1081,7 +1081,7 @@
             "fills": 29
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/practice-practice-pay-figma.png",
             "site": null
           }
         },
@@ -1113,7 +1113,7 @@
             "fills": 31
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/practice-kody-practice-pay-figma.png",
             "site": null
           }
         },
@@ -1145,7 +1145,7 @@
             "fills": 27
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/practice-practice-package-figma.png",
             "site": null
           }
         },
@@ -1177,7 +1177,7 @@
             "fills": 5
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/practice-info-section-figma.png",
             "site": null
           }
         },
@@ -1209,7 +1209,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/practice-footer-figma.png",
             "site": null
           }
         }
@@ -1264,7 +1264,7 @@
             "fills": 6
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/quiz-quiz-section-figma.png",
             "site": null
           }
         },
@@ -1296,7 +1296,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/quiz-header-figma.png",
             "site": null
           }
         },
@@ -1328,7 +1328,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/quiz-footer-figma.png",
             "site": null
           }
         }
@@ -1383,7 +1383,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/booking-booking-hero-figma.png",
             "site": null
           }
         },
@@ -1415,7 +1415,7 @@
             "fills": 56
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/booking-booking-formats-figma.png",
             "site": null
           }
         },
@@ -1447,7 +1447,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/booking-footer-figma.png",
             "site": null
           }
         },
@@ -1479,7 +1479,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/booking-header-figma.png",
             "site": null
           }
         }
@@ -1534,7 +1534,7 @@
             "fills": 2
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/method-method-hero-figma.png",
             "site": null
           }
         },
@@ -1566,7 +1566,7 @@
             "fills": 8
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/method-method-about-figma.png",
             "site": null
           }
         },
@@ -1598,7 +1598,7 @@
             "fills": 4
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/method-method-cta-figma.png",
             "site": null
           }
         },
@@ -1630,7 +1630,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/method-footer-figma.png",
             "site": null
           }
         },
@@ -1662,7 +1662,7 @@
             "fills": 3
           },
           "images": {
-            "figma": null,
+            "figma": "/structure/method-header-figma.png",
             "site": null
           }
         }

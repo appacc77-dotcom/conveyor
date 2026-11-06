@@ -88,7 +88,8 @@ function statusOf(entry) {
 
 // --- превью ---------------------------------------------------------------
 function publish(slug, entry) {
-  const figma = join(sectionsRoot, slug, 'crop.png');
+  // Кроп лежит в папке секции: pages/<страница>/<секция>/crop.png
+  const figma = join(root, entry.dir, 'crop.png');
   if (existsSync(figma)) copyFileSync(figma, join(outDir, `${slug}-figma.png`));
   const shot = join(root, '.screens', `${slug}.png`);
   const hasShot = existsSync(shot);
