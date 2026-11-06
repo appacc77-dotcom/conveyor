@@ -1,15 +1,16 @@
 # Переносимость
 
-Проект должен запускаться из любой папки на любой машине с Node.js; никаких
-`../syntonia-deepseek`, `../agent-system` или абсолютных `/Users/...` в коде,
-скриптах и конфигах.
+Проект работает от **живого файла Figma** через `figma-agent`. Ни `.fig`, ни
+заранее выгруженных рендеров в репозитории нет — поэтому «перенести проект» и
+«перенести эталоны» это одно и то же действие: открыть файл в Figma desktop.
 
 ## Требования
 
 - Node.js ≥ 20 (рекомендуется 22 LTS, см. `.nvmrc`);
 - npm;
-- Chromium для Playwright (нужен воротам и снимкам):
-  `npx playwright install chromium`.
+- Chromium для Playwright: `npx playwright install chromium`;
+- Figma desktop с открытым файлом и запущенным плагином **DESIGN:OS Bridge**;
+- CLI `figma-agent` в `PATH`.
 
 ## Установка и запуск
 
@@ -18,39 +19,41 @@ npm run setup
 npm run setup:browsers
 npm run dev      # http://127.0.0.1:4321/
 npm run build    # dist/
-npm run preview  # http://127.0.0.1:4322/
 ```
 
-Сейчас `src/` и `public/` отсутствуют — проект на фазе P0. `npm run build`
-соберёт 0 страниц и завершится успешно; зелёная сборка при этом ничего не
-доказывает — проверять пока нечего.
+## Проверка, что мост живой
+
+```bash
+figma-agent status --peek
+```
+
+Нужно увидеть `connected: true` и `fileName` — он должен совпасть с
+`live.fileName` в `design/figma/source.json`. Если имя или `fileKey` другие,
+все снимки в `design/figma/live/`, спеки и кропы устарели одновременно.
 
 ## Что не переносится вместе с папкой
 
 | Что | Где | Почему |
 |---|---|---|
-| `.fig` (106 MB) | `../syntonia-deepseek/design/figma/` | внешний путь, хеш в `design/figma/source.json` |
-| Канвас 1:1 (27 MB) | `design/export/home/Website Syntonia.png` | в git не лежит — при копировании папки через git файл потеряется |
-| Доска | `../agent-system/board.json` | доска общая для рабочей области, не часть проекта |
-
-При переносе: положить `.fig` в `design/figma/`, пересчитать хеш в
-`source.json`, скопировать канвас в `design/export/home/`. Без `.fig` и канваса
-пайплайн P0–P3 не запускается — это вход, а не артефакт.
+| Живой файл | Figma desktop | источник истины, `fileKey NInjODHyOOjIitF3lq4Vpe` |
+| Плагин моста | Figma desktop → Plugins | без него не читается ничего |
+| Доска | `../agent-system/board.json` | общая для рабочей области, не часть проекта |
 
 ## Адреса
 
 | Переменная | По умолчанию | Назначение |
 |---|---|---|
 | `DSH_URL` | `http://127.0.0.1:57686` | прокси `/kanban` (astro.config.mjs) |
-| `DSH_BOARD_URL` | `http://127.0.0.1:57686/kanban/api/board` | watcher и снимки |
+| `DSH_BOARD_URL` | `http://127.0.0.1:57686/kanban/api/board` | доска |
+| `SHOT_PORT` | `4330` / `4331` | локальный сервер для `shot` и `measure` |
 
 ## Правила
 
-1. В `src/`, `scripts/`, конфигах и `package.json` — только относительные пути
+1. В `src/`, `tools/`, конфигах и `package.json` — только относительные пути
    проекта и локальные зависимости.
 2. Не добавлять `PLAYWRIGHT_PATH` и импорты из соседних репозиториев.
-3. Тяжёлые исходники Figma (`.fig`, канвас, PDF) не коммитятся. Разбор `.fig`
-   в `design/figma/extracted/` регенерируется — коммитится только `manifest.json`.
+3. `design/figma/live/`, `spec/` и `crops/` коммитятся: они малы и привязаны к
+   `fileKey`. Тяжёлые выгрузки — только локально.
 4. Документы могут ссылаться на старые проекты как на источник; это не
    runtime-зависимость.
 5. Внешние ссылки в документах помечаются словами «вне проекта», а не тихой

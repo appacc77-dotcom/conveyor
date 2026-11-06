@@ -184,7 +184,7 @@ DSH Web
 
 После того как главная собрана, бэклог наполняется не желаниями, а фактами:
 
-1. **Аудит 15 блоков**: текущий рендер против `home-1440.png`, по каждому
+1. **Аудит секций**: текущий рендер против кропа, снятого с живого узла, по каждому
    отклонению — карточка-дефект с числом.
 2. **Долг из AGENTS.md §10**: семь `width` в Button, `tokens.css`, отсутствие
    `/ds`, неподключённые spec/crops — по карточке на пункт.
@@ -208,8 +208,8 @@ DSH Web
   "tag": "layout",
   "unit": "btn-primary",
   "figmaNode": "123:456",
-  "spec": "design/figma/extracted/spec/home.json",
-  "crop": "design/figma/extracted/crops/btn-primary.png",
+  "spec": "design/figma/spec/home.json",
+  "crop": "design/figma/crops/btn-primary.png",
   "gate": "G1",
   "report": "reports/layout/btn-primary.md",
   "files": ["src/components/Button.astro", "src/styles/tokens.css"],

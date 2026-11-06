@@ -9,7 +9,11 @@
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 4322",
     "setup": "npm ci",
-    "setup:browsers": "npx playwright install chromium"
+    "setup:browsers": "npx playwright install chromium",
+    "ds:tokens": "node tools/ds-tokens.mjs",
+    "shot": "node tools/shot.mjs",
+    "measure": "node tools/measure.mjs",
+    "compare": "node tools/compare.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",

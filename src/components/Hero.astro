@@ -1,0 +1,104 @@
+---
+/**
+ * Hero — секция `hero` (79:105), фрейм `main` (79:103) страницы Home.
+ *
+ * Геометрия с живого узла: 1440×780, padding 64, контент 600×369 прижат к низу
+ * (y = 780 − 64 − 369 = 347), gap 32, play 47×47 в правом нижнем углу.
+ * Контент приходит пропсами: компонент не знает, какая это страница.
+ */
+import BtnPrimary from './ds/btn-primary.astro';
+import Play from './ds/play.astro';
+
+interface Props {
+  title: string;
+  lead: string;
+  ctaLabel: string;
+  ctaHref: string;
+  playLabel?: string;
+}
+
+const {
+  title,
+  lead,
+  ctaLabel,
+  ctaHref,
+  playLabel = 'Смотреть видео',
+} = Astro.props;
+---
+
+<section class="hero" data-figma-node="79:105">
+  <img
+    class="hero__bg"
+    src="/img/hero.jpg"
+    alt=""
+    width="1440"
+    height="780"
+    fetchpriority="high"
+  />
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <h1 class="hero__title t-h1">{title}</h1>
+    <p class="hero__lead t-body">{lead}</p>
+    <div class="hero__actions">
+      <BtnPrimary href={ctaHref} label={ctaLabel} />
+    </div>
+  </div>
+
+  <button class="hero__play" type="button" aria-label={playLabel}>
+    <Play />
+  </button>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 780px;
+    padding: var(--space-3xl);
+    overflow: hidden;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--color-overlay-dark);
+  }
+
+  .hero__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    width: 600px;
+    max-width: 100%;
+  }
+
+  .hero__title,
+  .hero__lead {
+    color: var(--color-text-on-image);
+  }
+
+  /* Кнопка не растягивается на ширину колонки: её ширина — из контента. */
+  .hero__actions {
+    display: flex;
+    align-self: flex-start;
+  }
+
+  .hero__play {
+    position: absolute;
+    right: var(--space-3xl);
+    bottom: var(--space-3xl);
+    width: 47px;
+    height: 47px;
+  }
+</style>

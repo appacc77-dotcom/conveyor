@@ -1,0 +1,36 @@
+---
+/**
+ * btn-primary — набор Figma `btn-primary` (5:19).
+ * Инстанс в hero: 303×45, padding 8/16, gap 8, радиус 4.
+ * Ширина не задаётся: 303 получается из 16 + 249 + 8 + 14 + 16.
+ */
+import ArrowQuiet from './arrow-quiet.astro';
+
+interface Props {
+  href: string;
+  label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<a class="btn-primary" href={href} data-figma-node="5:19">
+  <span class="btn-primary__label t-button">{label}</span>
+  <ArrowQuiet />
+</a>
+
+<style>
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-s) var(--space-m);
+    border-radius: var(--radius-s);
+    background: var(--color-accent-muted);
+    color: var(--color-text-on-image);
+  }
+
+  .btn-primary__label {
+    display: block;
+  }
+</style>

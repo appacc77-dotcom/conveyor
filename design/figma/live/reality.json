@@ -1,0 +1,973 @@
+warning: [find-all-without-visible-filter] line 16: findAll without a visible filter also returns hidden nodes (template layers, archived copies); fix: filter on n.visible in the predicate, or .filter(n => n.visible) the result
+{
+  "result": {
+    "file": {
+      "name": "Website Syntonia2"
+    },
+    "instances": {
+      "total": 1145,
+      "byPage": {
+        "Design system": 95,
+        "_______________________": 0,
+        "Home": 381,
+        "Masters": 92,
+        "Library": 136,
+        "Practice": 189,
+        "Quiz": 141,
+        "Booking": 99,
+        "Method": 12,
+        "______________________": 0
+      },
+      "scaledCount": 0,
+      "scaled": []
+    },
+    "textStyles": [
+      {
+        "id": "S:44387a0567972f64c536097c123ae77dbdab7d7f,",
+        "name": "H1",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 64,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 100
+        },
+        "letterSpacing": {
+          "unit": "PIXELS",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:2d78bfb527af1fd5b7577bb748b5797c10c445b4,",
+        "name": "H2",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 48,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 125
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:bce413022f062f8dd3a25d322199ae1691312fbd,",
+        "name": "H3",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 38,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 125
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:c3c748e5ea60e25a4c597b6d0fdaea9b1f75fdc6,",
+        "name": "H4",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 29,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 133.00000429153442
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:e57b4ca59638ca5410c789858b297d6a2378470a,",
+        "name": "H5",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 22,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 125
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:571fe9c8babf72460b370ef69f8588629c2db930,",
+        "name": "H6",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 20,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 125
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:80db8eb31857a6ec0812b69e66d39f7c1a056209,",
+        "name": "lead",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 28,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:4bc22f9515636c0691719c2b7d60499770bc7ff1,",
+        "name": "body",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 20,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:f4a914959d2161321f1978cace129ed8c36e4b9b,",
+        "name": "body-s",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 14,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 135.0000023841858
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:5abf7a450948515b46f03ce300ead64b86c91d7f,",
+        "name": "body-tight",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 20,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 135.0000023841858
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:b8d871d56eccaa73eedaf055509c67618acf7071,",
+        "name": "caption",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 13,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 150
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:2b7b0f8027b8b6e68fcdba9b400cfe1646503e23,",
+        "name": "quote",
+        "font": {
+          "family": "Lora",
+          "style": "Italic",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 20,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 139.9999976158142
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:02e7bd2ad25509ba6f6c4fb5911185b839ae65b3,",
+        "name": "quote-l",
+        "font": {
+          "family": "Lora",
+          "style": "Italic",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 44,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 139.9999976158142
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:1f88af89e0fc612cfb5f8f5e6c92670834af2c58,",
+        "name": "quote-founder",
+        "font": {
+          "family": "Lora",
+          "style": "Italic",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 24,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 139.9999976158142
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:8b48a369037e602cbb6c52b37c9c1a87067ca0e4,",
+        "name": "signature",
+        "font": {
+          "family": "Hurricane",
+          "style": "Regular"
+        },
+        "size": 42,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 139.9999976158142
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 5
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:9470f83eb50e179102dd1ed048f10769881d6be7,",
+        "name": "script-s",
+        "font": {
+          "family": "Great Vibes",
+          "style": "Regular"
+        },
+        "size": 27,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 117.99999475479126
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:0d580116524448197d47389f792a30eab0b651d9,",
+        "name": "script-m",
+        "font": {
+          "family": "Great Vibes",
+          "style": "Regular"
+        },
+        "size": 42,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 3
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:b1ad34e5f7ae10054afa2caf2348b9475a2780aa,",
+        "name": "script-l",
+        "font": {
+          "family": "Great Vibes",
+          "style": "Regular"
+        },
+        "size": 48,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:97e06c93c52aa5f21710d8b5ddb0545cf6196e75,",
+        "name": "script-xl",
+        "font": {
+          "family": "Great Vibes",
+          "style": "Regular"
+        },
+        "size": 55,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 125
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:3c56cbb664e18d47617009780d5d0e38c7ab3137,",
+        "name": "button",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 17,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 3
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:c00235406ca6f95e5bd91388f29fb4ca427199d0,",
+        "name": "button-caps",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 17,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 3
+        },
+        "textCase": "UPPER"
+      },
+      {
+        "id": "S:f7d12f48fc15db21f8f43a3c494937c34ad95976,",
+        "name": "button-s",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 11,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 3
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:27b6559bf1871876846cc5fec4941a184dfe03ff,",
+        "name": "button-s-caps",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 11,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 3
+        },
+        "textCase": "UPPER"
+      },
+      {
+        "id": "S:724f9dafcf2bbf75f173cf06ef9a4f6a21e5ff5f,",
+        "name": "button-m",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 24,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 170.00000476837158
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 3
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:f602da4a60cb18b2051f5c0b00d3be878b75b5d7,",
+        "name": "number",
+        "font": {
+          "family": "Lora",
+          "style": "Italic",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 13,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 150
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:f1a7ca019be5a6d1697a45cdfbb591a81bbcf753,",
+        "name": "eyebrow",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 20,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 150
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 16
+        },
+        "textCase": "UPPER"
+      },
+      {
+        "id": "S:f65c8ffabc928a669fd93f0b71edccbcf08352e6,",
+        "name": "eyebrow-s",
+        "font": {
+          "family": "Golos Text",
+          "style": "Medium",
+          "variationSettings": {
+            "wght": 500
+          }
+        },
+        "size": 15,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 150
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 16
+        },
+        "textCase": "UPPER"
+      },
+      {
+        "id": "S:f9ebcd9f7aa1b97a2ed3df8764005ea69929777e,",
+        "name": "eyebrow-xs",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 13,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 150
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 16
+        },
+        "textCase": "UPPER"
+      },
+      {
+        "id": "S:06e208862a8af1df0a91f93184998e2c52ef74b5,",
+        "name": "founder-role",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 24,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 135.0000023841858
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:4f37c11cac70eb6c9b9cfe842c8cf62d5234f738,",
+        "name": "founder-acc-title",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 25,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 117.99999475479126
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:346f49e81ab17d660dd6ca73713cfded1eff1a29,",
+        "name": "master-name",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 55,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 125
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:85bb01dc8bdbe738f52bf54ff6b367fdbe602a0f,",
+        "name": "more-title",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 43,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 125
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:9c3ef19217f89f0530656bdc471f76faeda9b19b,",
+        "name": "more-text",
+        "font": {
+          "family": "Golos Text",
+          "style": "Regular",
+          "variationSettings": {
+            "wght": 400
+          }
+        },
+        "size": 17,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 135.0000023841858
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      },
+      {
+        "id": "S:6689fe87627f696b895fec5fb6a32dd0f83537ed,",
+        "name": "issue-title",
+        "font": {
+          "family": "Literata",
+          "style": "Light",
+          "variationSettings": {
+            "opsz": 12,
+            "wght": 300
+          }
+        },
+        "size": 16,
+        "lineHeight": {
+          "unit": "PERCENT",
+          "value": 125
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        },
+        "textCase": "ORIGINAL"
+      }
+    ],
+    "paintStyles": [
+      {
+        "id": "S:7616737f1b1fb2d63d3e335910025956236de0c0,",
+        "name": "bg-gradient-warm",
+        "paints": [
+          {
+            "type": "GRADIENT_LINEAR",
+            "color": null,
+            "opacity": 1,
+            "gradientTransform": [
+              [
+                1.0007914304733276,
+                0.0508069284260273,
+                -0.030703434720635414
+              ],
+              [
+                -0.050806958228349686,
+                0.19954484701156616,
+                0.4070606529712677
+              ]
+            ],
+            "stops": [
+              {
+                "position": 0,
+                "color": {
+                  "hex": "#efe7d7",
+                  "a": 1
+                }
+              },
+              {
+                "position": 0.52,
+                "color": {
+                  "hex": "#fbf8f1",
+                  "a": 1
+                }
+              },
+              {
+                "position": 1,
+                "color": {
+                  "hex": "#fffcf6",
+                  "a": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "S:acef773ee73dede71bae2eac024d384ef6a566ed,",
+        "name": "bg-gradient-warm-reverse",
+        "paints": [
+          {
+            "type": "GRADIENT_LINEAR",
+            "color": null,
+            "opacity": 1,
+            "gradientTransform": [
+              [
+                -0.9442242383956909,
+                0.11319899559020996,
+                0.903868556022644
+              ],
+              [
+                -0.11319898068904877,
+                -0.36230960488319397,
+                0.7423631548881531
+              ]
+            ],
+            "stops": [
+              {
+                "position": 0,
+                "color": {
+                  "hex": "#efe7d7",
+                  "a": 1
+                }
+              },
+              {
+                "position": 0.494,
+                "color": {
+                  "hex": "#fcf9f2",
+                  "a": 1
+                }
+              },
+              {
+                "position": 1,
+                "color": {
+                  "hex": "#fffcf6",
+                  "a": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "S:b96dad056ccd31471054aeb64309016e3a69f6d4,",
+        "name": "bg-gradient-warm-center",
+        "paints": [
+          {
+            "type": "GRADIENT_LINEAR",
+            "color": null,
+            "opacity": 1,
+            "gradientTransform": [
+              [
+                6.123234262925839e-17,
+                1,
+                0
+              ],
+              [
+                -1,
+                6.123234262925839e-17,
+                1
+              ]
+            ],
+            "stops": [
+              {
+                "position": 0,
+                "color": {
+                  "hex": "#eae6d9",
+                  "a": 1
+                }
+              },
+              {
+                "position": 0.5,
+                "color": {
+                  "hex": "#fbf8f1",
+                  "a": 1
+                }
+              },
+              {
+                "position": 1,
+                "color": {
+                  "hex": "#ecdcc5",
+                  "a": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "S:e318070f05e4e92dbf19273653d146c08e54cc86,",
+        "name": "bg-gradient-master",
+        "paints": [
+          {
+            "type": "GRADIENT_LINEAR",
+            "color": null,
+            "opacity": 1,
+            "gradientTransform": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ]
+            ],
+            "stops": [
+              {
+                "position": 0,
+                "color": {
+                  "hex": "#e1d6c6",
+                  "a": 1
+                }
+              },
+              {
+                "position": 0.488,
+                "color": {
+                  "hex": "#6b6357",
+                  "a": 1
+                }
+              },
+              {
+                "position": 0.995,
+                "color": {
+                  "hex": "#3a3323",
+                  "a": 1
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "S:157a5692d28c86a6b60f2e5ca474299b8433378d,",
+        "name": "bg-gradient-more",
+        "paints": [
+          {
+            "type": "GRADIENT_LINEAR",
+            "color": null,
+            "opacity": 1,
+            "gradientTransform": [
+              [
+                -0.7411442995071411,
+                0.13964872062206268,
+                0.8604552149772644
+              ],
+              [
+                -0.13964872062206268,
+                -0.13917042315006256,
+                0.6390668749809265
+              ]
+            ],
+            "stops": [
+              {
+                "position": 0.017,
+                "color": {
+                  "hex": "#c9bea4",
+                  "a": 1
+                }
+              },
+              {
+                "position": 1,
+                "color": {
+                  "hex": "#f4eee3",
+                  "a": 1
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "topLevelWidths": {
+      "824": 1,
+      "1440": 48
+    }
+  },
+  "console": [],
+  "ms": 130,
+  "executed": true,
+  "mode": "statement",
+  "fileContext": {
+    "fileName": "Website Syntonia2",
+    "fileKey": "NInjODHyOOjIitF3lq4Vpe"
+  }
+}

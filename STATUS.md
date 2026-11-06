@@ -1,53 +1,57 @@
 # STATUS — Syntonia
 
-Дата: 06.11.2026. Состояние после перезапуска.
+Дата: 06.11.2026, вечер. Работаем **только через живой мост** `figma-agent`.
 
-## Что произошло
+## Режим
 
-Проект сброшен к чистому листу. Готовый сайт (48 компонентов, 13 страниц,
-73 MB ассетов) удалён: он был собран без ворот — приёмка показала escape rate
-33% (5 дефектов из 15 карточек после «готово»), а два 🔴 в `decisions.md`
-оставались открытыми, хотя P4 по процессу не может начаться при открытом G0.
+Ни `.fig`, ни заранее выгруженных PNG. Всё читается с файла, открытого в Figma
+desktop: **«Website Syntonia2»**, `fileKey NInjODHyOOjIitF3lq4Vpe`.
 
-Код и ассеты восстановимы из git: тег `pre-reset-2026-11-06` (коммит `65e91e2`).
+Старые эталоны удалены: они были выгружены из другого файла
+(`wbtBZLldiNMyOD4vX8ukKz`), поэтому любое сравнение с ними давало ложные числа.
+Код удалённого сайта восстановим из тега `pre-reset-2026-11-06`.
 
-## Что сохранено
+## Фазы
 
-| Что | Где | Зачем |
+| Фаза | Состояние | Чем закрыта |
 |---|---|---|
-| Канвас 1:1 (27 MB) | `design/export/home/Website Syntonia.png` | вход для кропов; **не в git** |
-| Эталон главной 1440 | `design/export/home/home-1440.png` | пиксельная сверка |
-| Эталон «Метода» | `design/export/method/method-1440.png` | то же |
-| `.fig` (106 MB) | `../syntonia-deepseek/design/figma/` | вход P0; хеш в `design/figma/source.json` |
-| Процесс | `docs/system/` | P0–P7, ворота G0–G3 |
-| Решения | `docs/decisions.md` | журнал, append-only |
-| История | `docs/archive/` | отчёты, приёмка, старый README |
+| P0 Ingest | **готово** | `design/figma/live/{structure,ds,reality}.json` + `source.json` с fileKey |
+| P1 Reality | **готово** | 0 отмасштабированных из 1145; 48 фреймов шириной 1440 |
+| G0 | **закрыт** | см. «Ревизия 06.11.2026» в `docs/decisions.md` |
+| P2 Resolve | начато | `design/figma/spec/hero.json` |
+| P3 Model | **готово для первого шага** | `npm run ds:tokens` → 41 переменная, 34 стиля |
+| P4 Components | начато | `ds/btn-primary`, `ds/arrow-quiet`, `ds/play` |
+| P5 Pages | начато | `index.astro` — только hero |
 
-## Где мы сейчас
+## Первый блок — hero
 
-**Фаза P0 не начата.** Каталоги `design/figma/{canvas,extracted,spec,crops}`
-заведены пустыми — под выход скриптов.
+Собран из живого файла: фото фона забрано по `imageHash`, иконки — вектором с
+узлов, цвета и типографика — из сгенерированных токенов.
 
+| Проверка | Число |
+|---|---|
+| геометрия против Figma | **0 нарушений**, максимум Δ **0,11 px** (допуск 1) |
+| пиксельная сверка | средняя **1,82**, пикселей > 16 — **1,05 %** |
+| сборка | 1 страница, exit 0 |
+
+Для сравнения, прежний прогон давал по hero среднюю 3,52 и 2,25 %.
+
+## Команды
+
+```bash
+npm run ds:tokens                                  # токены и типографика из живого файла
+npm run build
+npm run shot -- .hero .screens/hero.png 1440       # снимок элемента
+npm run measure -- design/figma/spec/hero.json     # геометрия, exit 1 при Δ > 1 px
+npm run compare -- design/figma/crops/hero.png .screens/hero.png
 ```
-P0 Ingest     ← здесь            extracted/manifest.json
-P1 Reality                       reports/reality.md            [G0]
-P2 Resolve                       design/figma/spec/*.json
-P3 Model                         crops/, tokens, inventory
-P4 Components                    src/components/ds/            [G1]
-P5 Pages                         src/pages/                    [G2]
-P6 Adaptive                                                     [G3]
-P7 Accept
-```
 
-## Чего нет (и это блокирует)
 
-- `src/` — удалён; пустая сборка не соберётся, пока нет хотя бы одной страницы;
-- скриптов пайплайна нет: `figma-extract`, `figma-reality`, `figma-resolve`,
-  `figma-tokens`, `figma-crops` — P0–P3 нечем выполнить;
-- ворот нет ни одних: `ds:check`, `anchors:check`, `pixel`, `audit`;
-- 2 🔴 в `docs/decisions.md` (масштабы, канонические фреймы Practice/Quiz).
+## Что дальше
 
-## Следующий шаг
-
-P0: `figma-extract` по `Website Syntonia.fig` → `design/figma/extracted/` +
-`manifest.json` с хешем `51bd7410…c9c28`. До него P1–P7 не начинаются.
+1. Остальные 13 секций главной — по одной, каждая: узел → спека → компонент →
+   замер → кроп → сверка.
+2. `spec/home.json` собирать не руками, а скриптом из `live/`.
+3. Ворота G1: `measure` + `compare` по каждому компоненту из
+   `scan-design-system` — пока проверены только hero и три ds-компонента.
+4. Доска: 28 старых карточек ссылаются на удалённые файлы — в архив.

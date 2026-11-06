@@ -7,12 +7,9 @@ dist/
 .npmcache/
 .npmlogs/
 
-# Тяжёлые исходники Figma: локально, воспроизводимы по хешу из design/figma/source.json
-design/export/home/Website Syntonia.png
-design/export/home/main.pdf
+# Источник — живой файл Figma, а не выгрузка. .fig в проект не кладём.
 *.fig
 
-# Разбор .fig — регенерируется из .fig скриптом P0.
-# Коммитится только манифест: в нём хеш и версия, без них числа в отчётах не проверить.
-design/figma/extracted/*
-!design/figma/extracted/manifest.json
+# Снимки моста и кропы коммитятся: они малы и привязаны к fileKey.
+# Тяжёлые выгрузки, если появятся, — только локально:
+#   design/export/**
