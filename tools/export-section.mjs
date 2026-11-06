@@ -185,6 +185,37 @@ const spec = {
 };
 writeFileSync(join(dir, 'spec.json'), JSON.stringify(spec, null, 2) + '\n');
 
+// --- 6.1 Состояния секции --------------------------------------------------
+// Секция живёт в файле не в одном виде: у `formats` пять инстансов, по одному
+// на активный формат, и у каждого своя картинка слайдера и свои описания.
+// Один выгруженный инстанс — одно состояние; остальные теряются молча.
+try {
+  const variantsTemplate = readFileSync(join(root, 'tools/figma/variants.template.js'), 'utf8');
+  const variantsTmp = join(tmpdir(), `figma-variants-${process.pid}.js`);
+  writeFileSync(variantsTmp, variantsTemplate.split('__ID__').join(nodeId));
+  const variantsReply = figma(['exec-js', variantsTmp, '--timeout', '120000']);
+  if (variantsReply.result && !variantsReply.result.error) {
+    writeFileSync(
+      join(dir, 'states.json'),
+      JSON.stringify(
+        {
+          at: new Date().toISOString(),
+          section: variantsReply.result.name,
+          nodeId,
+          total: variantsReply.result.total,
+          states: variantsReply.result.states,
+        },
+        null,
+        2,
+      ) + '\n',
+    );
+    spec.counts.states = variantsReply.result.total;
+    writeFileSync(join(dir, 'spec.json'), JSON.stringify(spec, null, 2) + '\n');
+  }
+} catch (error) {
+  console.warn(`состояния не сняты: ${String(error.message).slice(0, 120)}`);
+}
+
 // --- 7. Сводка -------------------------------------------------------------
 console.log(`секция:  ${section.root.name}  ${section.root.w}×${section.root.h}  (${nodeId})`);
 console.log(`узлов:   ${section.count}`);

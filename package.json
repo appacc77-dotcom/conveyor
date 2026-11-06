@@ -31,7 +31,8 @@
     "assets:check": "node tools/check-assets.mjs",
     "status": "node tools/status.mjs",
     "scaffold": "node tools/scaffold.mjs",
-    "portability": "node tools/check-portability.mjs"
+    "portability": "node tools/check-portability.mjs",
+    "variants": "node tools/variants.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",
