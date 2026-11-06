@@ -1,0 +1,18 @@
+{
+  "at": "2026-11-06T17:44:36.332Z",
+  "section": {
+    "id": "79:104",
+    "name": "header",
+    "w": 1424,
+    "h": 92
+  },
+  "ok": true,
+  "red": 0,
+  "unknown": 0,
+  "missing": [],
+  "marked": 14,
+  "nodes": 29,
+  "coverage": 100,
+  "tolerance": 1,
+  "worstDelta": 0.8899999999999864
+}

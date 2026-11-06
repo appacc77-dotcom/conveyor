@@ -20,6 +20,12 @@ interface Props {
   theme?: 'light' | 'dark' | 'muted';
   size?: 'L' | 'S';
   caps?: boolean;
+  /**
+   * Переопределение паддинга, которое встречается в файле: в шапке инстанс
+   * `light/caps/L` обжат с 16/24 до 8/16 (высота 45 вместо 61). Это не вариант
+   * набора, а правка инстанса — поэтому отдельный проп, а не селектор снаружи.
+   */
+  compact?: boolean;
 }
 
 const {
@@ -29,6 +35,7 @@ const {
   theme = 'muted',
   size = 'L',
   caps = false,
+  compact = false,
 } = Astro.props;
 
 const labelClass =
@@ -36,7 +43,12 @@ const labelClass =
 ---
 
 <a
-  class:list={['btn-primary', `btn-primary--${theme}`, `btn-primary--${size.toLowerCase()}`]}
+  class:list={[
+    'btn-primary',
+    `btn-primary--${theme}`,
+    `btn-primary--${size.toLowerCase()}`,
+    compact && 'btn-primary--compact',
+  ]}
   href={href}
   data-figma-node={node}
 >
@@ -64,6 +76,11 @@ const labelClass =
 
   .btn-primary--s {
     padding: var(--space-xs) var(--space-s);
+  }
+
+  /* Обжатый инстанс: паддинг 8/16 при любом size. */
+  .btn-primary--compact {
+    padding: var(--space-s) var(--space-m);
   }
 
   /* muted по файлу всегда 45 px: паддинг 8/16 независимо от size. */

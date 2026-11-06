@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-06T17:37:08.863Z",
+  "at": "2026-11-06T17:44:37.768Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 3,
+    "green": 4,
     "measured": 0,
     "red": 0,
-    "exported": 43,
+    "exported": 42,
     "todo": 0
   },
   "assetsTotal": {
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-06T17:36:51.922Z"
+            "at": "2026-11-06T17:44:33.345Z"
           },
           "pixel": {
             "mean": 1.76,
@@ -96,7 +96,7 @@
             "nodes": 5,
             "coverage": 100,
             "worstDelta": 0.29000000000002046,
-            "at": "2026-11-06T17:36:53.871Z"
+            "at": "2026-11-06T17:44:35.334Z"
           },
           "pixel": {
             "mean": 3.06,
@@ -141,7 +141,7 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.730000000000004,
-            "at": "2026-11-06T17:36:52.900Z"
+            "at": "2026-11-06T17:44:34.351Z"
           },
           "pixel": {
             "mean": 4.14,
@@ -528,11 +528,24 @@
           "slug": "home-header",
           "dir": "design/figma/pages/home/header",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 14,
+            "nodes": 29,
+            "coverage": 100,
+            "worstDelta": 0.8899999999999864,
+            "at": "2026-11-06T17:44:36.332Z"
+          },
+          "pixel": {
+            "mean": 3.83,
+            "over16": 5.94,
+            "over48": 1.97,
+            "at": "2026-11-06T17:44:12.743Z"
+          },
           "assets": {
             "nodes": 29,
             "images": 1,
@@ -546,16 +559,16 @@
           },
           "images": {
             "figma": "/structure/home-header-figma.png",
-            "site": null
+            "site": "/structure/home-header-site.png"
           }
         }
       ],
       "counts": {
         "total": 15,
-        "green": 3,
+        "green": 4,
         "measured": 0,
         "red": 0,
-        "exported": 12,
+        "exported": 11,
         "todo": 0
       }
     },
