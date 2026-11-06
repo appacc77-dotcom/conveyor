@@ -275,6 +275,25 @@ const { title, lead, note, slide, tabs } = Astro.props;
 
   .format-tab--active .format-tab__desc {
     display: block;
+    animation: format-fade 0.3s ease both;
+  }
+
+  /* Появление описания: display переключить нельзя, анимируем прозрачность. */
+  @keyframes format-fade {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .format-tab--active .format-tab__desc {
+      animation: none;
+    }
   }
 
   .format-tab--active .format-tab__cta {

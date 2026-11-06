@@ -27,6 +27,17 @@ const { label, href = '#', node } = Astro.props;
     align-items: center;
     gap: var(--space-s);
     color: var(--color-accent);
+    transition: opacity 0.2s ease;
+  }
+
+  .btn-quiet:hover {
+    opacity: 0.7;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-quiet {
+      transition: none;
+    }
   }
 
   /* Вариант style=underline: линия под текстом. Рамка добавляла 1 px к высоте

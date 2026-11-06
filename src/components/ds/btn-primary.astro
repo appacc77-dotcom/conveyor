@@ -63,6 +63,7 @@ const labelClass =
     gap: var(--space-s);
     border-radius: var(--radius-s);
     color: var(--color-text-on-image);
+    transition: filter 0.2s ease, transform 0.2s ease;
   }
 
   .btn-primary__label {
@@ -98,5 +99,24 @@ const labelClass =
     background-image: url('/img/btn-texture.png');
     background-size: cover;
     background-position: center;
+  }
+
+  /* Отклик на курсор — не из макета: в файле только состояние покоя. */
+  .btn-primary:hover {
+    filter: brightness(1.08);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.985);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary {
+      transition: none;
+    }
+
+    .btn-primary:active {
+      transform: none;
+    }
   }
 </style>
