@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-06T18:40:58.583Z",
+  "at": "2026-11-06T18:46:28.611Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 8,
+    "green": 9,
     "measured": 0,
     "red": 0,
-    "exported": 38,
+    "exported": 37,
     "todo": 0
   },
   "assetsTotal": {
@@ -266,11 +266,24 @@
           "slug": "home-about-founder",
           "dir": "design/figma/pages/home/about-founder",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 16,
+            "nodes": 21,
+            "coverage": 100,
+            "worstDelta": 0.5,
+            "at": "2026-11-06T18:45:50.489Z"
+          },
+          "pixel": {
+            "mean": 1.24,
+            "over16": 1.52,
+            "over48": 0.45,
+            "at": "2026-11-06T18:45:51.302Z"
+          },
           "assets": {
             "nodes": 21,
             "images": 1,
@@ -284,7 +297,7 @@
           },
           "images": {
             "figma": "/structure/home-about-founder-figma.png",
-            "site": null
+            "site": "/structure/home-about-founder-site.png"
           }
         },
         {
@@ -617,10 +630,10 @@
       ],
       "counts": {
         "total": 15,
-        "green": 8,
+        "green": 9,
         "measured": 0,
         "red": 0,
-        "exported": 7,
+        "exported": 6,
         "todo": 0
       }
     },
