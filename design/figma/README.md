@@ -22,7 +22,7 @@ figma-agent status --peek                 # жив ли мост
 figma-agent scan-design-system --out design/figma/live/ds.json
 figma-agent exec-js design/figma/live/read-structure.js   # страницы и фреймы
 figma-agent context <nodeId> --budget 128 # CSS, токены, текст узла
-figma-agent export-png --node <id> --out design/figma/crops/<name>.png
+figma-agent export-png --node <id> --out design/figma/sections/<slug>/crop.png
 ```
 
 ## Правило

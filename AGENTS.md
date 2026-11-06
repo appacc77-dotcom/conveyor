@@ -30,8 +30,8 @@ Figma → спецификация → компоненты → страницы
 2. Живой файл: `figma-agent` к открытому документу (`fileKey` в
    `design/figma/project.json`).
 3. `design/figma/live/*.json` — снимки файла: структура, дизайн-система, реальность.
-4. `design/figma/spec/<section>.json` — числа секции для замера (P2).
-5. `design/figma/crops/<section>.png` — эталон, экспортированный с узла (P3).
+4. `design/figma/sections/<section>/spec.json` — числа секции для замера (P2).
+5. `design/figma/sections/<section>/crop.png` — эталон, экспортированный с узла (P3).
 6. Код `src/` — реализация, не истина.
 
 Два правила важнее остальных:
@@ -70,7 +70,7 @@ Figma → спецификация → компоненты → страницы
 - **Не трогать без карточки:** `docs/system/**` (процесс), `package.json`
   (зависимости), `design/figma/live/**` (снимки файла).
 - **Только чтение, генерируемое:** `src/styles/tokens.css`,
-  `src/styles/typography.css` (пишет `npm run ds:tokens`), `design/figma/crops/**`.
+  `src/styles/typography.css` (пишет `npm run ds:tokens`), `design/figma/sections/**`.
 - **Общий слой** — `src/styles/base.css`, шапка, подвал — меняется отдельной
   карточкой, а не «попутно».
 - **Новые зависимости** — только с согласованием.
@@ -109,7 +109,7 @@ column: "review" }`. `board.json` руками не править: плагин
 | P0 Ingest | `design/figma/live/*.json` + `fileKey` | **готово** |
 | P1 Reality | числа по файлу (масштабы, ширины) | **готово** |
 | G0 | 0 открытых 🔴 в `decisions.md` | **закрыт** |
-| P2 Resolve | `design/figma/spec/<section>.json` | идёт |
+| P2 Resolve | `design/figma/sections/<section>/spec.json` | идёт |
 | P3 Model | токены, кропы | готово для hero |
 | P4 Components | G1: `measure` зелёный по каждому компоненту | идёт: hero |
 
@@ -120,10 +120,11 @@ column: "review" }`. `board.json` руками не править: плагин
 
 ```bash
 npm run intake                                 # снимок живого файла; exit 1 при чужом файле
+npm run export -- <nodeId> --name <slug>       # кроп + ассеты + spec.json секции
 npm run ds:tokens                              # токены и типографика из живого файла
 npm run build                                  # dist/
 npm run shot -- .hero .screens/hero.png 1440   # снимок элемента
-npm run measure -- design/figma/spec/hero.json # геометрия; exit 1 при Δ > 1 px
+npm run measure -- design/figma/sections/hero/measure.json # геометрия; exit 1 при Δ > 1 px
 npm run compare -- <crop.png> <shot.png>       # пиксель, без внешних зависимостей
 ```
 
@@ -185,7 +186,7 @@ npm run compare -- <crop.png> <shot.png>       # пиксель, без внеш
 
 Не «норма», а список того, чего нет и что нельзя обойти:
 
-- спека собирается руками по одному узлу; скрипта `spec` из `live/` ещё нет;
+- `measure.json` (соответствие узлов и селекторов) по-прежнему пишется руками: экспорт даёт `spec.json`, но не знает разметки;
 - `measure` проверен на hero и трёх ds-компонентах, а не на всех 54 наборах —
   G1 пока не закрыт;
 - `/ds` — страницы со всеми вариантами компонентов — нет;

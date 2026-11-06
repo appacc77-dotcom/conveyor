@@ -19,13 +19,48 @@
     "method": "263:449"
   },
   "frames": {
-    "home": { "id": "79:103", "name": "main", "w": 1440, "h": 10548 },
-    "method": { "id": "323:422", "name": "main", "w": 1440, "h": 2737 },
-    "masters": { "id": "217:237", "name": "main", "w": 1440, "h": 3886 },
-    "library": { "id": "267:450", "name": "main", "w": 1440, "h": 3188 },
-    "practice": { "id": "408:241", "name": "practice-page", "w": 1440, "h": 9291 },
-    "quiz": { "id": "529:118", "name": "quiz", "w": 1440, "h": 1218 },
-    "booking": { "id": "383:286", "name": "main", "w": 1440, "h": 2416 }
+    "home": {
+      "id": "79:103",
+      "name": "main",
+      "w": 1440,
+      "h": 10548
+    },
+    "method": {
+      "id": "323:422",
+      "name": "main",
+      "w": 1440,
+      "h": 2737
+    },
+    "masters": {
+      "id": "217:237",
+      "name": "main",
+      "w": 1440,
+      "h": 3886
+    },
+    "library": {
+      "id": "267:450",
+      "name": "main",
+      "w": 1440,
+      "h": 3188
+    },
+    "practice": {
+      "id": "408:241",
+      "name": "practice-page",
+      "w": 1440,
+      "h": 9291
+    },
+    "quiz": {
+      "id": "529:118",
+      "name": "quiz",
+      "w": 1440,
+      "h": 1218
+    },
+    "booking": {
+      "id": "383:286",
+      "name": "main",
+      "w": 1440,
+      "h": 2416
+    }
   },
   "paths": {
     "live": "design/figma/live",
@@ -33,9 +68,15 @@
     "crops": "design/figma/crops",
     "assets": "design/figma/assets",
     "styles": "src/styles",
-    "screens": ".screens"
+    "screens": ".screens",
+    "sections": "design/figma/sections"
   },
-  "viewport": { "width": 1440 },
-  "gates": { "geometryTolerancePx": 1, "pixelDelta": 16 },
+  "viewport": {
+    "width": 1440
+  },
+  "gates": {
+    "geometryTolerancePx": 1,
+    "pixelDelta": 16
+  },
   "note": "Всё, что знает про конкретный сайт. Перенос на другой файл — правка этого файла, скилы и скрипты не меняются."
 }

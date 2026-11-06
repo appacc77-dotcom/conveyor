@@ -2,7 +2,7 @@
 /**
  * Замер DOM против чисел из Figma.
  *
- *   node tools/measure.mjs design/figma/spec/hero.json
+ *   node tools/measure.mjs design/figma/sections/hero/measure.json
  *
  * Спека — плоский список { selector, figma: {x, y, w, h}, name }.
  * Печатает таблицу «эталон / факт / Δ» и код возврата 1, если Δ > 1 px.
@@ -16,7 +16,7 @@ const root = process.cwd();
 const dist = join(root, 'dist');
 const specPath = process.argv[2];
 if (!specPath) {
-  console.error('Укажи спеку: node tools/measure.mjs design/figma/spec/hero.json');
+  console.error('Укажи спеку: node tools/measure.mjs design/figma/sections/hero/measure.json');
   process.exit(2);
 }
 

@@ -8,6 +8,7 @@
     "setup": "npm ci",
     "setup:browsers": "npx playwright install chromium",
     "intake": "node tools/intake.mjs",
+    "export": "node tools/export-section.mjs",
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1 --port 4321",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 4322",
