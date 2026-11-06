@@ -27,6 +27,8 @@ const arg = (name, fallback) => {
 const pageKey = arg('--page', 'home');
 const route = arg('--url', '/');
 const project = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
+const structurePath = join(root, 'design/figma/structure.json');
+const structure = existsSync(structurePath) ? JSON.parse(readFileSync(structurePath, 'utf8')) : null;
 const frame = project.frames?.[pageKey];
 if (!frame) {
   console.error(`в project.json нет фрейма для страницы «${pageKey}» — npm run discover -- --write`);
@@ -62,8 +64,20 @@ try {
 // --- 3. сравнение ---------------------------------------------------------
 const ref = decodePngFile(tmpFrame);
 const shot = decodePngFile(tmpShot);
+
+// Сравниваем только непрерывное начало страницы: собранные секции идут подряд
+// от нуля, пока не встретится пропуск. Иначе formats (в макете y=6255) сравнился
+// бы с чужим блоком на y=2012 и дал бы разницу в сотни.
+const built = (structure?.pages.find((p) => p.key === pageKey)?.sections ?? [])
+  .filter((s) => s.images?.site)
+  .sort((a, b) => a.y - b.y);
+let prefix = 0;
+for (const s of built) {
+  if (s.y !== prefix) break;
+  prefix = s.y + s.h;
+}
 const w = Math.min(ref.width, shot.width);
-const h = Math.min(ref.height, shot.height);
+const h = Math.min(ref.height, shot.height, prefix || Infinity);
 
 let sum = 0;
 let over16 = 0;
@@ -102,6 +116,7 @@ const result = {
   route,
   width: w,
   height: h,
+  prefix,
   mean: +(sum / (total * 3)).toFixed(2),
   over16: +((over16 / total) * 100).toFixed(2),
   over48: +((over48 / total) * 100).toFixed(2),
@@ -116,7 +131,7 @@ rmSync(tmpFrame, { force: true });
 rmSync(tmpShot, { force: true });
 
 console.log(`страница: ${pageKey} (${frame.name}), маршрут ${route}`);
-console.log(`размер:   ${w}×${h} — сравнивается меньшая из двух высот`);
+console.log(`размер:   ${w}×${h} — непрерывное начало собранных секций${prefix && h < prefix ? ` (собрано до ${prefix} px)` : ''}`);
 console.log(`средняя разница: ${result.mean}`);
 console.log(`пикселей > 16:   ${result.over16} %`);
 console.log(`пикселей > 48:   ${result.over48} %`);

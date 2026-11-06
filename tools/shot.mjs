@@ -9,7 +9,7 @@
  */
 import { createServer } from 'node:http';
 import { existsSync, readFileSync, statSync, mkdirSync } from 'node:fs';
-import { extname, join, normalize, dirname } from 'node:path';
+import { extname, join, normalize, dirname, isAbsolute } from 'node:path';
 import { chromium } from 'playwright';
 
 const root = process.cwd();
@@ -90,9 +90,20 @@ if (!el) {
   process.exit(1);
 }
 
+// Шапка и подобные слои лежат поверх секций. При съёмке секции их прячем,
+// иначе в кадр попадает чужой блок и сравнение с кропом врёт.
+const isOverlayTarget = await el.evaluate((node) => !!node.closest('[data-overlay]'));
+if (!isOverlayTarget) {
+  await page.evaluate(() => {
+    for (const node of document.querySelectorAll('[data-overlay]')) node.style.visibility = 'hidden';
+  });
+}
+
 const box = await el.boundingBox();
-mkdirSync(dirname(join(root, out)), { recursive: true });
-await el.screenshot({ path: join(root, out) });
+// Абсолютный путь берём как есть: join(root, '/tmp/x') склеил бы корень.
+const target = isAbsolute(out) ? out : join(root, out);
+mkdirSync(dirname(target), { recursive: true });
+await el.screenshot({ path: target });
 
 console.log(JSON.stringify({ selector, out, width, height: Math.round(box.height), w: Math.round(box.width) }));
 
