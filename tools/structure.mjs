@@ -103,7 +103,7 @@ function publish(slug, entry) {
 // --- страницы и их секции -------------------------------------------------
 const pages = [];
 for (const [pageKey, pageId] of Object.entries(project.pages)) {
-  if (pageKey === 'design-system') continue;
+  if (pageKey === project.designSystemPage) continue;
   const canonical = project.frames[pageKey];
   if (!canonical) continue;
 

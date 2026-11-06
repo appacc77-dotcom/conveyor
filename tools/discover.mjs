@@ -117,6 +117,10 @@ if (write) {
   };
   next.source = { ...next.source, fileKey: data.fileKey, fileName: data.name };
   next.pages = Object.fromEntries(found.filter((f) => f.frame).map((f) => [f.key, f.id]));
+  // Страница дизайн-системы не даёт секций: её фрейм — витрина компонентов,
+  // а не блок сайта. Ключ определяем по имени страницы, а не по константе.
+  const dsPage = found.find((f) => /design\s*system|дизайн[-\s]*систем/i.test(f.name));
+  if (dsPage) next.designSystemPage = dsPage.key;
   next.frames = Object.fromEntries(
     found.filter((f) => f.frame).map((f) => [f.key, { id: f.frame.id, name: f.frame.name }]),
   );

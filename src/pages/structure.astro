@@ -64,7 +64,7 @@ const collected = (page) => page.sections.filter((s) => s.images.site).length;
 const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').length;
 ---
 
-<BaseLayout title="Структура — Syntonia">
+<BaseLayout title={`Структура — ${file.name}`}>
   <main class="map">
     <header class="head">
       <div class="head__row">

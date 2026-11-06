@@ -2,7 +2,7 @@
 /**
  * Сверка собранной страницы с рендером фрейма из Figma — целиком, а не по секциям.
  *
- *   node tools/page-compare.mjs [--page home] [--url /]
+ *   node tools/page-compare.mjs [--page <ключ страницы>] [--url /]
  *
  * Зачем: посекционные ворота не видят, что блоки стоят в неверном порядке или
  * что между ними лишний отступ. Сравнение целой страницы это ловит: у нас
@@ -24,9 +24,12 @@ const arg = (name, fallback) => {
   return i > 0 ? process.argv[i + 1] : fallback;
 };
 
-const pageKey = arg('--page', 'home');
 const route = arg('--url', '/');
 const project = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
+// По умолчанию — первая страница проекта, кроме дизайн-системы: у нового сайта
+// первая страница не обязана называться home.
+const firstPage = Object.keys(project.pages ?? {}).find((key) => key !== project.designSystemPage);
+const pageKey = arg('--page', firstPage);
 const structurePath = join(root, 'design/figma/structure.json');
 const structure = existsSync(structurePath) ? JSON.parse(readFileSync(structurePath, 'utf8')) : null;
 const frame = project.frames?.[pageKey];
