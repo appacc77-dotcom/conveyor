@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:04:52.863Z"
+    "at": "2026-11-06T17:07:35.092Z"
   },
   "section": {
     "id": "410:1365",
@@ -345,6 +345,22 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "segments": [
+        {
+          "text": "Практика",
+          "style": null,
+          "font": "Great Vibes",
+          "size": 36,
+          "color": "#ffffff"
+        },
+        {
+          "text": "  по твоему коду — в подарок.",
+          "style": "body",
+          "font": "Golos Text",
+          "size": 20,
+          "color": "#ffffff"
+        }
+      ],
       "fills": [
         {
           "type": "SOLID",

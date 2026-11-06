@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:05:15.042Z"
+    "at": "2026-11-06T17:07:57.689Z"
   },
   "section": {
     "id": "383:761",
@@ -2578,6 +2578,29 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "segments": [
+        {
+          "text": "Начните ",
+          "style": "body-tight",
+          "font": "Golos Text",
+          "size": 20,
+          "color": "#433d34"
+        },
+        {
+          "text": "с Точки входа",
+          "style": null,
+          "font": "Golos Text",
+          "size": 20,
+          "color": "#433d34"
+        },
+        {
+          "text": ".",
+          "style": "body-tight",
+          "font": "Golos Text",
+          "size": 20,
+          "color": "#433d34"
+        }
+      ],
       "fills": [
         {
           "type": "SOLID",

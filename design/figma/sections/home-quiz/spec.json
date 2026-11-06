@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:04:07.144Z"
+    "at": "2026-11-06T17:06:49.405Z"
   },
   "section": {
     "id": "79:137",
@@ -259,6 +259,22 @@
         "value": 0
       },
       "autoResize": "HEIGHT",
+      "segments": [
+        {
+          "text": "Тест ",
+          "style": "script-l",
+          "font": "Great Vibes",
+          "size": 48,
+          "color": "#ffffff"
+        },
+        {
+          "text": "поможет увидеть, что сейчас управляет твоим состоянием и жизнью",
+          "style": "body",
+          "font": "Golos Text",
+          "size": 20,
+          "color": "#ffffff"
+        }
+      ],
       "fills": [
         {
           "type": "SOLID",

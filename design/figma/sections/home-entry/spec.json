@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:04:11.934Z"
+    "at": "2026-11-06T17:06:54.211Z"
   },
   "section": {
     "id": "79:173",
@@ -994,6 +994,10 @@
         "value": 5
       },
       "autoResize": "HEIGHT",
+      "lines": [
+        "Рядом,",
+        "даже на расстоянии"
+      ],
       "fills": [
         {
           "type": "SOLID",

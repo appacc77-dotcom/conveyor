@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:04:57.970Z"
+    "at": "2026-11-06T17:07:40.374Z"
   },
   "section": {
     "id": "410:1414",
@@ -626,6 +626,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Когда кажется, что сил больше нет.",
+        "Как найти опору и выйти из тупика."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -1759,6 +1763,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Снять внутренние ограничения",
+        "и открыть поток возможностей."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -2922,6 +2930,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Увидеть и отпустить, что мешает",
+        "быть рядом и быть собой."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -4055,6 +4067,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Научиться опираться на себя",
+        "и сохранять устойчивость."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -5218,6 +5234,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Понять сигналы тела и восстановить",
+        "диалог с собой."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -6351,6 +6371,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Практика соединения с источником",
+        "поддержки и смысла."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -7514,6 +7538,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Найти то, что вдохновляет,",
+        "и позволить себе жить в этом."
+      ],
       "fills": [
         {
           "type": "SOLID",

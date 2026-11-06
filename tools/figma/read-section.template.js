@@ -57,6 +57,31 @@ function walk(n, depth) {
     if (n.textDecoration && n.textDecoration !== "NONE") o.textDecoration = n.textDecoration;
     if (n.paragraphSpacing) o.paragraphSpacing = n.paragraphSpacing;
     if (n.textAutoResize && n.textAutoResize !== "NONE") o.autoResize = n.textAutoResize;
+
+    // Figma хранит перевод строки как U+2028, неразрывный пробел — как U+00A0.
+    // В HTML U+2028 ненадёжен: пишем строки явно, сборка развернёт в <br>.
+    if (n.characters.includes("\u2028")) o.lines = n.characters.split("\u2028");
+    if (n.characters.includes("\u00a0")) o.nbsp = true;
+
+    // Текст с разными стилями внутри одного узла: в файле таких 12, но без
+    // сегментов выделенное слово теряет свой шрифт или цвет.
+    try {
+      const segs = n.getStyledTextSegments(["textStyleId", "fontName", "fontSize", "fills"]);
+      const distinct = new Set(
+        segs.map((g) => `${g.textStyleId}|${g.fontName?.family}|${g.fontSize}|${g.fills?.[0]?.color ? rgba(g.fills[0].color).hex : ""}`),
+      );
+      if (distinct.size > 1) {
+        o.segments = segs.map((g) => ({
+          text: g.characters,
+          style: g.textStyleId ? styleNames.get(g.textStyleId) ?? null : null,
+          font: g.fontName?.family ?? null,
+          size: g.fontSize,
+          color: g.fills?.[0]?.color ? rgba(g.fills[0].color).hex : null,
+        }));
+      }
+    } catch (e) {
+      /* старые версии плагина не умеют сегменты */
+    }
   }
 
   if ("fills" in n && Array.isArray(n.fills) && n.fills.length) {

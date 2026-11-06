@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:04:39.090Z"
+    "at": "2026-11-06T17:07:20.973Z"
   },
   "section": {
     "id": "267:953",
@@ -321,6 +321,7 @@
         "value": 0
       },
       "autoResize": "HEIGHT",
+      "nbsp": true,
       "fills": [
         {
           "type": "SOLID",

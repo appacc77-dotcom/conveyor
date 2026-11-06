@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:05:04.840Z"
+    "at": "2026-11-06T17:07:47.312Z"
   },
   "section": {
     "id": "414:2107",
@@ -1107,6 +1107,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Код Негодования. ",
+        "Перестать спорить с прошлым"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -1152,6 +1156,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Код Гордыни. ",
+        "Выход из внутреннего холода"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -1197,6 +1205,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Код Растерянности. ",
+        "Возвращение ясности"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -2298,6 +2310,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Разрешить себе больше. Деньги, реализация, ",
+        "масштаб"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -2343,6 +2359,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Возвращение близости. Внутренние преграды",
+        "в отношениях"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -3804,6 +3824,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Код Негодования. ",
+        "Перестать спорить с прошлым"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -3849,6 +3873,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Код Гордыни. ",
+        "Выход из внутреннего холода"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -3894,6 +3922,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Код Растерянности. ",
+        "Возвращение ясности"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -3984,6 +4016,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Разрешить себе больше. Деньги, реализация, ",
+        "масштаб"
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -4029,6 +4065,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Возвращение близости. Внутренние преграды",
+        "в отношениях"
+      ],
       "fills": [
         {
           "type": "SOLID",

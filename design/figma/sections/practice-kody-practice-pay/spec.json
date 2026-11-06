@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:05:01.487Z"
+    "at": "2026-11-06T17:07:43.939Z"
   },
   "section": {
     "id": "414:1970",
@@ -2921,6 +2921,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Освободиться от страха",
+        "и вернуть движение."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -4054,6 +4058,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Энергия гнева —",
+        "в созидание и ясность."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -5217,6 +5225,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Отпустить внутренний спор",
+        "и освободиться от прошлого."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -6350,6 +6362,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Смягчить внутреннюю дистанцию",
+        "и вернуть живой контакт."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -7474,6 +7490,10 @@
         "value": 0
       },
       "autoResize": "HEIGHT",
+      "lines": [
+        "Код Растерянности. \nВозвращение ясности",
+        ""
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -7514,6 +7534,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Собрать внимание",
+        "и увидеть следующий шаг."
+      ],
       "fills": [
         {
           "type": "SOLID",
@@ -8631,6 +8655,10 @@
         "value": 0
       },
       "autoResize": "WIDTH_AND_HEIGHT",
+      "lines": [
+        "Когда кажется, что сил больше нет.",
+        "Как найти опору и выйти из тупика."
+      ],
       "fills": [
         {
           "type": "SOLID",
