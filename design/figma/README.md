@@ -27,6 +27,6 @@ figma-agent export-png --node <id> --out design/figma/crops/<name>.png
 
 ## Правило
 
-`source.json` фиксирует `fileKey` и дату чтения. **Число без fileKey — не
+`project.json` фиксирует `fileKey` и дату чтения. **Число без fileKey — не
 число.** Если файл в Figma сменили, всё в `live/`, `spec/` и `crops/` устарело
 одновременно — перечитывается целиком, а не по частям.

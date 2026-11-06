@@ -65,7 +65,7 @@
 | # | Вопрос | Ответ на живом файле | Чем проверено |
 |---|---|---|---|
 | 1 | 236 инстансов были отмасштабированы — 🔴 | **0 из 1145.** Масштаб сброшен, вопрос снят | `read-reality.js` → `instances.scaledCount = 0` |
-| 3 | Канонический фрейм Practice и Quiz — 🔴 | Practice — `408:241` `practice-page` 1440×9291; Quiz — `529:118` `quiz` 1440×1218; остальные фреймы — варианты секций | `read-structure.js`; зафиксировано в `design/figma/source.json` |
+| 3 | Канонический фрейм Practice и Quiz — 🔴 | Practice — `408:241` `practice-page` 1440×9291; Quiz — `529:118` `quiz` 1440×1218; остальные фреймы — варианты секций | `read-structure.js`; зафиксировано в `design/figma/project.json` |
 | — | Масштаб и override разрешены? | Да: `scaledCount = 0`, все 48 верхнеуровневых фреймов шириной 1440 | `read-reality.js` → `topLevelWidths` |
 | — | Что теперь эталон | `export-png` по узлу с живого файла. Рендеров «на память» больше нет | `design/figma/README.md` |
 

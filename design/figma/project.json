@@ -1,11 +1,12 @@
 {
+  "project": "syntonia",
   "mode": "bridge-only",
-  "live": {
+  "source": {
+    "bridge": "figma-agent",
     "fileName": "Website Syntonia2",
     "fileKey": "NInjODHyOOjIitF3lq4Vpe",
-    "bridge": "DESIGN:OS Bridge 0.1.0, protocol 1, port 9410",
-    "readAt": "2026-11-06",
-    "counts": { "components": 54, "tokens": 41, "styles": 39 }
+    "plugin": "DESIGN:OS Bridge 0.1.0",
+    "protocol": 1
   },
   "pages": {
     "design-system": "0:1",
@@ -17,7 +18,7 @@
     "booking": "263:448",
     "method": "263:449"
   },
-  "canonicalFrames": {
+  "frames": {
     "home": { "id": "79:103", "name": "main", "w": 1440, "h": 10548 },
     "method": { "id": "323:422", "name": "main", "w": 1440, "h": 2737 },
     "masters": { "id": "217:237", "name": "main", "w": 1440, "h": 3886 },
@@ -26,5 +27,15 @@
     "quiz": { "id": "529:118", "name": "quiz", "w": 1440, "h": 1218 },
     "booking": { "id": "383:286", "name": "main", "w": 1440, "h": 2416 }
   },
-  "note": "Ни одного файла .fig и ни одного заранее выгруженного PNG. Всё читается с живого файла через figma-agent."
+  "paths": {
+    "live": "design/figma/live",
+    "spec": "design/figma/spec",
+    "crops": "design/figma/crops",
+    "assets": "design/figma/assets",
+    "styles": "src/styles",
+    "screens": ".screens"
+  },
+  "viewport": { "width": 1440 },
+  "gates": { "geometryTolerancePx": 1, "pixelDelta": 16 },
+  "note": "Всё, что знает про конкретный сайт. Перенос на другой файл — правка этого файла, скилы и скрипты не меняются."
 }

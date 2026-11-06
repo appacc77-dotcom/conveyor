@@ -69,11 +69,11 @@ const STACK = {
 
 const ds = loadJson(join(live, 'ds.json'));
 const reality = loadJson(join(live, 'reality.json')).result ?? loadJson(join(live, 'reality.json'));
-const source = loadJson(join(root, 'design/figma/source.json'));
+const project = loadJson(join(root, 'design/figma/project.json'));
 byId = new Map(ds.tokens.map((t) => [t.id, t]));
-const liveName = source.live?.fileName ?? 'live';
-const liveKey = source.live?.fileKey ?? '';
-const liveAt = source.live?.readAt ?? '';
+const liveName = project.source?.fileName ?? 'live';
+const liveKey = project.source?.fileKey ?? '';
+const liveAt = new Date().toISOString().slice(0, 10);
 
 // ---------- tokens.css ----------
 const groups = new Map();

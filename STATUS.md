@@ -15,7 +15,7 @@ desktop: **«Website Syntonia2»**, `fileKey NInjODHyOOjIitF3lq4Vpe`.
 
 | Фаза | Состояние | Чем закрыта |
 |---|---|---|
-| P0 Ingest | **готово** | `design/figma/live/{structure,ds,reality}.json` + `source.json` с fileKey |
+| P0 Ingest | **готово** | `design/figma/live/{structure,ds,reality}.json` + `project.json` с fileKey |
 | P1 Reality | **готово** | 0 отмасштабированных из 1145; 48 фреймов шириной 1440 |
 | G0 | **закрыт** | см. «Ревизия 06.11.2026» в `docs/decisions.md` |
 | P2 Resolve | начато | `design/figma/spec/hero.json` |

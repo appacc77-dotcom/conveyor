@@ -28,7 +28,7 @@ figma-agent status --peek
 ```
 
 Нужно увидеть `connected: true` и `fileName` — он должен совпасть с
-`live.fileName` в `design/figma/source.json`. Если имя или `fileKey` другие,
+`live.fileName` в `design/figma/project.json`. Если имя или `fileKey` другие,
 все снимки в `design/figma/live/`, спеки и кропы устарели одновременно.
 
 ## Что не переносится вместе с папкой

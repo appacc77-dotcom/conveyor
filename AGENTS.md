@@ -28,7 +28,7 @@ Figma → спецификация → компоненты → страницы
 
 1. `docs/decisions.md` — принятые решения. Выше кода.
 2. Живой файл: `figma-agent` к открытому документу (`fileKey` в
-   `design/figma/source.json`).
+   `design/figma/project.json`).
 3. `design/figma/live/*.json` — снимки файла: структура, дизайн-система, реальность.
 4. `design/figma/spec/<section>.json` — числа секции для замера (P2).
 5. `design/figma/crops/<section>.png` — эталон, экспортированный с узла (P3).
@@ -36,7 +36,7 @@ Figma → спецификация → компоненты → страницы
 
 Два правила важнее остальных:
 
-- **Число без `fileKey` — не число.** Он лежит в `design/figma/source.json`.
+- **Число без `fileKey` — не число.** Он лежит в `design/figma/project.json`.
 - **Число без замера — не число.** Геометрия проверяется `npm run measure`,
   пиксель — `npm run compare`; «на глаз сошлось» не считается.
 
@@ -119,6 +119,7 @@ column: "review" }`. `board.json` руками не править: плагин
 ## 6. Проверки
 
 ```bash
+npm run intake                                 # снимок живого файла; exit 1 при чужом файле
 npm run ds:tokens                              # токены и типографика из живого файла
 npm run build                                  # dist/
 npm run shot -- .hero .screens/hero.png 1440   # снимок элемента
@@ -138,7 +139,7 @@ npm run compare -- <crop.png> <shot.png>       # пиксель, без внеш
 Остановиться и вернуть `blocked` с причиной, если:
 
 - нет кропа или спеки по единице, либо `fileKey` живого файла не совпал с
-  `source.json` (работать по чужому файлу нельзя);
+  `project.json` (работать по чужому файлу нельзя);
 - в `decisions.md` открыт 🔴 по этой единице;
 - spec расходится с кропом (тогда чинится spec, а не вёрстка);
 - нужен файл вне `files:`;
