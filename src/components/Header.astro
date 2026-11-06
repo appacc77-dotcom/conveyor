@@ -361,6 +361,23 @@ const dropdownItems = [
     height: 3px;
     background: var(--color-text-on-image);
     border-radius: var(--radius-s);
+    transition:
+      transform var(--motion-base) var(--ease-out),
+      opacity var(--motion-fast) var(--ease-out);
+  }
+
+  /* Открытое меню: полосы складываются в крестик. Смещение — половина шага
+     плюс половина толщины: (8 + 3) = 11 px. */
+  .header__burger[aria-expanded='true'] .header__line:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+  }
+
+  .header__burger[aria-expanded='true'] .header__line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__burger[aria-expanded='true'] .header__line:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
   }
 </style>
 
