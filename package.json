@@ -11,6 +11,7 @@
     "document": "node tools/document.mjs",
     "export": "node tools/export-section.mjs",
     "export:all": "node tools/export-all.mjs",
+    "assets:prune": "node tools/assets-prune.mjs",
     "structure": "node tools/structure.mjs",
     "ds:tokens": "node tools/ds-tokens.mjs",
     "tone:fit": "node tools/fit-tone.mjs",
