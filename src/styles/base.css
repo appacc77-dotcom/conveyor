@@ -17,6 +17,7 @@ body {
   color: var(--color-text-primary);
   background: var(--color-bg-page);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 img,

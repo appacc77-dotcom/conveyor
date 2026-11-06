@@ -43,6 +43,18 @@ const gainsArg = (() => {
 })();
 const gains = gainsArg ?? [2 ** exposure, 2 ** exposure, 2 ** exposure];
 
+// Аффинная кривая по каналам в sRGB: value → k·value + b.
+// Это то, что делает Figma: поднимает тени и поджимает светá, поэтому чистое
+// умножение выжигает плоские участки в 255. Коэффициенты снимаются с рендера
+// Figma (tools/fit-tone.mjs), как в img-tone.py у syntonia-v3.
+const affineArg = (() => {
+  const i = process.argv.indexOf('--affine');
+  if (i < 0) return null;
+  const v = process.argv[i + 1].split(',').map(Number);
+  return [[v[0], v[1]], [v[2], v[3]], [v[4], v[5]]];
+})();
+const affine = affineArg;
+
 const mime = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
 const ext = extname(input).toLowerCase();
 const dataUrl = `data:${mime[ext] ?? 'image/png'};base64,${readFileSync(input).toString('base64')}`;
@@ -51,7 +63,7 @@ const browser = await chromium.launch();
 const page = await browser.newPage();
 
 const result = await page.evaluate(
-  async ({ dataUrl, exposure, saturation, contrast, gains }) => {
+  async ({ dataUrl, exposure, saturation, contrast, gains, affine }) => {
     const img = new Image();
     img.src = dataUrl;
     await img.decode();
@@ -107,6 +119,18 @@ const result = await page.evaluate(
       d[i + 2] = b < 0 ? 0 : b > 255 ? 255 : b;
     }
 
+    if (affine) {
+      for (let ch = 0; ch < 3; ch++) {
+        const [k, b] = affine[ch];
+        const lut = new Float32Array(256);
+        for (let v = 0; v < 256; v++) lut[v] = k * v + b;
+        for (let i = ch; i < d.length; i += 4) {
+          const v = lut[d[i]];
+          d[i] = v < 0 ? 0 : v > 255 ? 255 : v;
+        }
+      }
+    }
+
     ctx.putImageData(image, 0, 0);
     return {
       url: canvas.toDataURL('image/jpeg', 0.92),
@@ -114,7 +138,7 @@ const result = await page.evaluate(
       height: canvas.height,
     };
   },
-  { dataUrl, exposure, saturation, contrast, gains },
+  { dataUrl, exposure, saturation, contrast, gains, affine },
 );
 
 await browser.close();
