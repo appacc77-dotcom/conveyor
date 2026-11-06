@@ -1,0 +1,14 @@
+---
+/**
+ * Изолированная страница секции: только она, без остальных блоков.
+ * Нужна, чтобы собирать и мерить блок, не трогая главную страницу.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Library from '../components/Library.astro';
+---
+
+<BaseLayout title="Проверка: home/library">
+  <main class="page">
+    <Library />
+  </main>
+</BaseLayout>

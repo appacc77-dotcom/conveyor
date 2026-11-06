@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-06T19:09:32.767Z",
+  "at": "2026-11-06T19:29:14.934Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 11,
+    "green": 15,
     "measured": 0,
     "red": 0,
-    "exported": 35,
+    "exported": 31,
     "todo": 0
   },
   "assetsTotal": {
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-06T19:06:04.568Z"
+            "at": "2026-11-06T19:18:56.365Z"
           },
           "pixel": {
             "mean": 1.76,
@@ -276,7 +276,7 @@
             "nodes": 21,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-06T19:05:59.104Z"
+            "at": "2026-11-06T19:18:57.472Z"
           },
           "pixel": {
             "mean": 1.24,
@@ -366,7 +366,7 @@
             "nodes": 23,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-06T19:05:57.985Z"
+            "at": "2026-11-06T19:18:55.292Z"
           },
           "pixel": {
             "mean": 5.1,
@@ -411,7 +411,7 @@
             "nodes": 76,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-06T19:06:00.200Z"
+            "at": "2026-11-06T19:25:28.859Z"
           },
           "pixel": {
             "mean": 4.55,
@@ -456,7 +456,7 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.5300000000000011,
-            "at": "2026-11-06T19:08:15.095Z"
+            "at": "2026-11-06T19:18:53.151Z"
           },
           "pixel": {
             "mean": 4.9,
@@ -491,11 +491,24 @@
           "slug": "home-library",
           "dir": "design/figma/pages/home/library",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 15,
+            "nodes": 18,
+            "coverage": 100,
+            "worstDelta": 0.5,
+            "at": "2026-11-06T19:29:02.126Z"
+          },
+          "pixel": {
+            "mean": 1.49,
+            "over16": 1.08,
+            "over48": 0.51,
+            "at": "2026-11-06T19:24:58.316Z"
+          },
           "assets": {
             "nodes": 18,
             "images": 1,
@@ -509,7 +522,7 @@
           },
           "images": {
             "figma": "/structure/home-library-figma.png",
-            "site": null
+            "site": "/structure/home-library-site.png"
           }
         },
         {
@@ -523,11 +536,24 @@
           "slug": "home-air-photo",
           "dir": "design/figma/pages/home/air-photo",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 1,
+            "nodes": 1,
+            "coverage": 100,
+            "worstDelta": 0,
+            "at": "2026-11-06T19:29:05.182Z"
+          },
+          "pixel": {
+            "mean": 12.99,
+            "over16": 24.01,
+            "over48": 7.23,
+            "at": "2026-11-06T19:12:22.069Z"
+          },
           "assets": {
             "nodes": 1,
             "images": 1,
@@ -541,7 +567,7 @@
           },
           "images": {
             "figma": "/structure/home-air-photo-figma.png",
-            "site": null
+            "site": "/structure/home-air-photo-site.png"
           }
         },
         {
@@ -555,11 +581,24 @@
           "slug": "home-faq",
           "dir": "design/figma/pages/home/faq",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 32,
+            "nodes": 52,
+            "coverage": 100,
+            "worstDelta": 0.4399999999999977,
+            "at": "2026-11-06T19:29:03.134Z"
+          },
+          "pixel": {
+            "mean": 4.27,
+            "over16": 1.7,
+            "over48": 0.89,
+            "at": "2026-11-06T19:25:37.148Z"
+          },
           "assets": {
             "nodes": 52,
             "images": 2,
@@ -573,7 +612,7 @@
           },
           "images": {
             "figma": "/structure/home-faq-figma.png",
-            "site": null
+            "site": "/structure/home-faq-site.png"
           }
         },
         {
@@ -587,11 +626,24 @@
           "slug": "home-footer",
           "dir": "design/figma/pages/home/footer",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 31,
+            "nodes": 31,
+            "coverage": 100,
+            "worstDelta": 0.9799999999999969,
+            "at": "2026-11-06T19:29:04.170Z"
+          },
+          "pixel": {
+            "mean": 1.04,
+            "over16": 1.22,
+            "over48": 0.44,
+            "at": "2026-11-06T19:18:49.428Z"
+          },
           "assets": {
             "nodes": 31,
             "images": 1,
@@ -605,7 +657,7 @@
           },
           "images": {
             "figma": "/structure/home-footer-figma.png",
-            "site": null
+            "site": "/structure/home-footer-site.png"
           }
         },
         {
@@ -656,10 +708,10 @@
       ],
       "counts": {
         "total": 15,
-        "green": 11,
+        "green": 15,
         "measured": 0,
         "red": 0,
-        "exported": 4,
+        "exported": 0,
         "todo": 0
       }
     },
@@ -705,7 +757,7 @@
           },
           "images": {
             "figma": "/structure/masters-founder-hero-figma.png",
-            "site": null
+            "site": "/structure/masters-founder-hero-site.png"
           }
         },
         {
@@ -769,7 +821,7 @@
           },
           "images": {
             "figma": "/structure/masters-masters-more-figma.png",
-            "site": null
+            "site": "/structure/masters-masters-more-site.png"
           }
         },
         {
@@ -801,7 +853,7 @@
           },
           "images": {
             "figma": "/structure/masters-footer-figma.png",
-            "site": null
+            "site": "/structure/masters-footer-site.png"
           }
         },
         {
@@ -888,7 +940,7 @@
           },
           "images": {
             "figma": "/structure/library-library-hero-figma.png",
-            "site": null
+            "site": "/structure/library-library-hero-site.png"
           }
         },
         {

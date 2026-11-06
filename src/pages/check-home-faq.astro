@@ -1,0 +1,80 @@
+---
+/**
+ * Изолированная страница секции home/faq (узел 148:508): только она.
+ * Нужна, чтобы собирать и мерить блок, не трогая главную страницу.
+ * Тексты и id узлов — из design/figma/pages/home/faq/spec.json.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Faq from '../components/Faq.astro';
+
+const answer =
+  'Да и поможет. Работа идёт глубже — с внутренним состоянием, подсознательными причинами и тем, что на тонком плане управляет жизнью.';
+
+const items = [
+  {
+    state: 'open',
+    question: 'Если я уже был в терапии, мне это подойдёт?',
+    answer,
+    nodes: {
+      item: '148:519',
+      head: 'I148:519;141:320',
+      question: 'I148:519;140:349',
+      icon: 'I148:519;756:1883',
+      answer: 'I148:519;140:350',
+    },
+  },
+  {
+    state: 'closed',
+    question: 'Чем этот подход отличается от обычной психологии?',
+    nodes: {
+      item: '148:520',
+      head: 'I148:520;144:357',
+      question: 'I148:520;144:358',
+      icon: 'I148:520;755:2882',
+    },
+  },
+  {
+    state: 'closed',
+    question: 'Зачем мне это, если я уже многое о себе понял?',
+    nodes: {
+      item: '148:521',
+      head: 'I148:521;144:357',
+      question: 'I148:521;144:358',
+      icon: 'I148:521;755:2882',
+    },
+  },
+  {
+    state: 'closed',
+    question: 'Чем Точка входа отличается от мастер-сессии?',
+    nodes: {
+      item: '148:522',
+      head: 'I148:522;144:357',
+      question: 'I148:522;144:358',
+      icon: 'I148:522;755:2882',
+    },
+  },
+  {
+    state: 'closed',
+    question: 'Сколько встреч обычно нужно?',
+    nodes: {
+      item: '148:523',
+      head: 'I148:523;144:357',
+      question: 'I148:523;144:358',
+      icon: 'I148:523;755:2882',
+    },
+  },
+];
+---
+
+<BaseLayout title="Проверка: home/faq">
+  <main class="page">
+    <Faq
+      titleTop="То, что важно ПОНЯТЬ"
+      titleBottom="перед началом"
+      lead="О том, как внутренняя работа начинает менять состояние и саму жизнь"
+      ctaLabel="Задать вопрос"
+      ctaHref="/booking.html"
+      items={items}
+    />
+  </main>
+</BaseLayout>

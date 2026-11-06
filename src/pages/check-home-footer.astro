@@ -1,0 +1,14 @@
+---
+/**
+ * Изолированная страница секции: только она, без остальных блоков.
+ * Нужна, чтобы собирать и мерить блок, не трогая главную страницу.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Проверка: home/footer">
+  <main class="page">
+    <Footer />
+  </main>
+</BaseLayout>
