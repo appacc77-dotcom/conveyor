@@ -27,35 +27,43 @@ const {
 ---
 
 <section class="hero" id="home-hero" data-figma-node="79:105">
-  <img
-    class="hero__bg"
-    data-figma-node="79:106"
-    src="/img/hero.jpg"
-    alt=""
-    width="1440"
-    height="780"
-    fetchpriority="high"
-  />
-  <div class="hero__overlay" data-figma-node="767:2219"></div>
+  <div class="hero__video" data-figma-node="79:106">
+    <img
+      class="hero__bg"
+      src="/img/hero.jpg"
+      alt=""
+      width="1440"
+      height="780"
+      fetchpriority="high"
+    />
+    <div class="hero__overlay" data-figma-node="767:2219"></div>
 
-  <div class="hero__content" data-figma-node="79:107">
-    <h1 class="hero__title t-h1" data-figma-node="79:108">{title}</h1>
-    <p class="hero__lead t-body" data-figma-node="79:109">{lead}</p>
-    <div class="hero__actions">
+    <div class="hero__content" data-figma-node="79:107">
+      <h1 class="hero__title t-h1" data-figma-node="79:108">{title}</h1>
+      <p class="hero__lead t-body" data-figma-node="79:109">{lead}</p>
       <BtnPrimary href={ctaHref} label={ctaLabel} node="79:110" />
     </div>
-  </div>
 
-  <button class="hero__play" type="button" aria-label={playLabel}>
-    <Play node="79:113" />
-  </button>
+    <button class="hero__play" type="button" aria-label={playLabel}>
+      <Play node="79:113" />
+    </button>
+  </div>
 </section>
 
 <style>
+  /* hero (79:105) — фрейм фиксированной высоты 780, раскладки нет. */
   .hero {
+    position: relative;
+  }
+
+  /* hero-video (79:106): HORIZONTAL, gap 32, pad 64, primary MAX → space-between,
+     counter MAX → align-items: flex-end. Паддинг живёт здесь, не на секции. */
+  .hero__video {
     position: relative;
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-xl);
     min-height: 780px;
     padding: var(--space-3xl);
     overflow: hidden;
@@ -75,6 +83,8 @@ const {
     background: var(--color-overlay-dark);
   }
 
+  /* hero-content (79:107): VERTICAL, gap 32, HUG — ширина равна самому широкому
+     ребёнку, а он 600. */
   .hero__content {
     position: relative;
     display: flex;
@@ -82,6 +92,19 @@ const {
     gap: var(--space-xl);
     width: 600px;
     max-width: 100%;
+    /* counter MIN → по левому краю: кнопка не растягивается на ширину колонки. */
+    align-items: flex-start;
+  }
+
+  /* hero-title (79:108): ширина FIXED 600, высота HUG. */
+  .hero__title {
+    width: 600px;
+    max-width: 100%;
+  }
+
+  /* hero-lead (79:109): FILL — тянется на всю ширину колонки. */
+  .hero__lead {
+    width: 100%;
   }
 
   .hero__title,
@@ -89,16 +112,9 @@ const {
     color: var(--color-text-on-image);
   }
 
-  /* Кнопка не растягивается на ширину колонки: её ширина — из контента. */
-  .hero__actions {
-    display: flex;
-    align-self: flex-start;
-  }
-
+  /* play (79:113): обычный ребёнок слоя, а не абсолют — место задаёт space-between. */
   .hero__play {
-    position: absolute;
-    right: var(--space-3xl);
-    bottom: var(--space-3xl);
+    flex: none;
     width: 47px;
     height: 47px;
   }

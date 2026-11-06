@@ -92,15 +92,17 @@ const { title, lead, script, ctaLabel, ctaHref, items } = Astro.props;
     gap: var(--space-l);
   }
 
-  /* Ширины текстовых блоков из макета: с ними переносы строк совпадают
-     с Figma. Без них лид ломается после «опоры,» вместо «нет». */
+  /* pain-title (79:119) и pain-lead (79:120): ширина FIXED из спеки —
+     539 и 473. С ними переносы строк совпадают с Figma. */
   .pain__title {
-    max-width: 539px;
+    width: 539px;
+    max-width: 100%;
     color: var(--color-text-heading);
   }
 
   .pain__lead {
-    max-width: 473px;
+    width: 473px;
+    max-width: 100%;
     color: var(--color-text-secondary);
   }
 
