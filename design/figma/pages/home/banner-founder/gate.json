@@ -1,0 +1,18 @@
+{
+  "at": "2026-11-06T17:36:53.871Z",
+  "section": {
+    "id": "79:114",
+    "name": "banner-founder",
+    "w": 1440,
+    "h": 525
+  },
+  "ok": true,
+  "red": 0,
+  "unknown": 0,
+  "missing": [],
+  "marked": 5,
+  "nodes": 5,
+  "coverage": 100,
+  "tolerance": 1,
+  "worstDelta": 0.29000000000002046
+}

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import Pain from '../components/Pain.astro';
+import Banner from '../components/Banner.astro';
 
 const painItems = [
   {
@@ -67,6 +68,11 @@ const painItems = [
       ctaLabel="с точки входа"
       ctaHref="/booking.html#entry"
       items={painItems}
+    />
+
+    <Banner
+      title="Перемены в жизни начинаются изнутри"
+      signature="by Ekaterina Lebedeva"
     />
   </main>
 </BaseLayout>

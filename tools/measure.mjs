@@ -161,10 +161,20 @@ for (const el of measured.elements) {
     // Ширину текста сверяем: блоки ограничены max-width из спеки, поэтому
     // совпадает и ширина, и точки переноса. Если у блока ширины нет — он
     // растянется на колонку и ворота это покажут.
+    //
+    // Исключение — текст с HUG-шириной и ненулевым трекингом: браузер
+    // добавляет трекинг и после последней буквы, Figma — нет. Коробка выходит
+    // шире на один трекинг, хотя «чернила» совпадают. Сравниваем по чернилам.
+    const ink = (() => {
+      if (node.type !== 'TEXT' || node.sizing?.h !== 'HUG' || !node.letterSpacing) return el.w;
+      const ls = node.letterSpacing;
+      const trim = ls.unit === 'PERCENT' ? (ls.value / 100) * node.fontSize : ls.value;
+      return el.w - trim;
+    })();
     const worst = Math.max(
       Math.abs(el.x - abs.x),
       Math.abs(el.y - abs.y),
-      Math.abs(el.w - node.w),
+      Math.abs(ink - node.w),
       Math.abs(el.h - node.h),
     );
     const ok = worst <= tol;
