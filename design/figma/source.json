@@ -1,0 +1,15 @@
+{
+  "figma": {
+    "file": "../syntonia-deepseek/design/figma/Website Syntonia.fig",
+    "sizeBytes": 110717070,
+    "sha256": "51bd74105893c0eb0b435788117b1d02deaccd8018c6302dc76c1027e86c9c28",
+    "mtime": "2026-11-03",
+    "note": "Внешний путь. При переносе проекта файл нужно положить в design/figma/ и пересчитать хеш."
+  },
+  "canvas": {
+    "home": "design/export/home/Website Syntonia.png",
+    "homeCrop1440": "design/export/home/home-1440.png",
+    "method1440": "design/export/method/method-1440.png"
+  },
+  "registeredAt": "2026-11-06"
+}

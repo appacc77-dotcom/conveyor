@@ -1,56 +1,53 @@
 # STATUS — Syntonia
 
-Дата: 06.11.2026.
+Дата: 06.11.2026. Состояние после перезапуска.
 
-## Сделано
+## Что произошло
 
-- 11 страниц: Home, Method, Masters, Practice, Library, Booking, Quiz,
-  Offer, Privacy, Consent, 404.
-- Внутренние `/structure.html` и `/progress.html`.
-- 43 завершённых блока структуры; 4 todo: journal-start, journal-issue,
-  quiz cover, quiz thanks.
-- Figma-секции и полные фреймы для всех страниц, где есть Figma.
-- Подвал: текстура исправлена, карточка в review.
-- Проект перенесён в самостоятельную папку `syntonia/`.
+Проект сброшен к чистому листу. Готовый сайт (48 компонентов, 13 страниц,
+73 MB ассетов) удалён: он был собран без ворот — приёмка показала escape rate
+33% (5 дефектов из 15 карточек после «готово»), а два 🔴 в `decisions.md`
+оставались открытыми, хотя P4 по процессу не может начаться при открытом G0.
 
-## Доска
+Код и ассеты восстановимы из git: тег `pre-reset-2026-11-06` (коммит `65e91e2`).
 
-| Колонка | Карточек |
-|---|---:|
-| done | 27 |
-| review | 1 |
-| progress | 0 |
+## Что сохранено
 
-Review: `Shared · Подвал`.
+| Что | Где | Зачем |
+|---|---|---|
+| Канвас 1:1 (27 MB) | `design/export/home/Website Syntonia.png` | вход для кропов; **не в git** |
+| Эталон главной 1440 | `design/export/home/home-1440.png` | пиксельная сверка |
+| Эталон «Метода» | `design/export/method/method-1440.png` | то же |
+| `.fig` (106 MB) | `../syntonia-deepseek/design/figma/` | вход P0; хеш в `design/figma/source.json` |
+| Процесс | `docs/system/` | P0–P7, ворота G0–G3 |
+| Решения | `docs/decisions.md` | журнал, append-only |
+| История | `docs/archive/` | отчёты, приёмка, старый README |
 
-## Проверки
+## Где мы сейчас
 
-```bash
-npm ci
-npx playwright install chromium
-npm run build
-npm run smoke
-npm run audit:paths
+**Фаза P0 не начата.** Каталоги `design/figma/{canvas,extracted,spec,crops}`
+заведены пустыми — под выход скриптов.
+
+```
+P0 Ingest     ← здесь            extracted/manifest.json
+P1 Reality                       reports/reality.md            [G0]
+P2 Resolve                       design/figma/spec/*.json
+P3 Model                         crops/, tokens, inventory
+P4 Components                    src/components/ds/            [G1]
+P5 Pages                         src/pages/                    [G2]
+P6 Adaptive                                                     [G3]
+P7 Accept
 ```
 
-- build: 13 страниц;
-- smoke: 13 страниц × 1440/390, console 0, overflow 0, битых картинок 0;
-- audit:paths: 0 абсолютных/соседних путей.
+## Чего нет (и это блокирует)
 
-## Открытые хвосты
+- `src/` — удалён; пустая сборка не соберётся, пока нет хотя бы одной страницы;
+- скриптов пайплайна нет: `figma-extract`, `figma-reality`, `figma-resolve`,
+  `figma-tokens`, `figma-crops` — P0–P3 нечем выполнить;
+- ворот нет ни одних: `ds:check`, `anchors:check`, `pixel`, `audit`;
+- 2 🔴 в `docs/decisions.md` (масштабы, канонические фреймы Practice/Quiz).
 
-- приёмка подвала;
-- 4 блока структуры без сравнений;
-- legal-тексты — заглушки;
-- Booking без endpoint;
-- Quiz — 4 draft-вопроса;
-- цены Practice/Booking не подтверждены;
-- journal-выпуски без отдельных страниц;
-- аудио в Masters — заглушки.
+## Следующий шаг
 
-## Точка входа
-
-- перенос: `docs/PORTABILITY.md`;
-- процесс: `docs/system/PROCESS.md`;
-- решения: `docs/system/figma/decisions.md`;
-- эталоны: `public/structure/figma/`, `design/export/`.
+P0: `figma-extract` по `Website Syntonia.fig` → `design/figma/extracted/` +
+`manifest.json` с хешем `51bd7410…c9c28`. До него P1–P7 не начинаются.
