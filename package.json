@@ -35,7 +35,8 @@
     "variants": "node tools/variants.mjs",
     "bindings": "node tools/check-bindings.mjs",
     "interactive": "node tools/check-interactive.mjs",
-    "tokens:check": "node tools/check-tokens.mjs"
+    "tokens:check": "node tools/check-tokens.mjs",
+    "motion": "node tools/check-motion.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",

@@ -1,0 +1,131 @@
+#!/usr/bin/env node
+/**
+ * Проверяет, что интерактивные элементы не переключаются рывком.
+ *
+ *   node tools/check-motion.mjs [--url /]
+ *
+ * Класс ошибки: блок статичен по умолчанию. В макете есть только состояние
+ * покоя, поэтому переход надо закладывать — и легко забыть. Базовый слой
+ * `motion.css` даёт переход всем ссылкам, кнопкам и `summary`; этот скрипт
+ * проверяет, что он действительно доехал до страницы и что собственные
+ * правила компонентов его не отменили.
+ *
+ * Второе: при `prefers-reduced-motion: reduce` переходы должны выключаться —
+ * иначе мы ломаем доступность ради красоты.
+ */
+import { createServer } from 'node:http';
+import { readFileSync, existsSync, statSync } from 'node:fs';
+import { join, extname, normalize } from 'node:path';
+import { chromium } from 'playwright';
+
+const root = process.cwd();
+const dist = join(root, 'dist');
+const arg = (name, fallback) => {
+  const i = process.argv.indexOf(name);
+  return i > 0 ? process.argv[i + 1] : fallback;
+};
+const urlPath = arg('--url', '/');
+
+if (!existsSync(join(dist, 'index.html'))) {
+  console.error('нет dist/ — сначала npm run build');
+  process.exit(2);
+}
+
+const mime = {
+  '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css',
+  '.js': 'text/javascript',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+};
+
+const server = createServer((req, res) => {
+  let path = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+  if (path === '/') path = '/index.html';
+  const file = normalize(join(dist, path));
+  if (!existsSync(file) || !statSync(file).isFile()) {
+    res.writeHead(404);
+    res.end();
+    return;
+  }
+  res.writeHead(200, { 'content-type': mime[extname(file)] ?? 'application/octet-stream' });
+  res.end(readFileSync(file));
+});
+
+const port = Number(process.env.MOTION_PORT ?? 4337);
+await new Promise((r) => server.listen(port, '127.0.0.1', r));
+
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
+await page.evaluate(() => document.fonts.ready);
+
+const report = await page.evaluate(() => {
+  const selector = 'a[href], button, summary, [role="tab"], [role="button"], input, select, textarea';
+  const out = { total: 0, dead: [], byDuration: {} };
+
+  for (const el of document.querySelectorAll(selector)) {
+    // Только то, что реально видно: скрытые пункты меню не в счёт.
+    const rect = el.getBoundingClientRect();
+    if (!rect.width || !rect.height) continue;
+    if (getComputedStyle(el).visibility === 'hidden') continue;
+
+    out.total += 1;
+    const cs = getComputedStyle(el);
+    const properties = cs.transitionProperty.split(',').map((p) => p.trim());
+    const durations = cs.transitionDuration.split(',').map((d) => parseFloat(d) || 0);
+    const animated = properties.some((p, i) => p !== 'none' && (durations[i] ?? durations[0]) > 0);
+
+    const label = (el.textContent ?? '').trim().slice(0, 28) || el.getAttribute('aria-label') || el.tagName.toLowerCase();
+    if (animated) {
+      const key = `${durations[0] * 1000}мс`;
+      out.byDuration[key] = (out.byDuration[key] ?? 0) + 1;
+    } else {
+      out.dead.push({ label, tag: el.tagName.toLowerCase(), cls: (el.className || '').toString().split(' ')[0] });
+    }
+  }
+  return out;
+});
+
+console.log(`интерактивных элементов видно: ${report.total}`);
+for (const [duration, count] of Object.entries(report.byDuration)) {
+  console.log(`  переход ${duration}: ${count}`);
+}
+
+// Доступность: при reduce переходы должны гаснуть.
+await page.emulateMedia({ reducedMotion: 'reduce' });
+const reduced = await page.evaluate(() => {
+  const el = document.querySelector('a[href], button, summary');
+  if (!el) return null;
+  const cs = getComputedStyle(el);
+  const durations = cs.transitionDuration.split(',').map((d) => parseFloat(d) || 0);
+  return Math.max(...durations);
+});
+
+await browser.close();
+server.close();
+
+let failed = false;
+
+if (report.dead.length) {
+  failed = true;
+  console.error(`\nбез перехода: ${report.dead.length}`);
+  for (const item of report.dead.slice(0, 15)) {
+    console.error(`  ${item.tag}.${item.cls || '—'} «${item.label}»`);
+  }
+  console.error('\nэлемент без перехода переключается рывком — добавьте transition или используйте базовый слой');
+}
+
+if (reduced !== null && reduced > 0.01) {
+  failed = true;
+  console.error(`\nprefers-reduced-motion не отключает переходы: ${reduced}s`);
+}
+
+if (failed) process.exit(1);
+
+console.log('\nу всех видимых интерактивных элементов есть переход');
+console.log('prefers-reduced-motion отключает движение');
