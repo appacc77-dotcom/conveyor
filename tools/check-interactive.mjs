@@ -137,6 +137,7 @@ for (const section of sections) {
   let alive = false;
   let ariaOnly = [];
   let blind = [];
+  let covered = [];
   let inert = [];
 
   for (const control of controls) {
@@ -145,7 +146,10 @@ for (const section of sections) {
     const selfBefore = await controlSignature(control);
     try {
       await control.click({ timeout: 2000 });
-    } catch {
+    } catch (error) {
+      // Перекрытый элемент — такой же дефект, как мёртвый: до него не добраться.
+      const isCovered = String(error.message).includes('intercepts pointer events');
+      if (isCovered) covered.push(label);
       continue;
     }
     await page.waitForTimeout(320);
@@ -171,12 +175,21 @@ for (const section of sections) {
     }
   }
 
-  dead += ariaOnly.length + blind.length;
+  dead += ariaOnly.length + blind.length + covered.length;
   pretenders += ariaOnly.length + blind.length;
-  const status = ariaOnly.length ? 'ПРИТВОРЯЕТСЯ' : blind.length ? 'МОЛЧАЛИВЫЙ ПЕРЕКЛЮЧАТЕЛЬ' : alive ? 'живой' : 'СТАТИЧНЫЙ';
+  const status = covered.length
+    ? 'ПЕРЕКРЫТ'
+    : ariaOnly.length
+      ? 'ПРИТВОРЯЕТСЯ'
+      : blind.length
+        ? 'МОЛЧАЛИВЫЙ ПЕРЕКЛЮЧАТЕЛЬ'
+        : alive
+          ? 'живой'
+          : 'СТАТИЧНЫЙ';
   console.log(`${section.name.padEnd(18)} элементов ${String(controls.length).padStart(2)} · ${status}`);
   for (const label of ariaOnly) console.log(`   «${label}» — меняет только aria, на экране ничего`);
   for (const label of blind) console.log(`   «${label}» — открывает состояние, но сам не меняется`);
+  for (const label of covered) console.log(`   «${label}» — перекрыт другим слоем, клик не доходит`);
   if (!alive && !ariaOnly.length) console.log(`   нажатия не меняют ничего: ${inert.slice(0, 3).join(', ')}`);
   if (!alive && !ariaOnly.length) dead += 1;
 

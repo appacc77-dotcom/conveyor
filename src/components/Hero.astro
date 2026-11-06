@@ -44,11 +44,13 @@ const {
       <BtnPrimary href={ctaHref} label={ctaLabel} node="79:110" />
     </div>
 
-    {/* Видео в файле нет: кнопка без цели — обманка. Оставлена декоративной,
-        станет кнопкой, когда появится ссылка. */}
-    <span class="hero__play" aria-hidden="true">
+    {/* Видео в файле нет, но кнопка должна честно сказать об этом, а не
+        молчать. Клик показывает подсказку. */}
+    <button class="hero__play" type="button" aria-label={playLabel} data-play>
       <Play node="79:113" />
-    </span>
+    </button>
+
+    <div class="hero__toast" role="status" aria-live="polite" data-toast></div>
   </div>
 </section>
 
@@ -116,8 +118,55 @@ const {
 
   /* play (79:113): обычный ребёнок слоя, а не абсолют — место задаёт space-between. */
   .hero__play {
+    /* Без позиционирования кнопка рисуется под абсолютным оверлеем и не
+       принимает клики: elementFromPoint возвращал hero__overlay. */
+    position: relative;
+    z-index: 1;
     flex: none;
     width: 47px;
     height: 47px;
   }
 </style>
+
+<style>
+  /* Подсказка о том, чего ещё нет: всплывает внизу на четыре секунды. */
+  .hero__toast {
+    position: fixed;
+    left: 50%;
+    bottom: var(--space-l);
+    z-index: 200;
+    max-width: min(92vw, 480px);
+    padding: var(--space-s) var(--space-m);
+    color: var(--color-text-on-image);
+    background: var(--color-bg-inverse);
+    border-radius: var(--radius-m);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 28%);
+    opacity: 0;
+    transform: translate(-50%, var(--space-s));
+    pointer-events: none;
+    transition:
+      opacity var(--motion-base) var(--ease-out),
+      transform var(--motion-base) var(--ease-out);
+  }
+
+  .hero__toast--visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+</style>
+
+<script>
+  const play = document.querySelector('[data-play]');
+  const toast = document.querySelector('[data-toast]');
+  let timer;
+
+  play?.addEventListener('click', () => {
+    if (!toast) return;
+    toast.textContent = 'Видео ещё не загружено — появится позже.';
+    toast.classList.add('hero__toast--visible');
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      toast.classList.remove('hero__toast--visible');
+    }, 4000);
+  });
+</script>
