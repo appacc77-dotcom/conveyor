@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:55.374Z"
+    "at": "2026-11-06T16:54:54.429Z"
   },
   "section": {
     "id": "414:2107",
@@ -200,6 +200,8 @@
       "h": 81,
       "text": "Пакеты",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 65,
       "lineHeight": {
         "unit": "PERCENT",
@@ -209,6 +211,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -242,6 +245,8 @@
       "h": 34,
       "text": "Тщательно подобранные варианты доступа к практикам и состояниям, чтобы вы могли выбрать свой ритм и глубину.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -251,6 +256,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -413,6 +419,8 @@
       "h": 78,
       "text": "Коды построения реальности",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -422,6 +430,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -455,6 +464,8 @@
       "h": 48,
       "text": "7 глубоких состояний для внутренней \nработы и изменений.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -464,6 +475,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -636,6 +648,8 @@
       "h": 34,
       "text": "7 практик",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -645,6 +659,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -742,7 +757,8 @@
         "h": "HUG",
         "v": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -180
     },
     {
       "id": "I427:1185;144:75;144:72",
@@ -766,7 +782,12 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -90,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I427:1185;144:75;144:72;967:2244",
@@ -877,6 +898,8 @@
       "h": 20,
       "text": "Код Тепла. Активация",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -886,6 +909,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -919,6 +943,8 @@
       "h": 20,
       "text": "Код Боли. Возвращение к себе",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -928,6 +954,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -961,6 +988,8 @@
       "h": 20,
       "text": "Код Страха. Право двигаться вперёд",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -970,6 +999,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1003,6 +1033,8 @@
       "h": 20,
       "text": "Код Гнева. Сила без борьбы",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1012,6 +1044,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1045,6 +1078,8 @@
       "h": 40,
       "text": "Код Негодования.  Перестать спорить с прошлым",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1054,6 +1089,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1087,6 +1123,8 @@
       "h": 40,
       "text": "Код Гордыни.  Выход из внутреннего холода",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1096,6 +1134,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1129,6 +1168,8 @@
       "h": 40,
       "text": "Код Растерянности.  Возвращение ясности",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1138,6 +1179,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1201,6 +1243,8 @@
       "h": 34,
       "text": "Доступ на 12 месяцев",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1210,6 +1254,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1271,6 +1316,8 @@
       "h": 57,
       "text": "160 $",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1280,6 +1327,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1313,6 +1361,8 @@
       "h": 39,
       "text": "вместо 214 $",
       "styleName": "H4",
+      "fontFamily": null,
+      "fontStyle": null,
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1322,6 +1372,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1411,6 +1462,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Открыть пространство",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -1425,6 +1483,8 @@
       "h": 29,
       "text": "Открыть пространство",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1434,6 +1494,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1477,7 +1538,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I427:1232;14:128;967:2413",
@@ -1680,6 +1745,8 @@
       "h": 34,
       "text": "Живая жизнь",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1689,6 +1756,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1722,6 +1790,8 @@
       "h": 48,
       "text": "7 глубоких практик для более живого контакта с собой.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1731,6 +1801,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1903,6 +1974,8 @@
       "h": 34,
       "text": "7 практик",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1912,6 +1985,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2009,7 +2083,8 @@
         "h": "HUG",
         "v": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -180
     },
     {
       "id": "I427:1256;144:75;144:72",
@@ -2033,7 +2108,12 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -90,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I427:1256;144:75;144:72;967:2244",
@@ -2144,6 +2224,8 @@
       "h": 20,
       "text": "Жизнь на разрыве. Найти выход",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2153,6 +2235,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2186,6 +2269,8 @@
       "h": 40,
       "text": "Разрешить себе больше. Деньги, реализация,  масштаб",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2195,6 +2280,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2228,6 +2314,8 @@
       "h": 40,
       "text": "Возвращение близости. Внутренние преграды в отношениях",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2237,6 +2325,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2270,6 +2359,8 @@
       "h": 20,
       "text": "Держаться — это работа. Стоять — это состояние",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2279,6 +2370,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2312,6 +2404,8 @@
       "h": 20,
       "text": "Тело не молчит. Услышать внутренний смысл",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2321,6 +2415,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2354,6 +2449,8 @@
       "h": 20,
       "text": "Связь с Высшим проявлением",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2363,6 +2460,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2396,6 +2494,8 @@
       "h": 20,
       "text": "Вернуться к радости",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2405,6 +2505,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2468,6 +2569,8 @@
       "h": 34,
       "text": "Доступ на 12 месяцев",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2477,6 +2580,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2538,6 +2642,8 @@
       "h": 57,
       "text": "240 $",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2547,6 +2653,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2580,6 +2687,8 @@
       "h": 39,
       "text": "вместо 314 $",
       "styleName": "H4",
+      "fontFamily": null,
+      "fontStyle": null,
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2589,6 +2698,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2678,6 +2788,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Открыть пространство",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -2692,6 +2809,8 @@
       "h": 29,
       "text": "Открыть пространство",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2701,6 +2820,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2744,7 +2864,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I427:1270;14:128;967:2413",
@@ -2947,6 +3071,8 @@
       "h": 78,
       "text": "Пространство \nпрактик Syntonia",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2956,6 +3082,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2989,6 +3116,8 @@
       "h": 72,
       "text": "Все платные практики + эксклюзив и только в этом пакете практика: \n«Войти в своё желаемое будущее»",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2998,6 +3127,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3170,6 +3300,8 @@
       "h": 34,
       "text": "15 практик",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3179,6 +3311,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3276,7 +3409,8 @@
         "h": "HUG",
         "v": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -180
     },
     {
       "id": "I427:1289;144:75;144:72",
@@ -3300,7 +3434,12 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -90,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I427:1289;144:75;144:72;967:2244",
@@ -3411,6 +3550,8 @@
       "h": 20,
       "text": "Войти в своё желаемое будущее",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Medium",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3420,6 +3561,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3453,6 +3595,8 @@
       "h": 20,
       "text": "Код Тепла. Активация",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3462,6 +3606,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3495,6 +3640,8 @@
       "h": 20,
       "text": "Код Боли. Возвращение к себе",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3504,6 +3651,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3537,6 +3685,8 @@
       "h": 20,
       "text": "Код Страха. Право двигаться вперёд",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3546,6 +3696,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3579,6 +3730,8 @@
       "h": 20,
       "text": "Код Гнева. Сила без борьбы",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3588,6 +3741,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3621,6 +3775,8 @@
       "h": 40,
       "text": "Код Негодования.  Перестать спорить с прошлым",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3630,6 +3786,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3663,6 +3820,8 @@
       "h": 40,
       "text": "Код Гордыни.  Выход из внутреннего холода",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3672,6 +3831,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3705,6 +3865,8 @@
       "h": 40,
       "text": "Код Растерянности.  Возвращение ясности",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3714,6 +3876,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3747,6 +3910,8 @@
       "h": 20,
       "text": "Жизнь на разрыве. Найти выход",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3756,6 +3921,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3789,6 +3955,8 @@
       "h": 40,
       "text": "Разрешить себе больше. Деньги, реализация,  масштаб",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3798,6 +3966,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3831,6 +4000,8 @@
       "h": 40,
       "text": "Возвращение близости. Внутренние преграды в отношениях",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3840,6 +4011,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3873,6 +4045,8 @@
       "h": 20,
       "text": "Держаться — это работа. Стоять — это состояние",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3882,6 +4056,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3915,6 +4090,8 @@
       "h": 20,
       "text": "Тело не молчит. Услышать внутренний смысл",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3924,6 +4101,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3957,6 +4135,8 @@
       "h": 20,
       "text": "Связь с Высшим проявлением",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3966,6 +4146,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3999,6 +4180,8 @@
       "h": 20,
       "text": "Вернуться к радости",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4008,6 +4191,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4071,6 +4255,8 @@
       "h": 34,
       "text": "Доступ на 12 месяцев",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4080,6 +4266,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4141,6 +4328,8 @@
       "h": 57,
       "text": "360 $",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4150,6 +4339,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4183,6 +4373,8 @@
       "h": 39,
       "text": "вместо 460 $",
       "styleName": "H4",
+      "fontFamily": null,
+      "fontStyle": null,
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4192,6 +4384,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4281,6 +4474,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Открыть пространство",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -4295,6 +4495,8 @@
       "h": 29,
       "text": "Открыть пространство",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4304,6 +4506,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4347,7 +4550,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I427:1303;14:128;967:2413",

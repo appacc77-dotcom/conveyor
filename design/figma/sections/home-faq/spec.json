@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:14.887Z"
+    "at": "2026-11-06T16:54:14.811Z"
   },
   "section": {
     "id": "148:508",
@@ -237,6 +237,8 @@
       "h": 180,
       "text": "То, что важно ПОНЯТЬ",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -246,6 +248,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "BOTTOM",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -306,6 +310,8 @@
       "h": 106,
       "text": "перед началом",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 42,
       "lineHeight": {
         "unit": "PERCENT",
@@ -315,6 +321,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "BOTTOM",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -347,6 +355,8 @@
       "h": 68,
       "text": "О том, как внутренняя работа начинает менять состояние и саму жизнь",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -356,6 +366,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "BOTTOM",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -445,6 +457,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Задать вопрос",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -459,6 +478,8 @@
       "h": 29,
       "text": "Задать вопрос",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -468,6 +489,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -511,7 +533,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I148:517;14:128;967:2413",
@@ -661,6 +687,11 @@
         "fills": [
           "VariableID:709:1577"
         ]
+      },
+      "props": {
+        "answer#756:3": "Да и поможет. Работа идёт глубже — с внутренним состоянием, подсознательными причинами и тем, что на тонком плане управляет жизнью.",
+        "question#144:0": "Если я уже был в терапии, мне это подойдёт?",
+        "state": "open"
       }
     },
     {
@@ -703,6 +734,8 @@
       "h": 39,
       "text": "Если я уже был в терапии, мне это подойдёт?",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -712,6 +745,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -755,7 +789,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "up"
+      }
     },
     {
       "id": "I148:519;756:1883;756:1691",
@@ -766,7 +804,8 @@
       "x": 3,
       "y": 19,
       "w": 18,
-      "h": 14
+      "h": 14,
+      "rotation": 90
     },
     {
       "id": "I148:519;756:1883;755:2852",
@@ -789,6 +828,7 @@
       ],
       "strokeWeight": 2.25,
       "strokeAlign": "CENTER",
+      "rotation": 90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -817,6 +857,7 @@
       ],
       "strokeWeight": 4.5,
       "strokeAlign": "CENTER",
+      "rotation": 90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -835,6 +876,8 @@
       "h": 68,
       "text": "Да и поможет. Работа идёт глубже — с внутренним состоянием, подсознательными причинами и тем, что на тонком плане управляет жизнью.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -844,6 +887,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -915,6 +959,11 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "answer#756:3": "Да и поможет. Работа идёт глубже — с внутренним состоянием, подсознательными причинами и тем, что на тонком плане управляет жизнью.",
+        "question#144:0": "Чем этот подход отличается от обычной психологии?",
+        "state": "closed"
       }
     },
     {
@@ -957,6 +1006,8 @@
       "h": 39,
       "text": "Чем этот подход отличается от обычной психологии?",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -966,6 +1017,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1009,7 +1061,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "down"
+      }
     },
     {
       "id": "I148:520;755:2882;756:1690",
@@ -1020,7 +1076,8 @@
       "x": 18,
       "y": 2,
       "w": 18,
-      "h": 14
+      "h": 14,
+      "rotation": -90
     },
     {
       "id": "I148:520;755:2882;755:2849",
@@ -1043,6 +1100,7 @@
       ],
       "strokeWeight": 2.25,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -1071,6 +1129,7 @@
       ],
       "strokeWeight": 4.5,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -1127,6 +1186,11 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "answer#756:3": "Да и поможет. Работа идёт глубже — с внутренним состоянием, подсознательными причинами и тем, что на тонком плане управляет жизнью.",
+        "question#144:0": "Зачем мне это, если я уже многое о себе понял?",
+        "state": "closed"
       }
     },
     {
@@ -1169,6 +1233,8 @@
       "h": 39,
       "text": "Зачем мне это, если я уже многое о себе понял?",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1178,6 +1244,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1221,7 +1288,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "down"
+      }
     },
     {
       "id": "I148:521;755:2882;756:1690",
@@ -1232,7 +1303,8 @@
       "x": 18,
       "y": 2,
       "w": 18,
-      "h": 14
+      "h": 14,
+      "rotation": -90
     },
     {
       "id": "I148:521;755:2882;755:2849",
@@ -1255,6 +1327,7 @@
       ],
       "strokeWeight": 2.25,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -1283,6 +1356,7 @@
       ],
       "strokeWeight": 4.5,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -1339,6 +1413,11 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "answer#756:3": "Да и поможет. Работа идёт глубже — с внутренним состоянием, подсознательными причинами и тем, что на тонком плане управляет жизнью.",
+        "question#144:0": "Чем Точка входа отличается от мастер-сессии?",
+        "state": "closed"
       }
     },
     {
@@ -1381,6 +1460,8 @@
       "h": 39,
       "text": "Чем Точка входа отличается от мастер-сессии?",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1390,6 +1471,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1433,7 +1515,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "down"
+      }
     },
     {
       "id": "I148:522;755:2882;756:1690",
@@ -1444,7 +1530,8 @@
       "x": 18,
       "y": 2,
       "w": 18,
-      "h": 14
+      "h": 14,
+      "rotation": -90
     },
     {
       "id": "I148:522;755:2882;755:2849",
@@ -1467,6 +1554,7 @@
       ],
       "strokeWeight": 2.25,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -1495,6 +1583,7 @@
       ],
       "strokeWeight": 4.5,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -1551,6 +1640,11 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "answer#756:3": "Да и поможет. Работа идёт глубже — с внутренним состоянием, подсознательными причинами и тем, что на тонком плане управляет жизнью.",
+        "question#144:0": "Сколько встреч обычно нужно?",
+        "state": "closed"
       }
     },
     {
@@ -1593,6 +1687,8 @@
       "h": 39,
       "text": "Сколько встреч обычно нужно?",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1602,6 +1698,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1645,7 +1742,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "down"
+      }
     },
     {
       "id": "I148:523;755:2882;756:1690",
@@ -1656,7 +1757,8 @@
       "x": 18,
       "y": 2,
       "w": 18,
-      "h": 14
+      "h": 14,
+      "rotation": -90
     },
     {
       "id": "I148:523;755:2882;755:2849",
@@ -1679,6 +1781,7 @@
       ],
       "strokeWeight": 2.25,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:29"
@@ -1707,6 +1810,7 @@
       ],
       "strokeWeight": 4.5,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:29"

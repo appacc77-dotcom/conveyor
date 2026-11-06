@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:42:10.393Z"
+    "at": "2026-11-06T16:55:08.669Z"
   },
   "section": {
     "id": "323:871",
@@ -235,6 +235,8 @@
       "h": 69,
       "text": "01",
       "styleName": "script-xl",
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 55,
       "lineHeight": {
         "unit": "PERCENT",
@@ -244,6 +246,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -277,6 +280,8 @@
       "h": 60,
       "text": "Глубинный уровень",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -286,6 +291,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -319,6 +325,8 @@
       "h": 170,
       "text": "В основе метода лежит работа с устойчивыми метапрограммами, состояниями и внутренними кодами, которые закрепляются в психике, теле, восприятии, энергетическом поле, генетической памяти и во внутреннем устройстве человека. Именно этот глубинный уровень влияет на чувства, реакции, выбор, отношения и повторяющиеся сценарии.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -328,6 +336,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -423,6 +432,8 @@
       "h": 69,
       "text": "02",
       "styleName": "script-xl",
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 55,
       "lineHeight": {
         "unit": "PERCENT",
@@ -432,6 +443,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -465,6 +477,8 @@
       "h": 60,
       "text": "Целостный подход",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -474,6 +488,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -507,6 +522,8 @@
       "h": 170,
       "text": "Syntonia соединяет психологическую точность, коучинговую направленность, работу с эмоциональным и телесным опытом, внимание к подсознательным причинам, тонкому плану и внутренней духовной природе человека. Такой подход позволяет работать не только с тем, что проявлено на поверхности, но и с той внутренней структурой, из которой это возникает.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -516,6 +533,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -611,6 +629,8 @@
       "h": 69,
       "text": "03",
       "styleName": "script-xl",
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 55,
       "lineHeight": {
         "unit": "PERCENT",
@@ -620,6 +640,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -653,6 +674,8 @@
       "h": 60,
       "text": "Практический результат",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -662,6 +685,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -695,6 +719,8 @@
       "h": 102,
       "text": "В практике это означает не только понимание причины, но и постепенную перенастройку глубинного внутреннего устройства человека, включая слои подсознания, которые лежат в основе восприятия, выбора и жизненного пути.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -704,6 +730,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",

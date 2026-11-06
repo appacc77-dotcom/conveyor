@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:43.630Z"
+    "at": "2026-11-06T16:54:42.888Z"
   },
   "section": {
     "id": "410:1365",
@@ -219,6 +219,8 @@
       "h": 60,
       "text": "Не знаешь, с чего начать?",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -228,6 +230,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -256,6 +259,8 @@
       "h": 68,
       "text": "Пройди короткий тест и узнай свой код — состояние, которое сильнее \nвсего влияет на твою жизнь сейчас.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -265,6 +270,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -324,6 +330,8 @@
       "h": 61,
       "text": "Практика  по твоему коду — в подарок.",
       "styleName": null,
+      "fontFamily": null,
+      "fontStyle": null,
       "lineHeight": {
         "unit": "PERCENT",
         "value": 170.00000476837158
@@ -332,6 +340,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -444,6 +453,13 @@
         "strokes": [
           "VariableID:49:55"
         ]
+      },
+      "props": {
+        "text#30:0": "Пройти тест",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -458,6 +474,8 @@
       "h": 29,
       "text": "Пройти тест",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -467,6 +485,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -510,7 +529,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I410:1371;14:128;967:2413",
@@ -621,6 +644,8 @@
       "h": 20,
       "text": "Бесплатно   ",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -630,6 +655,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -685,6 +711,8 @@
       "h": 20,
       "text": "2-3 минуты",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -694,6 +722,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",

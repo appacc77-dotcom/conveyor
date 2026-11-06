@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:09.874Z"
+    "at": "2026-11-06T16:54:09.993Z"
   },
   "section": {
     "id": "116:246",
@@ -190,6 +190,8 @@
       "h": 60,
       "text": "Голоса",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -199,6 +201,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -232,6 +235,8 @@
       "h": 34,
       "text": "О том, как внутренняя работа начинает менять состояние и саму жизнь",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -241,6 +246,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -356,6 +362,12 @@
         "strokes": [
           "VariableID:2:20"
         ]
+      },
+      "props": {
+        "source#105:3": "из отзывов",
+        "author#105:2": "— Ольга, после двух мастер-сессий",
+        "quote#105:1": "Проходила две сессии с Екатериной, результатом очень довольна. Практически сразу почувствовала, что установился контакт. Ситуация у меня была достаточно сложная, но, благодаря квалификации и опыту видеть, мы сумели найти причину и решение. Очень эффективно, цель достигается. Катерина — очень чуткий и профессиональный человек, умеет объяснить и подсказать.",
+        "label#105:0": "женский голос"
       }
     },
     {
@@ -432,6 +444,8 @@
       "h": 23,
       "text": "женский голос",
       "styleName": "eyebrow-s",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Medium",
       "fontSize": 15,
       "lineHeight": {
         "unit": "PERCENT",
@@ -441,6 +455,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -474,6 +490,8 @@
       "h": 20,
       "text": "из отзывов",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -483,6 +501,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -555,6 +574,8 @@
       "h": 224,
       "text": "Проходила две сессии с Екатериной, результатом очень довольна. Практически сразу почувствовала, что установился контакт. Ситуация у меня была достаточно сложная, но, благодаря квалификации и опыту видеть, мы сумели найти причину и решение. Очень эффективно, цель достигается. Катерина — очень чуткий и профессиональный человек, умеет объяснить и подсказать.",
       "styleName": "quote",
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -564,6 +585,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -597,6 +619,8 @@
       "h": 19,
       "text": "— Ольга, после двух мастер-сессий",
       "styleName": "body-s",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -606,6 +630,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -690,6 +715,12 @@
         "strokes": [
           "VariableID:2:20"
         ]
+      },
+      "props": {
+        "source#105:3": "написал от сердца",
+        "author#105:2": "— мужчина, искавший себя 23 года",
+        "quote#105:1": "Разбираться в себе всегда было непросто. За 23 года я перепробовал много чего, есть с чем сравнить, но наши сессии с Екатериной ни на что не похожи. Что больше всего запомнилось — это отношение. Не как к очередному клиенту или ради денег. Я чувствовал её желание помочь, заботу, за что благодарю.",
+        "label#105:0": "мужской голос"
       }
     },
     {
@@ -766,6 +797,8 @@
       "h": 23,
       "text": "мужской голос",
       "styleName": "eyebrow-s",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Medium",
       "fontSize": 15,
       "lineHeight": {
         "unit": "PERCENT",
@@ -775,6 +808,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -808,6 +843,8 @@
       "h": 20,
       "text": "написал от сердца",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -817,6 +854,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -889,6 +927,8 @@
       "h": 224,
       "text": "Разбираться в себе всегда было непросто. За 23 года я перепробовал много чего, есть с чем сравнить, но наши сессии с Екатериной ни на что не похожи. Что больше всего запомнилось — это отношение. Не как к очередному клиенту или ради денег. Я чувствовал её желание помочь, заботу, за что благодарю.",
       "styleName": "quote",
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -898,6 +938,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -931,6 +972,8 @@
       "h": 19,
       "text": "— мужчина, искавший себя 23 года",
       "styleName": "body-s",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -940,6 +983,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1024,6 +1068,12 @@
         "strokes": [
           "VariableID:2:20"
         ]
+      },
+      "props": {
+        "source#105:3": "из сообщения поздно вечером",
+        "author#105:2": "— Наталья",
+        "quote#105:1": "Как бы я ни запуталась — ты и твоё доброе сердце всегда рядом. Твои слова разгоняют все мои туманы. Моё пространство жизни наполняется светом и благостью. Мне сильно легче. Я переслушиваю наши сессии и всё больше понимаю.",
+        "label#105:0": "женский голос"
       }
     },
     {
@@ -1100,6 +1150,8 @@
       "h": 23,
       "text": "женский голос",
       "styleName": "eyebrow-s",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Medium",
       "fontSize": 15,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1109,6 +1161,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1142,6 +1196,8 @@
       "h": 20,
       "text": "из сообщения поздно вечером",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1151,6 +1207,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1223,6 +1280,8 @@
       "h": 224,
       "text": "Как бы я ни запуталась — ты и твоё доброе сердце всегда рядом. Твои слова разгоняют все мои туманы. Моё пространство жизни наполняется светом и благостью. Мне сильно легче. Я переслушиваю наши сессии и всё больше понимаю.",
       "styleName": "quote",
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1232,6 +1291,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1265,6 +1325,8 @@
       "h": 19,
       "text": "— Наталья",
       "styleName": "body-s",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1274,6 +1336,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1375,7 +1438,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "active"
+      }
     },
     {
       "id": "I116:256;104:222",
@@ -1425,7 +1491,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:257;104:229",
@@ -1474,7 +1543,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:258;104:229",
@@ -1523,7 +1595,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:259;104:229",
@@ -1572,7 +1647,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:260;104:229",
@@ -1621,7 +1699,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:261;104:229",
@@ -1670,7 +1751,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:262;104:229",
@@ -1719,7 +1803,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:263;104:229",
@@ -1768,7 +1855,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:264;104:229",
@@ -1817,7 +1907,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:265;104:229",
@@ -1866,7 +1959,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:266;104:229",
@@ -1915,7 +2011,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I116:267;104:229",
@@ -2012,10 +2111,14 @@
         "h": "HUG"
       },
       "clips": false,
+      "rotation": 0,
       "bound": {
         "fills": [
           "VariableID:745:1208"
         ]
+      },
+      "props": {
+        "direction": "prev"
       }
     },
     {
@@ -2044,7 +2147,8 @@
         "h": "HUG",
         "v": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -180
     },
     {
       "id": "I116:269;709:1590",
@@ -2171,6 +2275,9 @@
         "fills": [
           "VariableID:745:1208"
         ]
+      },
+      "props": {
+        "direction": "next"
       }
     },
     {

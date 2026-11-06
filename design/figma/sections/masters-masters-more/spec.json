@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:25.244Z"
+    "at": "2026-11-06T16:54:24.689Z"
   },
   "section": {
     "id": "256:374",
@@ -192,6 +192,8 @@
       "h": 108,
       "text": "Продолжить знакомство",
       "styleName": "more-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 43,
       "lineHeight": {
         "unit": "PERCENT",
@@ -201,6 +203,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -234,6 +237,8 @@
       "h": 272,
       "text": "Если вы пока не знаете, с чего начать, не обязательно сразу выбирать мастера.\nМожно сначала понять метод, пройти диагностику состояния или познакомиться с текстами Syntonia глубже.",
       "styleName": "more-text",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -243,6 +248,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "paragraphSpacing": 16,
       "fills": [
         {
           "type": "SOLID",
@@ -328,6 +334,10 @@
         "strokes": [
           "VariableID:2:31"
         ]
+      },
+      "props": {
+        "text#257:1": "Короткая диагностика поможет увидеть, какое состояние сейчас сильнее всего влияет на ваши реакции, выборы и внутренний маршрут.",
+        "title#257:0": "Понять, с чего начать"
       }
     },
     {
@@ -436,6 +446,8 @@
       "h": 28,
       "text": "Понять, с чего начать",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -445,6 +457,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -478,6 +491,8 @@
       "h": 80,
       "text": "Короткая диагностика поможет увидеть, какое состояние сейчас сильнее всего влияет на ваши реакции, выборы и внутренний маршрут.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -537,6 +552,11 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:6"
+      },
+      "props": {
+        "label#134:0": "Пройти диагностику",
+        "style": "plain",
+        "size": "XS"
       }
     },
     {
@@ -551,6 +571,8 @@
       "h": 20,
       "text": "Пройти диагностику",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -560,6 +582,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -603,7 +626,11 @@
         "primary": "MAX",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I257:470;257:439;837:2905;967:2244",
@@ -732,6 +759,10 @@
         "strokes": [
           "VariableID:2:31"
         ]
+      },
+      "props": {
+        "text#257:1": "Если вам важно понять, как работает Syntonia: почему разговор сам по себе не всегда меняет сценарий и что значит идти к источнику состояния.",
+        "title#257:0": "Узнать о методе"
       }
     },
     {
@@ -840,6 +871,8 @@
       "h": 28,
       "text": "Узнать о методе",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -849,6 +882,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -882,6 +916,8 @@
       "h": 80,
       "text": "Если вам важно понять, как работает Syntonia: почему разговор сам по себе не всегда меняет сценарий и что значит идти к источнику состояния.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -891,6 +927,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -941,6 +978,11 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:6"
+      },
+      "props": {
+        "label#134:0": "Метод Syntonia",
+        "style": "plain",
+        "size": "XS"
       }
     },
     {
@@ -955,6 +997,8 @@
       "h": 20,
       "text": "Метод Syntonia",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -964,6 +1008,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1007,7 +1052,11 @@
         "primary": "MAX",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I257:482;257:439;837:2905;967:2244",
@@ -1136,6 +1185,10 @@
         "strokes": [
           "VariableID:2:31"
         ]
+      },
+      "props": {
+        "text#257:1": "Книга, журнал и тексты Syntonia — для медленного знакомства с подходом, словами и состояниями, к которым можно возвращаться.",
+        "title#257:0": "Почитать глубже"
       }
     },
     {
@@ -1244,6 +1297,8 @@
       "h": 28,
       "text": "Почитать глубже",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1253,6 +1308,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1286,6 +1342,8 @@
       "h": 80,
       "text": "Книга, журнал и тексты Syntonia — для медленного знакомства с подходом, словами и состояниями, к которым можно возвращаться.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1345,6 +1403,11 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:6"
+      },
+      "props": {
+        "label#134:0": "Открыть библиотеку",
+        "style": "plain",
+        "size": "XS"
       }
     },
     {
@@ -1359,6 +1422,8 @@
       "h": 20,
       "text": "Открыть библиотеку",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1368,6 +1433,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1411,7 +1477,11 @@
         "primary": "MAX",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I257:517;257:439;837:2905;967:2244",

@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:57.882Z"
+    "at": "2026-11-06T16:54:56.624Z"
   },
   "section": {
     "id": "435:423",
@@ -159,6 +159,8 @@
       "h": 81,
       "text": "Бережная практика",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 65,
       "lineHeight": {
         "unit": "PERCENT",
@@ -168,6 +170,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -201,6 +204,8 @@
       "h": 68,
       "text": "Перед началом уделите минуту своему состоянию. Практику можно остановить в любой момент — ориентируйтесь \nна своё самочувствие и не продолжайте через сильное напряжение.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -210,6 +215,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -381,6 +387,8 @@
       "h": 55,
       "text": "01",
       "styleName": null,
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 55,
       "lineHeight": {
         "unit": "PERCENT",
@@ -446,6 +454,8 @@
       "h": 41,
       "text": "С заботой о тебе",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 35,
       "lineHeight": {
         "unit": "PERCENT",
@@ -455,6 +465,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -552,7 +563,8 @@
         "h": "HUG",
         "v": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -180
     },
     {
       "id": "I435:479;144:75;144:72",
@@ -576,7 +588,12 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -90,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I435:479;144:75;144:72;967:2244",
@@ -729,6 +746,8 @@
       "h": 68,
       "text": "Перед началом оцени своё состояние по шкале 0–10. Если напряжение выше 6/10 — отложи практику или сделай  её с поддержкой.",
       "styleName": null,
+      "fontFamily": null,
+      "fontStyle": null,
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -738,6 +757,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -771,6 +791,8 @@
       "h": 34,
       "text": "Поставь мягкий таймер на 10–15 минут, держи рядом воду и плед.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -780,6 +802,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -813,6 +836,8 @@
       "h": 34,
       "text": "Сообщи близкому, что ты в практике, или договорись о «якоре поддержки»",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -822,6 +847,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -855,6 +881,8 @@
       "h": 34,
       "text": "Если в процессе становится хуже — остановись, открой глаза, сделай три длинных выдоха и сделай паузу.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -864,6 +892,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -897,6 +926,8 @@
       "h": 68,
       "text": "Если у тебя есть диагнозы, влияющие на психику, выраженная тревога/депрессия, частые флэшбэки или ты  принимаешь психотропные препараты — выполняй практики только с поддержкой специалиста.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -906,6 +937,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1013,6 +1045,8 @@
       "h": 55,
       "text": "02",
       "styleName": null,
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 55,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1109,6 +1143,8 @@
       "h": 41,
       "text": "SOS-алгоритм",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 35,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1118,6 +1154,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1151,6 +1188,8 @@
       "h": 34,
       "text": "Короткий SOS-алгоритм, чтобы вернуться в контакт с собой и пространством.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1160,6 +1199,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1218,7 +1258,10 @@
         "h": "HUG",
         "v": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "white arrow": "white"
+      }
     },
     {
       "id": "I435:562;72:125",
@@ -1242,7 +1285,12 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -90,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I435:562;72:125;967:2244",

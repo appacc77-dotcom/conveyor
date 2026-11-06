@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:04.490Z"
+    "at": "2026-11-06T16:54:04.689Z"
   },
   "section": {
     "id": "79:173",
@@ -162,6 +162,8 @@
       "h": 60,
       "text": "С чего начать",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -171,6 +173,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -204,6 +207,8 @@
       "h": 34,
       "text": "Бережно и точно. Ясность в том, что с тобой происходит.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -213,6 +218,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -313,6 +319,8 @@
       "h": 48,
       "text": "Точка входа",
       "styleName": "H3",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 38,
       "lineHeight": {
         "unit": "PERCENT",
@@ -322,6 +330,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -355,6 +364,8 @@
       "h": 102,
       "text": "Первая встреча. Ты увидишь, из какого состояния сейчас строится твоя жизнь, и почувствуешь, как звучит эта работа, прежде чем идти дальше.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -364,6 +375,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -427,6 +439,8 @@
       "h": 34,
       "text": "Онлайн",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -436,6 +450,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -496,6 +511,8 @@
       "h": 34,
       "text": "30 минут",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -505,6 +522,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -625,6 +643,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Начать с точки входа",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -639,6 +664,8 @@
       "h": 29,
       "text": "Начать с точки входа",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -648,6 +675,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -691,7 +719,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I79:185;14:128;967:2413",
@@ -824,6 +856,8 @@
       "h": 29,
       "text": "Форматы работы",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -833,6 +867,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -943,6 +978,8 @@
       "h": 110,
       "text": "Рядом, даже на расстоянии",
       "styleName": null,
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 42,
       "lineHeight": {
         "unit": "PERCENT",
@@ -952,6 +989,7 @@
         "unit": "PERCENT",
         "value": 5
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",

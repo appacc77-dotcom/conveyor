@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:42:05.565Z"
+    "at": "2026-11-06T16:55:04.146Z"
   },
   "section": {
     "id": "383:761",
@@ -160,6 +160,8 @@
       "h": 20,
       "text": "первый шаг",
       "styleName": "eyebrow-xs",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -169,6 +171,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -231,6 +235,8 @@
       "h": 20,
       "text": "глубокое сопровождение",
       "styleName": "eyebrow-xs",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -240,6 +246,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -375,6 +383,15 @@
         "fills": [
           "VariableID:779:1865"
         ]
+      },
+      "props": {
+        "divider#802:0": false,
+        "duration#778:12": "30 минут",
+        "desc#778:9": "Короткая встреча для прояснения запроса и понимания направления.",
+        "title#778:6": "Точка входа",
+        "price#778:15": "$50",
+        "number#778:3": "01",
+        "state": "selected"
       }
     },
     {
@@ -389,6 +406,8 @@
       "h": 60,
       "text": "01",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -398,6 +417,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -492,6 +512,8 @@
       "h": 39,
       "text": "Точка входа",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -501,6 +523,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -534,6 +557,8 @@
       "h": 54,
       "text": "Короткая встреча для прояснения запроса и понимания направления.",
       "styleName": "body-tight",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -543,6 +568,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -607,6 +633,8 @@
       "h": 20,
       "text": "30 минут",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -616,6 +644,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -676,6 +705,8 @@
       "h": 20,
       "text": "$50",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -685,6 +716,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -793,6 +825,15 @@
         "topRightRadius": "VariableID:2:18",
         "bottomLeftRadius": "VariableID:2:18",
         "bottomRightRadius": "VariableID:2:18"
+      },
+      "props": {
+        "divider#802:0": false,
+        "duration#778:12": "2 часа",
+        "price#778:15": "$230",
+        "desc#778:9": "Глубокая индивидуальная работа с одним запросом или конкретной темой.",
+        "title#778:6": "Индивидуальная мастер-сессия",
+        "number#778:3": "02",
+        "state": "default"
       }
     },
     {
@@ -807,6 +848,8 @@
       "h": 60,
       "text": "02",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -816,6 +859,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -910,6 +954,8 @@
       "h": 39,
       "text": "Индивидуальная мастер-сессия",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -919,6 +965,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -952,6 +999,8 @@
       "h": 54,
       "text": "Глубокая индивидуальная работа с одним запросом или конкретной темой.",
       "styleName": "body-tight",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -961,6 +1010,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1025,6 +1075,8 @@
       "h": 20,
       "text": "2 часа",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1034,6 +1086,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1094,6 +1147,8 @@
       "h": 20,
       "text": "$230",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1103,6 +1158,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1162,6 +1218,15 @@
         "topRightRadius": "VariableID:2:18",
         "bottomLeftRadius": "VariableID:2:18",
         "bottomRightRadius": "VariableID:2:18"
+      },
+      "props": {
+        "divider#802:0": true,
+        "duration#778:12": "3 × 2 часа",
+        "price#778:15": "$560",
+        "desc#778:9": "Последовательная работа с запросом в трёх индивидуальных встречах.",
+        "title#778:6": "Программа 3 встречи",
+        "number#778:3": "03",
+        "state": "default"
       }
     },
     {
@@ -1176,6 +1241,8 @@
       "h": 60,
       "text": "03",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1185,6 +1252,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1279,6 +1347,8 @@
       "h": 39,
       "text": "Программа 3 встречи",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1288,6 +1358,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1321,6 +1392,8 @@
       "h": 54,
       "text": "Последовательная работа с запросом в трёх индивидуальных встречах.",
       "styleName": "body-tight",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1330,6 +1403,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1394,6 +1468,8 @@
       "h": 20,
       "text": "3 × 2 часа",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1403,6 +1479,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1463,6 +1540,8 @@
       "h": 20,
       "text": "$560",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1472,6 +1551,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1558,6 +1638,15 @@
         "topRightRadius": "VariableID:2:18",
         "bottomLeftRadius": "VariableID:2:18",
         "bottomRightRadius": "VariableID:2:18"
+      },
+      "props": {
+        "divider#802:0": true,
+        "duration#778:12": "5 × 2 часа",
+        "price#778:15": "$1050",
+        "desc#778:9": "Более глубокий цикл для системной работы и интеграции изменений.",
+        "title#778:6": "Программа 5 встреч",
+        "number#778:3": "04",
+        "state": "default"
       }
     },
     {
@@ -1572,6 +1661,8 @@
       "h": 60,
       "text": "04",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1581,6 +1672,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1675,6 +1767,8 @@
       "h": 39,
       "text": "Программа 5 встреч",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1684,6 +1778,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1717,6 +1812,8 @@
       "h": 54,
       "text": "Более глубокий цикл для системной работы и интеграции изменений.",
       "styleName": "body-tight",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1726,6 +1823,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1790,6 +1888,8 @@
       "h": 20,
       "text": "5 × 2 часа",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1799,6 +1899,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1859,6 +1960,8 @@
       "h": 20,
       "text": "$1050",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1868,6 +1971,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1954,6 +2058,15 @@
         "topRightRadius": "VariableID:2:18",
         "bottomLeftRadius": "VariableID:2:18",
         "bottomRightRadius": "VariableID:2:18"
+      },
+      "props": {
+        "divider#802:0": true,
+        "duration#778:12": "60 минут",
+        "price#778:15": "$110",
+        "desc#778:9": "Поддерживающая встреча для продолжения процесса и текущих изменений.",
+        "title#778:6": "Сопровождение",
+        "number#778:3": "05",
+        "state": "default"
       }
     },
     {
@@ -1968,6 +2081,8 @@
       "h": 60,
       "text": "05",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1977,6 +2092,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2071,6 +2187,8 @@
       "h": 39,
       "text": "Сопровождение",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2080,6 +2198,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2113,6 +2232,8 @@
       "h": 54,
       "text": "Поддерживающая встреча для продолжения процесса и текущих изменений.",
       "styleName": "body-tight",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2122,6 +2243,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2186,6 +2308,8 @@
       "h": 20,
       "text": "60 минут",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2195,6 +2319,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2255,6 +2380,8 @@
       "h": 20,
       "text": "$110",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2264,6 +2391,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2388,6 +2516,8 @@
       "h": 27,
       "text": "Не уверены, какой формат выбрать?",
       "styleName": "body-tight",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2397,6 +2527,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2430,6 +2561,8 @@
       "h": 27,
       "text": "Начните с Точки входа.",
       "styleName": null,
+      "fontFamily": null,
+      "fontStyle": null,
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2439,6 +2572,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2489,6 +2623,11 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:7"
+      },
+      "props": {
+        "label#134:0": "Выбрать Точку входа",
+        "style": "plain",
+        "size": "S"
       }
     },
     {
@@ -2503,6 +2642,8 @@
       "h": 29,
       "text": "Выбрать Точку входа",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2512,6 +2653,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2555,7 +2697,11 @@
         "primary": "MAX",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I383:1084;16:62;967:2244",
@@ -2713,6 +2859,14 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:9"
+      },
+      "props": {
+        "price#805:5": "$50",
+        "label#808:14": "На встрече:",
+        "duration#805:4": "30 минут",
+        "meeting#805:7": "проясняем запрос и то, что сейчас действительно важно;\nопределяем основное направление работы;\nсмотрим, какой формат может подойти дальше.",
+        "about#805:6": "Точка входа — первая встреча, когда важно не начинать сразу с глубокой работы, а спокойно разобраться, что происходит сейчас и куда лучше двигаться дальше.\nЗа короткое время мы обозначаем основной запрос, смотрим на текущее состояние и определяем, какой следующий шаг может быть наиболее точным.",
+        "title#805:3": "Точка входа"
       }
     },
     {
@@ -2758,6 +2912,8 @@
       "h": 30,
       "text": "Выбранный формат",
       "styleName": "eyebrow",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2767,6 +2923,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2832,6 +2990,8 @@
       "h": 39,
       "text": "Точка входа",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2841,6 +3001,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2901,6 +3062,8 @@
       "h": 39,
       "text": "30 минут",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2910,6 +3073,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2970,6 +3134,8 @@
       "h": 39,
       "text": "$50",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2979,6 +3145,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3043,6 +3210,8 @@
       "h": 23,
       "text": "О формате",
       "styleName": "eyebrow-s",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Medium",
       "fontSize": 15,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3052,6 +3221,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3085,6 +3256,8 @@
       "h": 178,
       "text": "Точка входа — первая встреча, когда важно не начинать сразу с глубокой работы, а спокойно разобраться, что происходит сейчас и куда лучше двигаться дальше.\nЗа короткое время мы обозначаем основной запрос, смотрим на текущее состояние и определяем, какой следующий шаг может быть наиболее точным.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3094,6 +3267,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "paragraphSpacing": 16,
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3161,6 +3336,8 @@
       "h": 27,
       "text": "На встрече:",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3170,6 +3347,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3203,6 +3381,8 @@
       "h": 102,
       "text": "проясняем запрос и то, что сейчас действительно важно;\nопределяем основное направление работы;\nсмотрим, какой формат может подойти дальше.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3212,6 +3392,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3323,6 +3504,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "placeholder#383:33": "Как к вам обращаться",
+        "optional#806:11": false,
+        "required#806:8": true,
+        "label#383:32": "Имя",
+        "type": "input"
       }
     },
     {
@@ -3368,6 +3556,8 @@
       "h": 20,
       "text": "Имя",
       "styleName": "eyebrow-xs",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3377,6 +3567,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3488,6 +3680,8 @@
       "h": 20,
       "text": "Как к вам обращаться",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3497,6 +3691,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3547,6 +3742,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "placeholder#383:33": "ваш@email.com",
+        "optional#806:11": false,
+        "required#806:8": true,
+        "label#383:32": "Email",
+        "type": "input"
       }
     },
     {
@@ -3592,6 +3794,8 @@
       "h": 20,
       "text": "Email",
       "styleName": "eyebrow-xs",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3601,6 +3805,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3712,6 +3918,8 @@
       "h": 20,
       "text": "ваш@email.com",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3721,6 +3929,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3771,6 +3980,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "placeholder#383:33": "+1 (___) ___ ___ ___",
+        "optional#806:11": false,
+        "required#806:8": true,
+        "label#383:32": "Телефон",
+        "type": "input"
       }
     },
     {
@@ -3816,6 +4032,8 @@
       "h": 20,
       "text": "Телефон",
       "styleName": "eyebrow-xs",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3825,6 +4043,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3936,6 +4156,8 @@
       "h": 20,
       "text": "+1 (___) ___ ___ ___",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3945,6 +4167,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3995,6 +4218,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "required#806:8": false,
+        "placeholder#383:33": "Что важно знать заранее, ваш запрос или вопросы...",
+        "optional#806:11": true,
+        "label#383:32": "комментарий",
+        "type": "textarea"
       }
     },
     {
@@ -4040,6 +4270,8 @@
       "h": 20,
       "text": "комментарий",
       "styleName": "eyebrow-xs",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4049,6 +4281,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4082,6 +4316,8 @@
       "h": 20,
       "text": "ОПЦИОНАЛЬНО",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4091,6 +4327,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4175,6 +4412,8 @@
       "h": 20,
       "text": "Что важно знать заранее, ваш запрос или вопросы...",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4184,6 +4423,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4329,6 +4569,8 @@
       "h": 28,
       "text": "Отправить заявку",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4338,6 +4580,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4371,6 +4615,8 @@
       "h": 20,
       "text": "Нажимая “Отправить заявку”, вы соглашаетесь с условиями обработки данных.",
       "styleName": "caption",
+      "fontFamily": null,
+      "fontStyle": null,
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4380,6 +4626,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4507,6 +4755,8 @@
       "h": 20,
       "text": "Правовая информация",
       "styleName": "eyebrow-xs",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4516,6 +4766,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4583,6 +4835,8 @@
       "h": 40,
       "text": "Материалы и сессии носят консультативный характер и не являются медицинской услугой.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4592,6 +4846,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4657,6 +4912,8 @@
       "h": 20,
       "text": "Публичная оферта",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4666,6 +4923,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textDecoration": "UNDERLINE",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4699,6 +4958,8 @@
       "h": 20,
       "text": "Политика конфиденциальности",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4708,6 +4969,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textDecoration": "UNDERLINE",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4741,6 +5004,8 @@
       "h": 20,
       "text": "Согласие на обработку персональных данных",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4750,6 +5015,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textDecoration": "UNDERLINE",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",

@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:07.575Z"
+    "at": "2026-11-06T16:54:07.731Z"
   },
   "section": {
     "id": "102:220",
@@ -159,6 +159,8 @@
       "h": 60,
       "text": "Форматы работы",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -168,6 +170,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -201,6 +204,8 @@
       "h": 34,
       "text": "Форматы различаются по глубине запроса, длительности и степени сопровождения.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -210,6 +215,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -428,6 +434,8 @@
       "h": 28,
       "text": "1/5",
       "styleName": "quote",
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -437,6 +445,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -496,10 +506,14 @@
         "h": "HUG"
       },
       "clips": false,
+      "rotation": 0,
       "bound": {
         "fills": [
           "VariableID:709:1578"
         ]
+      },
+      "props": {
+        "direction": "prev"
       }
     },
     {
@@ -528,7 +542,8 @@
         "h": "HUG",
         "v": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -180
     },
     {
       "id": "I102:228;709:1590",
@@ -655,6 +670,9 @@
         "fills": [
           "VariableID:709:1578"
         ]
+      },
+      "props": {
+        "direction": "next"
       }
     },
     {
@@ -860,6 +878,15 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "price#709:14": "$50",
+        "divider#709:20": true,
+        "duration#709:11": "30 мин",
+        "desc#709:17": "Первая встреча. Твоё понимание, что мешает и куда двигаться. Дальше выбор за тобой.",
+        "title#709:8": "Точка входа",
+        "number#709:2": "01",
+        "state": "active"
       }
     },
     {
@@ -944,6 +971,8 @@
       "h": 32,
       "text": "01",
       "styleName": "number",
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -953,6 +982,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "textAlignV": "CENTER",
       "fills": [
         {
           "type": "SOLID",
@@ -985,6 +1016,8 @@
       "h": 56,
       "text": "Точка входа",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -994,6 +1027,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1027,6 +1062,8 @@
       "h": 95,
       "text": "Первая встреча. Твоё понимание, что мешает и куда двигаться. Дальше выбор за тобой.",
       "styleName": "body-s",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1036,6 +1073,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1100,6 +1138,8 @@
       "h": 20,
       "text": "30 мин",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1109,6 +1149,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1169,6 +1211,8 @@
       "h": 20,
       "text": "$50",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1178,6 +1222,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1267,6 +1312,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Перейти к записи",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -1281,6 +1333,8 @@
       "h": 29,
       "text": "Перейти к записи",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1290,6 +1344,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1333,7 +1388,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I709:1504;708:1417;14:128;967:2413",
@@ -1432,6 +1491,15 @@
         "paddingTop": "VariableID:2:8",
         "paddingRight": "VariableID:2:7",
         "paddingBottom": "VariableID:2:8"
+      },
+      "props": {
+        "desc#709:17": "Первая встреча, чтобы увидеть главное, прояснить запрос и понять, куда двигаться дальше.",
+        "divider#709:20": false,
+        "price#709:14": "$230",
+        "duration#709:11": "2 часа",
+        "title#709:8": "Индивидуальная мастер-сессия",
+        "number#709:2": "02",
+        "state": "default"
       }
     },
     {
@@ -1516,6 +1584,8 @@
       "h": 32,
       "text": "02",
       "styleName": null,
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1525,6 +1595,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "textAlignV": "CENTER",
       "fills": [
         {
           "type": "SOLID",
@@ -1557,6 +1629,8 @@
       "h": 50,
       "text": "Индивидуальная мастер-сессия",
       "styleName": "H6",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1566,6 +1640,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1693,6 +1769,8 @@
       "h": 20,
       "text": "2 часа",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1702,6 +1780,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1735,6 +1815,8 @@
       "h": 20,
       "text": "$230",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1744,6 +1826,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1796,6 +1879,15 @@
         "paddingTop": "VariableID:2:8",
         "paddingRight": "VariableID:2:7",
         "paddingBottom": "VariableID:2:8"
+      },
+      "props": {
+        "desc#709:17": "Первая встреча, чтобы увидеть главное, прояснить запрос и понять, куда двигаться дальше.",
+        "divider#709:20": true,
+        "price#709:14": "$650",
+        "duration#709:11": "3 х 2 часа",
+        "title#709:8": "Программа 3 встречи",
+        "number#709:2": "03",
+        "state": "default"
       }
     },
     {
@@ -1880,6 +1972,8 @@
       "h": 32,
       "text": "03",
       "styleName": null,
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1889,6 +1983,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "textAlignV": "CENTER",
       "fills": [
         {
           "type": "SOLID",
@@ -1921,6 +2017,8 @@
       "h": 50,
       "text": "Программа 3 встречи",
       "styleName": "H6",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1930,6 +2028,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2057,6 +2157,8 @@
       "h": 20,
       "text": "3 х 2 часа",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2066,6 +2168,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2099,6 +2203,8 @@
       "h": 20,
       "text": "$650",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2108,6 +2214,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2187,6 +2294,15 @@
         "paddingTop": "VariableID:2:8",
         "paddingRight": "VariableID:2:7",
         "paddingBottom": "VariableID:2:8"
+      },
+      "props": {
+        "desc#709:17": "Первая встреча, чтобы увидеть главное, прояснить запрос и понять, куда двигаться дальше.",
+        "divider#709:20": true,
+        "price#709:14": "$1050",
+        "duration#709:11": "5 х 2 часа",
+        "title#709:8": "Программа 5 встреч",
+        "number#709:2": "04",
+        "state": "default"
       }
     },
     {
@@ -2271,6 +2387,8 @@
       "h": 32,
       "text": "04",
       "styleName": null,
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2280,6 +2398,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "textAlignV": "CENTER",
       "fills": [
         {
           "type": "SOLID",
@@ -2312,6 +2432,8 @@
       "h": 50,
       "text": "Программа 5 встреч",
       "styleName": "H6",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2321,6 +2443,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2448,6 +2572,8 @@
       "h": 20,
       "text": "5 х 2 часа",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2457,6 +2583,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2490,6 +2618,8 @@
       "h": 20,
       "text": "$1050",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2499,6 +2629,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2578,6 +2709,15 @@
         "paddingTop": "VariableID:2:8",
         "paddingRight": "VariableID:2:7",
         "paddingBottom": "VariableID:2:8"
+      },
+      "props": {
+        "desc#709:17": "Первая встреча, чтобы увидеть главное, прояснить запрос и понять, куда двигаться дальше.",
+        "divider#709:20": true,
+        "price#709:14": "$110",
+        "duration#709:11": "60 минут",
+        "title#709:8": "Сопровождение",
+        "number#709:2": "05",
+        "state": "default"
       }
     },
     {
@@ -2662,6 +2802,8 @@
       "h": 32,
       "text": "05",
       "styleName": null,
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2671,6 +2813,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "textAlignV": "CENTER",
       "fills": [
         {
           "type": "SOLID",
@@ -2703,6 +2847,8 @@
       "h": 25,
       "text": "Сопровождение",
       "styleName": "H6",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2712,6 +2858,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2839,6 +2987,8 @@
       "h": 20,
       "text": "60 минут",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2848,6 +2998,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2881,6 +3033,8 @@
       "h": 20,
       "text": "$110",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2890,6 +3044,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2980,6 +3135,8 @@
       "h": 34,
       "text": "Переход к записи ни к чему не обязывает: сначала ты можешь задать вопросы, оплата идёт последним шагом.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2989,6 +3146,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",

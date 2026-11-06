@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:52.258Z"
+    "at": "2026-11-06T16:54:51.355Z"
   },
   "section": {
     "id": "414:1970",
@@ -212,6 +212,8 @@
       "h": 94,
       "text": "Коды состояний",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 75,
       "lineHeight": {
         "unit": "PERCENT",
@@ -221,6 +223,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -254,6 +257,8 @@
       "h": 34,
       "text": "Для более глубокой самостоятельной работы с тем состоянием, которое сильнее всего влияет на жизнь сейчас.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -263,6 +268,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -383,6 +389,12 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "price#412:6": "$39",
+        "time#412:5": "52 минуты",
+        "text-body#412:4": "Внутреннее тепло\nкак источник силы.",
+        "title#412:3": "Код Тепла. \nАктивация"
       }
     },
     {
@@ -553,6 +565,8 @@
       "h": 56,
       "text": "Код Тепла. \nАктивация",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -562,6 +576,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -590,6 +605,8 @@
       "h": 52,
       "text": "Внутреннее тепло\nкак источник силы.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -599,6 +616,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -658,6 +676,8 @@
       "h": 17,
       "text": "ФРАГМЕНТ ПРАКТИКИ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -667,6 +687,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -776,6 +797,9 @@
         "fills": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "Default"
       }
     },
     {
@@ -799,6 +823,7 @@
           }
         }
       ],
+      "rotation": -90,
       "bound": {
         "fills": [
           "VariableID:2:33"
@@ -929,6 +954,8 @@
       "h": 14,
       "text": "1:23",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 9.57655143737793,
       "lineHeight": {
         "unit": "PERCENT",
@@ -938,6 +965,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1058,6 +1086,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Купить",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -1072,6 +1107,8 @@
       "h": 21,
       "text": "Купить",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1081,6 +1118,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1124,7 +1162,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I414:1976;410:1528;14:128;967:2413",
@@ -1316,6 +1358,8 @@
       "h": 24,
       "text": "52 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1325,6 +1369,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1380,6 +1425,8 @@
       "h": 24,
       "text": "$39",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1389,6 +1436,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1474,6 +1522,12 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "price#412:6": "$39",
+        "time#412:5": "52 минуты",
+        "text-body#412:4": "Мягкое принятие боли\nи путь к целостности.",
+        "title#412:3": "Код Боли. \nВозвращение к себе"
       }
     },
     {
@@ -1644,6 +1698,8 @@
       "h": 56,
       "text": "Код Боли. \nВозвращение к себе",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1653,6 +1709,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1681,6 +1738,8 @@
       "h": 52,
       "text": "Мягкое принятие боли\nи путь к целостности.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1690,6 +1749,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1749,6 +1809,8 @@
       "h": 17,
       "text": "ФРАГМЕНТ ПРАКТИКИ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1758,6 +1820,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1867,6 +1930,9 @@
         "fills": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "Default"
       }
     },
     {
@@ -1890,6 +1956,7 @@
           }
         }
       ],
+      "rotation": -90,
       "bound": {
         "fills": [
           "VariableID:2:33"
@@ -2020,6 +2087,8 @@
       "h": 14,
       "text": "1:23",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 9.57655143737793,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2029,6 +2098,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2149,6 +2219,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Купить",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -2163,6 +2240,8 @@
       "h": 21,
       "text": "Купить",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2172,6 +2251,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2215,7 +2295,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I414:1977;410:1528;14:128;967:2413",
@@ -2407,6 +2491,8 @@
       "h": 24,
       "text": "52 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2416,6 +2502,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2471,6 +2558,8 @@
       "h": 24,
       "text": "$39",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2480,6 +2569,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2595,6 +2685,12 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "price#412:6": "$39",
+        "time#412:5": "52 минуты",
+        "text-body#412:4": "Освободиться от страха и вернуть движение.",
+        "title#412:3": "Код Страха. \nПраво двигаться вперёд"
       }
     },
     {
@@ -2765,6 +2861,8 @@
       "h": 56,
       "text": "Код Страха. \nПраво двигаться вперёд",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2774,6 +2872,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2802,6 +2901,8 @@
       "h": 52,
       "text": "Освободиться от страха и вернуть движение.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2811,6 +2912,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2870,6 +2972,8 @@
       "h": 17,
       "text": "ФРАГМЕНТ ПРАКТИКИ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2879,6 +2983,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2988,6 +3093,9 @@
         "fills": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "Default"
       }
     },
     {
@@ -3011,6 +3119,7 @@
           }
         }
       ],
+      "rotation": -90,
       "bound": {
         "fills": [
           "VariableID:2:33"
@@ -3141,6 +3250,8 @@
       "h": 14,
       "text": "1:23",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 9.57655143737793,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3150,6 +3261,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3270,6 +3382,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Купить",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -3284,6 +3403,8 @@
       "h": 21,
       "text": "Купить",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3293,6 +3414,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3336,7 +3458,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I414:1979;410:1528;14:128;967:2413",
@@ -3528,6 +3654,8 @@
       "h": 24,
       "text": "52 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3537,6 +3665,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3592,6 +3721,8 @@
       "h": 24,
       "text": "$39",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3601,6 +3732,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3686,6 +3818,12 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "price#412:6": "$39",
+        "time#412:5": "52 минуты",
+        "text-body#412:4": "Энергия гнева — в созидание и ясность.",
+        "title#412:3": "Код Гнева. \nСила без борьбы"
       }
     },
     {
@@ -3856,6 +3994,8 @@
       "h": 56,
       "text": "Код Гнева. \nСила без борьбы",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3865,6 +4005,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3893,6 +4034,8 @@
       "h": 52,
       "text": "Энергия гнева — в созидание и ясность.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3902,6 +4045,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3961,6 +4105,8 @@
       "h": 17,
       "text": "ФРАГМЕНТ ПРАКТИКИ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3970,6 +4116,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4079,6 +4226,9 @@
         "fills": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "Default"
       }
     },
     {
@@ -4102,6 +4252,7 @@
           }
         }
       ],
+      "rotation": -90,
       "bound": {
         "fills": [
           "VariableID:2:33"
@@ -4232,6 +4383,8 @@
       "h": 14,
       "text": "1:23",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 9.57655143737793,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4241,6 +4394,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4361,6 +4515,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Купить",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -4375,6 +4536,8 @@
       "h": 21,
       "text": "Купить",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4384,6 +4547,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4427,7 +4591,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I414:1980;410:1528;14:128;967:2413",
@@ -4619,6 +4787,8 @@
       "h": 24,
       "text": "52 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4628,6 +4798,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4683,6 +4854,8 @@
       "h": 24,
       "text": "$39",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4692,6 +4865,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -4807,6 +4981,12 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "price#412:6": "$39",
+        "time#412:5": "52 минуты",
+        "text-body#412:4": "Отпустить внутренний спор и освободиться от прошлого.",
+        "title#412:3": "Код Негодования. \nПерестать спорить \nс прошлым"
       }
     },
     {
@@ -4977,6 +5157,8 @@
       "h": 84,
       "text": "Код Негодования. \nПерестать спорить \nс прошлым",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4986,6 +5168,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -5014,6 +5197,8 @@
       "h": 52,
       "text": "Отпустить внутренний спор и освободиться от прошлого.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -5023,6 +5208,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -5082,6 +5268,8 @@
       "h": 17,
       "text": "ФРАГМЕНТ ПРАКТИКИ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -5091,6 +5279,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -5200,6 +5389,9 @@
         "fills": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "Default"
       }
     },
     {
@@ -5223,6 +5415,7 @@
           }
         }
       ],
+      "rotation": -90,
       "bound": {
         "fills": [
           "VariableID:2:33"
@@ -5353,6 +5546,8 @@
       "h": 14,
       "text": "1:23",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 9.57655143737793,
       "lineHeight": {
         "unit": "PERCENT",
@@ -5362,6 +5557,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -5482,6 +5678,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Купить",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -5496,6 +5699,8 @@
       "h": 21,
       "text": "Купить",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -5505,6 +5710,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -5548,7 +5754,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I414:1982;410:1528;14:128;967:2413",
@@ -5740,6 +5950,8 @@
       "h": 24,
       "text": "52 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -5749,6 +5961,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -5804,6 +6017,8 @@
       "h": 24,
       "text": "$39",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -5813,6 +6028,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -5898,6 +6114,12 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "price#412:6": "$39",
+        "time#412:5": "52 минуты",
+        "text-body#412:4": "Смягчить внутреннюю дистанцию и вернуть живой контакт.",
+        "title#412:3": "Код Гордыни. \nВыход из внутреннего \nхолода"
       }
     },
     {
@@ -6068,6 +6290,8 @@
       "h": 84,
       "text": "Код Гордыни. \nВыход из внутреннего \nхолода",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -6077,6 +6301,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -6105,6 +6330,8 @@
       "h": 52,
       "text": "Смягчить внутреннюю дистанцию и вернуть живой контакт.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -6114,6 +6341,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -6173,6 +6401,8 @@
       "h": 17,
       "text": "ФРАГМЕНТ ПРАКТИКИ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -6182,6 +6412,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -6291,6 +6522,9 @@
         "fills": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "Default"
       }
     },
     {
@@ -6314,6 +6548,7 @@
           }
         }
       ],
+      "rotation": -90,
       "bound": {
         "fills": [
           "VariableID:2:33"
@@ -6444,6 +6679,8 @@
       "h": 14,
       "text": "1:23",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 9.57655143737793,
       "lineHeight": {
         "unit": "PERCENT",
@@ -6453,6 +6690,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -6573,6 +6811,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Купить",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -6587,6 +6832,8 @@
       "h": 21,
       "text": "Купить",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -6596,6 +6843,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -6639,7 +6887,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I414:1983;410:1528;14:128;967:2413",
@@ -6831,6 +7083,8 @@
       "h": 24,
       "text": "52 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -6840,6 +7094,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -6895,6 +7150,8 @@
       "h": 24,
       "text": "$39",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -6904,6 +7161,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -7020,6 +7278,12 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "price#412:6": "$39",
+        "time#412:5": "52 минуты",
+        "text-body#412:4": "Собрать внимание и увидеть следующий шаг.",
+        "title#412:3": "Код Растерянности. \nВозвращение ясности "
       }
     },
     {
@@ -7190,6 +7454,8 @@
       "h": 84,
       "text": "Код Растерянности. \nВозвращение ясности ",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -7199,6 +7465,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -7227,6 +7494,8 @@
       "h": 52,
       "text": "Собрать внимание и увидеть следующий шаг.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -7236,6 +7505,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -7295,6 +7565,8 @@
       "h": 17,
       "text": "ФРАГМЕНТ ПРАКТИКИ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -7304,6 +7576,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -7413,6 +7686,9 @@
         "fills": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "Default"
       }
     },
     {
@@ -7436,6 +7712,7 @@
           }
         }
       ],
+      "rotation": -90,
       "bound": {
         "fills": [
           "VariableID:2:33"
@@ -7566,6 +7843,8 @@
       "h": 14,
       "text": "1:23",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 9.57655143737793,
       "lineHeight": {
         "unit": "PERCENT",
@@ -7575,6 +7854,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -7695,6 +7975,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Купить",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -7709,6 +7996,8 @@
       "h": 21,
       "text": "Купить",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -7718,6 +8007,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -7761,7 +8051,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I414:1985;410:1528;14:128;967:2413",
@@ -7953,6 +8247,8 @@
       "h": 24,
       "text": "52 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -7962,6 +8258,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -8017,6 +8314,8 @@
       "h": 24,
       "text": "$39",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -8026,6 +8325,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -8111,6 +8411,12 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "price#412:6": "$39",
+        "time#412:5": "52 минуты",
+        "text-body#412:4": "Когда кажется, что сил больше нет. Как найти опору и выйти из тупика.",
+        "title#412:3": "Жизнь на разрыве. \nНайти выход"
       }
     },
     {
@@ -8265,6 +8571,8 @@
       "h": 56,
       "text": "Жизнь на разрыве. \nНайти выход",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -8274,6 +8582,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -8302,6 +8611,8 @@
       "h": 52,
       "text": "Когда кажется, что сил больше нет. Как найти опору и выйти из тупика.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -8311,6 +8622,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -8370,6 +8682,8 @@
       "h": 17,
       "text": "ФРАГМЕНТ ПРАКТИКИ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -8379,6 +8693,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -8488,6 +8803,9 @@
         "fills": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "Default"
       }
     },
     {
@@ -8511,6 +8829,7 @@
           }
         }
       ],
+      "rotation": -90,
       "bound": {
         "fills": [
           "VariableID:2:33"
@@ -8641,6 +8960,8 @@
       "h": 14,
       "text": "1:23",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 9.57655143737793,
       "lineHeight": {
         "unit": "PERCENT",
@@ -8650,6 +8971,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -8770,6 +9092,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Купить",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -8784,6 +9113,8 @@
       "h": 21,
       "text": "Купить",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -8793,6 +9124,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -8836,7 +9168,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I414:1986;410:1528;14:128;967:2413",
@@ -9028,6 +9364,8 @@
       "h": 24,
       "text": "52 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -9037,6 +9375,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -9092,6 +9431,8 @@
       "h": 24,
       "text": "$39",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -9101,6 +9442,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",

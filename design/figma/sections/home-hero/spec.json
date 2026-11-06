@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:40:51.989Z"
+    "at": "2026-11-06T16:53:55.405Z"
   },
   "section": {
     "id": "79:105",
@@ -201,6 +201,8 @@
       "h": 192,
       "text": "Состояние, из которого строится жизнь",
       "styleName": "H1",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 64,
       "lineHeight": {
         "unit": "PERCENT",
@@ -210,6 +212,7 @@
         "unit": "PIXELS",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -245,6 +248,8 @@
       "h": 68,
       "text": "Когда меняется внутреннее основание, меняются выборы, отношения, энергия и жизнь.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -254,6 +259,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -330,6 +336,13 @@
         "fills": [
           "VariableID:2:31"
         ]
+      },
+      "props": {
+        "text#30:0": "Узнать свой код реальности",
+        "show arrow#16:0": true,
+        "theme": "muted",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -344,6 +357,8 @@
       "h": 29,
       "text": "Узнать свой код реальности",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -353,6 +368,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -396,7 +412,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I79:110;695:1532;967:2413",

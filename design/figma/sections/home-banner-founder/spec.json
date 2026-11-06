@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:40:52.995Z"
+    "at": "2026-11-06T16:53:56.392Z"
   },
   "section": {
     "id": "79:114",
@@ -167,6 +167,8 @@
       "h": 120,
       "text": "Перемены в жизни начинаются изнутри",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -176,6 +178,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -208,6 +211,8 @@
       "h": 59,
       "text": "by Ekaterina Lebedeva",
       "styleName": "signature",
+      "fontFamily": "Hurricane",
+      "fontStyle": "Regular",
       "fontSize": 42,
       "lineHeight": {
         "unit": "PERCENT",
@@ -217,6 +222,7 @@
         "unit": "PERCENT",
         "value": 5
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",

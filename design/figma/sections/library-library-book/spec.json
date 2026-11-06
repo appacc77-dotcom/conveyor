@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:30.715Z"
+    "at": "2026-11-06T16:54:30.101Z"
   },
   "section": {
     "id": "267:953",
@@ -228,6 +228,8 @@
       "h": 30,
       "text": "авторская книга",
       "styleName": "eyebrow",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -237,6 +239,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -301,6 +305,8 @@
       "h": 180,
       "text": "Коды построения реальности. 7 состояний жизни",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -310,6 +316,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -343,6 +350,8 @@
       "h": 39,
       "text": "Екатерина Лебедева",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -352,6 +361,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -385,6 +395,8 @@
       "h": 204,
       "text": "Книга о семи состояниях, которые формируют внутренние сценарии человека и влияют на выбор, отношения и ход жизни. Внутри — авторская система, соединяющая психологию, научные опоры, тонкий план и бережные практики для самостоятельной внутренней работы.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -394,6 +406,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -483,6 +496,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "читать онлайн",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "true",
+        "size": "L"
       }
     },
     {
@@ -497,6 +517,8 @@
       "h": 29,
       "text": "читать онлайн",
       "styleName": "button-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -506,6 +528,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -549,7 +573,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I272:1009;851:475;967:2413",

@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:42.566Z"
+    "at": "2026-11-06T16:54:41.826Z"
   },
   "section": {
     "id": "410:1122",
@@ -201,6 +201,8 @@
       "h": 81,
       "text": "Практики для мягкого входа",
       "styleName": null,
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 65,
       "lineHeight": {
         "unit": "PERCENT",
@@ -210,6 +212,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -243,6 +246,8 @@
       "h": 34,
       "text": "Для бережной самостоятельной настройки состояния. ",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -252,6 +257,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -405,6 +411,11 @@
           "VariableID:2:21",
           "VariableID:2:33"
         ]
+      },
+      "props": {
+        "time#410:2": "9 минут",
+        "text-body#410:1": "Практика завершения дня",
+        "title#410:0": "Освобождение \nот чужого и лишнего."
       }
     },
     {
@@ -548,6 +559,8 @@
       "h": 56,
       "text": "Освобождение \nот чужого и лишнего.",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -557,6 +570,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -590,6 +604,8 @@
       "h": 24,
       "text": "Практика завершения дня",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -599,6 +615,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -775,6 +792,8 @@
       "h": 20,
       "text": "9 минут",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -784,6 +803,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -881,6 +901,8 @@
       "h": 20,
       "text": "Бесплатно",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -890,6 +912,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -979,6 +1002,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Прослушать практику",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -993,6 +1023,8 @@
       "h": 21,
       "text": "Прослушать практику",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1002,6 +1034,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1045,7 +1078,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I410:1182;410:1173;14:128;967:2413",
@@ -1184,6 +1221,11 @@
           "VariableID:2:21",
           "VariableID:2:33"
         ]
+      },
+      "props": {
+        "time#410:2": "11 минут",
+        "text-body#410:1": "Для балансировки нервной\nсистемы",
+        "title#410:0": "Когда тревожно"
       }
     },
     {
@@ -1327,6 +1369,8 @@
       "h": 28,
       "text": "Когда тревожно",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1336,6 +1380,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1369,6 +1414,8 @@
       "h": 48,
       "text": "Для балансировки нервной\nсистемы",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1378,6 +1425,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1554,6 +1602,8 @@
       "h": 20,
       "text": "11 минут",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1563,6 +1613,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1660,6 +1711,8 @@
       "h": 20,
       "text": "Бесплатно",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1669,6 +1722,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1758,6 +1812,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Прослушать практику",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -1772,6 +1833,8 @@
       "h": 21,
       "text": "Прослушать практику",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1781,6 +1844,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1824,7 +1888,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I410:1199;410:1173;14:128;967:2413",
@@ -1963,6 +2031,11 @@
           "VariableID:2:21",
           "VariableID:2:33"
         ]
+      },
+      "props": {
+        "time#410:2": "8 минут",
+        "text-body#410:1": "Телесное расслабление",
+        "title#410:0": "Отпустить \nнапряжение"
       }
     },
     {
@@ -2106,6 +2179,8 @@
       "h": 56,
       "text": "Отпустить \nнапряжение",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2115,6 +2190,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2148,6 +2224,8 @@
       "h": 24,
       "text": "Телесное расслабление",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2157,6 +2235,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2333,6 +2412,8 @@
       "h": 20,
       "text": "8 минут",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2342,6 +2423,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2439,6 +2521,8 @@
       "h": 20,
       "text": "Бесплатно",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2448,6 +2532,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2537,6 +2622,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Прослушать практику",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -2551,6 +2643,8 @@
       "h": 21,
       "text": "Прослушать практику",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2560,6 +2654,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2603,7 +2698,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I410:1215;410:1173;14:128;967:2413",
@@ -2742,6 +2841,11 @@
           "VariableID:2:21",
           "VariableID:2:33"
         ]
+      },
+      "props": {
+        "time#410:2": "14 минут",
+        "text-body#410:1": "При усталости, выгорании,\nи пустоте",
+        "title#410:0": "Вернуть себе силы"
       }
     },
     {
@@ -2885,6 +2989,8 @@
       "h": 28,
       "text": "Вернуть себе силы",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2894,6 +3000,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2927,6 +3034,8 @@
       "h": 48,
       "text": "При усталости, выгорании,\nи пустоте",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2936,6 +3045,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3112,6 +3222,8 @@
       "h": 20,
       "text": "14 минут",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3121,6 +3233,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3218,6 +3331,8 @@
       "h": 20,
       "text": "Бесплатно",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3227,6 +3342,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3316,6 +3432,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Прослушать практику",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -3330,6 +3453,8 @@
       "h": 21,
       "text": "Прослушать практику",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 12.451401710510254,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3339,6 +3464,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3382,7 +3508,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I412:1914;410:1173;14:128;967:2413",
@@ -3499,7 +3629,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "active"
+      }
     },
     {
       "id": "I412:1936;104:222",
@@ -3549,7 +3682,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I412:1939;104:229",
@@ -3598,7 +3734,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I412:1941;104:229",
@@ -3647,7 +3786,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I412:1943;104:229",
@@ -3696,7 +3838,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I412:1945;104:229",
@@ -3745,7 +3890,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I412:1947;104:229",
@@ -3794,7 +3942,10 @@
           }
         }
       ],
-      "clips": false
+      "clips": false,
+      "props": {
+        "state": "default"
+      }
     },
     {
       "id": "I412:1949;104:229",
@@ -3859,7 +4010,11 @@
       "sizing": {
         "h": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -180,
+      "props": {
+        "direction": "next"
+      }
     },
     {
       "id": "I412:1959;11:17",
@@ -4009,7 +4164,10 @@
       "sizing": {
         "h": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "direction": "next"
+      }
     },
     {
       "id": "I412:1960;11:17",

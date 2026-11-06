@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:34.332Z"
+    "at": "2026-11-06T16:54:33.697Z"
   },
   "section": {
     "id": "272:1044",
@@ -176,6 +176,8 @@
       "h": 48,
       "text": "Все выпуски",
       "styleName": "H3",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 38,
       "lineHeight": {
         "unit": "PERCENT",
@@ -185,6 +187,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -235,6 +238,11 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:7"
+      },
+      "props": {
+        "label#134:0": "смотреть все",
+        "style": "plain",
+        "size": "S"
       }
     },
     {
@@ -249,6 +257,8 @@
       "h": 29,
       "text": "смотреть все",
       "styleName": "button-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -258,6 +268,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -301,7 +313,11 @@
         "primary": "MAX",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I272:1064;16:62;967:2244",
@@ -429,6 +445,11 @@
         "itemSpacing": "VariableID:2:8",
         "topLeftRadius": "VariableID:2:16",
         "topRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "description#282:2": "Как внутреннее состояние управляет нашими решениями — и что делать, когда выбор даётся с трудом.",
+        "name#282:1": "Тело и состояние",
+        "number#282:0": "№02"
       }
     },
     {
@@ -566,6 +587,8 @@
       "h": 20,
       "text": "№02",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -575,6 +598,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -608,6 +632,8 @@
       "h": 20,
       "text": "Тело и состояние",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -617,6 +643,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -681,6 +708,8 @@
       "h": 60,
       "text": "Как внутреннее состояние управляет нашими решениями — и что делать, когда выбор даётся с трудом.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -775,6 +804,13 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "text#30:0": "открыть выпуск",
+        "show arrow#16:0": true,
+        "theme": "dark",
+        "caps": "true",
+        "size": "S"
       }
     },
     {
@@ -789,6 +825,8 @@
       "h": 19,
       "text": "открыть выпуск",
       "styleName": "button-s-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -798,6 +836,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -841,7 +881,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I281:665;278:1082;854:2507;967:2244",
@@ -939,6 +983,11 @@
         "itemSpacing": "VariableID:2:8",
         "topLeftRadius": "VariableID:2:16",
         "topRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "description#282:2": "О том, как найти устойчивость внутри, когда снаружи всё меняется. Состояния, практики и способ слышать себя.",
+        "name#282:1": "Внутренняя опора",
+        "number#282:0": "№01"
       }
     },
     {
@@ -1076,6 +1125,8 @@
       "h": 20,
       "text": "№01",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1085,6 +1136,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1118,6 +1170,8 @@
       "h": 20,
       "text": "Внутренняя опора",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1127,6 +1181,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1191,6 +1246,8 @@
       "h": 60,
       "text": "О том, как найти устойчивость внутри, когда снаружи всё меняется. Состояния, практики и способ слышать себя.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1285,6 +1342,13 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "text#30:0": "открыть выпуск",
+        "show arrow#16:0": true,
+        "theme": "dark",
+        "caps": "true",
+        "size": "S"
       }
     },
     {
@@ -1299,6 +1363,8 @@
       "h": 19,
       "text": "открыть выпуск",
       "styleName": "button-s-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1308,6 +1374,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1351,7 +1419,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I281:709;278:1082;854:2507;967:2244",
@@ -1449,6 +1521,11 @@
         "itemSpacing": "VariableID:2:8",
         "topLeftRadius": "VariableID:2:16",
         "topRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "description#282:2": "Что собой представляют выпуски журнала Syntonia.Life, и как сделать чтение максимально удобным и эффективным.",
+        "name#282:1": "Вступительное слово",
+        "number#282:0": "№00"
       }
     },
     {
@@ -1586,6 +1663,8 @@
       "h": 20,
       "text": "№00",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1595,6 +1674,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1628,6 +1708,8 @@
       "h": 20,
       "text": "Вступительное слово",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1637,6 +1719,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1701,6 +1784,8 @@
       "h": 60,
       "text": "Что собой представляют выпуски журнала Syntonia.Life, и как сделать чтение максимально удобным и эффективным.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1795,6 +1880,13 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "text#30:0": "открыть выпуск",
+        "show arrow#16:0": true,
+        "theme": "dark",
+        "caps": "true",
+        "size": "S"
       }
     },
     {
@@ -1809,6 +1901,8 @@
       "h": 19,
       "text": "открыть выпуск",
       "styleName": "button-s-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1818,6 +1912,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1861,7 +1957,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I281:723;278:1082;854:2507;967:2244",
@@ -1959,6 +2059,11 @@
         "itemSpacing": "VariableID:2:8",
         "topLeftRadius": "VariableID:2:16",
         "topRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "description#282:2": "Превью для будущего выпуска",
+        "name#282:1": "СКОРО",
+        "number#282:0": "№03"
       }
     },
     {
@@ -2096,6 +2201,8 @@
       "h": 20,
       "text": "№03",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2105,6 +2212,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2138,6 +2246,8 @@
       "h": 20,
       "text": "СКОРО",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2147,6 +2257,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2211,6 +2322,8 @@
       "h": 60,
       "text": "Превью для будущего выпуска",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2305,6 +2418,13 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "text#30:0": "СКОРО",
+        "show arrow#16:0": false,
+        "theme": "dark",
+        "caps": "true",
+        "size": "S"
       }
     },
     {
@@ -2319,6 +2439,8 @@
       "h": 19,
       "text": "СКОРО",
       "styleName": "button-s-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2328,6 +2450,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",

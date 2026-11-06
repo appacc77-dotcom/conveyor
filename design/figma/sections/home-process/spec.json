@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:40:59.698Z"
+    "at": "2026-11-06T16:54:02.840Z"
   },
   "section": {
     "id": "79:166",
@@ -129,6 +129,8 @@
       "h": 60,
       "text": "Как проходит работа?",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -138,6 +140,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -226,6 +229,10 @@
         "itemSpacing": "VariableID:2:10",
         "paddingLeft": "VariableID:2:11",
         "paddingRight": "VariableID:2:11"
+      },
+      "props": {
+        "text-body#65:1": "",
+        "order": "text-first"
       }
     },
     {
@@ -271,6 +278,8 @@
       "h": 117,
       "text": "Сначала становится ясно, что с тобой происходит на самом деле",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -280,6 +289,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -373,6 +383,8 @@
       "h": 136,
       "text": "Не нужно подбирать слова. Открывается, из какого состояния ты живёшь и почему жизнь снова складывается именно так.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -382,6 +394,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -492,6 +505,10 @@
         "itemSpacing": "VariableID:2:10",
         "paddingLeft": "VariableID:2:11",
         "paddingRight": "VariableID:2:11"
+      },
+      "props": {
+        "text-body#65:1": "",
+        "order": "image-first"
       }
     },
     {
@@ -594,6 +611,8 @@
       "h": 78,
       "text": "Затем мы идём в глубину причины",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -603,6 +622,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -696,6 +716,8 @@
       "h": 102,
       "text": "Вместе находим, где берут начало чувства, реакции и выборы, которые сегодня управляют твоей жизнью.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -705,6 +727,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -758,6 +781,10 @@
         "itemSpacing": "VariableID:2:10",
         "paddingLeft": "VariableID:2:11",
         "paddingRight": "VariableID:2:11"
+      },
+      "props": {
+        "text-body#65:1": "",
+        "order": "text-first"
       }
     },
     {
@@ -803,6 +830,8 @@
       "h": 39,
       "text": "И программа отпускает",
       "styleName": "H4",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -812,6 +841,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -905,6 +935,8 @@
       "h": 170,
       "text": "Это не облегчение на время, а выход. Старое растворяется, в сердце просыпается тепло. И дальше ты идёшь со своим светом, легко и свободно.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -914,6 +946,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",

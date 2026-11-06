@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:11.518Z"
+    "at": "2026-11-06T16:54:11.666Z"
   },
   "section": {
     "id": "148:487",
@@ -205,6 +205,8 @@
       "h": 30,
       "text": "библиотека",
       "styleName": "eyebrow",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -214,6 +216,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -278,6 +282,8 @@
       "h": 34,
       "text": "Книга",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -287,6 +293,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -347,6 +354,8 @@
       "h": 34,
       "text": "журналы",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -356,6 +365,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -420,6 +430,8 @@
       "h": 120,
       "text": "Где для внутреннего находятся слова",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -429,6 +441,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -462,6 +475,8 @@
       "h": 136,
       "text": "Книга и выпуски журнала Syntonia собраны в одном пространстве — чтобы читать медленно, возвращаться по состоянию и находить слова для того, что происходит внутри.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -471,6 +486,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -521,6 +537,11 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:7"
+      },
+      "props": {
+        "label#134:0": "Открыть библиотеку",
+        "style": "plain",
+        "size": "S"
       }
     },
     {
@@ -535,6 +556,8 @@
       "h": 29,
       "text": "Открыть библиотеку",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -544,6 +567,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -587,7 +611,11 @@
         "primary": "MAX",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I148:500;16:62;967:2244",

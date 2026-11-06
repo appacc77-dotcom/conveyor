@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:29.259Z"
+    "at": "2026-11-06T16:54:28.653Z"
   },
   "section": {
     "id": "267:451",
@@ -153,6 +153,8 @@
       "h": 128,
       "text": "Библиотека Syntonia",
       "styleName": "H1",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 64,
       "lineHeight": {
         "unit": "PERCENT",
@@ -162,6 +164,7 @@
         "unit": "PIXELS",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -195,6 +198,8 @@
       "h": 68,
       "text": "Ответьте на несколько вопросов, чтобы лучше понять своё текущее состояние и то, что стоит за ним.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -204,6 +209,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -276,6 +282,13 @@
         "fills": [
           "VariableID:2:31"
         ]
+      },
+      "props": {
+        "text#30:0": "Увидеть, из чего строится ваша реальность",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -290,6 +303,8 @@
       "h": 29,
       "text": "Увидеть, из чего строится ваша реальность",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -299,6 +314,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -342,7 +358,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I267:911;14:128;967:2413",

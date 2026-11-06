@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:42:00.865Z"
+    "at": "2026-11-06T16:54:59.620Z"
   },
   "section": {
     "id": "529:119",
@@ -253,6 +253,8 @@
       "h": 41,
       "text": "Тест состояния",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -262,6 +264,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -323,6 +327,8 @@
       "h": 20,
       "text": "Отвечайте так, как чувствуете именно сейчас.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -332,6 +338,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -477,6 +485,8 @@
       "h": 17,
       "text": "3 минуты",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -486,6 +496,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -600,6 +612,8 @@
       "h": 17,
       "text": "9 вопросов",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -609,6 +623,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -723,6 +739,8 @@
       "h": 17,
       "text": "ваш текущий код и практика в подарок",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -732,6 +750,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -803,6 +823,11 @@
         "fills": [
           "VariableID:2:21"
         ]
+      },
+      "props": {
+        "question#533:2": "Какая мысль чаще всего звучит внутри — фоном, \nдаже когда вы заняты другим?",
+        "progress#533:1": "10,1% пройдено",
+        "question-number#533:0": "Вопрос 1 из 9"
       }
     },
     {
@@ -934,6 +959,8 @@
       "h": 17,
       "text": "Вопрос 1 из 9",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -943,6 +970,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -976,6 +1004,8 @@
       "h": 17,
       "text": "10,1% пройдено",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -985,6 +1015,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1137,6 +1168,8 @@
       "h": 17,
       "text": "Ваш пол",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1146,6 +1179,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1268,6 +1302,8 @@
       "h": 13,
       "text": "Женский",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 8.666666984558105,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1277,6 +1313,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1350,6 +1388,8 @@
       "h": 13,
       "text": "Мужской",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 8.666666984558105,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1359,6 +1399,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1451,6 +1493,8 @@
       "h": 56,
       "text": "Какая мысль чаще всего звучит внутри — фоном, \nдаже когда вы заняты другим?",
       "styleName": "H5",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 22,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1460,6 +1504,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1563,6 +1608,11 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text-body2#533:6": "«Я не понимаю, чего хочу и куда идти». ",
+        "text-body#533:3": "«Я не понимаю, чего хочу и куда идти». ",
+        "Property 1": "Default"
       }
     },
     {
@@ -1654,6 +1704,9 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "choice-round"
       }
     },
     {
@@ -1695,6 +1748,8 @@
       "h": 24,
       "text": "«Я не понимаю, чего хочу и куда идти». ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1704,6 +1759,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1765,6 +1821,11 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text-body#533:3": "«Я не понимаю, чего хочу и куда идти». ",
+        "text-body2#533:6": "«Так не должно было быть. Это несправедливо».  ",
+        "Property 1": "Variant2"
       }
     },
     {
@@ -1856,6 +1917,9 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "whithout-choice"
       }
     },
     {
@@ -1870,6 +1934,8 @@
       "h": 24,
       "text": "«Так не должно было быть. Это несправедливо».  ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1879,6 +1945,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1940,6 +2007,11 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text-body#533:3": "«Я не понимаю, чего хочу и куда идти». ",
+        "text-body2#533:6": "«Это уже не вернуть. Всё было зря».",
+        "Property 1": "Variant2"
       }
     },
     {
@@ -2031,6 +2103,9 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "whithout-choice"
       }
     },
     {
@@ -2045,6 +2120,8 @@
       "h": 24,
       "text": "«Это уже не вернуть. Всё было зря».",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2054,6 +2131,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2115,6 +2193,11 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text-body#533:3": "«Я не понимаю, чего хочу и куда идти». ",
+        "text-body2#533:6": "«Всё вокруг раздражает — люди, ситуации, мелочи». ",
+        "Property 1": "Variant2"
       }
     },
     {
@@ -2206,6 +2289,9 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "whithout-choice"
       }
     },
     {
@@ -2220,6 +2306,8 @@
       "h": 24,
       "text": "«Всё вокруг раздражает — люди, ситуации, мелочи». ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2229,6 +2317,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2290,6 +2379,11 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text-body#533:3": "«Я не понимаю, чего хочу и куда идти». ",
+        "text-body2#533:6": "«Справлюсь со всем без чьей-либо помощи». ",
+        "Property 1": "Variant2"
       }
     },
     {
@@ -2381,6 +2475,9 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "whithout-choice"
       }
     },
     {
@@ -2395,6 +2492,8 @@
       "h": 24,
       "text": "«Справлюсь со всем без чьей-либо помощи». ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2404,6 +2503,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2465,6 +2565,11 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text-body#533:3": "«Я не понимаю, чего хочу и куда идти». ",
+        "text-body2#533:6": "«А вдруг снова не получится».",
+        "Property 1": "Variant2"
       }
     },
     {
@@ -2556,6 +2661,9 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "whithout-choice"
       }
     },
     {
@@ -2570,6 +2678,8 @@
       "h": 24,
       "text": "«А вдруг снова не получится».",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2579,6 +2689,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2640,6 +2751,11 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text-body#533:3": "«Я не понимаю, чего хочу и куда идти». ",
+        "text-body2#533:6": "«Мне хорошо с собой — и этого достаточно». ",
+        "Property 1": "Variant2"
       }
     },
     {
@@ -2731,6 +2847,9 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "Property 1": "whithout-choice"
       }
     },
     {
@@ -2745,6 +2864,8 @@
       "h": 24,
       "text": "«Мне хорошо с собой — и этого достаточно». ",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2754,6 +2875,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2853,7 +2975,8 @@
       "sizing": {
         "v": "HUG"
       },
-      "clips": false
+      "clips": false,
+      "rotation": -180
     },
     {
       "id": "I533:3084;533:2961",
@@ -2922,6 +3045,8 @@
       "h": 24,
       "text": "Назад",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2931,6 +3056,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3017,6 +3143,8 @@
       "h": 24,
       "text": "Далее",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -3026,6 +3154,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -3069,7 +3198,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I533:3084;533:2955;967:2413",

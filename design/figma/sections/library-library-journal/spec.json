@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:32.535Z"
+    "at": "2026-11-06T16:54:31.881Z"
   },
   "section": {
     "id": "272:1017",
@@ -173,6 +173,8 @@
       "h": 30,
       "text": "журнал",
       "styleName": "eyebrow",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -182,6 +184,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -215,6 +219,8 @@
       "h": 60,
       "text": "Syntonia.Life",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -224,6 +230,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -257,6 +264,8 @@
       "h": 136,
       "text": "Выпуски, собранные вокруг того, что действительно волнует и сопровождает жизнь: внутренние состояния, отношения, выбор, опора, перемены, практика и смысл.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -266,6 +275,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -415,6 +425,8 @@
       "h": 20,
       "text": "актуальный выпуск",
       "styleName": "eyebrow-xs",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -424,6 +436,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -488,6 +502,8 @@
       "h": 20,
       "text": "№02",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -497,6 +513,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -530,6 +547,8 @@
       "h": 20,
       "text": "Тело и состояние",
       "styleName": "issue-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 16,
       "lineHeight": {
         "unit": "PERCENT",
@@ -539,6 +558,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -628,6 +648,13 @@
         "topRightRadius": "VariableID:854:2536",
         "bottomLeftRadius": "VariableID:854:2536",
         "bottomRightRadius": "VariableID:854:2536"
+      },
+      "props": {
+        "text#30:0": "читать выпуск",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "true",
+        "size": "S"
       }
     },
     {
@@ -642,6 +669,8 @@
       "h": 19,
       "text": "читать выпуск",
       "styleName": "button-s-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 11,
       "lineHeight": {
         "unit": "PERCENT",
@@ -651,6 +680,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -694,7 +725,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I281:578;854:2502;967:2413",

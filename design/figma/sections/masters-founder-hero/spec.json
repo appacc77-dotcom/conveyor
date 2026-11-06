@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:20.256Z"
+    "at": "2026-11-06T16:54:19.687Z"
   },
   "section": {
     "id": "217:238",
@@ -247,6 +247,8 @@
       "h": 128,
       "text": "Екатерина Лебедева",
       "styleName": "H1",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 64,
       "lineHeight": {
         "unit": "PERCENT",
@@ -256,6 +258,7 @@
         "unit": "PIXELS",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -289,6 +292,8 @@
       "h": 64,
       "text": "Психолог. Основатель Syntonia. Автор метода",
       "styleName": "founder-role",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -298,6 +303,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -331,6 +337,8 @@
       "h": 68,
       "text": "Я не работаю вокруг проблемы. Я веду к её источнику.",
       "styleName": "quote-founder",
+      "fontFamily": "Lora",
+      "fontStyle": "Italic",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -340,6 +348,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -429,6 +438,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "Услышать голос",
+        "show arrow#16:0": true,
+        "theme": "arrow-down",
+        "caps": "false",
+        "size": "L"
       }
     },
     {
@@ -443,6 +459,8 @@
       "h": 29,
       "text": "Услышать голос",
       "styleName": "button",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -452,6 +470,7 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -495,7 +514,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "down"
+      }
     },
     {
       "id": "I217:245;826:2428;756:1695",
@@ -506,7 +529,8 @@
       "x": 12,
       "y": 1,
       "w": 12,
-      "h": 10
+      "h": 10,
+      "rotation": -90
     },
     {
       "id": "I217:245;826:2428;755:2855",
@@ -529,6 +553,7 @@
       ],
       "strokeWeight": 1.5,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:20"
@@ -557,6 +582,7 @@
       ],
       "strokeWeight": 3,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:20"
@@ -619,6 +645,10 @@
         "fills": [
           "VariableID:827:2861"
         ]
+      },
+      "props": {
+        "teaser#233:1": "Можно многое понимать про себя и всё равно жить в одном и том же круге событий. Потому что вашей жизнью управляет не только то, что вы осознаёте.",
+        "time#233:0": "1:25"
       }
     },
     {
@@ -742,6 +772,8 @@
       "h": 20,
       "text": "1:25",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -751,6 +783,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -784,6 +817,8 @@
       "h": 40,
       "text": "Можно многое понимать про себя и всё равно жить в одном и том же круге событий. Потому что вашей жизнью управляет не только то, что вы осознаёте.",
       "styleName": "caption",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",
@@ -793,6 +828,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -995,6 +1031,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "text#826:9": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
+        "number#826:6": "01",
+        "title#826:3": "Видеть глубже",
+        "divider#826:0": true,
+        "state": "open"
       }
     },
     {
@@ -1095,6 +1138,8 @@
       "h": 29,
       "text": "Видеть глубже",
       "styleName": "founder-acc-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 25,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1104,6 +1149,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1137,6 +1183,8 @@
       "h": 20,
       "text": "01",
       "styleName": "script-s",
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 27,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1146,6 +1194,9 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "RIGHT",
+      "textAlignV": "CENTER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1179,6 +1230,8 @@
       "h": 156,
       "text": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
       "styleName": null,
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 14,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1188,6 +1241,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "paragraphSpacing": 16,
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1270,6 +1325,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "text#826:9": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
+        "title#826:3": "Путь в профессию",
+        "number#826:6": "02",
+        "divider#826:0": true,
+        "state": "closed"
       }
     },
     {
@@ -1370,6 +1432,8 @@
       "h": 29,
       "text": "Путь в профессию",
       "styleName": "founder-acc-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 25,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1379,6 +1443,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1412,6 +1477,8 @@
       "h": 20,
       "text": "02",
       "styleName": null,
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 27,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1421,6 +1488,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "RIGHT",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1500,6 +1569,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "text#826:9": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
+        "title#826:3": "Суть моего взгляда",
+        "number#826:6": "03",
+        "divider#826:0": true,
+        "state": "closed"
       }
     },
     {
@@ -1600,6 +1676,8 @@
       "h": 29,
       "text": "Суть моего взгляда",
       "styleName": "founder-acc-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 25,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1609,6 +1687,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1642,6 +1721,8 @@
       "h": 20,
       "text": "03",
       "styleName": null,
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 27,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1651,6 +1732,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "RIGHT",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1730,6 +1813,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "text#826:9": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
+        "title#826:3": "Ясность рядом",
+        "number#826:6": "04",
+        "divider#826:0": true,
+        "state": "closed"
       }
     },
     {
@@ -1830,6 +1920,8 @@
       "h": 29,
       "text": "Ясность рядом",
       "styleName": "founder-acc-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 25,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1839,6 +1931,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1872,6 +1965,8 @@
       "h": 20,
       "text": "04",
       "styleName": null,
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 27,
       "lineHeight": {
         "unit": "PERCENT",
@@ -1881,6 +1976,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "RIGHT",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -1960,6 +2057,13 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
+      },
+      "props": {
+        "text#826:9": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
+        "title#826:3": "Пространство Syntonia",
+        "number#826:6": "05",
+        "divider#826:0": true,
+        "state": "closed"
       }
     },
     {
@@ -2060,6 +2164,8 @@
       "h": 29,
       "text": "Пространство Syntonia",
       "styleName": "founder-acc-title",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 25,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2069,6 +2175,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2102,6 +2209,8 @@
       "h": 20,
       "text": "05",
       "styleName": null,
+      "fontFamily": "Great Vibes",
+      "fontStyle": "Regular",
       "fontSize": 27,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2111,6 +2220,8 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "textAlign": "RIGHT",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2230,6 +2341,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "с чего начать",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "true",
+        "size": "L"
       }
     },
     {
@@ -2244,6 +2362,8 @@
       "h": 29,
       "text": "с чего начать",
       "styleName": "button-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2253,6 +2373,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -2296,7 +2418,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I217:260;851:475;967:2413",

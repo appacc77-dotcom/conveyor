@@ -45,9 +45,18 @@ function walk(n, depth) {
   if (n.type === "TEXT") {
     o.text = n.characters;
     o.styleName = n.textStyleId ? styleNames.get(n.textStyleId) ?? null : null;
+    o.fontFamily = n.fontName?.family ?? null;
+    o.fontStyle = n.fontName?.style ?? null;
     o.fontSize = n.fontSize;
     o.lineHeight = n.lineHeight;
     o.letterSpacing = n.letterSpacing;
+    // Без этого текст расходится с макетом: регистр, выравнивание, подчёркивание.
+    if (n.textCase && n.textCase !== "ORIGINAL") o.textCase = n.textCase;
+    if (n.textAlignHorizontal && n.textAlignHorizontal !== "LEFT") o.textAlign = n.textAlignHorizontal;
+    if (n.textAlignVertical && n.textAlignVertical !== "TOP") o.textAlignV = n.textAlignVertical;
+    if (n.textDecoration && n.textDecoration !== "NONE") o.textDecoration = n.textDecoration;
+    if (n.paragraphSpacing) o.paragraphSpacing = n.paragraphSpacing;
+    if (n.textAutoResize && n.textAutoResize !== "NONE") o.autoResize = n.textAutoResize;
   }
 
   if ("fills" in n && Array.isArray(n.fills) && n.fills.length) {
@@ -118,6 +127,11 @@ function walk(n, depth) {
     if (Object.keys(sizing).length) o.sizing = sizing;
   }
   if (n.clipsContent === false) o.clips = false;
+  // Повёрнутые элементы: в файле их 298, без угла вёрстка их не воспроизводит.
+  if (n.rotation) o.rotation = +n.rotation.toFixed(2);
+  if (n.isMask) o.mask = true;
+  if (n.blendMode && n.blendMode !== "PASS_THROUGH" && n.blendMode !== "NORMAL") o.blend = n.blendMode;
+  if (n.strokeDashes?.length) o.strokeDashes = n.strokeDashes;
   if (n.opacity !== 1) o.opacity = +n.opacity.toFixed(3);
   if ("minWidth" in n && (n.maxWidth != null || n.minWidth != null)) {
     o.limits = {};
@@ -141,6 +155,13 @@ function walk(n, depth) {
   }
 
   nodes.push(o);
+
+  // Варианты компонента: из них собирается API компонента (theme × size × caps).
+  if (n.type === "INSTANCE" && n.componentProperties && Object.keys(n.componentProperties).length) {
+    o.props = Object.fromEntries(
+      Object.entries(n.componentProperties).map(([k, v]) => [k, v.value]),
+    );
+  }
 
   // Иконка: инстанс без текста внутри и небольшой — его выгодно держать вектором.
   if (n.type === "INSTANCE" && o.w <= ICON_MAX && o.h <= ICON_MAX && !hasText(n)) {

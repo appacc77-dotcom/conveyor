@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:42:04.534Z"
+    "at": "2026-11-06T16:55:03.134Z"
   },
   "section": {
     "id": "383:287",
@@ -180,6 +180,8 @@
       "h": 64,
       "text": "Форматы работы",
       "styleName": "H1",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 64,
       "lineHeight": {
         "unit": "PERCENT",
@@ -189,6 +191,7 @@
         "unit": "PIXELS",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -222,6 +225,8 @@
       "h": 68,
       "text": "Форматы различаются по глубине запроса, длительности и степени сопровождения.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -231,6 +236,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",

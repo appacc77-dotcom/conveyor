@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:41:39.246Z"
+    "at": "2026-11-06T16:54:38.569Z"
   },
   "section": {
     "id": "409:243",
@@ -157,6 +157,8 @@
       "h": 170,
       "text": "Пространство практики\nSyntonia",
       "styleName": null,
+      "fontFamily": "Cormorant Garamond",
+      "fontStyle": "Light",
       "fontSize": 85,
       "lineHeight": {
         "unit": "PERCENT",
@@ -166,6 +168,7 @@
         "unit": "PIXELS",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -199,6 +202,8 @@
       "h": 102,
       "text": "Практики для самостоятельной внутренней работы, восстановления состояния и бережного движения в глубину.",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -208,6 +213,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -275,6 +281,10 @@
         "strokes": [
           "VariableID:2:31"
         ]
+      },
+      "props": {
+        "theme": "dark",
+        "shape": "floating"
       }
     },
     {
@@ -405,6 +415,8 @@
       "h": 34,
       "text": "О проекте",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -414,6 +426,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -457,7 +470,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "down"
+      }
     },
     {
       "id": "I410:1381;760:560;756:1695",
@@ -468,7 +485,8 @@
       "x": 12,
       "y": 1,
       "w": 12,
-      "h": 10
+      "h": 10,
+      "rotation": -90
     },
     {
       "id": "I410:1381;760:560;755:2855",
@@ -491,6 +509,7 @@
       ],
       "strokeWeight": 1.5,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:20"
@@ -519,6 +538,7 @@
       ],
       "strokeWeight": 3,
       "strokeAlign": "CENTER",
+      "rotation": -90,
       "bound": {
         "strokes": [
           "VariableID:2:20"
@@ -537,6 +557,8 @@
       "h": 34,
       "text": "Понять себя",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -546,6 +568,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -579,6 +602,8 @@
       "h": 34,
       "text": "Пространство практики",
       "styleName": "body",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -588,6 +613,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -773,6 +799,13 @@
         "topRightRadius": "VariableID:2:16",
         "bottomLeftRadius": "VariableID:2:16",
         "bottomRightRadius": "VariableID:2:16"
+      },
+      "props": {
+        "text#30:0": "ЛИЧНАЯ ВСТРЕЧА",
+        "show arrow#16:0": true,
+        "theme": "light",
+        "caps": "true",
+        "size": "L"
       }
     },
     {
@@ -787,6 +820,8 @@
       "h": 29,
       "text": "ЛИЧНАЯ ВСТРЕЧА",
       "styleName": "button-caps",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 17,
       "lineHeight": {
         "unit": "PERCENT",
@@ -796,6 +831,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -839,7 +876,11 @@
         "primary": "CENTER",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "white",
+        "direction": "right"
+      }
     },
     {
       "id": "I410:1381;167:653;851:475;967:2413",
@@ -949,6 +990,9 @@
         "strokes": [
           "VariableID:2:20"
         ]
+      },
+      "props": {
+        "theme": "dark"
       }
     },
     {
@@ -1061,6 +1105,9 @@
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:7"
+      },
+      "props": {
+        "theme": "dark"
       }
     },
     {

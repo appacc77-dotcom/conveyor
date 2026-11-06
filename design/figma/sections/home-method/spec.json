@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:40:55.395Z"
+    "at": "2026-11-06T16:53:58.794Z"
   },
   "section": {
     "id": "79:127",
@@ -182,6 +182,8 @@
       "h": 30,
       "text": "Метод Syntonia",
       "styleName": "eyebrow",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -191,6 +193,8 @@
         "unit": "PERCENT",
         "value": 16
       },
+      "textCase": "UPPER",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -224,6 +228,8 @@
       "h": 96,
       "text": "Неблагоприятные линии жизни мы часто называем судьбой.",
       "styleName": "lead",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 28,
       "lineHeight": {
         "unit": "PERCENT",
@@ -233,6 +239,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -293,6 +300,8 @@
       "h": 48,
       "text": "Но существует выход из предначертанного.",
       "styleName": "lead",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 28,
       "lineHeight": {
         "unit": "PERCENT",
@@ -302,6 +311,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -397,6 +407,8 @@
       "h": 120,
       "text": "Там, где начинается новый выбор",
       "styleName": "H2",
+      "fontFamily": "Literata",
+      "fontStyle": "Light",
       "fontSize": 48,
       "lineHeight": {
         "unit": "PERCENT",
@@ -406,6 +418,7 @@
         "unit": "PERCENT",
         "value": 0
       },
+      "autoResize": "HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -467,6 +480,11 @@
         "strokes": [
           "VariableID:2:29"
         ]
+      },
+      "props": {
+        "label#134:0": "Как это работает",
+        "style": "underline",
+        "size": "L"
       }
     },
     {
@@ -481,6 +499,8 @@
       "h": 41,
       "text": "Как это работает",
       "styleName": "button-m",
+      "fontFamily": "Golos Text",
+      "fontStyle": "Regular",
       "fontSize": 24,
       "lineHeight": {
         "unit": "PERCENT",
@@ -490,6 +510,8 @@
         "unit": "PERCENT",
         "value": 3
       },
+      "textAlignV": "BOTTOM",
+      "autoResize": "WIDTH_AND_HEIGHT",
       "fills": [
         {
           "type": "SOLID",
@@ -533,7 +555,11 @@
         "primary": "MAX",
         "counter": "CENTER"
       },
-      "clips": false
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
     },
     {
       "id": "I79:136;698:2044;967:2244",
