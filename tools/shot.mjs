@@ -92,7 +92,11 @@ if (!el) {
 
 // Шапка и подобные слои лежат поверх секций. При съёмке секции их прячем,
 // иначе в кадр попадает чужой блок и сравнение с кропом врёт.
-const isOverlayTarget = await el.evaluate((node) => !!node.closest('[data-overlay]'));
+// Прячем оверлеи только когда снимаем секцию: если цель сама их содержит
+// (страница целиком), они часть кадра и скрывать их нельзя.
+const isOverlayTarget = await el.evaluate(
+  (node) => !!node.closest('[data-overlay]') || !!node.querySelector('[data-overlay]'),
+);
 if (!isOverlayTarget) {
   await page.evaluate(() => {
     for (const node of document.querySelectorAll('[data-overlay]')) node.style.visibility = 'hidden';

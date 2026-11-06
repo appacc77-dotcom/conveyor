@@ -6,6 +6,8 @@ import Banner from '../components/Banner.astro';
 import Header from '../components/Header.astro';
 import Formats from '../components/Formats.astro';
 import Entry from '../components/Entry.astro';
+import Method from '../components/Method.astro';
+import AirPhoto from '../components/AirPhoto.astro';
 
 const painItems = [
   {
@@ -77,6 +79,14 @@ const painItems = [
       ctaLabel="с точки входа"
       ctaHref="/booking.html#entry"
       items={painItems}
+    />
+
+    <Method
+      eyebrow="Метод Syntonia"
+      lead="Неблагоприятные линии жизни мы часто называем судьбой."
+      turn="Но существует выход из предначертанного."
+      title="Там, где начинается новый выбор"
+      ctaLabel="Как это работает"
     />
 
     <Entry

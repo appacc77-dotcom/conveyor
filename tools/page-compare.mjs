@@ -73,7 +73,9 @@ const built = (structure?.pages.find((p) => p.key === pageKey)?.sections ?? [])
   .sort((a, b) => a.y - b.y);
 let prefix = 0;
 for (const s of built) {
-  if (s.y !== prefix) break;
+  // Перекрытие (шапка лежит поверх героя) — не пропуск: пропускаем такой блок.
+  if (s.y < prefix) continue;
+  if (s.y > prefix) break;
   prefix = s.y + s.h;
 }
 const w = Math.min(ref.width, shot.width);
