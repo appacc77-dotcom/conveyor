@@ -4,7 +4,7 @@
  *
  *   node tools/export-section.mjs 79:105 --name hero
  *
- * Выход: design/figma/sections/<slug>/
+ * Выход: design/figma/pages/<page>/<section>/
  *   spec.json  — факты: геометрия, текст, заливки, авто-раскладка, ссылки на ассеты
  *   crop.png   — эталон, снятый с самого узла
  *   assets/    — img/<hash>.<ext> (фото), svg/<component>.svg (иконки-инстансы)
@@ -76,8 +76,11 @@ if (fileKey !== project.source.fileKey) {
 
 // --- 2. Каталог секции -----------------------------------------------------
 const slug = slugify(nameArg ?? section.root.name);
-const sectionsRoot = join(root, project.paths.sections ?? 'design/figma/sections');
-const dir = join(sectionsRoot, slug);
+const sectionsRoot = join(root, project.paths.sections ?? 'design/figma/pages');
+// Секции лежат по страницам, как в Figma: pages/<страница>/<секция>/.
+const pageSlug = slugify(section.page?.name ?? 'page');
+const dir = join(sectionsRoot, pageSlug, slug);
+mkdirSync(dir, { recursive: true });
 
 // Ассеты живут в общем складе по хешу: одно фото и одна иконка на весь проект.
 // Иначе одна и та же текстура кнопки лежит в двадцати папках секций.

@@ -15,7 +15,7 @@ const dry = process.argv.includes('--dry');
 const project = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
 
 const assetsRoot = join(root, project.paths.assets ?? 'design/figma/assets');
-const sectionsRoot = join(root, project.paths.sections ?? 'design/figma/sections');
+const sectionsRoot = join(root, project.paths.sections ?? 'design/figma/pages');
 
 if (!existsSync(assetsRoot) || !existsSync(sectionsRoot)) {
   console.error('нет склада или секций');
@@ -23,12 +23,16 @@ if (!existsSync(assetsRoot) || !existsSync(sectionsRoot)) {
 }
 
 const used = new Set();
-for (const slug of readdirSync(sectionsRoot)) {
-  const specPath = join(sectionsRoot, slug, 'spec.json');
-  if (!existsSync(specPath)) continue;
-  const spec = JSON.parse(readFileSync(specPath, 'utf8'));
-  for (const list of [spec.assets?.images ?? [], spec.assets?.icons ?? []]) {
-    for (const a of list) if (a.file) used.add(join(root, a.file));
+for (const pageDir of readdirSync(sectionsRoot)) {
+  const pagePath = join(sectionsRoot, pageDir);
+  if (!statSync(pagePath).isDirectory()) continue;
+  for (const sectionDir of readdirSync(pagePath)) {
+    const specPath = join(pagePath, sectionDir, 'spec.json');
+    if (!existsSync(specPath)) continue;
+    const spec = JSON.parse(readFileSync(specPath, 'utf8'));
+    for (const list of [spec.assets?.images ?? [], spec.assets?.icons ?? []]) {
+      for (const a of list) if (a.file) used.add(join(root, a.file));
+    }
   }
 }
 

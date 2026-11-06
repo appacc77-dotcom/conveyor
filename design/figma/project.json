@@ -69,7 +69,7 @@
     "assets": "design/figma/assets",
     "styles": "src/styles",
     "screens": ".screens",
-    "sections": "design/figma/sections"
+    "sections": "design/figma/pages"
   },
   "viewport": {
     "width": 1440

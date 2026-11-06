@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-06T16:59:33.689Z",
+  "at": "2026-11-06T17:14:08.130Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -39,6 +39,7 @@
           "w": 1440,
           "h": 780,
           "slug": "home-hero",
+          "dir": "design/figma/pages/home/hero",
           "status": {
             "key": "green",
             "label": "зелёный"
@@ -50,13 +51,13 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-06T16:59:17.772Z"
+            "at": "2026-11-06T17:13:15.886Z"
           },
           "pixel": {
             "mean": 1.76,
             "over16": 0.98,
             "over48": 0.56,
-            "at": "2026-11-06T16:59:19.692Z"
+            "at": "2026-11-06T17:13:16.824Z"
           },
           "assets": {
             "nodes": 14,
@@ -70,7 +71,7 @@
             "fills": 2
           },
           "images": {
-            "figma": "/structure/home-hero-figma.png",
+            "figma": null,
             "site": "/structure/home-hero-site.png"
           }
         },
@@ -83,6 +84,7 @@
           "w": 1440,
           "h": 525,
           "slug": "home-banner-founder",
+          "dir": "design/figma/pages/home/banner-founder",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -101,7 +103,7 @@
             "fills": 2
           },
           "images": {
-            "figma": "/structure/home-banner-founder-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -114,6 +116,7 @@
           "w": 1440,
           "h": 707,
           "slug": "home-pain",
+          "dir": "design/figma/pages/home/pain",
           "status": {
             "key": "green",
             "label": "зелёный"
@@ -125,13 +128,13 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.6900000000000546,
-            "at": "2026-11-06T16:59:18.768Z"
+            "at": "2026-11-06T17:13:34.303Z"
           },
           "pixel": {
             "mean": 4.14,
             "over16": 3.43,
             "over48": 1.91,
-            "at": "2026-11-06T16:49:19.512Z"
+            "at": "2026-11-06T17:13:35.104Z"
           },
           "assets": {
             "nodes": 34,
@@ -145,7 +148,7 @@
             "fills": 20
           },
           "images": {
-            "figma": "/structure/home-pain-figma.png",
+            "figma": null,
             "site": "/structure/home-pain-site.png"
           }
         },
@@ -158,6 +161,7 @@
           "w": 1440,
           "h": 615,
           "slug": "home-method",
+          "dir": "design/figma/pages/home/method",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -176,7 +180,7 @@
             "fills": 4
           },
           "images": {
-            "figma": "/structure/home-method-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -189,6 +193,7 @@
           "w": 1440,
           "h": 550,
           "slug": "home-quiz",
+          "dir": "design/figma/pages/home/quiz",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -207,7 +212,7 @@
             "fills": 4
           },
           "images": {
-            "figma": "/structure/home-quiz-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -220,6 +225,7 @@
           "w": 1440,
           "h": 757,
           "slug": "home-about-founder",
+          "dir": "design/figma/pages/home/about-founder",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -238,7 +244,7 @@
             "fills": 4
           },
           "images": {
-            "figma": "/structure/home-about-founder-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -251,6 +257,7 @@
           "w": 1440,
           "h": 1429,
           "slug": "home-process",
+          "dir": "design/figma/pages/home/process",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -269,7 +276,7 @@
             "fills": 11
           },
           "images": {
-            "figma": "/structure/home-process-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -282,6 +289,7 @@
           "w": 1440,
           "h": 892,
           "slug": "home-entry",
+          "dir": "design/figma/pages/home/entry",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -300,7 +308,7 @@
             "fills": 6
           },
           "images": {
-            "figma": "/structure/home-entry-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -313,6 +321,7 @@
           "w": 1440,
           "h": 1164,
           "slug": "home-formats",
+          "dir": "design/figma/pages/home/formats",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -331,7 +340,7 @@
             "fills": 23
           },
           "images": {
-            "figma": "/structure/home-formats-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -344,6 +353,7 @@
           "w": 1440,
           "h": 920,
           "slug": "home-voices",
+          "dir": "design/figma/pages/home/voices",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -362,7 +372,7 @@
             "fills": 8
           },
           "images": {
-            "figma": "/structure/home-voices-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -375,6 +385,7 @@
           "w": 1440,
           "h": 641,
           "slug": "home-library",
+          "dir": "design/figma/pages/home/library",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -393,7 +404,7 @@
             "fills": 4
           },
           "images": {
-            "figma": "/structure/home-library-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -406,6 +417,7 @@
           "w": 1440,
           "h": 400,
           "slug": "home-air-photo",
+          "dir": "design/figma/pages/home/air-photo",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -424,7 +436,7 @@
             "fills": 0
           },
           "images": {
-            "figma": "/structure/home-air-photo-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -437,6 +449,7 @@
           "w": 1440,
           "h": 807,
           "slug": "home-faq",
+          "dir": "design/figma/pages/home/faq",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -455,7 +468,7 @@
             "fills": 20
           },
           "images": {
-            "figma": "/structure/home-faq-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -468,6 +481,7 @@
           "w": 1440,
           "h": 361,
           "slug": "home-footer",
+          "dir": "design/figma/pages/home/footer",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -486,7 +500,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/home-footer-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -499,6 +513,7 @@
           "w": 1424,
           "h": 92,
           "slug": "home-header",
+          "dir": "design/figma/pages/home/header",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -517,7 +532,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/home-header-figma.png",
+            "figma": null,
             "site": null
           }
         }
@@ -553,6 +568,7 @@
           "w": 1440,
           "h": 839,
           "slug": "masters-founder-hero",
+          "dir": "design/figma/pages/masters/founder-hero",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -571,7 +587,7 @@
             "fills": 18
           },
           "images": {
-            "figma": "/structure/masters-founder-hero-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -584,6 +600,7 @@
           "w": 1440,
           "h": 2066,
           "slug": "masters-masters-team",
+          "dir": "design/figma/pages/masters/masters-team",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -602,7 +619,7 @@
             "fills": 14
           },
           "images": {
-            "figma": "/structure/masters-masters-team-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -615,6 +632,7 @@
           "w": 1440,
           "h": 620,
           "slug": "masters-masters-more",
+          "dir": "design/figma/pages/masters/masters-more",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -633,7 +651,7 @@
             "fills": 19
           },
           "images": {
-            "figma": "/structure/masters-masters-more-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -646,6 +664,7 @@
           "w": 1440,
           "h": 361,
           "slug": "masters-footer",
+          "dir": "design/figma/pages/masters/footer",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -664,7 +683,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/masters-footer-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -677,6 +696,7 @@
           "w": 1424,
           "h": 92,
           "slug": "masters-header",
+          "dir": "design/figma/pages/masters/header",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -695,7 +715,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/masters-header-figma.png",
+            "figma": null,
             "site": null
           }
         }
@@ -731,6 +751,7 @@
           "w": 1440,
           "h": 820,
           "slug": "library-library-hero",
+          "dir": "design/figma/pages/library/library-hero",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -749,7 +770,7 @@
             "fills": 2
           },
           "images": {
-            "figma": "/structure/library-library-hero-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -762,6 +783,7 @@
           "w": 1440,
           "h": 882,
           "slug": "library-library-book",
+          "dir": "design/figma/pages/library/library-book",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -780,7 +802,7 @@
             "fills": 6
           },
           "images": {
-            "figma": "/structure/library-library-book-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -793,6 +815,7 @@
           "w": 1440,
           "h": 570,
           "slug": "library-library-journal",
+          "dir": "design/figma/pages/library/library-journal",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -811,7 +834,7 @@
             "fills": 5
           },
           "images": {
-            "figma": "/structure/library-library-journal-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -824,6 +847,7 @@
           "w": 1440,
           "h": 555,
           "slug": "library-library-issues",
+          "dir": "design/figma/pages/library/library-issues",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -842,7 +866,7 @@
             "fills": 21
           },
           "images": {
-            "figma": "/structure/library-library-issues-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -855,6 +879,7 @@
           "w": 1440,
           "h": 361,
           "slug": "library-footer",
+          "dir": "design/figma/pages/library/footer",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -873,7 +898,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/library-footer-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -886,6 +911,7 @@
           "w": 1424,
           "h": 92,
           "slug": "library-header",
+          "dir": "design/figma/pages/library/header",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -904,7 +930,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/library-header-figma.png",
+            "figma": null,
             "site": null
           }
         }
@@ -940,6 +966,7 @@
           "w": 1440,
           "h": 900,
           "slug": "practice-hero",
+          "dir": "design/figma/pages/practice/hero",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -958,7 +985,7 @@
             "fills": 4
           },
           "images": {
-            "figma": "/structure/practice-hero-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -971,6 +998,7 @@
           "w": 1440,
           "h": 916,
           "slug": "practice-practice-free",
+          "dir": "design/figma/pages/practice/practice-free",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -989,7 +1017,7 @@
             "fills": 18
           },
           "images": {
-            "figma": "/structure/practice-practice-free-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1002,6 +1030,7 @@
           "w": 1440,
           "h": 550,
           "slug": "practice-quiz",
+          "dir": "design/figma/pages/practice/quiz",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1020,7 +1049,7 @@
             "fills": 1
           },
           "images": {
-            "figma": "/structure/practice-quiz-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1033,6 +1062,7 @@
           "w": 1440,
           "h": 2001,
           "slug": "practice-practice-pay",
+          "dir": "design/figma/pages/practice/practice-pay",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1051,7 +1081,7 @@
             "fills": 29
           },
           "images": {
-            "figma": "/structure/practice-practice-pay-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1064,6 +1094,7 @@
           "w": 1440,
           "h": 2078,
           "slug": "practice-kody-practice-pay",
+          "dir": "design/figma/pages/practice/kody-practice-pay",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1082,7 +1113,7 @@
             "fills": 31
           },
           "images": {
-            "figma": "/structure/practice-kody-practice-pay-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1095,6 +1126,7 @@
           "w": 1440,
           "h": 1533,
           "slug": "practice-practice-package",
+          "dir": "design/figma/pages/practice/practice-package",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1113,7 +1145,7 @@
             "fills": 27
           },
           "images": {
-            "figma": "/structure/practice-practice-package-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1126,6 +1158,7 @@
           "w": 1440,
           "h": 952,
           "slug": "practice-info-section",
+          "dir": "design/figma/pages/practice/info-section",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1144,7 +1177,7 @@
             "fills": 5
           },
           "images": {
-            "figma": "/structure/practice-info-section-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1157,6 +1190,7 @@
           "w": 1440,
           "h": 361,
           "slug": "practice-footer",
+          "dir": "design/figma/pages/practice/footer",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1175,7 +1209,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/practice-footer-figma.png",
+            "figma": null,
             "site": null
           }
         }
@@ -1211,6 +1245,7 @@
           "w": 1440,
           "h": 857,
           "slug": "quiz-quiz-section",
+          "dir": "design/figma/pages/quiz/quiz-section",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1229,7 +1264,7 @@
             "fills": 6
           },
           "images": {
-            "figma": "/structure/quiz-quiz-section-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1242,6 +1277,7 @@
           "w": 1424,
           "h": 92,
           "slug": "quiz-header",
+          "dir": "design/figma/pages/quiz/header",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1260,7 +1296,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/quiz-header-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1273,6 +1309,7 @@
           "w": 1440,
           "h": 361,
           "slug": "quiz-footer",
+          "dir": "design/figma/pages/quiz/footer",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1291,7 +1328,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/quiz-footer-figma.png",
+            "figma": null,
             "site": null
           }
         }
@@ -1327,6 +1364,7 @@
           "w": 1440,
           "h": 509,
           "slug": "booking-booking-hero",
+          "dir": "design/figma/pages/booking/booking-hero",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1345,7 +1383,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/booking-booking-hero-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1358,6 +1396,7 @@
           "w": 1440,
           "h": 1546,
           "slug": "booking-booking-formats",
+          "dir": "design/figma/pages/booking/booking-formats",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1376,7 +1415,7 @@
             "fills": 56
           },
           "images": {
-            "figma": "/structure/booking-booking-formats-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1389,6 +1428,7 @@
           "w": 1440,
           "h": 361,
           "slug": "booking-footer",
+          "dir": "design/figma/pages/booking/footer",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1407,7 +1447,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/booking-footer-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1420,6 +1460,7 @@
           "w": 1424,
           "h": 92,
           "slug": "booking-header",
+          "dir": "design/figma/pages/booking/header",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1438,7 +1479,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/booking-header-figma.png",
+            "figma": null,
             "site": null
           }
         }
@@ -1474,6 +1515,7 @@
           "w": 1440,
           "h": 800,
           "slug": "method-method-hero",
+          "dir": "design/figma/pages/method/method-hero",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1492,7 +1534,7 @@
             "fills": 2
           },
           "images": {
-            "figma": "/structure/method-method-hero-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1505,6 +1547,7 @@
           "w": 1440,
           "h": 1077,
           "slug": "method-method-about",
+          "dir": "design/figma/pages/method/method-about",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1523,7 +1566,7 @@
             "fills": 8
           },
           "images": {
-            "figma": "/structure/method-method-about-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1536,6 +1579,7 @@
           "w": 1440,
           "h": 499,
           "slug": "method-method-cta",
+          "dir": "design/figma/pages/method/method-cta",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1554,7 +1598,7 @@
             "fills": 4
           },
           "images": {
-            "figma": "/structure/method-method-cta-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1567,6 +1611,7 @@
           "w": 1440,
           "h": 361,
           "slug": "method-footer",
+          "dir": "design/figma/pages/method/footer",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1585,7 +1630,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/method-footer-figma.png",
+            "figma": null,
             "site": null
           }
         },
@@ -1598,6 +1643,7 @@
           "w": 1424,
           "h": 92,
           "slug": "method-header",
+          "dir": "design/figma/pages/method/header",
           "status": {
             "key": "exported",
             "label": "выгружен"
@@ -1616,7 +1662,7 @@
             "fills": 3
           },
           "images": {
-            "figma": "/structure/method-header-figma.png",
+            "figma": null,
             "site": null
           }
         }

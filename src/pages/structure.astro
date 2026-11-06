@@ -40,8 +40,8 @@ function taskText(page, s) {
   return [
     `Секция: ${page.title} / ${s.name} — узел ${s.id}`,
     `Размер: ${s.w}×${s.h}, y ${s.y}`,
-    s.slug ? `Спека: design/figma/sections/${s.slug}/spec.json` : 'Спека: не выгружена',
-    s.slug ? `Кроп: design/figma/sections/${s.slug}/crop.png` : '',
+    s.dir ? `Спека: ${s.dir}/spec.json` : 'Спека: не выгружена',
+    s.dir ? `Кроп: ${s.dir}/crop.png` : '',
     s.assets ? `Выгружено: ${s.assets.nodes} узлов, ${s.assets.images} фото, ${s.assets.svg} svg, ${size(s.assets.bytes)}` : '',
     s.gate
       ? `Геометрия: ${s.gate.red === 0 ? '0 нарушений' : `${s.gate.red} нарушений`}, Δ max ${s.gate.worstDelta.toFixed(2)} px, размечено ${s.gate.marked} из ${s.gate.nodes}`

@@ -31,8 +31,8 @@ Figma → спецификация → компоненты → страницы
    `design/figma/project.json`).
 3. `design/figma/live/*.json` — снимки файла: структура, дизайн-система, реальность,
    полный дамп `document.json`.
-4. `design/figma/sections/<section>/spec.json` — числа секции для замера (P2).
-5. `design/figma/sections/<section>/crop.png` — эталон, экспортированный с узла (P3).
+4. `design/figma/pages/<page>/<section>/spec.json` — числа секции для замера (P2).
+5. `design/figma/pages/<page>/<section>/crop.png` — эталон, экспортированный с узла (P3).
 6. Код `src/` — реализация, не истина.
 
 Два правила важнее остальных:
@@ -71,7 +71,7 @@ Figma → спецификация → компоненты → страницы
 - **Не трогать без карточки:** `docs/system/**` (процесс), `package.json`
   (зависимости), `design/figma/live/**` (снимки файла).
 - **Только чтение, генерируемое:** `src/styles/tokens.css`,
-  `src/styles/typography.css` (пишет `npm run ds:tokens`), `design/figma/sections/**`.
+  `src/styles/typography.css` (пишет `npm run ds:tokens`), `design/figma/pages/**`.
 - **Общий слой** — `src/styles/base.css`, шапка, подвал — меняется отдельной
   карточкой, а не «попутно».
 - **Новые зависимости** — только с согласованием.
@@ -110,7 +110,7 @@ column: "review" }`. `board.json` руками не править: плагин
 | P0 Ingest | `design/figma/live/*.json` + `fileKey` | **готово** |
 | P1 Reality | числа по файлу (масштабы, ширины) | **готово** |
 | G0 | 0 открытых 🔴 в `decisions.md` | **закрыт** |
-| P2 Resolve | `design/figma/sections/<section>/spec.json` | идёт |
+| P2 Resolve | `design/figma/pages/<page>/<section>/spec.json` | идёт |
 | P3 Model | токены, кропы | готово для hero |
 | P4 Components | G1: `measure` зелёный по каждому компоненту | идёт: hero |
 
@@ -126,7 +126,7 @@ npm run export -- <nodeId> --name <slug>       # кроп + ассеты + spec.
 npm run ds:tokens                              # токены и типографика из живого файла
 npm run build                                  # dist/
 npm run shot -- .hero .screens/hero.png 1440   # снимок элемента
-npm run measure -- design/figma/sections/hero/spec.json   # геометрия по data-figma-node
+npm run measure -- design/figma/pages/home/hero/spec.json   # геометрия по data-figma-node
 npm run compare -- <crop.png> <shot.png>       # пиксель, без внешних зависимостей
 npm run previews                               # снять собранные секции Playwright'ом
 npm run structure                              # пересобрать /structure.html из артефактов
@@ -136,7 +136,7 @@ npm run structure                              # пересобрать /structu
 по абсолютным координатам от корня секции. Красные, если расхождение больше 1 px,
 если у узла глубины ≤ 2 нет своего элемента или если атрибут ссылается на узел вне спеки.
 `compare` — сигнал регрессии, не критерий приёмки: текст растеризуется по-разному,
-фон и заливки совпадают. Ориентир: hero — средняя 1,82, пикселей > 16 — 1,05 %.
+фон и заливки совпадают. Ориентир: hero — средняя 1,76, пикселей > 16 — 0,98 %.
 
 **Любое утверждение о соответствии подкрепляется числом и командой**, которая это
 число получила. Скриншот без числа — впечатление, а не проверка.

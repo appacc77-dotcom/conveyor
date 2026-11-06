@@ -2,7 +2,7 @@
 /**
  * Пиксельная сверка снимка с кропом из Figma. Без внешних зависимостей.
  *
- *   node tools/compare.mjs design/figma/sections/hero/crop.png .screens/hero.png
+ *   node tools/compare.mjs design/figma/pages/home/hero/crop.png .screens/hero.png
  *
  * Печатает размеры, среднюю разницу, долю пикселей > 16 и худшие полосы.
  * Пиксель — сигнал регрессии, не ворота приёмки: текст растеризуется по-разному,

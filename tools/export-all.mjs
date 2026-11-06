@@ -27,9 +27,9 @@ const slugify = (s) =>
 const queue = [];
 for (const page of data.pages) {
   for (const s of page.sections) {
-    const slug = `${page.key}-${slugify(s.name)}`;
-    const done = existsSync(join(root, 'design/figma/sections', slug, 'spec.json'));
-    if (!done || force) queue.push({ ...s, slug, page: page.key });
+    const sectionSlug = slugify(s.name);
+    const done = existsSync(join(root, 'design/figma/pages', page.key, sectionSlug, 'spec.json'));
+    if (!done || force) queue.push({ ...s, sectionSlug, page: page.key });
   }
 }
 
@@ -47,7 +47,7 @@ for (const [i, s] of queue.entries()) {
   try {
     const out = execFileSync(
       process.execPath,
-      [join(root, 'tools/export-section.mjs'), s.id, '--name', s.slug],
+      [join(root, 'tools/export-section.mjs'), s.id, '--name', s.sectionSlug],
       { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 16 * 1024 * 1024 },
     );
     const line = out.trim().split('\n').find((l) => l.startsWith('фото:')) ?? '';

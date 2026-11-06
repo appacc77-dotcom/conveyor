@@ -63,8 +63,8 @@
 
 1. **Узел.** `exec-js` обход дерева: `read-tree.js` → координаты, размеры,
    авто-раскладка, видимость, тексты, заливки.
-2. **Спека.** Числа из дерева → `design/figma/sections/<section>/spec.json`.
-3. **Кроп.** `figma-agent export-png --node <id>` → `design/figma/sections/`.
+2. **Спека.** Числа из дерева → `design/figma/pages/<page>/<section>/spec.json`.
+3. **Кроп.** `figma-agent export-png --node <id>` → `design/figma/pages/`.
 4. **Ассеты.** Фото — по `imageHash` (`getImageByHash().getBytesAsync()`), иконки —
    `exportAsync({format:'SVG'})`. Не рисуются руками.
 5. **Сборка.** Компонент из токенов; размеры не вписываются под место вызова.

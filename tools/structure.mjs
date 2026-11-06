@@ -7,7 +7,7 @@
  * Вход (всё уже на диске):
  *   design/figma/project.json        — страницы и канонические фреймы
  *   design/figma/live/structure.json — секции каждой страницы из живого файла
- *   design/figma/sections/<slug>/    — spec.json, crop.png, gate.json, pixel.json
+ *   design/figma/pages/<page>/<section>/    — spec.json, crop.png, gate.json, pixel.json
  *   .screens/<slug>.png              — снимок собранной секции
  *
  * Выход:
@@ -30,23 +30,29 @@ mkdirSync(outDir, { recursive: true });
 // --- индекс секций: id узла → папка с артефактами -------------------------
 const byNode = new Map();
 if (existsSync(sectionsRoot)) {
-  for (const slug of readdirSync(sectionsRoot)) {
-    const dir = join(sectionsRoot, slug);
-    const specPath = join(dir, 'spec.json');
-    if (!existsSync(specPath)) continue;
-    const spec = JSON.parse(readFileSync(specPath, 'utf8'));
+  for (const pageDir of readdirSync(sectionsRoot)) {
+    const pagePath = join(sectionsRoot, pageDir);
+    if (!statSync(pagePath).isDirectory()) continue;
+    for (const sectionDir of readdirSync(pagePath)) {
+      const dir = join(pagePath, sectionDir);
+      const specPath = join(dir, 'spec.json');
+      if (!existsSync(specPath)) continue;
+      const slug = `${pageDir}-${sectionDir}`;
+      const spec = JSON.parse(readFileSync(specPath, 'utf8'));
     const read = (name) => {
       const p = join(dir, name);
       return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null;
     };
     byNode.set(spec.section.id, {
       slug,
+      dir: dir.slice(root.length + 1),
       spec,
       gate: read('gate.json'),
       pixel: read('pixel.json'),
       image: read('image.json'),
       assets: countAssets(spec),
-    });
+      });
+    }
   }
 }
 
@@ -116,6 +122,7 @@ for (const [pageKey, pageId] of Object.entries(project.pages)) {
       w: child.w,
       h: child.h,
       slug: entry?.slug ?? null,
+      dir: entry?.dir ?? null,
       status,
       gate: entry?.gate
         ? { ok: entry.gate.ok, red: entry.gate.red, marked: entry.gate.marked, nodes: entry.gate.nodes, coverage: entry.gate.coverage, worstDelta: entry.gate.worstDelta, at: entry.gate.at }

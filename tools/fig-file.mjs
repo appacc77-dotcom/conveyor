@@ -15,7 +15,7 @@
  * независимую сверку. Картинки из него должны совпадать с выгруженными
  * байт в байт, иначе где-то потеря.
  */
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { zstdDecompressSync, inflateRawSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { join, basename } from 'node:path';
@@ -175,15 +175,19 @@ if (command === 'inspect') {
 
 // --- вспомогательное -------------------------------------------------------
 function readSpecs() {
-  const dir = join(root, 'design/figma/sections');
+  const dir = join(root, 'design/figma/pages');
   if (!existsSync(dir)) return [];
   const out = [];
-  for (const slug of readdirSync(dir)) {
-    const p = join(dir, slug, 'spec.json');
-    if (!existsSync(p)) continue;
-    try {
-      out.push(JSON.parse(readFileSync(p, 'utf8')));
-    } catch {}
+  for (const pageDir of readdirSync(dir)) {
+    const pagePath = join(dir, pageDir);
+    if (!statSync(pagePath).isDirectory()) continue;
+    for (const sectionDir of readdirSync(pagePath)) {
+      const p = join(pagePath, sectionDir, 'spec.json');
+      if (!existsSync(p)) continue;
+      try {
+        out.push(JSON.parse(readFileSync(p, 'utf8')));
+      } catch {}
+    }
   }
   return out;
 }

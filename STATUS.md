@@ -18,7 +18,7 @@ desktop: **«Website Syntonia2»**, `fileKey NInjODHyOOjIitF3lq4Vpe`.
 | P0 Ingest | **готово** | `design/figma/live/{structure,ds,reality}.json` + `project.json` с fileKey |
 | P1 Reality | **готово** | 0 отмасштабированных из 1145; 48 фреймов шириной 1440 |
 | G0 | **закрыт** | см. «Ревизия 06.11.2026» в `docs/decisions.md` |
-| P2 Resolve | **готово для hero** | `design/figma/sections/hero/spec.json` |
+| P2 Resolve | **готово для hero** | `design/figma/pages/home/hero/spec.json` |
 | P3 Model | **готово для первого шага** | `npm run ds:tokens` → 41 переменная, 34 стиля |
 | P4 Components | начато | `ds/btn-primary`, `ds/arrow-quiet`, `ds/play` |
 | P5 Pages | идёт | `index.astro` — hero + pain, 1487 px |
@@ -42,8 +42,8 @@ desktop: **«Website Syntonia2»**, `fileKey NInjODHyOOjIitF3lq4Vpe`.
 npm run ds:tokens                                  # токены и типографика из живого файла
 npm run build
 npm run shot -- .hero .screens/hero.png 1440       # снимок элемента
-npm run measure -- design/figma/sections/hero/spec.json        # геометрия по data-figma-node
-npm run compare -- design/figma/sections/hero/crop.png .screens/hero.png
+npm run measure -- design/figma/pages/home/hero/spec.json        # геометрия по data-figma-node
+npm run compare -- design/figma/pages/home/hero/crop.png .screens/hero.png
 ```
 
 

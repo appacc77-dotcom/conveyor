@@ -2,8 +2,8 @@
 /**
  * Ворота геометрии: DOM против spec.json, связь через data-figma-node.
  *
- *   node tools/measure.mjs design/figma/sections/hero/spec.json
- *   node tools/measure.mjs design/figma/sections/hero/spec.json --tol 1 --url /
+ *   node tools/measure.mjs design/figma/pages/home/hero/spec.json
+ *   node tools/measure.mjs design/figma/pages/home/hero/spec.json --tol 1 --url /
  *
  * Как читается связь:
  *   - элемент с data-figma-node="79:106" сверяется с узлом 79:106 из спеки;
@@ -32,7 +32,7 @@ const arg = (name, fallback) => {
 };
 
 if (!specPath) {
-  console.error('Укажи спеку: node tools/measure.mjs design/figma/sections/hero/spec.json');
+  console.error('Укажи спеку: node tools/measure.mjs design/figma/pages/home/hero/spec.json');
   process.exit(2);
 }
 

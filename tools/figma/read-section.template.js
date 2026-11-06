@@ -240,7 +240,12 @@ for (const i of icons) {
   uniqueIcons.push(i);
 }
 
+// Страница — предок узла, а не figma.currentPage: открыта может быть любая.
+let pageNode = root;
+while (pageNode && pageNode.type !== "PAGE") pageNode = pageNode.parent;
+
 return {
+  page: { id: pageNode?.id ?? null, name: pageNode?.name ?? "page" },
   root: { id: root.id, name: root.name, w: Math.round(root.width), h: Math.round(root.height) },
   count: nodes.length,
   nodes,
