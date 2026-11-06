@@ -87,5 +87,9 @@
     "quiz": "/quiz.html",
     "booking": "/booking.html",
     "method": "/method.html"
+  },
+  "api": {
+    "tokenFile": "../syntonia-deepseek/.figma-token",
+    "fileEndpoint": "/v1/files"
   }
 }

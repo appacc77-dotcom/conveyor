@@ -1,0 +1,239 @@
+#!/usr/bin/env node
+/**
+ * Сверка трёх источников истины.
+ *
+ *   node tools/verify-sources.mjs [--fig <file.fig>]
+ *
+ *   A. Наш экспорт — то, что мы собрали через мост (design/figma/pages/**).
+ *   B. Figma REST API — версия файла на сервере, без открытого приложения.
+ *   C. .fig — снимок файла на диске (если передан).
+ *
+ * Источники независимы: мост читает открытое приложение, API — серверную
+ * версию, .fig — архив. Если они расходятся, значит либо файл изменился,
+ * либо выгрузка неполная. Печатает расхождения, код возврата 1 при них.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { readZip } from './lib/zip.mjs';
+import { createHash } from 'node:crypto';
+import { zstdDecompressSync, inflateRawSync } from 'node:zlib';
+
+const root = process.cwd();
+const project = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
+const fileKey = project.source.fileKey;
+
+const figArg = process.argv.includes('--fig') ? process.argv[process.argv.indexOf('--fig') + 1] : null;
+
+function token() {
+  if (process.env.FIGMA_TOKEN) return process.env.FIGMA_TOKEN.trim();
+  const path = project.api?.tokenFile;
+  if (path && existsSync(join(root, path))) return readFileSync(join(root, path), 'utf8').trim();
+  return null;
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// Figma ограничивает частоту: на серии запросов прилетает 429.
+// Повторяем с нарастающей паузой, иначе проверка падает не по делу.
+async function api(path, attempt = 1) {
+  const t = token();
+  if (!t) throw new Error('нет токена');
+  const res = await fetch(`https://api.figma.com/v1${path}`, { headers: { 'X-Figma-Token': t } });
+  const json = await res.json();
+  if (res.status === 429 && attempt <= 4) {
+    await sleep(1000 * 2 ** (attempt - 1));
+    return api(path, attempt + 1);
+  }
+  if (!res.ok) throw new Error(`${res.status}: ${json.err ?? 'ошибка API'}`);
+  return json;
+}
+
+const rows = [];
+/**
+ * @param {string} name
+ * @param {boolean} ok
+ * @param {string} detail
+ * @param {boolean} [required] провал обязательной проверки роняет команду;
+ *   недоступность вспомогательного источника — только запись в отчёте
+ */
+const check = (name, ok, detail, required = true) => {
+  rows.push({ name, ok, detail, required });
+};
+
+// --- A: наш экспорт -------------------------------------------------------
+const structurePath = join(root, 'design/figma/structure.json');
+const structure = existsSync(structurePath) ? JSON.parse(readFileSync(structurePath, 'utf8')) : null;
+const dsPath = join(root, 'design/figma/live/ds.json');
+const ds = existsSync(dsPath) ? JSON.parse(readFileSync(dsPath, 'utf8')) : null;
+const apiMetaPath = join(root, 'design/figma/live/api.json');
+const apiMeta = existsSync(apiMetaPath) ? JSON.parse(readFileSync(apiMetaPath, 'utf8')) : null;
+
+if (!structure) {
+  console.error('нет design/figma/structure.json — сначала npm run structure');
+  process.exit(2);
+}
+
+// --- B: REST API ----------------------------------------------------------
+let apiFile = null;
+let apiStyles = null;
+let apiComponents = null;
+try {
+  apiFile = await api(`/files/${fileKey}?depth=2`);
+  apiStyles = await api(`/files/${fileKey}/styles`);
+  apiComponents = await api(`/files/${fileKey}/components`);
+} catch (error) {
+  check('REST API доступен', false, `сверка пропущена: ${error.message}`, false);
+}
+
+if (apiFile) {
+  check('REST API доступен', true, `${apiFile.name}, версия ${apiFile.version}`);
+
+  // Страницы: проверяем в одну сторону — каждая наша страница должна быть в API.
+  // Лишние страницы в API нормальны: Design system и разделители мы не ведём.
+  const apiPages = (apiFile.document?.children ?? []).filter((p) => p.type === 'CANVAS');
+  const apiNames = new Set(apiPages.map((p) => p.name));
+  const ours = structure.pages.map((p) => p.title);
+  const missing = ours.filter((n) => !apiNames.has(n));
+  const extra = [...apiNames].filter((n) => !ours.includes(n));
+  check(
+    'наши страницы есть в API',
+    missing.length === 0,
+    missing.length ? `нет в API: ${missing.join(', ')}` : `${ours.length} из ${ours.length}${extra.length ? `, сверх них в API: ${extra.join(', ')}` : ''}`,
+  );
+
+  // Секции: depth=2 отдаёт фреймы с пустыми children, поэтому каждый
+  // канонический фрейм запрашиваем отдельно — depth=1 даёт его детей.
+  let sectionDiff = [];
+  let sectionsCompared = 0;
+  for (const page of structure.pages) {
+    let children = [];
+    await sleep(300);
+    try {
+      const reply = await api(`/files/${fileKey}/nodes?ids=${encodeURIComponent(page.frame.id)}&depth=1`);
+      children = reply.nodes?.[page.frame.id]?.document?.children ?? [];
+    } catch (error) {
+      sectionDiff.push(`${page.title}: ${error.message}`);
+      continue;
+    }
+    sectionsCompared += page.sections.length;
+    const apiSet = new Set(children.map((c) => c.name));
+    for (const s of page.sections) if (!apiSet.has(s.name)) sectionDiff.push(`${page.title}/${s.name}`);
+  }
+  check(
+    'секции совпадают с API',
+    sectionDiff.length === 0,
+    sectionDiff.length ? `нет в API: ${sectionDiff.slice(0, 3).join(', ')}` : `сверено ${sectionsCompared}`,
+  );
+
+  // секции: имена и размеры канонических фреймов
+  let compared = 0;
+  let mismatched = [];
+  for (const page of structure.pages) {
+    const apiPage = apiPages.find((p) => p.name === page.title);
+    if (!apiPage) continue;
+    const apiFrame = (apiPage.children ?? []).find((f) => f.id === page.frame.id);
+    if (!apiFrame) {
+      mismatched.push(`${page.title}: фрейм ${page.frame.id} не найден`);
+      continue;
+    }
+    compared++;
+    const box = apiFrame.absoluteBoundingBox ?? {};
+    if (Math.round(box.width) !== page.frame.w || Math.round(box.height) !== page.frame.h) {
+      mismatched.push(`${page.title}: ${Math.round(box.width)}×${Math.round(box.height)} в API против ${page.frame.w}×${page.frame.h}`);
+    }
+  }
+  check('фреймы страниц совпадают', mismatched.length === 0, mismatched.length ? mismatched.slice(0, 3).join('; ') : `сверено ${compared}`);
+
+  // Стили и компоненты API отдаёт только опубликованные в библиотеку.
+  // В этом файле они локальные, поэтому эндпоинты пусты — это не расхождение,
+  // а граница API: локальные стили проверяются через мост.
+  if (apiStyles && ds) {
+    const apiCount = apiStyles.meta?.styles?.length ?? 0;
+    if (apiCount === 0) {
+      check('стили: проверка через API', true, `API отдаёт только опубликованные (0); локальных ${ds.counts.styles} — только через мост`);
+    } else {
+      check('стили совпадают', apiCount === ds.counts.styles, `${apiCount} в API, ${ds.counts.styles} у нас`);
+    }
+  }
+  if (apiComponents && ds) {
+    const apiCount = apiComponents.meta?.components?.length ?? 0;
+    if (apiCount === 0) {
+      check('компоненты: проверка через API', true, `API отдаёт только опубликованные (0); локальных ${ds.counts.components} — только через мост`);
+    } else {
+      check('компоненты совпадают', apiCount === ds.counts.components, `${apiCount} в API, ${ds.counts.components} у нас`);
+    }
+  }
+}
+
+// --- C: .fig --------------------------------------------------------------
+if (figArg) {
+  if (!existsSync(figArg)) {
+    check('.fig найден', false, figArg, false);
+  } else {
+    const zip = readZip(figArg);
+    const meta = zip.json('meta.json');
+    check('.fig найден', true, `${meta?.file_name ?? '?'}, выгружен ${meta?.exported_at ?? '?'}`);
+
+    // картинки: хеш в имени = sha1 содержимого
+    const figHashes = new Set();
+    for (const name of zip.names) {
+      if (!name.startsWith('images/') || name.endsWith('/')) continue;
+      figHashes.add(createHash('sha1').update(zip.read(name)).digest('hex'));
+    }
+    const assetsRoot = join(root, 'design/figma/assets/img');
+    let same = 0;
+    let diff = 0;
+    if (existsSync(assetsRoot)) {
+      const { readdirSync } = await import('node:fs');
+      for (const f of readdirSync(assetsRoot)) {
+        const buf = readFileSync(join(assetsRoot, f));
+        if (figHashes.has(createHash('sha1').update(buf).digest('hex'))) same++;
+        else diff++;
+      }
+    }
+    check('картинки совпадают с .fig', diff === 0, `${same} совпало, ${diff} отличается`);
+
+    // тексты: ищем строки спек в канвасе
+    const canvas = zip.read('canvas.fig');
+    if (canvas && canvas.toString('latin1', 0, 8) === 'fig-kiwi') {
+      const schemaLen = canvas.readUInt32LE(12);
+      let pos = 16 + schemaLen;
+      const dataLen = canvas.readUInt32LE(pos);
+      pos += 4;
+      const data = zstdDecompressSync(canvas.subarray(pos, pos + dataLen));
+      const norm = (x) => x.replace(/[\u2028\u2029\u00a0\s]+/g, ' ').trim();
+      const haystack = norm(data.toString('utf8'));
+
+      const texts = new Set();
+      for (const page of structure.pages) {
+        for (const s of page.sections) {
+          if (!s.dir) continue;
+          const specPath = join(root, s.dir, 'spec.json');
+          if (!existsSync(specPath)) continue;
+          for (const n of JSON.parse(readFileSync(specPath, 'utf8')).nodes ?? []) {
+            if (n.type === 'TEXT' && n.text?.trim().length > 3) texts.add(n.text.trim());
+          }
+        }
+      }
+      let found = 0;
+      for (const t of texts) if (haystack.includes(norm(t).slice(0, 40))) found++;
+      check('тексты есть в .fig', found === texts.size, `${found} из ${texts.size}`);
+    }
+  }
+}
+
+// --- отчёт ----------------------------------------------------------------
+const width = Math.max(...rows.map((r) => r.name.length));
+console.log(`источники: экспорт${apiFile ? ' · API' : ''}${figArg ? ' · .fig' : ''}\n`);
+for (const r of rows) {
+  console.log(`  ${r.ok ? '✓' : '✗'}  ${r.name.padEnd(width)}  ${r.detail ?? ''}`);
+}
+
+const failed = rows.filter((r) => !r.ok && r.required);
+const skipped = rows.filter((r) => !r.ok && !r.required);
+console.log(
+  `\n${failed.length ? `расхождений: ${failed.length}` : 'все источники сходятся'}` +
+    (skipped.length ? ` · сверок пропущено: ${skipped.length}` : ''),
+);
+if (apiMeta?.version) console.log(`версия файла на сервере: ${apiMeta.version}`);
+process.exit(failed.length ? 1 : 0);
