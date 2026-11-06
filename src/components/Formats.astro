@@ -199,6 +199,9 @@ const { title, lead, note, slide, tabs } = Astro.props;
     min-height: 296px;
   }
 
+  /* Высота фиксированная, как в макете: у всех пяти активных вариантов 296,
+     хотя описания разной длины. Значит длинный текст обрезается — это
+     поведение файла, а не наше решение (см. docs/FIGMA-ISSUES.md). */
   .format-tab {
     position: relative;
     display: flex;
@@ -207,6 +210,7 @@ const { title, lead, note, slide, tabs } = Astro.props;
     justify-content: space-between;
     gap: var(--space-2xl);
     width: 232px;
+    height: 296px;
     padding: var(--space-m) var(--space-s);
   }
 
@@ -266,6 +270,9 @@ const { title, lead, note, slide, tabs } = Astro.props;
   .format-tab__desc {
     display: none;
     margin: 0;
+    /* 95 px — высота узла описания в макете. */
+    max-height: 95px;
+    overflow: hidden;
     color: var(--color-text-primary);
   }
 
