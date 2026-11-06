@@ -1,0 +1,119 @@
+---
+---
+
+<section class="practice-hero" id="practice" aria-labelledby="practice-title" data-figma-node="409:243">
+  <img
+    class="practice-hero__bg"
+    src="/img/practice-hero.jpg"
+    alt=""
+    width="1400"
+    height="876"
+    fetchpriority="high"
+  />
+  <div class="practice-hero__content">
+    <h1 class="practice-hero__title" id="practice-title">
+      Пространство практики <br />Syntonia
+    </h1>
+    <p class="practice-hero__lead">
+      Практики для самостоятельной внутренней работы, восстановления состояния
+      и&nbsp;бережного движения в&nbsp;глубину.
+    </p>
+  </div>
+</section>
+
+<style>
+  .practice-hero {
+    position: relative;
+    height: 900px;
+    overflow: hidden;
+    color: var(--color-white);
+  }
+
+  .practice-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  .practice-hero__content {
+    position: absolute;
+    left: 64px;
+    bottom: 96px;
+    display: flex;
+    width: 830px;
+    max-width: calc(100% - 128px);
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .practice-hero__title {
+    color: var(--color-white);
+    font-family: var(--font-hero);
+    font-size: 85px;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .practice-hero__lead {
+    width: 520px;
+    max-width: 100%;
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  @media (max-width: 1100px) {
+    .practice-hero {
+      height: 720px;
+    }
+
+    .practice-hero__content {
+      left: 40px;
+      right: 40px;
+      bottom: 48px;
+      width: auto;
+      max-width: none;
+      gap: 28px;
+    }
+
+    .practice-hero__title {
+      font-size: 60px;
+      line-height: 1.04;
+    }
+
+    .practice-hero__lead {
+      width: 440px;
+      font-size: 18px;
+      line-height: 30px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .practice-hero {
+      height: 620px;
+    }
+
+    .practice-hero__content {
+      left: 20px;
+      right: 20px;
+      bottom: 32px;
+      gap: 20px;
+    }
+
+    .practice-hero__title {
+      font-size: 42px;
+      line-height: 1.05;
+    }
+
+    .practice-hero__lead {
+      width: 100%;
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

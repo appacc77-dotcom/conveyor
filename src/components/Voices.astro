@@ -1,0 +1,434 @@
+---
+import { voices } from '../data/voices';
+
+const trackVoices = [voices[voices.length - 1], ...voices, voices[0]];
+---
+
+<section class="voices" aria-labelledby="voices-title" data-figma-node="116:246" data-voices>
+  <img
+    class="voices__bg"
+    src="/img/voices-bg.jpg"
+    alt=""
+    width="1672"
+    height="941"
+    loading="lazy"
+  />
+
+  <div class="voices__inner">
+    <div class="voices__head">
+      <h2 class="voices__title" id="voices-title">Голоса</h2>
+      <p class="voices__lead">
+        О том, как внутренняя работа начинает менять состояние и саму жизнь
+      </p>
+    </div>
+
+    <div class="voices__viewport">
+      <div
+        class="voices__track"
+        data-voices-track
+        style="transform: translateX(-720px)"
+      >
+        {
+          trackVoices.map((voice, index) => {
+            const isClone =
+              index === 0 || index === trackVoices.length - 1;
+            return (
+              <article
+                class="voice-card"
+                aria-hidden={isClone ? 'true' : undefined}
+              >
+                <div class="voice-card__body">
+                  <div class="voice-card__head">
+                    <span class="voice-card__label">{voice.label}</span>
+                    <span class="voice-card__note">{voice.note}</span>
+                  </div>
+                  <span class="voice-card__mark" aria-hidden="true">
+                    ”
+                  </span>
+                  <p class="voice-card__quote">{voice.text}</p>
+                </div>
+                <p class="voice-card__author">— {voice.author}</p>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <div class="voices__controls">
+      <div class="voices__dots" aria-label="Отзывы">
+        {
+          voices.map((voice, index) => (
+            <button
+              class:list={['voices__dot', { 'is-active': index === 0 }]}
+              type="button"
+              aria-label={`Отзыв ${index + 1}: ${voice.author}`}
+              aria-current={index === 0 ? 'true' : undefined}
+              data-voice-dot={index}
+            >
+              <svg viewBox="0 0 21 15" aria-hidden="true">
+                <path d="M2 7.5C6 1.5 13 1 19 7.5C13 14 6 13.5 2 7.5Z" />
+              </svg>
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="voices__arrows">
+        <button
+          class="voices__arrow voices__arrow--prev"
+          type="button"
+          aria-label="Предыдущий отзыв"
+          data-voices-prev
+        >
+          <img src="/icons/slider-arrow.svg" alt="" width="49" height="49" />
+        </button>
+        <button
+          class="voices__arrow voices__arrow--next"
+          type="button"
+          aria-label="Следующий отзыв"
+          data-voices-next
+        >
+          <img src="/icons/slider-arrow.svg" alt="" width="49" height="49" />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-voices]').forEach((root) => {
+    const track = root.querySelector('[data-voices-track]');
+    const dots = [...root.querySelectorAll('[data-voice-dot]')];
+    if (!track || !dots.length) return;
+
+    let active = 0;
+
+    const step = () => {
+      const card = track.querySelector('.voice-card');
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return (card?.getBoundingClientRect().width || 672) + gap;
+    };
+
+    const apply = () => {
+      track.style.transform = `translateX(${-step() * (active + 1)}px)`;
+      dots.forEach((dot, index) => {
+        const isActive = index === active;
+        dot.classList.toggle('is-active', isActive);
+        if (isActive) dot.setAttribute('aria-current', 'true');
+        else dot.removeAttribute('aria-current');
+      });
+    };
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        active = index;
+        apply();
+      });
+    });
+
+    root.querySelector('[data-voices-next]')?.addEventListener('click', () => {
+      active = (active + 1) % dots.length;
+      apply();
+    });
+
+    root.querySelector('[data-voices-prev]')?.addEventListener('click', () => {
+      active = (active - 1 + dots.length) % dots.length;
+      apply();
+    });
+
+    window.addEventListener('resize', apply, { passive: true });
+    apply();
+  });
+</script>
+
+<style>
+  .voices {
+    position: relative;
+    height: 920px;
+    padding: 96px 24px;
+    overflow: hidden;
+  }
+
+  .voices__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .voices__inner {
+    position: relative;
+    z-index: 1;
+    width: 1280px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .voices__head {
+    width: 711px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .voices__title {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 60px;
+  }
+
+  .voices__lead {
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .voices__viewport {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .voices__track {
+    display: flex;
+    gap: 48px;
+    width: max-content;
+    transition: transform 0.45s ease;
+  }
+
+  .voice-card {
+    flex: none;
+    width: 672px;
+    height: 482px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+  }
+
+  .voice-card__body {
+    height: 343px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow: hidden;
+  }
+
+  .voice-card__head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .voice-card__label {
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 23px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .voice-card__note {
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  .voice-card__mark {
+    display: block;
+    height: 24px;
+    overflow: hidden;
+    color: var(--color-olive);
+    font-family: var(--font-quote);
+    font-size: 48px;
+    font-style: italic;
+    line-height: 24px;
+  }
+
+  .voice-card__quote {
+    height: 224px;
+    overflow: hidden;
+    color: var(--color-text);
+    font-family: var(--font-quote);
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 28px;
+  }
+
+  .voice-card__author {
+    margin-top: auto;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+  }
+
+  .voices__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .voices__dots {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .voices__dot {
+    width: 21px;
+    height: 15px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .voices__dot svg {
+    width: 21px;
+    height: 15px;
+    overflow: visible;
+  }
+
+  .voices__dot svg path {
+    fill: none;
+    stroke: var(--color-accent);
+    stroke-width: 1;
+  }
+
+  .voices__dot.is-active svg path {
+    fill: var(--color-accent);
+  }
+
+  .voices__dot:focus-visible,
+  .voices__arrow:focus-visible {
+    outline: 2px solid #b8870a;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  .voices__arrows {
+    display: flex;
+    gap: 16px;
+  }
+
+  .voices__arrow {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+
+  .voices__arrow--prev img {
+    transform: rotate(180deg);
+  }
+
+  .voices__arrow img {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 1100px) {
+    .voices {
+      height: auto;
+      padding: 64px 24px;
+    }
+
+    .voices__inner {
+      padding-left: 0;
+      gap: 32px;
+    }
+
+    .voices__track {
+      gap: 24px;
+    }
+
+    .voice-card {
+      width: 86vw;
+      height: auto;
+      min-height: 420px;
+      padding: 32px;
+    }
+
+    .voice-card__body {
+      height: auto;
+    }
+
+    .voice-card__quote {
+      height: auto;
+      max-height: none;
+    }
+
+    .voices__controls {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .voices {
+      padding: 56px 16px;
+    }
+
+    .voices__head {
+      width: 100%;
+    }
+
+    .voices__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    .voices__lead {
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .voice-card {
+      width: 86vw;
+      padding: 24px;
+      border-radius: 12px;
+    }
+
+    .voice-card__label {
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .voice-card__quote {
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    .voices__dot {
+      width: 18px;
+    }
+
+    .voices__dot svg {
+      width: 18px;
+    }
+  }
+</style>

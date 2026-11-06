@@ -1,0 +1,23 @@
+:root {
+  /* Цвета из Figma (переменные и фактические заливки первых блоков) */
+  --color-page: #fbf8f1;
+  --color-text: #433d34;
+  --color-heading: #3a2214;
+  --color-muted: #7a756d;
+  --color-olive: #5a5a36;
+  --color-accent: #8a8560;
+  --color-white: #ffffff;
+  --color-header: rgba(58, 51, 35, 0.85);
+  --color-overlay: rgba(0, 0, 0, 0.12);
+
+  /* Шрифты */
+  --font-body: "Golos Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-hero: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-script: "Great Vibes", cursive;
+  --font-signature: "Hurricane", cursive;
+  --font-quote: "Lora", Georgia, "Times New Roman", serif;
+
+  --radius-btn: 4px;
+  --radius-header: 16px;
+}

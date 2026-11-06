@@ -1,0 +1,266 @@
+---
+import type { PracticeCardData } from '../data/practice';
+import PracticeSoundroadMin from './PracticeSoundroadMin.astro';
+
+interface Props {
+  item: PracticeCardData;
+}
+
+const { item } = Astro.props;
+const titleLines = item.title.split('\n');
+const textLines = item.text ? item.text.split('\n') : [];
+---
+
+<li
+  class="practice-card-pay"
+  data-figma-node={item.figmaNode}
+  style={`--card-height: ${item.cardHeight}px; --title-height: ${item.titleHeight}px; --text-gap: ${item.textGap}px; --title-size: ${item.titleSize}px`}
+>
+  <img
+    class="practice-card-pay__image"
+    src={item.image}
+    alt=""
+    width="236"
+    height="372"
+    loading="lazy"
+    style={`object-position: ${item.imagePosition ?? '50% 50%'}`}
+  />
+  <div class="practice-card-pay__body">
+    <div class="practice-card-pay__text">
+      <h3 class="practice-card-pay__title">
+        {titleLines.map((line, index) => (
+          <>
+            {index > 0 && <br />}
+            {line}
+          </>
+        ))}
+      </h3>
+      <p class="practice-card-pay__desc">
+        {textLines.map((line, index) => (
+          <>
+            {index > 0 && <br />}
+            {line}
+          </>
+        ))}
+      </p>
+    </div>
+
+    <PracticeSoundroadMin fragment={item.fragment ?? '1:23'} label={item.title} />
+
+    <div class="practice-card-pay__action">
+      <button
+        class="practice-card-pay__buy"
+        type="button"
+        aria-label={`Купить: ${item.title.replace(/\n/g, ' ')}`}
+        data-practice-buy
+      >
+        Купить
+        <img src="/icons/icon-arrow.svg" alt="" width="14" height="14" />
+      </button>
+      <p class="practice-card-pay__meta">
+        <span class="practice-card-pay__duration">
+          <img src="/icons/practice-clock.svg" alt="" width="13" height="14" />
+          {item.duration}
+        </span>
+        <span class="practice-card-pay__dot" aria-hidden="true"></span>
+        <span>{item.price}</span>
+      </p>
+    </div>
+  </div>
+</li>
+
+<style>
+  .practice-card-pay {
+    display: grid;
+    grid-template-columns: 236px minmax(0, 1fr);
+    width: 100%;
+    height: var(--card-height, 371.5px);
+    overflow: hidden;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--practice-paper) 0%, var(--practice-card-shade) 100%);
+  }
+
+  .practice-card-pay__image {
+    width: 236px;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .practice-card-pay__body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 32px 32px 20px;
+  }
+
+  .practice-card-pay__text {
+    flex: none;
+    height: 152px;
+  }
+
+  .practice-card-pay__title {
+    max-width: 324px;
+    min-height: var(--title-height, 76px);
+    color: var(--practice-text);
+    font-family: var(--font-display);
+    font-size: var(--title-size, 24px);
+    font-weight: 300;
+    line-height: 1.1875;
+  }
+
+  .practice-card-pay__desc {
+    max-width: 309px;
+    margin-top: var(--text-gap, 24px);
+    color: var(--practice-text);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 26px;
+  }
+
+  .practice-card-pay > :global(.soundroad-min) {
+    flex: none;
+    margin-top: 24px;
+  }
+
+  .practice-card-pay__action {
+    display: flex;
+    flex: none;
+    align-items: flex-start;
+    gap: 32px;
+    margin-top: 24px;
+  }
+
+  .practice-card-pay__buy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 44.7px;
+    padding: 0 24px;
+    border-radius: 4px;
+    background-color: var(--practice-olive);
+    background-image: url('/img/btn-texture.jpg');
+    background-position: center;
+    background-size: cover;
+    color: var(--practice-button-text);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0.03em;
+  }
+
+  .practice-card-pay__buy img {
+    flex: none;
+    width: 14px;
+    height: 14px;
+  }
+
+  .practice-card-pay__buy:hover {
+    opacity: 0.92;
+  }
+
+  .practice-card-pay__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    color: var(--practice-text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 24px;
+    white-space: nowrap;
+  }
+
+  .practice-card-pay__duration {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .practice-card-pay__duration img {
+    width: 13px;
+    height: 14px;
+  }
+
+  .practice-card-pay__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 1199px) {
+    .practice-card-pay {
+      grid-template-columns: 236px minmax(0, 1fr);
+      height: auto;
+      min-height: 371.5px;
+    }
+
+    .practice-card-pay__body {
+      height: auto;
+      min-height: 371.5px;
+    }
+
+    .practice-card-pay__text {
+      height: auto;
+      min-height: 152px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .practice-card-pay {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+
+    .practice-card-pay__image {
+      width: 100%;
+      height: 220px;
+    }
+
+    .practice-card-pay__body {
+      min-height: 0;
+      padding: 24px 20px 20px;
+    }
+
+    .practice-card-pay__text {
+      min-height: 0;
+    }
+
+    .practice-card-pay__title {
+      max-width: none;
+      min-height: 0;
+      font-size: 20px;
+      line-height: 25px;
+    }
+
+    .practice-card-pay__desc {
+      max-width: none;
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 23px;
+    }
+
+    .practice-card-pay > :global(.soundroad-min) {
+      margin-top: 18px;
+    }
+
+    .practice-card-pay__action {
+      margin-top: 18px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .practice-card-pay__buy {
+      height: 44px;
+    }
+
+    .practice-card-pay__meta {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+</style>

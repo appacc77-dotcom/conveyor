@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import BookingHero from '../components/BookingHero.astro';
+import BookingFormats from '../components/BookingFormats.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Форматы работы и запись — Syntonia"
+  description="Выберите формат работы и оставьте заявку на личную встречу."
+>
+  <SiteHeader />
+  <main id="main">
+    <BookingHero />
+    <BookingFormats />
+  </main>
+  <Footer />
+</BaseLayout>

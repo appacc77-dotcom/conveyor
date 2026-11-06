@@ -1,0 +1,240 @@
+---
+import type { PracticeCardData } from '../data/practice';
+
+interface Props {
+  item: PracticeCardData;
+}
+
+const { item } = Astro.props;
+const titleLines = item.title.split('\n');
+const textLines = item.text ? item.text.split('\n') : [];
+---
+
+<li
+  class="practice-card-free"
+  data-figma-node={item.figmaNode}
+  style={`--card-height: ${item.cardHeight}px; --media-position: ${item.imagePosition ?? '50% 50%'}`}
+>
+  <img
+    class="practice-card-free__image"
+    src={item.image}
+    alt=""
+    width="296"
+    height="256"
+    loading="lazy"
+    style={`object-position: ${item.imagePosition ?? '50% 50%'}`}
+  />
+  <div class="practice-card-free__body">
+    <div class="practice-card-free__text">
+      <h3 class="practice-card-free__title">
+        {titleLines.map((line, index) => (
+          <>
+            {index > 0 && <br />}
+            {line}
+          </>
+        ))}
+      </h3>
+      <p class="practice-card-free__desc">
+        {textLines.map((line, index) => (
+          <>
+            {index > 0 && <br />}
+            {line}
+          </>
+        ))}
+      </p>
+    </div>
+
+    <div class="practice-card-free__action">
+      <p class="practice-card-free__meta">
+        <span class="practice-card-free__duration">
+          <img src="/icons/practice-clock.svg" alt="" width="13" height="14" />
+          {item.duration}
+        </span>
+        <span class="practice-card-free__free">Бесплатно</span>
+      </p>
+      <button
+        class="practice-card-free__listen"
+        type="button"
+        aria-label={`Прослушать практику: ${item.title.replace(/\n/g, ' ')}`}
+        data-practice-audio
+      >
+        Прослушать практику
+        <img src="/icons/icon-arrow.svg" alt="" width="14" height="14" />
+      </button>
+    </div>
+  </div>
+</li>
+
+<style>
+  .practice-card-free {
+    display: flex;
+    flex: 0 0 296px;
+    flex-direction: column;
+    width: 296px;
+    min-height: var(--card-height, 470.72px);
+    overflow: hidden;
+    border-radius: 16px;
+    background: linear-gradient(180deg, var(--practice-paper) 30%, var(--practice-sand) 100%);
+  }
+
+  .practice-card-free__image {
+    width: 296px;
+    height: 256px;
+    object-fit: cover;
+  }
+
+  .practice-card-free__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 24px 12px;
+  }
+
+  .practice-card-free__text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .practice-card-free__title {
+    color: var(--practice-text);
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+  }
+
+  .practice-card-free__desc {
+    color: var(--practice-muted);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .practice-card-free__action {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .practice-card-free__meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 22px;
+  }
+
+  .practice-card-free__duration {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--practice-text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 20px;
+    white-space: nowrap;
+  }
+
+  .practice-card-free__duration img {
+    width: 13px;
+    height: 14px;
+  }
+
+  .practice-card-free__free {
+    display: inline-flex;
+    align-items: center;
+    height: 22px;
+    padding: 0 8px;
+    border: 1px solid var(--practice-accent);
+    border-radius: 4px;
+    color: var(--practice-text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 20px;
+    white-space: nowrap;
+  }
+
+  .practice-card-free__listen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    height: 45px;
+    padding: 0 12px;
+    border-radius: 4px;
+    background-color: var(--practice-olive);
+    background-image: url('/img/btn-texture.jpg');
+    background-position: center;
+    background-size: cover;
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 21px;
+    letter-spacing: 0.03em;
+  }
+
+  .practice-card-free__listen img {
+    flex: none;
+    width: 14px;
+    height: 14px;
+  }
+
+  .practice-card-free__listen:hover {
+    opacity: 0.92;
+  }
+
+  @media (max-width: 1100px) {
+    .practice-card-free {
+      flex-basis: 296px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .practice-card-free {
+      flex: 0 0 272px;
+      width: 272px;
+      min-height: 0;
+    }
+
+    .practice-card-free__image {
+      width: 272px;
+      height: 230px;
+    }
+
+    .practice-card-free__body {
+      padding: 20px 20px 12px;
+    }
+
+    .practice-card-free__title {
+      font-size: 19px;
+      line-height: 26px;
+    }
+
+    .practice-card-free__desc {
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .practice-card-free__meta {
+      gap: 12px;
+    }
+
+    .practice-card-free__duration,
+    .practice-card-free__free {
+      font-size: 14px;
+    }
+
+    .practice-card-free__free {
+      padding: 0 6px;
+    }
+
+    .practice-card-free__listen {
+      height: 44px;
+      font-size: 16px;
+    }
+  }
+</style>

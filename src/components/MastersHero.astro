@@ -1,0 +1,434 @@
+---
+import AudioButton from './AudioButton.astro';
+import Button from './Button.astro';
+import MasterPlayer from './MasterPlayer.astro';
+
+const topics = [
+  {
+    number: '01',
+    title: 'Видеть глубже',
+    text: 'Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.',
+    draft: false,
+  },
+  {
+    number: '02',
+    title: 'Путь в профессию',
+    text: 'Текст раздела ожидается от заказчика.',
+    draft: true,
+  },
+  {
+    number: '03',
+    title: 'Суть моего взгляда',
+    text: 'Текст раздела ожидается от заказчика.',
+    draft: true,
+  },
+  {
+    number: '04',
+    title: 'Ясность рядом',
+    text: 'Текст раздела ожидается от заказчика.',
+    draft: true,
+  },
+  {
+    number: '05',
+    title: 'Пространство Syntonia',
+    text: 'Текст раздела ожидается от заказчика.',
+    draft: true,
+  },
+];
+---
+
+<section
+  class="masters-hero"
+  id="founder-hero"
+  aria-labelledby="founder-title"
+  data-figma-node="217:238"
+>
+  <div class="masters-hero__media">
+    <img
+      class="masters-hero__image"
+      src="/img/masters-hero.jpg"
+      alt="Екатерина Лебедева сидит в кресле у оливковой стены"
+      width="1752"
+      height="1762"
+      fetchpriority="high"
+    />
+    <span class="masters-hero__shade" aria-hidden="true"></span>
+
+    <div class="masters-hero__content">
+      <h1 class="masters-hero__title" id="founder-title">
+        Екатерина Лебедева
+      </h1>
+      <p class="masters-hero__role">
+        Психолог. Основатель Syntonia. Автор метода
+      </p>
+      <p class="masters-hero__quote">
+        Я не работаю вокруг проблемы. Я веду к её источнику.
+      </p>
+      <div class="masters-hero__audio">
+        <AudioButton label="Услышать голос" />
+      </div>
+      <div class="masters-hero__player">
+        <MasterPlayer
+          time="1:25"
+          teaser="Можно многое понимать про себя и всё равно жить в одном и том же круге событий. Потому что вашей жизнью управляет не только то, что вы осознаёте."
+          playLabel="Слушать голос Екатерины Лебедевой"
+        />
+      </div>
+    </div>
+  </div>
+
+  <aside class="masters-hero__aside" aria-labelledby="founder-story-title">
+    <h2 class="visually-hidden" id="founder-story-title">
+      Разделы о мастере
+    </h2>
+    <div class="masters-hero__panel">
+      <ol class="masters-topics" id="founder-story">
+        {
+          topics.map((topic, index) => (
+            <li>
+              <details class="masters-topic" open={index === 0}>
+                <summary class="masters-topic__summary">
+                  <span class="masters-topic__title">{topic.title}</span>
+                  <span class="masters-topic__num" aria-hidden="true">
+                    {topic.number}
+                  </span>
+                </summary>
+                <div
+                  class:list={['masters-topic__text', { 'is-draft': topic.draft }]}
+                  data-draft={topic.draft ? '' : undefined}
+                >
+                  {
+                    topic.text.split('\n').map((paragraph) => (
+                      <p>{paragraph}</p>
+                    ))
+                  }
+                </div>
+              </details>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="masters-hero__start">
+        <Button
+          href="/quiz.html"
+          label="с чего начать"
+          variant="textured"
+          caps
+        />
+      </div>
+    </div>
+  </aside>
+</section>
+
+<style>
+  .masters-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 564px;
+    height: 839px;
+    background: var(--masters-bg);
+  }
+
+  .masters-hero__media {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .masters-hero__image {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 50%;
+  }
+
+  .masters-hero__shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .masters-hero__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 478px;
+    max-width: 100%;
+    height: 100%;
+    padding: 231px 48px 48px;
+  }
+
+  .masters-hero__title {
+    max-width: 382px;
+    color: var(--masters-white);
+    font-family: var(--font-display);
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .masters-hero__role {
+    margin-top: 32px;
+    max-width: 382px;
+    color: var(--masters-white);
+    font-family: var(--font-body);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+  }
+
+  .masters-hero__quote {
+    margin-top: 32px;
+    max-width: 382px;
+    color: var(--masters-white);
+    font-family: var(--font-quote);
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .masters-hero__audio {
+    margin-top: 32px;
+  }
+
+  .masters-hero__player {
+    margin-top: 32px;
+  }
+
+  .masters-hero__aside {
+    display: flex;
+    padding: 128px 24px 24px;
+    background: var(--masters-bg);
+  }
+
+  .masters-hero__panel {
+    position: relative;
+    isolation: isolate;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding: 32px;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .masters-hero__panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url('/img/masters-stone.jpg') center / 100% 100% no-repeat;
+    opacity: 0.85;
+  }
+
+  .masters-topics {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .masters-hero__start {
+    align-self: flex-start;
+  }
+
+  /* В Figma у кнопки «с чего начать» паддинг 24, а не 16, как у btn--m:
+     отсюда ширина 207. Button API такого размера не имеет — правим только
+     паддинг на месте вызова, не меняя общий компонент. */
+  .masters-hero__start :global(.btn) {
+    padding-inline: 24px;
+  }
+
+  .masters-topic {
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--masters-line);
+  }
+
+  .masters-topic__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 29px;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .masters-topic__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .masters-topic__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--masters-white);
+    font-family: var(--font-display);
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 29px;
+  }
+
+  .masters-topic__title::before {
+    content: "";
+    flex: none;
+    width: 3px;
+    height: 24px;
+    border-radius: 2px;
+    background: var(--masters-accent);
+  }
+
+  .masters-topic__num {
+    flex: none;
+    color: var(--masters-sand);
+    font-family: var(--font-script);
+    font-size: 27px;
+    line-height: 20px;
+  }
+
+  .masters-topic__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+    color: var(--masters-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .masters-topic__text.is-draft {
+    color: var(--masters-text);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 1100px) {
+    .masters-hero {
+      display: block;
+      height: auto;
+    }
+
+    .masters-hero__media {
+      min-height: 720px;
+      display: flex;
+    }
+
+    .masters-hero__content {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      min-height: 720px;
+      padding: 132px 40px 40px;
+    }
+
+    .masters-hero__title {
+      font-size: 56px;
+      line-height: 1.05;
+    }
+
+    .masters-hero__role {
+      margin-top: 24px;
+      font-size: 20px;
+      line-height: 30px;
+    }
+
+    .masters-hero__quote {
+      margin-top: 24px;
+      font-size: 21px;
+      line-height: 30px;
+    }
+
+    .masters-hero__audio {
+      margin-top: 24px;
+    }
+
+    .masters-hero__player {
+      margin-top: 24px;
+    }
+
+    .masters-hero__aside {
+      padding: 40px 24px;
+    }
+
+    .masters-hero__panel {
+      gap: 32px;
+      padding: 28px;
+    }
+
+    .masters-topics {
+      gap: 16px;
+    }
+
+    .masters-topic__text {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .masters-hero__media {
+      min-height: 640px;
+    }
+
+    .masters-hero__content {
+      min-height: 640px;
+      padding: 104px 20px 32px;
+    }
+
+    .masters-hero__title {
+      font-size: 40px;
+      line-height: 44px;
+    }
+
+    .masters-hero__role {
+      margin-top: 20px;
+      font-size: 17px;
+      line-height: 26px;
+    }
+
+    .masters-hero__quote {
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 28px;
+    }
+
+    .masters-hero__audio {
+      margin-top: 24px;
+    }
+
+    .masters-hero__player {
+      margin-top: 24px;
+    }
+
+    .masters-hero__aside {
+      padding: 32px 16px 40px;
+    }
+
+    .masters-hero__panel {
+      gap: 24px;
+      padding: 20px;
+    }
+
+    .masters-topic__title {
+      font-size: 20px;
+      line-height: 26px;
+    }
+
+    .masters-topic__num {
+      font-size: 22px;
+    }
+
+    .masters-topic__text {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+</style>

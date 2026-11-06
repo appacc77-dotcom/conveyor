@@ -1,0 +1,227 @@
+---
+import Button from './Button.astro';
+---
+
+<section
+  class="library-book"
+  aria-labelledby="book-title"
+  data-figma-node="267:953"
+>
+  <div class="library-book__inner">
+    <div class="library-book__media">
+      <img
+        class="library-book__image"
+        src="/img/library-book.jpg"
+        alt="Раскрытая книга на деревянном столе, рядом ваза с оливковой ветвью и льняная ткань"
+        width="1280"
+        height="801"
+        loading="lazy"
+      />
+    </div>
+
+    <div class="library-book__content">
+      <p class="library-book__eyebrow">авторская книга</p>
+
+      <div class="library-book__heading">
+        <h2 class="library-book__title" id="book-title">
+          Коды построения реальности. 7&nbsp;состояний жизни
+        </h2>
+        <p class="library-book__author">Екатерина Лебедева</p>
+      </div>
+
+      <p class="library-book__text">
+        Книга о&nbsp;семи состояниях, которые формируют внутренние сценарии
+        человека и&nbsp;влияют на выбор, отношения и&nbsp;ход жизни. Внутри&nbsp;—
+        авторская система, соединяющая психологию, научные опоры, тонкий план
+        и&nbsp;бережные практики для самостоятельной внутренней работы.
+      </p>
+
+      <div class="library-book__action">
+        <Button
+          href="#"
+          label="читать онлайн"
+          variant="textured"
+          size="l"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .library-book {
+    padding-block: 64px;
+    background: var(--color-page);
+  }
+
+  .library-book__inner {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: 24px;
+    display: grid;
+    gap: 32px;
+  }
+
+  .library-book__media {
+    width: 100%;
+    aspect-ratio: 662 / 626;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--library-photo);
+  }
+
+  .library-book__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 72% 50%;
+  }
+
+  .library-book__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+  }
+
+  .library-book__eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .library-book__title {
+    margin-top: 16px;
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.25;
+  }
+
+  .library-book__author {
+    margin-top: 12px;
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.25;
+  }
+
+  .library-book__text {
+    margin-top: 24px;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 28px;
+  }
+
+  .library-book__action {
+    margin-top: 28px;
+  }
+
+  @media (min-width: 768px) {
+    .library-book {
+      padding-block: 80px;
+    }
+
+    .library-book__inner {
+      padding-inline: 32px;
+      grid-template-columns: 280px minmax(0, 1fr);
+      align-items: center;
+      gap: 48px;
+    }
+
+    .library-book__media {
+      aspect-ratio: 662 / 626;
+    }
+
+    .library-book__eyebrow {
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .library-book__title {
+      margin-top: 20px;
+      font-size: 36px;
+      line-height: 1.2;
+    }
+
+    .library-book__author {
+      margin-top: 12px;
+      font-size: 24px;
+    }
+
+    .library-book__text {
+      margin-top: 20px;
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .library-book__action {
+      margin-top: 24px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .library-book {
+      padding-block: 128px;
+    }
+
+    .library-book__inner {
+      padding-inline: 80px;
+      grid-template-columns: 662px 554px;
+      align-items: start;
+      gap: 64px;
+    }
+
+    .library-book__media {
+      height: 626px;
+      aspect-ratio: auto;
+    }
+
+    /* Узел eyebrow: 20/30, трекинг 3.2 px. */
+    .library-book__eyebrow {
+      font-size: 20px;
+      line-height: 30px;
+      letter-spacing: 3.2px;
+    }
+
+    /* Узел book-heading: 32 px до заголовка, заголовок 48/60 (3 строки),
+       автор 32/39 через 16 px. */
+    .library-book__title {
+      margin-top: 32px;
+      font-size: 48px;
+      line-height: 60px;
+    }
+
+    .library-book__author {
+      margin-top: 16px;
+      font-size: 32px;
+      line-height: 39px;
+    }
+
+    .library-book__text {
+      margin-top: 32px;
+      font-size: 20px;
+      line-height: 34px;
+    }
+
+    .library-book__action {
+      margin-top: 32px;
+    }
+
+    /* В макете подпись кнопки — 20/29 (кроп book), при этом узел текста
+       помечен 17 px: берём размер с кропа, иначе кнопка 196 вместо 221. */
+    .library-book__action :global(.btn) {
+      font-size: 20px;
+      line-height: 29px;
+    }
+  }
+</style>

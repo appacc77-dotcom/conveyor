@@ -1,0 +1,178 @@
+---
+import LinkCard from './LinkCard.astro';
+
+const links = [
+  {
+    href: '/quiz.html',
+    title: 'Понять, с чего начать',
+    text: 'Короткая диагностика поможет увидеть, какое состояние сейчас сильнее всего влияет на ваши реакции, выборы и внутренний маршрут.',
+    cta: 'Пройти диагностику',
+    image: '/img/masters-more-diagnostic.jpg',
+    alt: 'Арочный проём с видом на море',
+    figmaNode: '257:470',
+    imagePosition: '66% 50%',
+  },
+  {
+    href: '/method.html',
+    title: 'Узнать о методе',
+    text: 'Если вам важно понять, как работает Syntonia: почему разговор сам по себе не всегда меняет сценарий и что значит идти к источнику состояния.',
+    cta: 'Метод Syntonia',
+    image: '/img/masters-more-method.jpg',
+    alt: 'Коридор с арками и человеком вдали',
+    figmaNode: '257:482',
+    imagePosition: '50% 48%',
+  },
+  {
+    href: '/library.html',
+    title: 'Почитать глубже',
+    text: 'Книга, журнал и тексты Syntonia — для медленного знакомства с подходом, словами и состояниями, к которым можно возвращаться.',
+    cta: 'Открыть библиотеку',
+    image: '/img/masters-more-library.jpg',
+    alt: 'Книжный шкаф у окна',
+    figmaNode: '257:517',
+    imagePosition: '50% 24%',
+  },
+];
+---
+
+<section
+  class="masters-more"
+  id="masters-more"
+  aria-labelledby="more-title"
+  data-figma-node="256:374"
+>
+  <div class="masters-more__inner">
+    <div class="masters-more__intro">
+      <h2 class="masters-more__title" id="more-title">
+        Продолжить знакомство
+      </h2>
+      <div class="masters-more__text">
+        <p>
+          Если вы пока не знаете, с чего начать, не обязательно сразу выбирать
+          мастера.
+        </p>
+        <p>
+          Можно сначала понять метод, пройти диагностику состояния или
+          познакомиться с текстами Syntonia глубже.
+        </p>
+      </div>
+    </div>
+
+    <ul class="masters-more__list">
+      {
+        links.map((link) => (
+          <li>
+            <LinkCard {...link} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .masters-more {
+    padding: 96px clamp(24px, 5.5556vw, 80px);
+    background: linear-gradient(to top right, #f4eee3 0%, #c9bea4 100%);
+  }
+
+  .masters-more__inner {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .masters-more__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .masters-more__title {
+    color: var(--masters-ink);
+    font-family: var(--font-display);
+    font-size: 43px;
+    font-weight: 300;
+    line-height: 54px;
+  }
+
+  .masters-more__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--masters-ink-soft);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 23px;
+  }
+
+  .masters-more__list {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  @media (max-width: 1100px) {
+    .masters-more {
+      padding: 64px clamp(20px, 4vw, 40px);
+    }
+
+    .masters-more__inner {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .masters-more__intro {
+      grid-column: 1 / -1;
+      gap: 24px;
+      max-width: 640px;
+    }
+
+    .masters-more__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    .masters-more__text {
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .masters-more__list {
+      grid-column: 1 / -1;
+      gap: 24px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .masters-more {
+      padding: 48px 16px 56px;
+    }
+
+    .masters-more__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    .masters-more__intro {
+      grid-column: auto;
+    }
+
+    .masters-more__title {
+      font-size: 30px;
+      line-height: 38px;
+    }
+
+    .masters-more__list {
+      grid-column: auto;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+  }
+</style>

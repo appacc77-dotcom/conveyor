@@ -1,0 +1,198 @@
+---
+import TextLink from './TextLink.astro';
+---
+
+<section class="founder" aria-labelledby="founder-title" data-figma-node="79:148">
+  <div class="founder__inner">
+    <article class="founder__card">
+      <div class="founder__photo">
+        <img
+          src="/img/founder.jpg"
+          alt="Екатерина Лебедева в бежевом платье сидит в светлом кресле"
+          width="548"
+          height="565"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="founder__panel">
+        <div class="founder__content">
+          <div class="founder__head">
+            <h2 class="founder__name" id="founder-title">Екатерина Лебедева</h2>
+            <div class="founder__meta">
+              <span>Психолог</span>
+              <span class="founder__dot" aria-hidden="true"></span>
+              <span>основатель Syntonia</span>
+              <span class="founder__dot" aria-hidden="true"></span>
+              <span>глубже слов</span>
+            </div>
+          </div>
+
+          <blockquote class="founder__quote">
+            <p>«Я не работаю вокруг проблемы. Я веду к её источнику».</p>
+          </blockquote>
+
+          <TextLink href="/masters.html" label="Познакомиться ближе" />
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .founder {
+    padding: 96px 24px;
+    display: flex;
+    justify-content: center;
+    background: var(--color-page);
+  }
+
+  .founder__inner {
+    width: 1280px;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .founder__card {
+    width: 1184px;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 548px 636px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #e1d6c6;
+  }
+
+  .founder__photo img {
+    display: block;
+    width: 100%;
+    height: 565px;
+    object-fit: cover;
+  }
+
+  .founder__panel {
+    padding: 32px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e1d6c6;
+  }
+
+  .founder__content {
+    width: 473px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .founder__head {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .founder__name {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 60px;
+    white-space: nowrap;
+  }
+
+  .founder__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 34px;
+    white-space: nowrap;
+  }
+
+  .founder__dot {
+    display: block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .founder__quote {
+    width: 100%;
+    color: var(--color-text);
+    font-family: var(--font-quote);
+    font-size: 44px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 62px;
+  }
+
+  @media (max-width: 1100px) {
+    .founder {
+      padding: 64px 24px;
+    }
+
+    .founder__card {
+      grid-template-columns: 1fr;
+    }
+
+    .founder__photo img {
+      height: 420px;
+    }
+
+    .founder__panel {
+      padding: 48px 32px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .founder {
+      padding: 56px 16px;
+    }
+
+    .founder__photo img {
+      height: 360px;
+    }
+
+    .founder__panel {
+      padding: 36px 24px;
+    }
+
+    .founder__content {
+      width: 100%;
+      gap: 24px;
+    }
+
+    .founder__name {
+      width: 100%;
+      font-size: 34px;
+      line-height: 42px;
+      white-space: normal;
+    }
+
+    .founder__meta {
+      width: 100%;
+      font-size: 16px;
+      line-height: 26px;
+      gap: 6px;
+      white-space: normal;
+    }
+
+    .founder__quote {
+      width: 100%;
+      font-size: 28px;
+      line-height: 40px;
+    }
+  }
+</style>

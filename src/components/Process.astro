@@ -1,0 +1,104 @@
+---
+import StageCard from './StageCard.astro';
+
+const stages = [
+  {
+    title: 'Сначала становится ясно, что с тобой происходит на самом деле',
+    text: 'Не нужно подбирать слова. Открывается, из какого состояния ты живёшь и почему жизнь снова складывается именно так.',
+    image: '/img/process-1.png',
+    alt: 'Акварель: две женщины сидят друг напротив друга, между ними тёплый свет',
+    body: 'serif' as const,
+  },
+  {
+    title: 'Затем мы идём в глубину причины',
+    text: 'Вместе находим, где берут начало чувства, реакции и выборы, которые сегодня управляют твоей жизнью.',
+    image: '/img/process-2.png',
+    alt: 'Акварель: две женщины идут рядом по золотой траве',
+    body: 'sans' as const,
+    reverse: true,
+  },
+  {
+    title: 'И программа отпускает',
+    text: 'Это не облегчение на время, а выход. Старое растворяется, в сердце просыпается тепло. И дальше ты идёшь со своим светом, легко и свободно.',
+    image: '/img/process-3.png',
+    alt: 'Акварель: женщина легко идёт навстречу свету, положив руку на сердце',
+    body: 'serif' as const,
+  },
+];
+---
+
+<section class="process" aria-labelledby="process-title" data-figma-node="79:166">
+  <h2 class="process__title" id="process-title">Как проходит работа?</h2>
+
+  <div class="process__list">
+    {
+      stages.map((stage) => (
+        <StageCard
+          title={stage.title}
+          text={stage.text}
+          image={stage.image}
+          alt={stage.alt}
+          body={stage.body}
+          reverse={stage.reverse}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .process {
+    padding: 96px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+    background: #fcf8f2;
+  }
+
+  .process__title {
+    width: 100%;
+    max-width: 720px;
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 60px;
+    text-align: center;
+  }
+
+  .process__list {
+    width: 1080px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  @media (max-width: 1100px) {
+    .process {
+      padding: 64px 24px;
+      gap: 40px;
+    }
+
+    .process__list {
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .process {
+      padding: 56px 16px;
+      gap: 32px;
+    }
+
+    .process__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    .process__list {
+      gap: 40px;
+    }
+  }
+</style>

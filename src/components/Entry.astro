@@ -1,0 +1,283 @@
+---
+import Button from './Button.astro';
+---
+
+<section class="entry" aria-labelledby="entry-title" data-figma-node="79:173">
+  <div class="entry__head">
+    <h2 class="entry__title" id="entry-title">С чего начать</h2>
+    <p class="entry__lead">
+      Бережно и точно. Ясность в том, что с тобой происходит.
+    </p>
+  </div>
+
+  <div class="entry__container">
+    <div class="entry__text">
+      <h3 class="entry__name">Точка входа</h3>
+      <p class="entry__desc">
+        Первая встреча. Ты увидишь, из какого состояния сейчас строится твоя
+        жизнь, и почувствуешь, как звучит эта работа, прежде чем идти дальше.
+      </p>
+
+      <div class="entry__meta">
+        <span>Онлайн</span>
+        <span class="entry__dot" aria-hidden="true"></span>
+        <span>30 минут</span>
+      </div>
+
+      <div class="entry__actions">
+        <Button
+          href="/booking.html#entry"
+          label="Начать с точки входа"
+          variant="textured"
+          class="btn--entry"
+        />
+        <Button
+          href="/booking.html"
+          label="Форматы работы"
+          variant="outline"
+          arrow={false}
+          class="btn--formats"
+        />
+      </div>
+    </div>
+
+    <div class="entry__photo">
+      <img
+        src="/img/entry-online.jpg"
+        alt="Женщина на онлайн-встрече у ноутбука"
+        width="1254"
+        height="1254"
+        loading="lazy"
+      />
+      <span class="entry__photo-overlay" aria-hidden="true"></span>
+      <p class="entry__photo-text">Рядом,<br />даже на расстоянии</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .entry {
+    padding: 96px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    background: linear-gradient(
+      277deg,
+      #efe7d7 0%,
+      #fcf9f2 49%,
+      #fffcf6 100%
+    );
+  }
+
+  .entry__head {
+    width: 563px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .entry__title {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 60px;
+  }
+
+  .entry__lead {
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 19.5px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .entry__container {
+    width: 1280px;
+    max-width: 100%;
+    height: 550px;
+    display: grid;
+    grid-template-columns: 640px 640px;
+  }
+
+  .entry__text {
+    align-self: center;
+    padding: 32px 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .entry__name {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 48px;
+  }
+
+  .entry__desc {
+    width: 512px;
+    max-width: 100%;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .entry__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .entry__dot {
+    display: block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .entry__actions {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .entry__photo {
+    position: relative;
+    width: 640px;
+    height: 550px;
+    overflow: hidden;
+    border-radius: 0 12px 12px 0;
+    background: #3a3323;
+  }
+
+  .entry__photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 55%;
+  }
+
+  .entry__photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .entry__photo-text {
+    position: absolute;
+    top: 48px;
+    left: 96px;
+    width: 448px;
+    color: var(--color-white);
+    font-family: var(--font-script);
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 55px;
+    letter-spacing: 1.26px;
+  }
+
+  @media (max-width: 1100px) {
+    .entry {
+      padding: 64px 24px;
+      gap: 40px;
+    }
+
+    .entry__container {
+      height: auto;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .entry__text {
+      padding: 0;
+      width: 100%;
+      max-width: 640px;
+      justify-self: center;
+    }
+
+    .entry__photo {
+      width: 100%;
+      height: 440px;
+      border-radius: 12px;
+      order: -1;
+    }
+
+    .entry__photo img {
+      object-position: center;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .entry {
+      padding: 56px 16px;
+      gap: 32px;
+    }
+
+    .entry__head {
+      width: 100%;
+    }
+
+    .entry__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    .entry__lead {
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .entry__text {
+      padding: 0 8px;
+      gap: 24px;
+    }
+
+    .entry__name {
+      font-size: 28px;
+      line-height: 36px;
+    }
+
+    .entry__desc {
+      width: 100%;
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .entry__meta {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .entry__actions {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .entry__photo {
+      height: 340px;
+    }
+
+    .entry__photo-text {
+      top: 24px;
+      left: 24px;
+      width: calc(100% - 48px);
+      font-size: 28px;
+      line-height: 36px;
+    }
+  }
+</style>

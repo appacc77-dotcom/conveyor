@@ -1,0 +1,170 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'solid' | 'textured' | 'outline';
+  size?: 'm' | 'l' | 'xs';
+  caps?: boolean;
+  arrow?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  label,
+  variant = 'solid',
+  size = 'm',
+  caps = false,
+  arrow = true,
+  class: className,
+} = Astro.props;
+---
+
+<a
+  class:list={[
+    'btn',
+    `btn--${variant}`,
+    `btn--${size}`,
+    { 'btn--caps': caps },
+    className,
+  ]}
+  href={href}
+>
+  <span class="btn__label">{label}</span>
+  {
+    arrow && (
+      <img
+        class="btn__arrow"
+        src="/icons/icon-arrow.svg"
+        alt=""
+        width="14"
+        height="14"
+      />
+    )
+  }
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: none;
+    border-radius: var(--radius-btn);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .btn--m {
+    height: 45px;
+    padding: 8px 16px;
+  }
+
+  .btn--l {
+    height: 61px;
+    padding: 16px 24px;
+  }
+
+  .btn--xs {
+    height: 45px;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .btn--solid {
+    background: var(--color-accent);
+  }
+
+  .btn--textured {
+    background-color: var(--color-olive);
+    background-image: url('/img/btn-texture.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .btn--outline {
+    background: transparent;
+    /* Figma strokeAlign=INSIDE: обводка не добавляет 2 px к ширине контента */
+    box-shadow: inset 0 0 0 1px var(--color-olive);
+    color: var(--color-olive);
+  }
+
+  .btn--caps {
+    text-transform: uppercase;
+  }
+
+  .btn__label {
+    display: block;
+  }
+
+  .btn__arrow {
+    flex: none;
+    width: 14px;
+    height: 14px;
+  }
+
+  .btn--hero {
+    width: 303px;
+  }
+
+  .btn--header {
+    width: 215px;
+  }
+
+  .btn--pain {
+    width: 214px;
+  }
+
+  .btn--quiz {
+    width: 180px;
+  }
+
+  .btn--entry {
+    width: 241px;
+  }
+
+  .btn--formats {
+    width: 182px;
+  }
+
+  .btn--format {
+    width: 211px;
+  }
+
+  .btn--faq {
+    width: 182px;
+  }
+
+  .btn:hover {
+    opacity: 0.92;
+  }
+
+  @media (max-width: 1100px) {
+    .btn--header {
+      display: none;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .btn--hero,
+    .btn--pain,
+    .btn--entry,
+    .btn--formats,
+    .btn--format,
+    .btn--faq {
+      width: auto;
+      min-width: 0;
+    }
+
+    .btn--l {
+      height: 56px;
+      padding: 13px 20px;
+    }
+  }
+</style>

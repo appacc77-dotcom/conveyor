@@ -1,0 +1,257 @@
+---
+import type { Block } from '../data/structure';
+import { statusLabel } from '../data/structure';
+
+interface Props {
+  block: Block;
+  pageRoute: string;
+  anchorId: string;
+  cardLabel: string;
+  liveCardTitle?: string;
+  pageId?: string;
+}
+
+const { block, pageRoute, anchorId, cardLabel, liveCardTitle, pageId } = Astro.props;
+---
+
+<article
+  class:list={['block', `block--${block.status}`]}
+  id={anchorId}
+  data-status={block.status}
+  data-live-card={liveCardTitle}
+  data-block-page={pageId}
+>
+  <div class="block__body">
+    <div class="block__top">
+      <span class="block__status">{statusLabel[block.status]}</span>
+      <h3 class="block__title">{block.title}</h3>
+    </div>
+    <p class="block__does">{block.does}</p>
+    <p class="block__task">
+      <span>Что сделать:</span>{' '}
+      {block.task}
+    </p>
+    {block.note && <p class="block__note">{block.note}</p>}
+    <span class="block__card">Карточка: {cardLabel}</span>
+    <a class="block__link" href={pageRoute} target="_blank" rel="noreferrer">
+      Открыть страницу
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  {
+    block.images ? (
+      <div class="shots">
+        <figure class="shot">
+          <img
+            src={block.images.before}
+            alt={`${block.title}: ${block.images.beforeLabel ?? 'эталон'}`}
+            loading="lazy"
+            data-block-image
+            data-block-page={pageId}
+          />
+          <figcaption>{block.images.beforeLabel ?? 'Эталон'}</figcaption>
+        </figure>
+        <figure class="shot">
+          <img
+            src={block.images.after}
+            alt={`${block.title}: сделано`}
+            loading="lazy"
+            data-block-image
+            data-block-page={pageId}
+          />
+          <figcaption>{block.images.afterLabel ?? 'Сделано'}</figcaption>
+        </figure>
+        {block.images.warning && (
+          <p class="shots__warning">{block.images.warning}</p>
+        )}
+      </div>
+    ) : (
+      <div class="shots shots--empty">
+        <p>
+          {block.status === 'todo'
+            ? 'Скриншотов пока нет — блок ещё не собран.'
+            : 'Скриншотов нет — блок проверяется без превью.'}
+        </p>
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .block {
+    min-width: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: 1px solid #e2d8c3;
+    border-radius: 14px;
+    background: #fbf8f1;
+  }
+
+  .block--progress,
+  .block--review {
+    border-color: #d8bd82;
+  }
+
+  .block__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .block__top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .block__status {
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 18px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  .block--done .block__status {
+    background: #e7ead8;
+    color: #51552f;
+  }
+
+  .block--progress .block__status,
+  .block--review .block__status {
+    background: #f3e6c9;
+    color: #7a5a13;
+  }
+
+  .block--todo .block__status {
+    background: #ece8df;
+    color: #7a756d;
+  }
+
+  .block__title {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 30px;
+  }
+
+  .block__does,
+  .block__task,
+  .block__note {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
+  .block__does {
+    color: var(--color-text);
+  }
+
+  .block__task {
+    color: #6b6357;
+  }
+
+  .block__task span {
+    color: var(--color-heading);
+  }
+
+  .block__note {
+    color: #8a6a1f;
+  }
+
+  .block__card {
+    color: #8b8478;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .block__link {
+    align-self: flex-start;
+    margin-top: 2px;
+    color: var(--color-olive);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 20px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .shot {
+    min-width: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .shot img {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: top center;
+    border: 1px solid #e2d8c3;
+    border-radius: 8px;
+    background: #f4eee3;
+  }
+
+  .shot figcaption {
+    color: #7a756d;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  .shots__warning {
+    grid-column: 1 / -1;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: #f3e6c9;
+    color: #7a5a13;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .shots--empty {
+    min-height: 80px;
+    place-items: center;
+    border: 1px dashed #d8cfbc;
+    border-radius: 8px;
+    color: #8b8478;
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  @media (max-width: 700px) {
+    .block {
+      padding: 12px;
+    }
+
+    .block__title {
+      font-size: 21px;
+      line-height: 27px;
+    }
+
+    .shot img {
+      height: 150px;
+    }
+  }
+</style>

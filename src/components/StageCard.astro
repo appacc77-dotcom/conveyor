@@ -1,0 +1,157 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  image: string;
+  alt: string;
+  reverse?: boolean;
+  body?: 'serif' | 'sans';
+}
+
+const {
+  title,
+  text,
+  image,
+  alt,
+  reverse = false,
+  body = 'serif',
+} = Astro.props;
+---
+
+<article class:list={['stage', { 'stage--reverse': reverse }]}>
+  <div class="stage__content">
+    <h3 class="stage__title">{title}</h3>
+    <div class="stage__body">
+      <span class="stage__line" aria-hidden="true"></span>
+      <p class:list={['stage__text', `stage__text--${body}`]}>{text}</p>
+    </div>
+  </div>
+
+  <div class="stage__media">
+    <img
+      src={image}
+      alt={alt}
+      width="545"
+      height="339"
+      loading="lazy"
+    />
+  </div>
+</article>
+
+<style>
+  .stage {
+    width: 1080px;
+    max-width: 100%;
+    height: 339px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 0 48px;
+  }
+
+  .stage--reverse {
+    flex-direction: row-reverse;
+  }
+
+  .stage__content {
+    flex: none;
+    width: 407px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .stage__title {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 29px;
+    font-weight: 300;
+    line-height: 39px;
+  }
+
+  .stage__body {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .stage__line {
+    flex: none;
+    width: 1px;
+    background: var(--color-accent);
+  }
+
+  .stage__text {
+    flex: 1;
+    color: var(--color-text);
+  }
+
+  .stage__text--serif {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 34px;
+  }
+
+  .stage__text--sans {
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .stage__media {
+    flex: none;
+    width: 545px;
+    height: 339px;
+  }
+
+  .stage__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1100px) {
+    .stage {
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      padding: 0;
+      gap: 24px;
+    }
+
+    .stage--reverse {
+      flex-direction: column;
+    }
+
+    .stage__content {
+      width: 100%;
+      gap: 20px;
+    }
+
+    .stage__media {
+      order: -1;
+      width: 100%;
+      height: 300px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .stage__title {
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .stage__text--serif,
+    .stage__text--sans {
+      font-size: 20px;
+      line-height: 30px;
+    }
+
+    .stage__media {
+      height: 240px;
+    }
+  }
+</style>

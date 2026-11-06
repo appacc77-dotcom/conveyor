@@ -1,0 +1,54 @@
+/* Сгенерировано figma-layout-kit/figma-tokens. Не редактировать руками. */
+/* Источник: variables.json, styles.json */
+
+:root {
+  /* Spacing */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+
+  /* Radius */
+  --radius-s: 4px;
+  --radius-m: 12px;
+  --radius-l: 16px;
+  --radius-xs: 2px;
+
+  /* Colors */
+  --color-text-on-image: #ffffff;
+  --color-bg-page: #fbf8f1;
+  --color-bg-surface: #f4eee3;
+  --color-bg-muted: #e1d6c6;
+  --color-bg-inverse: #3a3323;
+  --color-text-heading: #3a2214;
+  --color-text-primary: #433d34;
+  --color-text-secondary: #7a756d;
+  --color-text-on-dark: #f3ede0;
+  --color-accent: #5a5a36;
+  --color-accent-hover: #464626;
+  --color-accent-muted: #8a8560;
+  --color-border: #e7e0d4;
+  --color-text-deep: #6b6357;
+  --color-thread: #c9bea4;
+  --color-bg-dark: #2d2822;
+  --color-practice-surface: #f8f8f2;
+  --color-bg-illustration: #fcf8f2;
+  --color-overlay-dark: #000000;
+  --color-bg-glass: #ffffff;
+  --color-bg-glass-strong: #ffffff;
+  --color-bg-glass-light: #ffffff;
+  --color-bg-header: #3a3323;
+  --color-bg-glass-dark: #433d34;
+  --color-line-on-dark: #c9bea4;
+
+  /* Stroke */
+  --stroke-hairline: 4.5px;
+
+  /* Layout */
+  --layout-container-max: 1280px;
+}

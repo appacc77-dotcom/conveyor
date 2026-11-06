@@ -1,0 +1,24 @@
+{
+  "name": "syntonia",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1 --port 4321",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 4322",
+    "previews:once": "node scripts/structure-previews.mjs --once",
+    "previews:watch": "node scripts/structure-previews.mjs",
+    "previews:blocks": "node scripts/structure-blocks.mjs",
+    "smoke": "npm run build && node scripts/smoke.mjs",
+    "setup": "npm ci && npx playwright install chromium",
+    "audit:paths": "node scripts/audit-paths.mjs"
+  },
+  "devDependencies": {
+    "astro": "^7.4.5",
+    "playwright": "1.64.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

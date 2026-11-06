@@ -1,0 +1,170 @@
+---
+import Button from './Button.astro';
+---
+
+<section
+  class="library-hero"
+  aria-labelledby="library-title"
+  data-figma-node="267:451"
+>
+  <img
+    class="library-hero__image"
+    src="/img/library-hero.jpg"
+    alt="Библиотека с книжными шкафами, кожаным креслом и открытой дверью в сад"
+    width="1586"
+    height="992"
+    fetchpriority="high"
+  />
+  <span class="library-hero__shade" aria-hidden="true"></span>
+
+  <div class="library-hero__content">
+    <h1 class="library-hero__title" id="library-title">Библиотека Syntonia</h1>
+    <p class="library-hero__lead">
+      Ответьте на&nbsp;несколько вопросов, чтобы лучше понять своё текущее
+      состояние и&nbsp;то, что стоит за&nbsp;ним.
+    </p>
+    <div class="library-hero__action">
+      <Button
+        href="/quiz.html"
+        label="Увидеть, из чего строится ваша реальность"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .library-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 640px;
+    overflow: hidden;
+    background: var(--library-umber);
+    color: var(--color-white);
+  }
+
+  .library-hero__image,
+  .library-hero__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .library-hero__image {
+    z-index: -2;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .library-hero__shade {
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .library-hero__content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding: 152px 24px 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .library-hero__title {
+    max-width: 538px;
+    color: var(--color-white);
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+
+  .library-hero__lead {
+    max-width: 538px;
+    margin-top: 24px;
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 28px;
+  }
+
+  .library-hero__action {
+    margin-top: 28px;
+    max-width: 100%;
+  }
+
+  .library-hero__action :global(.btn) {
+    max-width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .library-hero__action :global(.btn) {
+      height: auto;
+      min-height: 45px;
+      padding-block: 8px;
+      white-space: normal;
+    }
+
+    .library-hero__action :global(.btn__label) {
+      white-space: normal;
+      text-align: left;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .library-hero {
+      min-height: 700px;
+    }
+
+    .library-hero__content {
+      padding: 240px 48px 72px;
+    }
+
+    .library-hero__title {
+      font-size: 54px;
+      line-height: 1.12;
+    }
+
+    .library-hero__lead {
+      margin-top: 28px;
+      font-size: 18px;
+      line-height: 30px;
+    }
+
+    .library-hero__action {
+      margin-top: 32px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .library-hero {
+      height: 820px;
+      min-height: 0;
+    }
+
+    .library-hero__content {
+      padding: 419px 96px 0;
+    }
+
+    /* H1 в макете: 65 px, две строки по 64 px (узел library-hero-title). */
+    .library-hero__title {
+      font-size: 65px;
+      line-height: 64px;
+    }
+
+    .library-hero__lead {
+      margin-top: 32px;
+      font-size: 20px;
+      line-height: 34px;
+    }
+
+    .library-hero__action {
+      margin-top: 32px;
+    }
+  }
+</style>

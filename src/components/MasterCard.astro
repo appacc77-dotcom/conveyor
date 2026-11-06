@@ -1,0 +1,216 @@
+---
+import AudioButton from './AudioButton.astro';
+import MasterPlayer from './MasterPlayer.astro';
+
+interface Props {
+  name: string;
+  role: string;
+  about: string;
+  image: string;
+  imageWidth: number;
+  imageHeight: number;
+  alt: string;
+  time: string;
+  teaser: string;
+  playLabel: string;
+  figmaNode: string;
+  imagePosition?: string;
+  zoom?: { width: string; left: string; top: string };
+}
+
+const {
+  name,
+  role,
+  about,
+  image,
+  imageWidth,
+  imageHeight,
+  alt,
+  time,
+  teaser,
+  playLabel,
+  figmaNode,
+  imagePosition = 'center',
+  zoom,
+} = Astro.props;
+
+const imageStyle = zoom
+  ? `--photo-width:${zoom.width};--photo-left:${zoom.left};--photo-top:${zoom.top};--photo-position:${imagePosition};`
+  : `--photo-position:${imagePosition};`;
+---
+
+<article class="master-card" data-figma-node={figmaNode} data-zoom={zoom ? '' : undefined}>
+  <div class="master-card__photo">
+    <img
+      class="master-card__image"
+      src={image}
+      alt={alt}
+      width={imageWidth}
+      height={imageHeight}
+      loading="lazy"
+      style={imageStyle}
+    />
+    <span class="master-card__shade" aria-hidden="true"></span>
+  </div>
+
+  <div class="master-card__body">
+    <div class="master-card__head">
+      <h3 class="master-card__name">{name}</h3>
+      <p class="master-card__role">{role}</p>
+    </div>
+
+    <p class="master-card__about">{about}</p>
+
+    <AudioButton label="Услышать голос" />
+
+    <MasterPlayer
+      time={time}
+      teaser={teaser}
+      playLabel={playLabel}
+    />
+  </div>
+</article>
+
+<style>
+  .master-card {
+    display: grid;
+    grid-template-columns: 44.53125% minmax(0, 1fr);
+    overflow: hidden;
+    border-radius: 12px;
+    /* Figma master-card: gradient #e1d6c6 → #6b6357 (48,8 %) → #3a3323 (99,5 %). */
+    background: linear-gradient(
+      90deg,
+      #e1d6c6 0%,
+      #6b6357 48.82%,
+      #3a3323 99.48%
+    );
+  }
+
+  .master-card__photo {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .master-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--photo-position, center);
+  }
+
+  /* Крупный кадр из Figma: imageTransform первой карточки показывает
+     41 % ширины и 71 % высоты снимка. Держим его только на 1440-раскладке,
+     где карточка 570×730; ниже работает cover. */
+  @media (min-width: 1200px) {
+    .master-card[data-zoom] .master-card__image {
+      position: absolute;
+      width: var(--photo-width);
+      height: auto;
+      max-width: none;
+      left: var(--photo-left);
+      top: var(--photo-top);
+      object-fit: fill;
+    }
+  }
+
+  .master-card__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 55%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+  }
+
+  .master-card__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 48px;
+  }
+
+  .master-card__head {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .master-card__name {
+    max-width: 280px;
+    color: var(--masters-white);
+    font-family: var(--font-display);
+    font-size: 55px;
+    font-weight: 300;
+    line-height: 1.25;
+  }
+
+  .master-card__role {
+    color: var(--masters-sand);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .master-card__about {
+    max-width: 614px;
+    min-height: 170px;
+    color: var(--masters-white);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  @media (max-width: 1100px) {
+    .master-card__body {
+      gap: 24px;
+      padding: 32px;
+    }
+
+    .master-card__head {
+      gap: 16px;
+    }
+
+    .master-card__name {
+      font-size: 40px;
+    }
+
+    .master-card__role {
+      font-size: 17px;
+      line-height: 24px;
+    }
+
+    .master-card__about {
+      font-size: 17px;
+      line-height: 28px;
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .master-card {
+      grid-template-columns: minmax(0, 1fr);
+      /* На мобильном тело карточки занимает всю ширину: светлая часть
+         градиента макета сделала бы белый текст нечитаемым. */
+      background: linear-gradient(135deg, #4a4234 0%, #3a3323 100%);
+    }
+
+    .master-card__photo {
+      aspect-ratio: 4 / 3;
+    }
+
+    .master-card__body {
+      gap: 24px;
+      padding: 28px 24px 32px;
+    }
+
+    .master-card__name {
+      font-size: 34px;
+      line-height: 1.15;
+    }
+  }
+</style>

@@ -1,0 +1,152 @@
+---
+import TextLink from './TextLink.astro';
+---
+
+<section class="method" aria-labelledby="method-title" data-figma-node="79:127">
+  <div class="method__inner">
+    <div class="method__intro">
+      <p class="method__eyebrow">Метод Syntonia</p>
+      <p class="method__lead">
+        Неблагоприятные линии жизни мы часто называем судьбой.
+      </p>
+    </div>
+
+    <p class="method__turn">Но существует выход из предначертанного.</p>
+
+    <div class="method__cta">
+      <div class="method__cta-inner">
+        <h2 class="method__title" id="method-title">
+          Там, где начинается новый выбор
+        </h2>
+        <TextLink href="/method.html" label="Как это работает" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .method {
+    min-height: 615px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #efe7d7 0%, #fbf8f1 52%, #fffcf6 100%);
+  }
+
+  .method__inner {
+    width: 1280px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .method__intro {
+    width: 438px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .method__eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 3.2px;
+    text-transform: uppercase;
+  }
+
+  .method__lead {
+    color: #6b6357;
+    font-family: var(--font-body);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 48px;
+  }
+
+  .method__turn {
+    width: 100%;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 48px;
+    text-align: center;
+  }
+
+  .method__cta {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .method__cta-inner {
+    width: 467px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .method__title {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 60px;
+  }
+
+  @media (max-width: 1100px) {
+    .method {
+      min-height: 0;
+      padding: 64px 0;
+    }
+
+    .method__intro {
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .method__cta {
+      justify-content: flex-start;
+    }
+
+    .method__cta-inner {
+      width: 100%;
+      max-width: 560px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .method {
+      padding: 56px 0;
+    }
+
+    .method__inner {
+      gap: 24px;
+      padding: 0 24px;
+    }
+
+    .method__eyebrow {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 2.2px;
+    }
+
+    .method__lead,
+    .method__turn {
+      font-size: 20px;
+      line-height: 30px;
+    }
+
+    .method__turn {
+      text-align: left;
+    }
+
+    .method__title {
+      font-size: 32px;
+      line-height: 40px;
+    }
+  }
+</style>

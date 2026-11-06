@@ -1,0 +1,762 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Прогресс — Syntonia"
+  description="Живой прогресс карточек Syntonia v2 из канбана DSH."
+  noindex
+>
+  <div class="progress">
+    <header class="top">
+      <div class="top__bar">
+        <p class="kicker">Живой прогресс · канбан DSH · обновление каждые 2,5 с</p>
+        <div class="top__links">
+          <a href="/structure.html">← структура</a>
+          <a href="/">главная</a>
+        </div>
+      </div>
+      <div class="title-row">
+        <h1>Прогресс</h1>
+        <span class="live" data-live><i></i><span data-live-text>подключение…</span></span>
+      </div>
+      <p class="lead">
+        Что реально происходит на доске: карточки в работе, последние
+        перемещения и обновления. Это представление читает
+        <code>/kanban/api/board</code> через dev-прокси.
+      </p>
+    </header>
+
+    <div class="stats" data-stats>
+      <div class="stat"><span>Всего</span><strong>—</strong></div>
+      <div class="stat"><span>В работе</span><strong>—</strong></div>
+      <div class="stat"><span>На приёмке</span><strong>—</strong></div>
+      <div class="stat"><span>Готово</span><strong>—</strong></div>
+    </div>
+
+    <p class="error" data-error hidden>
+      Нет соединения с доской. Проверь, что DSH открыт и порт в
+      <code>DSH_URL</code> совпадает.
+    </p>
+
+    <section class="panel" aria-labelledby="progress-title">
+      <div class="panel__head">
+        <h2 id="progress-title">В работе</h2>
+        <button class="refresh" type="button" data-refresh>Обновить</button>
+      </div>
+      <div class="cards" data-progress-list>
+        <p class="muted">Загрузка…</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="review-title">
+      <div class="panel__head">
+        <h2 id="review-title">На приёмке</h2>
+        <span class="count" data-review-count>—</span>
+      </div>
+      <div class="cards cards--compact" data-review-list>
+        <p class="muted">Загрузка…</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="timeline-title">
+      <div class="panel__head">
+        <h2 id="timeline-title">Последние события</h2>
+        <span class="count" data-updated>—</span>
+      </div>
+      <ol class="timeline" data-timeline>
+        <li class="muted">Загрузка…</li>
+      </ol>
+    </section>
+
+    <footer class="foot">
+      <p>
+        Источник — <code>agent-system/board.json</code> через плагин Kanban.
+        Страница только читает; карточки не меняет.
+      </p>
+    </footer>
+  </div>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector('.progress');
+  if (root) {
+    const statsEl = root.querySelector('[data-stats]');
+    const progressList = root.querySelector('[data-progress-list]');
+    const reviewList = root.querySelector('[data-review-list]');
+    const reviewCount = root.querySelector('[data-review-count]');
+    const timeline = root.querySelector('[data-timeline]');
+    const updatedEl = root.querySelector('[data-updated]');
+    const liveText = root.querySelector('[data-live-text]');
+    const liveDot = root.querySelector('[data-live]');
+    const errorEl = root.querySelector('[data-error]');
+    const refreshBtn = root.querySelector('[data-refresh]');
+
+    const time = (value) => {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return new Intl.DateTimeFormat('ru-RU', {
+        hour: '2-digit',
+        minute: '2-digit',
+      }).format(date);
+    };
+
+    const dateTime = (value) => {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '';
+      return new Intl.DateTimeFormat('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+      }).format(date);
+    };
+
+    const node = (tag, className, text) => {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (text !== undefined) element.textContent = text;
+      return element;
+    };
+
+    const renderStats = (board) => {
+      const count = (column) =>
+        board.cards.filter((card) => card.column === column).length;
+      const values = [
+        ['Всего', board.cards.length],
+        ['В работе', count('progress')],
+        ['На приёмке', count('review')],
+        ['Готово', count('done')],
+      ];
+      statsEl.replaceChildren(
+        ...values.map(([label, value]) => {
+          const item = node('div', 'stat');
+          item.append(node('span', '', label), node('strong', '', String(value)));
+          return item;
+        }),
+      );
+    };
+
+    const cardNode = (card, compact = false) => {
+      const article = node('article', 'card');
+      const head = node('div', 'card__head');
+      const title = node('h3', 'card__title', card.title);
+      head.append(title);
+      if (card.tag) head.append(node('span', 'tag', card.tag));
+      article.append(head);
+
+      if (!compact && card.description) {
+        article.append(node('p', 'card__desc', card.description));
+      }
+
+      const history = Array.isArray(card.history) ? card.history : [];
+      const last = history[history.length - 1];
+      const waiting =
+        card.column === 'progress' &&
+        last?.action === 'move' &&
+        String(last?.note ?? '').includes('progress') &&
+        !history.some(
+          (entry) =>
+            entry.action === 'update' &&
+            String(entry.at) >= String(last.at),
+        );
+      const owner =
+        card.column === 'review'
+          ? 'ждёт приёмки'
+          : waiting
+            ? 'ожидает исполнителя'
+            : card.assignee === 'human'
+              ? 'человек'
+              : 'агент';
+
+      const meta = node('div', 'card__meta');
+      meta.append(
+        node('span', waiting ? 'is-waiting' : '', owner),
+        node('span', '', `обновлено ${time(card.updatedAt)}`),
+      );
+      article.append(meta);
+      if (last) {
+        article.append(
+          node('p', 'card__event', `${last.action}${last.note ? ` · ${last.note}` : ''}`),
+        );
+      }
+      return article;
+    };
+
+    const render = (board) => {
+      const progress = board.cards
+        .filter((card) => card.column === 'progress')
+        .sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
+      const review = board.cards.filter((card) => card.column === 'review');
+
+      progressList.replaceChildren(
+        ...(progress.length
+          ? progress.map((card) => cardNode(card))
+          : [node('p', 'muted', 'В работе пока нет карточек.')]),
+      );
+      reviewList.replaceChildren(
+        ...(review.length
+          ? review.map((card) => cardNode(card, true))
+          : [node('p', 'muted', 'На приёмке пока нет карточек.')]),
+      );
+      reviewCount.textContent = String(review.length);
+
+      const events = board.cards
+        .flatMap((card) =>
+          (card.history || []).map((entry) => ({
+            at: entry.at,
+            action: entry.action,
+            note: entry.note,
+            title: card.title,
+          })),
+        )
+        .sort((a, b) => String(b.at).localeCompare(String(a.at)))
+        .slice(0, 24);
+
+      timeline.replaceChildren(
+        ...(events.length
+          ? events.map((event) => {
+              const item = node('li', 'event');
+              const when = node('span', 'event__time', time(event.at));
+              const body = node('div', 'event__body');
+              body.append(
+                node('strong', '', event.title),
+                node('span', '', `${event.action}${event.note ? ` · ${event.note}` : ''}`),
+              );
+              item.append(when, body);
+              return item;
+            })
+          : [node('li', 'muted', 'Событий пока нет.')]),
+      );
+
+      updatedEl.textContent = `доска: ${dateTime(board.updatedAt)}`;
+      renderStats(board);
+    };
+
+    let inFlight = false;
+    const load = async () => {
+      if (inFlight) return;
+      inFlight = true;
+      try {
+        const response = await fetch(`/kanban/api/board?ts=${Date.now()}`, {
+          cache: 'no-store',
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const payload = await response.json();
+        if (!payload?.board) throw new Error('no board');
+        render(payload.board);
+        errorEl.hidden = true;
+        liveText.textContent = 'live';
+        liveDot.classList.add('is-live');
+      } catch (error) {
+        errorEl.hidden = false;
+        liveText.textContent = 'нет связи';
+        liveDot.classList.remove('is-live');
+      } finally {
+        inFlight = false;
+      }
+    };
+
+    refreshBtn?.addEventListener('click', load);
+    load();
+    window.setInterval(load, 2500);
+  }
+</script>
+
+<style>
+  .progress {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 24px 72px;
+    color: var(--color-text);
+  }
+
+  .top {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d8cfbc;
+  }
+
+  .top__bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 22px;
+  }
+
+  .kicker {
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 18px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .top__links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .top__links a {
+    color: var(--color-olive);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 20px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 60px;
+  }
+
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 10px;
+    border: 1px solid #d8cfbc;
+    border-radius: 999px;
+    color: #7a756d;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  .live i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #b7b0a3;
+  }
+
+  .live.is-live i {
+    background: #6f7540;
+  }
+
+  .lead {
+    max-width: 760px;
+    margin-top: 10px;
+    color: #6b6357;
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  .lead code,
+  .error code,
+  .foot code {
+    color: #5a5a36;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .stat {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: 1px solid #e2d8c3;
+    border-radius: 12px;
+    background: #fffdf8;
+  }
+
+  .stat span {
+    color: #7a756d;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .stat strong {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 38px;
+  }
+
+  .error {
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #f3e6c9;
+    color: #7a5a13;
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .panel {
+    min-width: 0;
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid #e2d8c3;
+    border-radius: 16px;
+    background: #fffdf8;
+  }
+
+  .panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .panel__head h2 {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 36px;
+  }
+
+  .count {
+    color: #8b8478;
+    font-family: var(--font-body);
+    font-size: 12px;
+  }
+
+  .refresh {
+    padding: 5px 10px;
+    border: 1px solid #d8cfbc;
+    border-radius: 8px;
+    color: #5a5a36;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .cards--compact {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #e2d8c3;
+    border-radius: 12px;
+    background: #fbf8f1;
+  }
+
+  .card__head {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .card__title {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  .tag {
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #ece8df;
+    color: #7a756d;
+    font-family: var(--font-body);
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .card__desc {
+    overflow-wrap: anywhere;
+    margin-top: 8px;
+    color: #5f594f;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .card__meta {
+    margin-top: 10px;
+    display: flex;
+    gap: 14px;
+    color: #8b8478;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .card__event {
+    overflow-wrap: anywhere;
+    margin-top: 6px;
+    color: #8a6a1f;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 17px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .event {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0eadf;
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .event__time {
+    color: #8b8478;
+  }
+
+  .event__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .event__body strong {
+    color: #433d34;
+    font-weight: 500;
+  }
+
+  .event__body span {
+    color: #7a756d;
+  }
+
+  .muted {
+    color: #8b8478;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .foot {
+    margin-top: 24px;
+    color: #8b8478;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  @media (max-width: 760px) {
+    .progress {
+      padding: 24px 16px 48px;
+    }
+
+    h1 {
+      font-size: 40px;
+      line-height: 46px;
+    }
+
+    .top__bar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .stats {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cards--compact {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<style is:global>
+  .progress .cards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .progress .cards--compact {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .progress .card {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #e2d8c3;
+    border-radius: 12px;
+    background: #fbf8f1;
+  }
+
+  .progress .card__head {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .progress .card__title {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 28px;
+  }
+
+  .progress .tag {
+    padding: 2px 7px;
+    border-radius: 999px;
+    background: #ece8df;
+    color: #7a756d;
+    font-family: var(--font-body);
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .progress .card__desc {
+    overflow-wrap: anywhere;
+    margin-top: 8px;
+    color: #5f594f;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .progress .card__meta {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    color: #8b8478;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .progress .card__meta .is-waiting {
+    color: #8a6a1f;
+  }
+
+  .progress .card__event {
+    overflow-wrap: anywhere;
+    margin-top: 6px;
+    color: #8a6a1f;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 17px;
+  }
+
+  .progress .stat {
+    min-width: 0;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: 1px solid #e2d8c3;
+    border-radius: 12px;
+    background: #fffdf8;
+  }
+
+  .progress .stat span {
+    color: #7a756d;
+    font-family: var(--font-body);
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .progress .stat strong {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 38px;
+  }
+
+  .progress .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .progress .event {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #f0eadf;
+    font-family: var(--font-body);
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .progress .event__time {
+    color: #8b8478;
+  }
+
+  .progress .event__body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    overflow-wrap: anywhere;
+  }
+
+  .progress .event__body strong {
+    color: #433d34;
+    font-weight: 500;
+  }
+
+  .progress .event__body span {
+    color: #7a756d;
+  }
+
+  .progress .muted {
+    color: #8b8478;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  @media (max-width: 760px) {
+    .progress .cards--compact {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

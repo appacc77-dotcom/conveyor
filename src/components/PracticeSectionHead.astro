@@ -1,0 +1,79 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  subtitle: string;
+  size?: 'm' | 'l';
+  class?: string;
+}
+
+const { id, title, subtitle, size = 'm', class: className } = Astro.props;
+---
+
+<header class:list={['practice-head', `practice-head--${size}`, className]}>
+  <h2 class="practice-head__title" id={id}>{title}</h2>
+  <p class="practice-head__subtitle">{subtitle}</p>
+</header>
+
+<style>
+  .practice-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    text-align: center;
+  }
+
+  .practice-head__title {
+    color: var(--practice-heading);
+    font-family: var(--font-display);
+    font-size: 65px;
+    font-weight: 300;
+    line-height: 1.25;
+  }
+
+  .practice-head--l .practice-head__title {
+    font-size: 75px;
+  }
+
+  .practice-head__subtitle {
+    max-width: 1160px;
+    color: var(--practice-text);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  @media (max-width: 1100px) {
+    .practice-head__title,
+    .practice-head--l .practice-head__title {
+      font-size: 48px;
+      line-height: 1.22;
+    }
+
+    .practice-head__subtitle {
+      font-size: 18px;
+      line-height: 30px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .practice-head {
+      gap: 12px;
+      padding: 12px 0;
+    }
+
+    .practice-head__title,
+    .practice-head--l .practice-head__title {
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .practice-head__subtitle {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

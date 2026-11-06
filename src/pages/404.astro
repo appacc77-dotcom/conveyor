@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Footer from '../components/Footer.astro';
+import TextLink from '../components/TextLink.astro';
+---
+
+<BaseLayout title="Страница не найдена — Syntonia" description="Страница не найдена." noindex>
+  <SiteHeader />
+  <main class="notfound" id="main">
+    <div class="notfound__inner">
+      <p class="notfound__code">404</p>
+      <h1 class="notfound__title">Страница не найдена</h1>
+      <p class="notfound__text">
+        Возможно, ссылка устарела. Вернись на главную или открой структуру сайта.
+      </p>
+      <div class="notfound__actions">
+        <TextLink href="/" label="На главную" size="s" />
+        <TextLink href="/structure.html" label="Структура сайта" size="s" />
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: 70vh;
+    padding: 200px 24px 96px;
+    background: #fbf8f1;
+  }
+
+  .notfound__inner {
+    width: 760px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .notfound__code {
+    color: var(--color-accent);
+    font-family: var(--font-quote);
+    font-size: 72px;
+    font-style: italic;
+    line-height: 80px;
+  }
+
+  .notfound__title {
+    margin-top: 8px;
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 54px;
+    font-weight: 300;
+    line-height: 62px;
+  }
+
+  .notfound__text {
+    margin: 24px 0 28px;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 30px;
+  }
+
+  .notfound__actions {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 700px) {
+    .notfound {
+      padding: 140px 16px 64px;
+    }
+
+    .notfound__title {
+      font-size: 36px;
+      line-height: 44px;
+    }
+
+    .notfound__text {
+      font-size: 16px;
+      line-height: 27px;
+    }
+  }
+</style>

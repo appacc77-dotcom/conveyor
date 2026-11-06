@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import PracticeHero from '../components/PracticeHero.astro';
+import PracticeFree from '../components/PracticeFree.astro';
+import PracticeQuiz from '../components/PracticeQuiz.astro';
+import PracticePay from '../components/PracticePay.astro';
+import PracticeCodes from '../components/PracticeCodes.astro';
+import PracticePackages from '../components/PracticePackages.astro';
+import PracticeInfo from '../components/PracticeInfo.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Пространство практики — Syntonia"
+  description="Бесплатные и платные практики, коды состояний и пакеты практик Syntonia."
+>
+  <SiteHeader />
+  <main class="practice-page" id="main">
+    <PracticeHero />
+    <PracticeFree />
+    <PracticeQuiz />
+    <PracticePay />
+    <PracticeCodes />
+    <PracticePackages />
+    <PracticeInfo />
+  </main>
+  <Footer />
+
+  <div class="practice-toast" role="status" aria-live="polite" hidden data-practice-toast></div>
+
+  <script>
+    const track = document.querySelector('[data-practice-track]');
+    const prev = document.querySelector('[data-practice-prev]');
+    const next = document.querySelector('[data-practice-next]');
+    const dots = Array.from(document.querySelectorAll('[data-practice-dot]'));
+
+    if (track && prev && next) {
+      const cards = Array.from(track.children);
+      const gap = () => parseFloat(getComputedStyle(track).columnGap || '0') || 0;
+      const step = () =>
+        (cards[0] ? cards[0].getBoundingClientRect().width : 296) + gap();
+      const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'auto'
+        : 'smooth';
+
+      prev.addEventListener('click', () => {
+        track.scrollBy({ left: -step(), behavior });
+      });
+      next.addEventListener('click', () => {
+        track.scrollBy({ left: step(), behavior });
+      });
+
+      const setActive = (index) => {
+        dots.forEach((dot, dotIndex) => {
+          if (dotIndex === index) {
+            dot.setAttribute('aria-current', 'true');
+            dot.classList.add('is-active');
+          } else {
+            dot.removeAttribute('aria-current');
+            dot.classList.remove('is-active');
+          }
+        });
+      };
+
+      const syncDots = () => {
+        const origin = cards[0] ? cards[0].offsetLeft : 0;
+        let active = 0;
+        cards.forEach((card, index) => {
+          if (card.offsetLeft - origin <= track.scrollLeft + 8) active = index;
+        });
+        setActive(active);
+      };
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          const card = cards[index];
+          if (!card || !cards[0]) return;
+          track.scrollTo({
+            left: card.offsetLeft - cards[0].offsetLeft,
+            behavior,
+          });
+        });
+      });
+
+      track.addEventListener('scroll', syncDots, { passive: true });
+      syncDots();
+    }
+
+    const toast = document.querySelector('[data-practice-toast]');
+    let toastTimer;
+
+    document.addEventListener('click', (event) => {
+      const button = event.target.closest(
+        '[data-practice-audio], [data-practice-buy]',
+      );
+      if (!button || !toast) return;
+
+      toast.textContent = button.hasAttribute('data-practice-audio')
+        ? 'Аудиозапись ещё не загружена — появится после передачи файлов.'
+        : 'Оплата ещё не подключена.';
+      toast.hidden = false;
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => {
+        toast.hidden = true;
+      }, 4000);
+    });
+  </script>
+
+  <style>
+    .practice-page {
+      --practice-paper: #fbf8f1;
+      --practice-cream: #f8f8f2;
+      --practice-sand: #e7e0d4;
+      --practice-card-shade: #dcdacc;
+      --practice-text: #433d34;
+      --practice-heading: #3a3323;
+      --practice-muted: #6b6357;
+      --practice-olive: #5a5a36;
+      --practice-accent: #8a8560;
+      --practice-line: #c9bea4;
+      --practice-info-bg: #e4d8cd;
+      --practice-package-2-end: #ebe1ce;
+      --practice-package-3-start: #f4eee3;
+      --practice-package-3-end: #dfcba6;
+      --practice-button-text: #f3ede0;
+      background: var(--practice-paper);
+    }
+
+    .practice-page > section {
+      scroll-margin-top: 120px;
+    }
+
+    .practice-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      z-index: 200;
+      max-width: min(92vw, 520px);
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: #3a3323;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+      color: #ffffff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 22px;
+      transform: translateX(-50%);
+    }
+
+    .practice-toast[hidden] {
+      display: none;
+    }
+  </style>
+</BaseLayout>

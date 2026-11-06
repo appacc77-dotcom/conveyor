@@ -1,0 +1,155 @@
+---
+const principles = [
+  {
+    number: '01',
+    title: 'Глубинный уровень',
+    text: 'В основе метода лежит работа с устойчивыми метапрограммами, состояниями и внутренними кодами, которые закрепляются в психике, теле, восприятии, энергетическом поле, генетической памяти и во внутреннем устройстве человека. Именно этот глубинный уровень влияет на чувства, реакции, выбор, отношения и повторяющиеся сценарии.',
+  },
+  {
+    number: '02',
+    title: 'Целостный подход',
+    text: 'Syntonia соединяет психологическую точность, коучинговую направленность, работу с эмоциональным и телесным опытом, внимание к подсознательным причинам, тонкому плану и внутренней духовной природе человека. Такой подход позволяет работать не только с тем, что проявлено на поверхности, но и с той внутренней структурой, из которой это возникает.',
+  },
+  {
+    number: '03',
+    title: 'Практический результат',
+    text: 'В практике это означает не только понимание причины, но и постепенную перенастройку глубинного внутреннего устройства человека, включая слои подсознания, которые лежат в основе восприятия, выбора и жизненного пути.',
+  },
+];
+---
+
+<section class="method-principles" aria-labelledby="principles-title" data-figma-node="323:871">
+  <h2 class="visually-hidden" id="principles-title">Принципы метода</h2>
+  <ol class="method-principles__list">
+    {
+      principles.map((item) => (
+        <li class="method-principle">
+          <div class="method-principle__head">
+            <span class="method-principle__num" aria-hidden="true">
+              {item.number}
+            </span>
+            <h3 class="method-principle__title">{item.title}</h3>
+          </div>
+          <p class="method-principle__text">{item.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .method-principles {
+    height: 1077px;
+    padding: 96px 24px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(
+      180deg,
+      #eae6d9 0%,
+      #fbf8f1 50%,
+      #ecdcc5 100%
+    );
+  }
+
+  .method-principles__list {
+    width: 783px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .method-principle {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .method-principle__head {
+    min-height: 73px;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .method-principle__num {
+    flex: none;
+    margin-top: 4px;
+    color: var(--color-accent);
+    font-family: var(--font-script);
+    font-size: 57px;
+    font-weight: 400;
+    line-height: 69px;
+  }
+
+  .method-principle__title {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 60px;
+  }
+
+  .method-principle__text {
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  @media (max-width: 1100px) {
+    .method-principles {
+      height: auto;
+      padding: 64px 24px;
+    }
+
+    .method-principles__list {
+      gap: 48px;
+    }
+
+    .method-principle__head {
+      min-height: 0;
+      gap: 16px;
+    }
+
+    .method-principle__num {
+      font-size: 42px;
+      line-height: 50px;
+    }
+
+    .method-principle__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .method-principles {
+      padding: 56px 16px;
+    }
+
+    .method-principles__list {
+      gap: 40px;
+    }
+
+    .method-principle {
+      gap: 20px;
+    }
+
+    .method-principle__num {
+      font-size: 36px;
+      line-height: 44px;
+    }
+
+    .method-principle__title {
+      font-size: 28px;
+      line-height: 36px;
+    }
+
+    .method-principle__text {
+      font-size: 17px;
+      line-height: 28px;
+    }
+  }
+</style>

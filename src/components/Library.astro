@@ -1,0 +1,188 @@
+---
+import TextLink from './TextLink.astro';
+---
+
+<section class="library" aria-labelledby="library-title" data-figma-node="148:487">
+  <img
+    class="library__bg"
+    src="/img/library-books.jpg"
+    alt=""
+    width="1672"
+    height="941"
+    loading="lazy"
+  />
+
+  <div class="library__inner">
+    <div class="library__content">
+      <div class="library__head">
+        <p class="library__eyebrow">библиотека</p>
+        <p class="library__meta">
+          <span>Книга</span>
+          <span class="library__dot" aria-hidden="true"></span>
+          <span>журналы</span>
+        </p>
+      </div>
+
+      <div class="library__body">
+        <h2 class="library__title" id="library-title">
+          Где для внутреннего находятся слова
+        </h2>
+        <p class="library__desc">
+          Книга и выпуски журнала Syntonia собраны в одном пространстве — чтобы
+          читать медленно, возвращаться по состоянию и находить слова для того,
+          что происходит внутри.
+        </p>
+      </div>
+
+      <TextLink href="/library.html" label="Открыть библиотеку" size="s" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .library {
+    position: relative;
+    height: 641px;
+    padding: 96px 24px;
+    overflow: hidden;
+  }
+
+  .library__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .library__inner {
+    position: relative;
+    z-index: 1;
+    width: 1280px;
+    max-width: 100%;
+    height: 449px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .library__content {
+    width: 493px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .library__head {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .library__eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .library__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .library__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .library__body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .library__title {
+    width: 493px;
+    max-width: 100%;
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 60px;
+  }
+
+  .library__desc {
+    width: 493px;
+    max-width: 100%;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  @media (max-width: 1100px) {
+    .library {
+      height: auto;
+      padding: 64px 24px;
+    }
+
+    .library__inner {
+      height: auto;
+    }
+
+    .library__content {
+      width: 100%;
+      max-width: 560px;
+      margin-left: auto;
+      padding: 32px;
+      border-radius: 16px;
+      background: rgba(252, 248, 242, 0.82);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .library {
+      padding: 56px 16px;
+    }
+
+    .library__content {
+      padding: 24px;
+      gap: 24px;
+    }
+
+    .library__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    .library__desc {
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .library__eyebrow {
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .library__meta {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+</style>

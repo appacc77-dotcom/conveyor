@@ -1,0 +1,300 @@
+---
+const nav = [
+  { label: 'О проекте', href: '/method.html' },
+  { label: 'Практики', href: '/practice.html' },
+  { label: 'Библиотека', href: '/library.html' },
+  { label: 'Форматы работы', href: '/booking.html' },
+  { label: 'Отзывы', href: '/index.html#voices-title' },
+  { label: 'Вопросы и ответы', href: '/index.html#faq-title' },
+];
+
+const legal = [
+  { label: 'Публичная оферта', href: '/offer.html' },
+  { label: 'Политика конфиденциальности', href: '/privacy.html' },
+  {
+    label: 'Согласие на обработку персональных данных',
+    href: '/consent.html',
+  },
+];
+---
+
+<footer class="footer" data-figma-node="148:561">
+  <img
+    class="footer__bg"
+    src="/img/footer-texture.jpg"
+    alt=""
+    width="1254"
+    height="1254"
+    loading="lazy"
+  />
+  <span class="footer__overlay" aria-hidden="true"></span>
+
+  <div class="footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="/" aria-label="Syntonia — на главную">
+          <img
+            src="/icons/logo-gold.svg"
+            alt="Syntonia — Evolution of Consciousness"
+            width="168"
+            height="60"
+          />
+        </a>
+        <p class="footer__tagline">Состояние, из которого строится жизнь</p>
+      </div>
+
+      <nav class="footer__col" aria-labelledby="footer-nav-title">
+        <p class="footer__heading" id="footer-nav-title">Навигация</p>
+        <ul class="footer__list">
+          {
+            nav.map((item) => (
+              <li>
+                <a class="footer__link" href={item.href}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <p class="footer__heading" id="footer-contacts-title">Контакты</p>
+        <ul class="footer__list" aria-labelledby="footer-contacts-title">
+          <li><a class="footer__link" href="#" rel="noopener">Telegram</a></li>
+          <li><a class="footer__link" href="#" rel="noopener">Instagram</a></li>
+          <li><a class="footer__link" href="#" rel="noopener">YouTube</a></li>
+          <li>
+            <a class="footer__link" href="mailto:hello@syntonia.com">
+              hello@syntonia.com
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <span class="footer__divider" aria-hidden="true"></span>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© Syntonia, 2026</p>
+      <ul class="footer__legal">
+        {
+          legal.map((item) => (
+            <li>
+              <a class="footer__legal-link" href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <button class="footer__legal-link" type="button">
+            Cookie settings
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    height: 361px;
+    padding: 64px 24px 20px;
+    overflow: hidden;
+    background: #3a3323;
+    color: #f3ede0;
+  }
+
+  .footer__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .footer__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(58, 51, 35, 0.55);
+  }
+
+  .footer__inner {
+    position: relative;
+    z-index: 1;
+    width: 1280px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer__top {
+    height: 220px;
+    display: flex;
+    align-items: flex-start;
+    gap: 96px;
+  }
+
+  .footer__brand {
+    width: 276px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer__brand img {
+    display: block;
+    width: 168px;
+    height: 60px;
+  }
+
+  .footer__tagline {
+    color: #f3ede0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: -0.2px;
+  }
+
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer__heading {
+    color: #f3ede0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .footer__list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer__list li {
+    line-height: 20px;
+  }
+
+  .footer__link {
+    color: #f3ede0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .footer__link:hover {
+    text-decoration: underline;
+  }
+
+  .footer__divider {
+    display: block;
+    height: 1px;
+    background: #c9bea4;
+  }
+
+  .footer__bottom {
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer__copy {
+    color: #f3ede0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .footer__legal {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer__legal-link {
+    color: #f3ede0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+  }
+
+  .footer__legal-link:hover {
+    text-decoration: underline;
+  }
+
+  .footer button.footer__legal-link {
+    padding: 0;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1100px) {
+    .footer {
+      height: auto;
+      padding: 48px 24px 24px;
+    }
+
+    .footer__inner {
+      padding: 0;
+      gap: 24px;
+    }
+
+    .footer__top {
+      height: auto;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer__brand {
+      width: 100%;
+    }
+
+    .footer__bottom {
+      flex-wrap: wrap;
+    }
+
+    .footer__legal {
+      flex-wrap: wrap;
+      gap: 12px 24px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .footer {
+      padding: 48px 16px 24px;
+    }
+
+    .footer__top {
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .footer__brand {
+      gap: 20px;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

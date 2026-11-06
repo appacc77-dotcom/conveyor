@@ -1,0 +1,216 @@
+---
+import MasterCard from './MasterCard.astro';
+
+const masters = [
+  {
+    name: 'Наталья Уолс',
+    role: 'Мастер Syntonia',
+    about:
+      'Мне близка практическая сторона перемен: как от понимания перейти к действию. Я помогаю увидеть, что мешает двигаться дальше, собрать ясный план и пройти этот путь до результата в своём темпе.',
+    image: '/img/masters-natalia.jpg',
+    imageWidth: 1448,
+    imageHeight: 1086,
+    alt: 'Наталья Уолс сидит в кресле у глиняной стены в тёплом свете',
+    time: '1:14',
+    teaser:
+      'Можно многое понимать про себя и всё равно жить в одном и том же круге событий. Потому что вашей жизнью управляет не только то, что вы осознаёте.',
+    playLabel: 'Слушать голос Натальи Уолс',
+    figmaNode: '233:332',
+    imagePosition: '79% 50%',
+    zoom: { width: '241.4%', left: '-100%', top: '-16.44%' },
+  },
+  {
+    name: 'Ангелина Гебо',
+    role: 'Мастер Syntonia',
+    about:
+      'Я помогаю справиться с душевными переживаниями и внутренними противоречиями, выстроить отношения с собой и телом. Вместе мы распутываем то, что стало сложным, и яснее видим связь между внутренним состоянием и тем, что происходит в жизни.',
+    image: '/img/masters-angelina.jpg',
+    imageWidth: 1140,
+    imageHeight: 1392,
+    alt: 'Ангелина Гебо сидит за каменным столом у тёплой стены',
+    time: '1:14',
+    teaser:
+      'Можно многое понимать про себя и всё равно жить в одном и том же круге событий. Потому что вашей жизнью управляет не только то, что вы осознаёте.',
+    playLabel: 'Слушать голос Ангелины Гебо',
+    figmaNode: '233:368',
+    imagePosition: '88% 50%',
+  },
+];
+---
+
+<section
+  class="masters-team"
+  id="masters-team"
+  aria-labelledby="team-title"
+  data-figma-node="217:345"
+>
+  <div class="masters-team__inner">
+    <div class="masters-team__head">
+      <h2 class="masters-team__title" id="team-title">
+        Один путь.<br />Много голосов
+      </h2>
+      <p class="masters-team__desc">
+        Syntonia&nbsp;– это пространство глубины и&nbsp;ясности.<br />
+        Здесь работают мастера, которым можно доверять.<br />
+        Каждый&nbsp;– со&nbsp;своей историей, опытом и&nbsp;способом быть рядом.<br />
+        Выбирайте того, с&nbsp;кем созвучно именно вам.
+      </p>
+    </div>
+
+    <img
+      class="masters-team__divider"
+      src="/img/masters-divider.svg"
+      alt=""
+      width="1280"
+      height="25"
+      loading="lazy"
+    />
+
+    <div class="masters-team__block">
+      <p class="masters-team__eyebrow">Другие мастера Syntonia</p>
+      <ul class="masters-team__list">
+        {
+          masters.map((master) => (
+            <li>
+              <MasterCard {...master} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .masters-team {
+    padding: 64px clamp(24px, 5.5556vw, 80px);
+    background: var(--masters-bg);
+  }
+
+  .masters-team__inner {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .masters-team__head {
+    display: grid;
+    grid-template-columns: 341px minmax(0, 614px);
+    align-items: start;
+    column-gap: clamp(32px, 8.8889vw, 128px);
+  }
+
+  .masters-team__title {
+    color: var(--masters-sand);
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 60px;
+  }
+
+  .masters-team__desc {
+    color: var(--masters-sand);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0.03em;
+  }
+
+  .masters-team__divider {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 64px;
+  }
+
+  .masters-team__block {
+    margin-top: 96px;
+  }
+
+  .masters-team__eyebrow {
+    color: var(--masters-sand);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .masters-team__list {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+  }
+
+  @media (max-width: 1100px) {
+    .masters-team {
+      padding: 48px clamp(20px, 4vw, 40px);
+    }
+
+    .masters-team__head {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 24px;
+    }
+
+    .masters-team__title {
+      font-size: 40px;
+      line-height: 48px;
+    }
+
+    .masters-team__desc {
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .masters-team__divider {
+      margin-top: 40px;
+    }
+
+    .masters-team__block {
+      margin-top: 48px;
+    }
+
+    .masters-team__list {
+      margin-top: 24px;
+      gap: 48px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .masters-team {
+      padding: 40px 16px 48px;
+    }
+
+    .masters-team__title {
+      font-size: 32px;
+      line-height: 40px;
+    }
+
+    .masters-team__desc {
+      font-size: 15px;
+      line-height: 26px;
+    }
+
+    .masters-team__eyebrow {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.14em;
+    }
+
+    .masters-team__divider {
+      margin-top: 32px;
+    }
+
+    .masters-team__block {
+      margin-top: 40px;
+    }
+
+    .masters-team__list {
+      margin-top: 20px;
+      gap: 32px;
+    }
+  }
+</style>

@@ -1,0 +1,584 @@
+---
+import Button from './Button.astro';
+import { formats } from '../data/formats';
+---
+
+<section class="formats" aria-labelledby="formats-title" data-figma-node="102:220">
+  <img
+    class="formats__bg"
+    src="/img/formats-bg.jpg"
+    alt=""
+    width="1448"
+    height="1086"
+    loading="lazy"
+  />
+
+  <div class="formats__content">
+    <div class="formats__head">
+      <h2 class="formats__title" id="formats-title">Форматы работы</h2>
+      <p class="formats__lead">
+        Форматы различаются по глубине запроса, длительности и степени
+        сопровождения.
+      </p>
+    </div>
+
+    <div class="formats__panel" data-formats>
+      <div class="formats__stage">
+        {
+          formats.map((format, index) => (
+            <div
+              class:list={['formats__slide', { 'is-active': index === 0 }]}
+              data-format-slide={index}
+              id={`format-slide-${index}`}
+            >
+              <img
+                src={format.image}
+                alt={format.alt}
+                width="1672"
+                height="941"
+                loading="eager"
+              />
+            </div>
+          ))
+        }
+
+        <button
+          class="formats__arrow formats__arrow--prev"
+          type="button"
+          aria-label="Предыдущий формат"
+          data-formats-prev
+        >
+          <img src="/icons/slider-arrow.svg" alt="" width="49" height="49" />
+        </button>
+
+        <button
+          class="formats__arrow formats__arrow--next"
+          type="button"
+          aria-label="Следующий формат"
+          data-formats-next
+        >
+          <img src="/icons/slider-arrow.svg" alt="" width="49" height="49" />
+        </button>
+
+        <p class="formats__counter" aria-live="polite" data-formats-counter>
+          1/5
+        </p>
+      </div>
+
+      <div class="formats__tabs" role="tablist" aria-label="Форматы работы">
+        {
+          formats.map((format, index) => (
+            <div
+              class:list={['format-tab', { 'is-active': index === 0 }]}
+              role="tab"
+              tabindex={index === 0 ? 0 : -1}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              aria-controls={`format-slide-${index}`}
+              data-format-tab={index}
+            >
+              <div class="format-tab__head">
+                <span class="format-tab__num" aria-hidden="true">
+                  {format.number}
+                </span>
+                <span class="format-tab__title">{format.title}</span>
+              </div>
+
+              <p class="format-tab__desc">{format.description}</p>
+
+              <div class="format-tab__meta format-tab__meta--active">
+                <span>{format.duration}</span>
+                <span class="format-tab__dot" aria-hidden="true"></span>
+                <span>{format.price}</span>
+              </div>
+
+              <div class="format-tab__meta format-tab__meta--idle">
+                <span class="format-tab__pill">{format.duration}</span>
+                <span>{format.price}</span>
+              </div>
+
+              <Button
+                href="/booking.html"
+                label="Перейти к записи"
+                variant="textured"
+                size="xs"
+                class="btn--format"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <p class="formats__note">
+      Переход к записи ни к чему не обязывает: сначала ты можешь задать
+      вопросы, оплата идёт последним шагом.
+    </p>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-formats]').forEach((root) => {
+    const tabs = [...root.querySelectorAll('[data-format-tab]')];
+    const slides = [...root.querySelectorAll('[data-format-slide]')];
+    const counter = root.querySelector('[data-formats-counter]');
+    let active = 0;
+
+    const setActive = (index) => {
+      if (!tabs.length) return;
+      active = (index + tabs.length) % tabs.length;
+
+      tabs.forEach((tab, tabIndex) => {
+        const isActive = tabIndex === active;
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        tab.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
+
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('is-active', slideIndex === active);
+      });
+
+      if (counter) counter.textContent = `${active + 1}/${tabs.length}`;
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', (event) => {
+        if (event.target.closest('a')) return;
+        setActive(index);
+      });
+
+      tab.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          setActive(index);
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          setActive(active + 1);
+          tabs[(active + 1) % tabs.length].focus();
+        }
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          setActive(active - 1);
+          tabs[(active - 1 + tabs.length) % tabs.length].focus();
+        }
+      });
+    });
+
+    root.querySelector('[data-formats-prev]')?.addEventListener('click', () => {
+      setActive(active - 1);
+    });
+
+    root.querySelector('[data-formats-next]')?.addEventListener('click', () => {
+      setActive(active + 1);
+    });
+
+    setActive(0);
+  });
+</script>
+
+<style>
+  .formats {
+    position: relative;
+    height: 1164px;
+    padding: 96px 24px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .formats__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .formats__content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .formats__head {
+    width: 1392px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .formats__title {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 300;
+    line-height: 60px;
+  }
+
+  .formats__lead {
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+  }
+
+  .formats__panel {
+    width: 1280px;
+    max-width: 100%;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 16px;
+    background: #f4eee3;
+  }
+
+  .formats__stage {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #d8cbb8;
+  }
+
+  .formats__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .formats__slide.is-active {
+    opacity: 1;
+  }
+
+  .formats__slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .formats__arrow {
+    position: absolute;
+    top: 50%;
+    width: 48px;
+    height: 48px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+  }
+
+  .formats__arrow--prev {
+    left: 24px;
+  }
+
+  .formats__arrow--next {
+    right: 24px;
+  }
+
+  .formats__arrow--prev img {
+    transform: rotate(180deg);
+  }
+
+  .formats__arrow img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .formats__counter {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 47px;
+    height: 36px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.75);
+    color: var(--color-olive);
+    font-family: var(--font-quote);
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 28px;
+  }
+
+  .formats__tabs {
+    display: flex;
+    width: 100%;
+    height: 296px;
+    overflow: hidden;
+  }
+
+  .format-tab {
+    position: relative;
+    flex: 0 0 232.25px;
+    min-width: 0;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      flex-grow 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .format-tab + .format-tab {
+    border-left: 1px solid #c9bea4;
+  }
+
+  .format-tab.is-active {
+    flex: 1 1 0;
+    padding: 16px;
+    justify-content: flex-start;
+    gap: 16px;
+    border-left-color: transparent;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: inset 0 0 0 1px #c9bea4;
+  }
+
+  .format-tab:focus-visible {
+    outline: 2px solid #b8870a;
+    outline-offset: -2px;
+  }
+
+  .format-tab__head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 50px;
+  }
+
+  .format-tab.is-active .format-tab__head {
+    min-height: 56px;
+    align-items: flex-start;
+  }
+
+  .format-tab__num {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-accent);
+    border-radius: 50%;
+    color: var(--color-olive);
+    font-family: var(--font-quote);
+    font-size: 13px;
+    font-style: italic;
+    line-height: 20px;
+  }
+
+  .format-tab__title {
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 29.7px;
+  }
+
+  .format-tab.is-active .format-tab__title {
+    font-size: 27px;
+    line-height: 32.67px;
+  }
+
+  .format-tab__desc {
+    display: none;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+  }
+
+  .format-tab.is-active .format-tab__desc {
+    display: block;
+    min-height: 95px;
+  }
+
+  .format-tab__meta {
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .format-tab__meta--active {
+    display: none;
+  }
+
+  .format-tab.is-active .format-tab__meta--active {
+    display: flex;
+  }
+
+  .format-tab__meta--idle {
+    display: flex;
+    gap: 16px;
+  }
+
+  .format-tab.is-active .format-tab__meta--idle {
+    display: none;
+  }
+
+  .format-tab__dot {
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .format-tab__pill {
+    height: 28px;
+    padding: 4px 8px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  .format-tab :global(.btn--format) {
+    display: none;
+  }
+
+  .format-tab.is-active :global(.btn--format) {
+    display: inline-flex;
+  }
+
+  .formats__note {
+    width: 1392px;
+    max-width: 100%;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 34px;
+    text-align: center;
+  }
+
+  @media (max-width: 1100px) {
+    .formats {
+      height: auto;
+      padding: 64px 24px;
+    }
+
+    .formats__content {
+      gap: 32px;
+    }
+
+    .formats__stage {
+      height: 320px;
+    }
+
+    .formats__tabs {
+      height: auto;
+      flex-direction: column;
+    }
+
+    .format-tab {
+      flex: none;
+      width: 100%;
+      padding: 16px;
+      gap: 12px;
+      border-left: 0 !important;
+      border-top: 1px solid #c9bea4;
+    }
+
+    .format-tab:first-child {
+      border-top: 0;
+    }
+
+    .format-tab.is-active {
+      box-shadow: none;
+    }
+
+    .format-tab__head {
+      min-height: 0;
+    }
+
+    .format-tab.is-active .format-tab__desc {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .formats {
+      padding: 56px 16px;
+    }
+
+    .formats__title {
+      font-size: 34px;
+      line-height: 42px;
+    }
+
+    .formats__lead {
+      font-size: 17px;
+      line-height: 28px;
+    }
+
+    .formats__panel {
+      padding: 6px;
+      gap: 6px;
+    }
+
+    .formats__stage {
+      height: 240px;
+    }
+
+    .formats__arrow {
+      width: 40px;
+      height: 40px;
+    }
+
+    .formats__arrow--prev {
+      left: 12px;
+    }
+
+    .formats__arrow--next {
+      right: 12px;
+    }
+
+    .formats__counter {
+      bottom: 12px;
+      height: 30px;
+      font-size: 17px;
+    }
+
+    .format-tab__title {
+      font-size: 18px;
+      line-height: 26px;
+    }
+
+    .format-tab.is-active .format-tab__title {
+      font-size: 24px;
+      line-height: 30px;
+    }
+
+    .formats__note {
+      font-size: 17px;
+      line-height: 28px;
+    }
+  }
+</style>
