@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T20:39:47.055Z"
+    "at": "2026-11-06T20:46:31.246Z"
   },
   "section": {
     "id": "79:105",
@@ -462,7 +462,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.5,
@@ -490,7 +491,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 3,
@@ -540,7 +542,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.5,

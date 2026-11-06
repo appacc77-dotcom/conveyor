@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:13:00.700Z"
+    "at": "2026-11-06T20:47:59.096Z"
   },
   "section": {
     "id": "387:1464",
@@ -10,11 +10,14 @@
     "w": 1424,
     "h": 92
   },
+  "fingerprint": "85f287b6",
+  "cloudVersion": "2418696346917289452",
   "counts": {
     "nodes": 29,
     "images": 1,
     "icons": 4,
-    "iconInstances": 4
+    "iconInstances": 4,
+    "states": 16
   },
   "assets": {
     "crop": "crop.png",
@@ -97,13 +100,15 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "strokeWeight": 0.5,
       "sizing": {
         "v": "HUG"
       },
+      "absolute": true,
       "limits": {
         "maxW": 1424
       },
@@ -138,8 +143,9 @@
           "opacity": 0.8500000238418579,
           "color": {
             "hex": "#3a3323",
-            "a": 1
-          }
+            "a": 0.85
+          },
+          "variable": "bg-header"
         }
       ],
       "autoLayout": {
@@ -164,6 +170,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "clips": false,
       "bound": {
         "paddingLeft": "VariableID:2:10",
@@ -201,6 +208,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:9"
@@ -269,7 +277,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -338,7 +347,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.5,
@@ -367,7 +377,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 3,
@@ -411,7 +422,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -456,7 +468,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -529,6 +542,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
@@ -675,7 +689,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -743,7 +758,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.5,
@@ -771,7 +787,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 3,
@@ -811,7 +828,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.5,
@@ -872,7 +890,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.5748560428619385,
@@ -899,7 +918,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.7443636655807495,
@@ -962,7 +982,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "radius": 4,
@@ -994,7 +1015,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "radius": 4,
@@ -1026,7 +1048,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "radius": 4,
@@ -1040,7 +1063,5 @@
         ]
       }
     }
-  ],
-  "fingerprint": "85f287b6",
-  "cloudVersion": "2418696346917289452"
+  ]
 }

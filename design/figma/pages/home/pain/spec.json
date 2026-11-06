@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T20:39:50.288Z"
+    "at": "2026-11-06T20:46:34.313Z"
   },
   "section": {
     "id": "79:116",
@@ -525,7 +525,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.5,
@@ -553,7 +554,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 3,

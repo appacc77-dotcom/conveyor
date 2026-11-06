@@ -146,7 +146,29 @@ async function walk(n, depth) {
 
   if ("cornerRadius" in n && n.cornerRadius) o.radius = n.cornerRadius;
   if ("strokes" in n && Array.isArray(n.strokes) && n.strokes.length) {
-    o.strokes = n.strokes.map((s) => ({ type: s.type, color: rgba(s.color) }));
+    // Штрихи тоже привязаны к переменным (1141 узел в файле) — берём значение
+    // переменной, а не цвет краски, иначе полупрозрачная обводка станет плотной.
+    const boundStrokes = (n.boundVariables && n.boundVariables.strokes) || [];
+    o.strokes = [];
+    for (let si = 0; si < n.strokes.length; si += 1) {
+      const s = n.strokes[si];
+      const rec = { type: s.type, color: rgba(s.color) };
+      const bound = boundStrokes[si];
+      if (bound && s.type === "SOLID") {
+        try {
+          const variable = await figma.variables.getVariableByIdAsync(bound.id);
+          const modes = variable && variable.valuesByMode;
+          const value = modes && modes[Object.keys(modes)[0]];
+          if (value && typeof value === "object" && "r" in value) {
+            rec.color = rgba(value);
+            rec.variable = variable.name;
+          }
+        } catch (error) {
+          rec.variableError = String(error && error.message).slice(0, 80);
+        }
+      }
+      o.strokes.push(rec);
+    }
     o.strokeWeight = n.strokeWeight;
     if (n.strokeAlign && n.strokeAlign !== "INSIDE") o.strokeAlign = n.strokeAlign;
   }

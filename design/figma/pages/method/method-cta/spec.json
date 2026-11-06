@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:13:04.844Z"
+    "at": "2026-11-06T20:48:04.281Z"
   },
   "section": {
     "id": "334:992",
@@ -10,11 +10,14 @@
     "w": 1440,
     "h": 499
   },
+  "fingerprint": "6bc0dbe9",
+  "cloudVersion": "2418696346917289452",
   "counts": {
     "nodes": 10,
     "images": 2,
     "icons": 0,
-    "iconInstances": 0
+    "iconInstances": 0,
+    "states": 2
   },
   "assets": {
     "crop": "crop.png",
@@ -91,6 +94,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "paddingLeft": "VariableID:2:9",
         "paddingTop": "VariableID:2:13",
@@ -124,6 +128,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "clips": false,
       "limits": {
         "maxW": 1280
@@ -194,13 +199,15 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:2:25"
@@ -239,13 +246,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -392,7 +401,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -434,7 +444,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "strokeWeight": 1,
@@ -490,7 +501,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "sizing": {
@@ -503,7 +515,5 @@
         ]
       }
     }
-  ],
-  "fingerprint": "6bc0dbe9",
-  "cloudVersion": "2418696346917289452"
+  ]
 }

@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T20:40:13.482Z"
+    "at": "2026-11-06T20:46:56.487Z"
   },
   "section": {
     "id": "148:561",
@@ -99,7 +99,8 @@
           "color": {
             "hex": "#c9bea4",
             "a": 1
-          }
+          },
+          "variable": "thread"
         }
       ],
       "clips": false,

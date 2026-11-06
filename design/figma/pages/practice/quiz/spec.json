@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:12:36.250Z"
+    "at": "2026-11-06T20:47:30.625Z"
   },
   "section": {
     "id": "410:1365",
@@ -10,11 +10,14 @@
     "w": 1440,
     "h": 550
   },
+  "fingerprint": "4711f98d",
+  "cloudVersion": "2418696346917289452",
   "counts": {
     "nodes": 19,
     "images": 1,
     "icons": 1,
-    "iconInstances": 1
+    "iconInstances": 1,
+    "states": 4
   },
   "assets": {
     "crop": "crop.png",
@@ -79,7 +82,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1,
@@ -145,6 +149,8 @@
         "h": "FILL",
         "v": "FILL"
       },
+      "align": "STRETCH",
+      "grow": 1,
       "bound": {
         "paddingLeft": "VariableID:2:14",
         "paddingRight": "VariableID:2:14"
@@ -426,7 +432,8 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "autoLayout": {
@@ -448,7 +455,8 @@
           "color": {
             "hex": "#c9bea4",
             "a": 1
-          }
+          },
+          "variable": "thread"
         }
       ],
       "strokeWeight": 0.44999998807907104,
@@ -514,7 +522,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -582,7 +591,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 1.5,
@@ -610,7 +620,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "strokeWeight": 3,
@@ -710,7 +721,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "bound": {
@@ -759,7 +771,5 @@
         "v": "HUG"
       }
     }
-  ],
-  "fingerprint": "4711f98d",
-  "cloudVersion": "2418696346917289452"
+  ]
 }
