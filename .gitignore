@@ -19,3 +19,4 @@ tmp/
 var/
 
 .build.lock
+.coldstart/

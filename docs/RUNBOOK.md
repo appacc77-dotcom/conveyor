@@ -10,14 +10,30 @@
 ## 0. Что нужно
 
 - Figma открыта, в ней нужный файл, мост подключён (`figma-agent status`);
-- Node и `pnpm/npm`;
-- папка проекта с `tools/`, `src/`, `package.json` (скелет переносится из
-  предыдущего прогона — код от проекта не зависит).
+- Node и `npm`;
+- папка с одним каталогом `tools/` — больше ничего не нужно.
+
+## 0.1 Развернуть каркас
+
+```bash
+node tools/scaffold.mjs
+npm install
+```
+
+Кладёт `astro.config.mjs`, `tsconfig.json`, `package.json`, каркас страницы
+(`src/layouts/BaseLayout.astro`, `src/styles/base.css`) и саму страницу структуры
+(`src/pages/structure.astro`). Шаблоны лежат в `tools/scaffold/` и не знают ни про
+какой проект: имя файла, страницы и кадры приходят из `project.json`.
+
+Существующие файлы не перезаписываются — нужен `--force`.
 
 ## 1. Файл: какой именно
 
 Если `project.json` ещё нет — его создаёт `discover` (шаг 2): `fileKey` он берёт
-из открытого файла. Проверено на пустой папке: только `tools/`, ни одного JSON.
+из открытого файла. **Проверено на пустой папке:** только `tools/`, ни одного JSON — `scaffold`,
+`discover --write`, `intake`, `ds:tokens`, `structure`, `build` дают
+`dist/structure.html` со всеми 46 секциями и семью страницами. Ни одной правки
+кода и ни одной правки инструкций.
 
 
 

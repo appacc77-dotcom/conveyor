@@ -29,7 +29,8 @@
     "measure": "node tools/measure.mjs",
     "compare": "node tools/compare.mjs",
     "assets:check": "node tools/check-assets.mjs",
-    "status": "node tools/status.mjs"
+    "status": "node tools/status.mjs",
+    "scaffold": "node tools/scaffold.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",
