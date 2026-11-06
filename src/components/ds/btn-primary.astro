@@ -26,6 +26,11 @@ interface Props {
    * набора, а правка инстанса — поэтому отдельный проп, а не селектор снаружи.
    */
   compact?: boolean;
+  /**
+   * Обводка инстанса: в `quiz` у кнопки stroke 1 px цветом thread (#c9bea4),
+   * хотя у набора её нет. Переопределение инстанса, поэтому проп.
+   */
+  outlined?: boolean;
 }
 
 const {
@@ -36,6 +41,7 @@ const {
   size = 'L',
   caps = false,
   compact = false,
+  outlined = false,
 } = Astro.props;
 
 const labelClass =
@@ -48,6 +54,7 @@ const labelClass =
     `btn-primary--${theme}`,
     `btn-primary--${size.toLowerCase()}`,
     compact && 'btn-primary--compact',
+    outlined && 'btn-primary--outlined',
   ]}
   href={href}
   data-figma-node={node}
@@ -82,6 +89,11 @@ const labelClass =
   /* Обжатый инстанс: паддинг 8/16 при любом size. */
   .btn-primary--compact {
     padding: var(--space-s) var(--space-m);
+  }
+
+  /* Обводка инстанса: inset-тень, чтобы не растить высоту. */
+  .btn-primary--outlined {
+    box-shadow: inset 0 0 0 1px var(--color-thread);
   }
 
   /* muted по файлу всегда 45 px: паддинг 8/16 независимо от size. */

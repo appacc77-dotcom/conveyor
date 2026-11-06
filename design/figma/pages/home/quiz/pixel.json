@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-06T18:40:20.012Z",
+  "at": "2026-11-06T19:56:06.049Z",
   "reference": "design/figma/pages/home/quiz/crop.png",
   "shot": ".screens/home-quiz.png",
   "width": 1440,
   "height": 550,
-  "mean": 2.23,
-  "over16": 2.54,
-  "over48": 1.79
+  "mean": 2.2,
+  "over16": 2.53,
+  "over48": 1.75
 }

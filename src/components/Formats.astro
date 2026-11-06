@@ -16,8 +16,19 @@
  */
 import BtnPrimary from './ds/btn-primary.astro';
 
+interface TabNodes {
+  desc?: string;
+  meta?: string;
+  duration?: string;
+  dot?: string;
+  price?: string;
+  cta?: string;
+  button?: string;
+}
+
 interface Tab {
   node?: string;
+  nodes?: TabNodes;
   number: string;
   title: string;
   duration: string;
@@ -71,17 +82,22 @@ const { title, lead, note, slide, tabs } = Astro.props;
             <h3 class:list={['format-tab__title', tab.active ? 't-h5' : 't-h6']}>{tab.title}</h3>
           </div>
 
-          {tab.desc && <p class="format-tab__desc t-body-s">{tab.desc}</p>}
+          {tab.desc && (
+            <p class="format-tab__desc t-body-s" data-figma-node={tab.nodes?.desc}>{tab.desc}</p>
+          )}
 
-          <div class="format-tab__cta">
-            <BtnPrimary href="#" label="Перейти к записи" theme="light" size="L" caps compact />
+          {/* Порядок из макета: метаданные на y=199, кнопка на y=235. */}
+          <div class="format-tab__meta" data-figma-node={tab.nodes?.meta}>
+            <span class="format-tab__pill">
+              <span class="format-tab__duration t-caption" data-figma-node={tab.nodes?.duration}>{tab.duration}</span>
+            </span>
+            {tab.active && <span class="format-tab__dot" aria-hidden="true" data-figma-node={tab.nodes?.dot}></span>}
+            <span class="format-tab__price t-caption" data-figma-node={tab.nodes?.price}>{tab.price}</span>
           </div>
 
-          <div class="format-tab__meta">
-            <span class="format-tab__pill">
-              <span class="format-tab__duration t-caption">{tab.duration}</span>
-            </span>
-            <span class="format-tab__price t-caption">{tab.price}</span>
+          <div class="format-tab__cta" data-figma-node={tab.nodes?.cta}>
+            {/* caps false: в макете кнопка набрана обычным регистром. */}
+            <BtnPrimary href="#" label="Перейти к записи" theme="light" size="L" compact node={tab.nodes?.button} />
           </div>
         </article>
       ))}
@@ -254,8 +270,19 @@ const { title, lead, note, slide, tabs } = Astro.props;
     color: var(--color-accent);
   }
 
+  /* Ширина из узлов: 129 у активной (две строки), 176 у остальных. */
+  /* Коробка заголовка из узлов: 176×50 у остальных, 129×56 у активной.
+     Высота задана явно: текст «Точка входа» помещается в строку, но в макете
+     коробка двухстрочная — иначе съезжает всё ниже на 24 px. */
   .format-tab__title {
+    width: 176px;
+    height: 50px;
     color: var(--color-text-heading);
+  }
+
+  .format-tab--active .format-tab__title {
+    width: 129px;
+    height: 56px;
   }
 
   /* t-h6 у неактивных, t-h5 у активной — класс ставит и снимает скрипт,
@@ -278,10 +305,13 @@ const { title, lead, note, slide, tabs } = Astro.props;
 
   .format-tab__cta {
     display: none;
+    align-self: flex-start;
   }
 
+  /* Высота 95 — из узла tab-desc: описание занимает её независимо от длины. */
   .format-tab--active .format-tab__desc {
     display: block;
+    height: 95px;
     animation: format-fade 0.3s ease both;
   }
 
@@ -307,9 +337,11 @@ const { title, lead, note, slide, tabs } = Astro.props;
     display: flex;
   }
 
+  /* Ширина по содержимому: в макете 87 (активная) и 104 (остальные). */
   .format-tab__meta {
     display: flex;
     align-items: center;
+    align-self: flex-start;
     gap: var(--space-s);
   }
 
@@ -317,12 +349,20 @@ const { title, lead, note, slide, tabs } = Astro.props;
     gap: var(--space-s);
   }
 
+  /* Точка между длительностью и ценой: 2×2 в узле I709:1504;708:1415. */
+  .format-tab__dot {
+    flex: none;
+    width: 2px;
+    height: 2px;
+    background: var(--color-text-secondary);
+    border-radius: 50%;
+  }
+
+  /* У узла tab-meta есть радиус 999, но заливки нет: в макете это просто
+     строка «30 мин · $50» без плашки. Плашка была выдумкой. */
   .format-tab__pill {
     display: flex;
     align-items: center;
-    padding: var(--space-xs) var(--space-s);
-    background: var(--color-bg-page);
-    border-radius: 999px;
   }
 
   .format-tab__duration,
