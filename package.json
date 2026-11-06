@@ -33,7 +33,8 @@
     "scaffold": "node tools/scaffold.mjs",
     "portability": "node tools/check-portability.mjs",
     "variants": "node tools/variants.mjs",
-    "bindings": "node tools/check-bindings.mjs"
+    "bindings": "node tools/check-bindings.mjs",
+    "interactive": "node tools/check-interactive.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",
