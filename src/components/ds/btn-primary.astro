@@ -9,12 +9,14 @@ import ArrowQuiet from './arrow-quiet.astro';
 interface Props {
   href: string;
   label: string;
+  /** id инстанса в Figma — по нему элемент находит замер. */
+  node?: string;
 }
 
-const { href, label } = Astro.props;
+const { href, label, node } = Astro.props;
 ---
 
-<a class="btn-primary" href={href} data-figma-node="5:19">
+<a class="btn-primary" href={href} data-figma-node={node}>
   <span class="btn-primary__label t-button">{label}</span>
   <ArrowQuiet />
 </a>

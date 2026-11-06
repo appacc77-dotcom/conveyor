@@ -29,24 +29,25 @@ const {
 <section class="hero" data-figma-node="79:105">
   <img
     class="hero__bg"
+    data-figma-node="79:106"
     src="/img/hero.jpg"
     alt=""
     width="1440"
     height="780"
     fetchpriority="high"
   />
-  <div class="hero__overlay"></div>
+  <div class="hero__overlay" data-figma-node="767:2219"></div>
 
-  <div class="hero__content">
-    <h1 class="hero__title t-h1">{title}</h1>
-    <p class="hero__lead t-body">{lead}</p>
+  <div class="hero__content" data-figma-node="79:107">
+    <h1 class="hero__title t-h1" data-figma-node="79:108">{title}</h1>
+    <p class="hero__lead t-body" data-figma-node="79:109">{lead}</p>
     <div class="hero__actions">
-      <BtnPrimary href={ctaHref} label={ctaLabel} />
+      <BtnPrimary href={ctaHref} label={ctaLabel} node="79:110" />
     </div>
   </div>
 
   <button class="hero__play" type="button" aria-label={playLabel}>
-    <Play />
+    <Play node="79:113" />
   </button>
 </section>
 
