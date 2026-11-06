@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-06T17:44:37.768Z",
+  "at": "2026-11-06T17:55:10.564Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 4,
+    "green": 5,
     "measured": 0,
     "red": 0,
-    "exported": 42,
+    "exported": 41,
     "todo": 0
   },
   "assetsTotal": {
@@ -336,11 +336,24 @@
           "slug": "home-formats",
           "dir": "design/figma/pages/home/formats",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 18,
+            "nodes": 76,
+            "coverage": 100,
+            "worstDelta": 1,
+            "at": "2026-11-06T17:54:39.619Z"
+          },
+          "pixel": {
+            "mean": 4.55,
+            "over16": 3.32,
+            "over48": 2.6,
+            "at": "2026-11-06T17:54:40.835Z"
+          },
           "assets": {
             "nodes": 76,
             "images": 3,
@@ -354,7 +367,7 @@
           },
           "images": {
             "figma": "/structure/home-formats-figma.png",
-            "site": null
+            "site": "/structure/home-formats-site.png"
           }
         },
         {
@@ -538,13 +551,13 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-06T17:44:36.332Z"
+            "at": "2026-11-06T17:49:49.749Z"
           },
           "pixel": {
             "mean": 3.83,
             "over16": 5.94,
             "over48": 1.97,
-            "at": "2026-11-06T17:44:12.743Z"
+            "at": "2026-11-06T17:48:39.291Z"
           },
           "assets": {
             "nodes": 29,
@@ -565,10 +578,10 @@
       ],
       "counts": {
         "total": 15,
-        "green": 4,
+        "green": 5,
         "measured": 0,
         "red": 0,
-        "exported": 11,
+        "exported": 10,
         "todo": 0
       }
     },

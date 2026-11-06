@@ -151,6 +151,12 @@ function walk(n, depth) {
     if (n.layoutSizingVertical !== "FIXED") sizing.v = n.layoutSizingVertical;
     if (Object.keys(sizing).length) o.sizing = sizing;
   }
+
+  // Поведение ребёнка в авто-раскладке: STRETCH — на всю ширину родителя,
+  // ABSOLUTE — вне потока, координаты от родителя.
+  if (n.layoutAlign && n.layoutAlign !== "INHERIT") o.align = n.layoutAlign;
+  if (n.layoutGrow) o.grow = n.layoutGrow;
+  if (n.layoutPositioning === "ABSOLUTE") o.absolute = true;
   if (n.clipsContent === false) o.clips = false;
   // Повёрнутые элементы: в файле их 298, без угла вёрстка их не воспроизводит.
   if (n.rotation) o.rotation = +n.rotation.toFixed(2);

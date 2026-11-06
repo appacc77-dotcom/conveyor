@@ -1,0 +1,299 @@
+---
+/**
+ * Formats — секция `formats` (102:220), фрейм `main` (79:103).
+ *
+ * Геометрия с живого узла: 1440×1164, фон-фотография, панель со слайдером
+ * и пятью вкладками форматов.
+ *
+ * Раскладка из спеки:
+ *   formats       — VERTICAL, gap 48, pad 96/24, MIN/CENTER
+ *   heading-block — VERTICAL, gap 8, CENTER/CENTER
+ *   formats-panel — VERTICAL, gap 8, pad 8, радиус 16, фон bg-surface
+ *   formats-slider— HORIZONTAL, pad 32/24, SPACE_BETWEEN/CENTER, радиус 12
+ *   formats-tabs  — HORIZONTAL, gap 0
+ *   format-tab    — активная: VERTICAL gap 16 pad 16, белая; остальные:
+ *                   VERTICAL gap 48 pad 16/8, SPACE_BETWEEN
+ */
+import BtnPrimary from './ds/btn-primary.astro';
+
+interface Tab {
+  node?: string;
+  number: string;
+  title: string;
+  duration: string;
+  price: string;
+  desc?: string;
+  active?: boolean;
+  divider?: boolean;
+}
+
+interface Props {
+  title: string;
+  lead: string;
+  note: string;
+  slide: string;
+  tabs: Tab[];
+}
+
+const { title, lead, note, slide, tabs } = Astro.props;
+---
+
+<section class="formats" id="home-formats" data-figma-node="102:220">
+  <div class="formats__heading" data-figma-node="102:221">
+    <h2 class="formats__title t-h2" data-figma-node="102:222">{title}</h2>
+    <p class="formats__lead t-body" data-figma-node="102:223">{lead}</p>
+  </div>
+
+  <div class="formats__panel" data-figma-node="102:224">
+    <div class="formats__slider" data-figma-node="102:225">
+      <button class="formats__arrow" type="button" aria-label="Предыдущий слайд" data-figma-node="102:228">
+        <img src="/svg/slider-arrow-prev.svg" alt="" width="48" height="48" />
+      </button>
+
+      <span class="formats__counter" data-figma-node="102:226">
+        <span class="formats__counter-text t-quote" data-figma-node="102:227">{slide}</span>
+      </span>
+
+      <button class="formats__arrow" type="button" aria-label="Следующий слайд" data-figma-node="102:229">
+        <img src="/svg/slider-arrow-next.svg" alt="" width="48" height="48" />
+      </button>
+    </div>
+
+    <div class="formats__tabs" data-figma-node="102:230">
+      {tabs.map((tab) => (
+        <article
+          class:list={['format-tab', tab.active && 'format-tab--active', tab.divider && 'format-tab--divided']}
+          data-figma-node={tab.node}
+        >
+          <div class="format-tab__head">
+            <span class="format-tab__number t-number">{tab.number}</span>
+            <h3 class:list={['format-tab__title', tab.active ? 't-h5' : 't-h6']}>{tab.title}</h3>
+          </div>
+
+          {tab.active && tab.desc && <p class="format-tab__desc t-body-s">{tab.desc}</p>}
+
+          {tab.active && (
+            <div class="format-tab__cta">
+              <BtnPrimary href="#" label="Перейти к записи" theme="light" size="L" caps compact />
+            </div>
+          )}
+
+          <div class="format-tab__meta">
+            <span class="format-tab__pill">
+              <span class="format-tab__duration t-caption">{tab.duration}</span>
+            </span>
+            <span class="format-tab__price t-caption">{tab.price}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <div class="formats__note" data-figma-node="741:1194">
+    <p class="formats__note-text t-body" data-figma-node="741:1196">{note}</p>
+  </div>
+</section>
+
+<style>
+  /* formats (102:220): фон-фотография и вертикальный поток. */
+  .formats {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xl);
+    padding: var(--space-4xl) var(--space-l);
+    background-image: url('/img/formats-bg.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* heading-block (102:221): align STRETCH — на всю ширину секции. */
+  .formats__heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-s);
+    width: 100%;
+    text-align: center;
+  }
+
+  .formats__title {
+    color: var(--color-text-heading);
+  }
+
+  .formats__lead {
+    max-width: 842px;
+    color: var(--color-text-primary);
+  }
+
+  /* formats-panel (102:224) */
+  .formats__panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: var(--container-max);
+    gap: var(--space-s);
+    padding: var(--space-s);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-l);
+  }
+
+  /* formats-slider (102:225): фото внутри, стрелки по краям, счётчик по центру. */
+  .formats__slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 420px;
+    padding: var(--space-xl) var(--space-l);
+    border-radius: var(--radius-m);
+    background-image: url('/img/formats-slider.png');
+    background-repeat: no-repeat;
+    /* imageTransform: [[1, 0, 0.00004], [0, 0.5953, 0.2029]]
+       ширина 100 %, высота 100 %/0.5953 = 167.97 %,
+       сдвиг по y 0.2029/(1−0.5953) = 50.15 %, по x сдвига нет. */
+    background-size: 100% 167.97%;
+    background-position: 0% 50.15%;
+  }
+
+  .formats__arrow {
+    display: block;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .formats__arrow img {
+    display: block;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* slide-counter (102:226): ABSOLUTE — стоит по координатам из спеки,
+     а не в потоке: 608,359 внутри слайдера. */
+  .formats__counter {
+    position: absolute;
+    top: 359px;
+    left: 608px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xs) var(--space-s);
+    background: var(--color-text-on-image);
+    border-radius: 999px;
+  }
+
+  .formats__counter-text {
+    color: var(--color-accent);
+  }
+
+  /* formats-tabs (102:234): пять вкладок вплотную. */
+  /* formats-tabs (102:230): высота 296 из спеки, вкладки тянутся. */
+  .formats__tabs {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 296px;
+  }
+
+  .format-tab {
+    position: relative;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-2xl);
+    width: 232px;
+    padding: var(--space-m) var(--space-s);
+  }
+
+  /* Активная вкладка шире, с описанием и кнопкой. */
+  .format-tab--active {
+    gap: var(--space-m);
+    justify-content: flex-start;
+    width: 335px;
+    padding: var(--space-m);
+    background: var(--color-text-on-image);
+    border-radius: var(--radius-m);
+  }
+
+  /* Разделитель между вкладками: линия 1 px с отступом 10 px сверху и снизу. */
+  .format-tab--divided::before {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    width: 1px;
+    content: '';
+    background: var(--color-line-on-dark);
+    opacity: 0.6;
+  }
+
+  .format-tab__head {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-s);
+  }
+
+  .format-tab__number {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--color-bg-page);
+    border-radius: 999px;
+    color: var(--color-accent);
+  }
+
+  .format-tab__title {
+    color: var(--color-text-heading);
+  }
+
+  .format-tab__desc {
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  .format-tab__cta {
+    display: flex;
+  }
+
+  .format-tab__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+  }
+
+  .format-tab--active .format-tab__meta {
+    gap: var(--space-s);
+  }
+
+  .format-tab__pill {
+    display: flex;
+    align-items: center;
+    padding: var(--space-xs) var(--space-s);
+    background: var(--color-bg-page);
+    border-radius: 999px;
+  }
+
+  .format-tab__duration,
+  .format-tab__price {
+    color: var(--color-text-primary);
+  }
+
+  /* formats-note (741:1194): align STRETCH, без ограничения ширины. */
+  .formats__note {
+    width: 100%;
+  }
+
+  .formats__note-text {
+    margin: 0;
+    color: var(--color-text-secondary);
+  }
+</style>

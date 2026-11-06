@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import Pain from '../components/Pain.astro';
 import Banner from '../components/Banner.astro';
 import Header from '../components/Header.astro';
+import Formats from '../components/Formats.astro';
 
 const painItems = [
   {
@@ -75,6 +76,21 @@ const painItems = [
       ctaLabel="с точки входа"
       ctaHref="/booking.html#entry"
       items={painItems}
+    />
+
+    <Formats
+      title="Форматы работы"
+      lead="Форматы различаются по глубине запроса, длительности и степени сопровождения."
+      note="Переход к записи ни к чему не обязывает: сначала ты можешь задать вопросы, оплата идёт последним шагом."
+      slide="1/5"
+      tabs={[
+        { node: '709:1504', number: '01', title: 'Точка входа', duration: '30 мин', price: '$50', active: true,
+          desc: 'Первая встреча. Твоё понимание, что мешает и куда двигаться. Дальше выбор за тобой.' },
+        { node: '709:1520', number: '02', title: 'Индивидуальная мастер-сессия', duration: '2 часа', price: '$230' },
+        { node: '709:1544', number: '03', title: 'Программа 3\u00a0встречи', duration: '3 х 2 часа', price: '$650', divider: true },
+        { node: '709:1554', number: '04', title: 'Программа 5\u00a0встреч', duration: '5 х 2 часа', price: '$1050', divider: true },
+        { node: '709:1564', number: '05', title: 'Сопровождение', duration: '60 минут', price: '$110', divider: true },
+      ]}
     />
   </main>
 </BaseLayout>
