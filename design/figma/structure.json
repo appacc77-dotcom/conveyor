@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-06T16:16:49.650Z",
+  "at": "2026-11-06T16:20:56.177Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -52,6 +52,14 @@
             "over48": 0.62,
             "at": "2026-11-06T16:05:05.141Z"
           },
+          "assets": {
+            "nodes": 14,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 2,
+            "bytes": 75031
+          },
           "images": {
             "figma": "/structure/home-hero-figma.png",
             "site": "/structure/home-hero-site.png"
@@ -72,6 +80,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 5,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 179207
+          },
           "images": {
             "figma": "/structure/home-banner-founder-figma.png",
             "site": null
@@ -105,6 +121,14 @@
             "over48": 1.91,
             "at": "2026-11-06T16:05:06.308Z"
           },
+          "assets": {
+            "nodes": 34,
+            "images": 2,
+            "png": 1,
+            "jpg": 1,
+            "svg": 1,
+            "bytes": 2883055
+          },
           "images": {
             "figma": "/structure/home-pain-figma.png",
             "site": "/structure/home-pain-site.png"
@@ -125,6 +149,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 16,
+            "images": 0,
+            "png": 0,
+            "jpg": 0,
+            "svg": 1,
+            "bytes": 3781
+          },
           "images": {
             "figma": "/structure/home-method-figma.png",
             "site": null
@@ -145,6 +177,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 17,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 1,
+            "bytes": 63778
+          },
           "images": {
             "figma": "/structure/home-quiz-figma.png",
             "site": null
@@ -165,6 +205,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 21,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 1,
+            "bytes": 1963959
+          },
           "images": {
             "figma": "/structure/home-about-founder-figma.png",
             "site": null
@@ -185,6 +233,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 25,
+            "images": 3,
+            "png": 3,
+            "jpg": 0,
+            "svg": 0,
+            "bytes": 3751718
+          },
           "images": {
             "figma": "/structure/home-process-figma.png",
             "site": null
@@ -205,6 +261,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 23,
+            "images": 2,
+            "png": 1,
+            "jpg": 1,
+            "svg": 1,
+            "bytes": 2944546
+          },
           "images": {
             "figma": "/structure/home-entry-figma.png",
             "site": null
@@ -225,6 +289,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 76,
+            "images": 3,
+            "png": 3,
+            "jpg": 0,
+            "svg": 2,
+            "bytes": 6709691
+          },
           "images": {
             "figma": "/structure/home-formats-figma.png",
             "site": null
@@ -245,6 +317,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 70,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 1974342
+          },
           "images": {
             "figma": "/structure/home-voices-figma.png",
             "site": null
@@ -265,6 +345,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 18,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 1,
+            "bytes": 2716934
+          },
           "images": {
             "figma": "/structure/home-library-figma.png",
             "site": null
@@ -285,6 +373,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 1,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 77325
+          },
           "images": {
             "figma": "/structure/home-air-photo-figma.png",
             "site": null
@@ -305,6 +401,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 52,
+            "images": 2,
+            "png": 2,
+            "jpg": 0,
+            "svg": 1,
+            "bytes": 4456519
+          },
           "images": {
             "figma": "/structure/home-faq-figma.png",
             "site": null
@@ -325,6 +429,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 31,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 205035
+          },
           "images": {
             "figma": "/structure/home-footer-figma.png",
             "site": null
@@ -345,6 +457,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 29,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 2787345
+          },
           "images": {
             "figma": "/structure/home-header-figma.png",
             "site": null
@@ -386,6 +506,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 66,
+            "images": 3,
+            "png": 2,
+            "jpg": 1,
+            "svg": 2,
+            "bytes": 6509085
+          },
           "images": {
             "figma": "/structure/masters-founder-hero-figma.png",
             "site": null
@@ -406,6 +534,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 56,
+            "images": 3,
+            "png": 3,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 7410571
+          },
           "images": {
             "figma": "/structure/masters-masters-team-figma.png",
             "site": null
@@ -426,6 +562,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 38,
+            "images": 3,
+            "png": 0,
+            "jpg": 3,
+            "svg": 1,
+            "bytes": 210468
+          },
           "images": {
             "figma": "/structure/masters-masters-more-figma.png",
             "site": null
@@ -446,6 +590,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 31,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 205035
+          },
           "images": {
             "figma": "/structure/masters-footer-figma.png",
             "site": null
@@ -466,6 +618,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 29,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 2787356
+          },
           "images": {
             "figma": "/structure/masters-header-figma.png",
             "site": null
@@ -507,6 +667,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 10,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 1,
+            "bytes": 2300561
+          },
           "images": {
             "figma": "/structure/library-library-hero-figma.png",
             "site": null
@@ -527,6 +695,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 15,
+            "images": 2,
+            "png": 1,
+            "jpg": 1,
+            "svg": 1,
+            "bytes": 2873483
+          },
           "images": {
             "figma": "/structure/library-library-book-figma.png",
             "site": null
@@ -547,6 +723,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 18,
+            "images": 2,
+            "png": 1,
+            "jpg": 1,
+            "svg": 1,
+            "bytes": 6410115
+          },
           "images": {
             "figma": "/structure/library-library-journal-figma.png",
             "site": null
@@ -567,6 +751,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 59,
+            "images": 4,
+            "png": 0,
+            "jpg": 4,
+            "svg": 1,
+            "bytes": 3915417
+          },
           "images": {
             "figma": "/structure/library-library-issues-figma.png",
             "site": null
@@ -587,6 +779,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 31,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 205035
+          },
           "images": {
             "figma": "/structure/library-footer-figma.png",
             "site": null
@@ -607,6 +807,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 29,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 2787355
+          },
           "images": {
             "figma": "/structure/library-header-figma.png",
             "site": null
@@ -648,6 +856,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 33,
+            "images": 2,
+            "png": 2,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 4978064
+          },
           "images": {
             "figma": "/structure/practice-hero-figma.png",
             "site": null
@@ -668,6 +884,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 112,
+            "images": 5,
+            "png": 4,
+            "jpg": 1,
+            "svg": 4,
+            "bytes": 10234302
+          },
           "images": {
             "figma": "/structure/practice-practice-free-figma.png",
             "site": null
@@ -688,6 +912,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 19,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 1,
+            "bytes": 63786
+          },
           "images": {
             "figma": "/structure/practice-quiz-figma.png",
             "site": null
@@ -708,6 +940,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 220,
+            "images": 8,
+            "png": 2,
+            "jpg": 6,
+            "svg": 3,
+            "bytes": 17451645
+          },
           "images": {
             "figma": "/structure/practice-practice-pay-figma.png",
             "site": null
@@ -728,6 +968,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 249,
+            "images": 8,
+            "png": 1,
+            "jpg": 7,
+            "svg": 3,
+            "bytes": 4188672
+          },
           "images": {
             "figma": "/structure/practice-kody-practice-pay-figma.png",
             "site": null
@@ -748,6 +996,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 119,
+            "images": 2,
+            "png": 2,
+            "jpg": 0,
+            "svg": 4,
+            "bytes": 4748683
+          },
           "images": {
             "figma": "/structure/practice-practice-package-figma.png",
             "site": null
@@ -768,6 +1024,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 35,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 4,
+            "bytes": 2728218
+          },
           "images": {
             "figma": "/structure/practice-info-section-figma.png",
             "site": null
@@ -788,6 +1052,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 31,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 205035
+          },
           "images": {
             "figma": "/structure/practice-footer-figma.png",
             "site": null
@@ -829,6 +1101,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 83,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 5,
+            "bytes": 2181544
+          },
           "images": {
             "figma": "/structure/quiz-quiz-section-figma.png",
             "site": null
@@ -849,6 +1129,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 29,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 2787355
+          },
           "images": {
             "figma": "/structure/quiz-header-figma.png",
             "site": null
@@ -869,6 +1157,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 31,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 205035
+          },
           "images": {
             "figma": "/structure/quiz-footer-figma.png",
             "site": null
@@ -910,6 +1206,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 5,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 0,
+            "bytes": 3114278
+          },
           "images": {
             "figma": "/structure/booking-booking-hero-figma.png",
             "site": null
@@ -930,6 +1234,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 130,
+            "images": 0,
+            "png": 0,
+            "jpg": 0,
+            "svg": 2,
+            "bytes": 34311
+          },
           "images": {
             "figma": "/structure/booking-booking-formats-figma.png",
             "site": null
@@ -950,6 +1262,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 31,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 205035
+          },
           "images": {
             "figma": "/structure/booking-footer-figma.png",
             "site": null
@@ -970,6 +1290,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 29,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 2787355
+          },
           "images": {
             "figma": "/structure/booking-header-figma.png",
             "site": null
@@ -1011,6 +1339,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 4,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 0,
+            "bytes": 1886434
+          },
           "images": {
             "figma": "/structure/method-method-hero-figma.png",
             "site": null
@@ -1031,6 +1367,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 18,
+            "images": 0,
+            "png": 0,
+            "jpg": 0,
+            "svg": 0,
+            "bytes": 0
+          },
           "images": {
             "figma": "/structure/method-method-about-figma.png",
             "site": null
@@ -1051,6 +1395,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 10,
+            "images": 2,
+            "png": 2,
+            "jpg": 0,
+            "svg": 0,
+            "bytes": 5091940
+          },
           "images": {
             "figma": "/structure/method-method-cta-figma.png",
             "site": null
@@ -1071,6 +1423,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 31,
+            "images": 1,
+            "png": 0,
+            "jpg": 1,
+            "svg": 0,
+            "bytes": 205035
+          },
           "images": {
             "figma": "/structure/method-footer-figma.png",
             "site": null
@@ -1091,6 +1451,14 @@
           },
           "gate": null,
           "pixel": null,
+          "assets": {
+            "nodes": 29,
+            "images": 1,
+            "png": 1,
+            "jpg": 0,
+            "svg": 3,
+            "bytes": 2787355
+          },
           "images": {
             "figma": "/structure/method-header-figma.png",
             "site": null

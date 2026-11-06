@@ -45,8 +45,25 @@ if (existsSync(sectionsRoot)) {
       gate: read('gate.json'),
       pixel: read('pixel.json'),
       image: read('image.json'),
+      assets: countAssets(spec),
     });
   }
+}
+
+// --- что выгружено из Figma ----------------------------------------------
+function countAssets(spec) {
+  const images = spec.assets?.images ?? [];
+  const icons = spec.assets?.icons ?? [];
+  const byExt = (list, ext) => list.filter((a) => a.file.toLowerCase().endsWith(ext)).length;
+  const bytes = [...images, ...icons].reduce((s, a) => s + (a.bytes ?? 0), 0);
+  return {
+    nodes: spec.counts?.nodes ?? spec.nodes?.length ?? 0,
+    images: images.length,
+    png: byExt(images, '.png'),
+    jpg: byExt(images, '.jpg'),
+    svg: icons.length,
+    bytes,
+  };
 }
 
 // --- статус ---------------------------------------------------------------
@@ -99,6 +116,7 @@ for (const [pageKey, pageId] of Object.entries(project.pages)) {
         ? { ok: entry.gate.ok, red: entry.gate.red, marked: entry.gate.marked, nodes: entry.gate.nodes, coverage: entry.gate.coverage, worstDelta: entry.gate.worstDelta, at: entry.gate.at }
         : null,
       pixel: entry?.pixel ? { mean: entry.pixel.mean, over16: entry.pixel.over16, over48: entry.pixel.over48, at: entry.pixel.at } : null,
+      assets: entry?.assets ?? null,
       images: entry ? publish(entry.slug, entry) : { figma: null, site: null },
     };
   });

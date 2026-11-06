@@ -1,9 +1,9 @@
 ---
 /**
- * Внутренняя карта: все страницы и секции живого файла со статусами и превью.
+ * Внутренняя карта: все страницы и секции живого файла со статусами, числами,
+ * счётчиками выгруженного и парой превью «Figma / сделано».
  *
- * Данные не пишутся руками — их собирает tools/structure.mjs из артефактов:
- * design/figma/structure.json, sections/<slug>/{gate,pixel}.json и снимков.
+ * Данные не пишутся руками — их собирает tools/structure.mjs из артефактов.
  * noindex: страница для работы, а не для посетителей.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -19,7 +19,21 @@ const LABEL = {
   todo: 'не выгружен',
 };
 
+const FILTERS = [
+  { key: 'all', label: 'все' },
+  { key: 'green', label: 'зелёные' },
+  { key: 'exported', label: 'выгружены' },
+  { key: 'todo', label: 'не выгружены' },
+];
+
 const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyle: 'short' });
+
+const size = (bytes) => {
+  if (!bytes) return '—';
+  if (bytes < 1024) return `${bytes} Б`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} КБ`;
+  return `${(bytes / 1024 / 1024).toFixed(1)} МБ`;
+};
 ---
 
 <BaseLayout title="Структура — Syntonia">
@@ -28,9 +42,9 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
       <p class="map__kicker">Внутренняя карта · не индексируется</p>
       <h1 class="t-h2 map__title">Структура</h1>
       <p class="map__lead t-body">
-        {file.name} · <code>{file.key}</code> · снято {when}. Данные собираются из
-        артефактов: статус — по наличию спеки, ворот и сверки, числа — из
-        <code>gate.json</code> и <code>pixel.json</code>.
+        {file.name} · <code>{file.key}</code> · снято {when}. Статус выводится из
+        артефактов: спека → ворота → сверка; числа — из <code>gate.json</code> и
+        <code>pixel.json</code>, счётчики — из <code>spec.json</code>.
       </p>
 
       <dl class="stats">
@@ -50,21 +64,56 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
           <dt>Не выгружено</dt>
           <dd>{totals.todo}</dd>
         </div>
+        <div class="stats__item">
+          <dt>Собрано</dt>
+          <dd>{pages.reduce((n, p) => n + p.sections.filter((s) => s.images.site).length, 0)}</dd>
+        </div>
       </dl>
     </header>
 
+    <div class="toolbar" data-toolbar>
+      <div class="toolbar__filters" role="group" aria-label="Фильтр по статусу">
+        {FILTERS.map((f) => (
+          <button class="chip" type="button" data-filter={f.key} aria-pressed={f.key === 'all' ? 'true' : 'false'}>
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      <label class="search">
+        <span class="search__icon" aria-hidden="true">⌕</span>
+        <input type="search" placeholder="найти секцию или страницу" data-search />
+      </label>
+
+      <span class="toolbar__count" data-count>{totals.total} секций</span>
+    </div>
+
+    <nav class="jump" aria-label="Страницы">
+      {pages.map((page) => (
+        <a class="jump__item" href={`#page-${page.key}`}>
+          {page.title}
+          <span>{page.counts.total}</span>
+        </a>
+      ))}
+    </nav>
+
     {pages.map((page) => (
-      <section class="page" id={`page-${page.key}`}>
+      <section class="page" id={`page-${page.key}`} data-page={page.key}>
         <div class="page__head">
           <h2 class="t-h4 page__title">{page.title}</h2>
           <span class="page__meta">
-            {page.frame.w}×{page.frame.h} · {page.counts.total} секций
+            {page.frame.w}×{page.frame.h} · {page.counts.total} секций · зелёных {page.counts.green ?? 0}
           </span>
         </div>
 
         <ol class="blocks">
           {page.sections.map((s) => (
-            <li class:list={['block', `block--${s.status.key}`]} id={`block-${s.id.replace(':', '-')}`}>
+            <li
+              class:list={['block', `block--${s.status.key}`]}
+              id={`block-${s.id.replace(':', '-')}`}
+              data-status={s.status.key}
+              data-search-text={`${page.title} ${s.name} ${s.id} ${s.slug ?? ''}`.toLowerCase()}
+            >
               <div class="block__info">
                 <div class="block__top">
                   <span class="block__name">{s.name}</span>
@@ -75,6 +124,15 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
                   <code>{s.id}</code> · {s.w}×{s.h} · y {s.y}
                   {s.slug && <> · <code>{s.slug}</code></>}
                 </p>
+
+                {s.assets && (
+                  <ul class="assets">
+                    <li><b>{s.assets.nodes}</b> узлов</li>
+                    <li><b>{s.assets.images}</b> фото{s.assets.jpg || s.assets.png ? ` (${[s.assets.jpg && `jpg ${s.assets.jpg}`, s.assets.png && `png ${s.assets.png}`].filter(Boolean).join(', ')})` : ''}</li>
+                    <li><b>{s.assets.svg}</b> svg</li>
+                    <li class="assets__size">{size(s.assets.bytes)}</li>
+                  </ul>
+                )}
 
                 {s.gate && (
                   <p class="block__nums">
@@ -96,7 +154,9 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
               <div class="block__shots">
                 {s.images.figma ? (
                   <figure class="shot">
-                    <img src={s.images.figma} alt={`Figma: ${s.name}`} loading="lazy" />
+                    <a href={s.images.figma} target="_blank" rel="noreferrer">
+                      <img src={s.images.figma} alt={`Figma: ${s.name}`} loading="lazy" />
+                    </a>
                     <figcaption>Figma</figcaption>
                   </figure>
                 ) : (
@@ -105,7 +165,9 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
 
                 {s.images.site ? (
                   <figure class="shot">
-                    <img src={s.images.site} alt={`Сборка: ${s.name}`} loading="lazy" />
+                    <a href={s.images.site} target="_blank" rel="noreferrer">
+                      <img src={s.images.site} alt={`Сборка: ${s.name}`} loading="lazy" />
+                    </a>
                     <figcaption>сделано</figcaption>
                   </figure>
                 ) : (
@@ -115,10 +177,81 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
             </li>
           ))}
         </ol>
+
+        <p class="page__empty" data-empty hidden>по этому фильтру на странице ничего нет</p>
       </section>
     ))}
   </main>
 </BaseLayout>
+
+<script>
+  const toolbar = document.querySelector('[data-toolbar]');
+  const chips = [...document.querySelectorAll('[data-filter]')];
+  const search = document.querySelector('[data-search]');
+  const counter = document.querySelector('[data-count]');
+  const blocks = [...document.querySelectorAll('.block')];
+  const pageSections = [...document.querySelectorAll('[data-page]')];
+  const jumps = [...document.querySelectorAll('.jump__item')];
+
+  let status = 'all';
+  let query = '';
+
+  function apply() {
+    let shown = 0;
+    for (const block of blocks) {
+      const byStatus = status === 'all' || block.dataset.status === status;
+      const byText = !query || (block.dataset.searchText ?? '').includes(query);
+      const visible = byStatus && byText;
+      block.hidden = !visible;
+      if (visible) shown++;
+    }
+
+    for (const section of pageSections) {
+      const visible = section.querySelectorAll('.block:not([hidden])').length;
+      section.hidden = visible === 0;
+      const empty = section.querySelector('[data-empty]');
+      if (empty) empty.hidden = visible > 0;
+    }
+
+    for (const jump of jumps) {
+      const id = jump.getAttribute('href')?.slice(1);
+      const section = id ? document.getElementById(id) : null;
+      jump.hidden = !!section?.hidden;
+    }
+
+    counter.textContent = `${shown} из ${blocks.length}`;
+  }
+
+  for (const chip of chips) {
+    chip.addEventListener('click', () => {
+      status = chip.dataset.filter;
+      for (const c of chips) c.setAttribute('aria-pressed', String(c === chip));
+      apply();
+    });
+  }
+
+  search?.addEventListener('input', () => {
+    query = search.value.trim().toLowerCase();
+    apply();
+  });
+
+  // Ctrl/Cmd+K — фокус в поиск, Escape — сброс.
+  document.addEventListener('keydown', (event) => {
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault();
+      search?.focus();
+    }
+    if (event.key === 'Escape' && document.activeElement === search) {
+      search.value = '';
+      query = '';
+      apply();
+      search.blur();
+    }
+  });
+
+  if (toolbar) toolbar.dataset.ready = 'true';
+  apply();
+</script>
 
 <style>
   .map {
@@ -141,7 +274,7 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
   }
 
   .map__lead {
-    max-width: 720px;
+    max-width: 760px;
     margin-bottom: var(--space-xl);
     color: var(--color-text-secondary);
   }
@@ -155,28 +288,28 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
   .stats {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-l);
-    margin: 0 0 var(--space-3xl);
+    gap: var(--space-m);
+    margin: 0 0 var(--space-xl);
   }
 
   .stats__item {
-    min-width: 132px;
-    padding: var(--space-m) var(--space-l);
+    min-width: 116px;
+    padding: var(--space-s) var(--space-l);
     background: var(--color-bg-surface);
     border-radius: var(--radius-m);
   }
 
   .stats__item dt {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
   }
 
   .stats__item dd {
-    margin: var(--space-xs) 0 0;
+    margin: 2px 0 0;
     font-family: var(--font-literata);
-    font-size: 28px;
+    font-size: 26px;
     color: var(--color-text-heading);
   }
 
@@ -184,8 +317,99 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
     background: var(--color-bg-muted);
   }
 
+  /* Панель фильтров держится сверху: карта длинная. */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-s) 0;
+    margin-bottom: var(--space-m);
+    background: var(--color-bg-page);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .toolbar__filters {
+    display: flex;
+    gap: 6px;
+  }
+
+  .chip {
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--color-text-deep);
+    background: var(--color-bg-surface);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .chip[aria-pressed='true'] {
+    color: var(--color-text-on-image);
+    background: var(--color-accent);
+  }
+
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: var(--color-bg-surface);
+    border-radius: 999px;
+  }
+
+  .search__icon {
+    color: var(--color-text-secondary);
+  }
+
+  .search input {
+    width: 240px;
+    font: inherit;
+    font-size: 13px;
+    color: var(--color-text-primary);
+    background: transparent;
+    border: 0;
+    outline: none;
+  }
+
+  .toolbar__count {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .jump__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: var(--color-text-primary);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-s);
+  }
+
+  .jump__item span {
+    padding: 1px 6px;
+    font-size: 11px;
+    color: var(--color-text-on-image);
+    background: var(--color-accent-muted);
+    border-radius: 999px;
+  }
+
   .page {
     margin-bottom: var(--space-4xl);
+    scroll-margin-top: 64px;
   }
 
   .page__head {
@@ -202,7 +426,13 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
   }
 
   .page__meta {
-    font-size: 14px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .page__empty {
+    font-size: 13px;
+    font-style: italic;
     color: var(--color-text-secondary);
   }
 
@@ -217,7 +447,7 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
 
   .block {
     display: grid;
-    grid-template-columns: minmax(280px, 1fr) 2fr;
+    grid-template-columns: minmax(300px, 1fr) 1.6fr;
     gap: var(--space-l);
     padding: var(--space-m);
     background: var(--color-bg-surface);
@@ -247,12 +477,13 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
 
   .badge {
     padding: 2px 8px;
-    font-size: 11px;
-    letter-spacing: 0.04em;
+    font-size: 10px;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     border-radius: var(--radius-xs);
     background: var(--color-bg-muted);
     color: var(--color-text-deep);
+    white-space: nowrap;
   }
 
   .badge--green {
@@ -274,12 +505,38 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
   }
 
   .block__nums {
-    margin-top: var(--space-xs);
+    margin-top: 4px;
     color: var(--color-text-deep);
   }
 
   .block__nums--empty {
     font-style: italic;
+  }
+
+  .assets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: var(--space-s) 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+
+  .assets li {
+    padding: 2px 8px;
+    background: var(--color-bg-page);
+    border-radius: var(--radius-xs);
+  }
+
+  .assets b {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .assets__size {
+    color: var(--color-text-deep);
   }
 
   .block__shots {
@@ -299,14 +556,19 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
     display: block;
     width: 100%;
     height: auto;
-    max-height: 220px;
+    max-height: 210px;
     object-fit: cover;
     object-position: top;
+    transition: transform 0.2s ease;
+  }
+
+  .shot a:hover img {
+    transform: scale(1.02);
   }
 
   .shot figcaption {
     padding: 4px 8px;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
@@ -325,6 +587,10 @@ const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyl
   @media (max-width: 900px) {
     .block {
       grid-template-columns: 1fr;
+    }
+
+    .search input {
+      width: 140px;
     }
   }
 </style>
