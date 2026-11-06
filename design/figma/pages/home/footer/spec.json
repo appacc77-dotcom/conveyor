@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:12:06.888Z"
+    "at": "2026-11-06T17:25:39.422Z"
   },
   "section": {
     "id": "148:561",
@@ -10,6 +10,8 @@
     "w": 1440,
     "h": 361
   },
+  "fingerprint": "9be80d2c",
+  "cloudVersion": "2418696346917289452",
   "counts": {
     "nodes": 31,
     "images": 1,

@@ -112,6 +112,35 @@ for (const img of section.images) {
 }
 
 // --- 5. Иконки вектором ----------------------------------------------------
+// Отпечаток содержимого: считается ровно как в tools/figma/fingerprint.js.
+// По нему видно, изменилась ли секция после выгрузки.
+function fingerprintOf(nodes) {
+  let h = 0x811c9dc5;
+  for (const n of nodes) {
+    const line = [n.id, n.x, n.y, n.w, n.h, n.type === 'TEXT' ? n.text ?? '' : ''].join('|');
+    for (let i = 0; i < line.length; i++) {
+      h ^= line.charCodeAt(i);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    h ^= 10;
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(16).padStart(8, '0');
+}
+
+/** Версия облака на момент выгрузки: из аргумента или из live/api.json. */
+function cloudVersion() {
+  const i = process.argv.indexOf('--cloud-version');
+  if (i > 0) return process.argv[i + 1];
+  const p = join(root, 'design/figma/live/api.json');
+  if (existsSync(p)) {
+    try {
+      return JSON.parse(readFileSync(p, 'utf8')).version ?? null;
+    } catch {}
+  }
+  return null;
+}
+
 const icons = [];
 const usedNames = new Set();
 for (const icon of section.icons) {
@@ -148,6 +177,8 @@ for (const icon of section.icons) {
 const spec = {
   file: { name: project.source.fileName, key: fileKey, at: new Date().toISOString() },
   section: section.root,
+  fingerprint: fingerprintOf(section.nodes),
+  cloudVersion: cloudVersion(),
   counts: { nodes: section.count, images: images.length, icons: icons.length, iconInstances: section.iconInstances },
   assets: { crop: 'crop.png', images, icons },
   nodes: section.nodes,

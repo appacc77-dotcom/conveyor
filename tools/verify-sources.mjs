@@ -12,11 +12,22 @@
  * версию, .fig — архив. Если они расходятся, значит либо файл изменился,
  * либо выгрузка неполная. Печатает расхождения, код возврата 1 при них.
  */
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { readZip } from './lib/zip.mjs';
 import { createHash } from 'node:crypto';
-import { zstdDecompressSync, inflateRawSync } from 'node:zlib';
+import { zstdDecompressSync } from 'node:zlib';
+import { runFigma, FigmaError } from './figma/cli.mjs';
+import { tmpdir } from 'node:os';
+
+/** Подставляет id узла в шаблон моста и выполняет его. */
+function bridgeFingerprint(nodeId) {
+  const template = readFileSync(join(root, 'tools/figma/fingerprint.js'), 'utf8');
+  const tmp = join(tmpdir(), `figma-fp-${process.pid}-${nodeId.replace(':', '-')}.js`);
+  writeFileSync(tmp, template.split('__NODE_ID__').join(nodeId));
+  const reply = runFigma(['exec-js', tmp, '--timeout', '60000'], { timeoutMs: 90000 });
+  return reply?.result?.fingerprint ?? null;
+}
 
 const root = process.cwd();
 const project = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
@@ -163,6 +174,64 @@ if (apiFile) {
       check('компоненты совпадают', apiCount === ds.counts.components, `${apiCount} в API, ${ds.counts.components} у нас`);
     }
   }
+}
+
+// --- A↔мост: не устарел ли экспорт -------------------------------------
+const limitArg = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : Infinity;
+const sections = [];
+for (const page of structure.pages) for (const s of page.sections) if (s.dir) sections.push({ page: page.title, ...s });
+
+let checked = 0;
+const stale = [];
+const unread = [];
+for (const s of sections.slice(0, limitArg)) {
+  const specPath = join(root, s.dir, 'spec.json');
+  if (!existsSync(specPath)) continue;
+  const spec = JSON.parse(readFileSync(specPath, 'utf8'));
+  if (!spec.fingerprint) continue;
+  try {
+    const fresh = bridgeFingerprint(s.id);
+    checked++;
+    if (fresh !== spec.fingerprint) stale.push(`${s.page}/${s.name}: ${spec.fingerprint} → ${fresh}`);
+  } catch (error) {
+    if (error instanceof FigmaError) unread.push(`${s.page}/${s.name}: ${error.code}`);
+    else unread.push(`${s.page}/${s.name}: ${String(error.message).slice(0, 40)}`);
+  }
+}
+check(
+  'экспорт соответствует мосту',
+  stale.length === 0,
+  stale.length
+    ? `устарело ${stale.length} из ${checked}: ${stale.slice(0, 2).join('; ')}`
+    : `сверено ${checked}${unread.length ? `, не прочитано ${unread.length}` : ''}`,
+  unread.length < checked,
+);
+
+// --- A↔облако: не ушла ли вперёд версия ---------------------------------
+if (apiMeta?.version) {
+  const stamped = new Set();
+  for (const page of structure.pages) {
+    for (const s of page.sections) {
+      if (!s.dir) continue;
+      const specPath = join(root, s.dir, 'spec.json');
+      if (!existsSync(specPath)) continue;
+      const v = JSON.parse(readFileSync(specPath, 'utf8')).cloudVersion;
+      if (v) stamped.add(v);
+    }
+  }
+  const list = [...stamped];
+  check(
+    'экспорт снят с актуальной версии облака',
+    list.length === 1 && list[0] === apiMeta.version,
+    list.length === 0
+      ? 'в спеках нет версии облака'
+      : list.length > 1
+        ? `спеки из разных версий: ${list.length}`
+        : list[0] === apiMeta.version
+          ? `версия ${list[0]}`
+          : `спека ${list[0]} → облако ${apiMeta.version}`,
+    list.length > 0,
+  );
 }
 
 // --- C: .fig --------------------------------------------------------------

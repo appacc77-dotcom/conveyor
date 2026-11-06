@@ -38,6 +38,19 @@ if (!queue.length) {
   process.exit(0);
 }
 
+// Версия облака — одна на весь прогон, чтобы спеки знали, из какой версии сняты.
+let cloudVersion = null;
+try {
+  const reply = execFileSync(process.execPath, [join(root, 'tools/figma-api.mjs'), 'meta'], {
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'ignore'],
+  });
+  cloudVersion = readFileSync(join(root, 'design/figma/live/api.json'), 'utf8');
+  cloudVersion = JSON.parse(cloudVersion).version ?? null;
+} catch {
+  cloudVersion = null;
+}
+console.log(`версия облака: ${cloudVersion ?? 'недоступна'}\n`);
 console.log(`к выгрузке: ${queue.length} секций\n`);
 let ok = 0;
 const failed = [];
@@ -47,7 +60,7 @@ for (const [i, s] of queue.entries()) {
   try {
     const out = execFileSync(
       process.execPath,
-      [join(root, 'tools/export-section.mjs'), s.id, '--name', s.sectionSlug],
+      [join(root, 'tools/export-section.mjs'), s.id, '--name', s.sectionSlug, ...(cloudVersion ? ['--cloud-version', cloudVersion] : [])],
       { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 16 * 1024 * 1024 },
     );
     const line = out.trim().split('\n').find((l) => l.startsWith('фото:')) ?? '';
