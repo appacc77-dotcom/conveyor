@@ -186,11 +186,11 @@ npm run verify                                 # сверка: экспорт �
 Правило проекта: у документа две версии — человеческая (что это значит, без имён
 свойств) и агентская (id, свойства, было → стало).
 
-- `changes.md` / `changes.agent.md` / `changes.json` — что изменилось в новой
-  выгрузке `.fig`;
-- `designer-fixes.md` + `.csv` + `.extra.md` — что поправить в макете;
-- `decisions.md` — принятые решения, append-only;
-- `journal.md` — шаги человеческим языком, для чтения в перерыве;
+- [`TUTORIAL.md`](docs/TUTORIAL.md) — учебник: от пустой папки до собранного блока;
+- [`ARCHITECTURE.md`](docs/ARCHITECTURE.md) — устройство и почему так;
+- [`FIGMA-ISSUES.md`](docs/FIGMA-ISSUES.md) — что поправить в макете, с числами;
+- [`decisions.md`](docs/decisions.md) — принятые решения, append-only;
+- [`RUNBOOK.md`](docs/RUNBOOK.md) — холодный старт на новом сайте;
 - `reports/**` — числа и вердикты.
 
 ## 9. Definition of Done
