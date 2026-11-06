@@ -76,10 +76,10 @@ const signature = (selector) =>
     if (!rootEl) return null;
     const parts = [];
     const walk = (el) => {
-      parts.push(
-        `${el.tagName}|${el.className}|${el.getAttribute('aria-expanded') ?? ''}|` +
-          `${el.getAttribute('open') ?? ''}|${el.getAttribute('style') ?? ''}`,
-      );
+      // Только то, что видно: тег, классы, инлайн-стиль и видимость.
+      // aria-* сюда не входят — атрибут можно переключить, ничего не показав.
+      const visible = el.getClientRects().length > 0;
+      parts.push(`${el.tagName}|${el.className}|${el.getAttribute('style') ?? ''}|${visible ? 'v' : 'h'}`);
       for (const child of el.children) walk(child);
     };
     walk(rootEl);
@@ -112,6 +112,7 @@ if (!sections.length) {
 }
 
 let dead = 0;
+let pretenders = 0;
 let checked = 0;
 
 for (const section of sections) {
@@ -119,46 +120,53 @@ for (const section of sections) {
   if (!controls.length) continue;
 
   const initial = await signature(section.selector);
-  const seen = new Set([initial]);
-  const labels = [];
-  let clicks = 0;
+  let alive = false;
+  let ariaOnly = [];
+  let inert = [];
 
   for (const control of controls) {
     const label = (await control.evaluate((el) => (el.textContent ?? '').trim().slice(0, 24) || el.getAttribute('aria-label') || el.tagName.toLowerCase())).trim();
+    const ariaBefore = await control.evaluate((el) => el.getAttribute('aria-expanded'));
     try {
       await control.click({ timeout: 2000 });
     } catch {
       continue;
     }
     await page.waitForTimeout(320);
-    clicks += 1;
-    labels.push(label);
-    seen.add(await signature(section.selector));
+    checked += 1;
+
+    const now = await signature(section.selector);
+    const ariaAfter = await control.evaluate((el) => el.getAttribute('aria-expanded'));
+
+    if (now !== initial) {
+      alive = true;
+    } else if (ariaBefore !== null && ariaAfter !== null && ariaBefore !== ariaAfter) {
+      // Атрибут переключился, а на экране ничего: элемент делает вид, что живой.
+      ariaOnly.push(label);
+    } else {
+      inert.push(label);
+    }
   }
 
-  // Ни одного нажатия не прошло — проверять нечего.
-  if (!clicks) continue;
-  checked += clicks;
-  // Состояние не менялось ни разу — блок статичен, сколько бы кнопок в нём ни было.
-  const alive = seen.size > 1;
-  if (!alive) dead += 1;
-  console.log(
-    `${section.name.padEnd(18)} элементов ${String(clicks).padStart(2)} · состояний ${seen.size} ${alive ? 'живой' : 'СТАТИЧНЫЙ'}`,
-  );
-  if (!alive) console.log(`   нажатия не меняют ничего: ${labels.slice(0, 3).join(', ')}`);
+  dead += ariaOnly.length;
+  pretenders += ariaOnly.length;
+  const status = ariaOnly.length ? 'ПРИТВОРЯЕТСЯ' : alive ? 'живой' : 'СТАТИЧНЫЙ';
+  console.log(`${section.name.padEnd(18)} элементов ${String(controls.length).padStart(2)} · ${status}`);
+  for (const label of ariaOnly) console.log(`   «${label}» — меняет только aria, на экране ничего`);
+  if (!alive && !ariaOnly.length) console.log(`   нажатия не меняют ничего: ${inert.slice(0, 3).join(', ')}`);
+  if (!alive && !ariaOnly.length) dead += 1;
 
-  // вернуть страницу в исходное состояние
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
 }
 
-console.log(`\nпроверено элементов: ${checked}, статичных секций: ${dead}`);
+console.log(`\nпроверено элементов: ${checked}, притворяются: ${pretenders}, статичных секций: ${dead}`);
 
 await browser.close();
 server.close();
 
 if (dead > 0) {
-  console.error('\nсекция с кнопками, которые ничего не делают, — это картинка: добавьте состояние и переход');
+  console.error('\nэлемент, который меняет только атрибут, и секция без движения — это картинка: добавьте состояние и переход');
   process.exit(1);
 }
-console.log('все секции с управлением меняют состояние');
+console.log('все элементы управления меняют то, что видно');

@@ -105,6 +105,24 @@ const dropdownItems = [
       </button>
     </div>
   </div>
+
+  {/* Мобильное меню: в макете только закрытое состояние (одна иконка бургера).
+      Панель — изобретение, устройство взято по образцу десктопного меню. */}
+  <nav class="header__mobile" id="mobile-menu" aria-label="Меню" hidden data-mobile>
+    <ul class="header__mobile-list">
+      <li>
+        <a class="header__mobile-link t-body" href="#">О проекте</a>
+        <ul class="header__mobile-sub">
+          {dropdownItems.map((item) => (
+            <li><a class="header__mobile-link t-body" href={item.href}>{item.text}</a></li>
+          ))}
+        </ul>
+      </li>
+      {links.filter((link) => !link.dropdown).map((link) => (
+        <li><a class="header__mobile-link t-body" href="#">{link.text}</a></li>
+      ))}
+    </ul>
+  </nav>
 </section>
 
 <style>
@@ -267,6 +285,64 @@ const dropdownItems = [
     display: block;
   }
 
+  /* Панель мобильного меню: выезжает из-под шапки, как в соседнем проекте. */
+  .header__mobile {
+    position: absolute;
+    top: calc(100% + var(--space-s));
+    left: 50%;
+    width: min(100% - var(--space-m), var(--container-max));
+    max-height: calc(100vh - 140px);
+    padding: var(--space-m);
+    overflow: auto;
+    background: var(--color-bg-header);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-l);
+    box-shadow: 0 18px 50px rgb(0 0 0 / 28%);
+    /* Свой keyframe: общий motion-rise заканчивается на transform: none и
+       сбрасывает центрирование — панель уезжала вправо за экран. */
+    animation: panel-rise var(--motion-base) var(--ease-out) both;
+  }
+
+  @keyframes panel-rise {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -6px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .header__mobile-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .header__mobile-sub {
+    margin: var(--space-xs) 0 0;
+    padding: 0 0 0 var(--space-m);
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .header__mobile-link {
+    display: block;
+    padding: var(--space-s) 0;
+    color: var(--color-text-on-image);
+    transition: opacity var(--motion-fast) var(--ease-out);
+  }
+
+  .header__mobile-link:hover {
+    opacity: 0.7;
+  }
+
   /* burger (I79:104;167:655): три полосы 38×3 с шагом 8. */
   .header__burger {
     display: flex;
@@ -294,9 +370,12 @@ const dropdownItems = [
   const dropdown = document.querySelector('[data-dropdown]');
   const burger = document.querySelector('[data-burger]');
 
+  const mobile = document.querySelector('[data-mobile]');
+
   burger?.addEventListener('click', () => {
     const open = burger.getAttribute('aria-expanded') !== 'true';
     burger.setAttribute('aria-expanded', String(open));
+    if (mobile) mobile.hidden = !open;
     document.documentElement.classList.toggle('is-menu-open', open);
   });
 

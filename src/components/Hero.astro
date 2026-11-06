@@ -44,9 +44,11 @@ const {
       <BtnPrimary href={ctaHref} label={ctaLabel} node="79:110" />
     </div>
 
-    <button class="hero__play" type="button" aria-label={playLabel}>
+    {/* Видео в файле нет: кнопка без цели — обманка. Оставлена декоративной,
+        станет кнопкой, когда появится ссылка. */}
+    <span class="hero__play" aria-hidden="true">
       <Play node="79:113" />
-    </button>
+    </span>
   </div>
 </section>
 
