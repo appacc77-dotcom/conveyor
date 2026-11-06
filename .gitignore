@@ -17,3 +17,5 @@ dist/
 # Мусор от ошибочных путей
 tmp/
 var/
+
+.build.lock
