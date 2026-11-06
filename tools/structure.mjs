@@ -16,7 +16,7 @@
  *
  * Руками ничего не правится: статус выводится из наличия файлов и ворот.
  */
-import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, copyFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, copyFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
@@ -146,10 +146,30 @@ const totals = pages.reduce(
   { total: 0, green: 0, measured: 0, red: 0, exported: 0, todo: 0 },
 );
 
+// Реальный объём склада: ассеты общие, по секциям они считаются многократно.
+const assetsRoot = join(root, project.paths.assets ?? 'design/figma/assets');
+let assetFiles = 0;
+let assetBytes = 0;
+if (existsSync(assetsRoot)) {
+  const walk = (dir) => {
+    for (const name of readdirSync(dir)) {
+      const full = join(dir, name);
+      const st = statSync(full);
+      if (st.isDirectory()) walk(full);
+      else {
+        assetFiles++;
+        assetBytes += st.size;
+      }
+    }
+  };
+  walk(assetsRoot);
+}
+
 const data = {
   at: new Date().toISOString(),
   file: { name: project.source.fileName, key: project.source.fileKey },
   totals,
+  assetsTotal: { files: assetFiles, bytes: assetBytes },
   pages,
 };
 writeFileSync(join(root, 'design/figma/structure.json'), JSON.stringify(data, null, 2) + '\n');

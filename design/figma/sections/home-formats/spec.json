@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:03:05.300Z"
+    "at": "2026-11-06T16:32:17.161Z"
   },
   "section": {
     "id": "102:220",
@@ -21,19 +21,19 @@
     "images": [
       {
         "hash": "2667c37472ee6c9af720e380d8107b6e16eee6b0",
-        "file": "assets/img/2667c37472ee.png",
+        "file": "design/figma/assets/img/2667c37472ee.png",
         "bytes": 1869884,
         "usedBy": "formats"
       },
       {
         "hash": "74c15c87615539ec7cc05109667d7e84fd04662f",
-        "file": "assets/img/74c15c876155.png",
+        "file": "design/figma/assets/img/74c15c876155.png",
         "bytes": 2034748,
         "usedBy": "formats-slider"
       },
       {
         "hash": "1434b5611dfb11cee1ee7c8021b5b872608cdd62",
-        "file": "assets/img/1434b5611dfb.png",
+        "file": "design/figma/assets/img/1434b5611dfb.png",
         "bytes": 2781852,
         "usedBy": "btn-primary"
       }
@@ -42,13 +42,13 @@
       {
         "node": "102:228",
         "component": "slider-arrow",
-        "file": "assets/svg/slider-arrow.svg",
+        "file": "design/figma/assets/svg/slider-arrow.svg",
         "bytes": 19227
       },
       {
         "node": "I709:1504;708:1417;14:128",
         "component": "arrow-quiet",
-        "file": "assets/svg/arrow-quiet.svg",
+        "file": "design/figma/assets/svg/arrow-quiet.svg",
         "bytes": 3980
       }
     ]

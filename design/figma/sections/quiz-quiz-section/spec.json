@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:03:59.805Z"
+    "at": "2026-11-06T16:33:09.676Z"
   },
   "section": {
     "id": "529:119",
@@ -21,7 +21,7 @@
     "images": [
       {
         "hash": "eef4eeb98fd5308860279b0f6d49696da837259f",
-        "file": "assets/img/eef4eeb98fd5.png",
+        "file": "design/figma/assets/img/eef4eeb98fd5.png",
         "bytes": 2168891,
         "usedBy": "quiz-section"
       }
@@ -30,31 +30,31 @@
       {
         "node": "530:642",
         "component": "watch",
-        "file": "assets/svg/watch.svg",
+        "file": "design/figma/assets/svg/watch.svg",
         "bytes": 3445
       },
       {
         "node": "530:645",
         "component": "accordeon",
-        "file": "assets/svg/accordeon.svg",
+        "file": "design/figma/assets/svg/accordeon.svg",
         "bytes": 1074
       },
       {
         "node": "530:657",
         "component": "gift",
-        "file": "assets/svg/gift.svg",
+        "file": "design/figma/assets/svg/gift.svg",
         "bytes": 3772
       },
       {
         "node": "I533:3084;533:2853;531:2818",
         "component": "round",
-        "file": "assets/svg/round.svg",
+        "file": "design/figma/assets/svg/round.svg",
         "bytes": 386
       },
       {
         "node": "I533:3084;533:2955",
         "component": "arrow-quiet",
-        "file": "assets/svg/arrow-quiet.svg",
+        "file": "design/figma/assets/svg/arrow-quiet.svg",
         "bytes": 3976
       }
     ]

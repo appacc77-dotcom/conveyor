@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:03:28.440Z"
+    "at": "2026-11-06T16:32:39.556Z"
   },
   "section": {
     "id": "267:953",
@@ -21,13 +21,13 @@
     "images": [
       {
         "hash": "111ad11b465cfa3495abed7a7221703c2a771630",
-        "file": "assets/img/111ad11b465c.jpg",
+        "file": "design/figma/assets/img/111ad11b465c.jpg",
         "bytes": 87647,
         "usedBy": "book-image"
       },
       {
         "hash": "1434b5611dfb11cee1ee7c8021b5b872608cdd62",
-        "file": "assets/img/1434b5611dfb.png",
+        "file": "design/figma/assets/img/1434b5611dfb.png",
         "bytes": 2781852,
         "usedBy": "btn-primary"
       }
@@ -36,7 +36,7 @@
       {
         "node": "I272:1009;851:475",
         "component": "arrow-quiet",
-        "file": "assets/svg/arrow-quiet.svg",
+        "file": "design/figma/assets/svg/arrow-quiet.svg",
         "bytes": 3984
       }
     ]

@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:03:47.463Z"
+    "at": "2026-11-06T16:32:57.964Z"
   },
   "section": {
     "id": "410:1414",
@@ -21,49 +21,49 @@
     "images": [
       {
         "hash": "f33195ea0dc78b7074935abe78ae4defe8d22855",
-        "file": "assets/img/f33195ea0dc7.png",
+        "file": "design/figma/assets/img/f33195ea0dc7.png",
         "bytes": 1858867,
         "usedBy": "media"
       },
       {
         "hash": "1434b5611dfb11cee1ee7c8021b5b872608cdd62",
-        "file": "assets/img/1434b5611dfb.png",
+        "file": "design/figma/assets/img/1434b5611dfb.png",
         "bytes": 2781852,
         "usedBy": "btn-primary"
       },
       {
         "hash": "368edfb6aac17b2ab8afb6289e5f10a5e5801443",
-        "file": "assets/img/368edfb6aac1.jpg",
+        "file": "design/figma/assets/img/368edfb6aac1.jpg",
         "bytes": 4206665,
         "usedBy": "media"
       },
       {
         "hash": "f9a8253e006d2fba5e27e0ff18ebba46167f9eca",
-        "file": "assets/img/f9a8253e006d.jpg",
+        "file": "design/figma/assets/img/f9a8253e006d.jpg",
         "bytes": 145074,
         "usedBy": "media"
       },
       {
         "hash": "4170a51e8263ad50fbbb7570f79622eeb85b624c",
-        "file": "assets/img/4170a51e8263.jpg",
+        "file": "design/figma/assets/img/4170a51e8263.jpg",
         "bytes": 4703548,
         "usedBy": "media"
       },
       {
         "hash": "8eddbe3222d3a3450f0a4e28945e020f8b57055b",
-        "file": "assets/img/8eddbe3222d3.jpg",
+        "file": "design/figma/assets/img/8eddbe3222d3.jpg",
         "bytes": 81099,
         "usedBy": "media"
       },
       {
         "hash": "d9e7807131e8d888df6e3420f206d419139b25b8",
-        "file": "assets/img/d9e7807131e8.jpg",
+        "file": "design/figma/assets/img/d9e7807131e8.jpg",
         "bytes": 67327,
         "usedBy": "media"
       },
       {
         "hash": "9cc214d9f7d78c867a064d27aa72c6adfdd04644",
-        "file": "assets/img/9cc214d9f7d7.jpg",
+        "file": "design/figma/assets/img/9cc214d9f7d7.jpg",
         "bytes": 3599537,
         "usedBy": "media"
       }
@@ -72,19 +72,19 @@
       {
         "node": "I412:1782;447:2076;447:1798",
         "component": "play",
-        "file": "assets/svg/play.svg",
+        "file": "design/figma/assets/svg/play.svg",
         "bytes": 254
       },
       {
         "node": "I412:1782;410:1528;14:128",
         "component": "arrow-quiet",
-        "file": "assets/svg/arrow-quiet.svg",
+        "file": "design/figma/assets/svg/arrow-quiet.svg",
         "bytes": 3997
       },
       {
         "node": "I412:1782;447:2341",
         "component": "watch",
-        "file": "assets/svg/watch.svg",
+        "file": "design/figma/assets/svg/watch.svg",
         "bytes": 3425
       }
     ]

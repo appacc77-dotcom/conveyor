@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:03:21.315Z"
+    "at": "2026-11-06T16:32:32.530Z"
   },
   "section": {
     "id": "217:345",
@@ -21,19 +21,19 @@
     "images": [
       {
         "hash": "265473b3ff807a2dd76c1b3e7a5516224a616338",
-        "file": "assets/img/265473b3ff80.png",
+        "file": "design/figma/assets/img/265473b3ff80.png",
         "bytes": 2296488,
         "usedBy": "master-photo"
       },
       {
         "hash": "1434b5611dfb11cee1ee7c8021b5b872608cdd62",
-        "file": "assets/img/1434b5611dfb.png",
+        "file": "design/figma/assets/img/1434b5611dfb.png",
         "bytes": 2781852,
         "usedBy": "btn-primary"
       },
       {
         "hash": "2dbb286550d58691d171d198d558ef10b9d1878a",
-        "file": "assets/img/2dbb286550d5.png",
+        "file": "design/figma/assets/img/2dbb286550d5.png",
         "bytes": 2114930,
         "usedBy": "master-photo"
       }
@@ -42,19 +42,19 @@
       {
         "node": "I233:277;233:273",
         "component": "sun-vabisabi",
-        "file": "assets/svg/sun-vabisabi.svg",
+        "file": "design/figma/assets/svg/sun-vabisabi.svg",
         "bytes": 209593
       },
       {
         "node": "I233:332;233:287;826:2428",
         "component": "arrow-quiet",
-        "file": "assets/svg/arrow-quiet.svg",
+        "file": "design/figma/assets/svg/arrow-quiet.svg",
         "bytes": 3978
       },
       {
         "node": "I233:332;233:322;217:248",
         "component": "play",
-        "file": "assets/svg/play.svg",
+        "file": "design/figma/assets/svg/play.svg",
         "bytes": 3730
       }
     ]

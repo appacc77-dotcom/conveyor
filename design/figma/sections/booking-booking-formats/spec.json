@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:04:04.529Z"
+    "at": "2026-11-06T16:33:14.295Z"
   },
   "section": {
     "id": "383:761",
@@ -23,13 +23,13 @@
       {
         "node": "I383:916;383:879",
         "component": "accept",
-        "file": "assets/svg/accept.svg",
+        "file": "design/figma/assets/svg/accept.svg",
         "bytes": 30523
       },
       {
         "node": "I383:1084;16:62",
         "component": "arrow-quiet",
-        "file": "assets/svg/arrow-quiet.svg",
+        "file": "design/figma/assets/svg/arrow-quiet.svg",
         "bytes": 3788
       }
     ]

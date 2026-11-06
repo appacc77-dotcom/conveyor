@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:04:12.045Z"
+    "at": "2026-11-06T16:33:21.516Z"
   },
   "section": {
     "id": "335:1020",
@@ -21,7 +21,7 @@
     "images": [
       {
         "hash": "dcdfd3c20975cb0100ba9310762eefe6df7c26e3",
-        "file": "assets/img/dcdfd3c20975.jpg",
+        "file": "design/figma/assets/img/dcdfd3c20975.jpg",
         "bytes": 205035,
         "usedBy": "footer"
       }

@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T16:03:41.111Z"
+    "at": "2026-11-06T16:32:51.787Z"
   },
   "section": {
     "id": "410:1122",
@@ -21,31 +21,31 @@
     "images": [
       {
         "hash": "9fae1ec3b59dfedd13a568393e3be265e798d90e",
-        "file": "assets/img/9fae1ec3b59d.jpg",
+        "file": "design/figma/assets/img/9fae1ec3b59d.jpg",
         "bytes": 306910,
         "usedBy": "media"
       },
       {
         "hash": "1434b5611dfb11cee1ee7c8021b5b872608cdd62",
-        "file": "assets/img/1434b5611dfb.png",
+        "file": "design/figma/assets/img/1434b5611dfb.png",
         "bytes": 2781852,
         "usedBy": "btn-primary"
       },
       {
         "hash": "ce07186a24573ec36a5eb7a631212227fcc45964",
-        "file": "assets/img/ce07186a2457.png",
+        "file": "design/figma/assets/img/ce07186a2457.png",
         "bytes": 1980808,
         "usedBy": "media"
       },
       {
         "hash": "4ee7f4d868a888f381a0de738604944a0bc4efdc",
-        "file": "assets/img/4ee7f4d868a8.png",
+        "file": "design/figma/assets/img/4ee7f4d868a8.png",
         "bytes": 2768029,
         "usedBy": "media"
       },
       {
         "hash": "0ae94554df0b3dc132544f0b571db547526771c4",
-        "file": "assets/img/0ae94554df0b.png",
+        "file": "design/figma/assets/img/0ae94554df0b.png",
         "bytes": 2369793,
         "usedBy": "media"
       }
@@ -54,25 +54,25 @@
       {
         "node": "I410:1182;446:1721",
         "component": "watch",
-        "file": "assets/svg/watch.svg",
+        "file": "design/figma/assets/svg/watch.svg",
         "bytes": 3425
       },
       {
         "node": "I410:1182;410:1173;14:128",
         "component": "arrow-quiet",
-        "file": "assets/svg/arrow-quiet.svg",
+        "file": "design/figma/assets/svg/arrow-quiet.svg",
         "bytes": 4013
       },
       {
         "node": "412:1936",
         "component": "dot-leaf",
-        "file": "assets/svg/dot-leaf.svg",
+        "file": "design/figma/assets/svg/dot-leaf.svg",
         "bytes": 232
       },
       {
         "node": "412:1959",
         "component": "slider-arrow",
-        "file": "assets/svg/slider-arrow.svg",
+        "file": "design/figma/assets/svg/slider-arrow.svg",
         "bytes": 19240
       }
     ]

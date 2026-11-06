@@ -9,7 +9,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import structure from '../../design/figma/structure.json';
 
-const { pages, totals, file, at } = structure;
+const { pages, totals, assetsTotal, file, at } = structure;
 
 const LABEL = {
   green: 'зелёный',
@@ -37,7 +37,7 @@ const size = (bytes) => {
 
 /** Готовая постановка задачи: копируется кнопкой в блоке. */
 function taskText(page, s) {
-  const lines = [
+  return [
     `Секция: ${page.title} / ${s.name} — узел ${s.id}`,
     `Размер: ${s.w}×${s.h}, y ${s.y}`,
     s.slug ? `Спека: design/figma/sections/${s.slug}/spec.json` : 'Спека: не выгружена',
@@ -50,9 +50,15 @@ function taskText(page, s) {
     `Статус: ${LABEL[s.status.key] ?? s.status.key}`,
     '',
     'Задача: ',
-  ];
-  return lines.filter(Boolean).join('\n');
+  ].filter(Boolean).join('\n');
 }
+
+/** Прямая ссылка на узел в Figma: открывает файл на нужной секции. */
+const figmaUrl = (id) => {
+  const node = id.replace(':', '-');
+  const slug = file.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  return `https://www.figma.com/design/${file.key}/${slug}?node-id=${node}`;
+};
 
 const collected = (page) => page.sections.filter((s) => s.images.site).length;
 const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').length;
@@ -60,35 +66,45 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
 
 <BaseLayout title="Структура — Syntonia">
   <main class="map">
-    <header class="map__head">
-      <p class="map__kicker">Внутренняя карта · не индексируется</p>
-      <h1 class="t-h2 map__title">Структура</h1>
-      <p class="map__lead t-body">
-        {file.name} · <code>{file.key}</code> · снято {when}. Статус выводится из
-        артефактов: спека → ворота → сверка.
-      </p>
+    <header class="head">
+      <div class="head__row">
+        <div>
+          <p class="head__kicker">Внутренняя карта · не индексируется</p>
+          <h1 class="head__title">Структура</h1>
+        </div>
+        <div class="head__file">
+          <span>{file.name}</span>
+          <code>{file.key}</code>
+          <span class="head__when">снято {when}</span>
+        </div>
+      </div>
 
       <dl class="stats">
         <div class="stats__item">
-          <dt>Секций в Figma</dt>
+          <dt>в Figma</dt>
           <dd>{totals.total}</dd>
         </div>
         <div class="stats__item">
-          <dt>Выгружено</dt>
+          <dt>выгружено</dt>
           <dd>{totals.total - totals.todo}</dd>
         </div>
         <div class="stats__item stats__item--ok">
-          <dt>Зелёных</dt>
+          <dt>зелёных</dt>
           <dd>{totals.green}</dd>
         </div>
         <div class="stats__item">
-          <dt>Собрано</dt>
+          <dt>собрано</dt>
           <dd>{pages.reduce((n, p) => n + collected(p), 0)}</dd>
+        </div>
+        <div class="stats__item">
+          <dt>склад</dt>
+          <dd>{size(assetsTotal.bytes)}</dd>
+          <span class="stats__hint">{assetsTotal.files} файлов без копий</span>
         </div>
       </dl>
     </header>
 
-    <div class="toolbar" data-toolbar>
+    <div class="toolbar">
       <div class="toolbar__filters" role="group" aria-label="Фильтр по статусу">
         {FILTERS.map((f) => (
           <button class="chip" type="button" data-filter={f.key} aria-pressed={f.key === 'all' ? 'true' : 'false'}>
@@ -98,8 +114,8 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
       </div>
 
       <label class="search">
-        <span class="search__icon" aria-hidden="true">⌕</span>
-        <input type="search" placeholder="найти секцию или страницу" data-search />
+        <input type="search" placeholder="секция, id или страница" data-search />
+        <kbd>⌘K</kbd>
       </label>
 
       <span class="toolbar__count" data-count>{totals.total} секций</span>
@@ -117,14 +133,13 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     {pages.map((page) => (
       <section class="page" id={`page-${page.key}`} data-page={page.key}>
         <div class="page__head">
-          <h2 class="t-h4 page__title">{page.title}</h2>
-          <span class="page__meta">
-            {page.frame.w}×{page.frame.h}
-            {' · '}в Figma {page.counts.total}
-            {' · '}выгружено {exported(page)}
-            {' · '}собрано {collected(page)}
-            {' · '}зелёных {page.counts.green ?? 0}
-          </span>
+          <h2 class="page__title">{page.title}</h2>
+          <span class="page__meta">{page.frame.w}×{page.frame.h}</span>
+          <span class="page__sep"></span>
+          <span class="page__meta">в Figma {page.counts.total}</span>
+          <span class="page__meta">выгружено {exported(page)}</span>
+          <span class="page__meta">собрано {collected(page)}</span>
+          <span class="page__meta page__meta--ok">зелёных {page.counts.green ?? 0}</span>
         </div>
 
         <ol class="blocks">
@@ -136,8 +151,17 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
               data-search-text={`${page.title} ${s.name} ${s.id} ${s.slug ?? ''}`.toLowerCase()}
             >
               <div class="block__top">
+                <span class:list={['dot', `dot--${s.status.key}`]} aria-hidden="true"></span>
                 <span class="block__name">{s.name}</span>
-                <span class:list={['badge', `badge--${s.status.key}`]}>{LABEL[s.status.key] ?? s.status.key}</span>
+                <span class="block__status">{LABEL[s.status.key] ?? s.status.key}</span>
+                <a
+                  class="link"
+                  href={figmaUrl(s.id)}
+                  target="_blank"
+                  rel="noreferrer"
+                  title="открыть узел в Figma"
+                  aria-label={`Открыть ${s.name} в Figma`}
+                >figma ↗</a>
                 <button
                   class="copy"
                   type="button"
@@ -148,24 +172,9 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
               </div>
 
               <p class="block__meta">
-                <code>{s.id}</code> · {s.w}×{s.h} · y {s.y}
-              </p>
-
-              {s.assets && (
-                <ul class="assets">
-                  <li><b>{s.assets.nodes}</b> узлов</li>
-                  <li><b>{s.assets.images}</b> фото{s.assets.jpg || s.assets.png ? ` ${[s.assets.jpg && `jpg ${s.assets.jpg}`, s.assets.png && `png ${s.assets.png}`].filter(Boolean).join('/')}` : ''}</li>
-                  <li><b>{s.assets.svg}</b> svg</li>
-                  <li class="assets__size">{size(s.assets.bytes)}</li>
-                </ul>
-              )}
-
-              <p class="block__nums">
-                {s.gate
-                  ? `геометрия ${s.gate.red === 0 ? '0' : s.gate.red} · Δ ${s.gate.worstDelta.toFixed(2)} px`
-                  : 'геометрия —'}
-                {' · '}
-                {s.pixel ? `пиксель ${s.pixel.mean} · >16 ${s.pixel.over16} %` : 'пиксель —'}
+                <code>{s.id}</code>
+                <span>{s.w}×{s.h}</span>
+                <span>y {s.y}</span>
               </p>
 
               <div class="block__shots">
@@ -190,6 +199,24 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
                 ) : (
                   <div class="shot shot--empty">не собрано</div>
                 )}
+              </div>
+
+              <div class="block__foot">
+                {s.assets && (
+                  <ul class="assets">
+                    <li><b>{s.assets.nodes}</b> узлов</li>
+                    <li><b>{s.assets.images}</b> фото</li>
+                    <li><b>{s.assets.svg}</b> svg</li>
+                    <li>{size(s.assets.bytes)}</li>
+                  </ul>
+                )}
+                <p class="nums">
+                  {s.gate
+                    ? `Δ ${s.gate.worstDelta.toFixed(2)} px${s.gate.red ? ` · ${s.gate.red} наруш.` : ''}`
+                    : 'геометрия —'}
+                  <span>·</span>
+                  {s.pixel ? `${s.pixel.mean} / ${s.pixel.over16} %` : 'пиксель —'}
+                </p>
               </div>
             </li>
           ))}
@@ -260,8 +287,6 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     }
   });
 
-  // Копирование постановки задачи. navigator.clipboard требует secure context,
-  // поэтому есть запасной путь через textarea.
   async function copyText(text) {
     try {
       await navigator.clipboard.writeText(text);
@@ -297,56 +322,78 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
 
 <style>
   .map {
-    max-width: 1600px;
+    max-width: 1520px;
     margin: 0 auto;
-    padding: var(--space-2xl) var(--space-l) var(--space-4xl);
+    padding: 40px 32px 80px;
   }
 
-  .map__kicker {
-    margin-bottom: var(--space-xs);
-    font-size: 11px;
-    letter-spacing: 0.08em;
+  /* --- шапка --- */
+  .head {
+    margin-bottom: 20px;
+  }
+
+  .head__row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+
+  .head__kicker {
+    margin: 0 0 4px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
   }
 
-  .map__title {
-    margin-bottom: var(--space-s);
-    font-size: 40px;
+  .head__title {
+    margin: 0;
+    font-family: var(--font-literata);
+    font-size: 38px;
+    font-weight: 300;
+    line-height: 1.1;
     color: var(--color-text-heading);
   }
 
-  .map__lead {
-    max-width: 760px;
-    margin-bottom: var(--space-m);
-    font-size: 15px;
-    line-height: 1.6;
+  .head__file {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    font-size: 11px;
     color: var(--color-text-secondary);
   }
 
-  code {
-    font-family: var(--font-golos-text);
-    font-size: 0.92em;
+  .head__file code {
+    font-size: 10px;
     color: var(--color-text-deep);
+  }
+
+  .head__when {
+    opacity: 0.75;
   }
 
   .stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin: 0 0 var(--space-m);
+    gap: 6px;
+    margin: 0;
   }
 
   .stats__item {
-    min-width: 104px;
-    padding: 6px 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 5px 12px;
     background: var(--color-bg-surface);
-    border-radius: var(--radius-s);
+    border-radius: 999px;
   }
 
   .stats__item dt {
     font-size: 10px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
   }
@@ -354,42 +401,64 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
   .stats__item dd {
     margin: 0;
     font-family: var(--font-literata);
-    font-size: 22px;
-    line-height: 1.2;
+    font-size: 17px;
     color: var(--color-text-heading);
   }
 
   .stats__item--ok {
-    background: var(--color-bg-muted);
+    background: var(--color-accent);
   }
 
+  .stats__item--ok dt {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .stats__item--ok dd {
+    color: var(--color-text-on-image);
+  }
+
+  .stats__hint {
+    font-size: 10px;
+    color: var(--color-text-secondary);
+  }
+
+  /* --- панель --- */
   .toolbar {
     position: sticky;
     top: 0;
-    z-index: 5;
+    z-index: 10;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    padding: 8px 0;
-    margin-bottom: 8px;
-    background: var(--color-bg-page);
+    gap: 10px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    background: color-mix(in srgb, var(--color-bg-page) 92%, transparent);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--color-border);
   }
 
   .toolbar__filters {
     display: flex;
-    gap: 4px;
+    gap: 3px;
+    padding: 3px;
+    background: var(--color-bg-surface);
+    border-radius: 999px;
   }
 
   .chip {
     padding: 4px 12px;
     font-size: 12px;
     color: var(--color-text-deep);
-    background: var(--color-bg-surface);
+    background: transparent;
     border: 0;
     border-radius: 999px;
     cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .chip:hover {
+    color: var(--color-text-heading);
   }
 
   .chip[aria-pressed='true'] {
@@ -400,19 +469,14 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
   .search {
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 3px 10px;
+    gap: 8px;
+    padding: 4px 10px 4px 14px;
     background: var(--color-bg-surface);
     border-radius: 999px;
   }
 
-  .search__icon {
-    font-size: 13px;
-    color: var(--color-text-secondary);
-  }
-
   .search input {
-    width: 200px;
+    width: 220px;
     font: inherit;
     font-size: 12px;
     color: var(--color-text-primary);
@@ -421,9 +485,19 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     outline: none;
   }
 
+  .search kbd {
+    padding: 1px 5px;
+    font-family: var(--font-golos-text);
+    font-size: 10px;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-page);
+    border-radius: 4px;
+  }
+
   .toolbar__count {
     margin-left: auto;
     font-size: 12px;
+    font-variant-numeric: tabular-nums;
     color: var(--color-text-secondary);
   }
 
@@ -431,47 +505,67 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-    margin-bottom: var(--space-l);
+    margin-bottom: 28px;
   }
 
   .jump__item {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 10px;
+    padding: 3px 10px;
     font-size: 12px;
     color: var(--color-text-primary);
     background: var(--color-bg-surface);
-    border-radius: var(--radius-xs);
+    border-radius: 6px;
+  }
+
+  .jump__item:hover {
+    background: var(--color-bg-muted);
   }
 
   .jump__item span {
     font-size: 10px;
+    font-variant-numeric: tabular-nums;
     color: var(--color-text-secondary);
   }
 
+  /* --- страница --- */
   .page {
-    margin-bottom: var(--space-2xl);
+    margin-bottom: 36px;
     scroll-margin-top: 56px;
   }
 
   .page__head {
     display: flex;
     align-items: baseline;
-    gap: var(--space-s);
-    padding-bottom: 4px;
-    margin-bottom: var(--space-s);
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
     border-bottom: 1px solid var(--color-border);
   }
 
   .page__title {
-    font-size: 22px;
+    margin: 0;
+    font-family: var(--font-literata);
+    font-size: 20px;
+    font-weight: 400;
     color: var(--color-text-heading);
   }
 
   .page__meta {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--color-text-secondary);
+  }
+
+  .page__meta--ok {
+    color: var(--color-accent);
+  }
+
+  .page__sep {
+    width: 1px;
+    height: 12px;
+    background: var(--color-border);
   }
 
   .page__empty {
@@ -480,11 +574,11 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     color: var(--color-text-secondary);
   }
 
-  /* Две колонки: карта длинная, а блоки узкие. */
+  /* --- блоки --- */
   .blocks {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    gap: 8px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -493,66 +587,98 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
   .block {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 10px 12px;
+    gap: 6px;
+    padding: 10px 12px 8px;
     background: var(--color-bg-surface);
-    border-radius: var(--radius-s);
-    border-left: 3px solid var(--color-border);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .block:hover {
+    border-color: var(--color-border);
   }
 
   .block--green {
-    border-left-color: var(--color-accent);
-  }
-
-  .block--red {
-    border-left-color: #a4463c;
+    background: color-mix(in srgb, var(--color-bg-surface) 70%, var(--color-accent) 8%);
   }
 
   .block__top {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
+  }
+
+  .dot {
+    flex: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+
+  .dot--green {
+    background: var(--color-accent);
+  }
+
+  .dot--red {
+    background: #a4463c;
+  }
+
+  .dot--exported {
+    background: var(--color-accent-muted);
+    opacity: 0.55;
   }
 
   .block__name {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
+    letter-spacing: -0.01em;
     color: var(--color-text-heading);
   }
 
-  .badge {
-    padding: 1px 6px;
-    font-size: 9px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    border-radius: 3px;
-    background: var(--color-bg-muted);
-    color: var(--color-text-deep);
-    white-space: nowrap;
-  }
-
-  .badge--green {
-    background: var(--color-accent);
-    color: var(--color-text-on-image);
-  }
-
-  .badge--red {
-    background: #a4463c;
-    color: #fff;
-  }
-
-  .copy {
-    margin-left: auto;
-    padding: 2px 8px;
+  .block__status {
     font-size: 10px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
-    background: var(--color-bg-page);
+  }
+
+  .link {
+    margin-left: auto;
+    padding: 2px 8px;
+    font-size: 9.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .link:hover {
+    color: var(--color-text-on-image);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .copy {
+    padding: 2px 8px;
+    font-size: 9.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    background: transparent;
     border: 1px solid var(--color-border);
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
-    white-space: nowrap;
+    opacity: 0.6;
+    transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .block:hover .copy,
+  .copy:focus-visible {
+    opacity: 1;
   }
 
   .copy:hover {
@@ -564,63 +690,44 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     color: var(--color-text-on-image);
     background: var(--color-accent);
     border-color: var(--color-accent);
+    opacity: 1;
   }
 
-  .block__meta,
-  .block__nums {
-    margin: 0;
-    font-size: 11px;
-    line-height: 1.4;
-    color: var(--color-text-secondary);
-  }
-
-  .block__nums {
-    color: var(--color-text-deep);
-  }
-
-  .assets {
+  .block__meta {
     display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
+    gap: 8px;
     margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: 10px;
+    font-size: 10.5px;
+    font-variant-numeric: tabular-nums;
     color: var(--color-text-secondary);
   }
 
-  .assets li {
-    padding: 1px 6px;
-    background: var(--color-bg-page);
-    border-radius: 3px;
-  }
-
-  .assets b {
-    font-weight: 600;
-    color: var(--color-text-primary);
+  .block__meta code {
+    font-family: var(--font-golos-text);
+    color: var(--color-text-deep);
   }
 
   .block__shots {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px;
-    margin-top: 4px;
+    margin-top: 2px;
   }
 
   .shot {
     margin: 0;
     overflow: hidden;
     background: var(--color-bg-page);
-    border-radius: 3px;
+    border-radius: 6px;
   }
 
   .shot img {
     display: block;
     width: 100%;
-    height: 92px;
+    height: 108px;
     object-fit: cover;
     object-position: top;
-    transition: transform 0.2s ease;
+    transition: transform 0.25s ease;
   }
 
   .shot a:hover img {
@@ -628,9 +735,9 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
   }
 
   .shot figcaption {
-    padding: 2px 6px;
+    padding: 3px 7px;
     font-size: 9px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
   }
@@ -639,15 +746,64 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 92px;
+    height: 108px;
     font-size: 10px;
     color: var(--color-text-secondary);
     border: 1px dashed var(--color-border);
   }
 
+  .block__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 2px;
+  }
+
+  .assets {
+    display: flex;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 10px;
+    color: var(--color-text-secondary);
+  }
+
+  .assets b {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .nums {
+    margin: 0;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-deep);
+    white-space: nowrap;
+  }
+
+  .nums span {
+    opacity: 0.4;
+    margin: 0 3px;
+  }
+
   @media (max-width: 1000px) {
     .blocks {
       grid-template-columns: 1fr;
+    }
+
+    .map {
+      padding: 24px 16px 48px;
+    }
+
+    .head__row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .head__file {
+      align-items: flex-start;
     }
   }
 </style>

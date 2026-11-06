@@ -78,8 +78,14 @@ if (fileKey !== project.source.fileKey) {
 const slug = slugify(nameArg ?? section.root.name);
 const sectionsRoot = join(root, project.paths.sections ?? 'design/figma/sections');
 const dir = join(sectionsRoot, slug);
-mkdirSync(join(dir, 'assets/img'), { recursive: true });
-mkdirSync(join(dir, 'assets/svg'), { recursive: true });
+
+// Ассеты живут в общем складе по хешу: одно фото и одна иконка на весь проект.
+// Иначе одна и та же текстура кнопки лежит в двадцати папках секций.
+const assetsRoot = join(root, project.paths.assets ?? 'design/figma/assets');
+mkdirSync(join(assetsRoot, 'img'), { recursive: true });
+mkdirSync(join(assetsRoot, 'svg'), { recursive: true });
+
+const rel = (abs) => abs.slice(root.length + 1);
 
 // --- 3. Кроп ---------------------------------------------------------------
 const cropPath = join(dir, 'crop.png');
@@ -97,9 +103,9 @@ for (const img of section.images) {
     bytes[0] === 0xff && bytes[1] === 0xd8 ? 'jpg'
     : bytes[0] === 0x89 && bytes[1] === 0x50 ? 'png'
     : 'bin';
-  const file = `img/${img.hash.slice(0, 12)}.${ext}`;
-  writeFileSync(join(dir, 'assets', file), bytes);
-  images.push({ hash: img.hash, file: `assets/${file}`, bytes: bytes.length, usedBy: img.nodeName });
+  const abs = join(assetsRoot, 'img', `${img.hash.slice(0, 12)}.${ext}`);
+  if (!existsSync(abs)) writeFileSync(abs, bytes);
+  images.push({ hash: img.hash, file: rel(abs), bytes: bytes.length, usedBy: img.nodeName });
 }
 
 // --- 5. Иконки вектором ----------------------------------------------------
@@ -110,12 +116,13 @@ for (const icon of section.icons) {
   const svg = fetched.result?.svg;
   if (!svg) continue;
   let base = slugify(icon.componentName || icon.name) || icon.id.replace(':', '-');
-  let file = `svg/${base}.svg`;
+  let name = `${base}.svg`;
   let n = 2;
-  while (usedNames.has(file)) file = `svg/${base}-${n++}.svg`;
-  usedNames.add(file);
-  writeFileSync(join(dir, 'assets', file), svg.trim() + '\n');
-  icons.push({ node: icon.id, component: icon.componentName, file: `assets/${file}`, bytes: svg.length });
+  while (usedNames.has(name)) name = `${base}-${n++}.svg`;
+  usedNames.add(name);
+  const abs = join(assetsRoot, 'svg', name);
+  if (!existsSync(abs)) writeFileSync(abs, svg.trim() + '\n');
+  icons.push({ node: icon.id, component: icon.componentName, file: rel(abs), bytes: svg.length });
 }
 
 // --- 6. Спека --------------------------------------------------------------
@@ -131,6 +138,6 @@ writeFileSync(join(dir, 'spec.json'), JSON.stringify(spec, null, 2) + '\n');
 // --- 7. Сводка -------------------------------------------------------------
 console.log(`секция:  ${section.root.name}  ${section.root.w}×${section.root.h}  (${nodeId})`);
 console.log(`узлов:   ${section.count}`);
-console.log(`фото:    ${images.length}${images.length ? ' — ' + images.map((i) => i.file).join(', ') : ''}`);
+console.log(`фото:    ${images.length}${images.length ? ' — ' + images.map((i) => i.file.split('/').pop()).join(', ') : ''}`);
 console.log(`иконок:  ${icons.length}${icons.length ? ' — ' + icons.map((i) => i.component ?? i.node).join(', ') : ''}`);
 console.log(`каталог: ${dir.replace(root + '/', '')}`);
