@@ -85,20 +85,28 @@ const arrowDown = `<svg width="21" height="21" viewBox="0 0 21 21" fill="none" x
             class:list={['faq__item', item.state === 'open' && 'faq__item--open']}
             data-figma-node={item.nodes.item}
           >
-            <div class="faq__head" data-figma-node={item.nodes.head}>
+            <button
+              class="faq__head"
+              type="button"
+              aria-expanded={item.state === 'open' ? 'true' : 'false'}
+              data-figma-node={item.nodes.head}
+            >
               <h3 class="faq__question t-h4" data-figma-node={item.nodes.question}>
                 {item.question}
               </h3>
+              {/* В макете это две разные стрелки, а не повёрнутая одна:
+                  показываем обе и переключаем прозрачностью. */}
               <span class="faq__icon" data-figma-node={item.nodes.icon}>
-                <Fragment set:html={item.state === 'open' ? arrowUp : arrowDown} />
+                <span class="faq__icon-down"><Fragment set:html={arrowDown} /></span>
+                <span class="faq__icon-up"><Fragment set:html={arrowUp} /></span>
               </span>
-            </div>
+            </button>
 
-            {item.state === 'open' && (
-              <p class="faq__answer t-body" data-figma-node={item.nodes.answer}>
-                {item.answer}
-              </p>
-            )}
+            {/* Ответ есть у всех вопросов: в файле он лежит в других инстансах
+                секции (по одному открытому на состояние). */}
+            <p class="faq__answer t-body" data-figma-node={item.nodes.answer}>
+              {item.answer}
+            </p>
           </div>
         ))
       }
@@ -220,11 +228,56 @@ const arrowDown = `<svg width="21" height="21" viewBox="0 0 21 21" fill="none" x
   /* faq-head: HORIZONTAL, CENTER. Gap в узле 24, но вопрос 766 + иконка 21 =
      787 — свободного места нет, фактический зазор 0; gap: 24 отнял бы у
      вопроса ровно 24 px и развёл бы его с эталоном. */
+  /* Голова — кнопка: клавиатура и скринридер работают без костылей. */
   .faq__head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0;
+    width: 100%;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  /* Две стрелки друг на друге: открытая проявляется, закрытая гаснет. */
+  .faq__icon {
+    position: relative;
+    display: block;
+  }
+
+  .faq__icon-down,
+  .faq__icon-up {
+    display: block;
+    transition: opacity var(--motion-base) var(--ease-out);
+  }
+
+  .faq__icon-up {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+
+  .faq__item--open .faq__icon-up {
+    opacity: 1;
+  }
+
+  .faq__item--open .faq__icon-down {
+    opacity: 0;
+  }
+
+  /* Ответ есть в разметке у всех, показывается только у открытого. */
+  .faq__answer {
+    display: none;
+  }
+
+  .faq__item--open .faq__answer {
+    display: block;
+    animation: motion-fade var(--motion-base) var(--ease-out) both;
   }
 
   /* faq-question: H4 29/39, grow 1 → 787 − 21 = 766. */
@@ -268,3 +321,25 @@ const arrowDown = `<svg width="21" height="21" viewBox="0 0 21 21" fill="none" x
     }
   }
 </style>
+
+<script>
+  // Аккордеон: открыт один вопрос, остальные закрываются.
+  const root = document.querySelector('.faq');
+  if (root) {
+    const items = [...root.querySelectorAll('.faq__item')];
+    items.forEach((item) => {
+      const button = item.querySelector('.faq__head');
+      button?.addEventListener('click', () => {
+        const willOpen = !item.classList.contains('faq__item--open');
+        items.forEach((other) => {
+          other.classList.remove('faq__item--open');
+          other.querySelector('.faq__head')?.setAttribute('aria-expanded', 'false');
+        });
+        if (willOpen) {
+          item.classList.add('faq__item--open');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+</script>
