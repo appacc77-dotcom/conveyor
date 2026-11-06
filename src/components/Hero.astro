@@ -46,11 +46,14 @@ const {
 
     {/* Видео в файле нет, но кнопка должна честно сказать об этом, а не
         молчать. Клик показывает подсказку. */}
-    <button class="hero__play" type="button" aria-label={playLabel} data-play>
-      <Play node="79:113" />
-    </button>
+    <div class="hero__play-wrap">
+      <button class="hero__play" type="button" aria-label={playLabel} data-play>
+        <Play node="79:113" />
+      </button>
 
-    <div class="hero__toast" role="status" aria-live="polite" data-toast></div>
+      {/* Подсказка — у самой кнопки, а не полосой на пол экрана. */}
+      <div class="hero__toast t-caption" role="status" aria-live="polite" data-toast></div>
+    </div>
   </div>
 </section>
 
@@ -117,36 +120,50 @@ const {
   }
 
   /* play (79:113): обычный ребёнок слоя, а не абсолют — место задаёт space-between. */
-  .hero__play {
-    /* Без позиционирования кнопка рисуется под абсолютным оверлеем и не
-       принимает клики: elementFromPoint возвращал hero__overlay. */
+  .hero__play-wrap {
+    /* Обёртка держит кнопку и подсказку: без позиционирования кнопка рисуется
+       под абсолютным оверлеем и не принимает клики. */
     position: relative;
     z-index: 1;
+    flex: none;
+    display: flex;
+  }
+
+  .hero__play {
     flex: none;
     width: 47px;
     height: 47px;
   }
-</style>
 
-<style>
-  /* Подсказка о том, чего ещё нет: всплывает внизу на четыре секунды. */
+  /* Подсказка о том, чего ещё нет: маленькая, у кнопки, со стрелкой вниз. */
   .hero__toast {
-    position: fixed;
+    position: absolute;
+    bottom: calc(100% + var(--space-s));
     left: 50%;
-    bottom: var(--space-l);
-    z-index: 200;
-    max-width: min(92vw, 480px);
+    width: max-content;
+    max-width: 200px;
     padding: var(--space-s) var(--space-m);
     color: var(--color-text-on-image);
     background: var(--color-bg-inverse);
-    border-radius: var(--radius-m);
-    box-shadow: 0 12px 32px rgb(0 0 0 / 28%);
+    border-radius: var(--radius-s);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 24%);
     opacity: 0;
-    transform: translate(-50%, var(--space-s));
+    transform: translate(-50%, var(--space-xs));
     pointer-events: none;
     transition:
-      opacity var(--motion-base) var(--ease-out),
-      transform var(--motion-base) var(--ease-out);
+      opacity var(--motion-fast) var(--ease-out),
+      transform var(--motion-fast) var(--ease-out);
+  }
+
+  /* Стрелка на кнопку. */
+  .hero__toast::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: 5px solid transparent;
+    border-top-color: var(--color-bg-inverse);
+    transform: translateX(-50%);
   }
 
   .hero__toast--visible {
@@ -154,6 +171,7 @@ const {
     transform: translate(-50%, 0);
   }
 </style>
+
 
 <script>
   const play = document.querySelector('[data-play]');

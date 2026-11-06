@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-06T21:16:34.164Z",
+  "at": "2026-11-06T21:18:29.502Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-06T21:16:29.107Z"
+            "at": "2026-11-06T21:18:15.020Z"
           },
           "pixel": {
             "mean": 1.76,
