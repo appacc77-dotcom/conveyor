@@ -1,8 +1,14 @@
 ---
 /**
  * btn-primary — набор Figma `btn-primary` (5:19).
- * Инстанс в hero: 303×45, padding 8/16, gap 8, радиус 4.
- * Ширина не задаётся: 303 получается из 16 + 249 + 8 + 14 + 16.
+ *
+ * API повторяет пропсы набора: theme × caps × size.
+ *   theme: light (текстура) | dark (светлая) | muted (оливковая, всегда 45 px)
+ *   caps:  заглавные, стиль button-caps
+ *   size:  L — паддинг 16/24 (высота 61), S — 4/8 (высота 27)
+ *
+ * Ширина не задаётся никогда: в hero 303 px — это 16 + 249 + 8 + 14 + 16,
+ * в pain 214 px — 24 + 144 + 8 + 14 + 24.
  */
 import ArrowQuiet from './arrow-quiet.astro';
 
@@ -11,13 +17,30 @@ interface Props {
   label: string;
   /** id инстанса в Figma — по нему элемент находит замер. */
   node?: string;
+  theme?: 'light' | 'dark' | 'muted';
+  size?: 'L' | 'S';
+  caps?: boolean;
 }
 
-const { href, label, node } = Astro.props;
+const {
+  href,
+  label,
+  node,
+  theme = 'muted',
+  size = 'L',
+  caps = false,
+} = Astro.props;
+
+const labelClass =
+  size === 'S' ? (caps ? 't-button-s-caps' : 't-button-s') : caps ? 't-button-caps' : 't-button';
 ---
 
-<a class="btn-primary" href={href} data-figma-node={node}>
-  <span class="btn-primary__label t-button">{label}</span>
+<a
+  class:list={['btn-primary', `btn-primary--${theme}`, `btn-primary--${size.toLowerCase()}`]}
+  href={href}
+  data-figma-node={node}
+>
+  <span class:list={['btn-primary__label', labelClass]}>{label}</span>
   <ArrowQuiet />
 </a>
 
@@ -26,13 +49,37 @@ const { href, label, node } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: var(--space-s);
-    padding: var(--space-s) var(--space-m);
     border-radius: var(--radius-s);
-    background: var(--color-accent-muted);
     color: var(--color-text-on-image);
   }
 
   .btn-primary__label {
     display: block;
+  }
+
+  /* Размеры — из набора: L паддинг 16/24, S — 4/8. */
+  .btn-primary--l {
+    padding: var(--space-m) var(--space-l);
+  }
+
+  .btn-primary--s {
+    padding: var(--space-xs) var(--space-s);
+  }
+
+  /* muted по файлу всегда 45 px: паддинг 8/16 независимо от size. */
+  .btn-primary--muted {
+    padding: var(--space-s) var(--space-m);
+    background: var(--color-accent-muted);
+  }
+
+  .btn-primary--dark {
+    background: var(--color-bg-page);
+    color: var(--color-text-primary);
+  }
+
+  .btn-primary--light {
+    background-image: url('/img/btn-texture.png');
+    background-size: cover;
+    background-position: center;
   }
 </style>

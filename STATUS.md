@@ -21,7 +21,7 @@ desktop: **«Website Syntonia2»**, `fileKey NInjODHyOOjIitF3lq4Vpe`.
 | P2 Resolve | **готово для hero** | `design/figma/sections/hero/spec.json` |
 | P3 Model | **готово для первого шага** | `npm run ds:tokens` → 41 переменная, 34 стиля |
 | P4 Components | начато | `ds/btn-primary`, `ds/arrow-quiet`, `ds/play` |
-| P5 Pages | начато | `index.astro` — только hero |
+| P5 Pages | идёт | `index.astro` — hero + pain, 1487 px |
 
 ## Первый блок — hero
 

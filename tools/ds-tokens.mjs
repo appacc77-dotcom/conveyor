@@ -134,11 +134,16 @@ for (const f of [...families].sort()) {
 typo.push('}');
 typo.push('');
 
+/**
+ * Figma считает высоту текстового узла как ОКРУГЛЁННУЮ высоту строки × число
+ * строк: H4 38,57 → 39, script-m 71,4 → 71, script-xl 68,75 → 69. Если оставить
+ * дробь, каждый блок расходится на 0,3–1,3 px и расхождение копится вниз по дереву.
+ */
 const lineHeight = (s) => {
   const lh = s.lineHeight;
   if (!lh) return 'normal';
-  if (lh.unit === 'PIXELS') return `${+lh.value.toFixed(2)}px`;
-  if (lh.unit === 'PERCENT') return `${+((s.size * lh.value) / 100).toFixed(2)}px`;
+  if (lh.unit === 'PIXELS') return `${Math.round(lh.value)}px`;
+  if (lh.unit === 'PERCENT') return `${Math.round((s.size * lh.value) / 100)}px`;
   return 'normal';
 };
 

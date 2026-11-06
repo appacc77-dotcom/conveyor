@@ -1,6 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import Pain from '../components/Pain.astro';
+
+const painItems = [
+  {
+    number: '01',
+    text: 'Если жизнь идёт, а всё будто стоит на месте',
+    nodes: {
+      item: '79:123',
+      row: 'I79:123;42:70',
+      number: 'I79:123;42:71',
+      text: 'I79:123;42:72',
+      divider: 'I79:123;42:74',
+    },
+  },
+  {
+    number: '02',
+    text: 'Если попыток было уже столько, а по-настоящему легче так и не стало',
+    nodes: {
+      item: '79:124',
+      row: 'I79:124;42:70',
+      number: 'I79:124;42:71',
+      text: 'I79:124;42:72',
+      divider: 'I79:124;42:74',
+    },
+  },
+  {
+    number: '03',
+    text: 'Если ты устаёшь носить в себе напряжение, тяжесть или скрытую боль',
+    nodes: {
+      item: '79:125',
+      row: 'I79:125;42:70',
+      number: 'I79:125;42:71',
+      text: 'I79:125;42:72',
+      divider: 'I79:125;42:74',
+    },
+  },
+  {
+    number: '04',
+    text: 'Если тебе нужна глубокая и точная внутренняя работа',
+    nodes: {
+      item: '79:126',
+      row: 'I79:126;42:70',
+      number: 'I79:126;42:71',
+      text: 'I79:126;42:72',
+      divider: 'I79:126;42:74',
+    },
+  },
+];
 ---
 
 <BaseLayout title="Syntonia — состояние, из которого строится жизнь">
@@ -10,6 +58,15 @@ import Hero from '../components/Hero.astro';
       lead="Когда меняется внутреннее основание, меняются выборы, отношения, энергия и жизнь."
       ctaLabel="Узнать свой код реальности"
       ctaHref="/quiz.html"
+    />
+
+    <Pain
+      title="Когда нужен не просто разговор, а реальные перемены в жизни"
+      lead="Если в отношениях снова больно, в выборе нет опоры, внутри тяжело, а энергии всё меньше — причина внутри, и это можно изменить"
+      script="Начни"
+      ctaLabel="с точки входа"
+      ctaHref="/booking.html#entry"
+      items={painItems}
     />
   </main>
 </BaseLayout>

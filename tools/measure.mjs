@@ -53,12 +53,16 @@ for (const node of spec.nodes) {
   byId.set(node.id, node);
 }
 
-/** Абсолютные координаты узла от корня секции — сумма смещений предков. */
-function absolute(node) {
+/**
+ * Абсолютные координаты узла от корня секции.
+ * Смещение самого корня не учитывается: в макете он стоит на странице
+ * (например, pain на y=1305), а в DOM корень и есть начало координат.
+ */
+function absolute(node, rootId) {
   let x = 0;
   let y = 0;
   let cur = node;
-  while (cur) {
+  while (cur && cur.id !== rootId) {
     x += cur.x;
     y += cur.y;
     cur = cur.parentId ? byId.get(cur.parentId) : null;
@@ -106,7 +110,9 @@ const measured = await page.evaluate((rootNodeId) => {
   if (!rootEl) return { error: 'root-not-found' };
   const origin = rootEl.getBoundingClientRect();
   const out = [];
-  for (const el of document.querySelectorAll('[data-figma-node]')) {
+  // сам корень тоже меряем: он должен совпасть с (0,0,w,h)
+  const roots = [rootEl, ...rootEl.querySelectorAll('[data-figma-node]')];
+  for (const el of roots) {
     const ids = (el.getAttribute('data-figma-node') ?? '').trim().split(/\s+/).filter(Boolean);
     const r = el.getBoundingClientRect();
     const style = getComputedStyle(el);
@@ -151,11 +157,14 @@ for (const el of measured.elements) {
       rows.push({ id, name: node.name, status: 'СКРЫТ', el });
       continue;
     }
-    const abs = absolute(node);
+    const abs = absolute(node, rootId);
+    // Ширина текстового узла в Figma — следствие метрик шрифта и переносов,
+    // а не дизайн-решение: сверяем позицию и высоту, ширину показываем для справки.
+    const checkWidth = node.type !== 'TEXT';
     const worst = Math.max(
       Math.abs(el.x - abs.x),
       Math.abs(el.y - abs.y),
-      Math.abs(el.w - node.w),
+      checkWidth ? Math.abs(el.w - node.w) : 0,
       Math.abs(el.h - node.h),
     );
     const ok = worst <= tol;

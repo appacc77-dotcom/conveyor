@@ -59,6 +59,9 @@ function walk(n, depth) {
         rec.scaleMode = f.scaleMode;
         rec.imageTransform = f.imageTransform;
         rec.imageHash = f.imageHash;
+        // Настройки изображения (экспозиция, насыщенность…) — часть заливки.
+        // Без них фон уезжает по цвету: у pain exposure +0,35, saturation −0,13.
+        rec.filters = f.filters ?? null;
         if (f.imageHash && !seenImage.has(f.imageHash)) {
           seenImage.add(f.imageHash);
           images.push({ hash: f.imageHash, nodeId: n.id, nodeName: n.name, w: o.w, h: o.h });
