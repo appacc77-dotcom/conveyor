@@ -72,7 +72,7 @@ for (const file of files) {
   if (projectName && text.includes(projectName)) {
     problems.push({ rel, what: `имя файла «${projectName}»`, line: lineOf(text, projectName) });
   }
-  if (brand.length > 3 && text.includes(brand)) {
+  if (brand.length > 3 && new RegExp(brand, 'i').test(text)) {
     problems.push({ rel, what: `бренд «${brand}»`, line: lineOf(text, brand) });
   }
   for (const key of pageKeys) {
