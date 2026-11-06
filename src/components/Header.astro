@@ -22,6 +22,16 @@ const links = [
   { text: 'Понять себя', node: 'I79:104;167:647', dropdown: false },
   { text: 'Пространство практики', node: 'I79:104;167:648', dropdown: false },
 ];
+
+/**
+ * Содержимое выпадающего меню. В макете открытого состояния нет — это
+ * изобретение (decisions.md, #76): пункты взяты из реальных страниц файла.
+ */
+const dropdownItems = [
+  { text: 'Мастера', href: '/masters.html' },
+  { text: 'Метод', href: '/method.html' },
+  { text: 'Библиотека', href: '/library.html' },
+];
 ---
 
 <section class="header" id="home-header" data-figma-node="79:104">
@@ -29,16 +39,23 @@ const links = [
     <nav class="header__nav" data-figma-node="I79:104;167:643">
       {links.map((link) =>
         link.dropdown ? (
-          <div class="header__dropdown" data-figma-node="I79:104;167:644">
-            <a class="header__link t-body" href="#" data-figma-node={link.node}>{link.text}</a>
-            <img
-              class="header__chevron"
-              data-figma-node="I79:104;760:560"
-              src="/svg/arrow-quiet-white-down.svg"
-              alt=""
-              width="14"
-              height="14"
-            />
+          <div class="header__dropdown" data-figma-node="I79:104;167:644" data-dropdown>
+            <button class="header__dropdown-button" type="button" aria-expanded="false" aria-haspopup="true">
+              <span class="header__link t-body" data-figma-node={link.node}>{link.text}</span>
+              <img
+                class="header__chevron"
+                data-figma-node="I79:104;760:560"
+                src="/svg/arrow-quiet-white-down.svg"
+                alt=""
+                width="14"
+                height="14"
+              />
+            </button>
+            <ul class="header__menu" hidden>
+              {dropdownItems.map((item) => (
+                <li><a class="header__menu-link t-body" href={item.href}>{item.text}</a></li>
+              ))}
+            </ul>
           </div>
         ) : (
           <a class="header__link t-body" href="#" data-figma-node={link.node}>{link.text}</a>
@@ -74,7 +91,14 @@ const links = [
         </button>
       </div>
 
-      <button class="header__burger" type="button" data-figma-node="I79:104;167:655" aria-label="Меню">
+      <button
+        class="header__burger"
+        type="button"
+        data-figma-node="I79:104;167:655"
+        aria-label="Меню"
+        aria-expanded="false"
+        data-burger
+      >
         <span class="header__line"></span>
         <span class="header__line"></span>
         <span class="header__line"></span>
@@ -92,7 +116,7 @@ const links = [
     left: var(--space-s);
     width: 1424px;
     height: 92px;
-    overflow: hidden;
+    /* overflow не скрываем: из шапки выпадает меню. Радиус — на внутреннем слое. */
     border-radius: var(--radius-l);
   }
 
@@ -105,6 +129,7 @@ const links = [
     padding: var(--space-m) var(--space-xl);
     background: var(--color-bg-header);
     backdrop-filter: blur(10px);
+    border-radius: var(--radius-l);
   }
 
   /* nav: тянется, элементы слева. */
@@ -130,6 +155,48 @@ const links = [
     display: block;
     width: 14px;
     height: 14px;
+  }
+
+  .header__dropdown {
+    position: relative;
+  }
+
+  .header__dropdown-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0;
+    font: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+
+  /* Панель меню: те же токены, что у шапки, чтобы не выглядела чужой. */
+  .header__menu {
+    position: absolute;
+    top: calc(100% + var(--space-s));
+    left: 0;
+    z-index: 30;
+    min-width: 200px;
+    margin: 0;
+    padding: var(--space-s);
+    list-style: none;
+    background: var(--color-bg-header);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-m);
+  }
+
+  .header__menu-link {
+    display: block;
+    padding: var(--space-xs) var(--space-s);
+    color: var(--color-text-on-image);
+    border-radius: var(--radius-xs);
+    white-space: nowrap;
+  }
+
+  .header__menu-link:hover {
+    background: var(--color-line-on-dark);
   }
 
   .header__logo {
@@ -196,3 +263,41 @@ const links = [
     border-radius: var(--radius-s);
   }
 </style>
+
+<script>
+  // Выпадающее меню и мобильное. Изобретено: в макете открытых состояний нет.
+  const dropdown = document.querySelector('[data-dropdown]');
+  const dropdownButton = dropdown?.querySelector('button');
+  const menu = dropdown?.querySelector('.header__menu');
+  const burger = document.querySelector('[data-burger]');
+
+  function closeDropdown() {
+    if (!menu || !dropdownButton) return;
+    menu.hidden = true;
+    dropdownButton.setAttribute('aria-expanded', 'false');
+  }
+
+  dropdownButton?.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const open = menu.hidden;
+    menu.hidden = !open;
+    dropdownButton.setAttribute('aria-expanded', String(open));
+  });
+
+  burger?.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') !== 'true';
+    burger.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('is-menu-open', open);
+  });
+
+  document.addEventListener('click', (event) => {
+    if (dropdown && !dropdown.contains(event.target)) closeDropdown();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    closeDropdown();
+    burger?.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('is-menu-open');
+  });
+</script>
