@@ -225,16 +225,21 @@ const { title, lead, note, slide, tabs } = Astro.props;
     flex-direction: column;
     justify-content: space-between;
     gap: var(--space-2xl);
-    width: 232px;
+    /* Ширина через flex-basis, а не width: тогда раскрытие активной вкладки
+       анимируется переходом flex-grow, а не прыжком. */
+    flex: 0 0 232px;
     height: 296px;
     padding: var(--space-m) var(--space-s);
+    transition:
+      flex-grow var(--motion-base) var(--ease-in-out),
+      background-color var(--motion-base) var(--ease-out);
   }
 
   /* Активная вкладка шире, с описанием и кнопкой. */
   .format-tab--active {
+    flex: 1 1 0;
     gap: var(--space-m);
     justify-content: flex-start;
-    width: 335px;
     padding: var(--space-m);
     background: var(--color-text-on-image);
     border-radius: var(--radius-m);

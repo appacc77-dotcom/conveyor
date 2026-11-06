@@ -1,0 +1,61 @@
+/**
+ * Слой движения: длительности и кривые в одном месте.
+ *
+ * В макете анимаций нет — там только состояния покоя. Значит движение не
+ * переносится, а закладывается: у каждого интерактивного блока оно должно быть
+ * уже при сдаче, иначе блок остаётся картинкой.
+ *
+ * Правила:
+ *   - длительность берётся отсюда, а не числом в компоненте;
+ *   - двигаем только `transform` и `opacity` — они не вызывают пересчёт
+ *     раскладки; `flex-grow` — исключение для раскрывающейся вкладки;
+ *   - `prefers-reduced-motion` отключает всё разом.
+ */
+
+:root {
+  /* Быстрое — отклик на курсор: точки, ссылки, иконки. */
+  --motion-fast: 160ms;
+  /* Основное — раскрытие меню, смена вкладки, появление описания. */
+  --motion-base: 260ms;
+  /* Медленное — лента слайдера, крупные перемещения. */
+  --motion-slow: 450ms;
+
+  /* Вход и выход: мягкий разгон, мягкое торможение. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Появление снизу: меню, подсказки, всплывающие панели. */
+@keyframes motion-rise {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Появление содержимого: описание вкладки, ответ в аккордеоне. */
+@keyframes motion-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -263,7 +263,10 @@ const slides = voices;
   }
 
   /* Точка-листик 21×15: активная залита, остальные контуром. */
+  /* Активная точка проявляется поверх обычной: подменить картинку переходом
+     нельзя, а прозрачность — можно. */
   .voices__dot {
+    position: relative;
     flex: none;
     width: 21px;
     height: 15px;
@@ -271,16 +274,27 @@ const slides = voices;
     border: 0;
     background: url('/svg/dot-leaf-default.svg') no-repeat center / 21px 15px;
     cursor: pointer;
-    transition: opacity 0.2s ease;
+    transition: opacity var(--motion-fast) var(--ease-out);
+  }
+
+  .voices__dot::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: url('/svg/dot-leaf-active.svg') no-repeat center / 21px 15px;
+    opacity: 0;
+    transition: opacity var(--motion-base) var(--ease-out);
+  }
+
+  .voices__dot--active::after {
+    opacity: 1;
   }
 
   .voices__dot:hover {
     opacity: 0.65;
   }
 
-  .voices__dot--active {
-    background-image: url('/svg/dot-leaf-active.svg');
-  }
+
 
   .voices__arrows {
     display: flex;

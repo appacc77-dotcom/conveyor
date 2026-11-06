@@ -39,8 +39,8 @@ const dropdownItems = [
     <nav class="header__nav" data-figma-node="I79:104;167:643">
       {links.map((link) =>
         link.dropdown ? (
-          <div class="header__dropdown" data-figma-node="I79:104;167:644" data-dropdown>
-            <button class="header__dropdown-button" type="button" aria-expanded="false" aria-haspopup="true">
+          <details class="header__dropdown" data-figma-node="I79:104;167:644" data-dropdown>
+            <summary class="header__dropdown-button">
               <span class="header__link t-body" data-figma-node={link.node}>{link.text}</span>
               <img
                 class="header__chevron"
@@ -50,13 +50,13 @@ const dropdownItems = [
                 width="14"
                 height="14"
               />
-            </button>
-            <ul class="header__menu" hidden>
+            </summary>
+            <ul class="header__menu">
               {dropdownItems.map((item) => (
                 <li><a class="header__menu-link t-body" href={item.href}>{item.text}</a></li>
               ))}
             </ul>
-          </div>
+          </details>
         ) : (
           <a class="header__link t-body" href="#" data-figma-node={link.node}>{link.text}</a>
         ),
@@ -141,9 +141,8 @@ const dropdownItems = [
   }
 
   .header__dropdown {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
+    position: relative;
+    width: fit-content;
   }
 
   .header__link {
@@ -157,9 +156,8 @@ const dropdownItems = [
     height: 14px;
   }
 
-  .header__dropdown {
-    position: relative;
-  }
+  /* details вместо button+hidden: открытие работает без JS, а панель и шеврон
+     анимируются — у hidden перехода нет. */
 
   .header__dropdown-button {
     display: flex;
@@ -167,14 +165,35 @@ const dropdownItems = [
     gap: var(--space-xs);
     padding: 0;
     font: inherit;
+    color: inherit;
     background: transparent;
     border: 0;
     cursor: pointer;
+    list-style: none;
+  }
+
+  /* Убираем треугольник, который браузер рисует у summary. */
+  .header__dropdown-button::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Шеврон разворачивается при открытии. */
+  .header__chevron {
+    transition: transform var(--motion-fast) var(--ease-out);
+  }
+
+  .header__dropdown[open] .header__chevron {
+    transform: rotate(180deg);
   }
 
   /* Панель меню: те же токены, что у шапки, чтобы не выглядела чужой. */
+  /* Закрытое меню недоступно и для фокуса: у details содержимое не всегда
+     убирается из потока фокуса. */
   .header__menu {
     position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+    animation: motion-rise var(--motion-base) var(--ease-out) both;
     top: calc(100% + var(--space-s));
     left: 0;
     z-index: 30;
@@ -185,6 +204,11 @@ const dropdownItems = [
     background: var(--color-bg-header);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-m);
+  }
+
+  .header__dropdown[open] .header__menu {
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .header__menu-link {
@@ -265,24 +289,10 @@ const dropdownItems = [
 </style>
 
 <script>
-  // Выпадающее меню и мобильное. Изобретено: в макете открытых состояний нет.
+  // Выпадающее меню на <details>: браузер открывает сам, мы только закрываем
+  // по клику вне и по Esc. Изобретено: в макете открытых состояний нет.
   const dropdown = document.querySelector('[data-dropdown]');
-  const dropdownButton = dropdown?.querySelector('button');
-  const menu = dropdown?.querySelector('.header__menu');
   const burger = document.querySelector('[data-burger]');
-
-  function closeDropdown() {
-    if (!menu || !dropdownButton) return;
-    menu.hidden = true;
-    dropdownButton.setAttribute('aria-expanded', 'false');
-  }
-
-  dropdownButton?.addEventListener('click', (event) => {
-    event.stopPropagation();
-    const open = menu.hidden;
-    menu.hidden = !open;
-    dropdownButton.setAttribute('aria-expanded', String(open));
-  });
 
   burger?.addEventListener('click', () => {
     const open = burger.getAttribute('aria-expanded') !== 'true';
@@ -291,7 +301,14 @@ const dropdownItems = [
   });
 
   document.addEventListener('click', (event) => {
-    if (dropdown && !dropdown.contains(event.target)) closeDropdown();
+    if (dropdown?.open && !dropdown.contains(event.target)) dropdown.open = false;
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && dropdown?.open) {
+      dropdown.open = false;
+      dropdown.querySelector('summary')?.focus();
+    }
   });
 
   document.addEventListener('keydown', (event) => {
