@@ -28,7 +28,8 @@
     "shot": "node tools/shot.mjs",
     "measure": "node tools/measure.mjs",
     "compare": "node tools/compare.mjs",
-    "assets:check": "node tools/check-assets.mjs"
+    "assets:check": "node tools/check-assets.mjs",
+    "status": "node tools/status.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",
