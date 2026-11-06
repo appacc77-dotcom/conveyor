@@ -1,0 +1,1369 @@
+{
+  "file": {
+    "name": "Website Syntonia2",
+    "key": "NInjODHyOOjIitF3lq4Vpe",
+    "at": "2026-11-06T16:03:12.546Z"
+  },
+  "section": {
+    "id": "148:508",
+    "name": "faq",
+    "w": 1440,
+    "h": 807
+  },
+  "counts": {
+    "nodes": 52,
+    "images": 2,
+    "icons": 1,
+    "iconInstances": 6
+  },
+  "assets": {
+    "crop": "crop.png",
+    "images": [
+      {
+        "hash": "9fa5e7ad5153c67e6b61ab980569cab22d3d6f3f",
+        "file": "assets/img/9fa5e7ad5153.png",
+        "bytes": 1670676,
+        "usedBy": "faq"
+      },
+      {
+        "hash": "1434b5611dfb11cee1ee7c8021b5b872608cdd62",
+        "file": "assets/img/1434b5611dfb.png",
+        "bytes": 2781852,
+        "usedBy": "btn-primary"
+      }
+    ],
+    "icons": [
+      {
+        "node": "I148:517;14:128",
+        "component": "arrow-quiet",
+        "file": "assets/svg/arrow-quiet.svg",
+        "bytes": 3991
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "148:508",
+      "name": "faq",
+      "type": "FRAME",
+      "depth": 0,
+      "visible": true,
+      "x": 0,
+      "y": 9380,
+      "w": 1440,
+      "h": 807,
+      "fills": [
+        {
+          "type": "IMAGE",
+          "visible": true,
+          "opacity": 1,
+          "scaleMode": "FILL",
+          "imageTransform": [
+            [
+              0.5235950350761414,
+              0,
+              -0.0001554212358314544
+            ],
+            [
+              0,
+              0.47511401772499084,
+              -0.00046953046694397926
+            ]
+          ],
+          "imageHash": "9fa5e7ad5153c67e6b61ab980569cab22d3d6f3f",
+          "filters": {
+            "exposure": 0,
+            "contrast": 0.1333333303531011,
+            "saturation": -0.10000000149011612,
+            "temperature": -0.05999999865889549,
+            "tint": 0,
+            "highlights": 0,
+            "shadows": 0
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 0,
+        "pad": [
+          128,
+          24,
+          128,
+          24
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "148:509",
+      "name": "container",
+      "type": "FRAME",
+      "depth": 1,
+      "visible": true,
+      "x": 80,
+      "y": 128,
+      "w": 1280,
+      "h": 511,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 48,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "148:510",
+      "name": "faq-intro",
+      "type": "FRAME",
+      "depth": 2,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 397,
+      "h": 511,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 64,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "148:511",
+      "name": "faq-heading",
+      "type": "FRAME",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 397,
+      "h": 402,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 48,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "148:512",
+      "name": "faq-title",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 336,
+      "h": 286,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 0,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "148:513",
+      "name": "faq-title-top",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 208,
+      "h": 180,
+      "text": "То, что важно ПОНЯТЬ",
+      "styleName": "H2",
+      "fontSize": 48,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 125
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#3a2214",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "148:514",
+      "name": "faq-title-indent",
+      "type": "FRAME",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 180,
+      "w": 336,
+      "h": 106,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 0,
+        "pad": [
+          0,
+          0,
+          0,
+          160
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "148:515",
+      "name": "faq-title-bottom",
+      "type": "TEXT",
+      "depth": 6,
+      "visible": true,
+      "x": 160,
+      "y": 0,
+      "w": 176,
+      "h": 106,
+      "text": "перед началом",
+      "styleName": null,
+      "fontSize": 42,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 125
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#3a2214",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "148:516",
+      "name": "faq-lead",
+      "type": "TEXT",
+      "depth": 4,
+      "visible": true,
+      "x": 0,
+      "y": 334,
+      "w": 397,
+      "h": 68,
+      "text": "О том, как внутренняя работа начинает менять состояние и саму жизнь",
+      "styleName": "body",
+      "fontSize": 20,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 170.00000476837158
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#6b6357",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "148:517",
+      "name": "btn-primary",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 466,
+      "w": 182,
+      "h": 45,
+      "fills": [
+        {
+          "type": "IMAGE",
+          "visible": true,
+          "opacity": 1,
+          "scaleMode": "FILL",
+          "imageTransform": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "imageHash": "1434b5611dfb11cee1ee7c8021b5b872608cdd62",
+          "filters": {
+            "exposure": 0,
+            "contrast": 0,
+            "saturation": 0,
+            "temperature": 0,
+            "tint": 0,
+            "highlights": 0,
+            "shadows": 0
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 8,
+        "pad": [
+          8,
+          16,
+          8,
+          16
+        ],
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "radius": 4
+    },
+    {
+      "id": "I148:517;4:16",
+      "name": "btn-label",
+      "type": "TEXT",
+      "depth": 4,
+      "visible": true,
+      "x": 16,
+      "y": 8,
+      "w": 128,
+      "h": 29,
+      "text": "Задать вопрос",
+      "styleName": "button",
+      "fontSize": 17,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 170.00000476837158
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 3
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I148:517;14:128",
+      "name": "arrow-quiet",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 152,
+      "y": 16,
+      "w": 14,
+      "h": 14,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 1.4292793273925781,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "CENTER",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:517;14:128;967:2413",
+      "name": "icon",
+      "type": "GROUP",
+      "depth": 5,
+      "visible": true,
+      "x": 1,
+      "y": 2,
+      "w": 12,
+      "h": 10
+    },
+    {
+      "id": "I148:517;14:128;13:122",
+      "name": "icon-seed",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 1,
+      "y": 6,
+      "w": 6,
+      "h": 3,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1.5
+    },
+    {
+      "id": "I148:517;14:128;13:123",
+      "name": "icon-arrow",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 8,
+      "y": 2,
+      "w": 5,
+      "h": 10,
+      "radius": 0.7146396636962891,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 3
+    },
+    {
+      "id": "148:518",
+      "name": "faq-list",
+      "type": "FRAME",
+      "depth": 2,
+      "visible": true,
+      "x": 445,
+      "y": 0,
+      "w": 835,
+      "h": 511,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 16,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "148:519",
+      "name": "faq-item",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 835,
+      "h": 163,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.550000011920929,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          16,
+          24,
+          16,
+          24
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      },
+      "radius": 12
+    },
+    {
+      "id": "I148:519;141:320",
+      "name": "faq-head",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 24,
+      "y": 16,
+      "w": 787,
+      "h": 39,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 24,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "SPACE_BETWEEN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:519;140:349",
+      "name": "faq-question",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 766,
+      "h": 39,
+      "text": "Если я уже был в терапии, мне это подойдёт?",
+      "styleName": "H4",
+      "fontSize": 29,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 133.00000429153442
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I148:519;756:1883",
+      "name": "faq-icon",
+      "type": "INSTANCE",
+      "depth": 5,
+      "visible": true,
+      "x": 766,
+      "y": 9,
+      "w": 21,
+      "h": 21,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 2.143918991088867,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "CENTER",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:519;756:1883;756:1691",
+      "name": "icon",
+      "type": "GROUP",
+      "depth": 6,
+      "visible": true,
+      "x": 3,
+      "y": 19,
+      "w": 18,
+      "h": 14
+    },
+    {
+      "id": "I148:519;756:1883;755:2852",
+      "name": "icon-seed",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 8,
+      "y": 19,
+      "w": 8,
+      "h": 4,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2.25
+    },
+    {
+      "id": "I148:519;756:1883;755:2853",
+      "name": "icon-arrow",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 3,
+      "y": 9,
+      "w": 7,
+      "h": 14,
+      "radius": 1.0719594955444336,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 4.5
+    },
+    {
+      "id": "I148:519;140:350",
+      "name": "faq-answer",
+      "type": "TEXT",
+      "depth": 4,
+      "visible": true,
+      "x": 24,
+      "y": 79,
+      "w": 787,
+      "h": 68,
+      "text": "Да и поможет. Работа идёт глубже — с внутренним состоянием, подсознательными причинами и тем, что на тонком плане управляет жизнью.",
+      "styleName": "body",
+      "fontSize": 20,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 170.00000476837158
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#6b6357",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "148:520",
+      "name": "faq-item",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 179,
+      "w": 835,
+      "h": 71,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          16,
+          24,
+          16,
+          24
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      },
+      "radius": 12,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "I148:520;144:357",
+      "name": "faq-head",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 24,
+      "y": 16,
+      "w": 787,
+      "h": 39,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 24,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "SPACE_BETWEEN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:520;144:358",
+      "name": "faq-question",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 766,
+      "h": 39,
+      "text": "Чем этот подход отличается от обычной психологии?",
+      "styleName": "H4",
+      "fontSize": 29,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 133.00000429153442
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I148:520;755:2882",
+      "name": "faq-icon",
+      "type": "INSTANCE",
+      "depth": 5,
+      "visible": true,
+      "x": 766,
+      "y": 9,
+      "w": 21,
+      "h": 21,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 2.143918991088867,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "CENTER",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:520;755:2882;756:1690",
+      "name": "icon",
+      "type": "GROUP",
+      "depth": 6,
+      "visible": true,
+      "x": 18,
+      "y": 2,
+      "w": 18,
+      "h": 14
+    },
+    {
+      "id": "I148:520;755:2882;755:2849",
+      "name": "icon-seed",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 13,
+      "y": 2,
+      "w": 8,
+      "h": 4,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2.25
+    },
+    {
+      "id": "I148:520;755:2882;755:2850",
+      "name": "icon-arrow",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 18,
+      "y": 12,
+      "w": 7,
+      "h": 14,
+      "radius": 1.0719594955444336,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 4.5
+    },
+    {
+      "id": "148:521",
+      "name": "faq-item",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 266,
+      "w": 835,
+      "h": 71,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          16,
+          24,
+          16,
+          24
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      },
+      "radius": 12,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "I148:521;144:357",
+      "name": "faq-head",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 24,
+      "y": 16,
+      "w": 787,
+      "h": 39,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 24,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "SPACE_BETWEEN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:521;144:358",
+      "name": "faq-question",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 766,
+      "h": 39,
+      "text": "Зачем мне это, если я уже многое о себе понял?",
+      "styleName": "H4",
+      "fontSize": 29,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 133.00000429153442
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I148:521;755:2882",
+      "name": "faq-icon",
+      "type": "INSTANCE",
+      "depth": 5,
+      "visible": true,
+      "x": 766,
+      "y": 9,
+      "w": 21,
+      "h": 21,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 2.143918991088867,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "CENTER",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:521;755:2882;756:1690",
+      "name": "icon",
+      "type": "GROUP",
+      "depth": 6,
+      "visible": true,
+      "x": 18,
+      "y": 2,
+      "w": 18,
+      "h": 14
+    },
+    {
+      "id": "I148:521;755:2882;755:2849",
+      "name": "icon-seed",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 13,
+      "y": 2,
+      "w": 8,
+      "h": 4,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2.25
+    },
+    {
+      "id": "I148:521;755:2882;755:2850",
+      "name": "icon-arrow",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 18,
+      "y": 12,
+      "w": 7,
+      "h": 14,
+      "radius": 1.0719594955444336,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 4.5
+    },
+    {
+      "id": "148:522",
+      "name": "faq-item",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 353,
+      "w": 835,
+      "h": 71,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          16,
+          24,
+          16,
+          24
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      },
+      "radius": 12,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "I148:522;144:357",
+      "name": "faq-head",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 24,
+      "y": 16,
+      "w": 787,
+      "h": 39,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 24,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "SPACE_BETWEEN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:522;144:358",
+      "name": "faq-question",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 766,
+      "h": 39,
+      "text": "Чем Точка входа отличается от мастер-сессии?",
+      "styleName": "H4",
+      "fontSize": 29,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 133.00000429153442
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I148:522;755:2882",
+      "name": "faq-icon",
+      "type": "INSTANCE",
+      "depth": 5,
+      "visible": true,
+      "x": 766,
+      "y": 9,
+      "w": 21,
+      "h": 21,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 2.143918991088867,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "CENTER",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:522;755:2882;756:1690",
+      "name": "icon",
+      "type": "GROUP",
+      "depth": 6,
+      "visible": true,
+      "x": 18,
+      "y": 2,
+      "w": 18,
+      "h": 14
+    },
+    {
+      "id": "I148:522;755:2882;755:2849",
+      "name": "icon-seed",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 13,
+      "y": 2,
+      "w": 8,
+      "h": 4,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2.25
+    },
+    {
+      "id": "I148:522;755:2882;755:2850",
+      "name": "icon-arrow",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 18,
+      "y": 12,
+      "w": 7,
+      "h": 14,
+      "radius": 1.0719594955444336,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 4.5
+    },
+    {
+      "id": "148:523",
+      "name": "faq-item",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 440,
+      "w": 835,
+      "h": 71,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          16,
+          24,
+          16,
+          24
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      },
+      "radius": 12,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "I148:523;144:357",
+      "name": "faq-head",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 24,
+      "y": 16,
+      "w": 787,
+      "h": 39,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 24,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "SPACE_BETWEEN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:523;144:358",
+      "name": "faq-question",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 766,
+      "h": 39,
+      "text": "Сколько встреч обычно нужно?",
+      "styleName": "H4",
+      "fontSize": 29,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 133.00000429153442
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I148:523;755:2882",
+      "name": "faq-icon",
+      "type": "INSTANCE",
+      "depth": 5,
+      "visible": true,
+      "x": 766,
+      "y": 9,
+      "w": 21,
+      "h": 21,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 2.143918991088867,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "CENTER",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I148:523;755:2882;756:1690",
+      "name": "icon",
+      "type": "GROUP",
+      "depth": 6,
+      "visible": true,
+      "x": 18,
+      "y": 2,
+      "w": 18,
+      "h": 14
+    },
+    {
+      "id": "I148:523;755:2882;755:2849",
+      "name": "icon-seed",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 13,
+      "y": 2,
+      "w": 8,
+      "h": 4,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2.25
+    },
+    {
+      "id": "I148:523;755:2882;755:2850",
+      "name": "icon-arrow",
+      "type": "VECTOR",
+      "depth": 7,
+      "visible": true,
+      "x": 18,
+      "y": 12,
+      "w": 7,
+      "h": 14,
+      "radius": 1.0719594955444336,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 4.5
+    }
+  ]
+}

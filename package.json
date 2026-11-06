@@ -9,6 +9,8 @@
     "setup:browsers": "npx playwright install chromium",
     "intake": "node tools/intake.mjs",
     "export": "node tools/export-section.mjs",
+    "export:all": "node tools/export-all.mjs",
+    "structure": "node tools/structure.mjs",
     "ds:tokens": "node tools/ds-tokens.mjs",
     "tone:fit": "node tools/fit-tone.mjs",
     "bake": "node tools/bake-image.mjs",

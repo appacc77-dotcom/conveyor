@@ -20,8 +20,8 @@
  * Код возврата 1 — ворота красные, 0 — зелёные.
  */
 import { createServer } from 'node:http';
-import { existsSync, readFileSync, statSync } from 'node:fs';
-import { extname, join, normalize } from 'node:path';
+import { existsSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { extname, join, normalize, dirname } from 'node:path';
 import { chromium } from 'playwright';
 
 const root = process.cwd();
@@ -218,6 +218,23 @@ if (missing.length) {
 if (unknown) console.log(`\nВНИМАНИЕ: ${unknown} атрибут(ов) ссылаются на узлы, которых нет в спеке.`);
 
 const failed = red > 0 || unknown > 0 || missing.length > 0;
+
+// Числа остаются на диске: страница структуры читает их, а не пересказ.
+const gate = {
+  at: new Date().toISOString(),
+  section: spec.section,
+  ok: !failed,
+  red,
+  unknown,
+  missing: missing.map((n) => ({ id: n.id, name: n.name })),
+  marked: seen.size,
+  nodes: spec.nodes.length,
+  coverage: +coverage.toFixed(1),
+  tolerance: tol,
+  worstDelta: rows.reduce((m, r) => (r.worst > m ? r.worst : m), 0),
+};
+writeFileSync(join(dirname(join(root, specPath)), 'gate.json'), JSON.stringify(gate, null, 2) + '\n');
+
 console.log(
   `\nвердикт: ${failed ? 'КРАСНЫЕ' : 'зелёные'} · расхождений ${red}, вне спеки ${unknown}, не размечено ${missing.length}`,
 );

@@ -2,7 +2,7 @@
 /**
  * Снимок элемента собранного сайта для сверки с кропом из Figma.
  *
- *   node tools/shot.mjs .hero .screens/hero.png 1440
+ *   node tools/shot.mjs .hero .screens/hero.png 1440 [--url /structure.html]
  *
  * Поднимает dist/ на локальном порту, ждёт шрифты и картинки, снимает элемент.
  * Требует npm run build и установленный chromium.
@@ -18,6 +18,10 @@ const port = Number(process.env.SHOT_PORT ?? 4330);
 const base = `http://127.0.0.1:${port}`;
 
 const selector = process.argv[2] ?? '.hero';
+const urlArg = (() => {
+  const i = process.argv.indexOf('--url');
+  return i > 0 ? process.argv[i + 1] : '/';
+})();
 const out = process.argv[3] ?? '.screens/shot.png';
 const width = Number(process.argv[4] ?? 1440);
 
@@ -57,12 +61,25 @@ await new Promise((r) => server.listen(port, '127.0.0.1', r));
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
-await page.goto(base + '/', { waitUntil: 'networkidle' });
-await page.evaluate(() => document.fonts.ready);
+// networkidle на странице с десятками картинок не наступает — ждём load,
+// а изображения добираем явно.
+await page.goto(base + urlArg, { waitUntil: 'load', timeout: 60000 });
+// Ждём картинки, но не бесконечно: битая ссылка не должна вешать съёмку.
 await page.evaluate(async () => {
-  await Promise.all(
-    [...document.images].filter((i) => !i.complete).map((i) => new Promise((r) => { i.onload = i.onerror = r; })),
-  );
+  const pending = [...document.images].filter((i) => !i.complete);
+  await Promise.race([
+    Promise.all(pending.map((i) => new Promise((r) => { i.onload = i.onerror = r; }))),
+    new Promise((r) => setTimeout(r, 8000)),
+  ]);
+});
+await page.evaluate(() => document.fonts.ready);
+// Ждём картинки, но не бесконечно: битая ссылка не должна вешать съёмку.
+await page.evaluate(async () => {
+  const pending = [...document.images].filter((i) => !i.complete);
+  await Promise.race([
+    Promise.all(pending.map((i) => new Promise((r) => { i.onload = i.onerror = r; }))),
+    new Promise((r) => setTimeout(r, 8000)),
+  ]);
 });
 
 const el = await page.$(selector);

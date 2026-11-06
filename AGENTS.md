@@ -126,6 +126,8 @@ npm run build                                  # dist/
 npm run shot -- .hero .screens/hero.png 1440   # снимок элемента
 npm run measure -- design/figma/sections/hero/spec.json   # геометрия по data-figma-node
 npm run compare -- <crop.png> <shot.png>       # пиксель, без внешних зависимостей
+npm run previews                               # снять собранные секции Playwright'ом
+npm run structure                              # пересобрать /structure.html из артефактов
 ```
 
 `measure` — ворота геометрии: элемент с `data-figma-node` сверяется с узлом из `spec.json`
@@ -136,6 +138,11 @@ npm run compare -- <crop.png> <shot.png>       # пиксель, без внеш
 
 **Любое утверждение о соответствии подкрепляется числом и командой**, которая это
 число получила. Скриншот без числа — впечатление, а не проверка.
+
+**Публикация обязательна.** Секция не считается сданной, пока её нет на
+`/structure.html` с парой «Figma / сделано» и числами: `npm run previews` →
+`npm run structure`. Страница собирается из артефактов, поэтому расходиться с
+кодом не может — но только если её пересобирать.
 
 ## 7. Стоп-условия
 

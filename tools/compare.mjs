@@ -8,8 +8,9 @@
  * Пиксель — сигнал регрессии, не ворота приёмки: текст растеризуется по-разному,
  * фон и заливки совпадают. Код возврата всегда 0, если файлы прочитаны.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { inflateSync } from 'node:zlib';
+import { join, dirname } from 'node:path';
 
 const PNG_SIG = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
@@ -123,6 +124,19 @@ const worst = [...bands.entries()]
   .map(([i, b]) => ({ y: i * bandStep, mean: b.sum / b.n, over: (b.over / b.n) * 100 }))
   .sort((a, b) => b.mean - a.mean)
   .slice(0, 3);
+
+// Числа рядом с кропом — их читает страница структуры.
+const pixel = {
+  at: new Date().toISOString(),
+  reference: refPath,
+  shot: curPath,
+  width: w,
+  height: h,
+  mean: +(sum / (total * 3)).toFixed(2),
+  over16: +((over16 / total) * 100).toFixed(2),
+  over48: +((over48 / total) * 100).toFixed(2),
+};
+writeFileSync(join(dirname(join(process.cwd(), refPath)), 'pixel.json'), JSON.stringify(pixel, null, 2) + '\n');
 
 console.log('худшие полосы (средняя, y, % > 16):');
 for (const b of worst) {

@@ -17,9 +17,9 @@
  *   2 — мост недоступен: не запущен плагин или Figma закрыта
  *   3 — скрипт Figma вернул ошибку
  */
-import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join } from 'node:path';
+import { runFigma, FigmaError } from './figma/cli.mjs';
 
 const root = process.cwd();
 const quiet = process.argv.includes('--quiet');
@@ -36,29 +36,16 @@ const project = JSON.parse(readFileSync(projectPath, 'utf8'));
 const liveDir = join(root, project.paths.live);
 mkdirSync(liveDir, { recursive: true });
 
-/** figma-agent иногда предваряет JSON строкой предупреждения линтера. */
-function parseOutput(stdout) {
-  const at = stdout.indexOf('{');
-  if (at < 0) throw new Error(`не JSON: ${stdout.slice(0, 200)}`);
-  return JSON.parse(stdout.slice(at));
-}
-
-function figma(args) {
+/** Ответ моста читается через файловый дескриптор: pipe теряет всё сверх 64 КБ. */
+function figma(args, timeoutMs = 120000) {
   try {
-    const out = execFileSync('figma-agent', args, {
-      encoding: 'utf8',
-      maxBuffer: 32 * 1024 * 1024,
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    return parseOutput(out);
+    return runFigma(args, { timeoutMs });
   } catch (error) {
-    const stdout = error.stdout?.toString?.() ?? '';
-    const at = stdout.indexOf('{');
-    if (at >= 0) {
-      const parsed = JSON.parse(stdout.slice(at));
-      if (parsed.error) die(3, `${parsed.error.code}: ${parsed.error.message}`);
+    if (error instanceof FigmaError) {
+      const transport = ['E_NO_PLUGIN', 'E_NO_BROKER', 'E_TIMEOUT', 'E_NO_ANSWER', 'E_VERSION_MISMATCH'];
+      die(transport.includes(error.code) ? 2 : 3, `${error.code}: ${error.message}`);
     }
-    die(2, `figma-agent ${args[0]} не ответил (${error.message.split('\n')[0]})`);
+    die(3, String(error.message ?? error));
   }
 }
 

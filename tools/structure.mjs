@@ -1,0 +1,143 @@
+#!/usr/bin/env node
+/**
+ * Собирает данные для страницы /structure.html из артефактов.
+ *
+ *   node tools/structure.mjs
+ *
+ * Вход (всё уже на диске):
+ *   design/figma/project.json        — страницы и канонические фреймы
+ *   design/figma/live/structure.json — секции каждой страницы из живого файла
+ *   design/figma/sections/<slug>/    — spec.json, crop.png, gate.json, pixel.json
+ *   .screens/<slug>.png              — снимок собранной секции
+ *
+ * Выход:
+ *   design/figma/structure.json      — данные страницы
+ *   public/structure/*.png           — превью «Figma» и «сделано»
+ *
+ * Руками ничего не правится: статус выводится из наличия файлов и ворот.
+ */
+import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync, copyFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const root = process.cwd();
+const project = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
+const live = JSON.parse(readFileSync(join(root, 'design/figma/live/structure.json'), 'utf8'));
+
+const sectionsRoot = join(root, project.paths.sections);
+const outDir = join(root, 'public/structure');
+mkdirSync(outDir, { recursive: true });
+
+// --- индекс секций: id узла → папка с артефактами -------------------------
+const byNode = new Map();
+if (existsSync(sectionsRoot)) {
+  for (const slug of readdirSync(sectionsRoot)) {
+    const dir = join(sectionsRoot, slug);
+    const specPath = join(dir, 'spec.json');
+    if (!existsSync(specPath)) continue;
+    const spec = JSON.parse(readFileSync(specPath, 'utf8'));
+    const read = (name) => {
+      const p = join(dir, name);
+      return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null;
+    };
+    byNode.set(spec.section.id, {
+      slug,
+      spec,
+      gate: read('gate.json'),
+      pixel: read('pixel.json'),
+      image: read('image.json'),
+    });
+  }
+}
+
+// --- статус ---------------------------------------------------------------
+function statusOf(entry) {
+  if (!entry) return { key: 'todo', label: 'не выгружен' };
+  if (!entry.gate) return { key: 'exported', label: 'выгружен' };
+  if (!entry.gate.ok) return { key: 'red', label: 'ворота красные' };
+  if (entry.pixel) return { key: 'green', label: 'зелёный' };
+  return { key: 'measured', label: 'геометрия ок' };
+}
+
+// --- превью ---------------------------------------------------------------
+function publish(slug, entry) {
+  const figma = join(sectionsRoot, slug, 'crop.png');
+  if (existsSync(figma)) copyFileSync(figma, join(outDir, `${slug}-figma.png`));
+  const shot = join(root, '.screens', `${slug}.png`);
+  const hasShot = existsSync(shot);
+  if (hasShot) copyFileSync(shot, join(outDir, `${slug}-site.png`));
+  return {
+    figma: existsSync(figma) ? `/structure/${slug}-figma.png` : null,
+    site: hasShot ? `/structure/${slug}-site.png` : null,
+  };
+}
+
+// --- страницы и их секции -------------------------------------------------
+const pages = [];
+for (const [pageKey, pageId] of Object.entries(project.pages)) {
+  if (pageKey === 'design-system') continue;
+  const canonical = project.frames[pageKey];
+  if (!canonical) continue;
+
+  const page = live.pages.find((p) => p.id === pageId);
+  const frame = page?.frames.find((f) => f.id === canonical.id);
+  if (!frame) continue;
+
+  const sections = (frame.children ?? []).map((child) => {
+    const entry = byNode.get(child.id);
+    const status = statusOf(entry);
+    return {
+      id: child.id,
+      name: child.name,
+      type: child.type,
+      x: child.x,
+      y: child.y,
+      w: child.w,
+      h: child.h,
+      slug: entry?.slug ?? null,
+      status,
+      gate: entry?.gate
+        ? { ok: entry.gate.ok, red: entry.gate.red, marked: entry.gate.marked, nodes: entry.gate.nodes, coverage: entry.gate.coverage, worstDelta: entry.gate.worstDelta, at: entry.gate.at }
+        : null,
+      pixel: entry?.pixel ? { mean: entry.pixel.mean, over16: entry.pixel.over16, over48: entry.pixel.over48, at: entry.pixel.at } : null,
+      images: entry ? publish(entry.slug, entry) : { figma: null, site: null },
+    };
+  });
+
+  pages.push({
+    key: pageKey,
+    id: pageId,
+    title: page?.name ?? pageKey,
+    frame: { id: frame.id, name: frame.name, w: frame.w, h: frame.h },
+    sections,
+    counts: countSections(sections),
+  });
+}
+
+function countSections(list) {
+  const c = { total: list.length, green: 0, measured: 0, red: 0, exported: 0, todo: 0 };
+  for (const s of list) c[s.status.key] = (c[s.status.key] ?? 0) + 1;
+  return c;
+}
+
+const totals = pages.reduce(
+  (acc, p) => {
+    acc.total += p.counts.total;
+    for (const k of ['green', 'measured', 'red', 'exported', 'todo']) acc[k] += p.counts[k] ?? 0;
+    return acc;
+  },
+  { total: 0, green: 0, measured: 0, red: 0, exported: 0, todo: 0 },
+);
+
+const data = {
+  at: new Date().toISOString(),
+  file: { name: project.source.fileName, key: project.source.fileKey },
+  totals,
+  pages,
+};
+writeFileSync(join(root, 'design/figma/structure.json'), JSON.stringify(data, null, 2) + '\n');
+
+console.log(`страниц: ${pages.length}, секций: ${totals.total}`);
+console.log(`  зелёных ${totals.green} · геометрия ок ${totals.measured} · красных ${totals.red} · выгружено ${totals.exported} · не выгружено ${totals.todo}`);
+for (const p of pages) {
+  console.log(`  ${p.title.padEnd(10)} ${String(p.counts.total).padStart(2)} секций · ${p.frame.w}×${p.frame.h}`);
+}

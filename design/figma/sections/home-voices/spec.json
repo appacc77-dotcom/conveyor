@@ -1,0 +1,1840 @@
+{
+  "file": {
+    "name": "Website Syntonia2",
+    "key": "NInjODHyOOjIitF3lq4Vpe",
+    "at": "2026-11-06T16:03:07.580Z"
+  },
+  "section": {
+    "id": "116:246",
+    "name": "voices",
+    "w": 1440,
+    "h": 920
+  },
+  "counts": {
+    "nodes": 70,
+    "images": 1,
+    "icons": 3,
+    "iconInstances": 17
+  },
+  "assets": {
+    "crop": "crop.png",
+    "images": [
+      {
+        "hash": "4112a7406758c92d2d31f0ed18085709ac5140b6",
+        "file": "assets/img/4112a7406758.png",
+        "bytes": 1954589,
+        "usedBy": "voices"
+      }
+    ],
+    "icons": [
+      {
+        "node": "I116:252;105:227",
+        "component": "quote-mark",
+        "file": "assets/svg/quote-mark.svg",
+        "bytes": 293
+      },
+      {
+        "node": "116:256",
+        "component": "dot-leaf",
+        "file": "assets/svg/dot-leaf.svg",
+        "bytes": 228
+      },
+      {
+        "node": "116:269",
+        "component": "slider-arrow",
+        "file": "assets/svg/slider-arrow.svg",
+        "bytes": 19232
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "116:246",
+      "name": "voices",
+      "type": "FRAME",
+      "depth": 0,
+      "visible": true,
+      "x": 0,
+      "y": 7419,
+      "w": 1440,
+      "h": 920,
+      "fills": [
+        {
+          "type": "IMAGE",
+          "visible": true,
+          "opacity": 1,
+          "scaleMode": "CROP",
+          "imageTransform": [
+            [
+              0.8934414386749268,
+              0,
+              0.024039320647716522
+            ],
+            [
+              0,
+              0.9337565898895264,
+              0.03851307928562164
+            ]
+          ],
+          "imageHash": "4112a7406758c92d2d31f0ed18085709ac5140b6",
+          "filters": {
+            "exposure": 0,
+            "contrast": 0,
+            "saturation": 0,
+            "temperature": 0,
+            "tint": 0,
+            "highlights": 0,
+            "shadows": 0
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 48,
+        "pad": [
+          96,
+          24,
+          96,
+          24
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "116:247",
+      "name": "container",
+      "type": "FRAME",
+      "depth": 1,
+      "visible": true,
+      "x": 80,
+      "y": 96,
+      "w": 1280,
+      "h": 728,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 48,
+        "pad": [
+          0,
+          0,
+          0,
+          64
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "116:248",
+      "name": "voices-heading",
+      "type": "FRAME",
+      "depth": 2,
+      "visible": true,
+      "x": 64,
+      "y": 0,
+      "w": 711,
+      "h": 102,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 8,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "116:249",
+      "name": "voices-title",
+      "type": "TEXT",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 154,
+      "h": 60,
+      "text": "Голоса",
+      "styleName": "H2",
+      "fontSize": 48,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 125
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#3a2214",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "116:250",
+      "name": "voices-lead",
+      "type": "TEXT",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 68,
+      "w": 711,
+      "h": 34,
+      "text": "О том, как внутренняя работа начинает менять состояние и саму жизнь",
+      "styleName": "body",
+      "fontSize": 20,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 170.00000476837158
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "116:251",
+      "name": "voices-track",
+      "type": "FRAME",
+      "depth": 2,
+      "visible": true,
+      "x": 64,
+      "y": 150,
+      "w": 1392,
+      "h": 482,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 48,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "116:252",
+      "name": "voice-card",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 672,
+      "h": 482,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.3499999940395355,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      },
+      "radius": 16,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "I116:252;121:297",
+      "name": "voice-body",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 48,
+      "y": 48,
+      "w": 576,
+      "h": 343,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "I116:252;105:224",
+      "name": "voice-head",
+      "type": "FRAME",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 164,
+      "h": 47,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 4,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "I116:252;104:273",
+      "name": "voice-label",
+      "type": "TEXT",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 164,
+      "h": 23,
+      "text": "женский голос",
+      "styleName": "eyebrow-s",
+      "fontSize": 15,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 150
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 16
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:252;105:223",
+      "name": "voice-source",
+      "type": "TEXT",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 27,
+      "w": 71,
+      "h": 20,
+      "text": "из отзывов",
+      "styleName": "caption",
+      "fontSize": 13,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 150
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#7a756d",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:252;105:227",
+      "name": "quote-mark",
+      "type": "INSTANCE",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 71,
+      "w": 18,
+      "h": 24
+    },
+    {
+      "id": "I116:252;105:227;104:271",
+      "name": "Vector",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 18,
+      "h": 24,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:252;105:230",
+      "name": "voice-quote",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 119,
+      "w": 576,
+      "h": 224,
+      "text": "Проходила две сессии с Екатериной, результатом очень довольна. Практически сразу почувствовала, что установился контакт. Ситуация у меня была достаточно сложная, но, благодаря квалификации и опыту видеть, мы сумели найти причину и решение. Очень эффективно, цель достигается. Катерина — очень чуткий и профессиональный человек, умеет объяснить и подсказать.",
+      "styleName": "quote",
+      "fontSize": 20,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 139.9999976158142
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:252;105:231",
+      "name": "voice-author",
+      "type": "TEXT",
+      "depth": 4,
+      "visible": true,
+      "x": 48,
+      "y": 415,
+      "w": 244,
+      "h": 19,
+      "text": "— Ольга, после двух мастер-сессий",
+      "styleName": "body-s",
+      "fontSize": 14,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 135.0000023841858
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#6b6357",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "116:253",
+      "name": "voice-card",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": 720,
+      "y": 0,
+      "w": 672,
+      "h": 482,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.3499999940395355,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      },
+      "radius": 16,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "I116:253;121:297",
+      "name": "voice-body",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 48,
+      "y": 48,
+      "w": 576,
+      "h": 343,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "I116:253;105:224",
+      "name": "voice-head",
+      "type": "FRAME",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 166,
+      "h": 47,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 4,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "I116:253;104:273",
+      "name": "voice-label",
+      "type": "TEXT",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 166,
+      "h": 23,
+      "text": "мужской голос",
+      "styleName": "eyebrow-s",
+      "fontSize": 15,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 150
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 16
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:253;105:223",
+      "name": "voice-source",
+      "type": "TEXT",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 27,
+      "w": 120,
+      "h": 20,
+      "text": "написал от сердца",
+      "styleName": "caption",
+      "fontSize": 13,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 150
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#7a756d",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:253;105:227",
+      "name": "quote-mark",
+      "type": "INSTANCE",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 71,
+      "w": 18,
+      "h": 24
+    },
+    {
+      "id": "I116:253;105:227;104:271",
+      "name": "Vector",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 18,
+      "h": 24,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:253;105:230",
+      "name": "voice-quote",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 119,
+      "w": 576,
+      "h": 224,
+      "text": "Разбираться в себе всегда было непросто. За 23 года я перепробовал много чего, есть с чем сравнить, но наши сессии с Екатериной ни на что не похожи. Что больше всего запомнилось — это отношение. Не как к очередному клиенту или ради денег. Я чувствовал её желание помочь, заботу, за что благодарю.",
+      "styleName": "quote",
+      "fontSize": 20,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 139.9999976158142
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:253;105:231",
+      "name": "voice-author",
+      "type": "TEXT",
+      "depth": 4,
+      "visible": true,
+      "x": 48,
+      "y": 415,
+      "w": 242,
+      "h": 19,
+      "text": "— мужчина, искавший себя 23 года",
+      "styleName": "body-s",
+      "fontSize": 14,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 135.0000023841858
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#6b6357",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "767:3468",
+      "name": "voice-card",
+      "type": "INSTANCE",
+      "depth": 3,
+      "visible": true,
+      "x": -720,
+      "y": 0,
+      "w": 672,
+      "h": 482,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.3499999940395355,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          48,
+          48,
+          48,
+          48
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      },
+      "radius": 16,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "I767:3468;121:297",
+      "name": "voice-body",
+      "type": "FRAME",
+      "depth": 4,
+      "visible": true,
+      "x": 48,
+      "y": 48,
+      "w": 576,
+      "h": 343,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 24,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "I767:3468;105:224",
+      "name": "voice-head",
+      "type": "FRAME",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 198,
+      "h": 47,
+      "autoLayout": {
+        "mode": "VERTICAL",
+        "gap": 4,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "MIN"
+      }
+    },
+    {
+      "id": "I767:3468;104:273",
+      "name": "voice-label",
+      "type": "TEXT",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 164,
+      "h": 23,
+      "text": "женский голос",
+      "styleName": "eyebrow-s",
+      "fontSize": 15,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 150
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 16
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I767:3468;105:223",
+      "name": "voice-source",
+      "type": "TEXT",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 27,
+      "w": 198,
+      "h": 20,
+      "text": "из сообщения поздно вечером",
+      "styleName": "caption",
+      "fontSize": 13,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 150
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#7a756d",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I767:3468;105:227",
+      "name": "quote-mark",
+      "type": "INSTANCE",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 71,
+      "w": 18,
+      "h": 24
+    },
+    {
+      "id": "I767:3468;105:227;104:271",
+      "name": "Vector",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 18,
+      "h": 24,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I767:3468;105:230",
+      "name": "voice-quote",
+      "type": "TEXT",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 119,
+      "w": 576,
+      "h": 224,
+      "text": "Как бы я ни запуталась — ты и твоё доброе сердце всегда рядом. Твои слова разгоняют все мои туманы. Моё пространство жизни наполняется светом и благостью. Мне сильно легче. Я переслушиваю наши сессии и всё больше понимаю.",
+      "styleName": "quote",
+      "fontSize": 20,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 139.9999976158142
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#433d34",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I767:3468;105:231",
+      "name": "voice-author",
+      "type": "TEXT",
+      "depth": 4,
+      "visible": true,
+      "x": 48,
+      "y": 415,
+      "w": 71,
+      "h": 19,
+      "text": "— Наталья",
+      "styleName": "body-s",
+      "fontSize": 14,
+      "lineHeight": {
+        "unit": "PERCENT",
+        "value": 135.0000023841858
+      },
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#6b6357",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "116:254",
+      "name": "slider-controls",
+      "type": "FRAME",
+      "depth": 2,
+      "visible": true,
+      "x": 64,
+      "y": 680,
+      "w": 1216,
+      "h": 48,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 4,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "SPACE_BETWEEN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "116:255",
+      "name": "slider-dots",
+      "type": "FRAME",
+      "depth": 3,
+      "visible": true,
+      "x": 0,
+      "y": 17,
+      "w": 296,
+      "h": 15,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 4,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "116:256",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:256;104:222",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 1,
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "116:257",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 25,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:257;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:258",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 50,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:258;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:259",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 75,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:259;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:260",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 100,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:260;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:261",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 125,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:261;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:262",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 150,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:262;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:263",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 175,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:263;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:264",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 200,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:264;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:265",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 225,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:265;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:266",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 250,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:266;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:267",
+      "name": "dot-leaf",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 275,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": false,
+          "opacity": 1,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "I116:267;104:229",
+      "name": "leaf",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 21,
+      "h": 15,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#8a8560",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1
+    },
+    {
+      "id": "116:268",
+      "name": "slider-arrows",
+      "type": "FRAME",
+      "depth": 3,
+      "visible": true,
+      "x": 1104,
+      "y": 0,
+      "w": 112,
+      "h": 48,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 16,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "116:269",
+      "name": "slider-arrow",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 48,
+      "h": 48,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.3499999940395355,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 0,
+        "pad": [
+          17.984169006347656,
+          7.852242469787598,
+          17.984169006347656,
+          7.852242469787598
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      },
+      "radius": 999
+    },
+    {
+      "id": "I116:269;709:1589",
+      "name": "arrow",
+      "type": "FRAME",
+      "depth": 5,
+      "visible": true,
+      "x": 40,
+      "y": 19,
+      "w": 32,
+      "h": 10,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 0,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I116:269;709:1590",
+      "name": "Vector 4",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 4,
+      "w": 27,
+      "h": 3,
+      "radius": 0.5065962672233582,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2
+    },
+    {
+      "id": "I116:269;709:1591",
+      "name": "Vector 3",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 27,
+      "y": 0,
+      "w": 5,
+      "h": 10,
+      "radius": 0.5065962672233582,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2
+    },
+    {
+      "id": "I116:269;709:1592",
+      "name": "outline",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 47,
+      "h": 47,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1.5
+    },
+    {
+      "id": "116:270",
+      "name": "slider-arrow",
+      "type": "INSTANCE",
+      "depth": 4,
+      "visible": true,
+      "x": 64,
+      "y": 0,
+      "w": 48,
+      "h": 48,
+      "fills": [
+        {
+          "type": "SOLID",
+          "visible": true,
+          "opacity": 0.3499999940395355,
+          "color": {
+            "hex": "#ffffff",
+            "a": 1
+          }
+        }
+      ],
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 0,
+        "pad": [
+          17.984169006347656,
+          7.852242469787598,
+          17.984169006347656,
+          7.852242469787598
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      },
+      "radius": 999
+    },
+    {
+      "id": "I116:270;11:17",
+      "name": "arrow",
+      "type": "FRAME",
+      "depth": 5,
+      "visible": true,
+      "x": 8,
+      "y": 19,
+      "w": 32,
+      "h": 10,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 0,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "MIN",
+        "counter": "CENTER"
+      }
+    },
+    {
+      "id": "I116:270;11:14",
+      "name": "Vector 4",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 0,
+      "y": 4,
+      "w": 27,
+      "h": 3,
+      "radius": 0.5065962672233582,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2
+    },
+    {
+      "id": "I116:270;11:13",
+      "name": "Vector 3",
+      "type": "VECTOR",
+      "depth": 6,
+      "visible": true,
+      "x": 27,
+      "y": 0,
+      "w": 5,
+      "h": 10,
+      "radius": 0.5065962672233582,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 2
+    },
+    {
+      "id": "I116:270;11:15",
+      "name": "outline",
+      "type": "VECTOR",
+      "depth": 5,
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "w": 47,
+      "h": 47,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          }
+        }
+      ],
+      "strokeWeight": 1.5
+    }
+  ]
+}

@@ -1,0 +1,330 @@
+---
+/**
+ * Внутренняя карта: все страницы и секции живого файла со статусами и превью.
+ *
+ * Данные не пишутся руками — их собирает tools/structure.mjs из артефактов:
+ * design/figma/structure.json, sections/<slug>/{gate,pixel}.json и снимков.
+ * noindex: страница для работы, а не для посетителей.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import structure from '../../design/figma/structure.json';
+
+const { pages, totals, file, at } = structure;
+
+const LABEL = {
+  green: 'зелёный',
+  measured: 'геометрия ок',
+  red: 'красные ворота',
+  exported: 'выгружен',
+  todo: 'не выгружен',
+};
+
+const when = new Date(at).toLocaleString('ru-RU', { dateStyle: 'short', timeStyle: 'short' });
+---
+
+<BaseLayout title="Структура — Syntonia">
+  <main class="map">
+    <header class="map__head">
+      <p class="map__kicker">Внутренняя карта · не индексируется</p>
+      <h1 class="t-h2 map__title">Структура</h1>
+      <p class="map__lead t-body">
+        {file.name} · <code>{file.key}</code> · снято {when}. Данные собираются из
+        артефактов: статус — по наличию спеки, ворот и сверки, числа — из
+        <code>gate.json</code> и <code>pixel.json</code>.
+      </p>
+
+      <dl class="stats">
+        <div class="stats__item">
+          <dt>Секций</dt>
+          <dd>{totals.total}</dd>
+        </div>
+        <div class="stats__item stats__item--ok">
+          <dt>Зелёных</dt>
+          <dd>{totals.green}</dd>
+        </div>
+        <div class="stats__item">
+          <dt>Выгружено</dt>
+          <dd>{totals.exported}</dd>
+        </div>
+        <div class="stats__item">
+          <dt>Не выгружено</dt>
+          <dd>{totals.todo}</dd>
+        </div>
+      </dl>
+    </header>
+
+    {pages.map((page) => (
+      <section class="page" id={`page-${page.key}`}>
+        <div class="page__head">
+          <h2 class="t-h4 page__title">{page.title}</h2>
+          <span class="page__meta">
+            {page.frame.w}×{page.frame.h} · {page.counts.total} секций
+          </span>
+        </div>
+
+        <ol class="blocks">
+          {page.sections.map((s) => (
+            <li class:list={['block', `block--${s.status.key}`]} id={`block-${s.id.replace(':', '-')}`}>
+              <div class="block__info">
+                <div class="block__top">
+                  <span class="block__name">{s.name}</span>
+                  <span class:list={['badge', `badge--${s.status.key}`]}>{LABEL[s.status.key] ?? s.status.key}</span>
+                </div>
+
+                <p class="block__meta">
+                  <code>{s.id}</code> · {s.w}×{s.h} · y {s.y}
+                  {s.slug && <> · <code>{s.slug}</code></>}
+                </p>
+
+                {s.gate && (
+                  <p class="block__nums">
+                    геометрия: {s.gate.red === 0 ? '0 нарушений' : `${s.gate.red} нарушений`}
+                    {' · '}Δ max {s.gate.worstDelta.toFixed(2)} px
+                    {' · '}размечено {s.gate.marked} из {s.gate.nodes}
+                  </p>
+                )}
+
+                {s.pixel && (
+                  <p class="block__nums">
+                    пиксель: средняя {s.pixel.mean} · &gt; 16 — {s.pixel.over16} % · &gt; 48 — {s.pixel.over48} %
+                  </p>
+                )}
+
+                {!s.gate && !s.pixel && <p class="block__nums block__nums--empty">чисел пока нет</p>}
+              </div>
+
+              <div class="block__shots">
+                {s.images.figma ? (
+                  <figure class="shot">
+                    <img src={s.images.figma} alt={`Figma: ${s.name}`} loading="lazy" />
+                    <figcaption>Figma</figcaption>
+                  </figure>
+                ) : (
+                  <div class="shot shot--empty">нет эталона</div>
+                )}
+
+                {s.images.site ? (
+                  <figure class="shot">
+                    <img src={s.images.site} alt={`Сборка: ${s.name}`} loading="lazy" />
+                    <figcaption>сделано</figcaption>
+                  </figure>
+                ) : (
+                  <div class="shot shot--empty">не собрано</div>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </main>
+</BaseLayout>
+
+<style>
+  .map {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-3xl) var(--space-l) var(--space-5xl);
+  }
+
+  .map__kicker {
+    margin-bottom: var(--space-s);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .map__title {
+    margin-bottom: var(--space-m);
+    color: var(--color-text-heading);
+  }
+
+  .map__lead {
+    max-width: 720px;
+    margin-bottom: var(--space-xl);
+    color: var(--color-text-secondary);
+  }
+
+  code {
+    font-family: var(--font-golos-text);
+    font-size: 0.9em;
+    color: var(--color-text-deep);
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-l);
+    margin: 0 0 var(--space-3xl);
+  }
+
+  .stats__item {
+    min-width: 132px;
+    padding: var(--space-m) var(--space-l);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-m);
+  }
+
+  .stats__item dt {
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .stats__item dd {
+    margin: var(--space-xs) 0 0;
+    font-family: var(--font-literata);
+    font-size: 28px;
+    color: var(--color-text-heading);
+  }
+
+  .stats__item--ok {
+    background: var(--color-bg-muted);
+  }
+
+  .page {
+    margin-bottom: var(--space-4xl);
+  }
+
+  .page__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-m);
+    padding-bottom: var(--space-s);
+    margin-bottom: var(--space-l);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page__title {
+    color: var(--color-text-heading);
+  }
+
+  .page__meta {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  .blocks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .block {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) 2fr;
+    gap: var(--space-l);
+    padding: var(--space-m);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-m);
+    border-left: 3px solid var(--color-border);
+  }
+
+  .block--green {
+    border-left-color: var(--color-accent);
+  }
+
+  .block--red {
+    border-left-color: #a4463c;
+  }
+
+  .block__top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    margin-bottom: var(--space-xs);
+  }
+
+  .block__name {
+    font-weight: 500;
+    color: var(--color-text-heading);
+  }
+
+  .badge {
+    padding: 2px 8px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: var(--radius-xs);
+    background: var(--color-bg-muted);
+    color: var(--color-text-deep);
+  }
+
+  .badge--green {
+    background: var(--color-accent);
+    color: var(--color-text-on-image);
+  }
+
+  .badge--red {
+    background: #a4463c;
+    color: #fff;
+  }
+
+  .block__meta,
+  .block__nums {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+
+  .block__nums {
+    margin-top: var(--space-xs);
+    color: var(--color-text-deep);
+  }
+
+  .block__nums--empty {
+    font-style: italic;
+  }
+
+  .block__shots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-s);
+  }
+
+  .shot {
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-bg-page);
+    border-radius: var(--radius-s);
+  }
+
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .shot figcaption {
+    padding: 4px 8px;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+
+  .shot--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    border: 1px dashed var(--color-border);
+  }
+
+  @media (max-width: 900px) {
+    .block {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
