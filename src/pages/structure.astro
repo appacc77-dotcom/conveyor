@@ -140,6 +140,11 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
           <span class="page__meta">выгружено {exported(page)}</span>
           <span class="page__meta">собрано {collected(page)}</span>
           <span class="page__meta page__meta--ok">зелёных {page.counts.green ?? 0}</span>
+          {page.built && page.route && (
+            <a class="page__open" href={page.route} target="_blank" rel="noreferrer">
+              открыть страницу ↗
+            </a>
+          )}
         </div>
 
         <ol class="blocks">
@@ -154,6 +159,16 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
                 <span class:list={['dot', `dot--${s.status.key}`]} aria-hidden="true"></span>
                 <span class="block__name">{s.name}</span>
                 <span class="block__status">{LABEL[s.status.key] ?? s.status.key}</span>
+                {page.built && page.route && s.images.site && (
+                  <a
+                    class="link link--site"
+                    href={`${page.route}#${s.slug}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    title="открыть собранный элемент на локальном сервере"
+                    aria-label={`Открыть ${s.name} на сайте`}
+                  >на сайте ↗</a>
+                )}
                 <a
                   class="link"
                   href={figmaUrl(s.id)}
@@ -564,6 +579,13 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     color: var(--color-accent);
   }
 
+  .page__open {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-accent-muted);
+  }
+
   .page__sep {
     width: 1px;
     height: 12px;
@@ -646,8 +668,18 @@ const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').
     color: var(--color-text-secondary);
   }
 
-  .link {
+  .link--site {
     margin-left: auto;
+    color: var(--color-accent);
+    border-color: var(--color-accent-muted);
+  }
+
+  .link--site:hover {
+    color: var(--color-text-on-image);
+  }
+
+  .link {
+    margin-left: 0;
     padding: 2px 8px;
     font-size: 9.5px;
     letter-spacing: 0.05em;

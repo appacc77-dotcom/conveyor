@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-06T16:42:21.278Z",
+  "at": "2026-11-06T16:44:57.326Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -20,6 +20,8 @@
     {
       "key": "home",
       "id": "2:3",
+      "route": "/",
+      "built": true,
       "title": "Home",
       "frame": {
         "id": "79:103",
@@ -532,6 +534,8 @@
     {
       "key": "masters",
       "id": "190:487",
+      "route": "/masters.html",
+      "built": false,
       "title": "Masters",
       "frame": {
         "id": "217:237",
@@ -708,6 +712,8 @@
     {
       "key": "library",
       "id": "261:446",
+      "route": "/library.html",
+      "built": false,
       "title": "Library",
       "frame": {
         "id": "267:450",
@@ -915,6 +921,8 @@
     {
       "key": "practice",
       "id": "262:446",
+      "route": "/practice.html",
+      "built": false,
       "title": "Practice",
       "frame": {
         "id": "408:241",
@@ -1184,6 +1192,8 @@
     {
       "key": "quiz",
       "id": "262:447",
+      "route": "/quiz.html",
+      "built": false,
       "title": "Quiz",
       "frame": {
         "id": "529:118",
@@ -1298,6 +1308,8 @@
     {
       "key": "booking",
       "id": "263:448",
+      "route": "/booking.html",
+      "built": false,
       "title": "Booking",
       "frame": {
         "id": "383:286",
@@ -1443,6 +1455,8 @@
     {
       "key": "method",
       "id": "263:449",
+      "route": "/method.html",
+      "built": false,
       "title": "Method",
       "frame": {
         "id": "323:422",

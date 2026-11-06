@@ -126,9 +126,15 @@ for (const [pageKey, pageId] of Object.entries(project.pages)) {
     };
   });
 
+  const route = project.routes?.[pageKey] ?? null;
+  const routeFile = route === '/' ? 'index.astro' : route?.replace(/^\//, '').replace(/\.html$/, '.astro');
+  const built = !!routeFile && existsSync(join(root, 'src/pages', routeFile));
+
   pages.push({
     key: pageKey,
     id: pageId,
+    route,
+    built,
     title: page?.name ?? pageKey,
     frame: { id: frame.id, name: frame.name, w: frame.w, h: frame.h },
     sections,
