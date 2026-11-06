@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-06T18:46:28.611Z",
+  "at": "2026-11-06T18:59:54.412Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 9,
+    "green": 10,
     "measured": 0,
     "red": 0,
-    "exported": 37,
+    "exported": 36,
     "todo": 0
   },
   "assetsTotal": {
@@ -311,11 +311,24 @@
           "slug": "home-process",
           "dir": "design/figma/pages/home/process",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 25,
+            "nodes": 25,
+            "coverage": 100,
+            "worstDelta": 0.5,
+            "at": "2026-11-06T18:59:27.569Z"
+          },
+          "pixel": {
+            "mean": 2.13,
+            "over16": 4.23,
+            "over48": 1.31,
+            "at": "2026-11-06T18:59:28.508Z"
+          },
           "assets": {
             "nodes": 25,
             "images": 3,
@@ -329,7 +342,7 @@
           },
           "images": {
             "figma": "/structure/home-process-figma.png",
-            "site": null
+            "site": "/structure/home-process-site.png"
           }
         },
         {
@@ -630,10 +643,10 @@
       ],
       "counts": {
         "total": 15,
-        "green": 9,
+        "green": 10,
         "measured": 0,
         "red": 0,
-        "exported": 6,
+        "exported": 5,
         "todo": 0
       }
     },

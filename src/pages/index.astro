@@ -9,6 +9,7 @@ import Entry from '../components/Entry.astro';
 import Method from '../components/Method.astro';
 import Quiz from '../components/Quiz.astro';
 import AboutFounder from '../components/AboutFounder.astro';
+import Process from '../components/Process.astro';
 import AirPhoto from '../components/AirPhoto.astro';
 
 const painItems = [
@@ -110,6 +111,39 @@ const painItems = [
       ]}
       quote="«Я не работаю вокруг проблемы. Я веду к её источнику»."
       ctaLabel="Познакомиться ближе"
+    />
+
+    <Process
+      title="Как проходит работа?"
+      stages={[
+        {
+          order: 'text-first',
+          title: 'Сначала становится ясно, что с тобой происходит на самом деле',
+          text: 'Не нужно подбирать слова. Открывается, из какого состояния ты живёшь и почему жизнь снова складывается именно так.',
+          image: '/img/process-1.png',
+          size: '136.10% 100%',
+          position: '100% 0',
+          nodes: { card: '79:170', content: 'I79:170;61:78', title: 'I79:170;61:73', body: 'I79:170;61:76', line: 'I79:170;61:75', text: 'I79:170;61:74', image: 'I79:170;61:79' },
+        },
+        {
+          order: 'image-first',
+          title: 'Затем мы идём в глубину причины',
+          text: 'Вместе находим, где берут начало чувства, реакции и выборы, которые сегодня управляют твоей жизнью.',
+          image: '/img/process-2.png',
+          size: '110.52% 100%',
+          position: '0% 0',
+          nodes: { card: '79:171', content: 'I79:171;65:94', title: 'I79:171;65:96', body: 'I79:171;65:97', line: 'I79:171;65:98', text: 'I79:171;65:99', image: 'I79:171;65:100' },
+        },
+        {
+          order: 'text-first',
+          title: 'И программа отпускает',
+          text: 'Это не облегчение на время, а выход. Старое растворяется, в сердце просыпается тепло. И дальше ты идёшь со своим светом, легко и свободно.',
+          image: '/img/process-3.png',
+          size: '173.83% 157.20%',
+          position: '64.14% 42.77%',
+          nodes: { card: '79:172', content: 'I79:172;61:78', title: 'I79:172;61:73', body: 'I79:172;61:76', line: 'I79:172;61:75', text: 'I79:172;61:74', image: 'I79:172;61:79' },
+        },
+      ]}
     />
 
     <Entry
