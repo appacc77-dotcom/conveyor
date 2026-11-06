@@ -34,6 +34,28 @@ const size = (bytes) => {
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} КБ`;
   return `${(bytes / 1024 / 1024).toFixed(1)} МБ`;
 };
+
+/** Готовая постановка задачи: копируется кнопкой в блоке. */
+function taskText(page, s) {
+  const lines = [
+    `Секция: ${page.title} / ${s.name} — узел ${s.id}`,
+    `Размер: ${s.w}×${s.h}, y ${s.y}`,
+    s.slug ? `Спека: design/figma/sections/${s.slug}/spec.json` : 'Спека: не выгружена',
+    s.slug ? `Кроп: design/figma/sections/${s.slug}/crop.png` : '',
+    s.assets ? `Выгружено: ${s.assets.nodes} узлов, ${s.assets.images} фото, ${s.assets.svg} svg, ${size(s.assets.bytes)}` : '',
+    s.gate
+      ? `Геометрия: ${s.gate.red === 0 ? '0 нарушений' : `${s.gate.red} нарушений`}, Δ max ${s.gate.worstDelta.toFixed(2)} px, размечено ${s.gate.marked} из ${s.gate.nodes}`
+      : 'Геометрия: не мерилась',
+    s.pixel ? `Пиксель: средняя ${s.pixel.mean}, > 16 ${s.pixel.over16} %, > 48 ${s.pixel.over48} %` : 'Пиксель: не мерился',
+    `Статус: ${LABEL[s.status.key] ?? s.status.key}`,
+    '',
+    'Задача: ',
+  ];
+  return lines.filter(Boolean).join('\n');
+}
+
+const collected = (page) => page.sections.filter((s) => s.images.site).length;
+const exported = (page) => page.sections.filter((s) => s.status.key !== 'todo').length;
 ---
 
 <BaseLayout title="Структура — Syntonia">
@@ -43,30 +65,25 @@ const size = (bytes) => {
       <h1 class="t-h2 map__title">Структура</h1>
       <p class="map__lead t-body">
         {file.name} · <code>{file.key}</code> · снято {when}. Статус выводится из
-        артефактов: спека → ворота → сверка; числа — из <code>gate.json</code> и
-        <code>pixel.json</code>, счётчики — из <code>spec.json</code>.
+        артефактов: спека → ворота → сверка.
       </p>
 
       <dl class="stats">
         <div class="stats__item">
-          <dt>Секций</dt>
+          <dt>Секций в Figma</dt>
           <dd>{totals.total}</dd>
+        </div>
+        <div class="stats__item">
+          <dt>Выгружено</dt>
+          <dd>{totals.total - totals.todo}</dd>
         </div>
         <div class="stats__item stats__item--ok">
           <dt>Зелёных</dt>
           <dd>{totals.green}</dd>
         </div>
         <div class="stats__item">
-          <dt>Выгружено</dt>
-          <dd>{totals.exported}</dd>
-        </div>
-        <div class="stats__item">
-          <dt>Не выгружено</dt>
-          <dd>{totals.todo}</dd>
-        </div>
-        <div class="stats__item">
           <dt>Собрано</dt>
-          <dd>{pages.reduce((n, p) => n + p.sections.filter((s) => s.images.site).length, 0)}</dd>
+          <dd>{pages.reduce((n, p) => n + collected(p), 0)}</dd>
         </div>
       </dl>
     </header>
@@ -92,7 +109,7 @@ const size = (bytes) => {
       {pages.map((page) => (
         <a class="jump__item" href={`#page-${page.key}`}>
           {page.title}
-          <span>{page.counts.total}</span>
+          <span>{exported(page)}/{page.counts.total}</span>
         </a>
       ))}
     </nav>
@@ -102,7 +119,11 @@ const size = (bytes) => {
         <div class="page__head">
           <h2 class="t-h4 page__title">{page.title}</h2>
           <span class="page__meta">
-            {page.frame.w}×{page.frame.h} · {page.counts.total} секций · зелёных {page.counts.green ?? 0}
+            {page.frame.w}×{page.frame.h}
+            {' · '}в Figma {page.counts.total}
+            {' · '}выгружено {exported(page)}
+            {' · '}собрано {collected(page)}
+            {' · '}зелёных {page.counts.green ?? 0}
           </span>
         </div>
 
@@ -114,42 +135,38 @@ const size = (bytes) => {
               data-status={s.status.key}
               data-search-text={`${page.title} ${s.name} ${s.id} ${s.slug ?? ''}`.toLowerCase()}
             >
-              <div class="block__info">
-                <div class="block__top">
-                  <span class="block__name">{s.name}</span>
-                  <span class:list={['badge', `badge--${s.status.key}`]}>{LABEL[s.status.key] ?? s.status.key}</span>
-                </div>
-
-                <p class="block__meta">
-                  <code>{s.id}</code> · {s.w}×{s.h} · y {s.y}
-                  {s.slug && <> · <code>{s.slug}</code></>}
-                </p>
-
-                {s.assets && (
-                  <ul class="assets">
-                    <li><b>{s.assets.nodes}</b> узлов</li>
-                    <li><b>{s.assets.images}</b> фото{s.assets.jpg || s.assets.png ? ` (${[s.assets.jpg && `jpg ${s.assets.jpg}`, s.assets.png && `png ${s.assets.png}`].filter(Boolean).join(', ')})` : ''}</li>
-                    <li><b>{s.assets.svg}</b> svg</li>
-                    <li class="assets__size">{size(s.assets.bytes)}</li>
-                  </ul>
-                )}
-
-                {s.gate && (
-                  <p class="block__nums">
-                    геометрия: {s.gate.red === 0 ? '0 нарушений' : `${s.gate.red} нарушений`}
-                    {' · '}Δ max {s.gate.worstDelta.toFixed(2)} px
-                    {' · '}размечено {s.gate.marked} из {s.gate.nodes}
-                  </p>
-                )}
-
-                {s.pixel && (
-                  <p class="block__nums">
-                    пиксель: средняя {s.pixel.mean} · &gt; 16 — {s.pixel.over16} % · &gt; 48 — {s.pixel.over48} %
-                  </p>
-                )}
-
-                {!s.gate && !s.pixel && <p class="block__nums block__nums--empty">чисел пока нет</p>}
+              <div class="block__top">
+                <span class="block__name">{s.name}</span>
+                <span class:list={['badge', `badge--${s.status.key}`]}>{LABEL[s.status.key] ?? s.status.key}</span>
+                <button
+                  class="copy"
+                  type="button"
+                  title="скопировать постановку задачи"
+                  aria-label={`Скопировать задачу по секции ${s.name}`}
+                  data-task={taskText(page, s)}
+                >копировать</button>
               </div>
+
+              <p class="block__meta">
+                <code>{s.id}</code> · {s.w}×{s.h} · y {s.y}
+              </p>
+
+              {s.assets && (
+                <ul class="assets">
+                  <li><b>{s.assets.nodes}</b> узлов</li>
+                  <li><b>{s.assets.images}</b> фото{s.assets.jpg || s.assets.png ? ` ${[s.assets.jpg && `jpg ${s.assets.jpg}`, s.assets.png && `png ${s.assets.png}`].filter(Boolean).join('/')}` : ''}</li>
+                  <li><b>{s.assets.svg}</b> svg</li>
+                  <li class="assets__size">{size(s.assets.bytes)}</li>
+                </ul>
+              )}
+
+              <p class="block__nums">
+                {s.gate
+                  ? `геометрия ${s.gate.red === 0 ? '0' : s.gate.red} · Δ ${s.gate.worstDelta.toFixed(2)} px`
+                  : 'геометрия —'}
+                {' · '}
+                {s.pixel ? `пиксель ${s.pixel.mean} · >16 ${s.pixel.over16} %` : 'пиксель —'}
+              </p>
 
               <div class="block__shots">
                 {s.images.figma ? (
@@ -185,7 +202,6 @@ const size = (bytes) => {
 </BaseLayout>
 
 <script>
-  const toolbar = document.querySelector('[data-toolbar]');
   const chips = [...document.querySelectorAll('[data-filter]')];
   const search = document.querySelector('[data-search]');
   const counter = document.querySelector('[data-count]');
@@ -205,20 +221,16 @@ const size = (bytes) => {
       block.hidden = !visible;
       if (visible) shown++;
     }
-
     for (const section of pageSections) {
       const visible = section.querySelectorAll('.block:not([hidden])').length;
       section.hidden = visible === 0;
       const empty = section.querySelector('[data-empty]');
       if (empty) empty.hidden = visible > 0;
     }
-
     for (const jump of jumps) {
       const id = jump.getAttribute('href')?.slice(1);
-      const section = id ? document.getElementById(id) : null;
-      jump.hidden = !!section?.hidden;
+      jump.hidden = !!document.getElementById(id)?.hidden;
     }
-
     counter.textContent = `${shown} из ${blocks.length}`;
   }
 
@@ -235,7 +247,6 @@ const size = (bytes) => {
     apply();
   });
 
-  // Ctrl/Cmd+K — фокус в поиск, Escape — сброс.
   document.addEventListener('keydown', (event) => {
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
       event.preventDefault();
@@ -249,67 +260,102 @@ const size = (bytes) => {
     }
   });
 
-  if (toolbar) toolbar.dataset.ready = 'true';
+  // Копирование постановки задачи. navigator.clipboard требует secure context,
+  // поэтому есть запасной путь через textarea.
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.append(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      ta.remove();
+      return ok;
+    }
+  }
+
+  for (const button of document.querySelectorAll('[data-task]')) {
+    button.addEventListener('click', async () => {
+      const ok = await copyText(button.dataset.task ?? '');
+      const label = button.textContent;
+      button.textContent = ok ? 'скопировано' : 'не вышло';
+      button.classList.toggle('copy--done', ok);
+      setTimeout(() => {
+        button.textContent = label;
+        button.classList.remove('copy--done');
+      }, 1600);
+    });
+  }
+
   apply();
 </script>
 
 <style>
   .map {
-    max-width: var(--container-max);
+    max-width: 1600px;
     margin: 0 auto;
-    padding: var(--space-3xl) var(--space-l) var(--space-5xl);
+    padding: var(--space-2xl) var(--space-l) var(--space-4xl);
   }
 
   .map__kicker {
-    margin-bottom: var(--space-s);
-    font-size: 12px;
+    margin-bottom: var(--space-xs);
+    font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
   }
 
   .map__title {
-    margin-bottom: var(--space-m);
+    margin-bottom: var(--space-s);
+    font-size: 40px;
     color: var(--color-text-heading);
   }
 
   .map__lead {
     max-width: 760px;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-m);
+    font-size: 15px;
+    line-height: 1.6;
     color: var(--color-text-secondary);
   }
 
   code {
     font-family: var(--font-golos-text);
-    font-size: 0.9em;
+    font-size: 0.92em;
     color: var(--color-text-deep);
   }
 
   .stats {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-m);
-    margin: 0 0 var(--space-xl);
+    gap: 8px;
+    margin: 0 0 var(--space-m);
   }
 
   .stats__item {
-    min-width: 116px;
-    padding: var(--space-s) var(--space-l);
+    min-width: 104px;
+    padding: 6px 14px;
     background: var(--color-bg-surface);
-    border-radius: var(--radius-m);
+    border-radius: var(--radius-s);
   }
 
   .stats__item dt {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
   }
 
   .stats__item dd {
-    margin: 2px 0 0;
+    margin: 0;
     font-family: var(--font-literata);
-    font-size: 26px;
+    font-size: 22px;
+    line-height: 1.2;
     color: var(--color-text-heading);
   }
 
@@ -317,7 +363,6 @@ const size = (bytes) => {
     background: var(--color-bg-muted);
   }
 
-  /* Панель фильтров держится сверху: карта длинная. */
   .toolbar {
     position: sticky;
     top: 0;
@@ -325,24 +370,24 @@ const size = (bytes) => {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-s);
-    padding: var(--space-s) 0;
-    margin-bottom: var(--space-m);
+    gap: 8px;
+    padding: 8px 0;
+    margin-bottom: 8px;
     background: var(--color-bg-page);
     border-bottom: 1px solid var(--color-border);
   }
 
   .toolbar__filters {
     display: flex;
-    gap: 6px;
+    gap: 4px;
   }
 
   .chip {
-    padding: 6px 14px;
-    font-size: 13px;
+    padding: 4px 12px;
+    font-size: 12px;
     color: var(--color-text-deep);
     background: var(--color-bg-surface);
-    border: 1px solid transparent;
+    border: 0;
     border-radius: 999px;
     cursor: pointer;
   }
@@ -355,20 +400,21 @@ const size = (bytes) => {
   .search {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 5px 12px;
+    gap: 4px;
+    padding: 3px 10px;
     background: var(--color-bg-surface);
     border-radius: 999px;
   }
 
   .search__icon {
+    font-size: 13px;
     color: var(--color-text-secondary);
   }
 
   .search input {
-    width: 240px;
+    width: 200px;
     font: inherit;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--color-text-primary);
     background: transparent;
     border: 0;
@@ -377,81 +423,80 @@ const size = (bytes) => {
 
   .toolbar__count {
     margin-left: auto;
-    font-size: 13px;
+    font-size: 12px;
     color: var(--color-text-secondary);
   }
 
   .jump {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: var(--space-3xl);
+    gap: 4px;
+    margin-bottom: var(--space-l);
   }
 
   .jump__item {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    font-size: 13px;
+    gap: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
     color: var(--color-text-primary);
     background: var(--color-bg-surface);
-    border-radius: var(--radius-s);
+    border-radius: var(--radius-xs);
   }
 
   .jump__item span {
-    padding: 1px 6px;
-    font-size: 11px;
-    color: var(--color-text-on-image);
-    background: var(--color-accent-muted);
-    border-radius: 999px;
+    font-size: 10px;
+    color: var(--color-text-secondary);
   }
 
   .page {
-    margin-bottom: var(--space-4xl);
-    scroll-margin-top: 64px;
+    margin-bottom: var(--space-2xl);
+    scroll-margin-top: 56px;
   }
 
   .page__head {
     display: flex;
     align-items: baseline;
-    gap: var(--space-m);
-    padding-bottom: var(--space-s);
-    margin-bottom: var(--space-l);
+    gap: var(--space-s);
+    padding-bottom: 4px;
+    margin-bottom: var(--space-s);
     border-bottom: 1px solid var(--color-border);
   }
 
   .page__title {
+    font-size: 22px;
     color: var(--color-text-heading);
   }
 
   .page__meta {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--color-text-secondary);
   }
 
   .page__empty {
-    font-size: 13px;
+    font-size: 12px;
     font-style: italic;
     color: var(--color-text-secondary);
   }
 
+  /* Две колонки: карта длинная, а блоки узкие. */
   .blocks {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-m);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .block {
-    display: grid;
-    grid-template-columns: minmax(300px, 1fr) 1.6fr;
-    gap: var(--space-l);
-    padding: var(--space-m);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
     background: var(--color-bg-surface);
-    border-radius: var(--radius-m);
+    border-radius: var(--radius-s);
     border-left: 3px solid var(--color-border);
   }
 
@@ -466,21 +511,21 @@ const size = (bytes) => {
   .block__top {
     display: flex;
     align-items: center;
-    gap: var(--space-s);
-    margin-bottom: var(--space-xs);
+    gap: 6px;
   }
 
   .block__name {
+    font-size: 14px;
     font-weight: 500;
     color: var(--color-text-heading);
   }
 
   .badge {
-    padding: 2px 8px;
-    font-size: 10px;
+    padding: 1px 6px;
+    font-size: 9px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    border-radius: var(--radius-xs);
+    border-radius: 3px;
     background: var(--color-bg-muted);
     color: var(--color-text-deep);
     white-space: nowrap;
@@ -496,38 +541,58 @@ const size = (bytes) => {
     color: #fff;
   }
 
+  .copy {
+    margin-left: auto;
+    padding: 2px 8px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-page);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .copy:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-accent-muted);
+  }
+
+  .copy--done {
+    color: var(--color-text-on-image);
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
   .block__meta,
   .block__nums {
     margin: 0;
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 11px;
+    line-height: 1.4;
     color: var(--color-text-secondary);
   }
 
   .block__nums {
-    margin-top: 4px;
     color: var(--color-text-deep);
-  }
-
-  .block__nums--empty {
-    font-style: italic;
   }
 
   .assets {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin: var(--space-s) 0 0;
+    gap: 4px;
+    margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 12px;
+    font-size: 10px;
     color: var(--color-text-secondary);
   }
 
   .assets li {
-    padding: 2px 8px;
+    padding: 1px 6px;
     background: var(--color-bg-page);
-    border-radius: var(--radius-xs);
+    border-radius: 3px;
   }
 
   .assets b {
@@ -535,40 +600,36 @@ const size = (bytes) => {
     color: var(--color-text-primary);
   }
 
-  .assets__size {
-    color: var(--color-text-deep);
-  }
-
   .block__shots {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-s);
+    gap: 4px;
+    margin-top: 4px;
   }
 
   .shot {
     margin: 0;
     overflow: hidden;
     background: var(--color-bg-page);
-    border-radius: var(--radius-s);
+    border-radius: 3px;
   }
 
   .shot img {
     display: block;
     width: 100%;
-    height: auto;
-    max-height: 210px;
+    height: 92px;
     object-fit: cover;
     object-position: top;
     transition: transform 0.2s ease;
   }
 
   .shot a:hover img {
-    transform: scale(1.02);
+    transform: scale(1.03);
   }
 
   .shot figcaption {
-    padding: 4px 8px;
-    font-size: 10px;
+    padding: 2px 6px;
+    font-size: 9px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
@@ -578,19 +639,15 @@ const size = (bytes) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 90px;
-    font-size: 12px;
+    height: 92px;
+    font-size: 10px;
     color: var(--color-text-secondary);
     border: 1px dashed var(--color-border);
   }
 
-  @media (max-width: 900px) {
-    .block {
+  @media (max-width: 1000px) {
+    .blocks {
       grid-template-columns: 1fr;
-    }
-
-    .search input {
-      width: 140px;
     }
   }
 </style>
