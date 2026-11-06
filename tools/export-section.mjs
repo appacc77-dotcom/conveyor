@@ -193,7 +193,9 @@ try {
   const variantsTemplate = readFileSync(join(root, 'tools/figma/variants.template.js'), 'utf8');
   const variantsTmp = join(tmpdir(), `figma-variants-${process.pid}.js`);
   writeFileSync(variantsTmp, variantsTemplate.split('__ID__').join(nodeId));
-  const variantsReply = figma(['exec-js', variantsTmp, '--timeout', '120000']);
+  // runFigma напрямую: обёртка figma() при ошибке завершает процесс, и
+  // отсутствие состояний валило бы всю выгрузку.
+  const variantsReply = runFigma(['exec-js', variantsTmp, '--timeout', '120000']);
   if (variantsReply.result && !variantsReply.result.error) {
     writeFileSync(
       join(dir, 'states.json'),

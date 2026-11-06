@@ -17,7 +17,9 @@ function collect(node) {
   const acc = { texts: [], images: [], props: [] };
   const walk = (n) => {
     if (n.type === "TEXT") acc.texts.push({ name: n.name, text: n.characters });
-    const fill = (n.fills || []).find((f) => f.type === "IMAGE");
+    // У части узлов fills — не массив: проверяем, как в read-section.
+    const fills = Array.isArray(n.fills) ? n.fills : [];
+    const fill = fills.find((f) => f.type === "IMAGE");
     if (fill) acc.images.push({ name: n.name, hash: fill.imageHash });
     if (n.type === "INSTANCE" && n.componentProperties) {
       const props = {};

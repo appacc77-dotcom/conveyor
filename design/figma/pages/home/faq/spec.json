@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:12:06.036Z"
+    "at": "2026-11-06T20:40:12.306Z"
   },
   "section": {
     "id": "148:508",
@@ -10,11 +10,14 @@
     "w": 1440,
     "h": 807
   },
+  "fingerprint": "a3654de3",
+  "cloudVersion": "2418696346917289452",
   "counts": {
     "nodes": 52,
     "images": 2,
     "icons": 3,
-    "iconInstances": 6
+    "iconInstances": 6,
+    "states": 5
   },
   "assets": {
     "crop": "crop.png",
@@ -151,6 +154,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "clips": false,
       "limits": {
         "maxW": 1280
@@ -185,6 +189,7 @@
       "sizing": {
         "v": "FILL"
       },
+      "align": "STRETCH",
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:12"
@@ -216,6 +221,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:11"
@@ -282,7 +288,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -355,7 +362,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -400,13 +408,15 @@
           "color": {
             "hex": "#6b6357",
             "a": 1
-          }
+          },
+          "variable": "text-deep"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:49:53"
@@ -522,7 +532,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -655,6 +666,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:8"
@@ -677,8 +689,9 @@
           "opacity": 0.550000011920929,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.55
+          },
+          "variable": "bg-glass"
         }
       ],
       "autoLayout": {
@@ -698,6 +711,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9",
         "paddingLeft": "VariableID:2:9",
@@ -744,6 +758,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "clips": false
     },
     {
@@ -778,13 +793,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -920,13 +937,15 @@
           "color": {
             "hex": "#6b6357",
             "a": 1
-          }
+          },
+          "variable": "text-deep"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:49:53"
@@ -970,6 +989,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9",
         "paddingLeft": "VariableID:2:9",
@@ -1016,6 +1036,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "clips": false
     },
     {
@@ -1050,13 +1071,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -1197,6 +1220,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9",
         "paddingLeft": "VariableID:2:9",
@@ -1243,6 +1267,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "clips": false
     },
     {
@@ -1277,13 +1302,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -1424,6 +1451,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9",
         "paddingLeft": "VariableID:2:9",
@@ -1470,6 +1498,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "clips": false
     },
     {
@@ -1504,13 +1533,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -1651,6 +1682,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9",
         "paddingLeft": "VariableID:2:9",
@@ -1697,6 +1729,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "clips": false
     },
     {
@@ -1731,13 +1764,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -1841,7 +1876,5 @@
         ]
       }
     }
-  ],
-  "fingerprint": "a3654de3",
-  "cloudVersion": "2418696346917289452"
+  ]
 }

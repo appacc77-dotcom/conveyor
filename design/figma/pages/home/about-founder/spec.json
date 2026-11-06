@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:11:51.545Z"
+    "at": "2026-11-06T20:39:54.717Z"
   },
   "section": {
     "id": "79:148",
@@ -10,11 +10,14 @@
     "w": 1440,
     "h": 757
   },
+  "fingerprint": "4518e841",
+  "cloudVersion": "2418696346917289452",
   "counts": {
     "nodes": 21,
     "images": 1,
     "icons": 1,
-    "iconInstances": 1
+    "iconInstances": 1,
+    "states": 1
   },
   "assets": {
     "crop": "crop.png",
@@ -58,7 +61,8 @@
           "color": {
             "hex": "#fbf8f1",
             "a": 1
-          }
+          },
+          "variable": "bg-page"
         }
       ],
       "autoLayout": {
@@ -77,6 +81,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "paddingLeft": "VariableID:2:9",
         "paddingTop": "VariableID:2:13",
@@ -113,6 +118,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "clips": false,
       "limits": {
         "maxW": 1280
@@ -148,6 +154,8 @@
         "h": "FILL",
         "v": "FILL"
       },
+      "align": "STRETCH",
+      "grow": 1,
       "clips": false,
       "limits": {
         "maxW": 1184
@@ -238,7 +246,8 @@
           "color": {
             "hex": "#e1d6c6",
             "a": 1
-          }
+          },
+          "variable": "bg-muted"
         }
       ],
       "autoLayout": {
@@ -257,6 +266,8 @@
         "h": "FILL",
         "v": "FILL"
       },
+      "align": "STRETCH",
+      "grow": 1,
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:10",
@@ -366,7 +377,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -444,7 +456,8 @@
           "color": {
             "hex": "#7a756d",
             "a": 1
-          }
+          },
+          "variable": "text-secondary"
         }
       ],
       "sizing": {
@@ -475,7 +488,8 @@
           "color": {
             "hex": "#7a756d",
             "a": 1
-          }
+          },
+          "variable": "text-secondary"
         }
       ],
       "bound": {
@@ -516,7 +530,8 @@
           "color": {
             "hex": "#7a756d",
             "a": 1
-          }
+          },
+          "variable": "text-secondary"
         }
       ],
       "sizing": {
@@ -547,7 +562,8 @@
           "color": {
             "hex": "#7a756d",
             "a": 1
-          }
+          },
+          "variable": "text-secondary"
         }
       ],
       "bound": {
@@ -588,7 +604,8 @@
           "color": {
             "hex": "#7a756d",
             "a": 1
-          }
+          },
+          "variable": "text-secondary"
         }
       ],
       "sizing": {
@@ -633,7 +650,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -726,7 +744,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "sizing": {
@@ -833,7 +852,5 @@
         ]
       }
     }
-  ],
-  "fingerprint": "4518e841",
-  "cloudVersion": "2418696346917289452"
+  ]
 }

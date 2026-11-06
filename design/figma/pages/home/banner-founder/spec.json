@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:23:43.611Z"
+    "at": "2026-11-06T20:39:48.410Z"
   },
   "section": {
     "id": "79:114",
@@ -16,7 +16,8 @@
     "nodes": 5,
     "images": 1,
     "icons": 0,
-    "iconInstances": 0
+    "iconInstances": 0,
+    "states": 1
   },
   "assets": {
     "crop": "crop.png",
@@ -86,6 +87,7 @@
       "sizing": {
         "h": "FILL"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9",
         "paddingLeft": "VariableID:2:9",
@@ -118,6 +120,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "clips": false,
       "limits": {
         "maxW": 1280
@@ -189,7 +192,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -233,7 +237,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {

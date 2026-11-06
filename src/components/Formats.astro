@@ -208,8 +208,7 @@ const { title, lead, note, slide, tabs, slides = [] } = Astro.props;
   }
 
   /* Стрелки и счётчик — над слоями. */
-  .formats__arrow,
-  .formats__counter {
+  .formats__arrow {
     position: relative;
     z-index: 1;
   }
@@ -283,7 +282,8 @@ const { title, lead, note, slide, tabs, slides = [] } = Astro.props;
     gap: var(--space-m);
     justify-content: flex-start;
     padding: var(--space-m);
-    background: var(--color-text-on-image);
+    /* Заливка в узле — bg-glass (#ffffff @ 0.55), не непрозрачный белый. */
+    background: var(--color-bg-glass);
     border-radius: var(--radius-m);
   }
 

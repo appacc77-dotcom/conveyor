@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:22:08.537Z"
+    "at": "2026-11-06T20:39:47.055Z"
   },
   "section": {
     "id": "79:105",
@@ -16,7 +16,8 @@
     "nodes": 14,
     "images": 1,
     "icons": 2,
-    "iconInstances": 2
+    "iconInstances": 2,
+    "states": 2
   },
   "assets": {
     "crop": "crop.png",
@@ -131,6 +132,8 @@
         "h": "FILL",
         "v": "FILL"
       },
+      "align": "STRETCH",
+      "grow": 1,
       "bound": {
         "paddingLeft": "VariableID:2:12",
         "paddingTop": "VariableID:2:12",
@@ -155,10 +158,12 @@
           "opacity": 0.11999999731779099,
           "color": {
             "hex": "#000000",
-            "a": 1
-          }
+            "a": 0.12
+          },
+          "variable": "overlay-dark"
         }
       ],
+      "absolute": true,
       "bound": {
         "fills": [
           "VariableID:706:447"
@@ -228,7 +233,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -275,13 +281,15 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:2:20"
@@ -309,7 +317,8 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "autoLayout": {
@@ -384,7 +393,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {

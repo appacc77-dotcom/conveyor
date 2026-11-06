@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T20:26:30.068Z"
+    "at": "2026-11-06T20:40:02.925Z"
   },
   "section": {
     "id": "102:220",
@@ -199,7 +199,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -244,7 +245,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -275,7 +277,8 @@
           "color": {
             "hex": "#f4eee3",
             "a": 1
-          }
+          },
+          "variable": "bg-surface"
         }
       ],
       "autoLayout": {
@@ -412,8 +415,9 @@
           "opacity": 0.75,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.75
+          },
+          "variable": "bg-glass-strong"
         }
       ],
       "autoLayout": {
@@ -478,7 +482,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "sizing": {
@@ -508,8 +513,9 @@
           "opacity": 0.75,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.75
+          },
+          "variable": "bg-glass-strong"
         }
       ],
       "autoLayout": {
@@ -669,8 +675,9 @@
           "opacity": 0.75,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.75
+          },
+          "variable": "bg-glass-strong"
         }
       ],
       "autoLayout": {
@@ -856,8 +863,9 @@
           "opacity": 0.550000011920929,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.55
+          },
+          "variable": "bg-glass"
         }
       ],
       "autoLayout": {
@@ -1018,7 +1026,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "sizing": {
@@ -1064,7 +1073,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -1109,7 +1119,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -1186,7 +1197,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -1217,7 +1229,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "bound": {
@@ -1258,7 +1271,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -1380,7 +1394,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -1635,7 +1650,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "sizing": {
@@ -1681,7 +1697,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -1744,8 +1761,9 @@
           "opacity": 0.550000011920929,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.55
+          },
+          "variable": "bg-glass"
         }
       ],
       "autoLayout": {
@@ -1822,7 +1840,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -1867,7 +1886,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -2028,7 +2048,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "sizing": {
@@ -2075,7 +2096,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -2138,8 +2160,9 @@
           "opacity": 0.550000011920929,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.55
+          },
+          "variable": "bg-glass"
         }
       ],
       "autoLayout": {
@@ -2216,7 +2239,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -2261,7 +2285,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -2292,7 +2317,8 @@
           "color": {
             "hex": "#c9bea4",
             "a": 1
-          }
+          },
+          "variable": "thread"
         }
       ],
       "absolute": true,
@@ -2450,7 +2476,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "sizing": {
@@ -2497,7 +2524,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -2560,8 +2588,9 @@
           "opacity": 0.550000011920929,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.55
+          },
+          "variable": "bg-glass"
         }
       ],
       "autoLayout": {
@@ -2638,7 +2667,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -2683,7 +2713,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -2714,7 +2745,8 @@
           "color": {
             "hex": "#c9bea4",
             "a": 1
-          }
+          },
+          "variable": "thread"
         }
       ],
       "absolute": true,
@@ -2872,7 +2904,8 @@
           "color": {
             "hex": "#5a5a36",
             "a": 1
-          }
+          },
+          "variable": "accent"
         }
       ],
       "sizing": {
@@ -2918,7 +2951,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -2981,8 +3015,9 @@
           "opacity": 0.550000011920929,
           "color": {
             "hex": "#ffffff",
-            "a": 1
-          }
+            "a": 0.55
+          },
+          "variable": "bg-glass"
         }
       ],
       "autoLayout": {
@@ -3059,7 +3094,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -3104,7 +3140,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -3135,7 +3172,8 @@
           "color": {
             "hex": "#c9bea4",
             "a": 1
-          }
+          },
+          "variable": "thread"
         }
       ],
       "absolute": true,
@@ -3209,7 +3247,8 @@
           "color": {
             "hex": "#7a756d",
             "a": 1
-          }
+          },
+          "variable": "text-secondary"
         }
       ],
       "sizing": {

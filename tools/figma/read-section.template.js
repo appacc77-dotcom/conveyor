@@ -29,7 +29,7 @@ function hasText(n) {
   return false;
 }
 
-function walk(n, depth) {
+async function walk(n, depth) {
   const o = {
     id: n.id,
     name: n.name,
@@ -86,9 +86,30 @@ function walk(n, depth) {
 
   if ("fills" in n && Array.isArray(n.fills) && n.fills.length) {
     o.fills = [];
-    for (const f of n.fills) {
+    const boundFills = (n.boundVariables && n.boundVariables.fills) || [];
+    for (let fi = 0; fi < n.fills.length; fi += 1) {
+      const f = n.fills[fi];
       const rec = { type: f.type, visible: f.visible, opacity: f.opacity };
-      if (f.type === "SOLID") rec.color = rgba(f.color);
+      if (f.type === "SOLID") {
+        rec.color = rgba(f.color);
+        // Заливка может быть привязана к переменной: тогда действует её
+        // значение, а не цвет краски. Без этого полупрозрачное (bg-glass-light
+        // #ffffff@0.35) выгружалось непрозрачным — 164 узла в файле.
+        const bound = boundFills[fi];
+        if (bound) {
+          try {
+            const variable = await figma.variables.getVariableByIdAsync(bound.id);
+            const modes = variable && variable.valuesByMode;
+            const value = modes && modes[Object.keys(modes)[0]];
+            if (value && typeof value === "object" && "r" in value) {
+              rec.color = rgba(value);
+              rec.variable = variable.name;
+            }
+          } catch (error) {
+            rec.variableError = String(error && error.message).slice(0, 80);
+          }
+        }
+      }
       if (f.type === "IMAGE") {
         rec.scaleMode = f.scaleMode;
         rec.imageTransform = f.imageTransform;
@@ -200,10 +221,10 @@ function walk(n, depth) {
   }
 
   if (depth < MAX_DEPTH && "children" in n) {
-    for (const c of n.children) walk(c, depth + 1);
+    for (const c of n.children) await walk(c, depth + 1);
   }
 }
-walk(root, 0);
+await walk(root, 0);
 
 // Имена главных компонентов для иконок — только асинхронно (dynamic-page).
 const icons = [];

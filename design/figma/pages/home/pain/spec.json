@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T17:11:48.229Z"
+    "at": "2026-11-06T20:39:50.288Z"
   },
   "section": {
     "id": "79:116",
@@ -10,11 +10,14 @@
     "w": 1440,
     "h": 707
   },
+  "fingerprint": "eb7823fb",
+  "cloudVersion": "2418696346917289452",
   "counts": {
     "nodes": 34,
     "images": 2,
     "icons": 1,
-    "iconInstances": 1
+    "iconInstances": 1,
+    "states": 1
   },
   "assets": {
     "crop": "crop.png",
@@ -101,7 +104,8 @@
       "sizing": {
         "h": "FILL",
         "v": "HUG"
-      }
+      },
+      "align": "STRETCH"
     },
     {
       "id": "79:117",
@@ -129,6 +133,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "clips": false,
       "limits": {
         "maxW": 1280
@@ -168,6 +173,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "clips": false,
       "bound": {
         "itemSpacing": "VariableID:2:9"
@@ -205,7 +211,8 @@
           "color": {
             "hex": "#3a2214",
             "a": 1
-          }
+          },
+          "variable": "text-heading"
         }
       ],
       "sizing": {
@@ -249,7 +256,8 @@
           "color": {
             "hex": "#7a756d",
             "a": 1
-          }
+          },
+          "variable": "text-secondary"
         }
       ],
       "sizing": {
@@ -324,7 +332,8 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
@@ -447,7 +456,8 @@
           "color": {
             "hex": "#ffffff",
             "a": 1
-          }
+          },
+          "variable": "text-on-image"
         }
       ],
       "sizing": {
@@ -580,6 +590,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "itemSpacing": "VariableID:2:10"
       }
@@ -610,6 +621,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:8"
       },
@@ -644,6 +656,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9"
       }
@@ -680,7 +693,8 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "sizing": {
@@ -725,13 +739,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -756,12 +772,14 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "sizing": {
         "h": "FILL"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:2:31"
@@ -794,6 +812,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:8"
       },
@@ -828,6 +847,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9"
       }
@@ -864,7 +884,8 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "sizing": {
@@ -909,13 +930,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -940,12 +963,14 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "sizing": {
         "h": "FILL"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:2:31"
@@ -978,6 +1003,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:8"
       },
@@ -1012,6 +1038,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9"
       }
@@ -1048,7 +1075,8 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "sizing": {
@@ -1093,13 +1121,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -1124,12 +1154,14 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "sizing": {
         "h": "FILL"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:2:31"
@@ -1162,6 +1194,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:8"
       },
@@ -1196,6 +1229,7 @@
         "h": "FILL",
         "v": "HUG"
       },
+      "align": "STRETCH",
       "bound": {
         "itemSpacing": "VariableID:2:9"
       }
@@ -1232,7 +1266,8 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "sizing": {
@@ -1277,13 +1312,15 @@
           "color": {
             "hex": "#433d34",
             "a": 1
-          }
+          },
+          "variable": "text-primary"
         }
       ],
       "sizing": {
         "h": "FILL",
         "v": "HUG"
       },
+      "grow": 1,
       "bound": {
         "fills": [
           "VariableID:2:26"
@@ -1308,19 +1345,19 @@
           "color": {
             "hex": "#8a8560",
             "a": 1
-          }
+          },
+          "variable": "accent-muted"
         }
       ],
       "sizing": {
         "h": "FILL"
       },
+      "align": "STRETCH",
       "bound": {
         "fills": [
           "VariableID:2:31"
         ]
       }
     }
-  ],
-  "fingerprint": "eb7823fb",
-  "cloudVersion": "2418696346917289452"
+  ]
 }
