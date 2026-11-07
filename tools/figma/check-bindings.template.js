@@ -21,15 +21,25 @@ const items = __PAYLOAD__;
  * Тогда идём от инстанса по детям — это локальная операция.
  */
 async function resolveNode(id) {
+  let failure = null;
   try {
     const node = await figma.getNodeByIdAsync(id);
     if (node) return node;
-  } catch {
-    /* падаем в обход ниже */
+  } catch (error) {
+    failure = error;
   }
-  if (!id.includes(";")) return null;
+  if (!id.includes(";")) {
+    // Узел не найден по-настоящему — это расхождение, а не сбой связи.
+    if (failure) throw failure;
+    return null;
+  }
   const parts = id.replace(/^I/, "").split(";");
-  let node = await figma.getNodeByIdAsync(parts[0]);
+  let node = null;
+  try {
+    node = await figma.getNodeByIdAsync(parts[0]);
+  } catch (error) {
+    throw error;
+  }
   for (const part of parts.slice(1)) {
     if (!node) return null;
     const children = node.children || [];
@@ -43,7 +53,14 @@ const out = [];
 const variableCache = new Map();
 
 for (const item of items) {
-  const node = await resolveNode(item.id);
+  let node = null;
+  try {
+    node = await resolveNode(item.id);
+  } catch (error) {
+    // Сбой связи не должен выглядеть как «узел пропал»: пусть пачка упадёт
+    // и повторится, а не запишет ложное расхождение.
+    throw error;
+  }
   if (!node) {
     out.push({ id: item.id, kind: item.kind, index: item.index, error: "узел не найден" });
     continue;
