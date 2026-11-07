@@ -1,0 +1,24 @@
+{
+  "at": "2026-11-07T14:35:26.286Z",
+  "section": {
+    "id": "542:3151",
+    "name": "quiz-section",
+    "w": 1440,
+    "h": 1302
+  },
+  "ok": false,
+  "red": 14,
+  "unknown": 0,
+  "missing": [
+    {
+      "id": "550:553",
+      "name": "begin"
+    }
+  ],
+  "marked": 30,
+  "nodes": 56,
+  "coverage": 83.3,
+  "markedRatio": 53.6,
+  "tolerance": 1,
+  "worstDelta": 396
+}

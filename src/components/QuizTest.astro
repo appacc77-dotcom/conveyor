@@ -144,8 +144,17 @@ const answers = [
       note.classList.add('is-visible');
     };
 
+    // Вопрос в макете один, а за ним — экран результата (он спроектирован
+    // отдельной секцией). Показываем его вместо вопроса.
     section.querySelector('[data-next]')?.addEventListener('click', () => {
-      say('Вопросы 2–9 в макете не нарисованы — листать некуда.');
+      const result = document.querySelector('.qres');
+      if (!result) {
+        say('Экран результата не найден.');
+        return;
+      }
+      section.hidden = true;
+      result.hidden = false;
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     section.querySelector('[data-back]')?.addEventListener('click', () => {
       say('Это первый вопрос — назад листать некуда.');

@@ -9,6 +9,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import QuizTest from '../components/QuizTest.astro';
+import QuizResult from '../components/QuizResult.astro';
 import Footer from '../components/Footer.astro';
 ---
 
@@ -19,6 +20,7 @@ import Footer from '../components/Footer.astro';
   <main class="page">
     <Header />
     <QuizTest />
+    <QuizResult />
     <Footer />
   </main>
 </BaseLayout>
@@ -29,3 +31,13 @@ import Footer from '../components/Footer.astro';
     position: relative;
   }
 </style>
+
+<script>
+  // ?result=1 показывает экран результата сразу: так его можно замерить.
+  if (new URLSearchParams(location.search).get('result') === '1') {
+    const question = document.querySelector('.qtest');
+    const result = document.querySelector('.qres');
+    if (question) question.hidden = true;
+    if (result) result.hidden = false;
+  }
+</script>

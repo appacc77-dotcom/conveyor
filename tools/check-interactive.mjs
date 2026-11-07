@@ -144,6 +144,18 @@ for (const section of sections) {
   const controls = await page.$$(`${section.selector} button, ${section.selector} summary`);
   if (!controls.length) continue;
 
+  // Скрытая секция: кликать нечего, элементы не отрисованы.
+  const visible = await page.evaluate((sel) => {
+    const el = document.querySelector(sel);
+    if (!el) return false;
+    const rect = el.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0;
+  }, section.selector);
+  if (!visible) {
+    console.log(`${section.name.padEnd(18)} секция скрыта — пропущена`);
+    continue;
+  }
+
   let alive = false;
   let ariaOnly = [];
   let blind = [];

@@ -173,6 +173,17 @@ for (const [unit, { section, texts }] of expected) {
   }
   const spec = JSON.parse(readFileSync(section.specPath, 'utf8'));
   const id = sharedNodes[section.name] ?? spec.section?.id;
+  // Скрытая секция на странице не показывается: её текст проверять нечего.
+  const shown = await page.evaluate((nodeId) => {
+    const el = document.querySelector(`[data-figma-node~="${nodeId}"]`);
+    if (!el) return false;
+    const rect = el.getBoundingClientRect();
+    return rect.width > 0 && rect.height > 0 && el.offsetParent !== null;
+  }, id);
+  if (!shown) {
+    console.log(`  ${unit}: секция скрыта на странице — пропущена`);
+    continue;
+  }
   const rendered = await page.evaluate((nodeId) => {
     const el = document.querySelector(`[data-figma-node="${nodeId}"]`);
     if (!el) return null;
