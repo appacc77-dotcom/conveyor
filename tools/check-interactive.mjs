@@ -175,6 +175,8 @@ for (const section of sections) {
       // Уже выбранный переключатель и точка «вы здесь» при повторном клике
       // ничего не меняют по определению.
       if (el.getAttribute('aria-pressed') === 'true') return true;
+      // Отключённый элемент по определению ничего не делает.
+      if (el.disabled || el.getAttribute('aria-disabled') === 'true') return true;
       return el.getAttribute('aria-current') === 'true';
     });
     if (skip) continue;
