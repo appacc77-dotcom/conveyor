@@ -1,0 +1,473 @@
+---
+/**
+ * Секция `practice-pay` (410:1414), 1440×2001: заголовок и семь карточек
+ * платных практик в две колонки.
+ *
+ * Карточка 624×371: фото 236×371 слева, справа название, описание, строка
+ * «ФРАГМЕНТ ПРАКТИКИ» с волной и кнопка «Купить». Восьмая карточка в файле
+ * скрыта (`visible: false`), поэтому на экране семь.
+ */
+import { backgroundOf } from '../lib/fill.mjs';
+
+interface Props {
+  node?: string;
+}
+
+const { node = '410:1414' } = Astro.props;
+
+const rows = [
+  { node: '412:1664' },
+  { node: '412:1815' },
+  { node: '412:1848' },
+  { node: '412:1881' },
+];
+
+const cards = [
+  {
+    id: '412:1782',
+    titleWidth: 301,
+    titleSize: 32,
+    titleLine: 37.8,
+    textWidth: 300,
+    image: '/img/pay-f331.jpg',
+    title: ['Жизнь на разрыве.', 'Найти выход'],
+    text: ['Когда кажется, что сил больше нет.', 'Как найти опору и выйти из тупика.'],
+    time: '52 минуты',
+    price: '$39',
+  },
+  {
+    id: '412:1799',
+    crop: [[0.6352710127830505, 0, 0.23606911301612854], [0, 1, 0]],
+    titleWidth: 286,
+    titleSize: 24,
+    titleLine: 28.3,
+    textWidth: 268,
+    image: '/img/pay-368e.jpg',
+    title: ['Разрешить себе больше.', 'Деньги, реализация,', 'масштаб'],
+    text: ['Снять внутренние ограничения', 'и открыть поток возможностей.'],
+    time: '52 минуты',
+    price: '$39',
+  },
+  {
+    id: '412:1816',
+    titleWidth: 284,
+    titleSize: 24,
+    titleLine: 28.3,
+    textWidth: 275,
+    image: '/img/pay-f9a8.jpg',
+    title: ['Возвращение близости.', 'Внутренние преграды', 'в отношениях'],
+    text: ['Увидеть и отпустить, что мешает', 'быть рядом и быть собой.'],
+    time: '52 минуты',
+    price: '$39',
+  },
+  {
+    id: '412:1817',
+    titleWidth: 303,
+    titleSize: 25,
+    titleLine: 37.5,
+    textWidth: 247,
+    image: '/img/pay-4170.jpg',
+    title: ['Держаться — это работа.', 'Стоять — это состояние'],
+    text: ['Научиться опираться на себя', 'и сохранять устойчивость.'],
+    time: '52 минуты',
+    price: '$39',
+  },
+  {
+    id: '412:1849',
+    crop: [[0.3573399484157562, 0, 0.5327919125556946], [0, 1, 0]],
+    titleWidth: 273,
+    titleSize: 24,
+    titleLine: 28.3,
+    textWidth: 309,
+    image: '/img/pay-8edd.jpg',
+    title: ['Тело не молчит.', 'Услышать внутренний', 'смысл'],
+    text: ['Понять сигналы тела и восстановить', 'диалог с собой.'],
+    time: '52 минуты',
+    price: '$39',
+  },
+  {
+    id: '412:1850',
+    crop: [[0.3573399484157562, 0, 0.44216540455818176], [0, 1, 0]],
+    titleWidth: 258,
+    titleSize: 32,
+    titleLine: 37.8,
+    textWidth: 304,
+    image: '/img/pay-d9e7.jpg',
+    title: ['Связь с Высшим', 'проявлением'],
+    text: ['Практика соединения с источником', 'поддержки и смысла.'],
+    time: '52 минуты',
+    price: '$39',
+  },
+  {
+    id: '412:1882',
+    titleWidth: 167,
+    titleSize: 32,
+    titleLine: 37.8,
+    textWidth: 253,
+    image: '/img/pay-9cc2.jpg',
+    title: ['Вернуться', 'к радости'],
+    text: ['Найти то, что вдохновляет,', 'и позволить себе жить в этом.'],
+    time: '52 минуты',
+    price: '$39',
+  },
+];
+
+// Волна одинаковая во всех карточках: рисуется столбиками, как в макете.
+const bars = Array.from({ length: 48 }, (_, i) => {
+  const wave = Math.abs(Math.sin(i * 0.7) * Math.cos(i * 0.31));
+  return Math.max(3, Math.round(wave * 22));
+});
+---
+
+<section class="ppay" data-figma-node={node}>
+  <div class="ppay__container" data-figma-node="410:1415">
+    <div class="ppay__head" data-figma-node="410:1416">
+      <h2 class="ppay__title" data-figma-node="410:1417">Практики для глубокой работы</h2>
+      <p class="ppay__subtitle" data-figma-node="410:1418">
+        Для более глубокой самостоятельной работы с тем состоянием, которое сильнее всего влияет на жизнь сейчас.
+      </p>
+    </div>
+
+    <div class="ppay__grid">
+      {rows.map((row, rowIndex) => (
+        <div class="ppay__row" data-figma-node={row.node}>
+          {cards.slice(rowIndex * 2, rowIndex * 2 + 2).map((card) => (
+        <article class="pay" data-figma-node={card.id}>
+          <div
+            class="pay__media"
+            style={`background: ${backgroundOf({ url: card.image, scaleMode: card.crop ? 'CROP' : 'FILL', imageTransform: card.crop })}`}
+          />
+          <div class="pay__body">
+            <h3
+              class="pay__title"
+              style={`width: ${card.titleWidth}px; font-size: ${card.titleSize}px; line-height: ${card.titleLine}px`}
+            >
+              {card.title.map((line, i) => (
+                <>
+                  {i > 0 && <br />}
+                  {line}
+                </>
+              ))}
+            </h3>
+            <p class="pay__text" style={`width: ${card.textWidth}px`}>
+              {card.text.map((line, i) => (
+                <>
+                  {i > 0 && <br />}
+                  {line}
+                </>
+              ))}
+            </p>
+
+            <div class="pay__sound">
+              <span class="pay__caption">ФРАГМЕНТ ПРАКТИКИ</span>
+              <div class="pay__road">
+                <button class="pay__play" type="button" aria-label="Слушать фрагмент" aria-pressed="false" data-play>
+                  <span class="pay__triangle" aria-hidden="true" />
+                </button>
+                <div class="pay__wave" aria-hidden="true">
+                  {bars.map((h) => <span class="pay__bar" style={`height: ${h}px`} />)}
+                </div>
+                <span class="pay__length">1:23</span>
+              </div>
+            </div>
+
+            <div class="pay__action">
+              <button class="pay__buy" type="button" aria-describedby={`buy-note-${card.id.replace(':', '-')}`}>
+                <span>Купить</span>
+                <span class="pay__arrow" aria-hidden="true">→</span>
+              </button>
+              <div class="pay__meta">
+                <span class="pay__watch" aria-hidden="true" />
+                <span class="pay__time">{card.time}</span>
+                <span class="pay__dot" aria-hidden="true" />
+                <span class="pay__price">{card.price}</span>
+              </div>
+            </div>
+            </div>
+            <p class="pay__note" id={`buy-note-${card.id.replace(':', '-')}`} hidden>
+              Оплата не подключена: в макете нет сценария покупки.
+            </p>
+          </article>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.querySelector('.ppay');
+  if (section) {
+    // Звука в макете нет: кнопка переключает состояние, но не играет.
+    // Покупка: сценария оплаты в макете нет, поэтому кнопка показывает,
+    // что дальше ничего не происходит. Это отсутствие исходника, не дефект.
+    for (const button of section.querySelectorAll('.pay__buy')) {
+      button.addEventListener('click', () => {
+        const note = document.getElementById(button.getAttribute('aria-describedby'));
+        if (note) note.hidden = !note.hidden;
+      });
+    }
+
+    for (const button of section.querySelectorAll('[data-play]')) {
+      button.addEventListener('click', () => {
+        const playing = button.getAttribute('aria-pressed') === 'true';
+        button.setAttribute('aria-pressed', String(!playing));
+        button.classList.toggle('is-playing', !playing);
+      });
+    }
+  }
+</script>
+
+<style>
+  .ppay {
+    position: relative;
+    width: 1440px;
+    height: 2001px;
+    background: var(--color-practice-surface);
+  }
+
+  .ppay__container {
+    box-sizing: border-box;
+    width: 1280px;
+    height: 2001px;
+    margin: 0 auto;
+    padding-top: 96px;
+  }
+
+  .ppay__head {
+    box-sizing: border-box;
+    width: 1280px;
+    height: 163px;
+    /* Отступ — padding: margin первого блока схлопывается и двигает секцию. */
+    padding-top: 16px;
+  }
+
+  .ppay__title {
+    width: 983px;
+    height: 81px;
+    margin: 0 0 0 149px;
+    font-family: var(--font-literata);
+    font-size: 65px;
+    line-height: 81.25px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+  }
+
+  .ppay__subtitle {
+    width: 1114px;
+    height: 34px;
+    margin: 16px 0 0 83px;
+    font-size: 20px;
+    line-height: 34px;
+    color: var(--color-text-primary);
+  }
+
+  .ppay__grid {
+    width: 1280px;
+    margin-top: 64px;
+  }
+
+  .ppay__row {
+    display: flex;
+    gap: 32px;
+    width: 1280px;
+    height: 371px;
+  }
+
+  .ppay__row + .ppay__row {
+    margin-top: 64px;
+  }
+
+  .pay {
+    display: flex;
+    width: 624px;
+    height: 371px;
+    border-radius: 16px;
+    /* Градиент карточки: #fbf8f1 0 % → rgba(138,133,96,0.05) 60,2 %, угол 297°. */
+    background: linear-gradient(297deg, #fbf8f1 0%, rgb(138 133 96 / 5%) 60.2%);
+    overflow: hidden;
+  }
+
+  .pay__media {
+    flex: none;
+    width: 236px;
+    height: 371px;
+  }
+
+  .pay__body {
+    position: relative;
+    box-sizing: border-box;
+    width: 388px;
+    height: 371px;
+    padding: 32px;
+  }
+
+  .pay__title {
+    height: 84px;
+    margin: 0;
+    font-family: var(--font-literata);
+    font-weight: 400;
+    color: var(--color-text-primary);
+  }
+
+  .pay__text {
+    height: 52px;
+    margin: 24px 0 0;
+    font-size: 17px;
+    line-height: 26px;
+    color: var(--color-text-primary);
+  }
+
+  .pay__sound {
+    margin-top: 32px;
+  }
+
+  .pay__caption {
+    display: block;
+    width: 160px;
+    white-space: nowrap;
+    height: 17px;
+    font-size: 11px;
+    line-height: 17px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent-muted);
+  }
+
+  .pay__road {
+    position: relative;
+    width: 324px;
+    height: 54px;
+    margin-top: 4px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .pay__play {
+    position: absolute;
+    left: 13px;
+    top: 7px;
+    width: 41px;
+    height: 41px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-accent);
+    cursor: pointer;
+  }
+
+  .pay__triangle {
+    position: absolute;
+    left: 15px;
+    top: 12px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid var(--color-border);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+  }
+
+  .pay__wave {
+    position: absolute;
+    left: 65px;
+    top: 13px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 202px;
+    height: 28px;
+    overflow: hidden;
+  }
+
+  .pay__bar {
+    flex: none;
+    width: 2px;
+    background: var(--color-accent);
+  }
+
+  .pay__length {
+    position: absolute;
+    right: 7px;
+    top: 20px;
+    display: grid;
+    place-items: center;
+    width: 19px;
+    height: 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    font-size: 9.58px;
+    line-height: 14px;
+    color: var(--color-accent);
+  }
+
+  .pay__action {
+    position: absolute;
+    left: 32px;
+    top: 307px;
+    display: flex;
+    align-items: center;
+    width: 266px;
+    height: 33px;
+  }
+
+  .pay__buy {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: 85px;
+    height: 33px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 3px;
+    background: var(--color-accent) url('/img/practice-btn.jpg') center / cover no-repeat;
+    font-family: var(--font-golos-text);
+    font-size: 12.45px;
+    line-height: 21px;
+    color: var(--color-text-on-image);
+    cursor: pointer;
+  }
+
+  .pay__arrow {
+    font-size: 12px;
+  }
+
+  .pay__note {
+    position: absolute;
+    left: 32px;
+    bottom: 8px;
+    width: 320px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 16px;
+    color: var(--color-text-secondary);
+  }
+
+  .pay__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 32px;
+  }
+
+  .pay__watch {
+    width: 13px;
+    height: 14px;
+    border: 1px solid var(--color-text-primary);
+    border-radius: 50%;
+  }
+
+  .pay__time,
+  .pay__price {
+    font-size: 16px;
+    line-height: 24px;
+    white-space: nowrap;
+    color: var(--color-text-primary);
+  }
+
+  .pay__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-text-primary);
+  }
+</style>
