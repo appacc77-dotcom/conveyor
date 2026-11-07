@@ -114,6 +114,9 @@ if (write) {
     source: { fileKey: data.fileKey, fileName: data.name },
     paths: { live: 'design/figma/live', sections: 'design/figma/pages', assets: 'design/figma/assets' },
     gates: { geometryTolerancePx: 1, pixelDelta: 16 },
+    // Токен REST лежит в корне проекта и не коммитится. Путь не должен
+    // указывать на соседний проект: так конвейер перестаёт быть переносимым.
+    api: { tokenFile: '.figma-token' },
   };
   next.source = { ...next.source, fileKey: data.fileKey, fileName: data.name };
   next.pages = Object.fromEntries(found.filter((f) => f.frame).map((f) => [f.key, f.id]));

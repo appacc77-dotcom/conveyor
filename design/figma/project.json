@@ -55,8 +55,6 @@
   },
   "paths": {
     "live": "design/figma/live",
-    "spec": "design/figma/spec",
-    "crops": "design/figma/crops",
     "assets": "design/figma/assets",
     "styles": "src/styles",
     "screens": ".screens",
@@ -80,7 +78,7 @@
     "method": "/method.html"
   },
   "api": {
-    "tokenFile": "../syntonia-deepseek/.figma-token",
+    "tokenFile": ".figma-token",
     "fileEndpoint": "/v1/files"
   }
 }

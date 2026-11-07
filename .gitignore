@@ -20,3 +20,6 @@ var/
 
 .build.lock
 .coldstart/
+
+# токен Figma — только локально
+.figma-token
