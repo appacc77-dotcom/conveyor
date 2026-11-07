@@ -82,7 +82,10 @@ const shots = [];
 const missing = [];
 
 // Секции живут на разных страницах: перед каждой переходим на свою.
-const routes = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).routes ?? {};
+const projectCfg = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
+const routes = projectCfg.routes ?? {};
+// Общие секции размечены id компонента, а не инстанса страницы.
+const sharedNodes = projectCfg.shared ?? {};
 let currentRoute = '/';
 
 for (const s of targets) {
@@ -92,7 +95,8 @@ for (const s of targets) {
     await page.evaluate(() => document.fonts.ready);
     currentRoute = route;
   }
-  const handle = await page.$(`[data-figma-node~="${s.id}"]`);
+  const domId = sharedNodes[s.name] ?? s.id;
+  const handle = await page.$(`[data-figma-node~="${domId}"]`);
   if (!handle) {
     missing.push(s);
     continue;

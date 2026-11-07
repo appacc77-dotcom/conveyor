@@ -153,7 +153,10 @@ let missing = 0;
 const report = [];
 
 // Секции живут на разных страницах: перед каждой переходим на свою.
-const routes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).routes ?? {};
+const projectCfg = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8'));
+const routes = projectCfg.routes ?? {};
+// Общие секции размечены id канонического компонента, а не инстанса страницы.
+const sharedNodes = projectCfg.shared ?? {};
 let currentUrl = null;
 
 for (const [unit, { section, texts }] of expected) {
@@ -164,7 +167,7 @@ for (const [unit, { section, texts }] of expected) {
     currentUrl = pageUrl;
   }
   const spec = JSON.parse(readFileSync(section.specPath, 'utf8'));
-  const id = spec.section?.id;
+  const id = sharedNodes[section.name] ?? spec.section?.id;
   const rendered = await page.evaluate((nodeId) => {
     const el = document.querySelector(`[data-figma-node="${nodeId}"]`);
     if (!el) return null;

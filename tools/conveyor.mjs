@@ -160,17 +160,26 @@ function builtUnits() {
 const routes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).routes ?? {};
 const unitUrl = (unit) => routes[unit.split('/')[0]] ?? '/';
 
+// Общие секции (шапка, подвал) стоят на каждой странице своим инстансом:
+// в спеке страницы id свой, в компоненте — id канонической секции. Список
+// лежит в project.json.shared, чтобы это было данными, а не знанием в коде.
+const sharedNodes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).shared ?? {};
+const sharedArgs = (unit) => {
+  const node = sharedNodes[unit.split('/').pop()];
+  return node ? ['--root', node, '--by-suffix'] : [];
+};
+
 const measureStep = (unit) => ({
   id: `measure:${unit.split('/')[1]}`,
   tool: 'measure',
-  args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit)],
+  args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...sharedArgs(unit)],
   kind: 'gate',
   needsDist: true,
   about: `геометрия ${unit}`,
 });
 
 const unitSteps = (unit) => [
-  { id: 'measure', tool: 'measure', args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit)], kind: 'gate', needsDist: true, about: 'геометрия секции' },
+  { id: 'measure', tool: 'measure', args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...sharedArgs(unit)], kind: 'gate', needsDist: true, about: 'геометрия секции' },
   // Снимок нужен до сравнения: compare не снимает страницу сам.
   {
     id: 'shot',

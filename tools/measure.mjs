@@ -104,7 +104,16 @@ await page.goto(base + urlPath, { waitUntil: 'networkidle' });
 await page.evaluate(() => document.fonts.ready);
 
 // --- DOM: элементы с data-figma-node --------------------------------------
+// Общие секции (шапка, подвал) стоят на каждой странице своим инстансом:
+// id корня в спеке страницы свой, а в компоненте — id главной. --root
+// указывает, какой DOM-элемент считать корнем, --by-suffix сопоставляет
+// остальные узлы по внутреннему id инстанса (I<инстанс>;<внутренний>).
+// Корень спеки (для пересчёта координат) и корень в DOM (для поиска) —
+// разные вещи: у общей секции в спеке страницы свой id, в компоненте — главной.
 const rootId = spec.section.id;
+const domRootId = arg('--root', spec.section.id);
+const bySuffix = process.argv.includes('--by-suffix');
+const suffixOf = (id) => String(id).split(';').pop();
 const measured = await page.evaluate((rootNodeId) => {
   const rootEl = document.querySelector(`[data-figma-node~="${rootNodeId}"]`);
   if (!rootEl) return { error: 'root-not-found' };
@@ -130,13 +139,13 @@ const measured = await page.evaluate((rootNodeId) => {
     });
   }
   return { origin: { x: origin.x, y: origin.y, w: origin.width, h: origin.height }, elements: out };
-}, rootId);
+}, domRootId);
 
 await browser.close();
 server.close();
 
 if (measured.error) {
-  console.error(`Нет элемента с data-figma-node="${rootId}" — корень секции не размечен.`);
+  console.error(`Нет элемента с data-figma-node="${domRootId}" — корень секции не размечен.`);
   process.exit(1);
 }
 
@@ -146,17 +155,30 @@ const seen = new Set();
 let unknown = 0;
 let red = 0;
 
+// Карта «внутренний id → узел спеки» для общих секций.
+const bySuffixMap = new Map();
+if (bySuffix) {
+  for (const node of spec.nodes) {
+    const key = suffixOf(node.id);
+    if (!bySuffixMap.has(key)) bySuffixMap.set(key, node);
+  }
+}
+
 for (const el of measured.elements) {
   for (const id of el.ids) {
-    const node = byId.get(id);
+    // Сам корень: в DOM он размечен id главной, в спеке страницы — своим.
+    const node =
+      id === domRootId
+        ? byId.get(rootId)
+        : byId.get(id) ?? (bySuffix ? bySuffixMap.get(suffixOf(id)) : undefined);
+    if (node) seen.add(node.id);
     if (!node) {
       unknown++;
       rows.push({ id, name: '—', status: 'НЕТ В СПЕКЕ', el });
       continue;
     }
-    seen.add(id);
     if (el.hidden) {
-      rows.push({ id, name: node.name, status: 'СКРЫТ', el });
+      rows.push({ id: node.id, name: node.name, status: 'СКРЫТ', el });
       continue;
     }
     const abs = absolute(node, rootId);

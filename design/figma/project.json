@@ -100,9 +100,15 @@
     "home/process",
     "home/quiz",
     "home/voices",
+    "masters/footer",
     "masters/founder-hero",
+    "masters/header",
     "masters/masters-more",
     "masters/masters-team",
     "quiz/quiz-section"
-  ]
+  ],
+  "shared": {
+    "header": "79:104",
+    "footer": "148:561"
+  }
 }
