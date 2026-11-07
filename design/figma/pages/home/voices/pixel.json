@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-06T20:34:46.040Z",
+  "at": "2026-11-07T09:24:23.861Z",
   "reference": "design/figma/pages/home/voices/crop.png",
-  "shot": ".screens/home-voices.png",
+  "shot": ".screens/voices-12.png",
   "width": 1440,
   "height": 920,
-  "mean": 1.01,
+  "mean": 1,
   "over16": 1.46,
-  "over48": 0.22
+  "over48": 0.2
 }

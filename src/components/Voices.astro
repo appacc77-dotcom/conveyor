@@ -12,23 +12,33 @@
  *   voice-card      — VERTICAL, gap 24, pad 48, радиус 16, белый
  *   slider-controls — HORIZONTAL, gap 4, SPACE_BETWEEN, 1216
  *
- * Третья карточка в макете стоит на x = −720: это клон для прокрутки. При
- * статичной сборке он не нужен — карточки идут подряд, за край уходит третья.
+ * Голосов двенадцать. В секции home лежат три карточки — слева голос 3
+ * (обрезан краем), в центре 1, справа 2; остальные девять взяты из других
+ * вариантов секции, по одному на положение карусели. Узлы Figma есть только
+ * у трёх: остальные замеру сверять не с чем, поэтому у них нет
+ * `data-figma-node`.
  */
 
 interface Voice {
-  /** Координата карточки в макете: 0, 720 и −720 (третья стоит слева). */
-  x: number;
-  /** Стоит вне потока слева — так в макете устроена прокрутка по кругу. */
-  clone?: boolean;
   label: string;
   source: string;
   quote: string;
   author: string;
-  /** Ширина подписи из узла: браузер набирает на доли пикселя уже. */
-  authorWidth: number;
-  labelWidth: number;
-  nodes: { card: string; body: string; head: string; label: string; source: string; mark: string; quote: string; author: string };
+  /**
+   * Ширины из узлов — это ширина ТЕКСТА (hug), а не ограничение. Вписывать их
+   * в style нельзя: у «— из переписки» узел 71 px, а текст шире, и он
+   * переносился на вторую строку, растягивая карточку с 482 до 501.
+   */
+  authorWidth?: number;
+  labelWidth?: number;
+  /**
+   * Узлы Figma есть только у трёх карточек — тех, что лежат в секции home.
+   * Остальные девять голосов взяты из других вариантов секции: в этой секции
+   * их узлов нет, и замеру их сверять не с чем.
+   */
+  nodes?: { card: string; body: string; head: string; label: string; source: string; mark: string; quote: string; author: string };
+  /** Клон для замыкания карусели: рисуется, но не размечен. */
+  clone?: boolean;
 }
 
 interface Props {
@@ -38,8 +48,20 @@ interface Props {
 }
 
 const { title, lead, voices } = Astro.props;
-/** Слайды — карточки без клона; точек столько же, сколько слайдов. */
+/** Точек столько же, сколько голосов: карусель листает по одной карточке. */
 const slides = voices;
+/**
+ * Лента: перед первым голосом стоит последний, за последним — клоны первого и
+ * второго. Так окно из трёх карточек замкнуто: в макете слева видна
+ * предпоследняя по порядку, и на двенадцатом положении справа снова первая.
+ */
+/**
+ * Порядок карточек — как в макете: слева голос 3, в центре 1, справа 2.
+ * Дальше по списку 4, 5, … 12. Два клона в конце замыкают ленту, чтобы на
+ * последнем положении справа снова была первая карточка.
+ */
+const ordered = [voices[2], voices[0], voices[1], ...voices.slice(3)];
+const track = [...ordered, { ...ordered[0], clone: true }, { ...ordered[1], clone: true }];
 ---
 
 <section class="voices" id="home-voices" data-figma-node="116:246">
@@ -49,22 +71,23 @@ const slides = voices;
       <p class="voices__lead t-body" data-figma-node="116:250">{lead}</p>
     </div>
 
-    <div class="voices__viewport">
-    <div class="voices__track" data-figma-node="116:251" data-slider-track>
-      {voices.map((voice) => (
+    {/* Узел 116:251 — видимая полоса 1392 px, а не вся лента: в макете
+        карточки уходят за неё, и полоса их подрезает. */}
+    <div class="voices__viewport" data-figma-node="116:251">
+    <div class="voices__track" data-slider-track>
+      {track.map((voice) => (
         <article
           class:list={['voice', voice.clone && 'voice--clone']}
-          data-offset={voice.x}
-          data-figma-node={voice.nodes.card}
+          data-figma-node={voice.clone ? undefined : voice.nodes?.card}
         >
-          <div class="voice__body" data-figma-node={voice.nodes.body}>
-            <div class="voice__head" data-figma-node={voice.nodes.head}>
+          <div class="voice__body" data-figma-node={voice.clone ? undefined : voice.nodes?.body}>
+            <div class="voice__head" data-figma-node={voice.clone ? undefined : voice.nodes?.head}>
               <span
                 class="voice__label t-eyebrow-s"
-                style={`width:${voice.labelWidth}px`}
-                data-figma-node={voice.nodes.label}
+                style={voice.labelWidth ? `width:${voice.labelWidth}px` : undefined}
+                data-figma-node={voice.clone ? undefined : voice.nodes?.label}
               >{voice.label}</span>
-              <span class="voice__source t-caption" data-figma-node={voice.nodes.source}>{voice.source}</span>
+              <span class="voice__source t-caption" data-figma-node={voice.clone ? undefined : voice.nodes?.source}>{voice.source}</span>
             </div>
 
             <img
@@ -73,16 +96,16 @@ const slides = voices;
               alt=""
               width="18"
               height="24"
-              data-figma-node={voice.nodes.mark}
+              data-figma-node={voice.clone ? undefined : voice.nodes?.mark}
             />
 
-            <p class="voice__quote t-quote" data-figma-node={voice.nodes.quote}>{voice.quote}</p>
+            <p class="voice__quote t-quote" data-figma-node={voice.clone ? undefined : voice.nodes?.quote}>{voice.quote}</p>
           </div>
 
           <p
             class="voice__author t-body-s"
-            style={`width:${voice.authorWidth}px`}
-            data-figma-node={voice.nodes.author}
+            style={voice.authorWidth ? `width:${voice.authorWidth}px` : undefined}
+            data-figma-node={voice.clone ? undefined : voice.nodes?.author}
           >{voice.author}</p>
         </article>
       ))}
@@ -160,8 +183,10 @@ const slides = voices;
      следующая — как в макете. */
   /* Окно не обрезает: в макете клон третьей карточки виден слева у края
      секции, а сама секция уже обрезает всё за 1440. */
+  /* 1392 — из узла 116:251. Своего overflow нет: левая карточка стоит на
+     −720 и в макете видна — её режет край секции, а не полоса. */
   .voices__viewport {
-    width: 100%;
+    width: 1392px;
   }
 
   /* Движение — не из макета: в файле только состояния. Длительность и кривая
@@ -243,6 +268,13 @@ const slides = voices;
   }
 
   /* Подпись автора не растягивается: в макете ширина по содержимому. */
+  /* Ширина из узла — коробка, а не ограничение: текст в неё не влезает и в
+     Figma не переносится. Перенос растягивал карточку с 482 до 501. */
+  .voice__author,
+  .voice__label {
+    white-space: nowrap;
+  }
+
   .voice__author {
     align-self: flex-start;
     margin: 0;
@@ -325,26 +357,37 @@ const slides = voices;
 </style>
 
 <script>
-  // Слайдер отзывов: стрелки и точки двигают ленту на ширину карточки с зазором.
+  // Карусель отзывов: 12 голосов, окно из трёх карточек, шаг — карточка с
+  // зазором (672 + 48 = 720). Лента начинается с последнего голоса, поэтому
+  // первое окно — «последний, первый, второй», как в макете.
   const root = document.querySelector('.voices');
   if (root) {
     const track = root.querySelector('[data-slider-track]');
-    const slides = [...track.querySelectorAll('.voice')];
+    const cards = [...track.querySelectorAll('.voice')];
     const dots = [...root.querySelectorAll('.voices__dot')];
     const [prev, next] = root.querySelectorAll('.voices__arrow');
-    // У каждой карточки своя координата в макете: 0, 720 и −720. Чтобы
-    // показать слайд, сдвигаем ленту на его координату со знаком минус.
-    const offsets = slides.map((slide) => Number(slide.dataset.offset) || 0);
+    const total = dots.length;
+    // Шаг целый: дробная ширина даёт дрейф в пиксель к концу ленты.
+    const step = cards.length > 1
+      ? Math.round(cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left)
+      : 720;
+    // Лента сдвинута на один шаг: нулевая карточка уходит за левый край.
     let index = 0;
 
     const render = () => {
-      track.style.transform = `translateX(${-offsets[index]}px)`;
-      dots.forEach((dot, i) => dot.classList.toggle('voices__dot--active', i === index));
-      slides.forEach((slide, i) => slide.setAttribute('aria-hidden', String(i !== index)));
+      track.style.transform = `translateX(${-step * (index + 1)}px)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('voices__dot--active', i === index);
+        dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+      });
+      prev?.toggleAttribute('disabled', index === 0);
+      next?.toggleAttribute('disabled', index === total - 1);
     };
 
     const go = (delta) => {
-      index = (index + delta + slides.length) % slides.length;
+      const next_ = index + delta;
+      if (next_ < 0 || next_ >= total) return;
+      index = next_;
       render();
     };
 
@@ -356,6 +399,15 @@ const slides = voices;
         render();
       }),
     );
+
+    // Шаг считается по факту: если шрифт или зазор другие, лента не разъедется.
+    window.addEventListener('resize', () => {
+      const gap = cards.length > 1
+        ? Math.round(cards[1].getBoundingClientRect().left - cards[0].getBoundingClientRect().left)
+        : 720;
+      track.style.transform = `translateX(${-gap * (index + 1)}px)`;
+    });
+
     render();
   }
 </script>
