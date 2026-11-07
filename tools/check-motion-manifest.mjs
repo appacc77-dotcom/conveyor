@@ -166,14 +166,30 @@ for (const [key, rule] of rules) {
   }
 }
 
-// 2. Каждая запись имеет источник и решение.
+// 2. Объявление не разошлось с кодом. Ключ «файл + селектор» этого не ловит:
+// сменил значение в CSS — запись осталась старой и молчит.
+for (const [key, rule] of rules) {
+  const entry = entries.get(key);
+  if (!entry) continue;
+  const current = rule.declarations.join(' ');
+  if ((entry.declaration ?? '') !== current) {
+    problems.push({
+      kind: 'объявление разошлось',
+      file: rule.file,
+      selector: rule.selector,
+      declaration: `в манифесте «${entry.declaration ?? '—'}», в коде «${current}»`,
+    });
+  }
+}
+
+// 3. Каждая запись имеет источник и решение.
 for (const [key, entry] of entries) {
   if (!entry.status) problems.push({ kind: 'нет status', file: entry.file, selector: entry.selector });
   if (!entry.decision) problems.push({ kind: 'нет decision', file: entry.file, selector: entry.selector });
   if (!rules.has(key)) problems.push({ kind: 'запись без кода', file: entry.file, selector: entry.selector });
 }
 
-// 3. Длительность — токеном, не числом.
+// 4. Длительность — токеном, не числом.
 for (const [key, rule] of rules) {
   for (const declaration of rule.declarations) {
     // `!important` — это защита reduced-motion: там длительность обязана быть
@@ -197,5 +213,6 @@ for (const p of problems.slice(0, 20)) {
   const extra = p.declaration ? ` — ${p.declaration}` : '';
   console.error(`  ${p.kind}: ${p.file} ${p.selector}${extra}`);
 }
-console.error('\nанимация без записи — это движение, которого никто не решал');
+console.error('\nзапись обязана совпадать с кодом: движение без записи — это движение, которого никто не решал,');
+console.error('а разошедшаяся запись — манифест, которому больше нельзя верить. Пересобрать: npm run motion:manifest');
 process.exit(1);
