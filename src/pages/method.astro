@@ -1,0 +1,27 @@
+---
+/**
+ * Страница метода. Узлы: method-hero `323:423`, method-about `323:871`,
+ * method-cta `334:992`, header `323:872`, footer `335:1020`.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import MethodHero from '../components/MethodHero.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Метод Syntonia"
+  description="Глубинный метод работы с человеком как с целостной системой."
+>
+  <main class="page">
+    <Header />
+    <MethodHero />
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    position: relative;
+  }
+</style>

@@ -132,6 +132,10 @@ const measured = await page.evaluate((rootNodeId) => {
       w: +r.width.toFixed(2),
       h: +r.height.toFixed(2),
       hidden: style.display === 'none' || style.visibility === 'hidden',
+      // Типографика: у текста она важнее координат, а сверялась только ширина.
+      fs: +parseFloat(style.fontSize).toFixed(2),
+      lh: style.lineHeight === 'normal' ? null : +parseFloat(style.lineHeight).toFixed(2),
+      ls: style.letterSpacing === 'normal' ? 0 : +parseFloat(style.letterSpacing).toFixed(2),
       // Ширина задана явно из спеки — поправка на трекинг не нужна.
       fixedWidth: el.style.width !== '',
       tag: el.tagName.toLowerCase(),
@@ -182,6 +186,29 @@ for (const el of measured.elements) {
       continue;
     }
     const abs = absolute(node, rootId);
+
+    // Типографика: fontSize в px, lineHeight и letterSpacing — в процентах
+    // от кегля. Это ровно те три числа, которые я дважды взял на глаз.
+    const typo = [];
+    if (node.type === 'TEXT' && node.fontSize) {
+      const fs = node.fontSize;
+      const expectLh = node.lineHeight
+        ? node.lineHeight.unit === 'PERCENT'
+          ? (fs * node.lineHeight.value) / 100
+          : node.lineHeight.value
+        : null;
+      const expectLs = node.letterSpacing
+        ? node.letterSpacing.unit === 'PERCENT'
+          ? (fs * node.letterSpacing.value) / 100
+          : node.letterSpacing.value
+        : 0;
+
+      if (Math.abs(el.fs - fs) > 0.5) typo.push(`кегль ${fs} → ${el.fs}`);
+      if (expectLh !== null && el.lh !== null && Math.abs(el.lh - expectLh) > 1) {
+        typo.push(`межстрочный ${+expectLh.toFixed(1)} → ${el.lh}`);
+      }
+      if (Math.abs(el.ls - expectLs) > 0.15) typo.push(`трекинг ${+expectLs.toFixed(2)} → ${el.ls}`);
+    }
     // Ширину текста сверяем: блоки ограничены max-width из спеки, поэтому
     // совпадает и ширина, и точки переноса. Если у блока ширины нет — он
     // растянется на колонку и ворота это покажут.
@@ -206,11 +233,12 @@ for (const el of measured.elements) {
       Math.abs(ink - node.w),
       Math.abs(el.h - node.h),
     );
-    const ok = worst <= tol;
+    const ok = worst <= tol && typo.length === 0;
     if (!ok) red++;
     rows.push({
       id,
       name: node.name,
+      typo,
       figma: { ...abs, w: node.w, h: node.h },
       dom: el,
       worst,
@@ -243,8 +271,11 @@ for (const r of rows.sort((a, b) => depthOf(a.id) - depthOf(b.id))) {
   }
   const f = `${r.figma.x},${r.figma.y},${r.figma.w},${r.figma.h}`;
   const a = `${r.dom.x},${r.dom.y},${r.dom.w},${r.dom.h}`;
+  // Типографика печатается отдельной строкой: у неё другая единица, и
+  // складывать её с пикселями в «Δ max» нельзя.
+  const typoNote = r.typo?.length ? `\n      типографика: ${r.typo.join('; ')}` : '';
   console.log(
-    `${(r.ok ? '  ' : '! ') + r.id.padEnd(24)}  ${f.padEnd(20)}  ${a.padEnd(20)}  ${pad(r.worst.toFixed(2), 5)}  ${r.status}`,
+    `${(r.ok ? '  ' : '! ') + r.id.padEnd(24)}  ${f.padEnd(20)}  ${a.padEnd(20)}  ${pad(r.worst.toFixed(2), 5)}  ${r.status}${typoNote}`,
   );
 }
 

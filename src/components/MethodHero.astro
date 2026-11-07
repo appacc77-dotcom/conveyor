@@ -1,0 +1,63 @@
+---
+/**
+ * Секция `method-hero` (323:423), 1440×800: фото, заголовок и описание.
+ *
+ * Фон — FILL [[1, 0, −0.0003], [0, 0.9871, 0.0065]]: cover, центр.
+ */
+interface Props {
+  node?: string;
+}
+
+const { node = '323:423' } = Astro.props;
+---
+
+<section class="mhero" data-figma-node={node}>
+  <div class="mhero__content" data-figma-node="323:862">
+    <h1 class="mhero__title" data-figma-node="323:863">Метод Syntonia</h1>
+    <p class="mhero__desc" data-figma-node="323:864">
+      Syntonia — это глубинный метод работы с человеком как с целостной системой. Он объединяет науку,
+      психологическую точность и тонкое видение внутренней природы, чтобы помогать возвращать себе подлинное
+      состояние и жизненную силу.
+    </p>
+  </div>
+</section>
+
+<style>
+  .mhero {
+    position: relative;
+    width: 1440px;
+    height: 800px;
+    background-image: url('/img/method-hero.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+
+  .mhero__content {
+    position: absolute;
+    left: 64px;
+    top: 470px;
+    width: 600px;
+    height: 266px;
+  }
+
+  .mhero__title {
+    width: 600px;
+    height: 64px;
+    margin: 0;
+    font-family: var(--font-literata);
+    font-size: 64px;
+    line-height: 64px;
+    font-weight: 400;
+    color: var(--color-text-on-image);
+  }
+
+  .mhero__desc {
+    width: 600px;
+    height: 170px;
+    margin: 32px 0 0;
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--color-text-on-image);
+  }
+</style>
