@@ -34,11 +34,15 @@ function parseJson(text) {
 const TRANSIENT_CODES = new Set(['E_TIMEOUT', 'E_NO_ANSWER', 'E_NO_PLUGIN', 'E_NO_BROKER', 'E_NO_ANSWER']);
 const TRANSIENT_MESSAGE = /unable to establish connection to figma|failed to export node|not connected|disconnected|no plugin/i;
 
+/** Мост блокирует файл зависшей задачей и сам её не снимает: достаём id. */
+const WEDGED = /wedged job (j_[0-9a-z_]+)/i;
+
 export function isTransient(error) {
   if (TRANSIENT_CODES.has(error.code)) return true;
   // Плагин отдаёт свои обрывы как E_EVAL с текстом от Figma — код не помогает,
   // различаем по сообщению.
-  return TRANSIENT_MESSAGE.test(String(error.message ?? ''));
+  // Блокировка зависшей задачей — тоже транспорт: снимаем и повторяем.
+  return WEDGED.test(String(error.message ?? '')) || TRANSIENT_MESSAGE.test(String(error.message ?? ''));
 }
 
 /**
@@ -54,6 +58,13 @@ export function runFigma(args, { timeoutMs = 120000, retries = 3, onRetry } = {}
       return runFigmaOnce(args, timeoutMs);
     } catch (error) {
       lastError = error;
+      // Зависшая задача держит файл и не даёт пройти ничему: снимаем её и
+      // повторяем — иначе один застрявший вызов блокирует все следующие.
+      const wedged = WEDGED.exec(String(error.message ?? ''));
+      if (wedged) {
+        spawnSync('figma-agent', ['job', wedged[1], '--force-release'], { stdio: 'ignore', timeout: 15000 });
+      }
+
       if (!isTransient(error) || attempt === retries) throw error;
       onRetry?.(attempt, error);
       // Пауза растёт: плагину нужно время вернуться, а не долбить его сразу.
