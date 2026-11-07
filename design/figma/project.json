@@ -83,5 +83,26 @@
   },
   "scope": [
     "home"
+  ],
+  "acceptance": [
+    "home/about-founder",
+    "home/air-photo",
+    "home/banner-founder",
+    "home/entry",
+    "home/faq",
+    "home/footer",
+    "home/formats",
+    "home/header",
+    "home/hero",
+    "home/library",
+    "home/method",
+    "home/pain",
+    "home/process",
+    "home/quiz",
+    "home/voices",
+    "masters/founder-hero",
+    "masters/masters-more",
+    "masters/masters-team",
+    "quiz/quiz-section"
   ]
 }

@@ -120,8 +120,31 @@ const GLOBAL_STEPS = [
 
 // Все секции, которые уже в конвейере: у них есть замер рядом со спекой.
 // Так «проверить всё» не зависит от того, собрана ли страница целиком.
+/**
+ * Объём приёмки — то, что обещано сдать, а не то, что уже измерено.
+ *
+ * Раньше секция попадала в прогон по наличию `gate.json`: результат прошлого
+ * замера сам решал, входит ли секция в проверку. Удали результат — секция
+ * тихо выпадала из объёма. Теперь список лежит в `project.json.acceptance`.
+ */
+function acceptedUnits() {
+  const projectPath = join(root, 'design/figma/project.json');
+  const list = existsSync(projectPath)
+    ? JSON.parse(readFileSync(projectPath, 'utf8')).acceptance
+    : null;
+  if (!Array.isArray(list)) return null;
+  // Ничего не фильтруем: обещанная, но несуществующая секция обязана упасть
+  // на замере, а не тихо выпасть из объёма.
+  return list;
+}
+
 function builtUnits() {
   const pagesRoot = join(root, 'design/figma/pages');
+  // Объём берётся из реестра; скан по gate.json остаётся запасным путём для
+  // проектов, где реестра ещё нет.
+  const accepted = acceptedUnits();
+  if (accepted) return accepted.sort();
+
   const units = [];
   for (const page of readdirSync(pagesRoot)) {
     const pageDir = join(pagesRoot, page);
@@ -282,6 +305,7 @@ async function commandCheck(unit, json, all) {
   }
 
   const verdict = evaluate(results);
+  const provenanceInfo = provenance();
   const report = {
     schemaVersion: 1,
     runId: id,
@@ -291,8 +315,14 @@ async function commandCheck(unit, json, all) {
     finishedAt: new Date().toISOString(),
     status: verdict.status,
     exitCode: verdict.exitCode,
-    ...provenance(),
+    commit: provenanceInfo.commit,
+    dirty: provenanceInfo.dirty,
+    hashes: provenanceInfo.hashes,
+    files: provenanceInfo.files,
     coverage: coverage(units),
+    // Рабочий прогон может быть зелёным, но доказательством готовности
+    // коммита он не становится: правки не зафиксированы.
+    releaseEligible: verdict.status === 'PASS' && provenanceInfo.dirty === false && Boolean(provenanceInfo.commit),
     steps: results.map((r) => ({ id: r.id, status: r.status, ms: r.ms, kind: r.kind })),
   };
 
@@ -311,7 +341,9 @@ async function commandCheck(unit, json, all) {
         `\nсекций проверено: ${units.length}${cov ? ` из ${cov.total}` : ''}`,
       );
     }
-    process.stdout.write(`\nвердикт: ${verdict.status}`);
+    process.stdout.write(
+      `\nвердикт: ${verdict.status}${verdict.status === 'PASS' && !report.releaseEligible ? ' (рабочий: есть незакоммиченные правки)' : ''}`,
+    );
     if (failed.length) process.stdout.write(` · красных ${failed.length}: ${failed.map((r) => r.id).join(', ')}`);
     process.stdout.write(`\nпрогон: reports/runs/${id}/\n`);
   }
