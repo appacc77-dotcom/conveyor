@@ -231,6 +231,17 @@ for (const s of sections.slice(0, limitArg)) {
     else unread.push(`${s.page}/${s.name}: ${String(error.message).slice(0, 40)}`);
   }
 }
+// Непрочитанное не доказывает актуальность: если обязательные секции не
+// прочитаны, сверка не «сошлась», она не состоялась. Код 3 = INCOMPLETE.
+// Информационная строка: полнота чтения. Провал здесь — не расхождение,
+// а невозможность проверить, поэтому required = false и отдельный код выхода.
+check(
+  'экспорт прочитан полностью',
+  unread.length === 0,
+  unread.length ? `не прочитано ${unread.length}: ${unread.slice(0, 5).join('; ')}` : 'все секции прочитаны',
+  false,
+);
+
 check(
   'экспорт соответствует мосту',
   stale.length === 0,
@@ -335,9 +346,13 @@ for (const r of rows) {
 
 const failed = rows.filter((r) => !r.ok && r.required);
 const skipped = rows.filter((r) => !r.ok && !r.required);
+// Не смогли прочитать часть секций — это не «сошлось» и не «разошлось».
+const incomplete = failed.length === 0 && unread.length > 0;
 console.log(
   `\n${failed.length ? `расхождений: ${failed.length}` : 'все источники сходятся'}` +
     (skipped.length ? ` · сверок пропущено: ${skipped.length}` : ''),
 );
 if (apiMeta?.version) console.log(`версия файла на сервере: ${apiMeta.version}`);
-process.exit(failed.length ? 1 : 0);
+// 0 — проверено и сходится, 1 — расхождение, 3 — проверить не удалось.
+if (failed.length) process.exit(1);
+process.exit(incomplete ? 3 : 0);

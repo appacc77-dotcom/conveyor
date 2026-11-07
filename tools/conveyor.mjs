@@ -188,13 +188,28 @@ function runStep(step) {
     child.stdout.on('data', (chunk) => { stdout += chunk; });
     child.stderr.on('data', (chunk) => { stderr += chunk; });
 
+    // Зависший инструмент не должен останавливать весь прогон: у шага есть
+    // предел, после которого он снимается и считается непройденным по среде.
+    const limit = step.timeoutMs ?? 300000;
+    const timer = setTimeout(() => {
+      child.kill('SIGKILL');
+      resolve({
+        ...step,
+        status: 'ERROR',
+        ms: Date.now() - started,
+        note: `превышен таймаут ${Math.round(limit / 1000)} с — шаг снят`,
+      });
+    }, limit);
+
     child.on('error', (error) => {
       resolve({ ...step, status: 'ERROR', ms: Date.now() - started, note: String(error.message).slice(0, 200) });
     });
 
     child.on('close', (code) => {
-      // 0 — выполнено и чисто; 1 — выполнено и есть дефект; 2+ — не смогло.
-      const status = code === 0 ? 'PASS' : code === 1 ? 'FAIL' : 'ERROR';
+      clearTimeout(timer);
+      // 0 — выполнено и чисто; 1 — выполнено и есть дефект; 3 — выполнено
+      // частично (часть источников не прочитана); 2 и прочее — не смогло.
+      const status = code === 0 ? 'PASS' : code === 1 ? 'FAIL' : code === 3 ? 'INCOMPLETE' : 'ERROR';
       const note = (stderr || stdout).trim().split('\n').slice(-1)[0] ?? '';
       resolve({ ...step, status, exitCode: code, ms: Date.now() - started, note: note.slice(0, 200) });
     });
