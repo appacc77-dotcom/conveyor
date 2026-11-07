@@ -79,7 +79,9 @@ const clean = (text) =>
  */
 const squash = (text) => clean(text).replace(/\s+/g, '');
 
-const MIN_LENGTH = 25; // короче — это подписи вроде «1/5», их не сверяем
+const MIN_LENGTH = 4;
+// Регистр не сравниваем: «личная встреча» в разметке и «ЛИЧНАЯ ВСТРЕЧА» на
+// экране — это одно и то же, капс делает CSS.
 
 const expected = new Map(); // имя секции → Set текстов
 for (const section of sections) {
@@ -90,6 +92,8 @@ for (const section of sections) {
   // Состояния можно исключить данными: `exclude` в states.json с причиной.
   // Так отдельные экраны (результат теста) не выдаются за состояния блока.
   const excluded = new Set((states.exclude ?? []).flatMap((group) => group.ids ?? []));
+  // Тексты, которые макет сам себе противоречит: не проверяем, но и не молчим.
+  const ignored = new Set((states.ignoreTexts ?? []).map((item) => clean(item.text).toLowerCase()));
   if (excluded.size) {
     console.log(`  ${section.page}/${section.name}: исключено состояний ${excluded.size} — ${states.exclude[0].reason.slice(0, 60)}…`);
   }
@@ -111,6 +115,7 @@ for (const section of sections) {
       }
     }
   }
+  for (const t of ignored) texts.delete([...texts].find((x) => x.toLowerCase() === t) ?? '');
   if (texts.size) expected.set(`${section.page}/${section.name}`, { section, texts });
 }
 
@@ -187,9 +192,13 @@ for (const [unit, { section, texts }] of expected) {
     continue;
   }
 
-  const haystack = clean(rendered);
-  const haystackFlat = squash(rendered);
-  const absent = [...texts].filter((t) => !haystack.includes(t) && !haystackFlat.includes(squash(t)));
+  // Регистр не сравниваем: «личная встреча» в разметке и «ЛИЧНАЯ ВСТРЕЧА»
+  // на экране — одно и то же, капс делает CSS.
+  const haystack = clean(rendered).toLowerCase();
+  const haystackFlat = squash(rendered).toLowerCase();
+  const absent = [...texts].filter(
+    (t) => !haystack.includes(t.toLowerCase()) && !haystackFlat.includes(squash(t).toLowerCase()),
+  );
   total += texts.size;
   missing += absent.length;
   if (absent.length) report.push({ unit, reason: 'контент не собран', items: absent });
