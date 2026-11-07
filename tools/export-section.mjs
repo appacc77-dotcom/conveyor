@@ -52,16 +52,32 @@ function figma(args, timeoutMs) {
 }
 
 /** Подставляет параметры в шаблон exec-js и исполняет его. */
-function runTemplate(templateName, replacements) {
+function runTemplate(templateName, replacements, timeoutMs = 90000) {
   let source = readFileSync(join(root, 'tools/figma', templateName), 'utf8');
   for (const [key, value] of Object.entries(replacements)) {
     source = source.split(key).join(value);
   }
   const tmp = join(tmpdir(), `figma-${templateName.replace('.js', '')}-${process.pid}.js`);
   writeFileSync(tmp, source);
-  const reply = figma(['exec-js', tmp, '--timeout', '90000']);
+  const reply = figma(['exec-js', tmp, '--timeout', String(timeoutMs)]);
   if (reply.error) die(3, `${reply.error.code}: ${reply.error.message}`);
   return reply;
+}
+
+/** Как runTemplate, но не убивает процесс: сбой возвращает null. */
+function runTemplateSafe(templateName, replacements, timeoutMs) {
+  let source = readFileSync(join(root, 'tools/figma', templateName), 'utf8');
+  for (const [key, value] of Object.entries(replacements)) {
+    source = source.split(key).join(value);
+  }
+  const tmp = join(tmpdir(), `figma-${templateName.replace('.js', '')}-${process.pid}.js`);
+  writeFileSync(tmp, source);
+  try {
+    const reply = runFigma(['exec-js', tmp, '--timeout', String(timeoutMs)], { timeoutMs: timeoutMs + 10000 });
+    return reply.error ? null : reply;
+  } catch {
+    return null;
+  }
 }
 
 // --- 1. Прочитать секцию ---------------------------------------------------
@@ -142,11 +158,24 @@ function cloudVersion() {
 }
 
 const icons = [];
+const iconErrors = [];
 const usedNames = new Set();
 for (const icon of section.icons) {
-  const fetched = runTemplate('fetch-svg.template.js', { __NODE_ID__: icon.id });
+  // Сбой одной иконки не должен убивать секцию: спека и кроп нужны всё равно.
+  // Бывает, что Figma не может отрендерить инстанс («Unable to establish
+  // connection to Figma») — тогда иконка берётся из готовых или рисуется заново.
+  // Короткий таймаут и безопасная выгрузка: нерендерящаяся иконка не должна
+  // ни держать выгрузку две минуты, ни убивать процесс.
+  const fetched = runTemplateSafe('fetch-svg.template.js', { __NODE_ID__: icon.id }, 20000);
+  if (!fetched) {
+    iconErrors.push({ id: icon.id, name: icon.name, reason: 'svg не выгрузился' });
+    continue;
+  }
   const svg = fetched.result?.svg;
-  if (!svg) continue;
+  if (!svg) {
+    iconErrors.push({ id: icon.id, name: icon.name, reason: 'svg пустой' });
+    continue;
+  }
   // Вариант в имени: arrow-quiet + {color: white, direction: right} →
   // arrow-quiet-white-right.svg. Иначе разные стрелки перезапишут друг друга.
   const variant = icon.props

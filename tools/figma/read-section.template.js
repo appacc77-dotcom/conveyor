@@ -3,8 +3,9 @@ const ROOT_ID = "__NODE_ID__";
 const MAX_DEPTH = 12;
 const ICON_MAX = 64;
 
-// loadAllPagesAsync не нужен: при dynamic-page доступ страницы грузятся по требованию,
-// а вызов требует сети и падает с «Unable to establish connection to Figma».
+// Страницы грузим заранее: инстансы ищут главные компоненты на других
+// страницах, и без этого выгрузка иконки может зависнуть.
+await figma.loadAllPagesAsync();
 
 const styleNames = new Map();
 for (const s of await figma.getLocalTextStylesAsync()) styleNames.set(s.id, s.name);

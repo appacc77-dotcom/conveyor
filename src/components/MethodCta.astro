@@ -1,0 +1,131 @@
+---
+/**
+ * Секция `method-cta` (334:992), 1440×499: заголовок, текст и две кнопки.
+ *
+ * Фон — CROP [[0.9326, 0, 0.0675], [0, 0.5762, 0.1834]]: ширина 93,3 %,
+ * высота 57,6 %, позиция x = 0,0675 / (1 − 0,9326) = 100 %, y = 0,1834 / (1 − 0,5762) = 43,3 %.
+ * Кнопка «Начать с точки входа» — с текстурой, вторая — обводка accent.
+ */
+import ArrowQuiet from './ds/arrow-quiet.astro';
+
+interface Props {
+  node?: string;
+}
+
+const { node = '334:992' } = Astro.props;
+---
+
+<section class="mcta" data-figma-node={node}>
+  <div class="mcta__inner" data-figma-node="775:1680">
+    <div class="mcta__content" data-figma-node="335:993">
+      <h2 class="mcta__title" data-figma-node="335:995">Глубинные изменения начинаются с одного шага</h2>
+      <p class="mcta__text" data-figma-node="335:997">
+        Выберите точку входа, которая подходит вам прямо сейчас, и начните путь к ясности, внутренней опоре и
+        подлинной жизни.
+      </p>
+      <div class="mcta__group" data-figma-node="335:998">
+        <a class="mcta__btn mcta__btn--primary" href="/booking.html" data-figma-node="335:999">
+          <span class="mcta__label" data-figma-node="I335:999;4:16">Начать с точки входа</span>
+          <ArrowQuiet size={14} />
+        </a>
+        <a class="mcta__btn mcta__btn--secondary" href="/booking.html" data-figma-node="335:1000">
+          <span class="mcta__label mcta__label--accent" data-figma-node="I335:1000;5:33">Задать вопрос</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mcta {
+    position: relative;
+    width: 1440px;
+    height: 499px;
+    background-image: url('/img/method-cta-bg.png');
+    /* CROP: размер = 1/масштаб из трансформа → 107,24 % × 173,55 %,
+       позиция: 0,0675 / (1 − 0,9326) = 100 %, 0,1834 / (1 − 0,5762) = 43,3 %. */
+    background-size: 107.24% 173.55%;
+    background-position: 100% 43.3%;
+    background-repeat: no-repeat;
+  }
+
+  .mcta__inner {
+    position: absolute;
+    left: 80px;
+    top: 96px;
+    width: 1280px;
+    height: 307px;
+  }
+
+  .mcta__content {
+    width: 491px;
+    height: 307px;
+    margin-left: 64px;
+  }
+
+  .mcta__title {
+    width: 491px;
+    height: 96px;
+    margin: 0;
+    font-family: var(--font-literata);
+    font-size: 38px;
+    line-height: 47.5px;
+    font-weight: 400;
+    color: var(--color-text-heading);
+  }
+
+  .mcta__text {
+    width: 491px;
+    height: 102px;
+    margin: 32px 0 0;
+    font-size: 20px;
+    line-height: 34px;
+    color: var(--color-text-primary);
+  }
+
+  .mcta__group {
+    display: flex;
+    gap: 8px;
+    width: 387px;
+    height: 45px;
+    margin-top: 32px;
+  }
+
+  .mcta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-sizing: border-box;
+    height: 45px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .mcta__btn--primary {
+    width: 219px;
+    background: var(--color-accent) url('/img/practice-btn.jpg') center / cover no-repeat;
+  }
+
+  .mcta__btn--secondary {
+    width: 160px;
+    border: 1px solid var(--color-accent);
+  }
+
+  .mcta__label {
+    font-size: 17px;
+    line-height: 29px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    color: var(--color-text-on-image);
+  }
+
+  .mcta__label--accent {
+    color: var(--color-accent);
+  }
+
+  .mcta__btn :global(svg) {
+    display: block;
+    color: var(--color-text-on-image);
+  }
+</style>

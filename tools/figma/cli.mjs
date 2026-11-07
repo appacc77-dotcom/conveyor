@@ -51,6 +51,29 @@ export function isTransient(error) {
  * @returns {object} разобранный JSON-ответ
  * @throws {FigmaError} если CLI вернул ошибку или не ответил
  */
+/**
+ * Снимает задачи, чей исход неизвестен: такая задача блокирует очередь моста,
+ * и без снятия каждый следующий вызов падает по таймауту или с «Unable to
+ * establish connection to Figma». Проверено на живом файле: одна зависшая
+ * выгрузка SVG остановила весь конвейер.
+ */
+function releaseUnknownJobs() {
+  try {
+    const reply = spawnSync('figma-agent', ['job', '--list'], { encoding: 'utf8', timeout: 15000 });
+    const raw = reply.stdout ?? '';
+    const at = raw.indexOf('{');
+    if (at < 0) return;
+    const data = JSON.parse(raw.slice(at));
+    for (const job of data.jobs ?? []) {
+      if (job.state === 'outcome-unknown') {
+        spawnSync('figma-agent', ['job', job.jobId, '--force-release'], { stdio: 'ignore', timeout: 15000 });
+      }
+    }
+  } catch {
+    /* очередь недоступна — не наша ошибка */
+  }
+}
+
 export function runFigma(args, { timeoutMs = 120000, retries = 3, onRetry } = {}) {
   let lastError;
   for (let attempt = 1; attempt <= retries; attempt += 1) {
@@ -63,6 +86,10 @@ export function runFigma(args, { timeoutMs = 120000, retries = 3, onRetry } = {}
       const wedged = WEDGED.exec(String(error.message ?? ''));
       if (wedged) {
         spawnSync('figma-agent', ['job', wedged[1], '--force-release'], { stdio: 'ignore', timeout: 15000 });
+      } else {
+        // Задача с исходом «неизвестен» держит очередь моста: пока её не снять,
+        // все следующие вызовы падают с «Unable to establish connection».
+        releaseUnknownJobs();
       }
 
       if (!isTransient(error) || attempt === retries) throw error;
