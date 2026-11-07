@@ -97,7 +97,13 @@ function coverage(units) {
   if (!existsSync(path)) return null;
   const total = JSON.parse(readFileSync(path, 'utf8'))?.totals?.total ?? null;
   if (!total) return null;
-  return { units: units.length, total, text: `${units.length} из ${total}` };
+  // Юнитов может быть больше, чем секций в карте: экран результата квиза
+  // лежит вне карты. Тогда так и пишем, а не «47 из 46».
+  const extra = Math.max(0, units.length - total);
+  const text = extra
+    ? `${total} секций карты и ${extra} экран вне её`
+    : `${units.length} из ${total}`;
+  return { units: units.length, total, extra, text };
 }
 
 const GLOBAL_STEPS = [
@@ -171,6 +177,9 @@ const sharedNodes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/pr
 // когда узел спеки не совпадает с корнем компонента). Данные, не код.
 const unitArgs = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).unitArgs ?? {};
 const extraArgs = (unit) => unitArgs[unit] ?? [];
+// Явные аргументы юнита заменяют общие: иначе в списке окажутся два --root,
+// и замер возьмёт первый — от общего компонента.
+const argsFor = (unit) => (unitArgs[unit] ? extraArgs(unit) : sharedArgs(unit));
 const sharedArgs = (unit) => {
   const node = sharedNodes[unit.split('/').pop()];
   return node ? ['--root', node, '--by-suffix'] : [];
@@ -184,14 +193,21 @@ const stepId = (prefix, unit) => `${prefix}:${unit.replace('/', '-')}`;
 const measureStep = (unit) => ({
   id: stepId('measure', unit),
   tool: 'measure',
-  args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...sharedArgs(unit), ...extraArgs(unit)],
+  args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...argsFor(unit)],
   kind: 'gate',
   needsDist: true,
   about: `геометрия ${unit}`,
 });
 
 const unitSteps = (unit) => [
-  { id: 'measure', tool: 'measure', args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...sharedArgs(unit)], kind: 'gate', needsDist: true, about: 'геометрия секции' },
+  {
+    id: 'measure',
+    tool: 'measure',
+    args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...argsFor(unit)],
+    kind: 'gate',
+    needsDist: true,
+    about: 'геометрия секции',
+  },
   // Снимок нужен до сравнения: compare не снимает страницу сам.
   {
     id: 'shot',
@@ -374,7 +390,7 @@ async function commandCheck(unit, json, all) {
       // Покрытие печатается явно: «19 из 46» нельзя прочитать как «весь файл».
       const cov = coverage(units);
       process.stdout.write(
-        `\nсекций проверено: ${units.length}${cov ? ` из ${cov.total}` : ''}`,
+        `\nсекций проверено: ${cov ? cov.text : units.length}`,
       );
     }
     process.stdout.write(

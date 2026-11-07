@@ -110,8 +110,11 @@
     "home/process",
     "home/quiz",
     "home/voices",
+    "library/footer",
+    "library/header",
     "library/library-book",
     "library/library-hero",
+    "library/library-issues",
     "library/library-journal",
     "masters/footer",
     "masters/founder-hero",
@@ -147,6 +150,11 @@
     "practice/hero": [
       "--root",
       "409:243",
+      "--by-suffix"
+    ],
+    "library/header": [
+      "--root",
+      "267:923",
       "--by-suffix"
     ]
   }
