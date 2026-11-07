@@ -24,6 +24,7 @@
     "bake": "node tools/bake-image.mjs",
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1 --port 4321",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "prebuild": "node tools/prebuild.mjs",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 4322",
     "shot": "node tools/shot.mjs",
     "measure": "node tools/measure.mjs",
