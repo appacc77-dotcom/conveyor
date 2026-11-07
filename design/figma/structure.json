@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-07T17:56:17.996Z",
+  "at": "2026-11-07T18:07:38.525Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 39,
+    "green": 41,
     "measured": 0,
     "red": 0,
-    "exported": 7,
+    "exported": 5,
     "todo": 0
   },
   "assetsTotal": {
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-07T17:55:26.736Z"
+            "at": "2026-11-07T18:06:48.651Z"
           },
           "pixel": {
             "mean": 1.76,
@@ -96,7 +96,7 @@
             "nodes": 5,
             "coverage": 100,
             "worstDelta": 0.29000000000002046,
-            "at": "2026-11-07T17:55:20.576Z"
+            "at": "2026-11-07T18:06:42.686Z"
           },
           "pixel": {
             "mean": 3.06,
@@ -141,7 +141,7 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.730000000000004,
-            "at": "2026-11-07T17:55:29.821Z"
+            "at": "2026-11-07T18:06:51.618Z"
           },
           "pixel": {
             "mean": 4.14,
@@ -186,7 +186,7 @@
             "nodes": 16,
             "coverage": 100,
             "worstDelta": 0.9199999999999875,
-            "at": "2026-11-07T17:55:28.787Z"
+            "at": "2026-11-07T18:06:50.622Z"
           },
           "pixel": {
             "mean": 1.87,
@@ -231,7 +231,7 @@
             "nodes": 17,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:31.889Z"
+            "at": "2026-11-07T18:06:53.585Z"
           },
           "pixel": {
             "mean": 2.2,
@@ -276,7 +276,7 @@
             "nodes": 21,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T17:55:18.541Z"
+            "at": "2026-11-07T18:06:40.675Z"
           },
           "pixel": {
             "mean": 1.24,
@@ -321,7 +321,7 @@
             "nodes": 25,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T17:55:30.842Z"
+            "at": "2026-11-07T18:06:52.605Z"
           },
           "pixel": {
             "mean": 2.13,
@@ -366,7 +366,7 @@
             "nodes": 23,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:21.604Z"
+            "at": "2026-11-07T18:06:43.711Z"
           },
           "pixel": {
             "mean": 5.1,
@@ -411,7 +411,7 @@
             "nodes": 77,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:24.706Z"
+            "at": "2026-11-07T18:06:46.679Z"
           },
           "pixel": {
             "mean": 2.21,
@@ -456,7 +456,7 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.5300000000000011,
-            "at": "2026-11-07T17:55:32.929Z"
+            "at": "2026-11-07T18:06:54.574Z"
           },
           "pixel": {
             "mean": 1,
@@ -501,7 +501,7 @@
             "nodes": 18,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T17:55:27.759Z"
+            "at": "2026-11-07T18:06:49.639Z"
           },
           "pixel": {
             "mean": 1.49,
@@ -546,7 +546,7 @@
             "nodes": 1,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T17:55:19.550Z"
+            "at": "2026-11-07T18:06:41.681Z"
           },
           "pixel": {
             "mean": 5.91,
@@ -591,7 +591,7 @@
             "nodes": 52,
             "coverage": 100,
             "worstDelta": 0.4399999999999977,
-            "at": "2026-11-07T17:55:22.657Z"
+            "at": "2026-11-07T18:06:44.698Z"
           },
           "pixel": {
             "mean": 4.31,
@@ -636,7 +636,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T17:55:23.689Z"
+            "at": "2026-11-07T18:06:45.687Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -681,7 +681,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T17:55:25.720Z"
+            "at": "2026-11-07T18:06:47.668Z"
           },
           "pixel": {
             "mean": 3.83,
@@ -749,7 +749,7 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.6999999999999993,
-            "at": "2026-11-07T17:55:34.932Z"
+            "at": "2026-11-07T18:06:57.465Z"
           },
           "pixel": {
             "mean": 5.53,
@@ -794,7 +794,7 @@
             "nodes": 56,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:37.929Z"
+            "at": "2026-11-07T18:07:00.384Z"
           },
           "pixel": {
             "mean": 1.83,
@@ -839,7 +839,7 @@
             "nodes": 38,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T17:55:36.930Z"
+            "at": "2026-11-07T18:06:59.412Z"
           },
           "pixel": {
             "mean": 4.18,
@@ -884,7 +884,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T17:55:33.929Z"
+            "at": "2026-11-07T18:06:56.501Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -929,7 +929,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T17:55:35.926Z"
+            "at": "2026-11-07T18:06:58.431Z"
           },
           "pixel": {
             "mean": 3.84,
@@ -967,7 +967,7 @@
       "key": "library",
       "id": "261:446",
       "route": "/library.html",
-      "built": false,
+      "built": true,
       "title": "Library",
       "frame": {
         "id": "267:450",
@@ -987,11 +987,24 @@
           "slug": "library-library-hero",
           "dir": "design/figma/pages/library/library-hero",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 6,
+            "nodes": 10,
+            "coverage": 100,
+            "worstDelta": 0,
+            "at": "2026-11-07T18:06:55.519Z"
+          },
+          "pixel": {
+            "mean": 2.17,
+            "over16": 2.7,
+            "over48": 0.4,
+            "at": "2026-11-07T17:57:41.550Z"
+          },
           "assets": {
             "nodes": 10,
             "images": 1,
@@ -1133,7 +1146,7 @@
           },
           "images": {
             "figma": "/structure/library-footer-figma.png",
-            "site": null
+            "site": "/structure/library-footer-site.png"
           }
         },
         {
@@ -1171,10 +1184,10 @@
       ],
       "counts": {
         "total": 6,
-        "green": 0,
+        "green": 1,
         "measured": 0,
         "red": 0,
-        "exported": 6,
+        "exported": 5,
         "todo": 0
       }
     },
@@ -1212,7 +1225,7 @@
             "nodes": 33,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T17:55:43.915Z"
+            "at": "2026-11-07T18:07:07.208Z"
           },
           "pixel": {
             "mean": 1.25,
@@ -1257,7 +1270,7 @@
             "nodes": 112,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T17:55:47.030Z"
+            "at": "2026-11-07T18:07:10.243Z"
           },
           "pixel": {
             "mean": 9.13,
@@ -1302,7 +1315,7 @@
             "nodes": 19,
             "coverage": 100,
             "worstDelta": 0.04999999999999716,
-            "at": "2026-11-07T17:55:50.179Z"
+            "at": "2026-11-07T18:07:13.261Z"
           },
           "pixel": {
             "mean": 2.41,
@@ -1347,7 +1360,7 @@
             "nodes": 249,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:49.116Z"
+            "at": "2026-11-07T18:07:12.259Z"
           },
           "pixel": {
             "mean": 12.36,
@@ -1392,7 +1405,7 @@
             "nodes": 249,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:45.985Z"
+            "at": "2026-11-07T18:07:09.224Z"
           },
           "pixel": {
             "mean": 11.85,
@@ -1437,7 +1450,7 @@
             "nodes": 119,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:48.083Z"
+            "at": "2026-11-07T18:07:11.253Z"
           },
           "pixel": {
             "mean": 10.66,
@@ -1482,7 +1495,7 @@
             "nodes": 35,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:44.951Z"
+            "at": "2026-11-07T18:07:08.220Z"
           },
           "pixel": {
             "mean": 9.81,
@@ -1517,11 +1530,24 @@
           "slug": "practice-footer",
           "dir": "design/figma/pages/practice/footer",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 31,
+            "nodes": 31,
+            "coverage": 100,
+            "worstDelta": 0.9799999999999969,
+            "at": "2026-11-07T18:07:06.186Z"
+          },
+          "pixel": {
+            "mean": 1.04,
+            "over16": 1.22,
+            "over48": 0.44,
+            "at": "2026-11-07T17:56:41.954Z"
+          },
           "assets": {
             "nodes": 31,
             "images": 1,
@@ -1541,10 +1567,10 @@
       ],
       "counts": {
         "total": 8,
-        "green": 7,
+        "green": 8,
         "measured": 0,
         "red": 0,
-        "exported": 1,
+        "exported": 0,
         "todo": 0
       }
     },
@@ -1582,7 +1608,7 @@
             "nodes": 83,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T17:55:54.124Z"
+            "at": "2026-11-07T18:07:17.121Z"
           },
           "pixel": {
             "mean": 3.15,
@@ -1627,7 +1653,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T17:55:52.149Z"
+            "at": "2026-11-07T18:07:15.196Z"
           },
           "pixel": {
             "mean": 3.77,
@@ -1672,7 +1698,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T17:55:51.163Z"
+            "at": "2026-11-07T18:07:14.228Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -1740,7 +1766,7 @@
             "nodes": 5,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T17:55:15.536Z"
+            "at": "2026-11-07T18:06:37.661Z"
           },
           "pixel": {
             "mean": 3.87,
@@ -1785,7 +1811,7 @@
             "nodes": 144,
             "coverage": 100,
             "worstDelta": 0.8000000000000114,
-            "at": "2026-11-07T17:55:14.543Z"
+            "at": "2026-11-07T18:06:36.664Z"
           },
           "pixel": {
             "mean": 6.21,
@@ -1830,7 +1856,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T17:55:16.525Z"
+            "at": "2026-11-07T18:06:38.682Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -1875,7 +1901,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T17:55:17.522Z"
+            "at": "2026-11-07T18:06:39.651Z"
           },
           "pixel": {
             "mean": 4.08,
@@ -1943,7 +1969,7 @@
             "nodes": 4,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T17:55:42.887Z"
+            "at": "2026-11-07T18:07:05.176Z"
           },
           "pixel": {
             "mean": 1.11,
@@ -1988,7 +2014,7 @@
             "nodes": 18,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T17:55:40.920Z"
+            "at": "2026-11-07T18:07:03.260Z"
           },
           "pixel": {
             "mean": 1.47,
@@ -2033,7 +2059,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T17:55:41.902Z"
+            "at": "2026-11-07T18:07:04.214Z"
           },
           "pixel": {
             "mean": 1.73,
@@ -2078,7 +2104,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T17:55:38.929Z"
+            "at": "2026-11-07T18:07:01.353Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -2123,7 +2149,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T17:55:39.916Z"
+            "at": "2026-11-07T18:07:02.303Z"
           },
           "pixel": {
             "mean": 3.75,

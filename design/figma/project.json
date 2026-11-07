@@ -84,6 +84,7 @@
   "scope": [
     "booking",
     "home",
+    "library",
     "masters",
     "method",
     "practice",
@@ -109,6 +110,7 @@
     "home/process",
     "home/quiz",
     "home/voices",
+    "library/library-hero",
     "masters/footer",
     "masters/founder-hero",
     "masters/header",
@@ -119,6 +121,7 @@
     "method/method-about",
     "method/method-cta",
     "method/method-hero",
+    "practice/footer",
     "practice/hero",
     "practice/info-section",
     "practice/kody-practice-pay",
