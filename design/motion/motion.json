@@ -115,6 +115,13 @@
       "decision": 224
     },
     {
+      "file": "src/components/PracticePackage.astro",
+      "selector": ".pack__accord-arrow",
+      "declaration": "transition: transform var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 301
+    },
+    {
       "file": "src/components/QuizTest.astro",
       "selector": ".qtest__note",
       "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
