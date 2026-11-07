@@ -22,14 +22,18 @@ interface Props {
 const { node = '529:119' } = Astro.props;
 
 // id инстансов из спеки: по ним замер проверяет шаг строк (45 и 46 px вперемешку).
+// Код результата для каждого ответа — придуманная последовательность:
+// в файле соответствие «ответ → код» не задано (FIGMA-ISSUES №23).
+// Единственный код, кроме «Кода Боли», — «Код Гордыни»; он про
+// самодостаточность, поэтому отдан ответу про «справлюсь сама».
 const answers = [
-  { text: '«Я не понимаю, чего хочу и куда идти».', node: 'I533:3084;533:2853' },
-  { text: '«Так не должно было быть. Это несправедливо».', node: 'I533:3084;533:2859' },
-  { text: '«Это уже не вернуть. Всё было зря».', node: 'I533:3084;533:2865' },
-  { text: '«Всё вокруг раздражает — люди, ситуации, мелочи».', node: 'I533:3084;533:2871' },
-  { text: '«Справлюсь со всем без чьей-либо помощи».', node: 'I533:3084;533:2877' },
-  { text: '«А вдруг снова не получится».', node: 'I533:3084;533:2883' },
-  { text: '«Мне хорошо с собой — и этого достаточно».', node: 'I533:3084;533:2889' },
+  { text: '«Я не понимаю, чего хочу и куда идти».', node: 'I533:3084;533:2853', code: 'pain' },
+  { text: '«Так не должно было быть. Это несправедливо».', node: 'I533:3084;533:2859', code: 'pain' },
+  { text: '«Это уже не вернуть. Всё было зря».', node: 'I533:3084;533:2865', code: 'pain' },
+  { text: '«Всё вокруг раздражает — люди, ситуации, мелочи».', node: 'I533:3084;533:2871', code: 'pain' },
+  { text: '«Справлюсь со всем без чьей-либо помощи».', node: 'I533:3084;533:2877', code: 'pride' },
+  { text: '«А вдруг снова не получится».', node: 'I533:3084;533:2883', code: 'pain' },
+  { text: '«Мне хорошо с собой — и этого достаточно».', node: 'I533:3084;533:2889', code: 'pride' },
 ];
 ---
 
@@ -95,6 +99,7 @@ const answers = [
                 role="radio"
                 aria-checked={i === 0 ? 'true' : 'false'}
                 data-figma-node={answer.node}
+                data-code={answer.code}
               >
                 <span class="qtest__round" aria-hidden="true" />
                 <span class="qtest__option-text">{answer.text}</span>
@@ -152,6 +157,14 @@ const answers = [
         say('Экран результата не найден.');
         return;
       }
+      // Код берётся из выбранного ответа: в файле два кода, «Боль» и «Гордыня».
+      const chosen = section.querySelector('.qtest__option.is-active');
+      const code = chosen?.dataset.code === 'pride' ? 'pride' : 'pain';
+      const label = code === 'pride' ? 'Код Гордыни' : 'Код Боли';
+      for (const el of result.querySelectorAll('[data-code-name]')) el.textContent = label;
+      result.querySelector('[data-submit-label]').textContent =
+        code === 'pride' ? 'Практика для тебя' : 'Практика для вас';
+
       section.hidden = true;
       result.hidden = false;
       result.scrollIntoView({ behavior: 'smooth', block: 'start' });

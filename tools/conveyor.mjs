@@ -158,7 +158,10 @@ function builtUnits() {
 
 // Адрес страницы берётся из project.json: секция может жить не на «/».
 const routes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).routes ?? {};
-const unitUrl = (unit) => routes[unit.split('/')[0]] ?? '/';
+// Отдельная секция может открываться не по адресу страницы: экран результата
+// живёт за ?result=1. Такие адреса лежат в project.json.unitUrls.
+const unitUrls = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).unitUrls ?? {};
+const unitUrl = (unit) => unitUrls[unit] ?? routes[unit.split('/')[0]] ?? '/';
 
 // Общие секции (шапка, подвал) стоят на каждой странице своим инстансом:
 // в спеке страницы id свой, в компоненте — id канонической секции. Список

@@ -1,24 +1,19 @@
 {
-  "at": "2026-11-07T14:35:26.286Z",
+  "at": "2026-11-07T14:47:03.010Z",
   "section": {
     "id": "542:3151",
     "name": "quiz-section",
     "w": 1440,
     "h": 1302
   },
-  "ok": false,
-  "red": 14,
+  "ok": true,
+  "red": 0,
   "unknown": 0,
-  "missing": [
-    {
-      "id": "550:553",
-      "name": "begin"
-    }
-  ],
-  "marked": 30,
+  "missing": [],
+  "marked": 31,
   "nodes": 56,
-  "coverage": 83.3,
-  "markedRatio": 53.6,
+  "coverage": 100,
+  "markedRatio": 55.4,
   "tolerance": 1,
-  "worstDelta": 396
+  "worstDelta": 0.9699999999999989
 }

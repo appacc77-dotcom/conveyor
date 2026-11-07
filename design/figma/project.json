@@ -111,10 +111,14 @@
     "masters/masters-team",
     "quiz/footer",
     "quiz/header",
+    "quiz/quiz-result",
     "quiz/quiz-section"
   ],
   "shared": {
     "header": "79:104",
     "footer": "148:561"
+  },
+  "unitUrls": {
+    "quiz/quiz-result": "/quiz.html?result=1"
   }
 }
