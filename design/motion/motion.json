@@ -94,6 +94,13 @@
       "decision": 176
     },
     {
+      "file": "src/components/MastersTeam.astro",
+      "selector": ".master__note",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 224
+    },
+    {
       "file": "src/components/QuizTest.astro",
       "selector": ".qtest__note",
       "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",

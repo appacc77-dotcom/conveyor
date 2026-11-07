@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-07T10:59:00.837Z",
+  "at": "2026-11-07T12:44:49.019Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 18,
+    "green": 19,
     "measured": 0,
     "red": 0,
-    "exported": 28,
+    "exported": 27,
     "todo": 0
   },
   "assetsTotal": {
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-07T10:58:47.192Z"
+            "at": "2026-11-07T12:44:14.012Z"
           },
           "pixel": {
             "mean": 1.76,
@@ -96,7 +96,7 @@
             "nodes": 5,
             "coverage": 100,
             "worstDelta": 0.29000000000002046,
-            "at": "2026-11-07T10:58:41.174Z"
+            "at": "2026-11-07T12:44:07.808Z"
           },
           "pixel": {
             "mean": 3.06,
@@ -141,7 +141,7 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.730000000000004,
-            "at": "2026-11-07T10:58:50.196Z"
+            "at": "2026-11-07T12:44:17.320Z"
           },
           "pixel": {
             "mean": 4.14,
@@ -186,7 +186,7 @@
             "nodes": 16,
             "coverage": 100,
             "worstDelta": 0.9199999999999875,
-            "at": "2026-11-07T10:58:49.208Z"
+            "at": "2026-11-07T12:44:16.172Z"
           },
           "pixel": {
             "mean": 1.87,
@@ -231,7 +231,7 @@
             "nodes": 17,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T10:58:52.204Z"
+            "at": "2026-11-07T12:44:19.579Z"
           },
           "pixel": {
             "mean": 2.2,
@@ -276,7 +276,7 @@
             "nodes": 21,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T10:58:39.172Z"
+            "at": "2026-11-07T12:44:05.737Z"
           },
           "pixel": {
             "mean": 1.24,
@@ -321,7 +321,7 @@
             "nodes": 25,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T10:58:51.206Z"
+            "at": "2026-11-07T12:44:18.463Z"
           },
           "pixel": {
             "mean": 2.13,
@@ -366,7 +366,7 @@
             "nodes": 23,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T10:58:42.165Z"
+            "at": "2026-11-07T12:44:08.851Z"
           },
           "pixel": {
             "mean": 5.1,
@@ -411,7 +411,7 @@
             "nodes": 77,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T10:58:45.181Z"
+            "at": "2026-11-07T12:44:11.937Z"
           },
           "pixel": {
             "mean": 2.21,
@@ -456,7 +456,7 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.5300000000000011,
-            "at": "2026-11-07T10:58:53.201Z"
+            "at": "2026-11-07T12:44:20.676Z"
           },
           "pixel": {
             "mean": 1,
@@ -501,7 +501,7 @@
             "nodes": 18,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T10:58:48.200Z"
+            "at": "2026-11-07T12:44:15.037Z"
           },
           "pixel": {
             "mean": 1.49,
@@ -546,7 +546,7 @@
             "nodes": 1,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T10:58:40.174Z"
+            "at": "2026-11-07T12:44:06.769Z"
           },
           "pixel": {
             "mean": 5.91,
@@ -591,7 +591,7 @@
             "nodes": 52,
             "coverage": 100,
             "worstDelta": 0.4399999999999977,
-            "at": "2026-11-07T10:58:43.169Z"
+            "at": "2026-11-07T12:44:09.887Z"
           },
           "pixel": {
             "mean": 4.31,
@@ -636,7 +636,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T10:58:44.177Z"
+            "at": "2026-11-07T12:44:10.909Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -681,7 +681,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T10:58:46.189Z"
+            "at": "2026-11-07T12:44:12.960Z"
           },
           "pixel": {
             "mean": 3.83,
@@ -749,13 +749,13 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.6999999999999993,
-            "at": "2026-11-07T10:58:54.182Z"
+            "at": "2026-11-07T12:44:21.705Z"
           },
           "pixel": {
-            "mean": 6.64,
-            "over16": 4.57,
-            "over48": 3.38,
-            "at": "2026-11-07T10:57:25.644Z"
+            "mean": 5.53,
+            "over16": 4.54,
+            "over48": 2.86,
+            "at": "2026-11-07T12:24:19.480Z"
           },
           "assets": {
             "nodes": 70,
@@ -784,11 +784,24 @@
           "slug": "masters-masters-team",
           "dir": "design/figma/pages/masters/masters-team",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 12,
+            "nodes": 56,
+            "coverage": 100,
+            "worstDelta": 1,
+            "at": "2026-11-07T12:44:23.728Z"
+          },
+          "pixel": {
+            "mean": 1.83,
+            "over16": 2.18,
+            "over48": 0.65,
+            "at": "2026-11-07T12:36:06.671Z"
+          },
           "assets": {
             "nodes": 56,
             "images": 3,
@@ -802,7 +815,7 @@
           },
           "images": {
             "figma": "/structure/masters-masters-team-figma.png",
-            "site": null
+            "site": "/structure/masters-masters-team-site.png"
           }
         },
         {
@@ -826,7 +839,7 @@
             "nodes": 38,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T10:58:55.163Z"
+            "at": "2026-11-07T12:44:22.709Z"
           },
           "pixel": {
             "mean": 4.18,
@@ -917,10 +930,10 @@
       ],
       "counts": {
         "total": 5,
-        "green": 2,
+        "green": 3,
         "measured": 0,
         "red": 0,
-        "exported": 3,
+        "exported": 2,
         "todo": 0
       }
     },
@@ -1452,7 +1465,7 @@
             "nodes": 83,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T10:58:56.117Z"
+            "at": "2026-11-07T12:44:24.711Z"
           },
           "pixel": {
             "mean": 3.15,

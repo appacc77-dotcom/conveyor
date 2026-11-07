@@ -172,6 +172,8 @@ for (const el of measured.elements) {
       // Ширина взята из узла спеки — коробка уже равна эталону: поправка
       // на трекинг (браузер добавляет его после последней буквы) только врёт.
       if (el.fixedWidth) return el.w;
+      // Ширина уже равна узлу — поправка на трекинг только врёт.
+      if (Math.abs(el.w - node.w) < 0.5) return el.w;
       const ls = node.letterSpacing;
       const trim = ls.unit === 'PERCENT' ? (ls.value / 100) * node.fontSize : ls.value;
       return el.w - trim;
