@@ -81,7 +81,17 @@ await page.evaluate(async () => {
 const shots = [];
 const missing = [];
 
+// Секции живут на разных страницах: перед каждой переходим на свою.
+const routes = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).routes ?? {};
+let currentRoute = '/';
+
 for (const s of targets) {
+  const route = routes[s.page] ?? '/';
+  if (route !== currentRoute) {
+    await page.goto(base + route, { waitUntil: 'load', timeout: 60000 });
+    await page.evaluate(() => document.fonts.ready);
+    currentRoute = route;
+  }
   const handle = await page.$(`[data-figma-node~="${s.id}"]`);
   if (!handle) {
     missing.push(s);

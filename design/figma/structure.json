@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-07T10:48:57.671Z",
+  "at": "2026-11-07T10:49:32.323Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -1460,7 +1460,7 @@
           },
           "images": {
             "figma": "/structure/quiz-quiz-section-figma.png",
-            "site": null
+            "site": "/structure/quiz-quiz-section-site.png"
           }
         },
         {
