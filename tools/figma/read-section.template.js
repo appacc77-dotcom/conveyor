@@ -3,14 +3,33 @@ const ROOT_ID = "__NODE_ID__";
 const MAX_DEPTH = 12;
 const ICON_MAX = 64;
 
-await figma.loadAllPagesAsync();
+// loadAllPagesAsync не нужен: при dynamic-page доступ страницы грузятся по требованию,
+// а вызов требует сети и падает с «Unable to establish connection to Figma».
 
 const styleNames = new Map();
 for (const s of await figma.getLocalTextStylesAsync()) styleNames.set(s.id, s.name);
 for (const s of await figma.getLocalPaintStylesAsync()) styleNames.set(s.id, s.name);
 
+// Секция может лежать не на той странице, что открыта у дизайнера. При
+// dynamic-page доступе exportAsync на узле с другой страницы падает с
+// «may not have any visible layers». Переключаемся на страницу узла и обратно.
+const openedPage = figma.currentPage;
+const findPage = (node) => {
+  let current = node;
+  while (current && current.type !== "PAGE") current = current.parent;
+  return current;
+};
+
 const root = await figma.getNodeByIdAsync(ROOT_ID);
 if (!root) return { error: "E_NOT_FOUND", id: ROOT_ID };
+
+const rootPage = findPage(root);
+const switched = rootPage && rootPage.id !== openedPage.id;
+if (switched) {
+  await figma.setCurrentPageAsync(rootPage);
+  // Дать странице отрисоваться: сразу после переключения exportAsync может упасть.
+  await new Promise((r) => setTimeout(r, 300));
+}
 
 const rgba = (c) => {
   if (!c) return null;
@@ -294,6 +313,9 @@ for (const i of icons) {
 // Страница — предок узла, а не figma.currentPage: открыта может быть любая.
 let pageNode = root;
 while (pageNode && pageNode.type !== "PAGE") pageNode = pageNode.parent;
+
+// Возвращаем дизайнеру ту страницу, с которой он работал.
+if (switched) await figma.setCurrentPageAsync(openedPage);
 
 return {
   page: { id: pageNode?.id ?? null, name: pageNode?.name ?? "page" },
