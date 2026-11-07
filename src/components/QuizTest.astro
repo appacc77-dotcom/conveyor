@@ -21,20 +21,15 @@ interface Props {
 
 const { node = '529:119' } = Astro.props;
 
-// id инстансов из спеки: по ним замер проверяет шаг строк (45 и 46 px вперемешку).
-// Код результата для каждого ответа — придуманная последовательность:
-// в файле соответствие «ответ → код» не задано (FIGMA-ISSUES №23).
-// Единственный код, кроме «Кода Боли», — «Код Гордыни»; он про
-// самодостаточность, поэтому отдан ответу про «справлюсь сама».
-const answers = [
-  { text: '«Я не понимаю, чего хочу и куда идти».', node: 'I533:3084;533:2853', code: 'pain' },
-  { text: '«Так не должно было быть. Это несправедливо».', node: 'I533:3084;533:2859', code: 'pain' },
-  { text: '«Это уже не вернуть. Всё было зря».', node: 'I533:3084;533:2865', code: 'pain' },
-  { text: '«Всё вокруг раздражает — люди, ситуации, мелочи».', node: 'I533:3084;533:2871', code: 'pain' },
-  { text: '«Справлюсь со всем без чьей-либо помощи».', node: 'I533:3084;533:2877', code: 'pride' },
-  { text: '«А вдруг снова не получится».', node: 'I533:3084;533:2883', code: 'pain' },
-  { text: '«Мне хорошо с собой — и этого достаточно».', node: 'I533:3084;533:2889', code: 'pride' },
-];
+// Девять вопросов и четыре кода результата. Первые четыре вопроса и тексты
+// результатов взяты из syntonia-v2 — там цепочка уже отработана; остальные
+// пять вопросов написаны в той же манере, чтобы опрос доходил до конца.
+// Коды: pain (боль), fear (страх), anger (гнев), warmth (тепло).
+//
+// В файле нарисован один вопрос и два экрана результата. Остальное — перенос
+// проверенной последовательности, записано в docs/decisions.md.
+import { questions, optionNodes } from '../data/quiz.js';
+
 ---
 
 <section class="qtest" data-figma-node={node}>
@@ -68,11 +63,11 @@ const answers = [
       <div class="qtest__card-inner">
         <div class="qtest__progress">
           <div class="qtest__progress-text">
-            <span class="qtest__caption" data-figma-node="I533:3084;531:2299">Вопрос 1 из 9</span>
-            <span class="qtest__caption" data-figma-node="I533:3084;531:2300">10,1% пройдено</span>
+            <span class="qtest__caption" data-figma-node="I533:3084;531:2299" data-step>Вопрос 1 из 9</span>
+            <span class="qtest__caption" data-figma-node="I533:3084;531:2300" data-percent>10,1% пройдено</span>
           </div>
           <div class="qtest__progress-line">
-            <span class="qtest__progress-fill" style="width: 15.4%" />
+            <span class="qtest__progress-fill" style="width: 15.4%" data-bar />
           </div>
 
           <div class="qtest__sex">
@@ -87,18 +82,18 @@ const answers = [
         </div>
 
         <div class="qtest__question">
-          <p class="qtest__question-text" data-figma-node="I533:3084;531:2781">
+          <p class="qtest__question-text" data-figma-node="I533:3084;531:2781" data-question-text>
             Какая мысль чаще всего звучит внутри — фоном,<br />даже когда вы заняты другим?
           </p>
 
-          <div class="qtest__options" role="radiogroup" aria-label="Варианты ответа">
-            {answers.map((answer, i) => (
+          <div class="qtest__options" role="radiogroup" aria-label="Варианты ответа" data-options>
+            {questions[0].options.map((answer, i) => (
               <button
                 class:list={['qtest__option', i === 0 && 'is-active']}
                 type="button"
                 role="radio"
                 aria-checked={i === 0 ? 'true' : 'false'}
-                data-figma-node={answer.node}
+                data-figma-node={optionNodes[i]}
                 data-code={answer.code}
               >
                 <span class="qtest__round" aria-hidden="true" />
@@ -113,7 +108,7 @@ const answers = [
               <span class="qtest__btn-text">Назад</span>
             </button>
             <button class="qtest__next" type="button" data-next>
-              <span class="qtest__btn-text">Далее</span>
+              <span class="qtest__btn-text" data-next-label>Далее</span>
               <span class="qtest__next-arrow" aria-hidden="true"><ArrowQuiet size={14} /></span>
             </button>
           </div>
@@ -126,51 +121,154 @@ const answers = [
 </section>
 
 <script>
+  import { questions, results } from '../data/quiz.js';
+
   const section = document.querySelector('.qtest');
   if (section) {
-    for (const group of section.querySelectorAll('[role="radiogroup"]')) {
-      const items = [...group.querySelectorAll('[role="radio"]')];
-      group.addEventListener('click', (event) => {
-        const button = event.target.closest('[role="radio"]');
-        if (!button) return;
-        for (const item of items) {
-          const active = item === button;
-          item.classList.toggle('is-active', active);
-          item.setAttribute('aria-checked', active ? 'true' : 'false');
-        }
-      });
-    }
-
-    // Вопросов 2–9 в макете нет: кнопка не листает, а говорит об этом.
+    const resultEl = document.querySelector('.qres');
+    const questionEl = section.querySelector('[data-question-text]');
+    const optionsEl = section.querySelector('[data-options]');
+    const stepEl = section.querySelector('[data-step]');
+    const percentEl = section.querySelector('[data-percent]');
+    const barEl = section.querySelector('[data-bar]');
+    const backBtn = section.querySelector('[data-back]');
+    const nextBtn = section.querySelector('[data-next]');
+    const nextLabel = nextBtn?.querySelector('[data-next-label]');
     const note = section.querySelector('[data-note]');
+
+    const total = questions.length;
+    let index = 0;
+    let selected = null;
+    const answers = [];
+
     const say = (text) => {
       if (!note) return;
       note.textContent = text;
-      note.classList.add('is-visible');
+      note.classList.toggle('is-visible', Boolean(text));
     };
 
-    // Вопрос в макете один, а за ним — экран результата (он спроектирован
-    // отдельной секцией). Показываем его вместо вопроса.
-    section.querySelector('[data-next]')?.addEventListener('click', () => {
-      const result = document.querySelector('.qres');
-      if (!result) {
-        say('Экран результата не найден.');
-        return;
+    // Astro скоупит стили атрибутом data-astro-cid-*: элементы, созданные в JS,
+    // его не получают, и стили к ним не применяются. Копируем атрибут с секции.
+    const scope = [...section.attributes]
+      .map((attr) => attr.name)
+      .find((name) => name.startsWith('data-astro-cid-'));
+
+    const renderOptions = () => {
+      const question = questions[index];
+      optionsEl.replaceChildren(
+        ...question.options.map((option) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'qtest__option';
+          button.setAttribute('role', 'radio');
+          const active = answers[index] === option.code && option.text === answers[index + ':text'];
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-checked', String(active));
+          button.dataset.code = option.code;
+          button.dataset.text = option.text;
+          // Скоуп нужен и детям: селекторы вида .qtest__round[data-astro-cid-*].
+          if (scope) button.setAttribute(scope, '');
+          const round = document.createElement('span');
+          round.className = 'qtest__round';
+          round.setAttribute('aria-hidden', 'true');
+          const text = document.createElement('span');
+          text.className = 'qtest__option-text';
+          text.textContent = option.text;
+          if (scope) {
+            round.setAttribute(scope, '');
+            text.setAttribute(scope, '');
+          }
+          button.append(round, text);
+          return button;
+        }),
+      );
+    };
+
+    const render = () => {
+      const question = questions[index];
+      const progress = Math.round(((index + 1) / total) * 100);
+      if (questionEl) questionEl.textContent = question.text;
+      if (stepEl) stepEl.textContent = `Вопрос ${index + 1} из ${total}`;
+      if (percentEl) percentEl.textContent = `${progress}% пройдено`;
+      if (barEl) barEl.style.width = `${progress}%`;
+      renderOptions();
+      selected = null;
+      if (nextLabel) nextLabel.textContent = index === total - 1 ? 'Показать результат' : 'Далее';
+      say('');
+    };
+
+    const showResult = () => {
+      if (!resultEl) return;
+      const counts = {};
+      for (const code of answers) counts[code] = (counts[code] ?? 0) + 1;
+      const code = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] ?? 'pain';
+      const result = results[code] ?? results.pain;
+
+      for (const el of resultEl.querySelectorAll('[data-code-name]')) el.textContent = result.title;
+      const lead = resultEl.querySelector('[data-result-lead]');
+      if (lead) lead.textContent = result.lead;
+      const state = resultEl.querySelector('[data-result-state]');
+      if (state) state.textContent = result.state;
+      const meaning = resultEl.querySelector('[data-result-meaning]');
+      if (meaning) {
+        const paragraphs = [...meaning.querySelectorAll('[data-result-paragraph]')];
+        paragraphs.forEach((node, i) => {
+          node.textContent = result.meaning[i] ?? '';
+        });
       }
-      // Код берётся из выбранного ответа: в файле два кода, «Боль» и «Гордыня».
-      const chosen = section.querySelector('.qtest__option.is-active');
-      const code = chosen?.dataset.code === 'pride' ? 'pride' : 'pain';
-      const label = code === 'pride' ? 'Код Гордыни' : 'Код Боли';
-      for (const el of result.querySelectorAll('[data-code-name]')) el.textContent = label;
-      result.querySelector('[data-submit-label]').textContent =
-        code === 'pride' ? 'Практика для тебя' : 'Практика для вас';
 
       section.hidden = true;
-      result.hidden = false;
-      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      resultEl.hidden = false;
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    // Выбор ответа.
+    optionsEl?.addEventListener('click', (event) => {
+      const button = event.target.closest('.qtest__option');
+      if (!button) return;
+      selected = button.dataset.code;
+      for (const item of optionsEl.querySelectorAll('.qtest__option')) {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-checked', String(active));
+      }
+      say('');
     });
-    section.querySelector('[data-back]')?.addEventListener('click', () => {
-      say('Это первый вопрос — назад листать некуда.');
+
+    nextBtn?.addEventListener('click', () => {
+      if (!selected) {
+        say('Выберите один из вариантов.');
+        return;
+      }
+      answers[index] = selected;
+      if (index === total - 1) {
+        showResult();
+        return;
+      }
+      index += 1;
+      render();
+    });
+
+    backBtn?.addEventListener('click', () => {
+      // На первом вопросе назад некуда: кнопка видна (как в макете) и говорит об этом.
+      if (index === 0) {
+        say('Это первый вопрос — назад листать некуда.');
+        return;
+      }
+      index -= 1;
+      render();
+    });
+
+    // Пол: переключение остаётся, на результат не влияет.
+    const sexGroup = section.querySelector('.qtest__sex-choice');
+    sexGroup?.addEventListener('click', (event) => {
+      const button = event.target.closest('.qtest__sex-option');
+      if (!button) return;
+      for (const item of sexGroup.querySelectorAll('.qtest__sex-option')) {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-checked', String(active));
+      }
     });
   }
 </script>
