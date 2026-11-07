@@ -60,29 +60,42 @@ if (!items.length) {
 
 const template = readFileSync(join(root, 'tools/figma/check-bindings.template.js'), 'utf8');
 
-// Пачки: у плагина жёсткий бюджет ~10 с на вызов, а привязок больше тысячи.
-// Один вызов на всё не укладывается и падает «Unable to establish connection».
-const CHUNK = 30;
+// Пачки: у плагина жёсткий бюджет на вызов, а привязок больше тысячи. Пачка
+// из 30 узлов рвёт транспорт плагина («outcome-unknown»), из 10 проходит.
+const CHUNK = 10;
 let checked = 0;
 const mismatches = [];
 
-for (let start = 0; start < items.length; start += CHUNK) {
-  const chunk = items.slice(start, start + CHUNK);
+/**
+ * Одна пачка. Если плагин не выдержал (транспорт рвётся на большом вызове),
+ * пачка делится пополам и повторяется — вплоть до одного узла. Так размер
+ * пачки не магическое число: он подстраивается под файл.
+ */
+function checkChunk(chunk) {
   const source = template.replace('__PAYLOAD__', JSON.stringify(chunk));
-  const tmp = join(tmpdir(), `check-bindings-${process.pid}-${start}.js`);
+  const tmp = join(tmpdir(), `check-bindings-${process.pid}-${chunk[0]?.id?.replace(':', '-') ?? 'x'}.js`);
   writeFileSync(tmp, source);
 
-  let reply;
   try {
-    reply = runFigma(['exec-js', tmp, '--timeout', '180000']);
+    const reply = runFigma(['exec-js', tmp, '--timeout', '180000']);
+    const part = reply.result ?? { checked: 0, mismatches: [] };
+    checked += part.checked ?? 0;
+    mismatches.push(...(part.mismatches ?? []));
+    return true;
   } catch (error) {
-    console.error(`сверка не выполнена на пачке ${start / CHUNK + 1}: ${String(error.message).slice(0, 160)}`);
-    process.exit(2);
+    if (chunk.length === 1) {
+      console.error(`сверка не выполнена на узле ${chunk[0].id}: ${String(error.message).slice(0, 160)}`);
+      return false;
+    }
+    const half = Math.ceil(chunk.length / 2);
+    return checkChunk(chunk.slice(0, half)) && checkChunk(chunk.slice(half));
   }
-  const part = reply.result ?? { checked: 0, mismatches: [] };
-  checked += part.checked ?? 0;
-  mismatches.push(...(part.mismatches ?? []));
 }
+
+for (let start = 0; start < items.length; start += CHUNK) {
+  if (!checkChunk(items.slice(start, start + CHUNK))) process.exit(2);
+}
+
 console.log(`спек: ${specs.length} · привязок проверено: ${checked}`);
 
 if (!mismatches.length) {
