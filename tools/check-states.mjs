@@ -173,7 +173,11 @@ for (const [unit, { section, texts }] of expected) {
     if (!el) return null;
     // textContent берёт и скрытые узлы: закрытый ответ аккордеона — тоже
     // контент, он просто не показан.
-    return el.textContent ?? '';
+    // Плейсхолдер и aria-label пользователь видит, хотя это не textContent.
+    const extra = [...el.querySelectorAll('input, textarea, [aria-label]')]
+      .map((node) => `${node.getAttribute('placeholder') ?? ''} ${node.getAttribute('aria-label') ?? ''}`)
+      .join(' ');
+    return `${el.textContent ?? ''} ${extra}`;
   }, id);
 
   if (rendered === null) {

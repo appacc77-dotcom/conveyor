@@ -160,6 +160,9 @@ for (const section of sections) {
       // Выбранный пункт радиогруппы и точка «вы здесь» при повторном клике
       // ничего не меняют — это поведение, а не дефект.
       if (el.getAttribute('role') === 'radio' && el.getAttribute('aria-checked') === 'true') return true;
+      // Уже выбранный переключатель и точка «вы здесь» при повторном клике
+      // ничего не меняют по определению.
+      if (el.getAttribute('aria-pressed') === 'true') return true;
       return el.getAttribute('aria-current') === 'true';
     });
     if (skip) continue;

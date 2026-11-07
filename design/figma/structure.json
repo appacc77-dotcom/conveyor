@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-07T13:48:28.868Z",
+  "at": "2026-11-07T14:04:15.556Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 23,
+    "green": 27,
     "measured": 0,
     "red": 0,
-    "exported": 23,
+    "exported": 19,
     "todo": 0
   },
   "assetsTotal": {
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-07T13:47:56.905Z"
+            "at": "2026-11-07T14:03:48.172Z"
           },
           "pixel": {
             "mean": 1.76,
@@ -96,7 +96,7 @@
             "nodes": 5,
             "coverage": 100,
             "worstDelta": 0.29000000000002046,
-            "at": "2026-11-07T13:47:50.854Z"
+            "at": "2026-11-07T14:03:42.058Z"
           },
           "pixel": {
             "mean": 3.06,
@@ -141,7 +141,7 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.730000000000004,
-            "at": "2026-11-07T13:47:59.902Z"
+            "at": "2026-11-07T14:03:51.264Z"
           },
           "pixel": {
             "mean": 4.14,
@@ -186,7 +186,7 @@
             "nodes": 16,
             "coverage": 100,
             "worstDelta": 0.9199999999999875,
-            "at": "2026-11-07T13:47:58.863Z"
+            "at": "2026-11-07T14:03:50.265Z"
           },
           "pixel": {
             "mean": 1.87,
@@ -231,7 +231,7 @@
             "nodes": 17,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T13:48:02.024Z"
+            "at": "2026-11-07T14:03:53.302Z"
           },
           "pixel": {
             "mean": 2.2,
@@ -276,7 +276,7 @@
             "nodes": 21,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T13:47:48.833Z"
+            "at": "2026-11-07T14:03:40.027Z"
           },
           "pixel": {
             "mean": 1.24,
@@ -321,7 +321,7 @@
             "nodes": 25,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T13:48:00.966Z"
+            "at": "2026-11-07T14:03:52.286Z"
           },
           "pixel": {
             "mean": 2.13,
@@ -366,7 +366,7 @@
             "nodes": 23,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T13:47:51.867Z"
+            "at": "2026-11-07T14:03:43.073Z"
           },
           "pixel": {
             "mean": 5.1,
@@ -411,7 +411,7 @@
             "nodes": 77,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T13:47:54.919Z"
+            "at": "2026-11-07T14:03:46.148Z"
           },
           "pixel": {
             "mean": 2.21,
@@ -456,7 +456,7 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.5300000000000011,
-            "at": "2026-11-07T13:48:03.082Z"
+            "at": "2026-11-07T14:03:54.320Z"
           },
           "pixel": {
             "mean": 1,
@@ -501,7 +501,7 @@
             "nodes": 18,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T13:47:57.899Z"
+            "at": "2026-11-07T14:03:49.234Z"
           },
           "pixel": {
             "mean": 1.49,
@@ -546,7 +546,7 @@
             "nodes": 1,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T13:47:49.840Z"
+            "at": "2026-11-07T14:03:41.043Z"
           },
           "pixel": {
             "mean": 5.91,
@@ -591,7 +591,7 @@
             "nodes": 52,
             "coverage": 100,
             "worstDelta": 0.4399999999999977,
-            "at": "2026-11-07T13:47:52.884Z"
+            "at": "2026-11-07T14:03:44.118Z"
           },
           "pixel": {
             "mean": 4.31,
@@ -636,7 +636,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T13:47:53.892Z"
+            "at": "2026-11-07T14:03:45.128Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -681,7 +681,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T13:47:55.921Z"
+            "at": "2026-11-07T14:03:47.158Z"
           },
           "pixel": {
             "mean": 3.83,
@@ -749,7 +749,7 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.6999999999999993,
-            "at": "2026-11-07T13:48:05.129Z"
+            "at": "2026-11-07T14:03:56.320Z"
           },
           "pixel": {
             "mean": 5.53,
@@ -794,7 +794,7 @@
             "nodes": 56,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T13:48:08.094Z"
+            "at": "2026-11-07T14:03:59.301Z"
           },
           "pixel": {
             "mean": 1.83,
@@ -839,7 +839,7 @@
             "nodes": 38,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T13:48:07.091Z"
+            "at": "2026-11-07T14:03:58.290Z"
           },
           "pixel": {
             "mean": 4.18,
@@ -884,7 +884,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T13:48:04.141Z"
+            "at": "2026-11-07T14:03:55.319Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -929,7 +929,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T13:48:06.103Z"
+            "at": "2026-11-07T14:03:57.317Z"
           },
           "pixel": {
             "mean": 3.84,
@@ -1491,7 +1491,7 @@
             "nodes": 83,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T13:48:11.345Z"
+            "at": "2026-11-07T14:04:02.252Z"
           },
           "pixel": {
             "mean": 3.15,
@@ -1536,7 +1536,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T13:48:10.309Z"
+            "at": "2026-11-07T14:04:01.270Z"
           },
           "pixel": {
             "mean": 3.77,
@@ -1581,7 +1581,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T13:48:09.206Z"
+            "at": "2026-11-07T14:04:00.299Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -1619,7 +1619,7 @@
       "key": "booking",
       "id": "263:448",
       "route": "/booking.html",
-      "built": false,
+      "built": true,
       "title": "Booking",
       "frame": {
         "id": "383:286",
@@ -1639,11 +1639,24 @@
           "slug": "booking-booking-hero",
           "dir": "design/figma/pages/booking/booking-hero",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 5,
+            "nodes": 5,
+            "coverage": 100,
+            "worstDelta": 0,
+            "at": "2026-11-07T14:03:37.012Z"
+          },
+          "pixel": {
+            "mean": 3.87,
+            "over16": 4.08,
+            "over48": 0.34,
+            "at": "2026-11-07T13:49:45.964Z"
+          },
           "assets": {
             "nodes": 5,
             "images": 1,
@@ -1657,7 +1670,7 @@
           },
           "images": {
             "figma": "/structure/booking-booking-hero-figma.png",
-            "site": null
+            "site": "/structure/booking-booking-hero-site.png"
           }
         },
         {
@@ -1671,11 +1684,24 @@
           "slug": "booking-booking-formats",
           "dir": "design/figma/pages/booking/booking-formats",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 21,
+            "nodes": 144,
+            "coverage": 100,
+            "worstDelta": 0.8000000000000114,
+            "at": "2026-11-07T14:03:35.972Z"
+          },
+          "pixel": {
+            "mean": 6.21,
+            "over16": 5.97,
+            "over48": 4.12,
+            "at": "2026-11-07T13:57:28.706Z"
+          },
           "assets": {
             "nodes": 144,
             "images": 0,
@@ -1689,7 +1715,7 @@
           },
           "images": {
             "figma": "/structure/booking-booking-formats-figma.png",
-            "site": null
+            "site": "/structure/booking-booking-formats-site.png"
           }
         },
         {
@@ -1703,11 +1729,24 @@
           "slug": "booking-footer",
           "dir": "design/figma/pages/booking/footer",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 31,
+            "nodes": 31,
+            "coverage": 100,
+            "worstDelta": 0.9799999999999969,
+            "at": "2026-11-07T14:03:37.998Z"
+          },
+          "pixel": {
+            "mean": 1.04,
+            "over16": 1.22,
+            "over48": 0.44,
+            "at": "2026-11-07T13:57:40.264Z"
+          },
           "assets": {
             "nodes": 31,
             "images": 1,
@@ -1721,7 +1760,7 @@
           },
           "images": {
             "figma": "/structure/booking-footer-figma.png",
-            "site": null
+            "site": "/structure/booking-footer-site.png"
           }
         },
         {
@@ -1735,11 +1774,24 @@
           "slug": "booking-header",
           "dir": "design/figma/pages/booking/header",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 14,
+            "nodes": 29,
+            "coverage": 100,
+            "worstDelta": 0.8899999999999864,
+            "at": "2026-11-07T14:03:38.996Z"
+          },
+          "pixel": {
+            "mean": 4.08,
+            "over16": 5.77,
+            "over48": 1.93,
+            "at": "2026-11-07T13:57:39.409Z"
+          },
           "assets": {
             "nodes": 29,
             "images": 1,
@@ -1753,16 +1805,16 @@
           },
           "images": {
             "figma": "/structure/booking-header-figma.png",
-            "site": null
+            "site": "/structure/booking-header-site.png"
           }
         }
       ],
       "counts": {
         "total": 4,
-        "green": 0,
+        "green": 4,
         "measured": 0,
         "red": 0,
-        "exported": 4,
+        "exported": 0,
         "todo": 0
       }
     },

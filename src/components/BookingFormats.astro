@@ -1,0 +1,693 @@
+---
+/**
+ * Секция `booking-formats` (383:761), 1440×1546: шкала, список пяти форматов,
+ * панель выбранного формата и форма заявки.
+ *
+ * Тексты выбранного формата для пунктов 2–5 в спеке не лежат: в файле открыт
+ * первый. Они взяты из `states.json` — пять состояний, по одному на выбранный
+ * формат.
+ *
+ * Координаты в спеке относительны родителю: контейнер стоит на x=80, поэтому
+ * панель (x=673) начинается на 753, а разделитель (x=640) — на 720.
+ */
+import ArrowQuiet from './ds/arrow-quiet.astro';
+
+interface Props {
+  node?: string;
+}
+
+const { node = '383:761' } = Astro.props;
+
+const formats = [
+  {
+    num: '01',
+    title: 'Точка входа',
+    desc: 'Короткая встреча для прояснения запроса и понимания направления.',
+    duration: '30 минут',
+    price: '$50',
+    meetingLabel: 'На встрече:',
+    about:
+      'Точка входа — первая встреча, когда важно не начинать сразу с глубокой работы, а спокойно разобраться, что происходит сейчас и куда лучше двигаться дальше.\nЗа короткое время мы обозначаем основной запрос, смотрим на текущее состояние и определяем, какой следующий шаг может быть наиболее точным.',
+    list: 'проясняем запрос и то, что сейчас действительно важно;\nопределяем основное направление работы;\nсмотрим, какой формат может подойти дальше.',
+  },
+  {
+    num: '02',
+    title: 'Индивидуальная мастер-сессия',
+    desc: 'Глубокая индивидуальная работа с одним запросом или конкретной темой.',
+    duration: '2 часа',
+    price: '$230',
+    meetingLabel: 'В работе:',
+    about:
+      'Мастер-сессия — полноценная индивидуальная встреча для работы с конкретным запросом, состоянием или повторяющейся ситуацией.\nВ центре внимания не только то, что происходит внешне, но и внутреннее основание реакции: состояние, привычный сценарий и причины, которые могут поддерживать его глубже уровня обычного понимания.',
+    list: 'исследуем один ключевой запрос;\nидём от проявления к внутренней причине;\nработаем с тем, что поддерживает привычную реакцию;\nформируем более ясную внутреннюю точку для дальнейшего движения.',
+  },
+  {
+    num: '03',
+    title: 'Программа 3 встречи',
+    desc: 'Последовательная работа с запросом в трёх индивидуальных встречах.',
+    duration: '3 × 2 часа',
+    price: '$560',
+    meetingLabel: 'В работе:',
+    about:
+      'Три встречи дают возможность не ограничиваться одной точкой работы, а увидеть запрос в развитии: начать с основной причины, продолжить работу с тем, что раскрывается дальше, и закрепить изменения.\nЭтот формат подходит, когда одной встречи недостаточно и важна последовательность, но пока не требуется длительное сопровождение.',
+    list: '3 индивидуальные мастер-сессии по 2 часа;\nпоследовательная работа с одним направлением;\nвозможность идти глубже по мере раскрытия запроса;\nзакрепление того, что меняется между встречами.',
+  },
+  {
+    num: '04',
+    title: 'Программа 5 встреч',
+    desc: 'Более глубокий цикл для системной работы и интеграции изменений.',
+    duration: '5 × 2 часа',
+    price: '$1050',
+    meetingLabel: 'В работе:',
+    about:
+      'Пять встреч создают пространство для более глубокой и последовательной работы, когда запрос затрагивает не одну ситуацию, а связан с устойчивыми внутренними сценариями или несколькими областями жизни.\nЗдесь появляется возможность не спешить, возвращаться к тому, что проявляется между встречами, и постепенно работать с более глубокими слоями запроса.',
+    list: '5 индивидуальных мастер-сессий по 2 часа;\nсистемная работа с основным запросом;\nисследование связанных состояний и повторяющихся сценариев;\nвремя на интеграцию изменений между встречами;\nпостепенное углубление работы по мере необходимости.',
+  },
+  {
+    num: '05',
+    title: 'Сопровождение',
+    desc: 'Поддерживающая встреча для продолжения процесса и текущих изменений.',
+    duration: '60 минут',
+    price: '$110',
+    meetingLabel: 'В работе:',
+    about:
+      'Сопровождение — более компактный формат для тех случаев, когда глубокая основная работа уже началась и важно сохранить контакт с процессом, разобрать то, что проявилось в жизни, или скорректировать дальнейшее движение.\nЭто не новая работа «с нуля», а пространство для продолжения, уточнения и интеграции происходящих изменений.',
+    list: 'разбираем то, что проявилось после предыдущей работы;\nуточняем текущее состояние и новые вопросы;\nподдерживаем интеграцию изменений в повседневной жизни;\nопределяем следующий шаг.',
+  },
+];
+
+const fields = [
+  { label: 'Имя', optional: true, placeholder: 'Как к вам обращаться', type: 'text', height: 54 },
+  { label: 'Email', optional: true, placeholder: 'ваш@email.com', type: 'email', height: 54 },
+  { label: 'Телефон', optional: true, placeholder: '+1 (___) ___ ___ ___', type: 'tel', height: 54 },
+  { label: 'комментарий', optional: true, placeholder: 'Что важно знать заранее, ваш запрос или вопросы...', type: 'textarea', height: 86 },
+];
+---
+
+<section class="bformats" data-figma-node={node}>
+  <div class="bformats__container" data-figma-node="383:768">
+    <div class="bformats__scale" data-figma-node="383:787">
+      <span class="bformats__scale-label" data-figma-node="383:769">первый шаг</span>
+      <span class="bformats__scale-line" />
+      <span class="bformats__scale-label" data-figma-node="383:770">глубокое сопровождение</span>
+    </div>
+
+    <div class="bformats__layout" data-figma-node="383:822">
+      <div class="bformats__list" data-figma-node="383:882">
+        {formats.map((f, i) => (
+          <button
+            class:list={['fmt', i === 0 && 'is-active']}
+            type="button"
+            data-format={i}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+          >
+            <span class="fmt__num">{f.num}</span>
+            <span class="fmt__body">
+              <span class="fmt__title">{f.title}</span>
+              <span class="fmt__desc">{f.desc}</span>
+              <span class="fmt__meta">
+                <span>{f.duration}</span>
+                <span class="fmt__dot" aria-hidden="true" />
+                <span>{f.price}</span>
+              </span>
+            </span>
+            <span class="fmt__circle" aria-hidden="true" />
+          </button>
+        ))}
+
+        <div class="bformats__hint" data-figma-node="383:1062">
+          <p class="bformats__hint-text" data-figma-node="383:1063">Не уверены, какой формат выбрать?</p>
+          <p class="bformats__hint-text" data-figma-node="383:1064">Начните с Точки входа.</p>
+          <button class="bformats__hint-btn" type="button" data-pick-first>
+            <span>Выбрать Точку входа</span>
+            <ArrowQuiet size={14} />
+          </button>
+        </div>
+      </div>
+
+      <span class="bformats__divider" aria-hidden="true" />
+
+      <div class="bformats__panel" data-figma-node="383:824">
+        <div class="bformats__details" data-figma-node="804:349">
+          {formats.map((f, i) => (
+            <div class="bformats__view" data-view={i} hidden={i !== 0}>
+              <div class="bformats__details-head">
+                <span class="bformats__details-label" data-figma-node={i === 0 ? 'I804:349;383:1252' : undefined}>
+                  Выбранный формат
+                </span>
+                <div class="bformats__details-meta">
+                  <span class="bformats__details-title" data-figma-node={i === 0 ? 'I804:349;383:1253' : undefined}>
+                    {f.title}
+                  </span>
+                  <span class="bformats__dot" aria-hidden="true" />
+                  <span class="bformats__details-title">{f.duration}</span>
+                  <span class="bformats__dot" aria-hidden="true" />
+                  <span class="bformats__details-title">{f.price}</span>
+                </div>
+              </div>
+
+              <div class="bformats__about">
+                <span class="bformats__about-label" data-figma-node={i === 0 ? 'I804:349;383:1260' : undefined}>
+                  О формате
+                </span>
+                <p class="bformats__about-text" data-figma-node={i === 0 ? 'I804:349;383:1261' : undefined}>
+                  {f.about.split('\n').map((line, n) => (
+                    <>
+                      {n > 0 && <br />}
+                      {line}
+                    </>
+                  ))}
+                </p>
+              </div>
+
+              <div class="bformats__meeting">
+                <span class="bformats__meeting-label" data-figma-node={i === 0 ? 'I804:349;383:1262' : undefined}>
+                  {f.meetingLabel}
+                </span>
+                <p class="bformats__meeting-list" data-figma-node={i === 0 ? 'I804:349;383:1265' : undefined}>
+                  {f.list.split('\n').map((line, n) => (
+                    <>
+                      {n > 0 && <br />}
+                      {line}
+                    </>
+                  ))}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <span class="bformats__panel-divider" aria-hidden="true" />
+
+        <form class="bformats__form" data-figma-node="806:372" novalidate>
+          {fields.map((f) => (
+            <label class="bfield">
+              <span class="bfield__head">
+                <span class="bfield__label">{f.label}</span>
+                {f.optional && <span class="bfield__optional">ОПЦИОНАЛЬНО</span>}
+              </span>
+              {f.type === 'textarea' ? (
+                <textarea class="bfield__box bfield__box--area" placeholder={f.placeholder} rows={3} />
+              ) : (
+                <input class="bfield__box" type={f.type} placeholder={f.placeholder} />
+              )}
+            </label>
+          ))}
+
+          <button class="bformats__submit" type="submit" data-submit>
+            <span>Отправить заявку</span>
+          </button>
+          <p class="bformats__consent">
+            Нажимая “Отправить заявку”, вы соглашаетесь с условиями обработки данных.
+          </p>
+          <p class="bformats__note" role="status" aria-live="polite" data-note></p>
+
+          <div class="bformats__legal">
+            <span class="bformats__legal-title" data-figma-node="385:1344">Правовая информация</span>
+            <p class="bformats__legal-text" data-figma-node="385:1370">
+              Материалы и сессии носят консультативный характер и не являются медицинской услугой.
+            </p>
+            <p class="bformats__legal-links">
+              <a href="#offer">Публичная оферта</a>
+              <a href="#privacy">Политика конфиденциальности</a>
+              <a href="#consent">Согласие на обработку персональных данных</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.querySelector('.bformats');
+  if (section) {
+    const options = [...section.querySelectorAll('[data-format]')];
+    const pick = (index) => {
+      for (const option of options) {
+        const active = Number(option.dataset.format) === index;
+        option.classList.toggle('is-active', active);
+        option.setAttribute('aria-pressed', active ? 'true' : 'false');
+      }
+      // Все варианты лежат в разметке: переключаем видимость, а не текст.
+      for (const view of section.querySelectorAll('[data-view]')) {
+        view.hidden = Number(view.dataset.view) !== index;
+      }
+    };
+
+    for (const option of options) {
+      option.addEventListener('click', () => pick(Number(option.dataset.format)));
+    }
+    section.querySelector('[data-pick-first]')?.addEventListener('click', () => pick(0));
+
+    const note = section.querySelector('[data-note]');
+    section.querySelector('[data-submit]')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      // Отправлять некуда: у формы нет адресата и полей с обязательностью.
+      if (!note) return;
+      note.textContent = 'Форма не отправляется: адресат и правила валидации в макете не заданы.';
+      note.classList.add('is-visible');
+    });
+  }
+</script>
+
+<style>
+  .bformats {
+    position: relative;
+    width: 1440px;
+    height: 1546px;
+    background: var(--color-bg-page);
+  }
+
+  .bformats__container {
+    box-sizing: border-box;
+    width: 1280px;
+    height: 1546px;
+    /* padding, а не margin у первого блока: иначе отступ схлопывается
+       с секцией и всё съезжает на 64 px. */
+    padding-top: 64px;
+    margin: 0 auto;
+  }
+
+  .bformats__scale {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 20px;
+    color: var(--color-text-secondary);
+  }
+
+  .bformats__scale-label {
+    display: block;
+    height: 20px;
+    font-size: 13px;
+    line-height: 20px;
+    /* Трекинг из файла: 16 % от 13 px = 0,16em. Ширины 107 и 239 заданы
+       узлами, поэтому коробки фиксированы, а не по тексту. */
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .bformats__scale-label:first-child {
+    width: 107px;
+  }
+
+  .bformats__scale-label:last-child {
+    width: 239px;
+    text-align: right;
+  }
+
+  .bformats__scale-line {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+
+  .bformats__layout {
+    position: relative;
+    height: 1350px;
+    margin-top: 48px;
+  }
+
+  .bformats__list {
+    width: 608px;
+    height: 1280px;
+  }
+
+  .fmt {
+    position: relative;
+    display: flex;
+    width: 608px;
+    height: 209px;
+    padding: 32px;
+    border: 0;
+    border-radius: 16px;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    color: var(--color-text-primary);
+  }
+
+  .fmt + .fmt {
+    margin-top: 16px;
+  }
+
+  .fmt.is-active {
+    background: color-mix(in srgb, var(--color-accent-muted) 25%, transparent);
+  }
+
+  .fmt__num {
+    width: 60px;
+    font-family: var(--font-literata);
+    font-size: 48px;
+    line-height: 60px;
+    color: var(--color-text-deep);
+  }
+
+  .fmt__body {
+    display: flex;
+    flex-direction: column;
+    width: 476px;
+    margin-left: 8px;
+  }
+
+  .fmt__title {
+    font-family: var(--font-literata);
+    font-size: 29px;
+    line-height: 39px;
+    color: var(--color-text-primary);
+  }
+
+  .fmt__desc {
+    width: 476px;
+    margin-top: 16px;
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--color-text-primary);
+  }
+
+  .fmt:first-child .fmt__desc {
+    width: 421px;
+  }
+
+  .fmt__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-text-deep);
+  }
+
+  .fmt__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .fmt__circle {
+    position: absolute;
+    right: 32px;
+    top: 53px;
+    width: 39px;
+    height: 39px;
+    border: 1px solid var(--color-text-on-image);
+    border-radius: 50%;
+  }
+
+  .fmt.is-active .fmt__circle {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  .bformats__hint {
+    box-sizing: border-box;
+    width: 608px;
+    height: 155px;
+    /* Тексты стоят на 24 px ниже верха блока — это padding, а не margin. */
+    padding-top: 24px;
+    margin-top: 16px;
+  }
+
+  .bformats__hint-text {
+    margin: 0;
+    height: 27px;
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--color-text-primary);
+  }
+
+  .bformats__hint-text:first-child {
+    width: 362px;
+  }
+
+  .bformats__hint-text + .bformats__hint-text {
+    width: 231px;
+    margin-top: 8px;
+  }
+
+  .bformats__hint-btn {
+    margin-top: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-family: var(--font-literata);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    line-height: 29px;
+    color: var(--color-accent);
+    cursor: pointer;
+  }
+
+  .bformats__hint-btn :global(svg) {
+    display: block;
+  }
+
+  .bformats__divider {
+    position: absolute;
+    left: 640px;
+    top: 0;
+    width: 1px;
+    height: 1350px;
+    background: var(--color-border);
+  }
+
+  .bformats__panel {
+    position: absolute;
+    left: 673px;
+    top: 0;
+    width: 608px;
+    height: 1350px;
+  }
+
+  .bformats__details {
+    position: relative;
+    height: 487px;
+  }
+
+  .bformats__view {
+    position: absolute;
+    inset: 0;
+  }
+
+  .bformats__view[hidden] {
+    display: none;
+  }
+
+  .bformats__details-label {
+    display: block;
+    width: 273px;
+    height: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    color: var(--color-text-secondary);
+  }
+
+  .bformats__details-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 39px;
+    margin-top: 24px;
+  }
+
+  .bformats__details-title {
+    font-family: var(--font-literata);
+    font-size: 29px;
+    line-height: 39px;
+    color: var(--color-text-primary);
+  }
+
+  .bformats__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-text-secondary);
+  }
+
+  .bformats__about {
+    margin-top: 24px;
+  }
+
+  .bformats__about-label {
+    display: block;
+    width: 110px;
+    height: 23px;
+    font-size: 15px;
+    line-height: 23px;
+    color: var(--color-text-secondary);
+  }
+
+  .bformats__about-text {
+    width: 608px;
+    height: 178px;
+    margin: 8px 0 0;
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--color-text-primary);
+  }
+
+  .bformats__meeting {
+    margin-top: 24px;
+  }
+
+  .bformats__meeting-label {
+    display: block;
+    width: 608px;
+    height: 27px;
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--color-text-primary);
+  }
+
+  .bformats__meeting-list {
+    width: 608px;
+    height: 102px;
+    margin: 8px 0 0;
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--color-text-primary);
+  }
+
+  .bformats__panel-divider {
+    display: block;
+    width: 608px;
+    height: 1px;
+    margin-top: 24px;
+    background: var(--color-border);
+  }
+
+  .bformats__form {
+    display: flex;
+    flex-direction: column;
+    width: 608px;
+    /* Высота из спеки: у фрейма формы фиксированные 814. */
+    height: 814px;
+    margin-top: 24px;
+  }
+
+  .bfield {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .bfield__head {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    height: 20px;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-text-secondary);
+  }
+
+  .bfield__optional {
+    margin-left: auto;
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+  }
+
+  .bfield__box {
+    box-sizing: border-box;
+    width: 608px;
+    height: 54px;
+    padding: 0 17px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: var(--color-bg-page);
+    font-family: var(--font-golos-text);
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-text-primary);
+  }
+
+  .bfield__box--area {
+    height: 86px;
+    padding: 17px;
+    resize: none;
+  }
+
+  .bformats__submit {
+    width: 608px;
+    height: 60px;
+    margin-top: 24px;
+    border: 0;
+    border-radius: 4px;
+    background: var(--color-accent);
+    font-family: var(--font-literata);
+    font-size: 22px;
+    line-height: 28px;
+    color: var(--color-text-on-image);
+    cursor: pointer;
+  }
+
+  .bformats__consent {
+    margin: 14px 0 0;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-text-secondary);
+  }
+
+  .bformats__note {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-text-secondary);
+    opacity: 0;
+    transition: opacity var(--motion-fast) var(--ease-out);
+  }
+
+  .bformats__note.is-visible {
+    opacity: 1;
+  }
+
+  .bformats__legal {
+    margin-top: 42px;
+    padding: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .bformats__legal-title {
+    display: block;
+    width: 209px;
+    height: 20px;
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--color-accent);
+  }
+
+  .bformats__legal-text {
+    width: 574px;
+    height: 40px;
+    margin: 32px 0 0;
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--color-text-secondary);
+  }
+
+  .bformats__legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin: 16px 0 0;
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .bformats__legal-links a {
+    color: var(--color-text-secondary);
+  }
+</style>

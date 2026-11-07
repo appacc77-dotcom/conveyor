@@ -85,6 +85,10 @@
     "home"
   ],
   "acceptance": [
+    "booking/booking-formats",
+    "booking/booking-hero",
+    "booking/footer",
+    "booking/header",
     "home/about-founder",
     "home/air-photo",
     "home/banner-founder",

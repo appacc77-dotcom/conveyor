@@ -3,6 +3,13 @@
   "note": "Каждая анимация и переход в src/ описаны здесь. status: invented:baseline — общий слой, invented — точечное решение, invented:tool — внутренняя страница, figma — из макета. decision — номер записи в docs/decisions.md.",
   "entries": [
     {
+      "file": "src/components/BookingFormats.astro",
+      "selector": ".bformats__note",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 239
+    },
+    {
       "file": "src/components/Faq.astro",
       "selector": ".faq__icon-down",
       "declaration": "transition: opacity var(--motion-base) var(--ease-out)",
