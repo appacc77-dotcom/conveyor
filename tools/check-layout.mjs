@@ -29,7 +29,13 @@ const arg = (name, fallback) => {
   const i = process.argv.indexOf(name);
   return i > 0 ? process.argv[i + 1] : fallback;
 };
-const urlPath = arg('--url', '/');
+const onlyUrl = arg('--url', null);
+// По умолчанию — все страницы проекта: пока проверялась одна, ворота молчали
+// про раскладку остальных.
+const routes = existsSync(join(root, 'design/figma/project.json'))
+  ? (JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).routes ?? {})
+  : {};
+const pageList = onlyUrl ? [onlyUrl] : [...new Set(Object.values(routes))];
 const widths = arg('--widths', '1440')
   .split(',')
   .map((w) => Number(w.trim()))
@@ -71,10 +77,44 @@ await new Promise((r) => server.listen(port, '127.0.0.1', r));
 const browser = await chromium.launch();
 let failed = false;
 
+for (const urlPath of pageList.length ? pageList : ['/']) {
 for (const width of widths) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
+
+  // Схлопывание отступа: margin-top у первого блока секции уходит наружу,
+  // если у секции нет padding/border/overflow. Три раза подряд это стоило
+  // сдвига всей секции на 64–96 px.
+  const collapsed = await page.evaluate(() => {
+    const out = [];
+    for (const section of document.querySelectorAll('section[data-figma-node]')) {
+      const first = section.firstElementChild;
+      if (!first) continue;
+      const cs = getComputedStyle(first);
+      const parent = getComputedStyle(section);
+      const margin = parseFloat(cs.marginTop) || 0;
+      if (margin <= 0) continue;
+      // Схлопывание не происходит, если у родителя есть отсечка.
+      const blocked =
+        (parseFloat(parent.paddingTop) || 0) > 0 ||
+        (parseFloat(parent.borderTopWidth) || 0) > 0 ||
+        ['hidden', 'clip', 'auto', 'scroll'].includes(parent.overflowY) ||
+        parent.display === 'flex' || parent.display === 'grid';
+      if (!blocked) {
+        out.push({
+          section: section.className || section.getAttribute('data-figma-node'),
+          first: first.className || first.tagName.toLowerCase(),
+          margin,
+        });
+      }
+    }
+    return out;
+  });
+
+  for (const item of collapsed) {
+    console.error(`  схлопывание: ${item.section} → ${item.first} (margin-top ${item.margin} px)`);
+  }
 
   const result = await page.evaluate((viewportWidth) => {
     const doc = document.documentElement;
@@ -109,7 +149,7 @@ for (const width of widths) {
     return { overflow, offenders };
   }, width);
 
-  const ok = result.overflow <= 1 && !result.offenders.length;
+  const ok = result.overflow <= 1 && !result.offenders.length && !collapsed.length;
   if (!ok) failed = true;
   console.log(`${width}px: ${ok ? 'ок' : 'ПЕРЕПОЛНЕНИЕ'} · запас по ширине ${-result.overflow}px · вылезло ${result.offenders.length}`);
   for (const item of result.offenders.slice(0, 6)) {
@@ -117,6 +157,7 @@ for (const width of widths) {
   }
 
   await page.close();
+}
 }
 
 await browser.close();
@@ -126,7 +167,7 @@ console.log('');
 console.log('390 и 768 не проверяются: макетов нет, адаптива нет — это не дефект, а отсутствие исходника.');
 
 if (failed) {
-  console.error('страница шире экрана — горизонтальная прокрутка на этой ширине');
+  console.error('раскладка не держится: горизонтальная прокрутка или схлопнутый отступ секции');
   process.exit(1);
 }
 console.log('на ширине макета раскладка держится');
