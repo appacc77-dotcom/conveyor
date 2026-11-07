@@ -26,12 +26,44 @@ function parseJson(text) {
 }
 
 /**
+ * Плагин моста периодически теряет связь на секунды — особенно на тяжёлых
+ * операциях (экспорт PNG, обход большой секции). Это не ошибка вызова: тот же
+ * запрос через мгновение проходит. Без повтора один обрыв валит весь инструмент,
+ * и приходится запускать вручную заново.
+ */
+const TRANSIENT_CODES = new Set(['E_TIMEOUT', 'E_NO_ANSWER', 'E_NO_PLUGIN', 'E_NO_BROKER', 'E_NO_ANSWER']);
+const TRANSIENT_MESSAGE = /unable to establish connection to figma|failed to export node|not connected|disconnected|no plugin/i;
+
+export function isTransient(error) {
+  if (TRANSIENT_CODES.has(error.code)) return true;
+  // Плагин отдаёт свои обрывы как E_EVAL с текстом от Figma — код не помогает,
+  // различаем по сообщению.
+  return TRANSIENT_MESSAGE.test(String(error.message ?? ''));
+}
+
+/**
  * @param {string[]} args аргументы для figma-agent
- * @param {{timeoutMs?: number}} opts
+ * @param {{timeoutMs?: number, retries?: number, onRetry?: (attempt: number, error: FigmaError) => void}} opts
  * @returns {object} разобранный JSON-ответ
  * @throws {FigmaError} если CLI вернул ошибку или не ответил
  */
-export function runFigma(args, { timeoutMs = 120000 } = {}) {
+export function runFigma(args, { timeoutMs = 120000, retries = 3, onRetry } = {}) {
+  let lastError;
+  for (let attempt = 1; attempt <= retries; attempt += 1) {
+    try {
+      return runFigmaOnce(args, timeoutMs);
+    } catch (error) {
+      lastError = error;
+      if (!isTransient(error) || attempt === retries) throw error;
+      onRetry?.(attempt, error);
+      // Пауза растёт: плагину нужно время вернуться, а не долбить его сразу.
+      spawnSync('sleep', [String(attempt * 0.8)]);
+    }
+  }
+  throw lastError;
+}
+
+function runFigmaOnce(args, timeoutMs) {
   const dir = mkdtempSync(join(tmpdir(), 'figma-cli-'));
   const outPath = join(dir, 'stdout.json');
   const errPath = join(dir, 'stderr.txt');
@@ -77,4 +109,13 @@ export function runFigma(args, { timeoutMs = 120000 } = {}) {
   }
 
   return json;
+}
+
+/** Ждёт живой плагин перед пакетом вызовов: 46 секций подряд не должны падать на первой. */
+export function waitForPlugin(timeoutSec = 30) {
+  const result = spawnSync('figma-agent', ['status', '--wait', '--timeout', String(timeoutSec)], {
+    stdio: ['ignore', 'pipe', 'pipe'],
+    timeout: (timeoutSec + 5) * 1000,
+  });
+  return result.status === 0;
 }

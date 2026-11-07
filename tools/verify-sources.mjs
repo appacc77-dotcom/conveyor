@@ -17,7 +17,7 @@ import { join } from 'node:path';
 import { readZip } from './lib/zip.mjs';
 import { createHash } from 'node:crypto';
 import { zstdDecompressSync } from 'node:zlib';
-import { runFigma, FigmaError } from './figma/cli.mjs';
+import { runFigma, FigmaError, waitForPlugin } from './figma/cli.mjs';
 import { tmpdir } from 'node:os';
 
 /** Подставляет id узла в шаблон моста и выполняет его. */
@@ -34,6 +34,12 @@ function bridgeFingerprint(nodeId) {
 }
 
 const root = process.cwd();
+
+// Пакет из десятков вызовов не должен падать на первом: ждём живой плагин.
+if (!waitForPlugin(30)) {
+  console.error('плагин моста не отвечает 30 с — открой Figma и запусти плагин');
+  process.exit(2);
+}
 const project = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
 const fileKey = project.source.fileKey;
 

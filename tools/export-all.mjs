@@ -13,6 +13,12 @@ import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 const root = process.cwd();
+
+// Пакет из десятков вызовов не должен падать на первом: ждём живой плагин.
+if (!waitForPlugin(30)) {
+  console.error('плагин моста не отвечает 30 с — открой Figma и запусти плагин');
+  process.exit(2);
+}
 const force = process.argv.includes('--force');
 const dataPath = join(root, 'design/figma/structure.json');
 if (!existsSync(dataPath)) {
