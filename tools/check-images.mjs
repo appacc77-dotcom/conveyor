@@ -27,7 +27,13 @@ const arg = (name, fallback) => {
   const i = process.argv.indexOf(name);
   return i > 0 ? process.argv[i + 1] : fallback;
 };
-const urlPath = arg('--url', '/');
+const onlyUrl = arg('--url', null);
+// По умолчанию — все страницы проекта: пока проверялась одна, ворота молчали
+// про остальные. `--url` сужает до конкретной.
+const routes = existsSync(join(root, 'design/figma/project.json'))
+  ? (JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).routes ?? {})
+  : {};
+const pageList = onlyUrl ? [onlyUrl] : [...new Set(Object.values(routes))];
 
 if (!existsSync(join(dist, 'index.html'))) {
   console.error('нет dist/ — сначала npm run build');
@@ -64,10 +70,13 @@ await new Promise((r) => server.listen(port, '127.0.0.1', r));
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+let result = { checked: [], stretched: [] };
+
+for (const urlPath of pageList.length ? pageList : ['/']) {
 await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
 await page.evaluate(() => document.fonts.ready);
 
-const result = await page.evaluate(async () => {
+const part = await page.evaluate(async () => {
   const TOLERANCE = 0.02; // 2 % — уже заметно на фото
   const stretched = [];
   const checked = [];
@@ -137,6 +146,10 @@ const result = await page.evaluate(async () => {
   return { checked, stretched };
 });
 
+result.checked.push(...part.checked.map((c) => ({ ...c, urlPath })));
+result.stretched.push(...part.stretched.map((c) => ({ ...c, urlPath })));
+}
+
 await browser.close();
 server.close();
 
@@ -150,7 +163,7 @@ if (!result.stretched.length) {
 console.error(`\nрастянуто: ${result.stretched.length}`);
 for (const item of result.stretched) {
   console.error(
-    `  ${item.cls}: картинка ${item.image} в коробке ${item.box} — искажение ${item.stretch} (${item.url})`,
+    `  ${item.urlPath} ${item.cls}: картинка ${item.image} в коробке ${item.box} — искажение ${item.stretch} (${item.url})`,
   );
 }
 console.error('\nв Figma scaleMode FILL — это cover: пропорции сохраняются, лишнее обрезается');

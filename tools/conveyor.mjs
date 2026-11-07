@@ -21,7 +21,7 @@
  */
 import { spawn } from 'node:child_process';
 import { mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { parseArgs } from 'node:util';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
@@ -43,9 +43,13 @@ const runsDir = join(root, 'reports/runs');
  */
 function hashFiles(paths) {
   const h = createHash('sha256');
+  // Путь — относительный от корня проекта: иначе один и тот же набор файлов
+  // в другом каталоге даёт другой отпечаток.
   for (const path of paths.sort()) {
-    h.update(path);
+    h.update(relative(process.cwd(), path));
+    h.update('\0');
     h.update(readFileSync(path));
+    h.update('\0');
   }
   return h.digest('hex').slice(0, 16);
 }
