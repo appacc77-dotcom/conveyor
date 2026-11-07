@@ -25,6 +25,31 @@
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* --- Базовый слой ---------------------------------------------------------
+   Сайт не должен быть статичным по умолчанию. Любой интерактивный элемент
+   получает плавную смену цвета и прозрачности, даже если компонент об этом
+   не подумал.
+
+   Двигаются только свойства, не влияющие на раскладку: цвет, прозрачность,
+   тень, заливка. Геометрия (width, height, padding, margin) — никогда, иначе
+   поедет вёрстка и замер.
+
+   Собственный `transition` компонента (класс-селектор) перебивает это правило
+   по специфичности — так и задумано: блок уточняет, а не подчиняется. */
+
+a,
+button,
+summary,
+[role='tab'],
+[role='button'],
+input,
+select,
+textarea {
+  transition-property: color, background-color, border-color, opacity, box-shadow, fill, stroke;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: var(--ease-out);
+}
+
 /* Появление снизу: меню, подсказки, всплывающие панели. */
 @keyframes motion-rise {
   from {

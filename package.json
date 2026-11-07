@@ -16,7 +16,7 @@
     "export:all": "node tools/export-all.mjs",
     "assets:prune": "node tools/assets-prune.mjs",
     "fig": "node tools/fig-file.mjs",
-    "verify": "node tools/verify-sources.mjs && node tools/check-assets.mjs && node tools/check-tokens.mjs && node tools/check-portability.mjs && node tools/check-bindings.mjs",
+    "verify": "node tools/verify-sources.mjs && node tools/check-assets.mjs && node tools/check-tokens.mjs && node tools/check-portability.mjs && node tools/check-scaffold.mjs && node tools/check-bindings.mjs",
     "page": "node tools/page-compare.mjs",
     "structure": "node tools/structure.mjs",
     "ds:tokens": "node tools/ds-tokens.mjs",
@@ -36,7 +36,8 @@
     "bindings": "node tools/check-bindings.mjs",
     "interactive": "node tools/check-interactive.mjs",
     "tokens:check": "node tools/check-tokens.mjs",
-    "motion": "node tools/check-motion.mjs"
+    "motion": "node tools/check-motion.mjs",
+    "scaffold:check": "node tools/check-scaffold.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",

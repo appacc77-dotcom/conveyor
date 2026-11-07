@@ -49,36 +49,17 @@ for (const file of walk(templates)) {
   written.push(rel);
 }
 
-// package.json собирается отдельно: у нового проекта он свой.
+// package.json берётся из шаблона: список команд и версии живут в одном файле,
+// иначе шаблон отстаёт от конвейера (так и случилось: Astro ^5 при живом 7.4.5
+// и половина команд отсутствовала).
 const pkgPath = join(root, 'package.json');
+const pkgTemplate = join(templates, 'package.json');
+if (!existsSync(pkgTemplate)) {
+  console.error('нет tools/scaffold/package.json — нечего разворачивать');
+  process.exit(2);
+}
 if (!existsSync(pkgPath) || force) {
-  const pkg = {
-    name: 'figma-port',
-    private: true,
-    type: 'module',
-    version: '0.1.0',
-    scripts: {
-      intake: 'node tools/intake.mjs',
-      document: 'node tools/document.mjs',
-      discover: 'node tools/discover.mjs',
-      export: 'node tools/export-section.mjs',
-      'export:all': 'node tools/export-all.mjs',
-      structure: 'node tools/structure.mjs',
-      'ds:tokens': 'node tools/ds-tokens.mjs',
-      measure: 'node tools/measure.mjs',
-      shot: 'node tools/shot.mjs',
-      compare: 'node tools/compare.mjs',
-      previews: 'node tools/previews.mjs',
-      page: 'node tools/page-compare.mjs',
-      status: 'node tools/status.mjs',
-      verify: 'node tools/verify-sources.mjs && node tools/check-assets.mjs',
-      build: 'ASTRO_TELEMETRY_DISABLED=1 astro build',
-      dev: 'ASTRO_TELEMETRY_DISABLED=1 astro dev --host 127.0.0.1 --port 4321',
-      preview: 'ASTRO_TELEMETRY_DISABLED=1 astro preview --host 127.0.0.1 --port 4322',
-    },
-    dependencies: { astro: '^5.0.0' },
-    devDependencies: { playwright: '^1.50.0' },
-  };
+  const pkg = JSON.parse(readFileSync(pkgTemplate, 'utf8'));
   writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
   written.push('package.json');
 } else {
