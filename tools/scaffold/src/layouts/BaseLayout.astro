@@ -10,9 +10,11 @@ import '../styles/motion.css';
 interface Props {
   title: string;
   description?: string;
+  /** Внутренние страницы (структура, дизайн-система) не должны попадать в поиск. */
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,6 +24,7 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="stylesheet" href="/fonts/fonts.css" />
     <link
       rel="preload"
