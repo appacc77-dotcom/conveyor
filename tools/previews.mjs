@@ -95,8 +95,14 @@ for (const s of targets) {
     await page.evaluate(() => document.fonts.ready);
     currentRoute = route;
   }
-  const domId = sharedNodes[s.name] ?? s.id;
-  const handle = await page.$(`[data-figma-node~="${domId}"]`);
+  // У общего компонента на странице свой id инстанса (шапка на библиотеке —
+  // 267:923, а не 79:104). Пробуем общий id, затем собственный.
+  const candidates = [sharedNodes[s.name], s.id].filter(Boolean);
+  let handle = null;
+  for (const domId of candidates) {
+    handle = await page.$(`[data-figma-node~="${domId}"]`);
+    if (handle) break;
+  }
   if (!handle) {
     missing.push(s);
     continue;
