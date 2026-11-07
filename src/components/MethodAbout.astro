@@ -1,0 +1,160 @@
+---
+/**
+ * Секция `method-about` (323:871), 1440×1077: три пункта метода.
+ *
+ * Фон — линейный градиент `#eae6d9 → #fbf8f1 → #ecdcc5` (0 / 50 / 100 %).
+ * Номера пунктов набраны Great Vibes, а не основным шрифтом.
+ */
+interface Props {
+  node?: string;
+}
+
+const { node = '323:871' } = Astro.props;
+
+const items = [
+  {
+    num: '01',
+    title: 'Глубинный уровень',
+    node: '330:945',
+    head: '337:1055',
+    numNode: '337:1053',
+    titleNode: '330:946',
+    textNode: '330:947',
+    height: 275,
+    text:
+      'В основе метода лежит работа с устойчивыми метапрограммами, состояниями и внутренними кодами, которые закрепляются в психике, теле, восприятии, энергетическом поле, генетической памяти и во внутреннем устройстве человека. Именно этот глубинный уровень влияет на чувства, реакции, выбор, отношения и повторяющиеся сценарии.',
+  },
+  {
+    num: '02',
+    title: 'Целостный подход',
+    node: '773:1656',
+    head: '773:1657',
+    numNode: '773:1658',
+    titleNode: '773:1659',
+    textNode: '773:1660',
+    height: 275,
+    text:
+      'Syntonia соединяет психологическую точность, коучинговую направленность, работу с эмоциональным и телесным опытом, внимание к подсознательным причинам, тонкому плану и внутренней духовной природе человека. Такой подход позволяет работать не только с тем, что проявлено на поверхности, но и с той внутренней структурой, из которой это возникает.',
+  },
+  {
+    num: '03',
+    title: 'Практический результат',
+    node: '773:1667',
+    head: '773:1668',
+    numNode: '773:1669',
+    titleNode: '773:1670',
+    textNode: '773:1671',
+    height: 207,
+    text:
+      'В практике это означает не только понимание причины, но и постепенную перенастройку глубинного внутреннего устройства человека, включая слои подсознания, которые лежат в основе восприятия, выбора и жизненного пути.',
+  },
+];
+---
+
+<section class="mabout" data-figma-node={node}>
+  <div class="mabout__container" data-figma-node="329:902">
+    <div class="mabout__list" data-figma-node="330:938">
+      {items.map((item) => (
+        <article class="mabout__item" data-figma-node={item.node} style={`height: ${item.height}px`}>
+          <div class="mabout__head" data-figma-node={item.head}>
+            <span class="mabout__num" data-figma-node={item.numNode}>{item.num}</span>
+            <h2 class="mabout__title" data-figma-node={item.titleNode}>{item.title}</h2>
+          </div>
+          <p class="mabout__text" data-figma-node={item.textNode}>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .mabout {
+    position: relative;
+    width: 1440px;
+    height: 1077px;
+    background: linear-gradient(180deg, #eae6d9 0%, #fbf8f1 50%, #ecdcc5 100%);
+    box-sizing: border-box;
+    /* Отступ секции, а не контейнера: иначе он схлопнется с первым блоком. */
+    padding-top: 96px;
+  }
+
+  .mabout__container {
+    box-sizing: border-box;
+    width: 1280px;
+    height: 885px;
+    margin: 0 auto;
+  }
+
+  .mabout__list {
+    width: 783px;
+    margin: 0 auto;
+  }
+
+  .mabout__item + .mabout__item {
+    margin-top: 64px;
+  }
+
+  .mabout__head {
+    display: flex;
+    align-items: flex-start;
+    height: 73px;
+  }
+
+  .mabout__item:nth-child(1) .mabout__head {
+    width: 534px;
+  }
+
+  .mabout__item:nth-child(2) .mabout__head {
+    width: 520px;
+  }
+
+  .mabout__item:nth-child(3) .mabout__head {
+    width: 657px;
+  }
+
+  .mabout__item:nth-child(2) .mabout__num {
+    width: 47px;
+  }
+
+  .mabout__item:nth-child(3) .mabout__num {
+    width: 46px;
+  }
+
+  .mabout__num {
+    width: 42px;
+    height: 69px;
+    margin-top: 4px;
+    font-family: var(--font-great-vibes);
+    font-size: 55px;
+    line-height: 68.75px;
+    color: var(--color-accent-muted);
+  }
+
+  .mabout__title {
+    width: 460px;
+    height: 60px;
+    margin: 0 0 0 32px;
+    font-family: var(--font-literata);
+    font-size: 48px;
+    line-height: 60px;
+    font-weight: 400;
+    color: var(--color-text-heading);
+  }
+
+  /* Отступ у всех заголовков один — 32; различаются только ширина и номер. */
+  .mabout__item:nth-child(2) .mabout__title {
+    width: 441px;
+  }
+
+  .mabout__item:nth-child(3) .mabout__title {
+    width: 579px;
+  }
+
+  .mabout__text {
+    width: 783px;
+    margin: 32px 0 0;
+    font-size: 20px;
+    line-height: 34px;
+    color: var(--color-text-primary);
+  }
+</style>
