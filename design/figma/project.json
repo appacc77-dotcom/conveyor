@@ -105,6 +105,8 @@
     "masters/header",
     "masters/masters-more",
     "masters/masters-team",
+    "quiz/footer",
+    "quiz/header",
     "quiz/quiz-section"
   ],
   "shared": {
