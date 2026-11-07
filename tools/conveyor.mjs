@@ -23,6 +23,8 @@ import { spawn } from 'node:child_process';
 import { mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
+import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 
 const root = process.cwd();
 const runsDir = join(root, 'reports/runs');
@@ -30,6 +32,69 @@ const runsDir = join(root, 'reports/runs');
 // --- Шаги ------------------------------------------------------------------
 // needsDist: без собранной страницы шаг не имеет смысла.
 // kind: 'gate' — влияет на вердикт; 'signal' — диагностика, вердикт не меняет.
+
+
+/**
+ * Отпечатки прогона: к какому коду и каким артефактам он относится.
+ *
+ * Зачем: `reports/runs/` не коммитится, а `gate.json` рядом со спекой
+ * перезаписывается. Без этого вердикт нельзя связать с кодом — «прогон был
+ * зелёным» ничего не говорит, если неизвестно, когда и на чём.
+ */
+function hashFiles(paths) {
+  const h = createHash('sha256');
+  for (const path of paths.sort()) {
+    h.update(path);
+    h.update(readFileSync(path));
+  }
+  return h.digest('hex').slice(0, 16);
+}
+
+function walkFiles(dir, ext, out = []) {
+  if (!existsSync(dir)) return out;
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) walkFiles(full, ext, out);
+    else if (!ext || full.endsWith(ext)) out.push(full);
+  }
+  return out;
+}
+
+function provenance() {
+  let commit = null;
+  let dirty = null;
+  try {
+    commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim();
+    dirty = execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim().length > 0;
+  } catch {
+    // не git-репозиторий — провенанс просто пустой, прогон от этого не падает
+  }
+
+  const pagesDir = join(process.cwd(), 'design/figma/pages');
+  const specs = walkFiles(pagesDir, 'spec.json');
+  const crops = walkFiles(pagesDir, 'crop.png');
+  const dist = walkFiles(join(process.cwd(), 'dist'));
+
+  return {
+    commit,
+    dirty,
+    hashes: {
+      specs: specs.length ? hashFiles(specs) : null,
+      crops: crops.length ? hashFiles(crops) : null,
+      dist: dist.length ? hashFiles(dist) : null,
+    },
+    files: { specs: specs.length, crops: crops.length, dist: dist.length },
+  };
+}
+
+/** Сколько секций файла покрыто прогоном: «19 из 46». */
+function coverage(units) {
+  const path = join(process.cwd(), 'design/figma/structure.json');
+  if (!existsSync(path)) return null;
+  const total = JSON.parse(readFileSync(path, 'utf8'))?.totals?.total ?? null;
+  if (!total) return null;
+  return { units: units.length, total, text: `${units.length} из ${total}` };
+}
 
 const GLOBAL_STEPS = [
   // Сборка — не наш скрипт, а бинарь Astro из node_modules.
@@ -207,6 +272,8 @@ async function commandCheck(unit, json, all) {
     finishedAt: new Date().toISOString(),
     status: verdict.status,
     exitCode: verdict.exitCode,
+    ...provenance(),
+    coverage: coverage(units),
     steps: results.map((r) => ({ id: r.id, status: r.status, ms: r.ms, kind: r.kind })),
   };
 
@@ -218,7 +285,13 @@ async function commandCheck(unit, json, all) {
     process.stdout.write(JSON.stringify(report) + '\n');
   } else {
     const failed = results.filter((r) => r.kind === 'gate' && r.status !== 'PASS');
-    if (all) process.stdout.write(`\nсекций проверено: ${units.length}`);
+    if (all) {
+      // Покрытие печатается явно: «19 из 46» нельзя прочитать как «весь файл».
+      const cov = coverage(units);
+      process.stdout.write(
+        `\nсекций проверено: ${units.length}${cov ? ` из ${cov.total}` : ''}`,
+      );
+    }
     process.stdout.write(`\nвердикт: ${verdict.status}`);
     if (failed.length) process.stdout.write(` · красных ${failed.length}: ${failed.map((r) => r.id).join(', ')}`);
     process.stdout.write(`\nпрогон: reports/runs/${id}/\n`);
