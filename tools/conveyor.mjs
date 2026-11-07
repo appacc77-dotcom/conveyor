@@ -167,6 +167,10 @@ const unitUrl = (unit) => unitUrls[unit] ?? routes[unit.split('/')[0]] ?? '/';
 // в спеке страницы id свой, в компоненте — id канонической секции. Список
 // лежит в project.json.shared, чтобы это было данными, а не знанием в коде.
 const sharedNodes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).shared ?? {};
+// Доп. аргументы замера для конкретной секции (например, --root и --by-suffix,
+// когда узел спеки не совпадает с корнем компонента). Данные, не код.
+const unitArgs = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).unitArgs ?? {};
+const extraArgs = (unit) => unitArgs[unit] ?? [];
 const sharedArgs = (unit) => {
   const node = sharedNodes[unit.split('/').pop()];
   return node ? ['--root', node, '--by-suffix'] : [];
@@ -175,7 +179,7 @@ const sharedArgs = (unit) => {
 const measureStep = (unit) => ({
   id: `measure:${unit.split('/')[1]}`,
   tool: 'measure',
-  args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...sharedArgs(unit)],
+  args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...sharedArgs(unit), ...extraArgs(unit)],
   kind: 'gate',
   needsDist: true,
   about: `геометрия ${unit}`,

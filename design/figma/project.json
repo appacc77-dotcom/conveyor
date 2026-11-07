@@ -113,6 +113,7 @@
     "method/header",
     "method/method-about",
     "method/method-hero",
+    "practice/hero",
     "quiz/footer",
     "quiz/header",
     "quiz/quiz-result",
@@ -124,5 +125,12 @@
   },
   "unitUrls": {
     "quiz/quiz-result": "/quiz.html?result=1"
+  },
+  "unitArgs": {
+    "practice/hero": [
+      "--root",
+      "409:243",
+      "--by-suffix"
+    ]
   }
 }

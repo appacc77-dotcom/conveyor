@@ -2,6 +2,11 @@
 /**
  * Header — секция `header` (79:104), вариант `theme=dark, shape=floating`.
  *
+ * `node` — id инстанса на конкретной странице: в спеке первой секции шапка
+ * лежит своим узлом (например, `410:1381` на странице практик), и замер
+ * сверяет именно его. По умолчанию — исходный набор.
+
+ *
  * Геометрия с живого узла: 1424×92, стоит с отступом 8 от края и перекрывает
  * первую секцию — это плавающая шапка, а не блок в потоке.
  *
@@ -32,9 +37,21 @@ const dropdownItems = [
   { text: 'Метод', href: '/method.html' },
   { text: 'Библиотека', href: '/library.html' },
 ];
+
+interface Props {
+  node?: string;
+  /**
+   * Отступ от верхнего края. В файле он разный: 8 на главной и большинстве
+   * страниц, 10 на странице практик (FIGMA-ISSUES №18). Ставит страница —
+   * компонент не знает, где стоит.
+   */
+  offsetTop?: number;
+}
+
+const { node = '79:104', offsetTop = 8 } = Astro.props;
 ---
 
-<section class="header" id="home-header" data-figma-node="79:104" data-overlay>
+<section class="header" id="home-header" data-figma-node={node} data-overlay style={`--header-top: ${offsetTop}px`}>
   <div class="header__inner" data-figma-node="I79:104;167:642">
     <nav class="header__nav" data-figma-node="I79:104;167:643">
       {links.map((link) =>
@@ -130,7 +147,7 @@ const dropdownItems = [
   .header {
     position: absolute;
     z-index: 20;
-    top: var(--space-s);
+    top: var(--header-top, var(--space-s));
     left: var(--space-s);
     width: 1424px;
     height: 92px;

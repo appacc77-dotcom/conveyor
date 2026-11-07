@@ -10,7 +10,7 @@
  * Руками не правится: запусти `npm run ds:tokens` после чтения файла.
  * Имена 1:1 с Figma: `space-xs` → `--space-xs`, `bg-page` → `--color-bg-page`.
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
@@ -120,6 +120,25 @@ out.push('');
 // ---------- typography.css ----------
 const families = new Set();
 for (const s of reality.textStyles) families.add(s.font.family);
+
+// Семейства из «сырого» текста: в файле есть узлы, набранные размером без
+// текстового стиля (Cormorant Garamond в hero страницы практик). Из стилей
+// они не видны, и токена не было — компонент падал в подстановочный шрифт.
+const specFiles = [];
+const walk = (dir) => {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) walk(path);
+    else if (entry.name === 'spec.json') specFiles.push(path);
+  }
+};
+walk(join(root, 'design/figma/pages'));
+for (const specPath of specFiles) {
+  const spec = JSON.parse(readFileSync(specPath, 'utf8'));
+  for (const node of spec.nodes ?? []) {
+    if (node.fontFamily) families.add(node.fontFamily);
+  }
+}
 
 const typo = [
   '/* Сгенерировано tools/ds-tokens.mjs из живого файла Figma. Не править руками. */',
