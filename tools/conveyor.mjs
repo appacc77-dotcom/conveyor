@@ -64,22 +64,26 @@ function builtUnits() {
   return units.sort();
 }
 
+// Адрес страницы берётся из project.json: секция может жить не на «/».
+const routes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).routes ?? {};
+const unitUrl = (unit) => routes[unit.split('/')[0]] ?? '/';
+
 const measureStep = (unit) => ({
   id: `measure:${unit.split('/')[1]}`,
   tool: 'measure',
-  args: [`design/figma/pages/${unit}/spec.json`],
+  args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit)],
   kind: 'gate',
   needsDist: true,
   about: `геометрия ${unit}`,
 });
 
 const unitSteps = (unit) => [
-  { id: 'measure', tool: 'measure', args: [`design/figma/pages/${unit}/spec.json`], kind: 'gate', needsDist: true, about: 'геометрия секции' },
+  { id: 'measure', tool: 'measure', args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit)], kind: 'gate', needsDist: true, about: 'геометрия секции' },
   // Снимок нужен до сравнения: compare не снимает страницу сам.
   {
     id: 'shot',
     tool: 'shot',
-    args: [`.${unit.split('/').pop()}`, `.screens/${unit.replace('/', '-')}.png`, '1440'],
+    args: [`.${unit.split('/').pop()}`, `.screens/${unit.replace('/', '-')}.png`, '1440', '--url', unitUrl(unit)],
     kind: 'signal',
     needsDist: true,
     about: 'снимок секции',

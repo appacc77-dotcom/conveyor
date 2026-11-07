@@ -26,7 +26,11 @@ const arg = (name, fallback) => {
   const i = process.argv.indexOf(name);
   return i > 0 ? process.argv[i + 1] : fallback;
 };
-const urlPath = arg('--url', '/');
+const onlyUrl = arg('--url', null);
+const routes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).routes ?? {};
+// По умолчанию проверяем все страницы проекта: пока страница была одна, ворота
+// молча смотрели только главную.
+const pageList = onlyUrl ? [onlyUrl] : [...new Set(Object.values(routes))];
 const only = arg('--only', null);
 const width = Number(arg('--width', 1440));
 
@@ -65,6 +69,10 @@ await new Promise((r) => server.listen(port, '127.0.0.1', r));
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width, height: 900 } });
+let dead = 0;
+let pretenders = 0;
+let checked = 0;
+for (const urlPath of pageList) {
 await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
 await page.evaluate(() => document.fonts.ready);
 
@@ -119,15 +127,10 @@ const sections = await page.evaluate((onlySel) => {
 }, only);
 
 if (!sections.length) {
-  console.log('элементов управления не найдено');
-  await browser.close();
-  server.close();
-  process.exit(0);
+  console.log(`${urlPath}: элементов управления нет`);
+  continue;
 }
 
-let dead = 0;
-let pretenders = 0;
-let checked = 0;
 
 for (const section of sections) {
   const controls = await page.$$(`${section.selector} button, ${section.selector} summary`);
@@ -195,6 +198,7 @@ for (const section of sections) {
 
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
+}
 }
 
 console.log(`\nпроверено элементов: ${checked}, притворяются: ${pretenders}, статичных секций: ${dead}`);

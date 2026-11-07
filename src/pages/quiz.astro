@@ -1,0 +1,31 @@
+---
+/**
+ * Страница теста состояния. Узлы: quiz-section `529:119`, header `530:552`,
+ * footer `531:142` — шапка и подвал те же компоненты, что на главной.
+ *
+ * В файле нарисован один вопрос из девяти; вопросы 2–9 отсутствуют, поэтому
+ * страница показывает спроектированный экран, а не выдуманный поток.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import QuizTest from '../components/QuizTest.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Тест состояния — Syntonia"
+  description="Девять вопросов о том, что вы чувствуете сейчас. Три минуты."
+>
+  <main class="page">
+    <Header />
+    <QuizTest />
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  /* Шапка позиционируется абсолютно: ей нужен позиционированный родитель. */
+  .page {
+    position: relative;
+  }
+</style>

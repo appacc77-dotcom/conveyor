@@ -87,12 +87,20 @@ for (const section of sections) {
   const spec = JSON.parse(readFileSync(section.specPath, 'utf8'));
   const sectionPage = pageOf.get(spec.section?.id) ?? section.page;
 
+  // Состояния можно исключить данными: `exclude` в states.json с причиной.
+  // Так отдельные экраны (результат теста) не выдаются за состояния блока.
+  const excluded = new Set((states.exclude ?? []).flatMap((group) => group.ids ?? []));
+  if (excluded.size) {
+    console.log(`  ${section.page}/${section.name}: исключено состояний ${excluded.size} — ${states.exclude[0].reason.slice(0, 60)}…`);
+  }
+
   const texts = new Set();
   for (const node of spec.nodes ?? []) {
     const t = clean(node.text);
     if (t.length >= MIN_LENGTH) texts.add(t);
   }
   for (const state of states.states ?? []) {
+    if (excluded.has(state.id)) continue;
     // Варианты одного блока: только та же страница. У подвала состояния
     // приходят с других страниц, и требовать их на главной нельзя.
     if (pageOf.get(state.id) !== sectionPage) continue;
@@ -144,7 +152,17 @@ let total = 0;
 let missing = 0;
 const report = [];
 
+// Секции живут на разных страницах: перед каждой переходим на свою.
+const routes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).routes ?? {};
+let currentUrl = null;
+
 for (const [unit, { section, texts }] of expected) {
+  const pageUrl = routes[unit.split('/')[0]] ?? '/';
+  if (pageUrl !== currentUrl) {
+    await page.goto(`http://127.0.0.1:${port}${pageUrl}`, { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready);
+    currentUrl = pageUrl;
+  }
   const spec = JSON.parse(readFileSync(section.specPath, 'utf8'));
   const id = spec.section?.id;
   const rendered = await page.evaluate((nodeId) => {

@@ -33,7 +33,7 @@
     {
       "file": "src/components/Formats.astro",
       "selector": ".format-tab--active .format-tab__desc",
-      "declaration": "animation: format-fade 0.3s ease both animation: none",
+      "declaration": "animation: format-fade var(--motion-base) var(--ease-out) both animation: none",
       "status": "invented",
       "decision": 141
     },
@@ -80,9 +80,16 @@
       "decision": 176
     },
     {
+      "file": "src/components/QuizTest.astro",
+      "selector": ".qtest__note",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 213
+    },
+    {
       "file": "src/components/Voices.astro",
       "selector": ".voices__track",
-      "declaration": "transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
+      "declaration": "transition: transform var(--motion-slow) var(--ease-in-out)",
       "status": "invented",
       "decision": 197
     },
@@ -103,21 +110,21 @@
     {
       "file": "src/components/Voices.astro",
       "selector": ".voices__arrow",
-      "declaration": "transition: opacity 0.2s ease, transform 0.2s ease",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out)",
       "status": "invented",
       "decision": 197
     },
     {
       "file": "src/components/ds/btn-primary.astro",
       "selector": ".btn-primary",
-      "declaration": "transition: filter 0.2s ease, transform 0.2s ease transition: none",
+      "declaration": "transition: filter var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out) transition: none",
       "status": "invented:baseline",
       "decision": 180
     },
     {
       "file": "src/components/ds/btn-quiet.astro",
       "selector": ".btn-quiet",
-      "declaration": "transition: opacity 0.2s ease transition: none",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out) transition: none",
       "status": "invented:baseline",
       "decision": 180
     },
