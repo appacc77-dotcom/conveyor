@@ -39,6 +39,13 @@
     },
     {
       "file": "src/components/FounderHero.astro",
+      "selector": ".founder__note",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 228
+    },
+    {
+      "file": "src/components/FounderHero.astro",
       "selector": ".bio__title, .bio__num",
       "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
       "status": "invented",

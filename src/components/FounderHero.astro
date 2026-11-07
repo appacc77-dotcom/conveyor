@@ -68,12 +68,13 @@ const items = [
 
       <div class="founder__player" data-figma-node="233:296">
         <div class="founder__player-row">
-          <button class="founder__play" type="button" aria-label="Слушать голос">
+          <button class="founder__play" type="button" aria-label="Слушать голос" data-play>
             <span class="founder__play-icon" set:html={playBtn} />
           </button>
           <span class="founder__wave" set:html={wave} />
           <span class="founder__time" data-figma-node="I233:296;217:250">1:25</span>
         </div>
+        <p class="founder__note" role="status" aria-live="polite" data-note></p>
         <p class="founder__teaser" data-figma-node="I233:296;217:251">
           Можно многое понимать про себя и всё равно жить в одном и том же круге событий. Потому что вашей
           жизнью управляет не только то, что вы осознаёте.
@@ -110,6 +111,15 @@ const items = [
 </section>
 
 <script>
+  // Аудиозаписей в макете нет: кнопка не притворяется плеером.
+  const play = document.querySelector('[data-play]');
+  const playNote = document.querySelector('[data-note]');
+  play?.addEventListener('click', () => {
+    if (!playNote) return;
+    playNote.textContent = 'Запись пока не приложена.';
+    playNote.classList.add('is-visible');
+  });
+
   for (const bio of document.querySelectorAll('[data-bio]')) {
     const head = bio.querySelector('.bio__head');
     head?.addEventListener('click', () => {
@@ -266,6 +276,22 @@ const items = [
     font-size: 13px;
     line-height: 20px;
     color: var(--color-text-on-image);
+  }
+
+  .founder__note {
+    position: absolute;
+    left: 16px;
+    bottom: 2px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 14px;
+    color: var(--color-text-on-image);
+    opacity: 0;
+    transition: opacity var(--motion-fast) var(--ease-out);
+  }
+
+  .founder__note.is-visible {
+    opacity: 0.8;
   }
 
   .founder__teaser {

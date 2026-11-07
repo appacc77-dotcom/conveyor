@@ -84,10 +84,16 @@ const signature = (selector) =>
     if (!rootEl) return null;
     const parts = [];
     const walk = (el) => {
-      // Только то, что видно: тег, классы, инлайн-стиль и видимость.
-      // aria-* сюда не входят — атрибут можно переключить, ничего не показав.
-      const visible = el.getClientRects().length > 0;
-      parts.push(`${el.tagName}|${el.className}|${el.getAttribute('style') ?? ''}|${visible ? 'v' : 'h'}`);
+      // Только то, что видно: тег, классы, инлайн-стиль и реальная видимость.
+      // Геометрии мало: закрытое меню шапки скрыто через visibility, но бокс
+      // у него есть — по getClientRects оно выглядело открытым.
+      const cs = getComputedStyle(el);
+      // Текст листьев тоже виден пользователю: подсказка может сменить только
+      // содержимое, оставшись видимой.
+      const text = el.children.length === 0 ? (el.textContent ?? '').trim().slice(0, 60) : '';
+      parts.push(
+        `${el.tagName}|${el.className}|${el.getAttribute('style') ?? ''}|${cs.visibility}|${cs.display}|${cs.opacity}|${text}`,
+      );
       for (const child of el.children) walk(child);
     };
     walk(rootEl);
@@ -101,7 +107,9 @@ const controlSignature = (handle) =>
     const parts = [];
     const walk = (node) => {
       const cs = getComputedStyle(node);
-      parts.push(`${node.tagName}|${node.className}|${cs.transform}|${cs.opacity}|${cs.backgroundColor}`);
+      parts.push(
+        `${node.tagName}|${node.className}|${cs.transform}|${cs.opacity}|${cs.backgroundColor}|${cs.display}|${cs.visibility}|${node.open ?? ''}`,
+      );
       for (const child of node.children) walk(child);
     };
     walk(el);
@@ -136,7 +144,6 @@ for (const section of sections) {
   const controls = await page.$$(`${section.selector} button, ${section.selector} summary`);
   if (!controls.length) continue;
 
-  const initial = await signature(section.selector);
   let alive = false;
   let ariaOnly = [];
   let blind = [];
@@ -145,6 +152,18 @@ for (const section of sections) {
 
   for (const control of controls) {
     const label = (await control.evaluate((el) => (el.textContent ?? '').trim().slice(0, 24) || el.getAttribute('aria-label') || el.tagName.toLowerCase())).trim();
+    // Состояние снимается ПЕРЕД каждым кликом: сравнение с исходным делало
+    // секцию «живой навсегда» — одного работающего элемента хватало, чтобы
+    // мёртвые рядом не считались дефектом.
+    const before = await signature(section.selector);
+    const skip = await control.evaluate((el) => {
+      // Выбранный пункт радиогруппы и точка «вы здесь» при повторном клике
+      // ничего не меняют — это поведение, а не дефект.
+      if (el.getAttribute('role') === 'radio' && el.getAttribute('aria-checked') === 'true') return true;
+      return el.getAttribute('aria-current') === 'true';
+    });
+    if (skip) continue;
+
     const ariaBefore = await control.evaluate((el) => el.getAttribute('aria-expanded'));
     const selfBefore = await controlSignature(control);
     try {
@@ -168,7 +187,7 @@ for (const section of sections) {
       blind.push(label);
     }
 
-    if (now !== initial) {
+    if (now !== before) {
       alive = true;
     } else if (ariaBefore !== null && ariaAfter !== null && ariaBefore !== ariaAfter) {
       // Атрибут переключился, а на экране ничего: элемент делает вид, что живой.
@@ -178,7 +197,9 @@ for (const section of sections) {
     }
   }
 
-  dead += ariaOnly.length + blind.length + covered.length;
+  // Мёртвые элементы считаются поштучно, а не «секция целиком»: иначе один
+  // живой элемент скрывал бы четыре мёртвых.
+  dead += ariaOnly.length + blind.length + covered.length + inert.length;
   pretenders += ariaOnly.length + blind.length;
   const status = covered.length
     ? 'ПЕРЕКРЫТ'
@@ -186,15 +207,16 @@ for (const section of sections) {
       ? 'ПРИТВОРЯЕТСЯ'
       : blind.length
         ? 'МОЛЧАЛИВЫЙ ПЕРЕКЛЮЧАТЕЛЬ'
-        : alive
-          ? 'живой'
-          : 'СТАТИЧНЫЙ';
+        : inert.length
+          ? 'МЁРТВЫЕ ЭЛЕМЕНТЫ'
+          : alive
+            ? 'живой'
+            : 'СТАТИЧНЫЙ';
   console.log(`${section.name.padEnd(18)} элементов ${String(controls.length).padStart(2)} · ${status}`);
   for (const label of ariaOnly) console.log(`   «${label}» — меняет только aria, на экране ничего`);
   for (const label of blind) console.log(`   «${label}» — открывает состояние, но сам не меняется`);
   for (const label of covered) console.log(`   «${label}» — перекрыт другим слоем, клик не доходит`);
-  if (!alive && !ariaOnly.length) console.log(`   нажатия не меняют ничего: ${inert.slice(0, 3).join(', ')}`);
-  if (!alive && !ariaOnly.length) dead += 1;
+  for (const label of inert) console.log(`   «${label}» — нажатие не меняет ничего`);
 
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);

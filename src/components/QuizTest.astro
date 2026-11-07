@@ -103,7 +103,7 @@ const answers = [
           </div>
 
           <div class="qtest__move">
-            <button class="qtest__back" type="button">
+            <button class="qtest__back" type="button" data-back>
               <span class="qtest__back-arrow" aria-hidden="true"><ArrowQuiet size={13} /></span>
               <span class="qtest__btn-text">Назад</span>
             </button>
@@ -138,10 +138,17 @@ const answers = [
 
     // Вопросов 2–9 в макете нет: кнопка не листает, а говорит об этом.
     const note = section.querySelector('[data-note]');
-    section.querySelector('[data-next]')?.addEventListener('click', () => {
+    const say = (text) => {
       if (!note) return;
-      note.textContent = 'Вопросы 2–9 в макете не нарисованы — листать некуда.';
+      note.textContent = text;
       note.classList.add('is-visible');
+    };
+
+    section.querySelector('[data-next]')?.addEventListener('click', () => {
+      say('Вопросы 2–9 в макете не нарисованы — листать некуда.');
+    });
+    section.querySelector('[data-back]')?.addEventListener('click', () => {
+      say('Это первый вопрос — назад листать некуда.');
     });
   }
 </script>
