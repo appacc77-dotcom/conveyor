@@ -33,11 +33,21 @@ import Footer from '../components/Footer.astro';
 </style>
 
 <script>
-  // ?result=1 показывает экран результата сразу: так его можно замерить.
-  if (new URLSearchParams(location.search).get('result') === '1') {
+  // ?result=1 (или ?result=pride) показывает экран результата сразу: так его
+  // можно замерить. Набор текстов тот же, что в макете для этого кода.
+  const variant = new URLSearchParams(location.search).get('result');
+  if (variant) {
     const question = document.querySelector('.qtest');
     const result = document.querySelector('.qres');
     if (question) question.hidden = true;
-    if (result) result.hidden = false;
+    if (result) {
+      result.hidden = false;
+      if (variant === 'pride') {
+        const title = result.querySelector('.qres__title');
+        const action = result.querySelector('[data-submit-label]');
+        if (title) title.textContent = 'Код Гордыни';
+        if (action) action.textContent = 'Практика для тебя';
+      }
+    }
   }
 </script>

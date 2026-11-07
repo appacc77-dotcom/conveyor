@@ -28,7 +28,7 @@ const { node = '529:119' } = Astro.props;
 //
 // В файле нарисован один вопрос и два экрана результата. Остальное — перенос
 // проверенной последовательности, записано в docs/decisions.md.
-import { questions, optionNodes } from '../data/quiz.js';
+import { questions } from '../data/quiz.js';
 
 ---
 
@@ -93,7 +93,7 @@ import { questions, optionNodes } from '../data/quiz.js';
                 type="button"
                 role="radio"
                 aria-checked={i === 0 ? 'true' : 'false'}
-                data-figma-node={optionNodes[i]}
+                data-figma-node={answer.node}
                 data-code={answer.code}
               >
                 <span class="qtest__round" aria-hidden="true" />
@@ -121,7 +121,7 @@ import { questions, optionNodes } from '../data/quiz.js';
 </section>
 
 <script>
-  import { questions, results } from '../data/quiz.js';
+  import { questions, codes } from '../data/quiz.js';
 
   const section = document.querySelector('.qtest');
   if (section) {
@@ -136,10 +136,19 @@ import { questions, optionNodes } from '../data/quiz.js';
     const nextLabel = nextBtn?.querySelector('[data-next-label]');
     const note = section.querySelector('[data-note]');
 
+    // Механизм рассчитан на любое число вопросов. В макете вопрос один,
+    // поэтому значения прогресса остаются макетными (10,1 % и 15,4 %):
+    // считать «1 из 1» и показывать 100 % на первом экране нельзя.
     const total = questions.length;
     let index = 0;
     let selected = null;
     const answers = [];
+
+    // Astro скоупит стили атрибутом data-astro-cid-*: элементы из JS его не
+    // получают, поэтому копируем атрибут с секции на кнопку и её детей.
+    const scope = [...section.attributes]
+      .map((attr) => attr.name)
+      .find((name) => name.startsWith('data-astro-cid-'));
 
     const say = (text) => {
       if (!note) return;
@@ -147,27 +156,17 @@ import { questions, optionNodes } from '../data/quiz.js';
       note.classList.toggle('is-visible', Boolean(text));
     };
 
-    // Astro скоупит стили атрибутом data-astro-cid-*: элементы, созданные в JS,
-    // его не получают, и стили к ним не применяются. Копируем атрибут с секции.
-    const scope = [...section.attributes]
-      .map((attr) => attr.name)
-      .find((name) => name.startsWith('data-astro-cid-'));
-
     const renderOptions = () => {
-      const question = questions[index];
       optionsEl.replaceChildren(
-        ...question.options.map((option) => {
+        ...questions[index].options.map((option) => {
           const button = document.createElement('button');
           button.type = 'button';
           button.className = 'qtest__option';
           button.setAttribute('role', 'radio');
-          const active = answers[index] === option.code && option.text === answers[index + ':text'];
-          button.classList.toggle('is-active', active);
-          button.setAttribute('aria-checked', String(active));
+          button.setAttribute('aria-checked', 'false');
           button.dataset.code = option.code;
-          button.dataset.text = option.text;
-          // Скоуп нужен и детям: селекторы вида .qtest__round[data-astro-cid-*].
           if (scope) button.setAttribute(scope, '');
+
           const round = document.createElement('span');
           round.className = 'qtest__round';
           round.setAttribute('aria-hidden', 'true');
@@ -186,11 +185,13 @@ import { questions, optionNodes } from '../data/quiz.js';
 
     const render = () => {
       const question = questions[index];
-      const progress = Math.round(((index + 1) / total) * 100);
       if (questionEl) questionEl.textContent = question.text;
-      if (stepEl) stepEl.textContent = `Вопрос ${index + 1} из ${total}`;
-      if (percentEl) percentEl.textContent = `${progress}% пройдено`;
-      if (barEl) barEl.style.width = `${progress}%`;
+      if (total > 1) {
+        const progress = Math.round(((index + 1) / total) * 100);
+        if (stepEl) stepEl.textContent = `Вопрос ${index + 1} из ${total}`;
+        if (percentEl) percentEl.textContent = `${progress}% пройдено`;
+        if (barEl) barEl.style.width = `${progress}%`;
+      }
       renderOptions();
       selected = null;
       if (nextLabel) nextLabel.textContent = index === total - 1 ? 'Показать результат' : 'Далее';
@@ -199,30 +200,21 @@ import { questions, optionNodes } from '../data/quiz.js';
 
     const showResult = () => {
       if (!resultEl) return;
+      // Код берётся из ответа; при нескольких вопросах — по преобладанию.
       const counts = {};
       for (const code of answers) counts[code] = (counts[code] ?? 0) + 1;
-      const code = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] ?? 'pain';
-      const result = results[code] ?? results.pain;
+      const winner = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+      const result = codes[winner] ?? codes.pain;
 
       for (const el of resultEl.querySelectorAll('[data-code-name]')) el.textContent = result.title;
-      const lead = resultEl.querySelector('[data-result-lead]');
-      if (lead) lead.textContent = result.lead;
-      const state = resultEl.querySelector('[data-result-state]');
-      if (state) state.textContent = result.state;
-      const meaning = resultEl.querySelector('[data-result-meaning]');
-      if (meaning) {
-        const paragraphs = [...meaning.querySelectorAll('[data-result-paragraph]')];
-        paragraphs.forEach((node, i) => {
-          node.textContent = result.meaning[i] ?? '';
-        });
-      }
+      const action = resultEl.querySelector('[data-submit-label]');
+      if (action) action.textContent = result.action;
 
       section.hidden = true;
       resultEl.hidden = false;
       resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
-    // Выбор ответа.
     optionsEl?.addEventListener('click', (event) => {
       const button = event.target.closest('.qtest__option');
       if (!button) return;
@@ -250,7 +242,7 @@ import { questions, optionNodes } from '../data/quiz.js';
     });
 
     backBtn?.addEventListener('click', () => {
-      // На первом вопросе назад некуда: кнопка видна (как в макете) и говорит об этом.
+      // На первом вопросе назад некуда: кнопка видна, как в макете, и говорит об этом.
       if (index === 0) {
         say('Это первый вопрос — назад листать некуда.');
         return;
@@ -259,7 +251,6 @@ import { questions, optionNodes } from '../data/quiz.js';
       render();
     });
 
-    // Пол: переключение остаётся, на результат не влияет.
     const sexGroup = section.querySelector('.qtest__sex-choice');
     sexGroup?.addEventListener('click', (event) => {
       const button = event.target.closest('.qtest__sex-option');

@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-07T14:44:37.964Z",
+  "at": "2026-11-07T15:09:16.481Z",
   "reference": "design/figma/pages/quiz/quiz-result/crop.png",
-  "shot": ".screens/qres.png",
+  "shot": ".screens/qres-pride.png",
   "width": 1440,
   "height": 1302,
-  "mean": 6.77,
-  "over16": 5.23,
-  "over48": 4.02
+  "mean": 7.07,
+  "over16": 5.37,
+  "over48": 4.2
 }
