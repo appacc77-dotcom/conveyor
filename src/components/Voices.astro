@@ -196,7 +196,7 @@ const track = [...ordered, { ...ordered[0], clone: true }, { ...ordered[1], clon
     display: flex;
     gap: var(--space-2xl);
     width: max-content;
-    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--motion-slow) var(--ease-in-out);
   }
 
   /* Клон третьей карточки: в макете он стоит за левым краем на −720 —
@@ -344,7 +344,7 @@ const track = [...ordered, { ...ordered[0], clone: true }, { ...ordered[1], clon
     border: 0;
     background: none;
     cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
   }
 
   .voices__arrow:hover {

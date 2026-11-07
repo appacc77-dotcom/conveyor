@@ -96,14 +96,29 @@ for (const [duration, count] of Object.entries(report.byDuration)) {
   console.log(`  переход ${duration}: ${count}`);
 }
 
-// Доступность: при reduce переходы должны гаснуть.
+// Доступность: при reduce переходы должны гаснуть у ВСЕХ видимых элементов,
+// а не у первого. Раньше проверялся один `querySelector` — элемент, у которого
+// защита не сработала, проходил мимо ворот.
 await page.emulateMedia({ reducedMotion: 'reduce' });
 const reduced = await page.evaluate(() => {
-  const el = document.querySelector('a[href], button, summary');
-  if (!el) return null;
-  const cs = getComputedStyle(el);
-  const durations = cs.transitionDuration.split(',').map((d) => parseFloat(d) || 0);
-  return Math.max(...durations);
+  const selector = 'a[href], button, summary, [role="tab"], [role="button"], input, select, textarea';
+  const slow = [];
+  let checked = 0;
+  for (const el of document.querySelectorAll(selector)) {
+    const rect = el.getBoundingClientRect();
+    if (!rect.width || !rect.height) continue;
+    if (getComputedStyle(el).visibility === 'hidden') continue;
+    checked += 1;
+    const durations = getComputedStyle(el).transitionDuration.split(',').map((d) => parseFloat(d) || 0);
+    const worst = Math.max(...durations);
+    if (worst > 0.01) {
+      slow.push({
+        label: (el.textContent ?? '').trim().slice(0, 24) || el.getAttribute('aria-label') || el.tagName.toLowerCase(),
+        duration: worst,
+      });
+    }
+  }
+  return { checked, slow };
 });
 
 await browser.close();
@@ -120,9 +135,14 @@ if (report.dead.length) {
   console.error('\nэлемент без перехода переключается рывком — добавьте transition или используйте базовый слой');
 }
 
-if (reduced !== null && reduced > 0.01) {
+if (reduced && reduced.slow.length) {
   failed = true;
-  console.error(`\nprefers-reduced-motion не отключает переходы: ${reduced}s`);
+  console.error(
+    `\nprefers-reduced-motion не отключает переходы: ${reduced.slow.length} из ${reduced.checked}`,
+  );
+  for (const item of reduced.slow.slice(0, 8)) {
+    console.error(`  «${item.label}» — ${item.duration}s`);
+  }
 }
 
 if (failed) process.exit(1);

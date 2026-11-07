@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "note": "Каждая анимация и переход в src/ описаны здесь. status: invented:baseline — общий слой, invented — точечное решение, invented:tool — внутренняя страница, figma — из макета. decision — номер записи в docs/decisions.md.",
+  "entries": [
+    {
+      "file": "src/components/Faq.astro",
+      "selector": ".faq__icon-down",
+      "declaration": "transition: opacity var(--motion-base) var(--ease-out)",
+      "status": "invented",
+      "decision": 161
+    },
+    {
+      "file": "src/components/Faq.astro",
+      "selector": ".faq__item--open .faq__answer",
+      "declaration": "animation: motion-fade var(--motion-base) var(--ease-out) both",
+      "status": "invented",
+      "decision": 161
+    },
+    {
+      "file": "src/components/Formats.astro",
+      "selector": ".formats__slide",
+      "declaration": "transition: opacity var(--motion-slow) var(--ease-out)",
+      "status": "invented",
+      "decision": 141
+    },
+    {
+      "file": "src/components/Formats.astro",
+      "selector": ".format-tab",
+      "declaration": "transition:",
+      "status": "invented",
+      "decision": 141
+    },
+    {
+      "file": "src/components/Formats.astro",
+      "selector": ".format-tab--active .format-tab__desc",
+      "declaration": "animation: format-fade 0.3s ease both animation: none",
+      "status": "invented",
+      "decision": 141
+    },
+    {
+      "file": "src/components/Header.astro",
+      "selector": ".header__chevron",
+      "declaration": "transition: transform var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 166
+    },
+    {
+      "file": "src/components/Header.astro",
+      "selector": ".header__menu",
+      "declaration": "animation: motion-rise var(--motion-base) var(--ease-out) both",
+      "status": "invented",
+      "decision": 166
+    },
+    {
+      "file": "src/components/Header.astro",
+      "selector": ".header__mobile",
+      "declaration": "animation: panel-rise var(--motion-base) var(--ease-out) both",
+      "status": "invented",
+      "decision": 166
+    },
+    {
+      "file": "src/components/Header.astro",
+      "selector": ".header__mobile-link",
+      "declaration": "transition:",
+      "status": "invented",
+      "decision": 166
+    },
+    {
+      "file": "src/components/Header.astro",
+      "selector": ".header__line",
+      "declaration": "transition:",
+      "status": "invented",
+      "decision": 166
+    },
+    {
+      "file": "src/components/Hero.astro",
+      "selector": ".hero__toast",
+      "declaration": "transition:",
+      "status": "invented",
+      "decision": 176
+    },
+    {
+      "file": "src/components/Voices.astro",
+      "selector": ".voices__track",
+      "declaration": "transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
+      "status": "invented",
+      "decision": 197
+    },
+    {
+      "file": "src/components/Voices.astro",
+      "selector": ".voices__dot",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 197
+    },
+    {
+      "file": "src/components/Voices.astro",
+      "selector": ".voices__dot::after",
+      "declaration": "transition: opacity var(--motion-base) var(--ease-out)",
+      "status": "invented",
+      "decision": 197
+    },
+    {
+      "file": "src/components/Voices.astro",
+      "selector": ".voices__arrow",
+      "declaration": "transition: opacity 0.2s ease, transform 0.2s ease",
+      "status": "invented",
+      "decision": 197
+    },
+    {
+      "file": "src/components/ds/btn-primary.astro",
+      "selector": ".btn-primary",
+      "declaration": "transition: filter 0.2s ease, transform 0.2s ease transition: none",
+      "status": "invented:baseline",
+      "decision": 180
+    },
+    {
+      "file": "src/components/ds/btn-quiet.astro",
+      "selector": ".btn-quiet",
+      "declaration": "transition: opacity 0.2s ease transition: none",
+      "status": "invented:baseline",
+      "decision": 180
+    },
+    {
+      "file": "src/pages/structure.astro",
+      "selector": ".chip",
+      "declaration": "transition: background 0.15s ease, color 0.15s ease",
+      "status": "invented:tool",
+      "decision": 206
+    },
+    {
+      "file": "src/pages/structure.astro",
+      "selector": ".block",
+      "declaration": "transition: border-color 0.15s ease, transform 0.15s ease",
+      "status": "invented:tool",
+      "decision": 206
+    },
+    {
+      "file": "src/pages/structure.astro",
+      "selector": ".link",
+      "declaration": "transition: color 0.15s ease, border-color 0.15s ease",
+      "status": "invented:tool",
+      "decision": 206
+    },
+    {
+      "file": "src/pages/structure.astro",
+      "selector": ".copy",
+      "declaration": "transition: opacity 0.15s ease, color 0.15s ease, border-color 0.15s ease",
+      "status": "invented:tool",
+      "decision": 206
+    },
+    {
+      "file": "src/pages/structure.astro",
+      "selector": ".shot img",
+      "declaration": "transition: transform 0.25s ease",
+      "status": "invented:tool",
+      "decision": 206
+    },
+    {
+      "file": "src/styles/motion.css",
+      "selector": "a, button, summary, [role='tab'], [role='button'], input, select",
+      "declaration": "transition-property: color, background-color, border-color, opacity, box-shadow, fill, stroke transition-duration: var(--motion-fast)",
+      "status": "invented:baseline",
+      "decision": 180
+    },
+    {
+      "file": "src/styles/motion.css",
+      "selector": "}",
+      "declaration": "animation-duration: 0.01ms !important transition-duration: 0.01ms !important",
+      "status": "invented:baseline",
+      "decision": 180
+    }
+  ]
+}

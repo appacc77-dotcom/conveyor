@@ -357,7 +357,7 @@ const { title, lead, note, slide, tabs, slides = [] } = Astro.props;
   .format-tab--active .format-tab__desc {
     display: block;
     height: 95px;
-    animation: format-fade 0.3s ease both;
+    animation: format-fade var(--motion-base) var(--ease-out) both;
   }
 
   /* Появление описания: display переключить нельзя, анимируем прозрачность. */

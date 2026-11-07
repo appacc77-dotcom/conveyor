@@ -44,6 +44,7 @@ const GLOBAL_STEPS = [
   { id: 'states', tool: 'check-states', kind: 'gate', needsDist: true, about: 'контент всех состояний собран' },
   { id: 'interactive', tool: 'check-interactive', kind: 'gate', needsDist: true, about: 'блоки живые' },
   { id: 'motion', tool: 'check-motion', kind: 'gate', needsDist: true, about: 'есть переходы' },
+  { id: 'motion-manifest', tool: 'check-motion-manifest', kind: 'gate', needsDist: false, about: 'движение описано в манифесте' },
   { id: 'layout', tool: 'check-layout', kind: 'gate', needsDist: true, about: 'нет прокрутки на ширине макета' },
 ];
 
