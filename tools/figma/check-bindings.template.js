@@ -14,13 +14,36 @@
 await figma.loadAllPagesAsync();
 
 const items = __PAYLOAD__;
+
+/**
+ * Узел по id. Прямое чтение ребёнка инстанса (`I383:916;383:835`) тянет из
+ * сети главный компонент и падает с «Unable to establish connection to Figma».
+ * Тогда идём от инстанса по детям — это локальная операция.
+ */
+async function resolveNode(id) {
+  try {
+    const node = await figma.getNodeByIdAsync(id);
+    if (node) return node;
+  } catch {
+    /* падаем в обход ниже */
+  }
+  if (!id.includes(";")) return null;
+  const parts = id.replace(/^I/, "").split(";");
+  let node = await figma.getNodeByIdAsync(parts[0]);
+  for (const part of parts.slice(1)) {
+    if (!node) return null;
+    const children = node.children || [];
+    node = children.find((c) => c.id === part || c.id.endsWith(`;${part}`)) ?? null;
+  }
+  return node;
+}
 const out = [];
 // Переменная одна и та же у десятков узлов: без кэша каждый узел делает
 // отдельный запрос к плагину и пачка не укладывается в бюджет вызова.
 const variableCache = new Map();
 
 for (const item of items) {
-  const node = await figma.getNodeByIdAsync(item.id);
+  const node = await resolveNode(item.id);
   if (!node) {
     out.push({ id: item.id, kind: item.kind, index: item.index, error: "узел не найден" });
     continue;
