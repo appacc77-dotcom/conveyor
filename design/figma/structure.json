@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-07T10:36:20.055Z",
+  "at": "2026-11-07T10:48:57.671Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
   },
   "totals": {
     "total": 46,
-    "green": 16,
+    "green": 17,
     "measured": 0,
     "red": 0,
-    "exported": 30,
+    "exported": 29,
     "todo": 0
   },
   "assetsTotal": {
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-07T10:36:08.881Z"
+            "at": "2026-11-07T10:48:37.753Z"
           },
           "pixel": {
             "mean": 1.76,
@@ -96,7 +96,7 @@
             "nodes": 5,
             "coverage": 100,
             "worstDelta": 0.29000000000002046,
-            "at": "2026-11-07T10:36:02.532Z"
+            "at": "2026-11-07T10:48:31.481Z"
           },
           "pixel": {
             "mean": 3.06,
@@ -141,7 +141,7 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.730000000000004,
-            "at": "2026-11-07T10:36:12.016Z"
+            "at": "2026-11-07T10:48:40.901Z"
           },
           "pixel": {
             "mean": 4.14,
@@ -186,7 +186,7 @@
             "nodes": 16,
             "coverage": 100,
             "worstDelta": 0.9199999999999875,
-            "at": "2026-11-07T10:36:10.983Z"
+            "at": "2026-11-07T10:48:39.853Z"
           },
           "pixel": {
             "mean": 1.87,
@@ -231,7 +231,7 @@
             "nodes": 17,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T10:36:14.100Z"
+            "at": "2026-11-07T10:48:42.983Z"
           },
           "pixel": {
             "mean": 2.2,
@@ -276,7 +276,7 @@
             "nodes": 21,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T10:36:00.459Z"
+            "at": "2026-11-07T10:48:29.409Z"
           },
           "pixel": {
             "mean": 1.24,
@@ -321,7 +321,7 @@
             "nodes": 25,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T10:36:13.066Z"
+            "at": "2026-11-07T10:48:41.941Z"
           },
           "pixel": {
             "mean": 2.13,
@@ -366,7 +366,7 @@
             "nodes": 23,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T10:36:03.582Z"
+            "at": "2026-11-07T10:48:32.530Z"
           },
           "pixel": {
             "mean": 5.1,
@@ -411,7 +411,7 @@
             "nodes": 77,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T10:36:06.799Z"
+            "at": "2026-11-07T10:48:35.683Z"
           },
           "pixel": {
             "mean": 2.21,
@@ -456,7 +456,7 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.5300000000000011,
-            "at": "2026-11-07T10:36:15.133Z"
+            "at": "2026-11-07T10:48:44.035Z"
           },
           "pixel": {
             "mean": 1,
@@ -501,7 +501,7 @@
             "nodes": 18,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T10:36:09.933Z"
+            "at": "2026-11-07T10:48:38.803Z"
           },
           "pixel": {
             "mean": 1.49,
@@ -546,7 +546,7 @@
             "nodes": 1,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T10:36:01.494Z"
+            "at": "2026-11-07T10:48:30.437Z"
           },
           "pixel": {
             "mean": 5.91,
@@ -591,7 +591,7 @@
             "nodes": 52,
             "coverage": 100,
             "worstDelta": 0.4399999999999977,
-            "at": "2026-11-07T10:36:04.619Z"
+            "at": "2026-11-07T10:48:33.582Z"
           },
           "pixel": {
             "mean": 4.31,
@@ -636,7 +636,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T10:36:05.759Z"
+            "at": "2026-11-07T10:48:34.636Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -681,7 +681,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T10:36:07.848Z"
+            "at": "2026-11-07T10:48:36.700Z"
           },
           "pixel": {
             "mean": 3.83,
@@ -719,7 +719,7 @@
       "key": "masters",
       "id": "190:487",
       "route": "/masters.html",
-      "built": false,
+      "built": true,
       "title": "Masters",
       "frame": {
         "id": "217:237",
@@ -803,11 +803,24 @@
           "slug": "masters-masters-more",
           "dir": "design/figma/pages/masters/masters-more",
           "status": {
-            "key": "exported",
-            "label": "выгружен"
+            "key": "green",
+            "label": "зелёный"
           },
-          "gate": null,
-          "pixel": null,
+          "gate": {
+            "ok": true,
+            "red": 0,
+            "marked": 8,
+            "nodes": 38,
+            "coverage": 100,
+            "worstDelta": 0,
+            "at": "2026-11-07T10:48:45.035Z"
+          },
+          "pixel": {
+            "mean": 4.18,
+            "over16": 2.88,
+            "over48": 1.13,
+            "at": "2026-11-07T10:47:48.286Z"
+          },
           "assets": {
             "nodes": 38,
             "images": 3,
@@ -891,10 +904,10 @@
       ],
       "counts": {
         "total": 5,
-        "green": 0,
+        "green": 1,
         "measured": 0,
         "red": 0,
-        "exported": 5,
+        "exported": 4,
         "todo": 0
       }
     },
@@ -1426,7 +1439,7 @@
             "nodes": 83,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T10:36:16.117Z"
+            "at": "2026-11-07T10:48:46.033Z"
           },
           "pixel": {
             "mean": 3.15,
