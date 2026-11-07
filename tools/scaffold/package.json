@@ -34,7 +34,8 @@
     "interactive": "node tools/check-interactive.mjs",
     "tokens:check": "node tools/check-tokens.mjs",
     "motion": "node tools/check-motion.mjs",
-    "scaffold:check": "node tools/check-scaffold.mjs"
+    "scaffold:check": "node tools/check-scaffold.mjs",
+    "layout": "node tools/check-layout.mjs"
   },
   "dependencies": {
     "astro": "7.4.5"
