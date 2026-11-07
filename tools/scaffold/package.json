@@ -38,7 +38,8 @@
     "layout": "node tools/check-layout.mjs",
     "invented": "node tools/check-invented.mjs",
     "conveyor": "node tools/conveyor.mjs",
-    "hooks": "git config core.hooksPath tools/git-hooks && echo \"хуки включены: tools/git-hooks\""
+    "hooks": "git config core.hooksPath tools/git-hooks && echo \"хуки включены: tools/git-hooks\"",
+    "states": "node tools/check-states.mjs"
   },
   "dependencies": {
     "astro": "7.4.5"

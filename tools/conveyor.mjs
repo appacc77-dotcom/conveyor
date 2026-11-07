@@ -41,6 +41,7 @@ const GLOBAL_STEPS = [
   { id: 'portability', tool: 'check-portability', kind: 'gate', needsDist: false, about: 'нет привязки к проекту' },
   { id: 'scaffold', tool: 'check-scaffold', kind: 'gate', needsDist: false, about: 'шаблон не отстал' },
   { id: 'bindings', tool: 'check-bindings', kind: 'gate', needsDist: false, about: 'цвета из переменных' },
+  { id: 'states', tool: 'check-states', kind: 'gate', needsDist: true, about: 'контент всех состояний собран' },
   { id: 'interactive', tool: 'check-interactive', kind: 'gate', needsDist: true, about: 'блоки живые' },
   { id: 'motion', tool: 'check-motion', kind: 'gate', needsDist: true, about: 'есть переходы' },
   { id: 'layout', tool: 'check-layout', kind: 'gate', needsDist: true, about: 'нет прокрутки на ширине макета' },
