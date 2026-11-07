@@ -44,7 +44,8 @@
     "hooks": "git config core.hooksPath tools/git-hooks && echo \"хуки включены: tools/git-hooks\"",
     "states": "node tools/check-states.mjs",
     "motion:manifest": "node tools/check-motion-manifest.mjs --write",
-    "motion:check": "node tools/check-motion-manifest.mjs"
+    "motion:check": "node tools/check-motion-manifest.mjs",
+    "images": "node tools/check-images.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",

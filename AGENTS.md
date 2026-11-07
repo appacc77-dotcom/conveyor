@@ -163,6 +163,7 @@ npm run motion:manifest                        # пересобрать мани
 npm run layout                                 # на ширине макета нет горизонтальной прокрутки
 npm run invented                               # нет вёрстки под ширины, которых нет в макете
 npm run states                                 # контент всех состояний секции собран
+npm run images                                 # фоновые картинки не растянуты
 ```
 
 **Облачное API — опция.** По умолчанию сверка идёт только с мостом: REST
@@ -215,6 +216,7 @@ npm run states                                 # контент всех сос�
 - [`FIGMA-ISSUES.md`](docs/FIGMA-ISSUES.md) — что поправить в макете, с числами;
 - [`decisions.md`](docs/decisions.md) — принятые решения, append-only;
 - [`RUNBOOK.md`](docs/RUNBOOK.md) — холодный старт на новом сайте;
+- [`DEFECTS.md`](docs/DEFECTS.md) — каждый найденный дефект и ворота, которые его ловят;
 - `reports/**` — числа и вердикты.
 
 ## 9. Definition of Done
