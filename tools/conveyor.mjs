@@ -20,7 +20,7 @@
  * Упавший шаг не останавливает остальные; решение принимает политика.
  */
 import { spawn } from 'node:child_process';
-import { mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
 
@@ -45,6 +45,30 @@ const GLOBAL_STEPS = [
   { id: 'motion', tool: 'check-motion', kind: 'gate', needsDist: true, about: 'есть переходы' },
   { id: 'layout', tool: 'check-layout', kind: 'gate', needsDist: true, about: 'нет прокрутки на ширине макета' },
 ];
+
+// Все секции, которые уже в конвейере: у них есть замер рядом со спекой.
+// Так «проверить всё» не зависит от того, собрана ли страница целиком.
+function builtUnits() {
+  const pagesRoot = join(root, 'design/figma/pages');
+  const units = [];
+  for (const page of readdirSync(pagesRoot)) {
+    const pageDir = join(pagesRoot, page);
+    if (!statSync(pageDir).isDirectory()) continue;
+    for (const section of readdirSync(pageDir)) {
+      if (existsSync(join(pageDir, section, 'gate.json'))) units.push(`${page}/${section}`);
+    }
+  }
+  return units.sort();
+}
+
+const measureStep = (unit) => ({
+  id: `measure:${unit.split('/')[1]}`,
+  tool: 'measure',
+  args: [`design/figma/pages/${unit}/spec.json`],
+  kind: 'gate',
+  needsDist: true,
+  about: `геометрия ${unit}`,
+});
 
 const unitSteps = (unit) => [
   { id: 'measure', tool: 'measure', args: [`design/figma/pages/${unit}/spec.json`], kind: 'gate', needsDist: true, about: 'геометрия секции' },
@@ -129,8 +153,12 @@ function runId() {
   return `${stamp}-${process.pid}`;
 }
 
-async function commandCheck(unit, json) {
-  const steps = [...GLOBAL_STEPS, ...(unit ? unitSteps(unit) : [])];
+async function commandCheck(unit, json, all) {
+  const units = all ? builtUnits() : unit ? [unit] : [];
+  const steps = [
+    ...GLOBAL_STEPS,
+    ...units.flatMap((item) => (all ? [measureStep(item)] : unitSteps(item))),
+  ];
   const id = runId();
   const dir = join(runsDir, id);
   mkdirSync(join(dir, 'results'), { recursive: true });
@@ -166,7 +194,8 @@ async function commandCheck(unit, json) {
   const report = {
     schemaVersion: 1,
     runId: id,
-    unit: unit ?? null,
+    unit: all ? null : unit ?? null,
+    units,
     startedAt,
     finishedAt: new Date().toISOString(),
     status: verdict.status,
@@ -182,6 +211,7 @@ async function commandCheck(unit, json) {
     process.stdout.write(JSON.stringify(report) + '\n');
   } else {
     const failed = results.filter((r) => r.kind === 'gate' && r.status !== 'PASS');
+    if (all) process.stdout.write(`\nсекций проверено: ${units.length}`);
     process.stdout.write(`\nвердикт: ${verdict.status}`);
     if (failed.length) process.stdout.write(` · красных ${failed.length}: ${failed.map((r) => r.id).join(', ')}`);
     process.stdout.write(`\nпрогон: reports/runs/${id}/\n`);
@@ -213,9 +243,10 @@ function commandStatus(json) {
   return 0;
 }
 
-function commandPlan(unit) {
-  const steps = [...GLOBAL_STEPS, ...(unit ? unitSteps(unit) : [])];
-  process.stdout.write(`план${unit ? ` для ${unit}` : ''} — ${steps.length} шагов, последовательно:\n`);
+function commandPlan(unit, all) {
+  const units = all ? builtUnits() : unit ? [unit] : [];
+  const steps = [...GLOBAL_STEPS, ...units.flatMap((item) => (all ? [measureStep(item)] : unitSteps(item)))];
+  process.stdout.write(`план${unit ? ` для ${unit}` : all ? ` для ${units.length} секций` : ''} — ${steps.length} шагов, последовательно:\n`);
   for (const step of steps) {
     process.stdout.write(`  ${step.id.padEnd(12)} ${step.kind.padEnd(6)} ${step.about}\n`);
   }
@@ -232,6 +263,7 @@ const { values, positionals } = parseArgs({
   strict: true,
   options: {
     unit: { type: 'string' },
+    all: { type: 'boolean', default: false },
     json: { type: 'boolean', default: false },
   },
 });
@@ -240,11 +272,11 @@ const unit = values.unit ?? positionals[0] ?? null;
 
 try {
   let code;
-  if (command === 'check') code = await commandCheck(unit, values.json);
+  if (command === 'check') code = await commandCheck(unit, values.json, values.all);
   else if (command === 'status') code = commandStatus(values.json);
-  else if (command === 'plan') code = commandPlan(unit);
+  else if (command === 'plan') code = commandPlan(unit, values.all);
   else {
-    process.stderr.write('команды: check [--unit home/hero] | status | plan\n');
+    process.stderr.write('команды: check [--unit home/hero | --all] | status | plan\n');
     code = 2;
   }
   process.exitCode = code;

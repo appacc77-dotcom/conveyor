@@ -224,8 +224,11 @@ for (const r of rows.sort((a, b) => depthOf(a.id) - depthOf(b.id))) {
   );
 }
 
-console.log(`\nразмечено узлов: ${seen.size} из ${spec.nodes.length}`);
+console.log(`\nразмечено узлов: ${seen.size} из ${spec.nodes.length} (${((seen.size / Math.max(1, spec.nodes.length)) * 100).toFixed(0)} %)`);
 console.log(`обязательных (глубина ≤ 2): ${required.length}, покрыто ${coverage.toFixed(0)} %`);
+if (seen.size < spec.nodes.length) {
+  console.log(`не размечено ${spec.nodes.length - seen.size}: их геометрия не проверяется, только пиксель`);
+}
 if (missing.length) {
   console.log('не размечены:');
   for (const n of missing) console.log(`   ${n.id}  ${n.name}  ${n.w}×${n.h} (глубина ${n.depth})`);
@@ -244,13 +247,19 @@ const gate = {
   missing: missing.map((n) => ({ id: n.id, name: n.name })),
   marked: seen.size,
   nodes: spec.nodes.length,
+  // coverage — доля обязательных узлов (глубина ≤ 2), по ним вердикт.
   coverage: +coverage.toFixed(1),
+  // markedRatio — доля размеченных от всех узлов. Замер проверяет только
+  // размеченные: 24 из 76 значит, что 52 узла не сверяются вовсе, и «100 %»
+  // относится к обязательным, а не ко всей секции.
+  markedRatio: +((seen.size / Math.max(1, spec.nodes.length)) * 100).toFixed(1),
   tolerance: tol,
   worstDelta: rows.reduce((m, r) => (r.worst > m ? r.worst : m), 0),
 };
 writeFileSync(join(dirname(join(root, specPath)), 'gate.json'), JSON.stringify(gate, null, 2) + '\n');
 
 console.log(
-  `\nвердикт: ${failed ? 'КРАСНЫЕ' : 'зелёные'} · расхождений ${red}, вне спеки ${unknown}, не размечено ${missing.length}`,
+  `\nвердикт: ${failed ? 'КРАСНЫЕ' : 'зелёные'} · расхождений ${red}, вне спеки ${unknown}, ` +
+    `не размечено обязательных ${missing.length} · размечено ${seen.size} из ${spec.nodes.length}`,
 );
 process.exit(failed ? 1 : 0);

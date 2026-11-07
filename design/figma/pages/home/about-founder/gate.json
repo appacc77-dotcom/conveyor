@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-07T06:36:21.108Z",
+  "at": "2026-11-07T09:10:22.023Z",
   "section": {
     "id": "79:148",
     "name": "about-founder",
@@ -13,6 +13,7 @@
   "marked": 16,
   "nodes": 21,
   "coverage": 100,
+  "markedRatio": 76.2,
   "tolerance": 1,
   "worstDelta": 0.5
 }

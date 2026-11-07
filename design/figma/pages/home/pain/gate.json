@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-07T06:36:32.487Z",
+  "at": "2026-11-07T09:10:33.505Z",
   "section": {
     "id": "79:116",
     "name": "pain",
@@ -13,6 +13,7 @@
   "marked": 29,
   "nodes": 34,
   "coverage": 100,
+  "markedRatio": 85.3,
   "tolerance": 1,
   "worstDelta": 0.730000000000004
 }

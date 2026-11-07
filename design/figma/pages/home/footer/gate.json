@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-07T06:36:26.303Z",
+  "at": "2026-11-07T09:10:27.222Z",
   "section": {
     "id": "148:561",
     "name": "footer",
@@ -13,6 +13,7 @@
   "marked": 31,
   "nodes": 31,
   "coverage": 100,
+  "markedRatio": 100,
   "tolerance": 1,
   "worstDelta": 0.9799999999999969
 }
