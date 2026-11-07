@@ -36,7 +36,8 @@
     "motion": "node tools/check-motion.mjs",
     "scaffold:check": "node tools/check-scaffold.mjs",
     "layout": "node tools/check-layout.mjs",
-    "invented": "node tools/check-invented.mjs"
+    "invented": "node tools/check-invented.mjs",
+    "conveyor": "node tools/conveyor.mjs"
   },
   "dependencies": {
     "astro": "7.4.5"
