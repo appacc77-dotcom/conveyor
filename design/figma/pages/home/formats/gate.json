@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-07T09:31:55.158Z",
+  "at": "2026-11-07T09:56:39.311Z",
   "section": {
     "id": "102:220",
     "name": "formats",
@@ -11,9 +11,9 @@
   "unknown": 0,
   "missing": [],
   "marked": 24,
-  "nodes": 76,
+  "nodes": 77,
   "coverage": 100,
-  "markedRatio": 31.6,
+  "markedRatio": 31.2,
   "tolerance": 1,
   "worstDelta": 1
 }

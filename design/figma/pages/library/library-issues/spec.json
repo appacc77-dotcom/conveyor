@@ -2,7 +2,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T20:47:18.962Z"
+    "at": "2026-11-07T09:40:43.191Z"
   },
   "section": {
     "id": "272:1044",
@@ -10,13 +10,13 @@
     "w": 1440,
     "h": 555
   },
-  "fingerprint": "8a66e97c",
+  "fingerprint": "bef53148",
   "cloudVersion": "2418696346917289452",
   "counts": {
-    "nodes": 59,
+    "nodes": 63,
     "images": 4,
     "icons": 1,
-    "iconInstances": 4,
+    "iconInstances": 5,
     "states": 1
   },
   "assets": {
@@ -2536,6 +2536,102 @@
       },
       "bound": {
         "fills": [
+          "VariableID:2:29"
+        ]
+      }
+    },
+    {
+      "id": "I281:737;278:1082;854:2507",
+      "name": "arrow-quiet",
+      "type": "INSTANCE",
+      "depth": 6,
+      "visible": false,
+      "x": 121,
+      "y": 7,
+      "w": 14,
+      "h": 14,
+      "autoLayout": {
+        "mode": "HORIZONTAL",
+        "gap": 1.4292793273925781,
+        "pad": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "primary": "CENTER",
+        "counter": "CENTER"
+      },
+      "clips": false,
+      "props": {
+        "color": "accent",
+        "direction": "right"
+      }
+    },
+    {
+      "id": "I281:737;278:1082;854:2507;967:2244",
+      "name": "icon",
+      "type": "GROUP",
+      "depth": 7,
+      "visible": true,
+      "x": 1,
+      "y": 2,
+      "w": 12,
+      "h": 10
+    },
+    {
+      "id": "I281:737;278:1082;854:2507;10:4",
+      "name": "icon-seed",
+      "type": "VECTOR",
+      "depth": 8,
+      "visible": true,
+      "x": 1,
+      "y": 6,
+      "w": 6,
+      "h": 3,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          },
+          "variable": "accent"
+        }
+      ],
+      "strokeWeight": 1.5,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
+          "VariableID:2:29"
+        ]
+      }
+    },
+    {
+      "id": "I281:737;278:1082;854:2507;10:7",
+      "name": "icon-arrow",
+      "type": "VECTOR",
+      "depth": 8,
+      "visible": true,
+      "x": 8,
+      "y": 2,
+      "w": 5,
+      "h": 10,
+      "radius": 0.7146396636962891,
+      "strokes": [
+        {
+          "type": "SOLID",
+          "color": {
+            "hex": "#5a5a36",
+            "a": 1
+          },
+          "variable": "accent"
+        }
+      ],
+      "strokeWeight": 3,
+      "strokeAlign": "CENTER",
+      "bound": {
+        "strokes": [
           "VariableID:2:29"
         ]
       }

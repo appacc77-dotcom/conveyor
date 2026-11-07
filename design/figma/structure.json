@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-07T09:26:18.294Z",
+  "at": "2026-11-07T09:55:31.729Z",
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe"
@@ -51,7 +51,7 @@
             "nodes": 14,
             "coverage": 100,
             "worstDelta": 0.11000000000001364,
-            "at": "2026-11-07T09:25:29.338Z"
+            "at": "2026-11-07T09:46:11.807Z"
           },
           "pixel": {
             "mean": 1.76,
@@ -96,7 +96,7 @@
             "nodes": 5,
             "coverage": 100,
             "worstDelta": 0.29000000000002046,
-            "at": "2026-11-07T09:25:23.186Z"
+            "at": "2026-11-07T09:46:05.502Z"
           },
           "pixel": {
             "mean": 3.06,
@@ -141,7 +141,7 @@
             "nodes": 34,
             "coverage": 100,
             "worstDelta": 0.730000000000004,
-            "at": "2026-11-07T09:25:32.404Z"
+            "at": "2026-11-07T09:46:14.930Z"
           },
           "pixel": {
             "mean": 4.14,
@@ -186,7 +186,7 @@
             "nodes": 16,
             "coverage": 100,
             "worstDelta": 0.9199999999999875,
-            "at": "2026-11-07T09:25:31.379Z"
+            "at": "2026-11-07T09:46:13.891Z"
           },
           "pixel": {
             "mean": 1.87,
@@ -231,7 +231,7 @@
             "nodes": 17,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T09:25:34.451Z"
+            "at": "2026-11-07T09:46:17.016Z"
           },
           "pixel": {
             "mean": 2.2,
@@ -276,7 +276,7 @@
             "nodes": 21,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T09:25:21.096Z"
+            "at": "2026-11-07T09:46:03.387Z"
           },
           "pixel": {
             "mean": 1.24,
@@ -321,7 +321,7 @@
             "nodes": 25,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T09:25:33.419Z"
+            "at": "2026-11-07T09:46:15.979Z"
           },
           "pixel": {
             "mean": 2.13,
@@ -366,7 +366,7 @@
             "nodes": 23,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T09:25:24.220Z"
+            "at": "2026-11-07T09:46:06.551Z"
           },
           "pixel": {
             "mean": 5.1,
@@ -408,10 +408,10 @@
             "ok": true,
             "red": 0,
             "marked": 24,
-            "nodes": 76,
+            "nodes": 77,
             "coverage": 100,
             "worstDelta": 1,
-            "at": "2026-11-07T09:25:27.263Z"
+            "at": "2026-11-07T09:46:09.669Z"
           },
           "pixel": {
             "mean": 2.21,
@@ -420,13 +420,13 @@
             "at": "2026-11-07T06:32:17.089Z"
           },
           "assets": {
-            "nodes": 76,
+            "nodes": 77,
             "images": 3,
             "png": 3,
             "jpg": 0,
             "svg": 3,
             "bytes": 6728910,
-            "bound": 71,
+            "bound": 72,
             "effects": 0,
             "fills": 23
           },
@@ -456,13 +456,13 @@
             "nodes": 70,
             "coverage": 100,
             "worstDelta": 0.5300000000000011,
-            "at": "2026-11-07T09:25:35.470Z"
+            "at": "2026-11-07T09:46:18.063Z"
           },
           "pixel": {
             "mean": 1,
             "over16": 1.46,
             "over48": 0.2,
-            "at": "2026-11-07T09:24:23.861Z"
+            "at": "2026-11-07T09:27:00.956Z"
           },
           "assets": {
             "nodes": 70,
@@ -501,7 +501,7 @@
             "nodes": 18,
             "coverage": 100,
             "worstDelta": 0.5,
-            "at": "2026-11-07T09:25:30.363Z"
+            "at": "2026-11-07T09:46:12.835Z"
           },
           "pixel": {
             "mean": 1.49,
@@ -546,13 +546,13 @@
             "nodes": 1,
             "coverage": 100,
             "worstDelta": 0,
-            "at": "2026-11-07T09:25:22.130Z"
+            "at": "2026-11-07T09:55:23.243Z"
           },
           "pixel": {
-            "mean": 12.99,
-            "over16": 24.01,
-            "over48": 7.23,
-            "at": "2026-11-06T19:12:22.069Z"
+            "mean": 5.91,
+            "over16": 0.19,
+            "over48": 0,
+            "at": "2026-11-07T09:55:23.404Z"
           },
           "assets": {
             "nodes": 1,
@@ -591,7 +591,7 @@
             "nodes": 52,
             "coverage": 100,
             "worstDelta": 0.4399999999999977,
-            "at": "2026-11-07T09:25:25.225Z"
+            "at": "2026-11-07T09:46:07.590Z"
           },
           "pixel": {
             "mean": 4.31,
@@ -636,7 +636,7 @@
             "nodes": 31,
             "coverage": 100,
             "worstDelta": 0.9799999999999969,
-            "at": "2026-11-07T09:25:26.244Z"
+            "at": "2026-11-07T09:46:08.618Z"
           },
           "pixel": {
             "mean": 1.04,
@@ -681,7 +681,7 @@
             "nodes": 29,
             "coverage": 100,
             "worstDelta": 0.8899999999999864,
-            "at": "2026-11-07T09:25:28.326Z"
+            "at": "2026-11-07T09:46:10.720Z"
           },
           "pixel": {
             "mean": 5.59,
@@ -745,13 +745,13 @@
           "gate": null,
           "pixel": null,
           "assets": {
-            "nodes": 66,
+            "nodes": 70,
             "images": 3,
             "png": 2,
             "jpg": 1,
             "svg": 3,
             "bytes": 6513060,
-            "bound": 55,
+            "bound": 59,
             "effects": 2,
             "fills": 18
           },
@@ -1024,13 +1024,13 @@
           "gate": null,
           "pixel": null,
           "assets": {
-            "nodes": 59,
+            "nodes": 63,
             "images": 4,
             "png": 0,
             "jpg": 4,
             "svg": 1,
             "bytes": 3915417,
-            "bound": 46,
+            "bound": 48,
             "effects": 0,
             "fills": 21
           },
@@ -1239,15 +1239,15 @@
           "gate": null,
           "pixel": null,
           "assets": {
-            "nodes": 220,
+            "nodes": 249,
             "images": 8,
             "png": 2,
             "jpg": 6,
             "svg": 3,
             "bytes": 17451645,
-            "bound": 157,
+            "bound": 177,
             "effects": 0,
-            "fills": 29
+            "fills": 31
           },
           "images": {
             "figma": "/structure/practice-practice-pay-figma.png",
@@ -1573,13 +1573,13 @@
           "gate": null,
           "pixel": null,
           "assets": {
-            "nodes": 130,
+            "nodes": 144,
             "images": 0,
             "png": 0,
             "jpg": 0,
             "svg": 2,
             "bytes": 34311,
-            "bound": 127,
+            "bound": 137,
             "effects": 0,
             "fills": 56
           },

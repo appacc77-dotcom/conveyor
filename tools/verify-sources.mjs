@@ -26,7 +26,11 @@ function bridgeFingerprint(nodeId) {
   const tmp = join(tmpdir(), `figma-fp-${process.pid}-${nodeId.replace(':', '-')}.js`);
   writeFileSync(tmp, template.split('__NODE_ID__').join(nodeId));
   const reply = runFigma(['exec-js', tmp, '--timeout', '60000'], { timeoutMs: 90000 });
-  return reply?.result?.fingerprint ?? null;
+  const result = reply?.result;
+  if (!result?.fingerprint) return null;
+  // count — число узлов в секции. Единица значит «только сам фрейм, детей нет»:
+  // сверять нечего, кроп не снимается. Это не устаревание, а пустая секция.
+  return { fingerprint: result.fingerprint, count: result.count ?? 1 };
 }
 
 const root = process.cwd();
@@ -85,15 +89,23 @@ if (!structure) {
 }
 
 // --- B: REST API ----------------------------------------------------------
+// Облачное API — опция, а не часть приёмки: оно отдаёт 429, видит только
+// опубликованные стили и требует токен. Работаем с мостом; API включается
+// явно: `npm run verify -- --api` или FIGMA_API=1.
+const useApi = process.argv.includes('--api') || process.env.FIGMA_API === '1';
 let apiFile = null;
 let apiStyles = null;
 let apiComponents = null;
+if (!useApi) {
+  check('REST API', true, 'выключено: работаем с мостом (включить: --api или FIGMA_API=1)', false);
+}
 try {
+  if (!useApi) throw new Error('выключено');
   apiFile = await api(`/files/${fileKey}?depth=2`);
   apiStyles = await api(`/files/${fileKey}/styles`);
   apiComponents = await api(`/files/${fileKey}/components`);
 } catch (error) {
-  check('REST API доступен', false, `сверка пропущена: ${error.message}`, false);
+  if (useApi) check('REST API доступен', false, `сверка пропущена: ${error.message}`, false);
 }
 
 if (apiFile) {
@@ -184,6 +196,13 @@ for (const page of structure.pages) for (const s of page.sections) if (s.dir) se
 let checked = 0;
 const stale = [];
 const unread = [];
+// Объём проекта: страницы, которые собираем. Устаревание чужих страниц —
+// информация, а не провал ворот: их никто не обещал поддерживать в актуальном
+// виде, и они не влияют на то, что сдаётся.
+const scopeOf = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).scope ?? [];
+const scope = scopeOf.map((p) => p.toLowerCase());
+const inScope = (page) => !scope.length || scope.includes(page.toLowerCase());
+const staleOutside = [];
 for (const s of sections.slice(0, limitArg)) {
   const specPath = join(root, s.dir, 'spec.json');
   if (!existsSync(specPath)) continue;
@@ -191,8 +210,16 @@ for (const s of sections.slice(0, limitArg)) {
   if (!spec.fingerprint) continue;
   try {
     const fresh = bridgeFingerprint(s.id);
+    if (!fresh) {
+      unread.push(`${s.page}/${s.name}: пустой ответ`);
+      continue;
+    }
     checked++;
-    if (fresh !== spec.fingerprint) stale.push(`${s.page}/${s.name}: ${spec.fingerprint} → ${fresh}`);
+    if (fresh.fingerprint !== spec.fingerprint) {
+      const item = `${s.page}/${s.name}: ${spec.fingerprint} → ${fresh.fingerprint}`;
+      if (inScope(s.page)) stale.push(item);
+      else staleOutside.push(item);
+    }
   } catch (error) {
     if (error instanceof FigmaError) unread.push(`${s.page}/${s.name}: ${error.code}`);
     else unread.push(`${s.page}/${s.name}: ${String(error.message).slice(0, 40)}`);
@@ -202,8 +229,10 @@ check(
   'экспорт соответствует мосту',
   stale.length === 0,
   stale.length
-    ? `устарело ${stale.length} из ${checked}: ${stale.slice(0, 2).join('; ')}`
-    : `сверено ${checked}${unread.length ? `, не прочитано ${unread.length}` : ''}`,
+    ? `устарело ${stale.length} из ${checked}: ${stale.slice(0, 8).join('; ')}` +
+      (stale.length > 8 ? `; ещё ${stale.length - 8}` : '')
+    : `сверено ${checked}${unread.length ? `, не прочитано ${unread.length}` : ''}` +
+      (staleOutside.length ? `, вне объёма устарело ${staleOutside.length}` : ''),
   unread.length < checked,
 );
 

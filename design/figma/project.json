@@ -80,5 +80,8 @@
   "api": {
     "tokenFile": ".figma-token",
     "fileEndpoint": "/v1/files"
-  }
+  },
+  "scope": [
+    "home"
+  ]
 }
