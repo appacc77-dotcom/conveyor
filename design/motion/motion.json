@@ -38,6 +38,20 @@
       "decision": 141
     },
     {
+      "file": "src/components/FounderHero.astro",
+      "selector": ".bio__title, .bio__num",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 223
+    },
+    {
+      "file": "src/components/FounderHero.astro",
+      "selector": ".bio__body",
+      "declaration": "transition: max-height var(--motion-base) var(--ease-out)",
+      "status": "invented",
+      "decision": 223
+    },
+    {
       "file": "src/components/Header.astro",
       "selector": ".header__chevron",
       "declaration": "transition: transform var(--motion-fast) var(--ease-out)",

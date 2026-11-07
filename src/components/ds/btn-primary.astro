@@ -31,6 +31,12 @@ interface Props {
    * хотя у набора её нет. Переопределение инстанса, поэтому проп.
    */
   outlined?: boolean;
+  /**
+   * Горизонтальный паддинг инстанса. В файле встречаются правки инстансов:
+   * у кнопки «С чего начать» паддинг 8/24 вместо 8/16. Это не вариант набора,
+   * поэтому проп, а не селектор снаружи.
+   */
+  padX?: number;
 }
 
 const {
@@ -42,6 +48,7 @@ const {
   caps = false,
   compact = false,
   outlined = false,
+  padX,
 } = Astro.props;
 
 const labelClass =
@@ -55,9 +62,11 @@ const labelClass =
     `btn-primary--${size.toLowerCase()}`,
     compact && 'btn-primary--compact',
     outlined && 'btn-primary--outlined',
+    padX && 'btn-primary--padx',
   ]}
   href={href}
   data-figma-node={node}
+  style={padX ? `--btn-pad-x: ${padX}px` : undefined}
 >
   <span class:list={['btn-primary__label', labelClass]}>{label}</span>
   <ArrowQuiet />
@@ -89,6 +98,12 @@ const labelClass =
   /* Обжатый инстанс: паддинг 8/16 при любом size. */
   .btn-primary--compact {
     padding: var(--space-s) var(--space-m);
+  }
+
+  .btn-primary--padx {
+    /* Фолбэк обязателен: без него var() не определён и правило отбрасывается. */
+    padding-left: var(--btn-pad-x, var(--space-m));
+    padding-right: var(--btn-pad-x, var(--space-m));
   }
 
   /* Обводка инстанса: inset-тень, чтобы не растить высоту. */

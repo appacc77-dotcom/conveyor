@@ -59,19 +59,30 @@ if (!items.length) {
 }
 
 const template = readFileSync(join(root, 'tools/figma/check-bindings.template.js'), 'utf8');
-const source = template.replace('__PAYLOAD__', JSON.stringify(items));
-const tmp = join(tmpdir(), `check-bindings-${process.pid}.js`);
-writeFileSync(tmp, source);
 
-let reply;
-try {
-  reply = runFigma(['exec-js', tmp, '--timeout', '180000']);
-} catch (error) {
-  console.error(`сверка не выполнена: ${String(error.message).slice(0, 200)}`);
-  process.exit(2);
+// Пачки: у плагина жёсткий бюджет ~10 с на вызов, а привязок больше тысячи.
+// Один вызов на всё не укладывается и падает «Unable to establish connection».
+const CHUNK = 30;
+let checked = 0;
+const mismatches = [];
+
+for (let start = 0; start < items.length; start += CHUNK) {
+  const chunk = items.slice(start, start + CHUNK);
+  const source = template.replace('__PAYLOAD__', JSON.stringify(chunk));
+  const tmp = join(tmpdir(), `check-bindings-${process.pid}-${start}.js`);
+  writeFileSync(tmp, source);
+
+  let reply;
+  try {
+    reply = runFigma(['exec-js', tmp, '--timeout', '180000']);
+  } catch (error) {
+    console.error(`сверка не выполнена на пачке ${start / CHUNK + 1}: ${String(error.message).slice(0, 160)}`);
+    process.exit(2);
+  }
+  const part = reply.result ?? { checked: 0, mismatches: [] };
+  checked += part.checked ?? 0;
+  mismatches.push(...(part.mismatches ?? []));
 }
-
-const { checked, mismatches } = reply.result ?? { checked: 0, mismatches: [] };
 console.log(`спек: ${specs.length} · привязок проверено: ${checked}`);
 
 if (!mismatches.length) {

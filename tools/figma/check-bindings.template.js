@@ -10,6 +10,9 @@
  */
 const items = __PAYLOAD__;
 const out = [];
+// Переменная одна и та же у десятков узлов: без кэша каждый узел делает
+// отдельный запрос к плагину и пачка не укладывается в бюджет вызова.
+const variableCache = new Map();
 
 for (const item of items) {
   const node = await figma.getNodeByIdAsync(item.id);
@@ -22,7 +25,11 @@ for (const item of items) {
   if (!alias) continue;
 
   try {
-    const variable = await figma.variables.getVariableByIdAsync(alias.id);
+    let variable = variableCache.get(alias.id);
+    if (variable === undefined) {
+      variable = await figma.variables.getVariableByIdAsync(alias.id);
+      variableCache.set(alias.id, variable);
+    }
     const modes = variable && variable.valuesByMode;
     const value = modes && modes[Object.keys(modes)[0]];
     if (!value || typeof value !== "object" || !("r" in value)) continue;
