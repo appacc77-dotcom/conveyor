@@ -339,7 +339,10 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
   }
 
   .header__mobile-sub {
-    padding: var(--space-xs) 0 var(--space-xs) var(--space-m);
+    /* Без своих отступов: у пунктов уже есть 8 px по вертикали, а отступ
+       слева ставил подпункты на 32 px против 16 px у остальных, плюс 4 px
+       сверху и снизу ломали шаг (54 вместо 50). Все пункты с одного края. */
+    padding: 0;
   }
 
   .header__mobile-link {
