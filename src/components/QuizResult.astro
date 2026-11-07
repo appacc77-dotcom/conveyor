@@ -47,13 +47,13 @@ const profit = [
             </p>
             <p class="qres__about-text" data-figma-node="623:1130">
               Глубинно внутри тебя ощущение утраты, усталости, разочарования. Прошлый опыт всё ещё отзывается, и
-              кажется, что он не может быть пережит до конца. Ты слишком долго была сильной для других, но при этом
-              тебе важно, чтобы тебя увидели и поняли.
+              кажется, что это мешает двигаться дальше. Ты склонна держать боль в себе, стараетешься быть сильной для
+              других, но при этом тебе важно, чтобы тебя увидели и поняли.
             </p>
-            <p class="qres__about-text">
-              Это не слабость, а показатель твоей глубокой чувствительности. Именно она делает тебя живой,
-              чувствующей, способной на близость и искренность. Сейчас для тебя особенно важно бережно подходить к
-              себе и вернуть контакт со своими чувствами.
+            <p class="qres__about-text qres__about-text--narrow" data-figma-node="623:1131">
+              Это не слабость, а показатель твоей глубокой чувствительности. Именно она делает тебя живой, настоящей,
+              способной на близость и искренность. Сейчас для тебя особенно важно бережно поддержать себя и вернуть
+              контакт со своими чувствами.
             </p>
           </div>
 
@@ -238,6 +238,10 @@ const profit = [
     color: var(--color-text-primary);
   }
 
+  .qres__about-text--narrow {
+    width: 455px;
+  }
+
   .qres__profit {
     width: 406px;
     height: 166px;
@@ -259,9 +263,17 @@ const profit = [
     color: var(--color-text-primary);
   }
 
+  .qres__profit-list li {
+    position: relative;
+    padding-left: 14px;
+  }
+
+  /* В макете список с маркерами, а не с тире. */
   .qres__profit-list li::before {
-    content: '— ';
-    color: var(--color-text-secondary);
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-primary);
   }
 
   .qres__media {
@@ -290,18 +302,17 @@ const profit = [
     height: 120px;
     box-sizing: border-box;
     padding: 32px 24px 0;
-    background: color-mix(in srgb, var(--color-bg-page) 92%, transparent);
-    border-radius: 8px;
+    /* Заливки у рамки цитаты в макете нет: текст лежит прямо на фотографии. */
   }
 
   .qres__quote-text {
     width: 293px;
     height: 56px;
     margin: 0;
-    font-family: var(--font-lora);
+    /* В макете цитата набрана Great Vibes, а не Lora. */
+    font-family: var(--font-great-vibes);
     font-size: 20px;
     line-height: 28px;
-    font-style: italic;
     color: var(--color-text-primary);
   }
 
@@ -343,16 +354,18 @@ const profit = [
     width: 38px;
     height: 38px;
     padding: 0;
-    border: 0;
+    /* Из макета: заливка #c9bea4 с прозрачностью 45 % и белая обводка. */
+    border: 1px solid var(--color-text-on-image);
     border-radius: 50%;
-    background: var(--color-bg-muted);
+    background: rgb(201 190 164 / 45%);
     cursor: pointer;
   }
 
   .qres__play-triangle {
+    /* Треугольник по центру круга 38×38: 12×16 → отступы 13 и 11. */
     position: absolute;
-    left: 28px;
-    top: 10px;
+    left: 13px;
+    top: 11px;
     width: 0;
     height: 0;
     border-left: 12px solid var(--color-text-on-image);
@@ -404,7 +417,7 @@ const profit = [
   }
 
   .qres__practice-more {
-    width: 427px;
+    width: 428px;
     height: 36px;
     margin: 16px 0 0;
     font-size: 13px;
@@ -472,14 +485,21 @@ const profit = [
   }
 
   .qres__agree {
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
+    position: relative;
+    display: block;
     width: 441px;
     margin-top: 16px;
+    padding-left: 16px;
     font-size: 10px;
     line-height: 15px;
     color: var(--color-text-secondary);
+  }
+
+  .qres__agree input {
+    position: absolute;
+    left: 0;
+    top: 1px;
+    margin: 0;
   }
 
   .qres__final {
@@ -497,6 +517,8 @@ const profit = [
     width: 268px;
     height: 39px;
     margin: 0;
+    /* Текст занимает 268,8 px: в макете он в одну строку. */
+    white-space: nowrap;
     font-family: var(--font-literata);
     font-size: 29px;
     line-height: 38.6px;

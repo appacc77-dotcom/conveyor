@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-07T15:18:20.295Z",
+  "at": "2026-11-07T15:28:23.324Z",
   "section": {
     "id": "542:3151",
     "name": "quiz-section",
@@ -10,10 +10,10 @@
   "red": 0,
   "unknown": 0,
   "missing": [],
-  "marked": 31,
+  "marked": 32,
   "nodes": 56,
   "coverage": 100,
-  "markedRatio": 55.4,
+  "markedRatio": 57.1,
   "tolerance": 1,
-  "worstDelta": 0.9699999999999989
+  "worstDelta": 1
 }

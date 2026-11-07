@@ -56,6 +56,8 @@ async function walk(n, depth) {
     if (n.textAlignVertical && n.textAlignVertical !== "TOP") o.textAlignV = n.textAlignVertical;
     if (n.textDecoration && n.textDecoration !== "NONE") o.textDecoration = n.textDecoration;
     if (n.paragraphSpacing) o.paragraphSpacing = n.paragraphSpacing;
+    // Формат списка: без него маркеры теряются и текст собирается не тем.
+    if (n.listType && n.listType !== "NONE") o.listType = n.listType;
     if (n.textAutoResize && n.textAutoResize !== "NONE") o.autoResize = n.textAutoResize;
 
     // Figma хранит перевод строки как U+2028, неразрывный пробел — как U+00A0.
