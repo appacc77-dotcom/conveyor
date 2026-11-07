@@ -82,7 +82,12 @@
     "fileEndpoint": "/v1/files"
   },
   "scope": [
-    "home"
+    "booking",
+    "home",
+    "masters",
+    "method",
+    "practice",
+    "quiz"
   ],
   "acceptance": [
     "booking/booking-formats",
@@ -115,6 +120,7 @@
     "method/method-cta",
     "method/method-hero",
     "practice/hero",
+    "practice/kody-practice-pay",
     "practice/practice-free",
     "practice/practice-pay",
     "practice/quiz",

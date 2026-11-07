@@ -176,8 +176,13 @@ const sharedArgs = (unit) => {
   return node ? ['--root', node, '--by-suffix'] : [];
 };
 
+// id шага — это ещё и имя файла `results/<id>.json`. Без страницы пять шапок
+// писали в один файл и затирали друг друга; слеш в имени дал бы подпапку,
+// поэтому заменяем его дефисом — так же, как имена снимков.
+const stepId = (prefix, unit) => `${prefix}:${unit.replace('/', '-')}`;
+
 const measureStep = (unit) => ({
-  id: `measure:${unit.split('/')[1]}`,
+  id: stepId('measure', unit),
   tool: 'measure',
   args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...sharedArgs(unit), ...extraArgs(unit)],
   kind: 'gate',
@@ -283,16 +288,31 @@ function runId() {
   return `${stamp}-${process.pid}`;
 }
 
+/** Одинаковые id шагов — это коллизия: их файлы результатов перезапишутся. */
+function assertUniqueIds(steps) {
+  const seen = new Set();
+  const dupes = new Set();
+  for (const step of steps) {
+    if (seen.has(step.id)) dupes.add(step.id);
+    seen.add(step.id);
+  }
+  if (dupes.size) {
+    throw new Error(`коллизия id шагов: ${[...dupes].join(', ')}`);
+  }
+}
+
 async function commandCheck(unit, json, all) {
   const units = all ? builtUnits() : unit ? [unit] : [];
   const steps = [
     ...GLOBAL_STEPS,
     ...units.flatMap((item) => (all ? [measureStep(item)] : unitSteps(item))),
   ];
+  assertUniqueIds(steps);
   const id = runId();
   const dir = join(runsDir, id);
   mkdirSync(join(dir, 'results'), { recursive: true });
 
+  const idWidth = Math.max(...steps.map((step) => step.id.length));
   const events = [];
   const results = [];
   const startedAt = new Date().toISOString();
@@ -309,7 +329,7 @@ async function commandCheck(unit, json, all) {
       continue;
     }
 
-    if (!json) process.stdout.write(`  ${step.id.padEnd(12)} `);
+    if (!json) process.stdout.write(`  ${step.id.padEnd(idWidth)} `);
     const result = await runStep(step);
     results.push(result);
     events.push({ at: new Date().toISOString(), step: step.id, status: result.status, ms: result.ms });
@@ -385,7 +405,8 @@ function commandStatus(json) {
     process.stdout.write(JSON.stringify(report) + '\n');
   } else {
     process.stdout.write(`прогон ${report.runId} · ${report.status}${report.unit ? ` · ${report.unit}` : ''}\n`);
-    for (const step of report.steps) process.stdout.write(`  ${step.id.padEnd(12)} ${step.status}\n`);
+    const width = Math.max(...report.steps.map((step) => step.id.length));
+    for (const step of report.steps) process.stdout.write(`  ${step.id.padEnd(width)} ${step.status}\n`);
   }
   return 0;
 }
@@ -393,9 +414,11 @@ function commandStatus(json) {
 function commandPlan(unit, all) {
   const units = all ? builtUnits() : unit ? [unit] : [];
   const steps = [...GLOBAL_STEPS, ...units.flatMap((item) => (all ? [measureStep(item)] : unitSteps(item)))];
+  assertUniqueIds(steps);
   process.stdout.write(`план${unit ? ` для ${unit}` : all ? ` для ${units.length} секций` : ''} — ${steps.length} шагов, последовательно:\n`);
+  const idWidth = Math.max(...steps.map((step) => step.id.length));
   for (const step of steps) {
-    process.stdout.write(`  ${step.id.padEnd(12)} ${step.kind.padEnd(6)} ${step.about}\n`);
+    process.stdout.write(`  ${step.id.padEnd(idWidth)} ${step.kind.padEnd(6)} ${step.about}\n`);
   }
   process.stdout.write('\nничего не выполнено: это план\n');
   return 0;

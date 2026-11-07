@@ -98,8 +98,14 @@ for (const section of sections) {
     console.log(`  ${section.page}/${section.name}: исключено состояний ${excluded.size} — ${states.exclude[0].reason.slice(0, 60)}…`);
   }
 
+  // Скрытый узел не показывается, и его текста на странице быть не должно.
+  // Пометка `visible` стоит только на самом инстансе, а тексты — у его детей,
+  // поэтому проверяем всю цепочку предков: `I<скрытый>;<ребёнок>`.
+  const hidden = (spec.nodes ?? []).filter((node) => node.visible === false).map((node) => node.id);
+
   const texts = new Set();
   for (const node of spec.nodes ?? []) {
+    if (hidden.some((id) => node.id === id || node.id.startsWith(`I${id};`) || node.id.includes(`;${id};`))) continue;
     const t = clean(node.text);
     if (t.length >= MIN_LENGTH) texts.add(t);
   }
