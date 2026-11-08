@@ -48,7 +48,8 @@
     "fonts": "node tools/fonts.mjs",
     "fonts:check": "node tools/fonts.mjs --check",
     "snapshot:diff": "node tools/snapshot-diff.mjs",
-    "changes": "node tools/check-changes.mjs"
+    "changes": "node tools/check-changes.mjs",
+    "review": "node tools/review.mjs"
   },
   "dependencies": {
     "astro": "7.4.5"
