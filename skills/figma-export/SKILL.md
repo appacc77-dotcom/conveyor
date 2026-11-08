@@ -1,9 +1,10 @@
 ---
 name: figma-export
 description: "Экспорт секции из живого файла Figma через мост figma-agent: кроп-эталон, фотографии по imageHash, иконки вектором и spec.json с геометрией, текстом и авто-раскладкой. Использовать перед сборкой компонента или секции по макету, когда нужны эталон и ассеты, снятые с текущего состояния файла. Не для изменения макета и не для чтения всего файла целиком — для этого figma-agent scan-design-system и exec-js."
-version: 0.1.0
-requiresCli: ">=0.1.0"
-cliBinary: figma-agent
+metadata:
+  version: "0.1.0"
+  requiresCli: ">=0.1.0"
+  cliBinary: "figma-agent"
 ---
 
 # figma-export
