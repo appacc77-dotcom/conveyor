@@ -99,15 +99,32 @@ const SECTION = {
   Layout: 'Раскладка',
 };
 
+// DTCG 2025.10: цвет — строка #rrggbb или #rrggbbaa, поэтому rgba()
+// переводим в hex8: формат не знает функции CSS.
+const dtcgColor = (value) => {
+  const rgba = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+))?\s*\)$/.exec(value);
+  if (!rgba) return value;
+  const hex = (n) => Number(n).toString(16).padStart(2, '0');
+  const alpha = rgba[4] === undefined ? '' : hex(Math.round(Number(rgba[4]) * 255));
+  return `#${hex(rgba[1])}${hex(rgba[2])}${hex(rgba[3])}${alpha}`;
+};
+
+// DTCG 2025.10: стабильный формат токенов для обмена между инструментами.
+// CSS ниже строится из тех же значений, поэтому формат и вёрстка не разъедутся.
+const dtcg = {};
+
 for (const [group, items] of groups) {
   out.push(`  /* ${SECTION[group] ?? group} */`);
+  const branch = (dtcg[group] = {});
   for (const t of items) {
     let value;
     if (t.type === 'COLOR') {
       value = resolveColor(t.value);
       if (!value) { skipped.push(`${t.collection}/${t.name}`); continue; }
+      branch[t.name] = { $type: 'color', $value: dtcgColor(value) };
     } else {
       value = `${t.value}px`;
+      branch[t.name] = { $type: 'dimension', $value: { value: t.value, unit: 'px' } };
     }
     const name = t.type === 'COLOR' ? `--color-${t.name}` : `--${t.name}`;
     out.push(`  ${name}: ${value};`);
@@ -197,6 +214,10 @@ for (const s of reality.textStyles) {
 
 mkdirSync(join(root, 'src/styles'), { recursive: true });
 writeFileSync(join(root, 'src/styles/tokens.css'), out.join('\n'));
+
+// Тот же набор — в стабильном формате W3C Design Tokens.
+mkdirSync(join(root, 'design'), { recursive: true });
+writeFileSync(join(root, 'design/tokens.json'), JSON.stringify(dtcg, null, 2) + '\n');
 writeFileSync(join(root, 'src/styles/typography.css'), typo.join('\n'));
 
 const tokenCount = out.filter((l) => l.trim().startsWith('--')).length;

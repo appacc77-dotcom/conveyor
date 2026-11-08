@@ -49,7 +49,8 @@
     "fonts:check": "node tools/fonts.mjs --check",
     "snapshot:diff": "node tools/snapshot-diff.mjs",
     "changes": "node tools/check-changes.mjs",
-    "review": "node tools/review.mjs"
+    "review": "node tools/review.mjs",
+    "tokens:dtcg": "node tools/check-tokens-dtcg.mjs"
   },
   "dependencies": {
     "astro": "7.4.5"
