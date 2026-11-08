@@ -83,7 +83,9 @@ const skipped = [];
  * пачка делится пополам и повторяется — вплоть до одного узла. Так размер
  * пачки не магическое число: он подстраивается под файл.
  */
-function checkChunk(chunk) {
+let transportRetries = 0;
+
+function checkChunk(chunk, retried = false) {
   const source = template.replace('__PAYLOAD__', JSON.stringify(chunk));
   const tmp = join(tmpdir(), `check-bindings-${process.pid}-${chunk[0]?.id?.replace(':', '-') ?? 'x'}.js`);
   writeFileSync(tmp, source);
@@ -95,11 +97,22 @@ function checkChunk(chunk) {
       throw new Error('пустой ответ плагина');
     }
     const part = reply.result;
+    if (retried) transportRetries += 1;
     checked += part.checked ?? 0;
     mismatches.push(...(part.mismatches ?? []));
     skipped.push(...(part.skipped ?? []));
     return true;
   } catch (error) {
+    // Сбой транспорта неотличим от настоящего расхождения, а по одному
+    // падению судить нельзя: повторяем тот же кусок один раз. Только если
+    // и повтор не прошёл — делим дальше или сдаёмся.
+    if (!error.retried) {
+      try {
+        return checkChunk(chunk, true);
+      } catch {
+        // падение повторилось — идём обычным путём
+      }
+    }
     if (chunk.length === 1) {
       console.error(`сверка не выполнена на узле ${chunk[0].id}: ${String(error.message).slice(0, 160)}`);
       return false;
@@ -114,6 +127,7 @@ for (let start = 0; start < items.length; start += CHUNK) {
 }
 
 console.log(`спек: ${specs.length} · привязок проверено: ${checked} из ${items.length}`);
+if (transportRetries) console.log(`повторов из-за сбоя моста: ${transportRetries} — первый ответ не пришёл`);
 
 // Пропущенные — не зелёные: их никто не сверил. Ссылка на другую переменную
 // (alias-chain) и «не цвет» — справка; отсутствие привязки в файле значит,
