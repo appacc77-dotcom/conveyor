@@ -17,7 +17,8 @@
  *   2 — мост недоступен: не запущен плагин или Figma закрыта
  *   3 — скрипт Figma вернул ошибку
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { runFigma, FigmaError } from './figma/cli.mjs';
 
@@ -103,8 +104,33 @@ if (previous?.byPage) {
   if (previous.fileKey !== project.source.fileKey) drift.push('fileKey сменился');
 }
 
+// Отпечатки секций: по ним видно, что изменилось между снимками, не сверяя
+// каждую спеку руками. Секции появляются с экспортом, поэтому снимок берёт
+// то, что уже лежит на диске.
+const pagesRoot = join(root, 'design/figma/pages');
+const sections = {};
+const hashFile = (path) => createHash('sha256').update(readFileSync(path)).digest('hex').slice(0, 16);
+if (existsSync(pagesRoot)) {
+  for (const page of readdirSync(pagesRoot)) {
+    const pageDir = join(pagesRoot, page);
+    if (!statSync(pageDir).isDirectory()) continue;
+    for (const name of readdirSync(pageDir)) {
+      const dir = join(pageDir, name);
+      if (!statSync(dir).isDirectory()) continue;
+      const unit = `${page}/${name}`;
+      const entry = {};
+      for (const [key, file] of [['spec', 'spec.json'], ['crop', 'crop.png'], ['states', 'states.json']]) {
+        const path = join(dir, file);
+        if (existsSync(path)) entry[key] = hashFile(path);
+      }
+      if (Object.keys(entry).length) sections[unit] = entry;
+    }
+  }
+}
+
 const snapshot = {
   at: new Date().toISOString(),
+  sections,
   fileName: project.source.fileName,
   fileKey,
   counts: {
@@ -129,6 +155,7 @@ if (!quiet) {
   console.log(`стилей:      ${c.styles}`);
   console.log(`инстансов:   ${c.instances}  отмасштабированных: ${c.scaled}`);
   console.log(`фреймов 1440: ${c.frames1440}`);
+  console.log(`секций в снимке: ${Object.keys(snapshot.sections).length}`);
   if (c.scaled > 0) {
     console.log(`\nВНИМАНИЕ: ${c.scaled} отмасштабированных инстансов — размер из дерева не равен размеру на холсте.`);
   }

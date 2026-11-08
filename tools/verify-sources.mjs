@@ -205,6 +205,12 @@ const unread = [];
 // Объём проекта: страницы, которые собираем. Устаревание чужих страниц —
 // информация, а не провал ворот: их никто не обещал поддерживать в актуальном
 // виде, и они не влияют на то, что сдаётся.
+// Снимок файла: отпечатки всех снятых секций одним файлом (R3.1).
+const snapshotPath = join(root, 'design/figma/live/snapshot.json');
+const snapshotSections = existsSync(snapshotPath)
+  ? JSON.parse(readFileSync(snapshotPath, 'utf8')).sections ?? null
+  : null;
+
 const scopeOf = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).scope ?? [];
 const scope = scopeOf.map((p) => p.toLowerCase());
 const inScope = (page) => !scope.length || scope.includes(page.toLowerCase());
@@ -216,6 +222,13 @@ for (const s of sections.slice(0, limitArg)) {
   // зелёные на секции, которую никто не сверял.
   if (!existsSync(specPath)) {
     if (inScope(s.page)) unread.push(`${s.page}/${s.name}: нет spec.json`);
+    continue;
+  }
+  // Снимок файла знает, какие секции и с какими отпечатками сняты. Если
+  // спека есть, а в снимке её нет — снимок отстал, и сверять по нему нельзя.
+  // Ключ снимка — путь на диске: страница в нижнем регистре, как каталог.
+  if (snapshotSections && !snapshotSections[`${s.page.toLowerCase()}/${s.name}`]) {
+    if (inScope(s.page)) unread.push(`${s.page}/${s.name}: нет в снимке файла — npm run intake`);
     continue;
   }
   const spec = JSON.parse(readFileSync(specPath, 'utf8'));

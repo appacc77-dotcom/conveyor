@@ -3,17 +3,17 @@
     "name": "Website Syntonia2"
   },
   "instances": {
-    "total": 1117,
+    "total": 1145,
     "byPage": {
       "Design system": 95,
       "_______________________": 0,
       "Home": 381,
       "Masters": 92,
-      "Library": 135,
-      "Practice": 183,
+      "Library": 136,
+      "Practice": 189,
       "Quiz": 141,
-      "Booking": 79,
-      "Method": 11,
+      "Booking": 99,
+      "Method": 12,
       "______________________": 0
     },
     "scaledCount": 0,
