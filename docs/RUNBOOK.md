@@ -139,6 +139,26 @@ npm run intake
 
 **Выход:** `design/figma/live/{structure,ds,reality,snapshot}.json`
 
+## 1.1 Проверка, что шаблон чистый
+
+Новый проект от шаблона не должен знать ничего о Syntonia. Проверено
+(08.11.2026) на пустой папке с текущим шаблоном:
+
+| команда | код | что сказала |
+|---|---:|---|
+| `node tools/scaffold.mjs` | 0 | каркас развёрнут |
+| `npm run discover -- --write` | 0 | `project.json`: 8 страниц |
+| `npm run intake` | 0 | снимок файла |
+| `npm run fonts` | 0 | шрифты по стилям файла |
+| `npm run ds:tokens` | 0 | токены и типографика |
+| `npm run structure` | 0 | 46 секций, 7 страниц |
+| `npm run build` | 0 | `dist/structure.html` |
+| `npm run verify` | **0** | источники, ассеты, шаблон — всё сходится |
+| `node tools/conveyor.mjs check --all` | **3** | «секций в объёме нет — проверять нечего» |
+
+Код 3 — это и есть правильный ответ: проверять нечего, но и зелёным это не
+называется.
+
 ## 2.1 Шрифты
 
 ```bash
