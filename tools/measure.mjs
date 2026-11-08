@@ -160,14 +160,49 @@ const measured = await page.evaluate((rootNodeId) => {
 await browser.close();
 server.close();
 
+// gate.json пишется только при изменении содержимого: метка времени сама по
+// себе не повод менять отслеживаемый файл (иначе каждый прогон «грязнит» дерево).
+const gatePath = join(dirname(join(root, specPath)), 'gate.json');
+function writeGate(gate) {
+  const strip = (g) => JSON.stringify({ ...g, at: undefined });
+  if (existsSync(gatePath)) {
+    try {
+      if (strip(JSON.parse(readFileSync(gatePath, 'utf8'))) === strip(gate)) return;
+    } catch {
+      // битый файл — перепишем
+    }
+  }
+  writeFileSync(gatePath, JSON.stringify(gate, null, 2) + '\n');
+}
+
 if (measured.error) {
   console.error(`Нет элемента с data-figma-node="${domRootId}" — корень секции не размечен.`);
+  // Красный gate.json обязателен: иначе старый зелёный переживёт поломку
+  // и его прочтут структура, статус и ворота состояний.
+  writeGate({
+    at: new Date().toISOString(),
+    section: spec.section,
+    ok: false,
+    error: 'root-not-found',
+    red: 0,
+    unknown: 0,
+    missing: [{ id: spec.section.id, name: spec.section.name }],
+    marked: 0,
+    nodes: spec.nodes.length,
+    coverage: 0,
+    markedRatio: 0,
+    tolerance: tol,
+    worstDelta: 0,
+  });
   process.exit(1);
 }
 
 // --- Сверка ---------------------------------------------------------------
 const rows = [];
 const seen = new Set();
+// covered — узлы, у которых есть ВИДИМЫЙ элемент. Обязательный узел,
+// размеченный только на скрытом элементе, секцию не собирает.
+const covered = new Set();
 let unknown = 0;
 let red = 0;
 
@@ -197,6 +232,7 @@ for (const el of measured.elements) {
       rows.push({ id: node.id, name: node.name, status: 'СКРЫТ', el });
       continue;
     }
+    covered.add(node.id);
     const abs = absolute(node, rootId);
 
     // Типографика: fontSize в px, lineHeight и letterSpacing — в процентах
@@ -262,7 +298,7 @@ for (const el of measured.elements) {
 
 // Узлы глубины ≤ 2 обязаны иметь элемент: иначе секция собрана не целиком.
 const required = spec.nodes.filter((n) => n.depth > 0 && n.depth <= 2 && n.visible);
-const missing = required.filter((n) => !seen.has(n.id));
+const missing = required.filter((n) => !covered.has(n.id));
 const coverage = required.length ? ((required.length - missing.length) / required.length) * 100 : 100;
 
 // --- Печать ---------------------------------------------------------------
@@ -323,7 +359,7 @@ const gate = {
   tolerance: tol,
   worstDelta: rows.reduce((m, r) => (r.worst > m ? r.worst : m), 0),
 };
-writeFileSync(join(dirname(join(root, specPath)), 'gate.json'), JSON.stringify(gate, null, 2) + '\n');
+writeGate(gate);
 
 console.log(
   `\nвердикт: ${failed ? 'КРАСНЫЕ' : 'зелёные'} · расхождений ${red}, вне спеки ${unknown}, ` +
