@@ -309,6 +309,10 @@ const items = [
   }
 
   .founder__aside {
+    /* Фото держит свои 876, панель забирает остаток: при окне шире 1440
+       иначе справа оставалась полоса фона секции (564 фиксированных). */
+    flex: 1 1 auto;
+    min-width: 564px;
     width: 564px;
     height: 839px;
     background: var(--color-bg-dark);
