@@ -177,6 +177,49 @@ function acceptedUnits() {
 }
 
 /**
+ * Профиль проверок.
+ *
+ * Набор шагов берётся из контрактов (`tools/checks.json`, поле `mandatoryFor`),
+ * а не из списка в коде: добавили проверку — она попадает в профиль там же,
+ * где описана. Неизвестный профиль — ошибка конфигурации, а не пустой прогон.
+ */
+/**
+ * Предел шага из контракта проверки. Один файл — один источник правды:
+ * таймаут описан там же, где слой и входы.
+ */
+function contractTimeout(id) {
+  const path = join(root, 'tools/checks.json');
+  if (!existsSync(path)) return null;
+  try {
+    return JSON.parse(readFileSync(path, 'utf8')).checks?.[id]?.timeoutMs ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function stepsForProfile(profile) {
+  const path = join(root, 'tools/checks.json');
+  if (!existsSync(path)) {
+    console.error('нет tools/checks.json — профили не из чего собрать');
+    return null;
+  }
+  const contracts = JSON.parse(readFileSync(path, 'utf8'));
+  if (!contracts.profiles?.[profile]) {
+    console.error(`профиля «${profile}» нет. Есть: ${Object.keys(contracts.profiles ?? {}).join(', ')}`);
+    return null;
+  }
+  const wanted = new Set();
+  for (const [id, check] of Object.entries(contracts.checks ?? {})) {
+    if ((check.mandatoryFor ?? []).includes(profile)) wanted.add(id);
+  }
+  if (!wanted.size) {
+    console.error(`профиль «${profile}» не включает ни одной проверки — это ошибка контрактов`);
+    return null;
+  }
+  return wanted;
+}
+
+/**
  * Набор регрессии: быстрый прогон по секциям разного типа.
  *
  * Не заменяет полный: `releaseEligible` по нему не выдаётся. Задача — за
@@ -345,16 +388,20 @@ function runStep(step) {
     // Пульс: снаружи долгая проверка и зависание выглядят одинаково, пока
     // шаг молчит. Раз в 10 с печатаем, сколько он уже идёт и что успел
     // сказать последней строкой.
+    let heartbeatShown = false;
     const heartbeat = setInterval(() => {
       const seconds = Math.round((Date.now() - started) / 1000);
       const last = (stderr || stdout).trim().split('\n').filter(Boolean).slice(-1)[0] ?? '';
-      // Ширина как в основном выводе шагов: idWidth живёт в commandCheck.
-      process.stdout.write(`  ${step.id.padEnd(34)} … ${seconds} с${last ? ` · ${last.slice(0, 90)}` : ''}\n`);
+      // Ведущий перевод строки закрывает недописанную строку шага, иначе
+      // пульс приклеивается к её началу.
+      process.stdout.write(`\n  ${step.id.padEnd(34)} … ${seconds} с${last ? ` · ${last.slice(0, 90)}` : ''}\n`);
+      heartbeatShown = true;
     }, 10000);
 
     // Зависший инструмент не должен останавливать весь прогон: у шага есть
     // предел, после которого он снимается и считается непройденным по среде.
-    const limit = step.timeoutMs ?? 300000;
+    // Предел берётся из контракта проверки, если он там задан.
+    const limit = step.timeoutMs ?? contractTimeout(step.id) ?? 300000;
     const timer = setTimeout(() => {
       clearInterval(heartbeat);
       child.kill('SIGKILL');
@@ -362,13 +409,14 @@ function runStep(step) {
         ...step,
         status: 'ERROR',
         ms: Date.now() - started,
+        heartbeat: heartbeatShown,
         note: `превышен таймаут ${Math.round(limit / 1000)} с — шаг снят`,
       });
     }, limit);
 
     child.on('error', (error) => {
       clearInterval(heartbeat);
-      resolve({ ...step, status: 'ERROR', ms: Date.now() - started, note: String(error.message).slice(0, 200) });
+      resolve({ ...step, status: 'ERROR', ms: Date.now() - started, heartbeat: heartbeatShown, note: String(error.message).slice(0, 200) });
     });
 
     child.on('close', (code) => {
@@ -378,7 +426,7 @@ function runStep(step) {
       // частично (часть источников не прочитана); 2 и прочее — не смогло.
       const status = code === 0 ? 'PASS' : code === 1 ? 'FAIL' : code === 3 ? 'INCOMPLETE' : 'ERROR';
       const note = (stderr || stdout).trim().split('\n').slice(-1)[0] ?? '';
-      resolve({ ...step, status, exitCode: code, ms: Date.now() - started, note: note.slice(0, 200) });
+      resolve({ ...step, status, exitCode: code, ms: Date.now() - started, heartbeat: heartbeatShown, note: note.slice(0, 200) });
     });
   });
 }
@@ -424,9 +472,27 @@ function assertUniqueIds(steps) {
   }
 }
 
-async function commandCheck(unit, json, all, set = null, resume = null) {
-  const units = set === 'regression' ? regressionUnits() : all ? builtUnits() : unit ? [unit] : [];
+async function commandCheck(unit, json, all, set = null, resume = null, profileName = null) {
+  // Профиль задаёт и объём: приёмка — всегда все секции, регрессия — набор,
+  // локальная проверка — одна единица (или всё, если её не назвали).
+  const allUnits = profileName === 'accept-stage1' || profileName === 'accept-stage2' || all;
+  const units = profileName === 'regression' || set === 'regression'
+    ? regressionUnits()
+    : allUnits
+      ? builtUnits()
+      : unit
+        ? [unit]
+        : profileName === 'sources-live'
+          ? []
+          : builtUnits();
   if (set === 'regression' && units === null) return 2;
+
+  // Набор шагов — из контрактов: у каждой проверки есть mandatoryFor, и
+  // профиль решает, обязательна ли она. Зашитых списков больше нет.
+  const profile = profileName ?? (all ? 'accept-stage1' : set === 'regression' ? 'regression' : 'local');
+  const wanted = stepsForProfile(profile);
+  if (wanted === null) return 2;
+  const needsSections = wanted.has('measure');
 
   // Страницы сайта могут быть ещё не собраны (новый проект: в dist только
   // служебная). Тогда ворота, которым нужна страница, не «красные» — они
@@ -446,30 +512,17 @@ async function commandCheck(unit, json, all, set = null, resume = null) {
 
   // Новый проект: секций ещё не экспортировали, страниц сайта нет. Гонять
   // ворота не по чему, но и зелёным это называть нельзя — проверено ноль.
-  if (!units.length) {
+  if (!units.length && needsSections) {
     console.log('секций в объёме нет — проверять нечего');
     console.log('сначала: npm run discover -- --write → npm run intake → npm run ds:tokens → npm run structure → npm run build');
     return 3;
   }
 
-  // Регрессия — быстрый ответ «ничего не поехало». Медленные шаги, которым
-  // нужен мост (sources 6,7 с, bindings 17,3 с), остаются в полном прогоне:
-  // они про источники и цвета, а не про раскладку. Страничные ворота — тоже
-  // там: их время не делится на секции.
-  const LOCAL_STEPS = new Set([
-    'contracts', 'assets', 'tokens', 'invented', 'portability', 'scaffold', 'registry', 'changes', 'build',
-  ]);
-  // Проверка одной секции — тоже локальная: сборка и дешёвые ворота проекта,
-  // затем замер, снимок и пиксель этой секции. Источники и привязки — про
-  // весь файл, их место в полном прогоне: иначе правка одной строки ждёт
-  // мост минутами.
-  const local = set === 'regression' || (!all && unit);
-  const globalSteps = local
-    ? GLOBAL_STEPS.filter((step) => LOCAL_STEPS.has(step.id))
-    : GLOBAL_STEPS;
+  const local = profile === 'local' || profile === 'regression';
+  const globalSteps = GLOBAL_STEPS.filter((step) => wanted.has(step.id));
   const steps = [
     ...globalSteps,
-    ...(all || set ? [measureBatchStep(units)] : unitSteps(units[0])),
+    ...(needsSections ? (local ? unitSteps(units[0]) : [measureBatchStep(units)]) : []),
   ];
   assertUniqueIds(steps);
   // Возобновление: берём результаты прошлого прогона, но только если дерево
@@ -535,13 +588,16 @@ async function commandCheck(unit, json, all, set = null, resume = null) {
     // Шаг может готовить входные файлы (пакетный замер пишет список заданий).
     step.prepare?.();
 
-    if (!json) process.stdout.write(`  ${step.id.padEnd(idWidth)} `);
+    // Строку шага не печатаем заранее: если шаг длинный, её место займёт
+    // пульс, и получилась бы задвоенная строка.
     const result = await runStep(step);
     results.push(result);
     events.push({ at: new Date().toISOString(), step: step.id, status: result.status, ms: result.ms });
     if (!json) {
       const mark = result.status === 'PASS' ? 'ок' : result.status === 'FAIL' ? 'КРАСНЫЙ' : result.status;
-      process.stdout.write(`${mark}  ${String(result.ms).padStart(6)} мс  ${result.about}\n`);
+      // После пульса строка шага уже закрыта — начинаем результат с новой.
+      const prefix = result.heartbeat ? '\n' : '';
+      process.stdout.write(`${prefix}  ${step.id.padEnd(idWidth)} ${mark}  ${String(result.ms).padStart(6)} мс  ${result.about}\n`);
     }
     writeFileSync(join(dir, 'results', `${step.id}.json`), JSON.stringify(result, null, 2) + '\n');
   }
@@ -553,7 +609,8 @@ async function commandCheck(unit, json, all, set = null, resume = null) {
   const gitAfter = gitState();
   const stable = gitBefore.contentHash !== null && gitBefore.contentHash === gitAfter.contentHash;
   // full — полный объём (--all); unit — одна секция. Выпуск только по полному.
-  const mode = all ? 'full' : set === 'regression' ? 'regression' : 'unit';
+  // «full» остаётся признаком выпускной приёмки: только она даёт releaseEligible.
+  const mode = profile === 'accept-stage1' ? 'full' : profile;
   const report = {
     schemaVersion: 1,
     runId: id,
@@ -611,8 +668,11 @@ async function commandCheck(unit, json, all, set = null, resume = null) {
 }
 
 function notEligibleReason(report) {
-  if (report.mode === 'regression') return 'проверен набор регрессии, для выпуска нужен --all';
-  if (report.mode !== 'full') return 'проверена одна секция, для выпуска нужен --all';
+  if (report.mode === 'regression') return 'проверен набор регрессии, для выпуска нужен --profile accept-stage1';
+  if (report.mode === 'local') return 'проверена одна единица, для выпуска нужен --profile accept-stage1';
+  if (report.mode === 'sources-live') return 'сверены источники, основа не проверялась';
+  if (report.mode === 'accept-stage2') return 'проверены дополнения, выпуск даёт accept-stage1';
+  if (report.mode !== 'full') return `профиль ${report.mode}, для выпуска нужен --profile accept-stage1`;
   if (report.dirty) return 'есть незакоммиченные правки';
   if (report.changedDuringRun) return 'файлы менялись во время прогона';
   return 'нет коммита';
@@ -695,6 +755,7 @@ const { values, positionals } = parseArgs({
     all: { type: 'boolean', default: false },
     set: { type: 'string' },
     resume: { type: 'string' },
+    profile: { type: 'string' },
     json: { type: 'boolean', default: false },
   },
 });
@@ -703,7 +764,7 @@ const unit = values.unit ?? positionals[0] ?? null;
 
 try {
   let code;
-  if (command === 'check') code = await commandCheck(unit, values.json, values.all, values.set ?? null, values.resume ?? null);
+  if (command === 'check') code = await commandCheck(unit, values.json, values.all, values.set ?? null, values.resume ?? null, values.profile ?? null);
   else if (command === 'status') code = commandStatus(values.json);
   else if (command === 'plan') code = commandPlan(unit, values.all);
   else if (command === 'push-ok') code = commandPushOk();

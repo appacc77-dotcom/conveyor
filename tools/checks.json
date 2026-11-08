@@ -67,7 +67,8 @@
       "outputs": [],
       "mandatoryFor": [
         "accept-stage1",
-        "sources-live"
+        "sources-live",
+        "accept-stage2"
       ]
     },
     "changes": {
@@ -88,7 +89,8 @@
       },
       "outputs": [],
       "mandatoryFor": [
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "assets": {
@@ -112,7 +114,8 @@
       "mandatoryFor": [
         "local",
         "regression",
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "tokens": {
@@ -136,7 +139,8 @@
       "mandatoryFor": [
         "local",
         "regression",
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "tokens-dtcg": {
@@ -157,7 +161,8 @@
       },
       "outputs": [],
       "mandatoryFor": [
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "invented": {
@@ -180,7 +185,8 @@
       "mandatoryFor": [
         "local",
         "regression",
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "registry": {
@@ -229,7 +235,8 @@
       },
       "outputs": [],
       "mandatoryFor": [
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "scaffold": {
@@ -250,7 +257,8 @@
       },
       "outputs": [],
       "mandatoryFor": [
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "bindings": {
@@ -276,7 +284,8 @@
       "outputs": [],
       "mandatoryFor": [
         "accept-stage1",
-        "sources-live"
+        "sources-live",
+        "accept-stage2"
       ]
     },
     "states": {
@@ -303,7 +312,8 @@
       "outputs": [],
       "mandatoryFor": [
         "regression",
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "interactive": {
@@ -329,6 +339,7 @@
       },
       "outputs": [],
       "mandatoryFor": [
+        "accept-stage1",
         "accept-stage2"
       ]
     },
@@ -405,7 +416,8 @@
       "outputs": [],
       "mandatoryFor": [
         "regression",
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "stretch": {
@@ -431,7 +443,8 @@
       },
       "outputs": [],
       "mandatoryFor": [
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "images": {
@@ -457,7 +470,8 @@
       },
       "outputs": [],
       "mandatoryFor": [
-        "accept-stage1"
+        "accept-stage1",
+        "accept-stage2"
       ]
     },
     "measure": {
