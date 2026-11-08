@@ -30,7 +30,12 @@ const onlyUrl = arg('--url', null);
 const routes = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8')).routes ?? {};
 // По умолчанию проверяем все страницы проекта: пока страница была одна, ворота
 // молча смотрели только главную.
-const pageList = onlyUrl ? [onlyUrl] : [...new Set(Object.values(routes))];
+const project = JSON.parse(readFileSync(join(process.cwd(), 'design/figma/project.json'), 'utf8'));
+// Экраны, живущие на адресе с параметром (результат теста), тоже проверяются:
+// без этого скрытая секция молча пропускалась, и её элементы управления не
+// проверял никто.
+const extraUrls = Object.values(project.unitUrls ?? {});
+const pageList = onlyUrl ? [onlyUrl] : [...new Set([...Object.values(routes), ...extraUrls])];
 const only = arg('--only', null);
 const width = Number(arg('--width', 1440));
 
@@ -77,6 +82,16 @@ await new Promise((r) => server.listen(port, '127.0.0.1', r));
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width, height: 900 } });
 let dead = 0;
+// Известные долги: элемент помечен `data-inert-ok="<id долга>"`. Он не работает,
+// но это решение, а не дефект вёрстки. Печатается каждый прогон.
+const known = [];
+// Секции, которые на странице скрыты: проверить их нельзя, но и молчать о них
+// нельзя — иначе прогон выглядит полным.
+const skipped = [];
+// Секция может быть скрыта на одном адресе и видна на другом (результат теста
+// живёт на /quiz.html?result=1). Считаем проверенной, если её проверили хоть
+// где-то, и не жалуемся на скрытость там, где она скрыта по делу.
+const checkedSomewhere = new Set();
 let pretenders = 0;
 let checked = 0;
 for (const urlPath of pageList) {
@@ -159,10 +174,14 @@ for (const section of sections) {
     return rect.width > 0 && rect.height > 0;
   }, section.selector);
   if (!visible) {
-    console.log(`${section.name.padEnd(18)} секция скрыта — пропущена`);
+    // Скрытая секция с элементами управления — это не «проверено»: кликнуть
+    // по ней нельзя. Раньше она молча пропускалась, и прогон выглядел полным.
+    console.log(`${section.name.padEnd(18)} секция скрыта — не проверена`);
+    skipped.push(section.name);
     continue;
   }
 
+  checkedSomewhere.add(section.name);
   let alive = false;
   let ariaOnly = [];
   let blind = [];
@@ -201,12 +220,31 @@ for (const section of sections) {
     await page.waitForTimeout(320);
     checked += 1;
 
-    const now = await signature(section.selector);
-    const ariaAfter = await control.evaluate((el) => el.getAttribute('aria-expanded'));
-    const selfAfter = await controlSignature(control);
+    // Элемент мог увести на другой адрес (кнопка «пройти тест» на экране
+    // результата). Это не «мёртвый»: он сработал. Возвращаемся на страницу
+    // и продолжаем — иначе контекст разрушен и проверка падает.
+    let now;
+    try {
+      now = await signature(section.selector);
+    } catch (error) {
+      if (!String(error.message).includes('Execution context was destroyed')) throw error;
+      alive = true;
+      await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
+      await page.waitForTimeout(200);
+      continue;
+    }
+    const ariaAfter = await control.evaluate((el) => el.getAttribute('aria-expanded')).catch(() => null);
+    const selfAfter = await controlSignature(control).catch(() => null);
 
     // Переключатель обязан показать своё состояние: крестик вместо полос,
     // повёрнутый шеврон, другая иконка. Иначе открытие не читается.
+    if (selfAfter === null) {
+      // Элемент увёл на другой адрес — это сработавшая кнопка, а не дефект.
+      alive = true;
+      await page.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
+      await page.waitForTimeout(200);
+      continue;
+    }
     if (ariaBefore !== null && ariaAfter !== null && ariaBefore !== ariaAfter && selfBefore === selfAfter) {
       blind.push(label);
     }
@@ -217,7 +255,9 @@ for (const section of sections) {
       // Атрибут переключился, а на экране ничего: элемент делает вид, что живой.
       ariaOnly.push(label);
     } else {
-      inert.push(label);
+      const debt = await control.evaluate((el) => el.getAttribute('data-inert-ok')).catch(() => null);
+      if (debt) known.push({ unit: section.name, label, debt });
+      else inert.push(label);
     }
   }
 
@@ -256,4 +296,15 @@ if (dead > 0) {
   console.error('\nэлемент, который меняет только атрибут, и секция без движения — это картинка: добавьте состояние и переход');
   process.exit(1);
 }
+if (known.length) {
+  console.log(`известные долги (элемент не работает, есть решение): ${known.length}`);
+  for (const item of known) console.log(`  ${item.unit} · «${item.label}» — долг ${item.debt}`);
+}
 console.log('все элементы управления меняют то, что видно');
+const neverChecked = skipped.filter((name) => !checkedSomewhere.has(name));
+if (neverChecked.length) {
+  // Скрытые секции не проверены, а не пройдены: честный ответ — INCOMPLETE.
+  console.log(`не проверено (секция скрыта везде): ${neverChecked.length} — ${neverChecked.join(', ')}`);
+  console.log('проверить можно после действия, которое её открывает');
+  process.exit(3);
+}

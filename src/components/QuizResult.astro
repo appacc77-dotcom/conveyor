@@ -81,7 +81,10 @@ const profit = [
     <div class="qres__practice" data-figma-node="549:498">
       <div class="qres__practice-media" data-figma-node="549:500">
         <div class="qres__practice-image" data-figma-node="549:502">
-          <button class="qres__play" type="button" aria-label="Слушать практику">
+          {/* Известный долг INV-quiz-play: аудиофайла в макете нет, кнопка
+              ничего не делает. Пометка держит долг на виду: ворота interactive
+              печатают его каждый прогон, но не считают мёртвым элементом. */}
+          <button class="qres__play" type="button" aria-label="Слушать практику" data-inert-ok="INV-quiz-play">
             <span class="qres__play-triangle" aria-hidden="true" />
           </button>
         </div>

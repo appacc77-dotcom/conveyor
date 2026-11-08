@@ -388,6 +388,17 @@
       "source": "design/figma/invented.json#booking-form-not-sent",
       "decisions": [],
       "blocksRelease": false
+    },
+    {
+      "id": "INV-quiz-play",
+      "title": "Кнопка «Слушать практику» на экране результата ничего не делает",
+      "owner": "owner",
+      "kind": "site",
+      "status": "open",
+      "source": "tools/check-interactive.mjs",
+      "decisions": [],
+      "blocksRelease": false,
+      "note": "Найдено воротами interactive после того, как экран результата перестал пропускаться: у кнопки нет обработчика и нет видимого изменения. Нужно решение: аудиофайл, ссылка или убрать кнопку."
     }
   ]
 }
