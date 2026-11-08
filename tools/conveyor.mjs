@@ -68,7 +68,14 @@ function walkFiles(dir, ext, out = []) {
 // Файлы, которые прогон сам переписывает (замер и пиксель кладут числа рядом
 // со спекой). Они отслеживаются, но «грязным» дерево из-за них не считается:
 // иначе любой полный прогон делал себя же непригодным к выпуску.
-const GENERATED = [/^design\/figma\/pages\/.+\/gate\.json$/, /^design\/figma\/pages\/.+\/pixel\.json$/];
+const GENERATED = [
+  /^design\/figma\/pages\/.+\/gate\.json$/,
+  /^design\/figma\/pages\/.+\/pixel\.json$/,
+  // Счётчик очереди моста: его переписывает figma-agent на каждом обращении
+  // к плагину. Без исключения любой прогон с шагом `bindings` объявлял дерево
+  // изменившимся, и `releaseEligible` не мог стать true никогда.
+  /^design\/figma-contention\.json$/,
+];
 const isGenerated = (path) => GENERATED.some((re) => re.test(path));
 
 /**
