@@ -137,6 +137,7 @@ const GLOBAL_STEPS = [
   // Сборка — не наш скрипт, а бинарь Astro из node_modules.
   { id: 'build', bin: 'node_modules/.bin/astro', args: ['build'], kind: 'gate', needsDist: false, about: 'сборка dist/' },
   { id: 'sources', tool: 'verify-sources', kind: 'gate', needsDist: false, about: 'экспорт не устарел' },
+  { id: 'changes', tool: 'check-changes', kind: 'gate', needsDist: false, about: 'изменения покрыты запросами' },
   { id: 'assets', tool: 'check-assets', kind: 'gate', needsDist: false, about: 'ассеты на месте' },
   { id: 'tokens', tool: 'check-tokens', kind: 'gate', needsDist: false, about: 'нет var() без токена' },
   { id: 'invented', tool: 'check-invented', kind: 'gate', needsDist: false, about: 'нет вёрстки под несуществующие ширины' },
