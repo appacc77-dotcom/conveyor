@@ -200,6 +200,8 @@ const fields = [
           <p class="bformats__consent">
             Нажимая “Отправить заявку”, вы соглашаетесь с условиями обработки данных.
           </p>
+          {/* Подсказка вместо молчания: отправлять некуда, и об этом надо
+              сказать вслух. Исчезает сама — это не сообщение об ошибке формы. */}
           <p class="bformats__note" data-invented="booking-form-not-sent" role="status" aria-live="polite" data-note></p>
 
           <div class="bformats__legal">
@@ -244,9 +246,13 @@ const fields = [
     section.querySelector('[data-submit]')?.addEventListener('click', (event) => {
       event.preventDefault();
       // Отправлять некуда: у формы нет адресата и полей с обязательностью.
+      // Говорим об этом подсказкой, которая исчезает сама, — иначе человек
+      // решит, что заявка ушла.
       if (!note) return;
-      note.textContent = 'Форма не отправляется: адресат и правила валидации в макете не заданы.';
+      note.textContent = 'Пока не работает: отправка появится позже';
       note.classList.add('is-visible');
+      clearTimeout(note.hideTimer);
+      note.hideTimer = setTimeout(() => note.classList.remove('is-visible'), 3200);
     });
   }
 </script>
@@ -648,6 +654,8 @@ const fields = [
     color: var(--color-text-secondary);
     opacity: 0;
     transition: opacity var(--motion-fast) var(--ease-out);
+    /* Подсказка не двигает форму: она всплывает над строкой согласия. */
+    pointer-events: none;
   }
 
   .bformats__note.is-visible {

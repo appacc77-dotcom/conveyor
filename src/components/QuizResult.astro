@@ -81,12 +81,13 @@ const profit = [
     <div class="qres__practice" data-figma-node="549:498">
       <div class="qres__practice-media" data-figma-node="549:500">
         <div class="qres__practice-image" data-figma-node="549:502">
-          {/* Известный долг INV-quiz-play: аудиофайла в макете нет, кнопка
-              ничего не делает. Пометка держит долг на виду: ворота interactive
-              печатают его каждый прогон, но не считают мёртвым элементом. */}
-          <button class="qres__play" type="button" aria-label="Слушать практику" data-inert-ok="INV-quiz-play">
+          {/* Известный долг INV-quiz-play: аудиофайла в макете нет. Пока его
+              нет, кнопка честно говорит об этом подсказкой, которая исчезает.
+              Пометка долга остаётся: звук так и не играет. */}
+          <button class="qres__play" type="button" aria-label="Слушать практику" data-inert-ok="INV-quiz-play" data-play>
             <span class="qres__play-triangle" aria-hidden="true" />
           </button>
+          <span class="qres__play-note" role="status" aria-live="polite" data-play-note></span>
         </div>
         <div class="qres__practice-desc" data-figma-node="549:503">
           <span class="qres__practice-label" data-figma-node="549:504">практика в подарок</span>
@@ -350,6 +351,32 @@ const profit = [
     background-position: center;
   }
 
+  /* Подсказка «пока не работает»: всплывает над кнопкой и исчезает сама. */
+  .qres__play-note {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    margin-bottom: 8px;
+    transform: translateX(-50%) translateY(4px);
+    padding: 6px 10px;
+    border-radius: var(--radius-s);
+    background: var(--color-bg-dark);
+    color: var(--color-text-on-image);
+    font-size: 13px;
+    line-height: 18px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity var(--motion-fast) var(--ease-out),
+      transform var(--motion-fast) var(--ease-out);
+  }
+
+  .qres__play-note.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   .qres__play {
     position: absolute;
     left: 42px;
@@ -540,3 +567,18 @@ const profit = [
     color: var(--color-text-primary);
   }
 </style>
+
+<script>
+  // Аудиофайла в макете нет: кнопка прослушивания говорит об этом подсказкой,
+  // которая исчезает сама. Долг INV-quiz-play остаётся открытым.
+  for (const button of document.querySelectorAll('[data-play]')) {
+    const note = button.parentElement?.querySelector('[data-play-note]');
+    if (!note) continue;
+    button.addEventListener('click', () => {
+      note.textContent = 'Пока не работает: аудио появится позже';
+      note.classList.add('is-visible');
+      clearTimeout(note.hideTimer);
+      note.hideTimer = setTimeout(() => note.classList.remove('is-visible'), 3200);
+    });
+  }
+</script>

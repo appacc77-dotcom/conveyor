@@ -129,6 +129,13 @@
       "decision": 301
     },
     {
+      "file": "src/components/QuizResult.astro",
+      "selector": ".qres__play-note",
+      "declaration": "transition:",
+      "status": "invented",
+      "decision": 362
+    },
+    {
       "file": "src/components/QuizTest.astro",
       "selector": ".qtest__note",
       "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
