@@ -6,6 +6,11 @@
 # молча терять работу хуже, чем показать, что она не уехала.
 #
 # Хук не блокирует коммит: любой сбой здесь — предупреждение, не ошибка.
+#
+# Пушится только зелёное: последний прогон `conveyor check --all` должен быть
+# PASS, полным, на чистом дереве и на том же содержимом, что сейчас
+# (`node tools/conveyor.mjs push-ok`). Иначе коммит остаётся локальным.
+# Обойти осознанно: CONVEYOR_PUSH=force git commit ...
 
 remote=$(git remote 2>/dev/null | head -1)
 if [ -z "$remote" ]; then
@@ -15,6 +20,14 @@ fi
 branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 if [ "$branch" = "HEAD" ]; then
   exit 0
+fi
+
+if [ "$CONVEYOR_PUSH" != "force" ]; then
+  if ! reason=$(node tools/conveyor.mjs push-ok 2>&1); then
+    printf '\n  пуш пропущен: %s\n' "$reason"
+    printf '  сначала: node tools/conveyor.mjs check --all; отправить вручную: git push %s %s\n\n' "$remote" "$branch"
+    exit 0
+  fi
 fi
 
 # Быстрая проверка доступности: без сети ls-remote падает за секунды.
