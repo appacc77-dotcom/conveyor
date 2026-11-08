@@ -78,9 +78,11 @@ const formats = [
 ];
 
 const fields = [
-  { label: 'Имя', optional: true, placeholder: 'Как к вам обращаться', type: 'text', height: 54 },
-  { label: 'Email', optional: true, placeholder: 'ваш@email.com', type: 'email', height: 54 },
-  { label: 'Телефон', optional: true, placeholder: '+1 (___) ___ ___ ___', type: 'tel', height: 54 },
+  // У первых трёх полей в макете видна точка-маркер, а «ОПЦИОНАЛЬНО» скрыто
+  // (field-optional visible: false). У комментария наоборот.
+  { label: 'Имя', required: true, placeholder: 'Как к вам обращаться', type: 'text', height: 54 },
+  { label: 'Email', required: true, placeholder: 'ваш@email.com', type: 'email', height: 54 },
+  { label: 'Телефон', required: true, placeholder: '+1 (___) ___ ___ ___', type: 'tel', height: 54 },
   { label: 'комментарий', optional: true, placeholder: 'Что важно знать заранее, ваш запрос или вопросы...', type: 'textarea', height: 86 },
 ];
 ---
@@ -112,7 +114,12 @@ const fields = [
                 <span>{f.price}</span>
               </span>
             </span>
-            <span class="fmt__circle" aria-hidden="true" />
+            <span class="fmt__circle" aria-hidden="true">
+              {/* В макете у выбранного формата внутри круга галочка. */}
+              <svg class="fmt__check" width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7.2 5.4 10.6 12 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
           </button>
         ))}
 
@@ -151,28 +158,27 @@ const fields = [
                 <span class="bformats__about-label" data-figma-node={i === 0 ? 'I804:349;383:1260' : undefined}>
                   О формате
                 </span>
-                <p class="bformats__about-text" data-figma-node={i === 0 ? 'I804:349;383:1261' : undefined}>
-                  {f.about.split('\n').map((line, n) => (
-                    <>
-                      {n > 0 && <br />}
-                      {line}
-                    </>
+                {/* Два абзаца с просветом: в макете между ними пустая строка
+                    (paragraphSpacing), выгрузка его не несёт. */}
+                <div class="bformats__about-text" data-figma-node={i === 0 ? 'I804:349;383:1261' : undefined}>
+                  {f.about.split('\n').map((line) => (
+                    <p class="bformats__about-paragraph">{line}</p>
                   ))}
-                </p>
+                </div>
               </div>
 
               <div class="bformats__meeting">
                 <span class="bformats__meeting-label" data-figma-node={i === 0 ? 'I804:349;383:1262' : undefined}>
                   {f.meetingLabel}
                 </span>
-                <p class="bformats__meeting-list" data-figma-node={i === 0 ? 'I804:349;383:1265' : undefined}>
-                  {f.list.split('\n').map((line, n) => (
-                    <>
-                      {n > 0 && <br />}
-                      {line}
-                    </>
+                {/* Список — маркированный: в макете это буллиты, а не строки
+                    через перевод. Выгрузка маркеров не несёт, поэтому разметка
+                    задаёт их сама. */}
+                <ul class="bformats__meeting-list" data-figma-node={i === 0 ? 'I804:349;383:1265' : undefined}>
+                  {f.list.split('\n').map((line) => (
+                    <li>{line}</li>
                   ))}
-                </p>
+                </ul>
               </div>
             </div>
           ))}
@@ -185,6 +191,7 @@ const fields = [
             <label class="bfield">
               <span class="bfield__head">
                 <span class="bfield__label">{f.label}</span>
+                {f.required && <span class="bfield__dot" aria-hidden="true" />}
                 {f.optional && <span class="bfield__optional">ОПЦИОНАЛЬНО</span>}
               </span>
               {f.type === 'textarea' ? (
@@ -408,8 +415,20 @@ const fields = [
   }
 
   .fmt.is-active .fmt__circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--color-accent);
     border-color: var(--color-accent);
+    color: var(--color-text-on-image);
+  }
+
+  .fmt__check {
+    display: none;
+  }
+
+  .fmt.is-active .fmt__check {
+    display: block;
   }
 
   .bformats__hint {
@@ -496,6 +515,9 @@ const fields = [
     line-height: 30px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
+    /* В макете строка одна. Без запрета переноса текст шире коробки и
+       вылезает на заголовок: высота фиксирована 30 px. */
+    white-space: nowrap;
     color: var(--color-text-secondary);
   }
 
@@ -509,6 +531,9 @@ const fields = [
 
   .bformats__details-title {
     font-family: var(--font-literata);
+    /* Стиль H4 в макете — Light. Без веса браузер берёт 400, и строка
+       выглядит тяжелее и шире. */
+    font-weight: 300;
     font-size: 29px;
     line-height: 38.6px;
     color: var(--color-text-primary);
@@ -529,6 +554,8 @@ const fields = [
     display: block;
     width: 110px;
     height: 23px;
+    /* То же: 110 px уже текста с трекингом, вторая строка падала на абзац. */
+    white-space: nowrap;
     font-size: 15px;
     line-height: 23px;
     letter-spacing: 0.16em;
@@ -545,6 +572,15 @@ const fields = [
     color: var(--color-text-primary);
   }
 
+  /* Просвет между абзацами 16 px: 6 строк по 27 + 16 = 178, как в спеке. */
+  .bformats__about-paragraph {
+    margin: 0;
+  }
+
+  .bformats__about-paragraph + .bformats__about-paragraph {
+    margin-top: 16px;
+  }
+
   .bformats__meeting {
     margin-top: 24px;
   }
@@ -559,12 +595,20 @@ const fields = [
   }
 
   .bformats__meeting-list {
+    box-sizing: border-box;
     width: 608px;
     height: 102px;
     margin: 8px 0 0;
+    padding: 0 0 0 16px;
+    list-style: disc;
     font-size: 20px;
     line-height: 34px;
     color: var(--color-text-primary);
+  }
+
+  /* Маркер в макете мельче текста: точка около 4 px при кегле 20. */
+  .bformats__meeting-list ::marker {
+    font-size: 13px;
   }
 
   .bformats__panel-divider {
@@ -602,11 +646,27 @@ const fields = [
     color: var(--color-text-secondary);
   }
 
+  /* В макете «КОММЕНТАРИЙ  ОПЦИОНАЛЬНО» стоят рядом слева, а не по краям:
+     у метки textCase UPPER и трекинг 16 %, у подписи — свой. */
+  .bfield__label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  /* Точка-маркер обязательного поля: 3×3, на уровне верха строки. */
+  .bfield__dot {
+    width: 3px;
+    height: 3px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: var(--color-text-heading);
+  }
+
   .bfield__optional {
-    margin-left: auto;
     font-size: 13px;
     line-height: 20px;
     letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-text-secondary);
   }
 
@@ -631,9 +691,14 @@ const fields = [
   }
 
   .bformats__submit {
+    /* flex: none — иначе при содержимом выше 814 px форма сжимает кнопку
+       (было 36 вместо 60). */
+    flex: none;
     width: 608px;
     height: 60px;
-    margin-top: 24px;
+    /* Отступ даёт поле выше (margin-bottom 24), второй не нужен: с ним
+       правовой блок уезжал на 24 px вниз. */
+    margin-top: 0;
     border: 0;
     border-radius: 4px;
     background: var(--color-accent);
