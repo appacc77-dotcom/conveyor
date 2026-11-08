@@ -385,7 +385,7 @@ function assertUniqueIds(steps) {
   }
 }
 
-async function commandCheck(unit, json, all, set = null) {
+async function commandCheck(unit, json, all, set = null, resume = null) {
   const units = set === 'regression' ? regressionUnits() : all ? builtUnits() : unit ? [unit] : [];
   if (set === 'regression' && units === null) return 2;
 
@@ -428,6 +428,32 @@ async function commandCheck(unit, json, all, set = null) {
     ...units.flatMap((item) => (all || set ? [measureStep(item)] : unitSteps(item))),
   ];
   assertUniqueIds(steps);
+  // Возобновление: берём результаты прошлого прогона, но только если дерево
+  // то же самое. Иначе «пропущенные» шаги относятся к другому коду.
+  let resumeFrom = null;
+  if (resume) {
+    const prevDir = join(runsDir, resume);
+    const prevPath = join(prevDir, 'verdict.json');
+    if (!existsSync(prevPath)) {
+      console.error(`прогона ${resume} нет — возобновлять нечего`);
+      return 2;
+    }
+    const prev = JSON.parse(readFileSync(prevPath, 'utf8'));
+    const now = gitState();
+    if (!prev.contentHash || !now.contentHash || prev.contentHash !== now.contentHash) {
+      console.error('содержимое изменилось с прошлого прогона — возобновление отменено');
+      console.error(`  было ${prev.contentHash ?? 'нет'} · сейчас ${now.contentHash ?? 'нет'}`);
+      return 2;
+    }
+    resumeFrom = new Map();
+    for (const file of readdirSync(join(prevDir, 'results'))) {
+      if (!file.endsWith('.json')) continue;
+      const result = JSON.parse(readFileSync(join(prevDir, 'results', file), 'utf8'));
+      if (result.status === 'PASS') resumeFrom.set(result.id, result);
+    }
+    if (!json) console.log(`возобновление прогона ${resume}: зелёных шагов ${resumeFrom.size}`);
+  }
+
   const id = runId();
   const dir = join(runsDir, id);
   mkdirSync(join(dir, 'results'), { recursive: true });
@@ -450,6 +476,15 @@ async function commandCheck(unit, json, all, set = null) {
     if (buildBroken && step.needsDist) {
       results.push({ ...step, status: 'INCOMPLETE', ms: 0, note: 'сборка не прошла' });
       events.push({ at: new Date().toISOString(), step: step.id, status: 'INCOMPLETE' });
+      continue;
+    }
+
+    const resumed = resumeFrom?.get(step.id);
+    if (resumed) {
+      results.push({ ...resumed, resumed: true, ms: 0 });
+      events.push({ at: new Date().toISOString(), step: step.id, status: 'PASS', ms: 0, resumed: true });
+      if (!json) process.stdout.write(`  ${step.id.padEnd(idWidth)} ок  (возобновлён)  ${step.about}\n`);
+      writeFileSync(join(dir, 'results', `${step.id}.json`), JSON.stringify({ ...resumed, resumed: true }, null, 2) + '\n');
       continue;
     }
 
@@ -494,7 +529,13 @@ async function commandCheck(unit, json, all, set = null) {
     // коммита он не становится: правки не зафиксированы.
     releaseEligible:
       verdict.status === 'PASS' && mode === 'full' && gitBefore.dirty === false && Boolean(gitBefore.commit) && stable,
-    steps: results.map((r) => ({ id: r.id, status: r.status, ms: r.ms, kind: r.kind })),
+    steps: results.map((r) => ({
+      id: r.id,
+      status: r.status,
+      ms: r.ms,
+      kind: r.kind,
+      ...(r.resumed ? { resumed: true } : {}),
+    })),
   };
 
   writeFileSync(join(dir, 'verdict.json'), JSON.stringify(report, null, 2) + '\n');
@@ -606,6 +647,7 @@ const { values, positionals } = parseArgs({
     unit: { type: 'string' },
     all: { type: 'boolean', default: false },
     set: { type: 'string' },
+    resume: { type: 'string' },
     json: { type: 'boolean', default: false },
   },
 });
@@ -614,7 +656,7 @@ const unit = values.unit ?? positionals[0] ?? null;
 
 try {
   let code;
-  if (command === 'check') code = await commandCheck(unit, values.json, values.all, values.set ?? null);
+  if (command === 'check') code = await commandCheck(unit, values.json, values.all, values.set ?? null, values.resume ?? null);
   else if (command === 'status') code = commandStatus(values.json);
   else if (command === 'plan') code = commandPlan(unit, values.all);
   else if (command === 'push-ok') code = commandPushOk();
