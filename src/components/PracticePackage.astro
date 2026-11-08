@@ -1,4 +1,5 @@
 ---
+import { figmaOnly } from '../lib/flags.mjs';
 /**
  * Секция `practice-package` (414:2107), 1440×1533: три пакета практик.
  *
@@ -139,9 +140,11 @@ const cards = [
       ))}
     </div>
 
+    {!figmaOnly && (
     <p class="ppkg__note" data-invented="package-not-connected" id="pack-note" data-note hidden>
       Оплата не подключена: в макете нет сценария покупки.
     </p>
+    )}
   </div>
 </section>
 

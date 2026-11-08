@@ -9,6 +9,7 @@
  * матрице (см. `src/lib/fill.mjs`).
  */
 import { backgroundOf } from '../lib/fill.mjs';
+import { figmaOnly } from '../lib/flags.mjs';
 
 interface Card {
   id: string;
@@ -89,9 +90,11 @@ const bars = Array.from({ length: 48 }, (_, i) => {
         <span class="pay__price">{card.price}</span>
       </div>
     </div>
+    {!figmaOnly && (
     <p class="pay__note" data-invented="pay-not-connected" id={`buy-note-${card.id.replace(':', '-')}`} hidden>
       Оплата не подключена: в макете нет сценария покупки.
     </p>
+    )}
   </div>
 </article>
 

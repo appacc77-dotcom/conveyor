@@ -1,4 +1,5 @@
 ---
+import { figmaOnly } from '../lib/flags.mjs';
 /**
  * Секция `booking-formats` (383:761), 1440×1546: шкала, список пяти форматов,
  * панель выбранного формата и форма заявки.
@@ -202,7 +203,9 @@ const fields = [
           </p>
           {/* Подсказка вместо молчания: отправлять некуда, и об этом надо
               сказать вслух. Исчезает сама — это не сообщение об ошибке формы. */}
+          {!figmaOnly && (
           <p class="bformats__note" data-invented="booking-form-not-sent" role="status" aria-live="polite" data-note></p>
+          )}
 
           <div class="bformats__legal">
             <span class="bformats__legal-title" data-figma-node="385:1344">Правовая информация</span>
@@ -573,6 +576,7 @@ const fields = [
   }
 
   .bformats__form {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 608px;
@@ -648,6 +652,11 @@ const fields = [
   }
 
   .bformats__note {
+    /* Подсказка не занимает место в потоке: иначе её удаление в сборке
+       «только из макета» сдвигало бы правовой блок и ломало замер. */
+    position: absolute;
+    left: 0;
+    top: 100%;
     margin: 8px 0 0;
     font-size: 13px;
     line-height: 20px;

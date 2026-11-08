@@ -61,12 +61,14 @@
     },
     {
       "id": "booking-form-not-sent",
-      "what": "Сообщение «Форма не отправляется» в форме заявки",
+      "what": "Подсказка «Пока не работает: отправка появится позже» в форме заявки",
       "file": "src/components/BookingFormats.astro",
       "selector": ".bformats__note",
       "marker": true,
       "origin": "invented",
-      "decisions": [],
+      "decisions": [
+        362
+      ],
       "checkedBy": "interactive",
       "stage2": "адресат и валидация формы — решение владельца",
       "billable": true

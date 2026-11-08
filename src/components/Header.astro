@@ -21,6 +21,7 @@
  * логотип 168, свободного места нет — поэтому gap 10 из спеки не работает.
  */
 import BtnPrimary from './ds/btn-primary.astro';
+import { figmaOnly } from '../lib/flags.mjs';
 
 const links = [
   { text: 'О проекте', node: 'I79:104;167:645', dropdown: true },
@@ -68,11 +69,13 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
                 height="14"
               />
             </summary>
+            {!figmaOnly && (
             <ul class="header__menu" data-invented="header-dropdown-open">
               {dropdownItems.map((item) => (
                 <li><a class="header__menu-link t-body" href={item.href}>{item.text}</a></li>
               ))}
             </ul>
+            )}
           </details>
         ) : (
           <a class="header__link t-body" href="#" data-figma-node={link.node}>{link.text}</a>
@@ -125,6 +128,7 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
 
   {/* Мобильное меню: в макете только закрытое состояние (одна иконка бургера).
       Панель — изобретение, устройство взято по образцу десктопного меню. */}
+  {!figmaOnly && (
   <nav class="header__mobile" data-invented="header-mobile-panel" id="mobile-menu" aria-label="Меню" hidden data-mobile>
     <ul class="header__mobile-list">
       <li>
@@ -140,6 +144,7 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
       ))}
     </ul>
   </nav>
+  )}
 </section>
 
 <style>

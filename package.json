@@ -49,7 +49,8 @@
     "motion:check": "node tools/check-motion-manifest.mjs",
     "images": "node tools/check-images.mjs",
     "fonts": "node tools/fonts.mjs",
-    "fonts:check": "node tools/fonts.mjs --check"
+    "fonts:check": "node tools/fonts.mjs --check",
+    "build:figma-only": "FIGMA_ONLY=1 ASTRO_TELEMETRY_DISABLED=1 astro build"
   },
   "devDependencies": {
     "astro": "^7.4.5",
