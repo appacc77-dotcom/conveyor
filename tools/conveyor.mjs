@@ -259,14 +259,38 @@ const sharedArgs = (unit) => {
 // поэтому заменяем его дефисом — так же, как имена снимков.
 const stepId = (prefix, unit) => `${prefix}:${unit.replace('/', '-')}`;
 
-const measureStep = (unit) => ({
-  id: stepId('measure', unit),
-  tool: 'measure',
-  args: [`design/figma/pages/${unit}/spec.json`, '--url', unitUrl(unit), ...argsFor(unit)],
-  kind: 'gate',
-  needsDist: true,
-  about: `геометрия ${unit}`,
-});
+/**
+ * Замер всех секций одним запуском.
+ *
+ * Раньше на каждую секцию поднимался свой сервер и Chromium — самая дорогая
+ * часть прогона. Теперь задания идут списком, браузер один, страница
+ * загружается один раз на адрес.
+ */
+const measureBatchStep = (units) => {
+  const jobs = units.map((unit) => {
+    const root = argsFor(unit);
+    const rootIndex = root.indexOf('--root');
+    return {
+      spec: `design/figma/pages/${unit}/spec.json`,
+      url: unitUrl(unit),
+      ...(rootIndex >= 0 ? { root: root[rootIndex + 1] } : {}),
+      ...(root.includes('--by-suffix') ? { bySuffix: true } : {}),
+    };
+  });
+  const file = join(runsDir, 'measure-jobs.json');
+  return {
+    id: 'measure',
+    tool: 'measure',
+    args: ['--batch', file],
+    prepare: () => {
+      mkdirSync(runsDir, { recursive: true });
+      writeFileSync(file, JSON.stringify(jobs, null, 1) + '\n');
+    },
+    kind: 'gate',
+    needsDist: true,
+    about: `геометрия ${units.length} секций одним запуском`,
+  };
+};
 
 const unitSteps = (unit) => [
   {
@@ -444,7 +468,7 @@ async function commandCheck(unit, json, all, set = null, resume = null) {
     : GLOBAL_STEPS;
   const steps = [
     ...globalSteps,
-    ...units.flatMap((item) => (all || set ? [measureStep(item)] : unitSteps(item))),
+    ...(all || set ? [measureBatchStep(units)] : unitSteps(units[0])),
   ];
   assertUniqueIds(steps);
   // Возобновление: берём результаты прошлого прогона, но только если дерево
@@ -506,6 +530,9 @@ async function commandCheck(unit, json, all, set = null, resume = null) {
       writeFileSync(join(dir, 'results', `${step.id}.json`), JSON.stringify({ ...resumed, resumed: true }, null, 2) + '\n');
       continue;
     }
+
+    // Шаг может готовить входные файлы (пакетный замер пишет список заданий).
+    step.prepare?.();
 
     if (!json) process.stdout.write(`  ${step.id.padEnd(idWidth)} `);
     const result = await runStep(step);
