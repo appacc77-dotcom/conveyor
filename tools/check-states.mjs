@@ -53,6 +53,9 @@ for (const page of structure.pages ?? []) {
 // --- 2. Секции, у которых есть состояния и замер ---------------------------
 const pagesRoot = join(root, 'design/figma/pages');
 const sections = [];
+// Секции, у которых замер красный: их контент ещё не собран, и проверять
+// состояния нечего. Раньше они брались в работу по одному наличию gate.json.
+const notBuilt = [];
 for (const page of readdirSync(pagesRoot)) {
   const pageDir = join(pagesRoot, page);
   if (!statSync(pageDir).isDirectory()) continue;
@@ -62,11 +65,21 @@ for (const page of readdirSync(pagesRoot)) {
     const gatePath = join(dir, 'gate.json');
     const specPath = join(dir, 'spec.json');
     if (!existsSync(statesPath) || !existsSync(gatePath) || !existsSync(specPath)) continue;
+    const gate = JSON.parse(readFileSync(gatePath, 'utf8'));
+    if (gate.ok === false) {
+      notBuilt.push({ unit: `${page}/${name}`, red: gate.red ?? 0, worst: gate.worstDelta ?? null });
+      continue;
+    }
     sections.push({ page, name, dir, statesPath, specPath });
   }
 }
 
 if (!sections.length) {
+  if (notBuilt.length) {
+    console.log('собранных секций с состояниями нет: у всех замер красный');
+    for (const item of notBuilt) console.log(`  ${item.unit}: красных ${item.red}, худшее ${item.worst}`);
+    process.exit(3);
+  }
   console.log('нет собранных секций с состояниями');
   process.exit(0);
 }
@@ -235,6 +248,12 @@ console.log(`секций с состояниями: ${expected.size} · тек�
 
 if (!missing) {
   console.log('весь контент из состояний есть на странице');
+  if (notBuilt.length) {
+    // Проверено не всё: у этих секций красный замер, состояния не смотрелись.
+    console.log(`не проверено (замер красный): ${notBuilt.length}`);
+    for (const item of notBuilt) console.log(`  ${item.unit}: красных ${item.red}, худшее ${item.worst}`);
+    process.exit(3);
+  }
   process.exit(0);
 }
 
