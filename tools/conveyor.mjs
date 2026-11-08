@@ -161,7 +161,14 @@ function builtUnits() {
     const pageDir = join(pagesRoot, page);
     if (!statSync(pageDir).isDirectory()) continue;
     for (const section of readdirSync(pageDir)) {
-      if (existsSync(join(pageDir, section, 'gate.json'))) units.push(`${page}/${section}`);
+      // Объём — всё, что экспортировано: `spec.json` появляется с первым
+      // экспортом. `gate.json` — запасной признак для старых папок.
+      // Без этого новый проект не проверялся никогда: реестр `acceptance`
+      // пишется руками, а скан искал только gate.json.
+      const dir = join(pageDir, section);
+      if (existsSync(join(dir, 'spec.json')) || existsSync(join(dir, 'gate.json'))) {
+        units.push(`${page}/${section}`);
+      }
     }
   }
   return units.sort();
