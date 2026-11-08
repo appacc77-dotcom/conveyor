@@ -8,7 +8,6 @@
  *   content    — 64, 0, 491×307: заголовок 491×96 (Literata 38/48),
  *                текст 0,128 491×102 (Golos 20/34), кнопки 0,262 387×45
  */
-import ArrowQuiet from './ds/arrow-quiet.astro';
 import { backgroundOf } from '../lib/fill.mjs';
 
 interface Props {
@@ -41,9 +40,10 @@ const bg = backgroundOf({
       <div class="mcta__buttons" data-figma-node="335:998">
         {/* Кнопки со своей вёрсткой: в наборе они 74 px высотой, а в секции
             по спеке 45 — компонент набора сюда не подходит. */}
+        {/* Стрелки в кнопке нет: в макете слой `arrow-quiet` скрыт
+            (`visible: false`), хотя лежит внутри инстанса. */}
         <a class="mcta__btn mcta__btn--primary" href="/booking.html" data-figma-node="335:999">
           <span class="mcta__label">Начать с точки входа</span>
-          <ArrowQuiet size={14} />
         </a>
         <a class="mcta__btn mcta__btn--secondary" href="/booking.html" data-figma-node="335:1000">
           <span class="mcta__label mcta__label--accent">Задать вопрос</span>

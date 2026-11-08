@@ -91,7 +91,9 @@ function checkChunk(chunk, retried = false) {
   writeFileSync(tmp, source);
 
   try {
-    const reply = runFigma(['exec-js', tmp, '--timeout', '180000']);
+    // 60 с на кусок, а не 180: при сбое повтор и деление должны укладываться
+    // в таймаут шага (300 с), иначе конвейер снимает шаг целиком.
+    const reply = runFigma(['exec-js', tmp, '--timeout', '60000']);
     // Пустой ответ — сбой транспорта, а не «ноль привязок»: делим и повторяем.
     if (!reply || !reply.result || typeof reply.result !== 'object') {
       throw new Error('пустой ответ плагина');
@@ -104,9 +106,10 @@ function checkChunk(chunk, retried = false) {
     return true;
   } catch (error) {
     // Сбой транспорта неотличим от настоящего расхождения, а по одному
-    // падению судить нельзя: повторяем тот же кусок один раз. Только если
-    // и повтор не прошёл — делим дальше или сдаёмся.
-    if (!error.retried) {
+    // падению судить нельзя: повторяем тот же кусок один раз. Но не после
+    // таймаута: если плагин молчит 60 с, повтор только съест время шага.
+    const timedOut = /timeout|timed out/i.test(String(error.message));
+    if (!error.retried && !timedOut) {
       try {
         return checkChunk(chunk, true);
       } catch {

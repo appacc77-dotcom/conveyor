@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-08T17:29:40.511Z",
+  "at": "2026-11-08T17:47:20.883Z",
   "reference": "design/figma/pages/method/method-cta/crop.png",
   "shot": ".screens/method-method-cta.png",
   "width": 1440,
   "height": 499,
   "mean": 1.75,
   "over16": 1.75,
-  "over48": 0.71
+  "over48": 0.7
 }
