@@ -16,8 +16,8 @@
  * Разбор один и тот же для проверки и для записи: иначе манифест и код
  * разойдутся молча.
  */
-import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync, mkdirSync } from 'node:fs';
+import { join, relative, dirname } from 'node:path';
 
 const root = process.cwd();
 const manifestPath = join(root, 'design/motion/motion.json');
@@ -133,6 +133,9 @@ if (write) {
       decision: old?.decision ?? 0,
     };
   });
+  // Новый проект: папки `design/motion` ещё нет — создаём, иначе запись
+  // падает с ENOENT на ровном месте.
+  mkdirSync(dirname(manifestPath), { recursive: true });
   writeFileSync(
     manifestPath,
     JSON.stringify(

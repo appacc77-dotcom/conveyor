@@ -43,7 +43,9 @@
     "states": "node tools/check-states.mjs",
     "motion:manifest": "node tools/check-motion-manifest.mjs --write",
     "motion:check": "node tools/check-motion-manifest.mjs",
-    "images": "node tools/check-images.mjs"
+    "images": "node tools/check-images.mjs",
+    "fonts": "node tools/fonts.mjs",
+    "fonts:check": "node tools/fonts.mjs --check"
   },
   "dependencies": {
     "astro": "7.4.5"
