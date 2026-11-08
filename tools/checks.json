@@ -484,7 +484,7 @@
         "dist/**"
       ],
       "dependsOn": [
-        "visual"
+        "build"
       ],
       "resources": [
         "dist",

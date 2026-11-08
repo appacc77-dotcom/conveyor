@@ -197,6 +197,45 @@ function contractTimeout(id) {
   }
 }
 
+/**
+ * Зависимости проверки из контракта. Пустой список — шаг ни от кого не зависит.
+ */
+function contractDeps(id) {
+  const path = join(root, 'tools/checks.json');
+  if (!existsSync(path)) return null;
+  try {
+    return JSON.parse(readFileSync(path, 'utf8')).checks?.[id]?.dependsOn ?? [];
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Топологическая сортировка шагов по dependsOn из контрактов.
+ *
+ * Если зависимость не входит в профиль, она не учитывается: профиль уже
+ * выбрал, что запускать. Порядок внутри равных сохраняется (стабильно).
+ */
+function orderByDeps(steps) {
+  const byId = new Map(steps.map((step) => [step.id, step]));
+  const result = [];
+  const state = new Map();
+  const visit = (step) => {
+    const mark = state.get(step.id);
+    if (mark === 'done') return;
+    if (mark === 'open') return; // цикл поймает check-contracts, здесь не падаем
+    state.set(step.id, 'open');
+    for (const dep of contractDeps(step.id) ?? []) {
+      const next = byId.get(dep);
+      if (next) visit(next);
+    }
+    state.set(step.id, 'done');
+    result.push(step);
+  };
+  for (const step of steps) visit(step);
+  return result;
+}
+
 function stepsForProfile(profile) {
   const path = join(root, 'tools/checks.json');
   if (!existsSync(path)) {
@@ -445,11 +484,18 @@ function runStep(step) {
  *
  * Сигналы (пиксель) в вердикт не входят: это диагностика, а не приёмка.
  */
-function evaluate(results) {
+function evaluate(results, mandatory = null) {
   const gates = results.filter((r) => r.kind === 'gate');
   if (gates.some((r) => r.status === 'ERROR')) return { status: 'ERROR', exitCode: 2 };
   if (gates.some((r) => r.status === 'FAIL')) return { status: 'FAIL', exitCode: 1 };
   if (gates.some((r) => r.status === 'INCOMPLETE')) return { status: 'INCOMPLETE', exitCode: 2 };
+  // BLOCKED сам по себе вердикт не портит: причина уже названа тем шагом, от
+  // которого он зависит. Но если заблокирована обязательная проверка, её
+  // результат неизвестен — это INCOMPLETE, а не зелёный.
+  const blocked = gates.filter((r) => r.status === 'BLOCKED');
+  if (blocked.length && (!mandatory || blocked.some((r) => mandatory.has(r.id)))) {
+    return { status: 'INCOMPLETE', exitCode: 2 };
+  }
   return { status: 'PASS', exitCode: 0 };
 }
 
@@ -525,6 +571,9 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
     ...(needsSections ? (local ? unitSteps(units[0]) : [measureBatchStep(units)]) : []),
   ];
   assertUniqueIds(steps);
+  // Порядок — из зависимостей контракта, а не из порядка в массиве: шаг не
+  // должен проверять «прошла ли зависимость» до того, как она запускалась.
+  const ordered = orderByDeps(steps);
   // Возобновление: берём результаты прошлого прогона, но только если дерево
   // то же самое. Иначе «пропущенные» шаги относятся к другому коду.
   let resumeFrom = null;
@@ -564,15 +613,22 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
   const results = [];
   const startedAt = new Date().toISOString();
 
-  for (const step of steps) {
-    // Сборка не прошла — остальным нечего смотреть, но и молча пропускать
-    // нельзя: это INCOMPLETE, а не успех. Учитываем любой не-PASS: Astro при
-    // ошибке выходит с кодом 1, а не 2.
-    const build = results.find((r) => r.id === 'build');
-    const buildBroken = build && build.status !== 'PASS';
-    if (buildBroken && step.needsDist) {
-      results.push({ ...step, status: 'INCOMPLETE', ms: 0, note: 'сборка не прошла' });
-      events.push({ at: new Date().toISOString(), step: step.id, status: 'INCOMPLETE' });
+  for (const step of ordered) {
+    // Зависимости — из контрактов. Если зависимость не прошла, шаг не
+    // пытается работать: BLOCKED с именем причины, а не ERROR и не тишина.
+    // Раньше это было частным случаем сборки; теперь работает для любой
+    // цепочки (снимок → сравнение, сборка → все страничные ворота).
+    const broken = (contractDeps(step.id) ?? [])
+      .map((dep) => results.find((r) => r.id === dep))
+      .filter((dep) => dep && dep.status !== 'PASS');
+    if (broken.length) {
+      const why = broken.map((dep) => `${dep.id}: ${dep.status}`).join(', ');
+      results.push({ ...step, status: 'BLOCKED', ms: 0, blockedBy: broken.map((d) => d.id), note: why });
+      events.push({ at: new Date().toISOString(), step: step.id, status: 'BLOCKED', blockedBy: broken.map((d) => d.id) });
+      if (!json) {
+        process.stdout.write(`  ${step.id.padEnd(idWidth)} заблокировано  ${why}\n`);
+      }
+      writeFileSync(join(dir, 'results', `${step.id}.json`), JSON.stringify({ ...step, status: 'BLOCKED', ms: 0, blockedBy: broken.map((d) => d.id), note: why }, null, 2) + '\n');
       continue;
     }
 
@@ -602,7 +658,7 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
     writeFileSync(join(dir, 'results', `${step.id}.json`), JSON.stringify(result, null, 2) + '\n');
   }
 
-  const verdict = evaluate(results);
+  const verdict = evaluate(results, wanted);
   const provenanceInfo = provenance();
   // Дерево поменялось во время прогона — вердикт не относится ни к одному
   // состоянию целиком.
@@ -660,7 +716,12 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
     process.stdout.write(
       `\nвердикт: ${verdict.status}${verdict.status === 'PASS' && !report.releaseEligible ? ` (рабочий: ${notEligibleReason(report)})` : ''}`,
     );
-    if (failed.length) process.stdout.write(` · красных ${failed.length}: ${failed.map((r) => r.id).join(', ')}`);
+    // Заблокированные — не красные: их причина уже названа тем шагом, от
+    // которого они зависят. Смешивать их в один список значит врать о числе.
+    const red = failed.filter((r) => r.status !== 'BLOCKED');
+    const blocked = results.filter((r) => r.status === 'BLOCKED');
+    if (red.length) process.stdout.write(` · красных ${red.length}: ${red.map((r) => r.id).join(', ')}`);
+    if (blocked.length) process.stdout.write(` · заблокировано ${blocked.length}: ${blocked.map((r) => r.id).join(', ')}`);
     process.stdout.write(`\nпрогон: reports/runs/${id}/\n`);
   }
 
@@ -734,9 +795,12 @@ function commandPlan(unit, all) {
   const units = all ? builtUnits() : unit ? [unit] : [];
   const steps = [...GLOBAL_STEPS, ...units.flatMap((item) => (all ? [measureStep(item)] : unitSteps(item)))];
   assertUniqueIds(steps);
+  // Порядок — из зависимостей контракта, а не из порядка в массиве: шаг не
+  // должен проверять «прошла ли зависимость» до того, как она запускалась.
+  const ordered = orderByDeps(steps);
   process.stdout.write(`план${unit ? ` для ${unit}` : all ? ` для ${units.length} секций` : ''} — ${steps.length} шагов, последовательно:\n`);
   const idWidth = Math.max(...steps.map((step) => step.id.length));
-  for (const step of steps) {
+  for (const step of ordered) {
     process.stdout.write(`  ${step.id.padEnd(idWidth)} ${step.kind.padEnd(6)} ${step.about}\n`);
   }
   process.stdout.write('\nничего не выполнено: это план\n');
