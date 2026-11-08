@@ -9,15 +9,46 @@
  * Замок сериализует связку «собрать → замерить», оставляя остальную работу
  * параллельной.
  *
- * Устаревший замок (старше пяти минут) снимается: агент мог упасть.
+ * Внутри замка лежит owner.json (pid, host, время). Чужой замок снимается,
+ * только если владелец точно мёртв: тот же хост и процесса нет, либо замок
+ * старше пяти минут и владелец не проверяем (другой хост, нет owner.json).
+ * Раньше замок снимался по одному возрасту — и долгий живой прогон
+ * (сборка + замер дольше пяти минут) терял его посреди работы.
  */
-import { mkdirSync, rmSync, statSync } from 'node:fs';
+import { mkdirSync, rmSync, statSync, writeFileSync, readFileSync } from 'node:fs';
+import { hostname } from 'node:os';
+import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const LOCK = '.build.lock';
 const STALE_MS = 5 * 60 * 1000;
 const WAIT_MS = 200;
 const DEADLINE_MS = 10 * 60 * 1000;
+
+const OWNER = join(LOCK, 'owner.json');
+const host = hostname();
+
+function alive(pid) {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (error) {
+    // EPERM — процесс есть, но чужой: считаем живым.
+    return error.code === 'EPERM';
+  }
+}
+
+/** Можно ли снять чужой замок. */
+function abandoned() {
+  let owner = null;
+  try {
+    owner = JSON.parse(readFileSync(OWNER, 'utf8'));
+  } catch {
+    // owner.json ещё не записан (гонка) или замок старого формата
+  }
+  if (owner && owner.host === host && Number.isInteger(owner.pid)) return !alive(owner.pid);
+  return Date.now() - statSync(LOCK).mtimeMs > STALE_MS;
+}
 
 const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 
@@ -33,13 +64,15 @@ let taken = false;
 while (!taken) {
   try {
     mkdirSync(LOCK);
+    writeFileSync(OWNER, JSON.stringify({ pid: process.pid, host, at: new Date().toISOString(), command }) + '\n');
     taken = true;
   } catch (error) {
     if (error.code !== 'EEXIST') throw error;
 
     // Замок от упавшего агента не должен блокировать навсегда.
     try {
-      if (Date.now() - statSync(LOCK).mtimeMs > STALE_MS) {
+      if (abandoned()) {
+        console.error('замок брошен (владелец не жив) — снимаю');
         rmSync(LOCK, { recursive: true, force: true });
         continue;
       }
