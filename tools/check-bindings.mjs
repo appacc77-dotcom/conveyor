@@ -83,39 +83,37 @@ const skipped = [];
  * пачка делится пополам и повторяется — вплоть до одного узла. Так размер
  * пачки не магическое число: он подстраивается под файл.
  */
-let transportRetries = 0;
-
-function checkChunk(chunk, retried = false) {
+/**
+ * Сверка одной пачки узлов.
+ *
+ * Повторов здесь нет намеренно: `runFigma` уже повторяет временные сбои сам
+ * (E_TIMEOUT, обрыв связи, зависшая задача) и знает их коды. Свой повтор поверх
+ * него удваивал ожидание и — из-за проверки несуществующего поля — мог уходить
+ * в бесконечную рекурсию, пока шаг не снимался по таймауту.
+ *
+ * Здесь остаётся только деление пачки: одна упавшая пачка из тридцати узлов
+ * не должна отменять сверку остальных.
+ */
+function checkChunk(chunk) {
   const source = template.replace('__PAYLOAD__', JSON.stringify(chunk));
   const tmp = join(tmpdir(), `check-bindings-${process.pid}-${chunk[0]?.id?.replace(':', '-') ?? 'x'}.js`);
   writeFileSync(tmp, source);
 
   try {
-    // 60 с на кусок, а не 180: при сбое повтор и деление должны укладываться
-    // в таймаут шага (300 с), иначе конвейер снимает шаг целиком.
-    const reply = runFigma(['exec-js', tmp, '--timeout', '60000']);
+    // Бюджет задан явно: 45 с на попытку, две попытки внутри обёртки. Худший
+    // случай одной пачки — 90 с, это укладывается в таймаут шага (300 с) даже
+    // вместе с делением.
+    const reply = runFigma(['exec-js', tmp, '--timeout', '45000'], { timeoutMs: 45000, retries: 2 });
     // Пустой ответ — сбой транспорта, а не «ноль привязок»: делим и повторяем.
     if (!reply || !reply.result || typeof reply.result !== 'object') {
       throw new Error('пустой ответ плагина');
     }
     const part = reply.result;
-    if (retried) transportRetries += 1;
     checked += part.checked ?? 0;
     mismatches.push(...(part.mismatches ?? []));
     skipped.push(...(part.skipped ?? []));
     return true;
   } catch (error) {
-    // Сбой транспорта неотличим от настоящего расхождения, а по одному
-    // падению судить нельзя: повторяем тот же кусок один раз. Но не после
-    // таймаута: если плагин молчит 60 с, повтор только съест время шага.
-    const timedOut = /timeout|timed out/i.test(String(error.message));
-    if (!error.retried && !timedOut) {
-      try {
-        return checkChunk(chunk, true);
-      } catch {
-        // падение повторилось — идём обычным путём
-      }
-    }
     if (chunk.length === 1) {
       console.error(`сверка не выполнена на узле ${chunk[0].id}: ${String(error.message).slice(0, 160)}`);
       return false;
@@ -130,7 +128,6 @@ for (let start = 0; start < items.length; start += CHUNK) {
 }
 
 console.log(`спек: ${specs.length} · привязок проверено: ${checked} из ${items.length}`);
-if (transportRetries) console.log(`повторов из-за сбоя моста: ${transportRetries} — первый ответ не пришёл`);
 
 // Пропущенные — не зелёные: их никто не сверил. Ссылка на другую переменную
 // (alias-chain) и «не цвет» — справка; отсутствие привязки в файле значит,

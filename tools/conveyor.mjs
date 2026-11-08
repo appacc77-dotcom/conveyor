@@ -317,10 +317,21 @@ function runStep(step) {
     child.stdout.on('data', (chunk) => { stdout += chunk; });
     child.stderr.on('data', (chunk) => { stderr += chunk; });
 
+    // Пульс: снаружи долгая проверка и зависание выглядят одинаково, пока
+    // шаг молчит. Раз в 10 с печатаем, сколько он уже идёт и что успел
+    // сказать последней строкой.
+    const heartbeat = setInterval(() => {
+      const seconds = Math.round((Date.now() - started) / 1000);
+      const last = (stderr || stdout).trim().split('\n').filter(Boolean).slice(-1)[0] ?? '';
+      // Ширина как в основном выводе шагов: idWidth живёт в commandCheck.
+      process.stdout.write(`  ${step.id.padEnd(34)} … ${seconds} с${last ? ` · ${last.slice(0, 90)}` : ''}\n`);
+    }, 10000);
+
     // Зависший инструмент не должен останавливать весь прогон: у шага есть
     // предел, после которого он снимается и считается непройденным по среде.
     const limit = step.timeoutMs ?? 300000;
     const timer = setTimeout(() => {
+      clearInterval(heartbeat);
       child.kill('SIGKILL');
       resolve({
         ...step,
@@ -331,11 +342,13 @@ function runStep(step) {
     }, limit);
 
     child.on('error', (error) => {
+      clearInterval(heartbeat);
       resolve({ ...step, status: 'ERROR', ms: Date.now() - started, note: String(error.message).slice(0, 200) });
     });
 
     child.on('close', (code) => {
       clearTimeout(timer);
+      clearInterval(heartbeat);
       // 0 — выполнено и чисто; 1 — выполнено и есть дефект; 3 — выполнено
       // частично (часть источников не прочитана); 2 и прочее — не смогло.
       const status = code === 0 ? 'PASS' : code === 1 ? 'FAIL' : code === 3 ? 'INCOMPLETE' : 'ERROR';
@@ -418,11 +431,16 @@ async function commandCheck(unit, json, all, set = null, resume = null) {
   // нужен мост (sources 6,7 с, bindings 17,3 с), остаются в полном прогоне:
   // они про источники и цвета, а не про раскладку. Страничные ворота — тоже
   // там: их время не делится на секции.
-  const REGRESSION_STEPS = new Set([
+  const LOCAL_STEPS = new Set([
     'config', 'assets', 'tokens', 'invented', 'portability', 'scaffold', 'registry', 'changes', 'build',
   ]);
-  const globalSteps = set === 'regression'
-    ? GLOBAL_STEPS.filter((step) => REGRESSION_STEPS.has(step.id))
+  // Проверка одной секции — тоже локальная: сборка и дешёвые ворота проекта,
+  // затем замер, снимок и пиксель этой секции. Источники и привязки — про
+  // весь файл, их место в полном прогоне: иначе правка одной строки ждёт
+  // мост минутами.
+  const local = set === 'regression' || (!all && unit);
+  const globalSteps = local
+    ? GLOBAL_STEPS.filter((step) => LOCAL_STEPS.has(step.id))
     : GLOBAL_STEPS;
   const steps = [
     ...globalSteps,
