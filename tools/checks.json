@@ -1,0 +1,566 @@
+{
+  "version": 1,
+  "note": "Контракт проверки: что она проверяет, к какому слою относится, какие входы читает, от чего зависит и в каких профилях обязательна. Конвейер строит граф по этим записям; сами инструменты остаются самостоятельными и про этот файл не знают.",
+  "layers": {
+    "base": "воспроизведение исходника: компоненты, тексты, состояния и свойства из файла Figma",
+    "enhancements": "дополнения студии: адаптив, движение, поведение, интеграции",
+    "integration": "совместимость слоёв: дополнения не ломают защищённые свойства основы",
+    "common": "общая корректность: сборка, реестры, переносимость"
+  },
+  "profiles": {
+    "local": "изменённая единица и её зависимости, без живого моста",
+    "regression": "контрольный набор секций и зависимости",
+    "accept-stage1": "полная приёмка основы по обязательствам слоя 1",
+    "accept-stage2": "дополнения слоя 2 и их совместимость с основой",
+    "sources-live": "сверка выгрузки с текущим состоянием Figma"
+  },
+  "checks": {
+    "build": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "src/**",
+        "astro.config.mjs",
+        "package.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [
+        "dist/**"
+      ],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "accept-stage2"
+      ]
+    },
+    "sources": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/live/snapshot.json",
+        "design/figma/pages/**",
+        "design/figma/project.json"
+      ],
+      "dependsOn": [],
+      "resources": [
+        "figma-bridge"
+      ],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [
+          "E_TIMEOUT",
+          "E_NO_ANSWER"
+        ],
+        "attempts": 2
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1",
+        "sources-live"
+      ]
+    },
+    "changes": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/live/snapshot.json",
+        "changes/**"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1"
+      ]
+    },
+    "assets": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/assets/**",
+        "public/**",
+        "design/figma/pages/**/spec.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1"
+      ]
+    },
+    "tokens": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "src/styles/tokens.css",
+        "src/styles/typography.css",
+        "src/**/*.astro"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1"
+      ]
+    },
+    "tokens-dtcg": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/tokens.json",
+        "src/styles/tokens.css"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1"
+      ]
+    },
+    "invented": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "src/**/*.astro",
+        "design/figma/invented.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1"
+      ]
+    },
+    "registry": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/invented.json",
+        "design/enhancements.json",
+        "docs/debts.json",
+        "docs/decisions.md"
+      ],
+      "dependsOn": [
+        "invented"
+      ],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "accept-stage2"
+      ]
+    },
+    "portability": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "tools/**",
+        "skills/**"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1"
+      ]
+    },
+    "scaffold": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "tools/scaffold/**",
+        "tools/**"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1"
+      ]
+    },
+    "bindings": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/pages/**/spec.json"
+      ],
+      "dependsOn": [],
+      "resources": [
+        "figma-bridge"
+      ],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [
+          "E_TIMEOUT",
+          "E_NO_ANSWER"
+        ],
+        "attempts": 2
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1",
+        "sources-live"
+      ]
+    },
+    "states": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/pages/**/states.json",
+        "dist/**"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "regression",
+        "accept-stage1"
+      ]
+    },
+    "interactive": {
+      "layers": [
+        "enhancements"
+      ],
+      "scope": "project",
+      "inputs": [
+        "src/**/*.astro",
+        "dist/**"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 180000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage2"
+      ]
+    },
+    "motion": {
+      "layers": [
+        "enhancements"
+      ],
+      "scope": "project",
+      "inputs": [
+        "src/styles/motion.css",
+        "src/**/*.astro",
+        "dist/**"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage2"
+      ]
+    },
+    "motion-manifest": {
+      "layers": [
+        "enhancements"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/motion/motion.json",
+        "src/**/*.astro"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "accept-stage2"
+      ]
+    },
+    "layout": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "dist/**",
+        "design/figma/project.json"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "regression",
+        "accept-stage1"
+      ]
+    },
+    "stretch": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "dist/**",
+        "src/styles/base.css"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1"
+      ]
+    },
+    "images": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "dist/**",
+        "public/img/**"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1"
+      ]
+    },
+    "measure": {
+      "layers": [
+        "base"
+      ],
+      "scope": "section",
+      "inputs": [
+        "design/figma/pages/**/spec.json",
+        "dist/**"
+      ],
+      "dependsOn": [
+        "visual"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 180000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [
+        "design/figma/pages/**/gate.json"
+      ],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "accept-stage2"
+      ]
+    },
+    "shot": {
+      "layers": [
+        "base"
+      ],
+      "scope": "section",
+      "inputs": [
+        "dist/**"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 120000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [
+        ".screens/**"
+      ],
+      "mandatoryFor": []
+    },
+    "visual": {
+      "layers": [
+        "base"
+      ],
+      "scope": "section",
+      "inputs": [
+        "design/figma/pages/**/crop.png",
+        ".screens/**"
+      ],
+      "dependsOn": [
+        "shot"
+      ],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": []
+    },
+    "contracts": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "tools/checks.json",
+        "tools/conveyor.mjs"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "accept-stage2",
+        "sources-live"
+      ]
+    }
+  }
+}

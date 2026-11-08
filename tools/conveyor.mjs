@@ -135,6 +135,7 @@ function coverage(units) {
 
 const GLOBAL_STEPS = [
   // Сборка — не наш скрипт, а бинарь Astro из node_modules.
+  { id: 'contracts', tool: 'check-contracts', kind: 'gate', needsDist: false, about: 'контракты проверок сходятся' },
   { id: 'build', bin: 'node_modules/.bin/astro', args: ['build'], kind: 'gate', needsDist: false, about: 'сборка dist/' },
   { id: 'sources', tool: 'verify-sources', kind: 'gate', needsDist: false, about: 'экспорт не устарел' },
   { id: 'changes', tool: 'check-changes', kind: 'gate', needsDist: false, about: 'изменения покрыты запросами' },
@@ -456,7 +457,7 @@ async function commandCheck(unit, json, all, set = null, resume = null) {
   // они про источники и цвета, а не про раскладку. Страничные ворота — тоже
   // там: их время не делится на секции.
   const LOCAL_STEPS = new Set([
-    'config', 'assets', 'tokens', 'invented', 'portability', 'scaffold', 'registry', 'changes', 'build',
+    'contracts', 'assets', 'tokens', 'invented', 'portability', 'scaffold', 'registry', 'changes', 'build',
   ]);
   // Проверка одной секции — тоже локальная: сборка и дешёвые ворота проекта,
   // затем замер, снимок и пиксель этой секции. Источники и привязки — про
