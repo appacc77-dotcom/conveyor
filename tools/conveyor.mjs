@@ -174,6 +174,33 @@ function acceptedUnits() {
   return list;
 }
 
+/**
+ * Набор регрессии: быстрый прогон по секциям разного типа.
+ *
+ * Не заменяет полный: `releaseEligible` по нему не выдаётся. Задача — за
+ * минуту понять, что ничего не поехало, а не принять выпуск.
+ */
+function regressionUnits() {
+  const path = join(root, 'design/figma/regression.json');
+  if (!existsSync(path)) {
+    console.error('нет design/figma/regression.json — набор регрессии не задан');
+    return null;
+  }
+  const list = JSON.parse(readFileSync(path, 'utf8')).units ?? [];
+  if (!list.length) {
+    console.error('набор регрессии пуст');
+    return null;
+  }
+  // Секция вне приёмки — ошибка в наборе, а не повод её молча пропустить.
+  const accepted = new Set(acceptedUnits() ?? []);
+  const unknown = list.filter((unit) => accepted.size && !accepted.has(unit));
+  if (unknown.length) {
+    console.error(`в наборе регрессии секции вне приёмки: ${unknown.join(', ')}`);
+    return null;
+  }
+  return list;
+}
+
 function builtUnits() {
   const pagesRoot = join(root, 'design/figma/pages');
   // Объём берётся из реестра; скан по gate.json остаётся запасным путём для
@@ -358,8 +385,9 @@ function assertUniqueIds(steps) {
   }
 }
 
-async function commandCheck(unit, json, all) {
-  const units = all ? builtUnits() : unit ? [unit] : [];
+async function commandCheck(unit, json, all, set = null) {
+  const units = set === 'regression' ? regressionUnits() : all ? builtUnits() : unit ? [unit] : [];
+  if (set === 'regression' && units === null) return 2;
 
   // Страницы сайта могут быть ещё не собраны (новый проект: в dist только
   // служебная). Тогда ворота, которым нужна страница, не «красные» — они
@@ -385,9 +413,19 @@ async function commandCheck(unit, json, all) {
     return 3;
   }
 
+  // Регрессия — быстрый ответ «ничего не поехало». Медленные шаги, которым
+  // нужен мост (sources 6,7 с, bindings 17,3 с), остаются в полном прогоне:
+  // они про источники и цвета, а не про раскладку. Страничные ворота — тоже
+  // там: их время не делится на секции.
+  const REGRESSION_STEPS = new Set([
+    'config', 'assets', 'tokens', 'invented', 'portability', 'scaffold', 'registry', 'changes', 'build',
+  ]);
+  const globalSteps = set === 'regression'
+    ? GLOBAL_STEPS.filter((step) => REGRESSION_STEPS.has(step.id))
+    : GLOBAL_STEPS;
   const steps = [
-    ...GLOBAL_STEPS,
-    ...units.flatMap((item) => (all ? [measureStep(item)] : unitSteps(item))),
+    ...globalSteps,
+    ...units.flatMap((item) => (all || set ? [measureStep(item)] : unitSteps(item))),
   ];
   assertUniqueIds(steps);
   const id = runId();
@@ -433,7 +471,7 @@ async function commandCheck(unit, json, all) {
   const gitAfter = gitState();
   const stable = gitBefore.contentHash !== null && gitBefore.contentHash === gitAfter.contentHash;
   // full — полный объём (--all); unit — одна секция. Выпуск только по полному.
-  const mode = all ? 'full' : 'unit';
+  const mode = all ? 'full' : set === 'regression' ? 'regression' : 'unit';
   const report = {
     schemaVersion: 1,
     runId: id,
@@ -485,6 +523,7 @@ async function commandCheck(unit, json, all) {
 }
 
 function notEligibleReason(report) {
+  if (report.mode === 'regression') return 'проверен набор регрессии, для выпуска нужен --all';
   if (report.mode !== 'full') return 'проверена одна секция, для выпуска нужен --all';
   if (report.dirty) return 'есть незакоммиченные правки';
   if (report.changedDuringRun) return 'файлы менялись во время прогона';
@@ -566,6 +605,7 @@ const { values, positionals } = parseArgs({
   options: {
     unit: { type: 'string' },
     all: { type: 'boolean', default: false },
+    set: { type: 'string' },
     json: { type: 'boolean', default: false },
   },
 });
@@ -574,7 +614,7 @@ const unit = values.unit ?? positionals[0] ?? null;
 
 try {
   let code;
-  if (command === 'check') code = await commandCheck(unit, values.json, values.all);
+  if (command === 'check') code = await commandCheck(unit, values.json, values.all, values.set ?? null);
   else if (command === 'status') code = commandStatus(values.json);
   else if (command === 'plan') code = commandPlan(unit, values.all);
   else if (command === 'push-ok') code = commandPushOk();
