@@ -149,7 +149,9 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
     z-index: 20;
     top: var(--header-top, var(--space-s));
     left: var(--space-s);
-    width: 1424px;
+    /* 1424 = 1440 − 16 при окне макета. На широком окне шапка тянется, иначе
+       справа от неё оставалась полоса: 1424 фиксированных при окне 1512. */
+    width: calc(100% - var(--space-s) * 2);
     height: 92px;
     /* overflow не скрываем: из шапки выпадает меню. Радиус — на внутреннем слое. */
     border-radius: var(--radius-l);
