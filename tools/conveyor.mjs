@@ -332,6 +332,22 @@ function assertUniqueIds(steps) {
 async function commandCheck(unit, json, all) {
   const units = all ? builtUnits() : unit ? [unit] : [];
 
+  // Страницы сайта могут быть ещё не собраны (новый проект: в dist только
+  // служебная). Тогда ворота, которым нужна страница, не «красные» — они
+  // просто не могут работать. Один честный ответ вместо восьми красных.
+  const projectFile = join(root, 'design/figma/project.json');
+  const projectData = existsSync(projectFile) ? JSON.parse(readFileSync(projectFile, 'utf8')) : {};
+  const routes = Object.values(projectData.routes ?? {});
+  const pagesBuilt = routes.some((route) => {
+    const file = route === '/' ? 'index.html' : route.replace(/^\//, '').split('?')[0];
+    return existsSync(join(process.cwd(), 'dist', file));
+  });
+  if (units.length && !pagesBuilt) {
+    console.log('страниц сайта в dist нет — собрана только служебная');
+    console.log('ворота, которым нужна страница, не запускались: states, interactive, motion, layout, stretch, images');
+    return 3;
+  }
+
   // Новый проект: секций ещё не экспортировали, страниц сайта нет. Гонять
   // ворота не по чему, но и зелёным это называть нельзя — проверено ноль.
   if (!units.length) {

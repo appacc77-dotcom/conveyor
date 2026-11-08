@@ -37,8 +37,15 @@ const wide = Number(arg('--wide', 1512));
 const EDGE = 16; // отступ, при котором элемент считается доходящим до края
 const TOLERANCE = 2;
 
-if (!existsSync(join(dist, 'index.html'))) {
+// Различаем два состояния: сборки нет вовсе и сборка есть, но страниц сайта
+// в ней нет (новый проект: собрана только structure.html). Иначе сообщение
+// «нет dist/» врёт о причине.
+if (!existsSync(dist)) {
   console.error('нет dist/ — сначала npm run build');
+  process.exit(2);
+}
+if (!existsSync(join(dist, 'index.html'))) {
+  console.error('в dist нет страниц сайта (собрана только служебная) — сначала соберите страницы');
   process.exit(2);
 }
 
