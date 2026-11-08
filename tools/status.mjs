@@ -86,6 +86,29 @@ if (invented || debts) {
   }
 }
 
+// Закрытие этапа 1: один блок, по которому принимается решение о сдаче.
+// Считается по реестру долгов, а не по памяти: что открыто, у кого, что
+// блокирует и что уже закрыто.
+if (debts) {
+  const all = debts.debts ?? [];
+  const blocking = all.filter((d) => d.blocksRelease && d.status !== 'done' && d.status !== 'rejected');
+  const closed = all.filter((d) => d.status === 'done' || d.status === 'rejected');
+  lines.push('');
+  lines.push('### Закрытие этапа 1');
+  lines.push('');
+  if (blocking.length) {
+    lines.push(`не готово: блокируют сдачу **${blocking.length}** — ${blocking.map((d) => `${d.id} (${d.owner})`).join(', ')}`);
+    for (const d of blocking) lines.push(`- \`${d.id}\` ${d.title} — у ${d.owner}`);
+  } else {
+    lines.push('готово: блокирующих долгов нет');
+  }
+  lines.push('');
+  lines.push(`закрыто ${closed.length} из ${all.length} · открыто ${all.length - closed.length}`);
+  const byKind = {};
+  for (const d of all.filter((x) => x.status !== 'done' && x.status !== 'rejected')) byKind[d.kind] = (byKind[d.kind] ?? 0) + 1;
+  if (Object.keys(byKind).length) lines.push(`по типу: ${Object.entries(byKind).map(([k, n]) => `${k} ${n}`).join(', ')}`);
+}
+
 const table = lines.join('\n');
 console.log(table);
 
