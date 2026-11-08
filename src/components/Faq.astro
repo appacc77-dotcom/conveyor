@@ -123,11 +123,12 @@ const arrowDown = `<svg width="21" height="21" viewBox="0 0 21 21" fill="none" x
     align-items: center;
     min-height: 807px;
     padding: var(--space-5xl) var(--space-l);
-    /* Заливка — изображение 1672×941, растянутое на секцию. */
+    /* Заливка — изображение 1672×941, scaleMode FILL = cover по центру.
+       100% 100% растягивало фон, когда секция выше 807 (открытый аккордеон). */
     background-image: url('/img/faq-bg.png');
     background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: 0 0;
+    background-size: cover;
+    background-position: center;
   }
 
   /* container (148:509): HORIZONTAL, gap 48, MIN/MIN, max-width 1280. */

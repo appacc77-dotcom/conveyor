@@ -211,9 +211,18 @@ const inScope = (page) => !scope.length || scope.includes(page.toLowerCase());
 const staleOutside = [];
 for (const s of sections.slice(0, limitArg)) {
   const specPath = join(root, s.dir, 'spec.json');
-  if (!existsSync(specPath)) continue;
+  // Нет спеки или отпечатка — сверять не с чем. Для секций в объёме это
+  // «не прочитано» (INCOMPLETE), а не молчаливый пропуск: иначе ворота
+  // зелёные на секции, которую никто не сверял.
+  if (!existsSync(specPath)) {
+    if (inScope(s.page)) unread.push(`${s.page}/${s.name}: нет spec.json`);
+    continue;
+  }
   const spec = JSON.parse(readFileSync(specPath, 'utf8'));
-  if (!spec.fingerprint) continue;
+  if (!spec.fingerprint) {
+    if (inScope(s.page)) unread.push(`${s.page}/${s.name}: нет отпечатка в spec.json`);
+    continue;
+  }
   try {
     const fresh = bridgeFingerprint(s.id);
     if (!fresh) {

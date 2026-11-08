@@ -41,6 +41,7 @@
     "scaffold:check": "node tools/check-scaffold.mjs",
     "layout": "node tools/check-layout.mjs",
     "invented": "node tools/check-invented.mjs",
+    "registry": "node tools/check-registry.mjs",
     "conveyor": "node tools/conveyor.mjs",
     "hooks": "git config core.hooksPath tools/git-hooks && echo \"хуки включены: tools/git-hooks\"",
     "states": "node tools/check-states.mjs",

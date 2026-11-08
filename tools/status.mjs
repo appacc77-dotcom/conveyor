@@ -49,6 +49,43 @@ for (const r of rows) {
 lines.push('');
 lines.push(`средний пиксель по собранным: **${mean.toFixed(2)}**`);
 
+// Последний прогон конвейера: вердикт и пригодность к выпуску.
+const latestPath = join(root, 'reports/runs/latest');
+if (existsSync(latestPath)) {
+  const id = readFileSync(latestPath, 'utf8').trim();
+  const verdictPath = join(root, 'reports/runs', id, 'verdict.json');
+  if (existsSync(verdictPath)) {
+    const v = JSON.parse(readFileSync(verdictPath, 'utf8'));
+    const red = (v.steps ?? []).filter((step) => step.kind === 'gate' && step.status !== 'PASS').map((step) => step.id);
+    lines.push('');
+    lines.push(
+      `последний прогон: \`${v.runId}\` · **${v.status}** · ${v.mode ?? (v.unit ? 'unit' : 'full')}` +
+        ` · к выпуску ${v.releaseEligible ? 'пригоден' : 'не пригоден'}` +
+        (red.length ? ` · не PASS: ${red.slice(0, 8).join(', ')}${red.length > 8 ? ` и ещё ${red.length - 8}` : ''}` : ''),
+    );
+  }
+}
+
+// Реестры: изобретённое и долги этапа 1. Закрытие этапа — по этим числам.
+const readJson = (path) => (existsSync(join(root, path)) ? JSON.parse(readFileSync(join(root, path), 'utf8')) : null);
+const invented = readJson('design/figma/invented.json');
+const debts = readJson('docs/debts.json');
+if (invented || debts) {
+  lines.push('');
+  if (invented) lines.push(`изобретённое (\`design/figma/invented.json\`): **${invented.entries.length}** записей`);
+  if (debts) {
+    const open = debts.debts.filter((d) => d.status === 'open' || d.status === 'waiting');
+    const by = {};
+    for (const d of open) by[d.owner] = (by[d.owner] ?? 0) + 1;
+    const blocking = open.filter((d) => d.blocksRelease);
+    lines.push(
+      `долги этапа 1 (\`docs/debts.json\`): открыто **${open.length}** из ${debts.debts.length}` +
+        ` · ${Object.entries(by).map(([owner, n]) => `${owner} ${n}`).join(', ')}` +
+        (blocking.length ? ` · блокируют сдачу: ${blocking.map((d) => d.id).join(', ')}` : ''),
+    );
+  }
+}
+
 const table = lines.join('\n');
 console.log(table);
 

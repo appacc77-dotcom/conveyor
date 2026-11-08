@@ -89,7 +89,7 @@ const bars = Array.from({ length: 48 }, (_, i) => {
         <span class="pay__price">{card.price}</span>
       </div>
     </div>
-    <p class="pay__note" id={`buy-note-${card.id.replace(':', '-')}`} hidden>
+    <p class="pay__note" data-invented="pay-not-connected" id={`buy-note-${card.id.replace(':', '-')}`} hidden>
       Оплата не подключена: в макете нет сценария покупки.
     </p>
   </div>
