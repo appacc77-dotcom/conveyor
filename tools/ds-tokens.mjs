@@ -10,7 +10,7 @@
  * Руками не правится: запусти `npm run ds:tokens` после чтения файла.
  * Имена 1:1 с Figma: `space-xs` → `--space-xs`, `bg-page` → `--color-bg-page`.
  */
-import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
@@ -132,7 +132,11 @@ const walk = (dir) => {
     else if (entry.name === 'spec.json') specFiles.push(path);
   }
 };
-walk(join(root, 'design/figma/pages'));
+// На холодном старте секций ещё нет: папка появляется с первым экспортом.
+// Без проверки `ds:tokens` падал на пустом проекте, хотя токены берутся
+// из снимка файла, а не из спек.
+const pagesDir = join(root, 'design/figma/pages');
+if (existsSync(pagesDir)) walk(pagesDir);
 for (const specPath of specFiles) {
   const spec = JSON.parse(readFileSync(specPath, 'utf8'));
   for (const node of spec.nodes ?? []) {
