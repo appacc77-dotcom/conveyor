@@ -569,16 +569,20 @@ const profit = [
 </style>
 
 <script>
-  // Аудиофайла в макете нет: кнопка прослушивания говорит об этом подсказкой,
-  // которая исчезает сама. Долг INV-quiz-play остаётся открытым.
-  for (const button of document.querySelectorAll('[data-play]')) {
-    const note = button.parentElement?.querySelector('[data-play-note]');
-    if (!note) continue;
-    button.addEventListener('click', () => {
-      note.textContent = 'Пока не работает: аудио появится позже';
-      note.classList.add('is-visible');
-      clearTimeout(note.hideTimer);
-      note.hideTimer = setTimeout(() => note.classList.remove('is-visible'), 3200);
-    });
+  // Дополнение слоя 2: в режиме «только из макета» поведение выключено
+  // целиком — не только разметка, но и обработчики.
+  if (document.documentElement.dataset.enhancements === 'on') {
+    // Аудиофайла в макете нет: кнопка прослушивания говорит об этом подсказкой,
+    // которая исчезает сама. Долг INV-quiz-play остаётся открытым.
+    for (const button of document.querySelectorAll('[data-play]')) {
+      const note = button.parentElement?.querySelector('[data-play-note]');
+      if (!note) continue;
+      button.addEventListener('click', () => {
+        note.textContent = 'Пока не работает: аудио появится позже';
+        note.classList.add('is-visible');
+        clearTimeout(note.hideTimer);
+        note.hideTimer = setTimeout(() => note.classList.remove('is-visible'), 3200);
+      });
+    }
   }
 </script>

@@ -6,6 +6,7 @@ import '../styles/tokens.css';
 import '../styles/typography.css';
 import '../styles/base.css';
 import '../styles/motion.css';
+import { enhancementsOn } from '../lib/flags.mjs';
 
 interface Props {
   title: string;
@@ -18,7 +19,7 @@ const { title, description, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-enhancements={enhancementsOn ? 'on' : 'off'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -25,7 +25,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync, readdirSync, statSy
 import { join, relative } from 'node:path';
 import { parseArgs } from 'node:util';
 import { createHash } from 'node:crypto';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 
 const root = process.cwd();
 const runsDir = join(root, 'reports/runs');
@@ -154,6 +154,19 @@ const GLOBAL_STEPS = [
   { id: 'layout', tool: 'check-layout', kind: 'gate', needsDist: true, about: 'нет прокрутки на ширине макета' },
   { id: 'stretch', tool: 'check-stretch', kind: 'gate', needsDist: true, about: 'блоки у края тянутся вместе с окном' },
   { id: 'images', tool: 'check-images', kind: 'gate', needsDist: true, about: 'картинки не растянуты' },
+  // Интеграционные: дополнения не ломают основу. Сборка base отдельная —
+  // поэтому шаг собирает её сам и проверяет.
+  {
+    id: 'enhancement-off',
+    tool: 'check-enhancement-off',
+    kind: 'gate',
+    needsDist: true,
+    about: 'base-сборка без дополнений',
+    // Собираем base на время проверки и возвращаем обычную сборку: иначе
+    // следующий шаг смотрел бы на чужой dist.
+    prepare: () => runSync('npm', ['run', 'build:base']),
+    restore: () => runSync('npm', ['run', 'build']),
+  },
 ];
 
 // Все секции, которые уже в конвейере: у них есть замер рядом со спекой.
@@ -349,6 +362,10 @@ const stepId = (prefix, unit) => `${prefix}:${unit.replace('/', '-')}`;
  * часть прогона. Теперь задания идут списком, браузер один, страница
  * загружается один раз на адрес.
  */
+/** Синхронный запуск для подготовки окружения шага (сборка base и обратно). */
+const runSync = (command, args) =>
+  spawnSync(command, args, { cwd: root, stdio: 'ignore', env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1' } });
+
 const measureBatchStep = (units) => {
   const jobs = units.map((unit) => {
     const root = argsFor(unit);
@@ -641,12 +658,14 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
       continue;
     }
 
-    // Шаг может готовить входные файлы (пакетный замер пишет список заданий).
+    // Шаг может готовить входные файлы (пакетный замер пишет список заданий)
+    // и возвращать окружение обратно (base-сборка вместо обычной).
     step.prepare?.();
 
     // Строку шага не печатаем заранее: если шаг длинный, её место займёт
     // пульс, и получилась бы задвоенная строка.
     const result = await runStep(step);
+    step.restore?.();
     results.push(result);
     events.push({ at: new Date().toISOString(), step: step.id, status: result.status, ms: result.ms });
     if (!json) {

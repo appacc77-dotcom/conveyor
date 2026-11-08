@@ -149,23 +149,27 @@ const cards = [
 </section>
 
 <script>
-  const section = document.querySelector('.ppkg');
-  if (section) {
-    // Аккордеон: список раскрыт у первых двух карточек, у третьей свёрнут.
-    for (const button of section.querySelectorAll('[data-accord]')) {
-      button.addEventListener('click', () => {
-        const open = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', String(!open));
-        const list = button.parentElement.querySelector('[data-list]');
-        if (list) list.hidden = open;
-      });
-    }
-    // Оплаты в макете нет: кнопка показывает это, а не молчит.
-    for (const button of section.querySelectorAll('.pack__btn')) {
-      button.addEventListener('click', () => {
-        const note = section.querySelector('[data-note]');
-        if (note) note.hidden = !note.hidden;
-      });
+  // Дополнение слоя 2: в режиме «только из макета» поведение выключено
+  // целиком — не только разметка, но и обработчики.
+  if (document.documentElement.dataset.enhancements === 'on') {
+    const section = document.querySelector('.ppkg');
+    if (section) {
+      // Аккордеон: список раскрыт у первых двух карточек, у третьей свёрнут.
+      for (const button of section.querySelectorAll('[data-accord]')) {
+        button.addEventListener('click', () => {
+          const open = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!open));
+          const list = button.parentElement.querySelector('[data-list]');
+          if (list) list.hidden = open;
+        });
+      }
+      // Оплаты в макете нет: кнопка показывает это, а не молчит.
+      for (const button of section.querySelectorAll('.pack__btn')) {
+        button.addEventListener('click', () => {
+          const note = section.querySelector('[data-note]');
+          if (note) note.hidden = !note.hidden;
+        });
+      }
     }
   }
 </script>

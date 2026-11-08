@@ -84,3 +84,16 @@ textarea {
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Слой дополнений выключен в сборке «только из макета»: в макете анимаций
+ * нет, значит и переходов быть не должно. Токены остаются — их читают
+ * компоненты, — но само движение выключено.
+ */
+[data-enhancements='off'] *,
+[data-enhancements='off'] *::before,
+[data-enhancements='off'] *::after {
+  transition-duration: 0s !important;
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+}

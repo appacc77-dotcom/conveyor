@@ -408,35 +408,39 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
 </style>
 
 <script>
-  // Выпадающее меню на <details>: браузер открывает сам, мы только закрываем
-  // по клику вне и по Esc. Изобретено: в макете открытых состояний нет.
-  const dropdown = document.querySelector('[data-dropdown]');
-  const burger = document.querySelector('[data-burger]');
+  // Дополнение слоя 2: в режиме «только из макета» поведение выключено
+  // целиком — не только разметка, но и обработчики.
+  if (document.documentElement.dataset.enhancements === 'on') {
+    // Выпадающее меню на <details>: браузер открывает сам, мы только закрываем
+    // по клику вне и по Esc. Изобретено: в макете открытых состояний нет.
+    const dropdown = document.querySelector('[data-dropdown]');
+    const burger = document.querySelector('[data-burger]');
 
-  const mobile = document.querySelector('[data-mobile]');
+    const mobile = document.querySelector('[data-mobile]');
 
-  burger?.addEventListener('click', () => {
-    const open = burger.getAttribute('aria-expanded') !== 'true';
-    burger.setAttribute('aria-expanded', String(open));
-    if (mobile) mobile.hidden = !open;
-    document.documentElement.classList.toggle('is-menu-open', open);
-  });
+    burger?.addEventListener('click', () => {
+      const open = burger.getAttribute('aria-expanded') !== 'true';
+      burger.setAttribute('aria-expanded', String(open));
+      if (mobile) mobile.hidden = !open;
+      document.documentElement.classList.toggle('is-menu-open', open);
+    });
 
-  document.addEventListener('click', (event) => {
-    if (dropdown?.open && !dropdown.contains(event.target)) dropdown.open = false;
-  });
+    document.addEventListener('click', (event) => {
+      if (dropdown?.open && !dropdown.contains(event.target)) dropdown.open = false;
+    });
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && dropdown?.open) {
-      dropdown.open = false;
-      dropdown.querySelector('summary')?.focus();
-    }
-  });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && dropdown?.open) {
+        dropdown.open = false;
+        dropdown.querySelector('summary')?.focus();
+      }
+    });
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    closeDropdown();
-    burger?.setAttribute('aria-expanded', 'false');
-    document.documentElement.classList.remove('is-menu-open');
-  });
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      closeDropdown();
+      burger?.setAttribute('aria-expanded', 'false');
+      document.documentElement.classList.remove('is-menu-open');
+    });
+  }
 </script>

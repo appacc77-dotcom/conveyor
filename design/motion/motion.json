@@ -232,6 +232,13 @@
       "declaration": "animation-duration: 0.01ms !important transition-duration: 0.01ms !important",
       "status": "invented:baseline",
       "decision": 180
+    },
+    {
+      "file": "src/styles/motion.css",
+      "selector": "}, [data-enhancements='off'] *, [data-enhancements='off'] *::before",
+      "declaration": "transition-duration: 0s !important animation-duration: 0s !important",
+      "status": "invented",
+      "decision": 369
     }
   ]
 }

@@ -575,6 +575,32 @@
         "accept-stage2",
         "sources-live"
       ]
+    },
+    "enhancement-off": {
+      "layers": [
+        "integration"
+      ],
+      "scope": "project",
+      "inputs": [
+        "dist/**",
+        "src/components/**",
+        "src/lib/flags.mjs"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist"
+      ],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage2"
+      ]
     }
   }
 }

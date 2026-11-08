@@ -232,38 +232,42 @@ const fields = [
 </section>
 
 <script>
-  const section = document.querySelector('.bformats');
-  if (section) {
-    const options = [...section.querySelectorAll('[data-format]')];
-    const pick = (index) => {
+  // Дополнение слоя 2: в режиме «только из макета» поведение выключено
+  // целиком — не только разметка, но и обработчики.
+  if (document.documentElement.dataset.enhancements === 'on') {
+    const section = document.querySelector('.bformats');
+    if (section) {
+      const options = [...section.querySelectorAll('[data-format]')];
+      const pick = (index) => {
+        for (const option of options) {
+          const active = Number(option.dataset.format) === index;
+          option.classList.toggle('is-active', active);
+          option.setAttribute('aria-pressed', active ? 'true' : 'false');
+        }
+        // Все варианты лежат в разметке: переключаем видимость, а не текст.
+        for (const view of section.querySelectorAll('[data-view]')) {
+          view.hidden = Number(view.dataset.view) !== index;
+        }
+      };
+
       for (const option of options) {
-        const active = Number(option.dataset.format) === index;
-        option.classList.toggle('is-active', active);
-        option.setAttribute('aria-pressed', active ? 'true' : 'false');
+        option.addEventListener('click', () => pick(Number(option.dataset.format)));
       }
-      // Все варианты лежат в разметке: переключаем видимость, а не текст.
-      for (const view of section.querySelectorAll('[data-view]')) {
-        view.hidden = Number(view.dataset.view) !== index;
-      }
-    };
+      section.querySelector('[data-pick-first]')?.addEventListener('click', () => pick(0));
 
-    for (const option of options) {
-      option.addEventListener('click', () => pick(Number(option.dataset.format)));
+      const note = section.querySelector('[data-note]');
+      section.querySelector('[data-submit]')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        // Отправлять некуда: у формы нет адресата и полей с обязательностью.
+        // Говорим об этом подсказкой, которая исчезает сама, — иначе человек
+        // решит, что заявка ушла.
+        if (!note) return;
+        note.textContent = 'Пока не работает: отправка появится позже';
+        note.classList.add('is-visible');
+        clearTimeout(note.hideTimer);
+        note.hideTimer = setTimeout(() => note.classList.remove('is-visible'), 3200);
+      });
     }
-    section.querySelector('[data-pick-first]')?.addEventListener('click', () => pick(0));
-
-    const note = section.querySelector('[data-note]');
-    section.querySelector('[data-submit]')?.addEventListener('click', (event) => {
-      event.preventDefault();
-      // Отправлять некуда: у формы нет адресата и полей с обязательностью.
-      // Говорим об этом подсказкой, которая исчезает сама, — иначе человек
-      // решит, что заявка ушла.
-      if (!note) return;
-      note.textContent = 'Пока не работает: отправка появится позже';
-      note.classList.add('is-visible');
-      clearTimeout(note.hideTimer);
-      note.hideTimer = setTimeout(() => note.classList.remove('is-visible'), 3200);
-    });
   }
 </script>
 
