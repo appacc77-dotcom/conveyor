@@ -68,7 +68,7 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
                 height="14"
               />
             </summary>
-            <ul class="header__menu">
+            <ul class="header__menu" data-invented="header-dropdown-open">
               {dropdownItems.map((item) => (
                 <li><a class="header__menu-link t-body" href={item.href}>{item.text}</a></li>
               ))}
@@ -125,7 +125,7 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
 
   {/* Мобильное меню: в макете только закрытое состояние (одна иконка бургера).
       Панель — изобретение, устройство взято по образцу десктопного меню. */}
-  <nav class="header__mobile" id="mobile-menu" aria-label="Меню" hidden data-mobile>
+  <nav class="header__mobile" data-invented="header-mobile-panel" id="mobile-menu" aria-label="Меню" hidden data-mobile>
     <ul class="header__mobile-list">
       <li>
         <a class="header__mobile-link t-body" href="#">О проекте</a>
