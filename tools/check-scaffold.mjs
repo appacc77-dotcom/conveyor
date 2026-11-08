@@ -44,6 +44,9 @@ for (const templateFile of walk(scaffold)) {
   // package.json у нового проекта свой: имя, версия, набор команд.
   // Его проверяет правило 2 — по составу команд.
   if (rel === 'package.json') continue;
+  // `public/**` — данные проекта (шрифты, картинки), а не шаблон: каркас
+  // кладёт туда заглушку, проект — свои файлы.
+  if (rel.startsWith('public/')) continue;
   compared += 1;
   const a = readFileSync(templateFile, 'utf8');
   const b = readFileSync(live, 'utf8');

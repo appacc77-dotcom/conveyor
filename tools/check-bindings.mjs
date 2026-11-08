@@ -29,8 +29,19 @@ function walk(dir) {
   return out;
 }
 
+// Новый проект: секций ещё не экспортировали — проверять действительно нечего,
+// и это не ошибка. Ошибка — когда секции есть в карте, а папки нет.
+const project = existsSync(join(root, 'design/figma/project.json'))
+  ? JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'))
+  : {};
+const hasUnits = (project.acceptance ?? []).length > 0;
+
 if (!existsSync(pagesRoot)) {
-  console.error('нет design/figma/pages — проверять нечего');
+  if (!hasUnits) {
+    console.log('нет design/figma/pages — проверять нечего');
+    process.exit(0);
+  }
+  console.error('нет design/figma/pages, хотя в карте есть секции — нужен экспорт');
   process.exit(2);
 }
 

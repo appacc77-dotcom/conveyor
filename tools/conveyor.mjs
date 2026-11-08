@@ -152,6 +152,10 @@ function builtUnits() {
   const accepted = acceptedUnits();
   if (accepted) return accepted.sort();
 
+  // Новый проект: секций ещё не экспортировали. Это не поломка конвейера —
+  // проверять нечего, и об этом надо сказать, а не падать с ENOENT.
+  if (!existsSync(pagesRoot)) return [];
+
   const units = [];
   for (const page of readdirSync(pagesRoot)) {
     const pageDir = join(pagesRoot, page);
@@ -320,6 +324,15 @@ function assertUniqueIds(steps) {
 
 async function commandCheck(unit, json, all) {
   const units = all ? builtUnits() : unit ? [unit] : [];
+
+  // Новый проект: секций ещё не экспортировали, страниц сайта нет. Гонять
+  // ворота не по чему, но и зелёным это называть нельзя — проверено ноль.
+  if (!units.length) {
+    console.log('секций в объёме нет — проверять нечего');
+    console.log('сначала: npm run discover -- --write → npm run intake → npm run ds:tokens → npm run structure → npm run build');
+    return 3;
+  }
+
   const steps = [
     ...GLOBAL_STEPS,
     ...units.flatMap((item) => (all ? [measureStep(item)] : unitSteps(item))),
