@@ -76,6 +76,7 @@ const template = readFileSync(join(root, 'tools/figma/check-bindings.template.js
 const CHUNK = 10;
 let checked = 0;
 const mismatches = [];
+const skipped = [];
 
 /**
  * Одна пачка. Если плагин не выдержал (транспорт рвётся на большом вызове),
@@ -89,9 +90,14 @@ function checkChunk(chunk) {
 
   try {
     const reply = runFigma(['exec-js', tmp, '--timeout', '180000']);
-    const part = reply.result ?? { checked: 0, mismatches: [] };
+    // Пустой ответ — сбой транспорта, а не «ноль привязок»: делим и повторяем.
+    if (!reply || !reply.result || typeof reply.result !== 'object') {
+      throw new Error('пустой ответ плагина');
+    }
+    const part = reply.result;
     checked += part.checked ?? 0;
     mismatches.push(...(part.mismatches ?? []));
+    skipped.push(...(part.skipped ?? []));
     return true;
   } catch (error) {
     if (chunk.length === 1) {
@@ -107,9 +113,31 @@ for (let start = 0; start < items.length; start += CHUNK) {
   if (!checkChunk(items.slice(start, start + CHUNK))) process.exit(2);
 }
 
-console.log(`спек: ${specs.length} · привязок проверено: ${checked}`);
+console.log(`спек: ${specs.length} · привязок проверено: ${checked} из ${items.length}`);
+
+// Пропущенные — не зелёные: их никто не сверил. Ссылка на другую переменную
+// (alias-chain) и «не цвет» — справка; отсутствие привязки в файле значит,
+// что спека устарела, и вердикт не может быть PASS.
+const byReason = {};
+for (const item of skipped) byReason[item.reason] = (byReason[item.reason] ?? 0) + 1;
+if (skipped.length) {
+  console.log(
+    `пропущено ${skipped.length}: ` +
+      Object.entries(byReason)
+        .map(([reason, n]) => `${reason} ${n}`)
+        .join(', '),
+  );
+  for (const item of skipped.filter((i) => i.reason === 'no-binding').slice(0, 10)) {
+    console.log(`  ${item.id} ${item.kind}[${item.index}] — в спеке привязка есть, в файле нет`);
+  }
+}
+const noBinding = byReason['no-binding'] ?? 0;
 
 if (!mismatches.length) {
+  if (noBinding) {
+    console.error(`\nне сверено ${noBinding}: привязки нет в файле — перевыгрузить секции (npm run export)`);
+    process.exit(3);
+  }
   console.log('цвета в спеках совпадают со значениями переменных');
   process.exit(0);
 }

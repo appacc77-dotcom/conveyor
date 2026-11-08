@@ -48,6 +48,11 @@ async function resolveNode(id) {
   return node;
 }
 const out = [];
+// skipped — узлы, которые не удалось сверить по существу: привязки в файле нет
+// или значение переменной не цвет (например, ссылка на другую переменную).
+// Раньше они молча входили в «проверено».
+const skipped = [];
+let verified = 0;
 // Переменная одна и та же у десятков узлов: без кэша каждый узел делает
 // отдельный запрос к плагину и пачка не укладывается в бюджет вызова.
 const variableCache = new Map();
@@ -67,7 +72,10 @@ for (const item of items) {
   }
   const bound = (node.boundVariables && node.boundVariables[item.kind]) || [];
   const alias = bound[item.index];
-  if (!alias) continue;
+  if (!alias) {
+    skipped.push({ id: item.id, kind: item.kind, index: item.index, reason: "no-binding" });
+    continue;
+  }
 
   try {
     let variable = variableCache.get(alias.id);
@@ -77,7 +85,12 @@ for (const item of items) {
     }
     const modes = variable && variable.valuesByMode;
     const value = modes && modes[Object.keys(modes)[0]];
-    if (!value || typeof value !== "object" || !("r" in value)) continue;
+    if (!value || typeof value !== "object" || !("r" in value)) {
+      const reason = value && value.type === "VARIABLE_ALIAS" ? "alias-chain" : "not-color";
+      skipped.push({ id: item.id, kind: item.kind, index: item.index, reason, variable: variable && variable.name });
+      continue;
+    }
+    verified += 1;
 
     const h = (v) => Math.round(v * 255).toString(16).padStart(2, "0");
     const actual = { hex: `#${h(value.r)}${h(value.g)}${h(value.b)}`, a: +(value.a ?? 1).toFixed(3) };
@@ -98,4 +111,4 @@ for (const item of items) {
   }
 }
 
-return { checked: items.length, mismatches: out };
+return { checked: verified, total: items.length, skipped, mismatches: out };
