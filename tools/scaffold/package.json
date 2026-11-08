@@ -46,7 +46,8 @@
     "motion:check": "node tools/check-motion-manifest.mjs",
     "images": "node tools/check-images.mjs",
     "fonts": "node tools/fonts.mjs",
-    "fonts:check": "node tools/fonts.mjs --check"
+    "fonts:check": "node tools/fonts.mjs --check",
+    "snapshot:diff": "node tools/snapshot-diff.mjs"
   },
   "dependencies": {
     "astro": "7.4.5"
