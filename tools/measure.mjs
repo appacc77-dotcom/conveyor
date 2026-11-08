@@ -76,6 +76,18 @@ if (!existsSync(dist)) {
   process.exit(2);
 }
 
+// Страницы может не быть в сборке: в новом проекте есть только structure.html.
+// Без этой проверки замер открывал 404 и сообщал «корень секции не размечен» —
+// то есть врал о причине.
+// Адрес может быть с параметром (`/quiz.html?result=1`) — в сборке это тот же
+// файл: параметр разбирает страница, а не сервер.
+const urlPathname = urlPath.split('?')[0].split('#')[0];
+const distFile = urlPathname === '/' ? 'index.html' : urlPathname.replace(/^\//, '');
+if (!existsSync(join(dist, distFile))) {
+  console.error(`Страницы ${urlPath} нет в dist/ (${distFile}) — сначала соберите её: npm run build`);
+  process.exit(2);
+}
+
 const port = Number(process.env.SHOT_PORT ?? 4332);
 const base = `http://127.0.0.1:${port}`;
 const mime = {
