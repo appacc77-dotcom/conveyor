@@ -14,7 +14,8 @@
       ],
       "checkedBy": "interactive (живой элемент), глазом",
       "stage2": "заменить на макет открытого nav-dropdown, когда дизайнер его нарисует",
-      "billable": false
+      "billable": false,
+      "enhancement": "header-dropdown"
     },
     {
       "id": "header-mobile-panel",
@@ -29,7 +30,8 @@
       ],
       "checkedBy": "interactive, глазом",
       "stage2": "заменить на макет мобильного меню (D-2)",
-      "billable": false
+      "billable": false,
+      "enhancement": "header-mobile-panel"
     },
     {
       "id": "pay-not-connected",
@@ -43,7 +45,8 @@
       ],
       "checkedBy": "interactive",
       "stage2": "подключить оплату — этап 2/3, решение владельца",
-      "billable": true
+      "billable": true,
+      "enhancement": "pay-note"
     },
     {
       "id": "package-not-connected",
@@ -57,7 +60,8 @@
       ],
       "checkedBy": "interactive",
       "stage2": "подключить оплату — этап 2/3, решение владельца",
-      "billable": true
+      "billable": true,
+      "enhancement": "package-note"
     },
     {
       "id": "booking-form-not-sent",
@@ -71,7 +75,8 @@
       ],
       "checkedBy": "interactive",
       "stage2": "адресат и валидация формы — решение владельца",
-      "billable": true
+      "billable": true,
+      "enhancement": "form-behaviour"
     },
     {
       "id": "motion",
@@ -85,7 +90,8 @@
       ],
       "checkedBy": "motion, motion-manifest",
       "stage2": "сверить с дизайнером или заменить на прототип Figma",
-      "billable": false
+      "billable": false,
+      "enhancement": "motion"
     }
   ]
 }

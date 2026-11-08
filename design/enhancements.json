@@ -8,10 +8,14 @@
       "origin": "studio",
       "approvedBy": 76,
       "status": "active",
-      "scope": ["src/components/Header.astro"],
+      "scope": [
+        "src/components/Header.astro"
+      ],
       "allowedChanges": [],
       "offSwitch": "data-enhancements=off",
-      "checks": ["interactive"]
+      "checks": [
+        "interactive"
+      ]
     },
     "header-mobile-panel": {
       "layer": "enhancements",
@@ -19,10 +23,14 @@
       "origin": "studio",
       "approvedBy": 166,
       "status": "active",
-      "scope": ["src/components/Header.astro"],
+      "scope": [
+        "src/components/Header.astro"
+      ],
       "allowedChanges": [],
       "offSwitch": "data-enhancements=off",
-      "checks": ["interactive"]
+      "checks": [
+        "interactive"
+      ]
     },
     "pay-note": {
       "layer": "enhancements",
@@ -30,10 +38,16 @@
       "origin": "studio",
       "approvedBy": 292,
       "status": "active",
-      "scope": ["src/components/PracticePayCard.astro"],
-      "allowedChanges": ["видимость подсказки"],
+      "scope": [
+        "src/components/PracticePayCard.astro"
+      ],
+      "allowedChanges": [
+        "видимость подсказки"
+      ],
       "offSwitch": "data-enhancements=off",
-      "checks": ["interactive"]
+      "checks": [
+        "interactive"
+      ]
     },
     "package-note": {
       "layer": "enhancements",
@@ -41,10 +55,16 @@
       "origin": "studio",
       "approvedBy": 292,
       "status": "active",
-      "scope": ["src/components/PracticePackage.astro"],
-      "allowedChanges": ["видимость подсказки"],
+      "scope": [
+        "src/components/PracticePackage.astro"
+      ],
+      "allowedChanges": [
+        "видимость подсказки"
+      ],
       "offSwitch": "data-enhancements=off",
-      "checks": ["interactive"]
+      "checks": [
+        "interactive"
+      ]
     },
     "form-behaviour": {
       "layer": "enhancements",
@@ -52,10 +72,16 @@
       "origin": "studio",
       "approvedBy": 362,
       "status": "active",
-      "scope": ["src/components/BookingFormats.astro"],
-      "allowedChanges": ["видимость подсказки"],
+      "scope": [
+        "src/components/BookingFormats.astro"
+      ],
+      "allowedChanges": [
+        "видимость подсказки"
+      ],
       "offSwitch": "data-enhancements=off",
-      "checks": ["interactive"]
+      "checks": [
+        "interactive"
+      ]
     },
     "quiz-play-note": {
       "layer": "enhancements",
@@ -63,10 +89,16 @@
       "origin": "studio",
       "approvedBy": 362,
       "status": "active",
-      "scope": ["src/components/QuizResult.astro"],
-      "allowedChanges": ["видимость подсказки"],
+      "scope": [
+        "src/components/QuizResult.astro"
+      ],
+      "allowedChanges": [
+        "видимость подсказки"
+      ],
       "offSwitch": "data-enhancements=off",
-      "checks": ["interactive"]
+      "checks": [
+        "interactive"
+      ]
     },
     "motion": {
       "layer": "enhancements",
@@ -74,10 +106,16 @@
       "origin": "studio",
       "approvedBy": 114,
       "status": "active",
-      "scope": ["src/styles/motion.css", "src/styles/*.css"],
+      "scope": [
+        "src/styles/motion.css",
+        "src/styles/*.css"
+      ],
       "allowedChanges": [],
       "offSwitch": "data-enhancements=off",
-      "checks": ["motion", "motion-manifest"]
+      "checks": [
+        "motion",
+        "motion-manifest"
+      ]
     },
     "mobile-layout": {
       "layer": "enhancements",
@@ -86,9 +124,15 @@
       "approvedBy": null,
       "status": "not-started",
       "scope": [],
-      "allowedChanges": ["перестройка сетки на ширине < 768"],
+      "allowedChanges": [
+        "перестройка сетки на ширине < 768"
+      ],
       "offSwitch": "data-enhancements=off",
-      "checks": ["layout", "stretch", "images"]
+      "checks": [
+        "layout",
+        "stretch",
+        "images"
+      ]
     }
   }
 }

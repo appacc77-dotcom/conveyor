@@ -601,6 +601,31 @@
       "mandatoryFor": [
         "accept-stage2"
       ]
+    },
+    "enhancements": {
+      "layers": [
+        "enhancements"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/enhancements.json",
+        "design/figma/invented.json",
+        "tools/checks.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "accept-stage2"
+      ]
     }
   }
 }

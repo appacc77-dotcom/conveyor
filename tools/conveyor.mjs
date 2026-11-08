@@ -144,6 +144,7 @@ const GLOBAL_STEPS = [
   { id: 'tokens-dtcg', tool: 'check-tokens-dtcg', kind: 'gate', needsDist: false, about: 'токены DTCG совпадают с CSS' },
   { id: 'invented', tool: 'check-invented', kind: 'gate', needsDist: false, about: 'нет вёрстки под несуществующие ширины' },
   { id: 'registry', tool: 'check-registry', kind: 'gate', needsDist: false, about: 'изобретённое и долги в реестрах' },
+  { id: 'enhancements', tool: 'check-enhancements', kind: 'gate', needsDist: false, about: 'дополнения согласованы и отключаемы' },
   { id: 'portability', tool: 'check-portability', kind: 'gate', needsDist: false, about: 'нет привязки к проекту' },
   { id: 'scaffold', tool: 'check-scaffold', kind: 'gate', needsDist: false, about: 'шаблон не отстал' },
   { id: 'bindings', tool: 'check-bindings', kind: 'gate', needsDist: false, about: 'цвета из переменных' },
