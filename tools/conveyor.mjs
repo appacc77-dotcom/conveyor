@@ -7,6 +7,7 @@
  *   node tools/conveyor.mjs check [--unit home/hero] [--json]
  *   node tools/conveyor.mjs status [--json]
  *   node tools/conveyor.mjs plan [--unit home/hero]
+ *   node tools/conveyor.mjs push-ok        — можно ли пушить (последний полный PASS на этом же содержимом)
  *
  * Зачем:
  *   1. `npm run verify` — цепочка `&&`: первая красная проверка скрывает
@@ -64,24 +65,43 @@ function walkFiles(dir, ext, out = []) {
   return out;
 }
 
-function provenance() {
-  let commit = null;
-  let dirty = null;
+// Файлы, которые прогон сам переписывает (замер и пиксель кладут числа рядом
+// со спекой). Они отслеживаются, но «грязным» дерево из-за них не считается:
+// иначе любой полный прогон делал себя же непригодным к выпуску.
+const GENERATED = [/^design\/figma\/pages\/.+\/gate\.json$/, /^design\/figma\/pages\/.+\/pixel\.json$/];
+const isGenerated = (path) => GENERATED.some((re) => re.test(path));
+
+/**
+ * Состояние git на момент СТАРТА прогона: коммит, есть ли правки (без
+ * генерируемых файлов) и отпечаток содержимого отслеживаемых файлов с диска.
+ * contentHash сверяет хук пуша: зелёный прогон относится ровно к этому дереву.
+ */
+function gitState() {
   try {
-    commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim();
-    dirty = execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim().length > 0;
+    const commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' }).trim();
+    const changed = execFileSync('git', ['status', '--porcelain', '-z'], { encoding: 'utf8' })
+      .split('\0')
+      .filter(Boolean)
+      .map((line) => line.slice(3));
+    const dirtyFiles = changed.filter((path) => !isGenerated(path));
+    const tracked = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' })
+      .split('\0')
+      .filter((path) => path && !isGenerated(path) && existsSync(join(root, path)))
+      .map((path) => join(root, path));
+    return { commit, dirty: dirtyFiles.length > 0, dirtyFiles: dirtyFiles.slice(0, 20), contentHash: hashFiles(tracked) };
   } catch {
     // не git-репозиторий — провенанс просто пустой, прогон от этого не падает
+    return { commit: null, dirty: null, dirtyFiles: [], contentHash: null };
   }
+}
 
+function provenance() {
   const pagesDir = join(process.cwd(), 'design/figma/pages');
   const specs = walkFiles(pagesDir, 'spec.json');
   const crops = walkFiles(pagesDir, 'crop.png');
   const dist = walkFiles(join(process.cwd(), 'dist'));
 
   return {
-    commit,
-    dirty,
     hashes: {
       specs: specs.length ? hashFiles(specs) : null,
       crops: crops.length ? hashFiles(crops) : null,
@@ -365,6 +385,10 @@ async function commandCheck(unit, json, all) {
   const dir = join(runsDir, id);
   mkdirSync(join(dir, 'results'), { recursive: true });
 
+  // Провенанс снимается ДО шагов: замер во время прогона переписывает gate.json,
+  // и снимок после него говорил бы о другом дереве.
+  const gitBefore = gitState();
+
   const idWidth = Math.max(...steps.map((step) => step.id.length));
   const events = [];
   const results = [];
@@ -395,6 +419,12 @@ async function commandCheck(unit, json, all) {
 
   const verdict = evaluate(results);
   const provenanceInfo = provenance();
+  // Дерево поменялось во время прогона — вердикт не относится ни к одному
+  // состоянию целиком.
+  const gitAfter = gitState();
+  const stable = gitBefore.contentHash !== null && gitBefore.contentHash === gitAfter.contentHash;
+  // full — полный объём (--all); unit — одна секция. Выпуск только по полному.
+  const mode = all ? 'full' : 'unit';
   const report = {
     schemaVersion: 1,
     runId: id,
@@ -404,14 +434,19 @@ async function commandCheck(unit, json, all) {
     finishedAt: new Date().toISOString(),
     status: verdict.status,
     exitCode: verdict.exitCode,
-    commit: provenanceInfo.commit,
-    dirty: provenanceInfo.dirty,
+    mode,
+    commit: gitBefore.commit,
+    dirty: gitBefore.dirty,
+    dirtyFiles: gitBefore.dirtyFiles,
+    contentHash: gitBefore.contentHash,
+    changedDuringRun: !stable,
     hashes: provenanceInfo.hashes,
     files: provenanceInfo.files,
     coverage: coverage(units),
     // Рабочий прогон может быть зелёным, но доказательством готовности
     // коммита он не становится: правки не зафиксированы.
-    releaseEligible: verdict.status === 'PASS' && provenanceInfo.dirty === false && Boolean(provenanceInfo.commit),
+    releaseEligible:
+      verdict.status === 'PASS' && mode === 'full' && gitBefore.dirty === false && Boolean(gitBefore.commit) && stable,
     steps: results.map((r) => ({ id: r.id, status: r.status, ms: r.ms, kind: r.kind })),
   };
 
@@ -431,13 +466,48 @@ async function commandCheck(unit, json, all) {
       );
     }
     process.stdout.write(
-      `\nвердикт: ${verdict.status}${verdict.status === 'PASS' && !report.releaseEligible ? ' (рабочий: есть незакоммиченные правки)' : ''}`,
+      `\nвердикт: ${verdict.status}${verdict.status === 'PASS' && !report.releaseEligible ? ` (рабочий: ${notEligibleReason(report)})` : ''}`,
     );
     if (failed.length) process.stdout.write(` · красных ${failed.length}: ${failed.map((r) => r.id).join(', ')}`);
     process.stdout.write(`\nпрогон: reports/runs/${id}/\n`);
   }
 
   return verdict.exitCode;
+}
+
+function notEligibleReason(report) {
+  if (report.mode !== 'full') return 'проверена одна секция, для выпуска нужен --all';
+  if (report.dirty) return 'есть незакоммиченные правки';
+  if (report.changedDuringRun) return 'файлы менялись во время прогона';
+  return 'нет коммита';
+}
+
+/**
+ * Можно ли пушить: последний прогон зелёный, полный, на чистом дереве, и
+ * отпечаток содержимого совпадает с текущим. Код 0 — можно, 1 — нельзя
+ * (причина в stdout). Вызывается хуком post-commit.
+ */
+function commandPushOk() {
+  const report = latestRun();
+  if (!report) {
+    process.stdout.write('прогонов не было\n');
+    return 1;
+  }
+  if (!report.releaseEligible) {
+    process.stdout.write(
+      `последний прогон ${report.runId}: ${report.status}` +
+        (report.status === 'PASS' ? `, ${notEligibleReason(report)}` : '') +
+        '\n',
+    );
+    return 1;
+  }
+  const now = gitState();
+  if (now.contentHash !== report.contentHash) {
+    process.stdout.write(`последний зелёный прогон ${report.runId} относится к другому содержимому — нужен новый check --all\n`);
+    return 1;
+  }
+  process.stdout.write(`прогон ${report.runId}: PASS, полный, содержимое совпадает\n`);
+  return 0;
 }
 
 function latestRun() {
@@ -498,8 +568,9 @@ try {
   if (command === 'check') code = await commandCheck(unit, values.json, values.all);
   else if (command === 'status') code = commandStatus(values.json);
   else if (command === 'plan') code = commandPlan(unit, values.all);
+  else if (command === 'push-ok') code = commandPushOk();
   else {
-    process.stderr.write('команды: check [--unit home/hero | --all] | status | plan\n');
+    process.stderr.write('команды: check [--unit home/hero | --all] | status | plan | push-ok\n');
     code = 2;
   }
   process.exitCode = code;
