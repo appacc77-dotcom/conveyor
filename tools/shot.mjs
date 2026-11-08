@@ -8,7 +8,7 @@
  * Требует npm run build и установленный chromium.
  */
 import { createServer } from 'node:http';
-import { existsSync, readFileSync, statSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, statSync, mkdirSync, rmSync } from 'node:fs';
 import { extname, join, normalize, dirname, isAbsolute } from 'node:path';
 import { chromium } from 'playwright';
 
@@ -24,6 +24,11 @@ const urlArg = (() => {
 })();
 const out = process.argv[3] ?? '.screens/shot.png';
 const width = Number(process.argv[4] ?? 1440);
+
+// Старый снимок удаляем сразу: если съёмка упадёт, сравнение не должно
+// молча взять кадр прошлого прогона.
+const target = isAbsolute(out) ? out : join(root, out);
+rmSync(target, { force: true });
 
 if (!existsSync(dist)) {
   console.error('Нет dist/. Сначала: npm run build');
@@ -105,7 +110,6 @@ if (!isOverlayTarget) {
 
 const box = await el.boundingBox();
 // Абсолютный путь берём как есть: join(root, '/tmp/x') склеил бы корень.
-const target = isAbsolute(out) ? out : join(root, out);
 mkdirSync(dirname(target), { recursive: true });
 await el.screenshot({ path: target });
 
