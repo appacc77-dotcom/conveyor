@@ -84,9 +84,18 @@ for (const item of items) {
       variableCache.set(alias.id, variable);
     }
     const modes = variable && variable.valuesByMode;
-    const value = modes && modes[Object.keys(modes)[0]];
+    let value = modes && modes[Object.keys(modes)[0]];
+    // Переменная может ссылаться на другую переменную (alias-chain). Разрешаем
+    // цепочку до цвета, но не глубже пяти шагов: иначе легко уйти в цикл.
+    let hops = 0;
+    while (value && typeof value === "object" && value.type === "VARIABLE_ALIAS" && hops < 5) {
+      const next = await figma.variables.getVariableByIdAsync(value.id);
+      const nextModes = next && next.valuesByMode;
+      value = nextModes && nextModes[Object.keys(nextModes)[0]];
+      hops += 1;
+    }
     if (!value || typeof value !== "object" || !("r" in value)) {
-      const reason = value && value.type === "VARIABLE_ALIAS" ? "alias-chain" : "not-color";
+      const reason = hops >= 5 ? "alias-chain-too-deep" : "not-color";
       skipped.push({ id: item.id, kind: item.kind, index: item.index, reason, variable: variable && variable.name });
       continue;
     }
