@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-09T19:27:57.183Z",
+  "at": "2026-11-09T20:11:46.551Z",
   "sections": {
     "booking/booking-formats": {
       "spec": "a906ed28ebd32c7c",
@@ -20,6 +20,11 @@
       "spec": "c856e2a6fad4e1fe",
       "crop": "38ffdb6bcf25c1b7",
       "states": "f03b3f818376a0a3"
+    },
+    "design-system/logo-gold": {
+      "spec": "4cbd96e8d0e54c7c",
+      "crop": "35885d8364d73ba7",
+      "states": "3213b86ea6ea83a4"
     },
     "home/about-founder": {
       "spec": "13ab87022f622cc6",
