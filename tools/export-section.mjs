@@ -206,7 +206,8 @@ for (const icon of section.icons) {
 const spec = {
   file: { name: project.source.fileName, key: fileKey, at: new Date().toISOString() },
   section: section.root,
-  fingerprint: fingerprintOf(section.nodes),
+  // Отпечаток от плагина: он видит дерево целиком, как и раньше.
+  fingerprint: section.fingerprint ?? fingerprintOf(section.nodes),
   cloudVersion: cloudVersion(),
   counts: { nodes: section.count, images: images.length, icons: icons.length, iconInstances: section.iconInstances },
   assets: { crop: 'crop.png', images, icons },

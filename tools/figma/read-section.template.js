@@ -318,9 +318,31 @@ while (pageNode && pageNode.type !== "PAGE") pageNode = pageNode.parent;
 // Возвращаем дизайнеру ту страницу, с которой он работал.
 if (switched) await figma.setCurrentPageAsync(openedPage);
 
+// Отпечаток содержимого считается здесь, а не в экспортёре: два независимых
+// алгоритма на одном смысле расходятся молча, и «экспорт устарел» появляется
+// на ровном месте. Один источник — плагин.
+const fingerprintLines = [];
+function fingerprintWalk(n) {
+  fingerprintLines.push(
+    [n.id, Math.round(n.x), Math.round(n.y), Math.round(n.width), Math.round(n.height), n.type === "TEXT" ? n.characters : ""].join("|"),
+  );
+  if ("children" in n) for (const c of n.children) fingerprintWalk(c);
+}
+fingerprintWalk(root);
+let fingerprintHash = 0x811c9dc5;
+for (const line of fingerprintLines) {
+  for (let i = 0; i < line.length; i++) {
+    fingerprintHash ^= line.charCodeAt(i);
+    fingerprintHash = Math.imul(fingerprintHash, 0x01000193) >>> 0;
+  }
+  fingerprintHash ^= 10;
+  fingerprintHash = Math.imul(fingerprintHash, 0x01000193) >>> 0;
+}
+
 return {
   page: { id: pageNode?.id ?? null, name: pageNode?.name ?? "page" },
   root: { id: root.id, name: root.name, w: Math.round(root.width), h: Math.round(root.height) },
+  fingerprint: fingerprintHash.toString(16).padStart(8, "0"),
   count: nodes.length,
   nodes,
   images,
