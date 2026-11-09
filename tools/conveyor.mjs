@@ -538,9 +538,13 @@ function runStep(step) {
       ? [join(root, step.bin), step.args ?? []]
       : [process.execPath, [join(root, 'tools', `${step.tool}.mjs`), ...(step.args ?? [])]];
 
+    // Своя группа процессов: у шага бывают дети (Chromium у снимка и замера,
+    // astro у сборки). Убийство только родителя оставляло их сиротами —
+    // следующий шаг открывал страницу на живом браузере и занятом порту.
     const child = spawn(command, args, {
       cwd: root,
       shell: false,
+      detached: true,
       env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1' },
       stdio: ['ignore', 'pipe', 'pipe'],
     });
@@ -567,9 +571,23 @@ function runStep(step) {
     // предел, после которого он снимается и считается непройденным по среде.
     // Предел берётся из контракта проверки, если он там задан.
     const limit = step.timeoutMs ?? contractTimeout(step.id) ?? 300000;
+    /** Снять шаг вместе со всеми его детьми. */
+    const killTree = () => {
+      try {
+        // Отрицательный pid — вся группа, а не только прямой ребёнок.
+        process.kill(-child.pid, 'SIGKILL');
+      } catch {
+        try {
+          child.kill('SIGKILL');
+        } catch {
+          // процесс уже умер — это нормально
+        }
+      }
+    };
+
     const timer = setTimeout(() => {
       clearInterval(heartbeat);
-      child.kill('SIGKILL');
+      killTree();
       resolve({
         ...step,
         status: 'ERROR',
