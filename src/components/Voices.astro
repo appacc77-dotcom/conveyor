@@ -64,7 +64,8 @@ const ordered = [voices[2], voices[0], voices[1], ...voices.slice(3)];
 const track = [...ordered, { ...ordered[0], clone: true }, { ...ordered[1], clone: true }];
 ---
 
-<section class="voices" id="home-voices" data-figma-node="116:246">
+{/* Лента отзывов шире экрана и прокручивается — так задумано. */}
+<section class="voices" id="home-voices" data-figma-node="116:246" data-overflow-ok>
   <div class="voices__container" data-figma-node="116:247">
     <div class="voices__heading" data-figma-node="116:248">
       <h2 class="voices__title t-h2" data-figma-node="116:249">{title}</h2>

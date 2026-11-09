@@ -662,6 +662,32 @@
       "mandatoryFor": [
         "accept-stage1"
       ]
+    },
+    "overflow": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "dist/**",
+        "design/figma/project.json"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "browser"
+      ],
+      "timeoutMs": 180000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1"
+      ],
+      "about": "содержимое не вылезает за блоки и не заходит на соседние секции"
     }
   }
 }

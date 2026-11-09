@@ -134,6 +134,13 @@ function coverage(units) {
 }
 
 const GLOBAL_STEPS = [
+  {
+    id: 'overflow',
+    tool: 'check-overflow',
+    kind: 'gate',
+    needsDist: true,
+    about: 'контент не вылезает за блоки',
+  },
   // Сборка — не наш скрипт, а бинарь Astro из node_modules.
   { id: 'contracts', tool: 'check-contracts', kind: 'gate', needsDist: false, about: 'контракты проверок сходятся' },
   { id: 'build', bin: 'node_modules/.bin/astro', args: ['build'], kind: 'gate', needsDist: false, about: 'сборка dist/' },
