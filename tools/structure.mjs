@@ -6,7 +6,10 @@
  *
  * Вход (всё уже на диске):
  *   design/figma/project.json        — страницы и канонические фреймы
- *   design/figma/live/structure.json — секции каждой страницы из живого файла
+ *   design/figma/live/structure.json — снимок живого файла (что есть в Figma).
+ *                                      Другой файл с похожим именем —
+ *                                      design/figma/structure.json — это
+ *                                      ВЫХОД этого инструмента, данные страницы.
  *   design/figma/pages/<page>/<section>/    — spec.json, crop.png, gate.json, pixel.json
  *   .screens/<slug>.png              — снимок собранной секции
  *

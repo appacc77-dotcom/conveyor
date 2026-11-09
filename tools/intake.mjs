@@ -11,6 +11,11 @@
  * Вход:  design/figma/project.json
  * Выход: design/figma/live/{structure,ds,reality}.json + snapshot.json
  *
+ * ВАЖНО: `design/figma/live/structure.json` — снимок живого файла (что есть в
+ * Figma). Это не то же самое, что `design/figma/structure.json` — данные
+ * страницы /structure.html, которые собирает tools/structure.mjs. Одинаковое
+ * имя у двух разных смыслов уже путало; держим различие в шапках обоих.
+ *
  * Коды возврата:
  *   0 — снимок снят, fileKey совпал
  *   1 — открыт другой файл (или fileKey не совпал с project.json)
