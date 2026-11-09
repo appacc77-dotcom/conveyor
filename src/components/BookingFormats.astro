@@ -298,17 +298,23 @@ const fields = [
   .bformats {
     position: relative;
     width: 100%;
-    height: 1546px;
+    /* Высота минимальная: при выборе «Сопровождения» карточка и панель
+       становятся выше макета, и с фиксированной высотой низ формы уходил
+       на подвал. */
+    min-height: 1546px;
     background: var(--color-bg-page);
   }
 
   .bformats__container {
     box-sizing: border-box;
     width: 1280px;
-    height: 1546px;
+    min-height: 1546px;
     /* padding, а не margin у первого блока: иначе отступ схлопывается
        с секцией и всё съезжает на 64 px. */
     padding-top: 64px;
+    /* Нижний отступ в 64 px держит зазор до подвала и при выросшей секции:
+       без него подвал прилипал к низу формы. */
+    padding-bottom: 64px;
     margin: 0 auto;
   }
 
@@ -349,13 +355,20 @@ const fields = [
 
   .bformats__layout {
     position: relative;
-    height: 1350px;
+    /* Две колонки в потоке: высота секции — по самой высокой. Панель была
+       абсолютной с height 1350, её содержимое росло мимо секции и наезжало
+       на подвал при выборе «Сопровождения». */
+    display: flex;
+    align-items: flex-start;
+    gap: 65px;
+    min-height: 1350px;
     margin-top: 48px;
   }
 
   .bformats__list {
+    flex: none;
     width: 608px;
-    height: 1280px;
+    min-height: 1280px;
   }
 
   .fmt {
@@ -531,11 +544,9 @@ const fields = [
   }
 
   .bformats__panel {
-    position: absolute;
-    left: 673px;
-    top: 0;
+    flex: none;
     width: 608px;
-    height: 1350px;
+    min-height: 1350px;
   }
 
   .bformats__details {
