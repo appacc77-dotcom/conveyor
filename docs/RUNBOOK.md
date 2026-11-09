@@ -85,7 +85,7 @@ npm install
 | токены | `npm run ds:tokens` | 0 | `src/styles/{tokens,typography}.css` |
 | карта | `npm run structure` | 0 | `design/figma/structure.json`: 46 секций, 7 страниц |
 | сборка | `npm run build` | 0 | `dist/structure.html` **92 КБ** |
-| ворота | `npm run verify` | **0** | источники сходятся, ассеты на месте, шаблон совпадает |
+| ворота | `npm run verify` | **0** | это `check --profile accept-stage1 --cache`: все ворота профиля, 17 с на тёплом кэше |
 | конвейер | `node tools/conveyor.mjs check --all` | **3** | «секций в объёме нет» — проверять нечего |
 
 Ни одной правки кода и ни одной правки инструкций.
