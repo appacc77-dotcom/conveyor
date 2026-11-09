@@ -31,7 +31,7 @@ function parseJson(text) {
  * запрос через мгновение проходит. Без повтора один обрыв валит весь инструмент,
  * и приходится запускать вручную заново.
  */
-const TRANSIENT_CODES = new Set(['E_TIMEOUT', 'E_NO_ANSWER', 'E_NO_PLUGIN', 'E_NO_BROKER', 'E_NO_ANSWER']);
+const TRANSIENT_CODES = new Set(['E_TIMEOUT', 'E_NO_ANSWER', 'E_NO_PLUGIN', 'E_NO_BROKER']);
 const TRANSIENT_MESSAGE = /unable to establish connection to figma|failed to export node|not connected|disconnected|no plugin/i;
 
 /** Мост блокирует файл зависшей задачей и сам её не снимает: достаём id. */
@@ -95,7 +95,9 @@ export function runFigma(args, { timeoutMs = 120000, retries = 3, onRetry } = {}
       if (!isTransient(error) || attempt === retries) throw error;
       onRetry?.(attempt, error);
       // Пауза растёт: плагину нужно время вернуться, а не долбить его сразу.
-      spawnSync('sleep', [String(attempt * 0.8)]);
+      // Пауза без внешней команды: spawnSync('sleep') не работает вне Unix,
+      // а ждать надо на всех платформах.
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, Math.round(attempt * 800));
     }
   }
   throw lastError;
