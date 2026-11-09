@@ -14,7 +14,7 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { tmpdir } from 'node:os';
-import { runFigma } from './figma/cli.mjs';
+import { runFigma, waitForPlugin } from './figma/cli.mjs';
 
 const root = process.cwd();
 const pagesRoot = join(root, 'design/figma/pages');
@@ -42,6 +42,13 @@ if (!existsSync(pagesRoot)) {
     process.exit(0);
   }
   console.error('нет design/figma/pages, хотя в карте есть секции — нужен экспорт');
+  process.exit(2);
+}
+
+// Без живого плагина сверка не начнётся: ждать её в тишине — значит
+// получить многосекундный «зависший» шаг вместо честного «моста нет».
+if (!waitForPlugin(15)) {
+  console.error('плагин моста не отвечает 15 с — открой Figma и запусти плагин');
   process.exit(2);
 }
 
@@ -123,8 +130,12 @@ function checkChunk(chunk) {
   }
 }
 
+// Непроходимый кусок не должен обрывать остальные: иначе агент видит одну
+// ошибку и не знает, сколько ещё. Собираем все и выходим в конце.
+const failedChunks = [];
 for (let start = 0; start < items.length; start += CHUNK) {
-  if (!checkChunk(items.slice(start, start + CHUNK))) process.exit(2);
+  const chunk = items.slice(start, start + CHUNK);
+  if (!checkChunk(chunk)) failedChunks.push(`${chunk[0]?.id ?? '?'}…${chunk[chunk.length - 1]?.id ?? '?'}`);
 }
 
 console.log(`спек: ${specs.length} · привязок проверено: ${checked} из ${items.length}`);
@@ -147,10 +158,20 @@ if (skipped.length) {
 }
 const noBinding = byReason['no-binding'] ?? 0;
 
+// Непрошедшие пачки — среда, а не расхождение: о них говорим до вердикта,
+// чтобы отчёт не выглядел зелёным при неполной сверке.
+if (failedChunks.length) {
+  console.error(`\nне сверено пачек: ${failedChunks.length} — ${failedChunks.join(', ')}`);
+}
+
 if (!mismatches.length) {
   if (noBinding) {
     console.error(`\nне сверено ${noBinding}: привязки нет в файле — перевыгрузить секции (npm run export)`);
     process.exit(3);
+  }
+  if (failedChunks.length) {
+    console.error('часть пачек не сверена — вердикт не может быть зелёным');
+    process.exit(2);
   }
   console.log('цвета в спеках совпадают со значениями переменных');
   process.exit(0);
