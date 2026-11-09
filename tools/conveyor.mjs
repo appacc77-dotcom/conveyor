@@ -956,13 +956,19 @@ function commandStatus(json) {
   return 0;
 }
 
-function commandPlan(unit, all) {
+function commandPlan(unit, all, json = false) {
   const units = all ? builtUnits() : unit ? [unit] : [];
   const steps = [...GLOBAL_STEPS, ...units.flatMap((item) => (all ? [measureStep(item)] : unitSteps(item)))];
   assertUniqueIds(steps);
   // Порядок — из зависимостей контракта, а не из порядка в массиве: шаг не
   // должен проверять «прошла ли зависимость» до того, как она запускалась.
   const ordered = orderByDeps(steps);
+  // --json — машинный список шагов: по нему ворота contracts сверяют состав
+  // конвейера с контрактами, не разбирая исходник регуляркой.
+  if (json) {
+    process.stdout.write(JSON.stringify({ steps: ordered.map((step) => ({ id: step.id, kind: step.kind })) }, null, 1) + '\n');
+    return 0;
+  }
   process.stdout.write(`план${unit ? ` для ${unit}` : all ? ` для ${units.length} секций` : ''} — ${steps.length} шагов, последовательно:\n`);
   const idWidth = Math.max(...steps.map((step) => step.id.length));
   for (const step of ordered) {
@@ -997,7 +1003,7 @@ try {
   let code;
   if (command === 'check') code = await commandCheck(unit, values.json, values.all, values.set ?? null, values.resume ?? null, values.profile ?? null, values.cache && !values['no-cache']);
   else if (command === 'status') code = commandStatus(values.json);
-  else if (command === 'plan') code = commandPlan(unit, values.all);
+  else if (command === 'plan') code = commandPlan(unit, values.all, values.json);
   else if (command === 'push-ok') code = commandPushOk();
   else {
     process.stderr.write('команды: check [--unit home/hero | --all] | status | plan | push-ok\n');

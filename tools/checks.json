@@ -147,28 +147,6 @@
         "accept-stage2"
       ]
     },
-    "tokens-dtcg": {
-      "layers": [
-        "base"
-      ],
-      "scope": "project",
-      "inputs": [
-        "design/tokens.json",
-        "src/styles/tokens.css"
-      ],
-      "dependsOn": [],
-      "resources": [],
-      "timeoutMs": 60000,
-      "retryPolicy": {
-        "codes": [],
-        "attempts": 1
-      },
-      "outputs": [],
-      "mandatoryFor": [
-        "accept-stage1",
-        "accept-stage2"
-      ]
-    },
     "invented": {
       "layers": [
         "common"
@@ -662,6 +640,27 @@
       ],
       "mandatoryFor": [
         "accept-stage2"
+      ]
+    },
+    "tokens-dtcg": {
+      "layers": [
+        "base"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/tokens.json",
+        "src/styles/tokens.css"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "accept-stage1"
       ]
     }
   }

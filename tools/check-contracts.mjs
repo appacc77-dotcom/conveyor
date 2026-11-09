@@ -15,6 +15,7 @@
  */
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 
 const root = process.cwd();
 const contractsPath = join(root, 'tools/checks.json');
@@ -39,10 +40,27 @@ const layers = new Set(Object.keys(contracts.layers ?? {}));
 const profiles = new Set(Object.keys(contracts.profiles ?? {}));
 
 // --- 1. Шаги конвейера против контрактов -----------------------------------
-// Шаги собираются в двух местах: GLOBAL_STEPS и unitSteps. Читаем оба.
-const source = readFileSync(conveyorPath, 'utf8');
+// Состав шагов спрашиваем у самого конвейера (`plan --json`), а не ищем
+// регуляркой по исходнику: шаг, собранный динамически или иначе
+// отформатированный, выпадал из сверки молча.
 const stepIds = new Set();
-for (const match of source.matchAll(/[{,]\s*id:\s*'([a-z][\w-]*)'/g)) stepIds.add(match[1]);
+const askPlan = (args) => {
+  const plan = JSON.parse(
+    execFileSync(process.execPath, [conveyorPath, 'plan', ...args, '--json'], { encoding: 'utf8', cwd: root, timeout: 60000 }),
+  );
+  for (const step of plan.steps ?? []) stepIds.add(step.id);
+};
+try {
+  // Общий план даёт шаги проекта; план по секции добавляет measure, shot и
+  // visual — они появляются только в режиме единицы.
+  askPlan([]);
+  const project = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8'));
+  const sample = (project.acceptance ?? [])[0];
+  if (sample) askPlan(['--unit', sample]);
+} catch (error) {
+  console.error(`не удалось получить план шагов из конвейера: ${String(error.message).slice(0, 200)}`);
+  process.exit(2);
+}
 // Пакетный замер и обычный имеют один id — measure.
 for (const id of stepIds) {
   if (!known.has(id)) problems.push(`шаг ${id} есть в конвейере, но не описан в checks.json`);
