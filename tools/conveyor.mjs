@@ -158,6 +158,7 @@ const GLOBAL_STEPS = [
   { id: 'images', tool: 'check-images', kind: 'gate', needsDist: true, about: 'картинки не растянуты' },
   // Интеграционные: дополнения не ломают основу. Сборка base отдельная —
   // поэтому шаг собирает её сам и проверяет.
+  { id: 'base-parity', tool: 'check-base-parity', kind: 'gate', needsDist: true, about: 'основа не изменилась от дополнений' },
   {
     id: 'enhancement-off',
     tool: 'check-enhancement-off',

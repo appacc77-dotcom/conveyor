@@ -629,6 +629,35 @@
         "accept-stage1",
         "accept-stage2"
       ]
+    },
+    "base-parity": {
+      "layers": [
+        "integration"
+      ],
+      "scope": "section",
+      "inputs": [
+        "design/figma/pages/**",
+        "design/enhancements.json",
+        "dist/**"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [
+        "dist",
+        "browser"
+      ],
+      "timeoutMs": 300000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [
+        "reports/base-parity/**"
+      ],
+      "mandatoryFor": [
+        "accept-stage2"
+      ]
     }
   }
 }
