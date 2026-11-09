@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-09T18:48:17.266Z",
+  "at": "2026-11-09T19:27:57.183Z",
   "sections": {
     "booking/booking-formats": {
-      "spec": "9cef1a988fd3430c",
+      "spec": "a906ed28ebd32c7c",
       "crop": "d10cf772364f3d48",
-      "states": "9331a4511cdb5405"
+      "states": "d405f0f46d85d0d1"
     },
     "booking/booking-hero": {
       "spec": "593d67ce54dfcb5a",

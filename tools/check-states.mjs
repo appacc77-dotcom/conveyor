@@ -103,6 +103,13 @@ const MIN_LENGTH = 4;
 // Регистр не сравниваем: «личная встреча» в разметке и «ЛИЧНАЯ ВСТРЕЧА» на
 // экране — это одно и то же, капс делает CSS.
 
+// Исключения: тексты состояний, которые на странице отсутствуют намеренно.
+const exceptionsPath = join(root, 'design/figma/state-exceptions.json');
+const exceptions = existsSync(exceptionsPath)
+  ? JSON.parse(readFileSync(exceptionsPath, 'utf8')).exceptions ?? []
+  : [];
+let knownTotal = 0;
+
 const expected = new Map(); // имя секции → Set текстов
 for (const section of sections) {
   const states = JSON.parse(readFileSync(section.statesPath, 'utf8'));
@@ -236,15 +243,29 @@ for (const [unit, { section, texts }] of expected) {
   const absent = [...texts].filter(
     (t) => !haystack.includes(t.toLowerCase()) && !haystackFlat.includes(squash(t).toLowerCase()),
   );
+  // Известные противоречия файла: текст есть в состояниях, но противоречит
+  // согласованному решению. Держим их на виду, а не в тишине.
+  const known = [];
+  const real = [];
+  for (const text of absent) {
+    const hit = exceptions.find((e) => e.unit === unit && text.includes(e.contains));
+    if (hit) known.push({ text, debt: hit.debt });
+    else real.push(text);
+  }
+  if (known.length) {
+    knownTotal += known.length;
+    for (const item of known) console.log(`  ${unit}: «${item.text.slice(0, 50)}» — известное расхождение файла (${item.debt})`);
+  }
   total += texts.size;
-  missing += absent.length;
-  if (absent.length) report.push({ unit, reason: 'контент не собран', items: absent });
+  missing += real.length;
+  if (real.length) report.push({ unit, reason: 'контент не собран', items: real });
 }
 
 await browser.close();
 server.close();
 
 console.log(`секций с состояниями: ${expected.size} · текстов проверено: ${total}`);
+if (knownTotal) console.log(`известных расхождений файла: ${knownTotal}`);
 
 if (!missing) {
   console.log('весь контент из состояний есть на странице');
