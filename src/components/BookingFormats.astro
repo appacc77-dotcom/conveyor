@@ -148,10 +148,21 @@ const fields = [
                   <span class="bformats__details-title" data-figma-node={i === 0 ? 'I804:349;383:1253' : undefined}>
                     {f.title}
                   </span>
-                  <span class="bformats__dot" aria-hidden="true" />
-                  <span class="bformats__details-title">{f.duration}</span>
-                  <span class="bformats__dot" aria-hidden="true" />
-                  <span class="bformats__details-title">{f.price}</span>
+                  {/* Точка живёт вместе со своим значением: иначе при
+                      переносе она остаётся в конце строки одна. */}
+                  {/* Хвост «· длительность · цена» неразрывен: иначе при
+                      переносе он рвётся посередине и строка начинается
+                      с точки. */}
+                  <span class="bformats__meta-tail">
+                    <span class="bformats__meta-item">
+                      <span class="bformats__dot" aria-hidden="true" />
+                      <span class="bformats__details-title">{f.duration}</span>
+                    </span>
+                    <span class="bformats__meta-item">
+                      <span class="bformats__dot" aria-hidden="true" />
+                      <span class="bformats__details-title">{f.price}</span>
+                    </span>
+                  </span>
                 </div>
               </div>
 
@@ -518,12 +529,14 @@ const fields = [
 
   .bformats__details {
     position: relative;
-    height: 487px;
+    /* Высота минимальная, а не фиксированная: у «Индивидуальной
+       мастер-сессии» строка формата переносится и панель выше 487 px.
+       С фиксированной высотой текст вылезал на форму регистрации. */
+    min-height: 487px;
   }
 
   .bformats__view {
-    position: absolute;
-    inset: 0;
+    position: relative;
   }
 
   .bformats__view[hidden] {
@@ -546,10 +559,28 @@ const fields = [
 
   .bformats__details-meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-    height: 39px;
+    /* Высота не фиксирована: у длинного названия («Индивидуальная
+       мастер-сессия») строка не влезает в 608 px и переносится. С height
+       39 px она вылезала на «О формате» и на форму регистрации. */
+    min-height: 39px;
     margin-top: 24px;
+  }
+
+  .bformats__meta-tail {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .bformats__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
   }
 
   .bformats__details-title {
@@ -588,7 +619,9 @@ const fields = [
 
   .bformats__about-text {
     width: 608px;
-    height: 178px;
+    /* Высота минимальная: у разных форматов абзац занимает разное число
+       строк. С фиксированной 178 px длинный текст вылезал на форму. */
+    min-height: 178px;
     margin: 8px 0 0;
     font-size: 20px;
     line-height: 27px;
@@ -620,7 +653,9 @@ const fields = [
   .bformats__meeting-list {
     box-sizing: border-box;
     width: 608px;
-    height: 102px;
+    /* Список «В работе» тоже разной длины: у мастер-сессии четыре пункта
+       вместо трёх, и с height 102 px последний пункт налезал на форму. */
+    min-height: 102px;
     margin: 8px 0 0;
     /* Текст строки в макете начинается на 31 px от левого края блока
        (784 при блоке 753): маркер стоит на 765, текст — за ним. Было 12 px,
