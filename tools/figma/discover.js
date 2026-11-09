@@ -7,8 +7,17 @@ const pages = [];
 for (const page of figma.root.children) {
   if (page.type !== "PAGE") continue;
   const frames = [];
-  for (const child of page.children) {
-    if (!["FRAME", "COMPONENT", "SECTION"].includes(child.type)) continue;
+  // Фрейм бывает завёрнут в группу: в чужом файле страница — это GROUP, а
+  // внутри один FRAME. Смотреть только на верхний уровень значит объявить
+  // страницу пустой и не найти в ней ничего.
+  const flatten = (node) => {
+    if (["FRAME", "COMPONENT", "SECTION"].includes(node.type)) return [node];
+    if (["GROUP", "SECTION"].includes(node.type) && "children" in node) {
+      return node.children.flatMap(flatten);
+    }
+    return [];
+  };
+  for (const child of page.children.flatMap(flatten)) {
     frames.push({
       id: child.id,
       name: child.name,
