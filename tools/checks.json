@@ -298,6 +298,9 @@
       "scope": "project",
       "inputs": [
         "design/figma/pages/**/states.json",
+        "design/figma/pages/**/spec.json",
+        "design/figma/live/structure.json",
+        "design/figma/project.json",
         "dist/**"
       ],
       "dependsOn": [
@@ -326,6 +329,7 @@
       "scope": "project",
       "inputs": [
         "src/**/*.astro",
+        "design/figma/project.json",
         "dist/**"
       ],
       "dependsOn": [
