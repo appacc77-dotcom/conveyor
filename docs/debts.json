@@ -162,7 +162,8 @@
       "status": "open",
       "source": "docs/FIGMA-ISSUES.md#15",
       "decisions": [],
-      "blocksRelease": false
+      "blocksRelease": false,
+      "note": "Решение 09.11.2026: перезалить фото air-photo в sRGB. В проекте перезалито (public/img/air-photo.jpg), в файле Figma остался P3 — долг держится за файлом."
     },
     {
       "id": "FI-16",
@@ -175,7 +176,7 @@
         261
       ],
       "blocksRelease": false,
-      "note": "Заказчик 09.11.2026: тест задуман на 9 вопросов, подпись не меняем. Значит нужны вопросы 2–9 — это работа дизайнера."
+      "note": "Заказчик 09.11.2026: тест задуман на девять вопросов, подпись не меняем. Вопросы 2–9 нужны от дизайнера; срок неизвестен."
     },
     {
       "id": "FI-17",
@@ -195,7 +196,8 @@
       "status": "open",
       "source": "docs/FIGMA-ISSUES.md#18",
       "decisions": [],
-      "blocksRelease": false
+      "blocksRelease": false,
+      "note": "Решение 09.11.2026: выровнять y шапки на 8 во всех инстансах. В вёрстке уже 8 — правка нужна в файле."
     },
     {
       "id": "FI-19",
@@ -280,12 +282,13 @@
       "title": "Канонический фрейм не помечен на Practice и Quiz",
       "owner": "designer",
       "kind": "figma",
-      "status": "open",
+      "status": "done",
       "source": "docs/decisions.md",
       "decisions": [
         3
       ],
-      "blocksRelease": true
+      "blocksRelease": true,
+      "resolution": "Заказчик 09.11.2026 подтвердил: эталоны — Practice 408:241 «practice-page» 1440×9291 и Quiz 529:118 «quiz» 1440×1218. Зафиксировано в design/figma/project.json (frames)."
     },
     {
       "id": "D-4",
