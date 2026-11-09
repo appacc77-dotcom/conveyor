@@ -37,6 +37,39 @@ const project = JSON.parse(readFileSync(projectPath, 'utf8'));
 const liveDir = join(root, project.paths.live);
 mkdirSync(liveDir, { recursive: true });
 
+// `--sections-only` — пересчитать отпечатки секций без обращения к Figma.
+// Нужно после переэкспорта: файл не менялся, менялись только спеки на диске.
+if (process.argv.includes('--sections-only')) {
+  const snapshotPath = join(liveDir, 'snapshot.json');
+  if (!existsSync(snapshotPath)) die(3, 'нет снимка — сначала npm run intake');
+  const previous = JSON.parse(readFileSync(snapshotPath, 'utf8'));
+  const pagesRoot = join(root, 'design/figma/pages');
+  const hashFile = (path) => createHash('sha256').update(readFileSync(path)).digest('hex').slice(0, 16);
+  const sections = {};
+  if (existsSync(pagesRoot)) {
+    for (const page of readdirSync(pagesRoot)) {
+      const pageDir = join(pagesRoot, page);
+      if (!statSync(pageDir).isDirectory()) continue;
+      for (const name of readdirSync(pageDir)) {
+        const dir = join(pageDir, name);
+        if (!statSync(dir).isDirectory()) continue;
+        const entry = {};
+        for (const [key, file] of [['spec', 'spec.json'], ['crop', 'crop.png'], ['states', 'states.json']]) {
+          const path = join(dir, file);
+          if (existsSync(path)) entry[key] = hashFile(path);
+        }
+        if (Object.keys(entry).length) sections[`${page}/${name}`] = entry;
+      }
+    }
+  }
+  const before = Object.keys(previous.sections ?? {}).length;
+  previous.sections = sections;
+  previous.at = new Date().toISOString();
+  writeFileSync(snapshotPath, JSON.stringify(previous, null, 2) + '\n');
+  console.log(`отпечатки секций обновлены без моста: ${before} → ${Object.keys(sections).length}`);
+  process.exit(0);
+}
+
 /** Ответ моста читается через файловый дескриптор: pipe теряет всё сверх 64 КБ. */
 function figma(args, timeoutMs = 120000) {
   try {

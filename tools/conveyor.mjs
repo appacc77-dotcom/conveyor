@@ -137,7 +137,8 @@ const GLOBAL_STEPS = [
   // Сборка — не наш скрипт, а бинарь Astro из node_modules.
   { id: 'contracts', tool: 'check-contracts', kind: 'gate', needsDist: false, about: 'контракты проверок сходятся' },
   { id: 'build', bin: 'node_modules/.bin/astro', args: ['build'], kind: 'gate', needsDist: false, about: 'сборка dist/' },
-  { id: 'sources', tool: 'verify-sources', kind: 'gate', needsDist: false, about: 'экспорт не устарел' },
+  // Без моста: в приёмке основы сверяемся со снимком, живой файл — в sources-live.
+  { id: 'sources', tool: 'verify-sources', args: ['--offline'], kind: 'gate', needsDist: false, about: 'экспорт не устарел' },
   { id: 'changes', tool: 'check-changes', kind: 'gate', needsDist: false, about: 'изменения покрыты запросами' },
   { id: 'assets', tool: 'check-assets', kind: 'gate', needsDist: false, about: 'ассеты на месте' },
   { id: 'tokens', tool: 'check-tokens', kind: 'gate', needsDist: false, about: 'нет var() без токена' },

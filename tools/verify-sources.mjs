@@ -35,8 +35,13 @@ function bridgeFingerprint(nodeId) {
 
 const root = process.cwd();
 
+// `--offline` — сверка без живого моста: экспорт фиксирован, и его
+// согласованность проверяется по снимку файла. Сверка с текущим состоянием
+// Figma — отдельный профиль `sources-live`.
+const offline = process.argv.includes('--offline');
+
 // Пакет из десятков вызовов не должен падать на первом: ждём живой плагин.
-if (!waitForPlugin(30)) {
+if (!offline && !waitForPlugin(30)) {
   console.error('плагин моста не отвечает 30 с — открой Figma и запусти плагин');
   process.exit(2);
 }
@@ -196,6 +201,7 @@ if (apiFile) {
 
 // --- A↔мост: не устарел ли экспорт -------------------------------------
 const limitArg = process.argv.includes('--limit') ? Number(process.argv[process.argv.indexOf('--limit') + 1]) : Infinity;
+
 const sections = [];
 for (const page of structure.pages) for (const s of page.sections) if (s.dir) sections.push({ page: page.title, ...s });
 
@@ -234,6 +240,26 @@ for (const s of sections.slice(0, limitArg)) {
   const spec = JSON.parse(readFileSync(specPath, 'utf8'));
   if (!spec.fingerprint) {
     if (inScope(s.page)) unread.push(`${s.page}/${s.name}: нет отпечатка в spec.json`);
+    continue;
+  }
+  // Без моста сверяем не с живым файлом, а со снимком: он снят с той же
+  // версии, что и экспорт, и хранит отпечатки секций.
+  if (offline) {
+    // Снимок хранит отпечаток файла спеки, а не поле fingerprint внутри неё:
+    // сравнивать надо то же самое — иначе все секции «устарели» разом.
+    const snapshotEntry = snapshotSections?.[`${s.page.toLowerCase()}/${s.name}`];
+    const snapshotSpec = snapshotEntry?.spec;
+    if (!snapshotSpec) {
+      if (inScope(s.page)) unread.push(`${s.page}/${s.name}: в снимке нет отпечатка спеки`);
+      continue;
+    }
+    const fileHash = createHash('sha256').update(readFileSync(specPath)).digest('hex').slice(0, 16);
+    checked++;
+    if (snapshotSpec !== fileHash) {
+      const item = `${s.page}/${s.name}: спека менялась после снимка`;
+      if (inScope(s.page)) stale.push(item);
+      else staleOutside.push(item);
+    }
     continue;
   }
   try {

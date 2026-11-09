@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-08T15:16:26.472Z",
+  "at": "2026-11-09T03:56:50.188Z",
   "sections": {
     "booking/booking-formats": {
       "spec": "9cef1a988fd3430c",
@@ -162,19 +162,19 @@
       "states": "a5ecf25174fec782"
     },
     "method/method-about": {
-      "spec": "196f8043b792d7a8",
+      "spec": "ef53b0cc1033b1d3",
       "crop": "ce0296f71abd317e",
-      "states": "bdb104e6bd0ce2c7"
+      "states": "b0f40a898ac2dd2b"
     },
     "method/method-cta": {
-      "spec": "117395966a113e12",
+      "spec": "966f1f60971b4902",
       "crop": "4fe0d7f9218d420b",
-      "states": "6a905cd380c3f23b"
+      "states": "1e0f1d14144d3c0d"
     },
     "method/method-hero": {
-      "spec": "8057c433f6ff3bef",
+      "spec": "752b02a9f2d28b26",
       "crop": "8cc0264394ce41eb",
-      "states": "293a48ef2ab24a97"
+      "states": "ddf11069a0038dc5"
     },
     "practice/footer": {
       "spec": "65072a6f57d129e3",

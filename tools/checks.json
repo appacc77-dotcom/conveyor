@@ -69,7 +69,11 @@
         "accept-stage1",
         "sources-live",
         "accept-stage2"
-      ]
+      ],
+      "offlineArgs": [
+        "--offline"
+      ],
+      "note": "В accept-stage1 сверяется со снимком (--offline); с живым файлом — только в sources-live."
     },
     "changes": {
       "layers": [
@@ -283,10 +287,9 @@
       },
       "outputs": [],
       "mandatoryFor": [
-        "accept-stage1",
-        "sources-live",
-        "accept-stage2"
-      ]
+        "sources-live"
+      ],
+      "note": "Нужен живой мост: сверяет цвета в спеках со значениями переменных файла. В офлайн-приёмке основы не участвует."
     },
     "states": {
       "layers": [
