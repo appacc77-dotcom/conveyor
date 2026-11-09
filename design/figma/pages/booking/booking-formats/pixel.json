@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-09T20:14:09.846Z",
+  "at": "2026-11-09T20:34:03.046Z",
   "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/booking/booking-formats/crop.png",
   "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/booking-booking-formats.png",
   "width": 1440,
   "height": 1546,
-  "mean": 2.86,
-  "over16": 3.95,
-  "over48": 2.08
+  "mean": 2.5,
+  "over16": 3.74,
+  "over48": 1.86
 }

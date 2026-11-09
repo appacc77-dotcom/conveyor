@@ -469,11 +469,17 @@ const fields = [
     padding: 0;
     border: 0;
     background: transparent;
-    font-family: var(--font-literata);
+    /* В макете подпись набрана Golos Text 17 (I383:1084;16:50), а не Literata:
+       засечный шрифт делал ссылку визуально легче макета. */
+    font-family: var(--font-golos-text);
+    font-weight: 400;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 17px;
+    /* В макете трекинг 3 % (letterSpacing PERCENT 3): без него строка
+       на 16 px короче макета. */
+    letter-spacing: 0.03em;
     line-height: 29px;
     color: var(--color-accent);
     cursor: pointer;
@@ -606,9 +612,10 @@ const fields = [
     width: 608px;
     height: 102px;
     margin: 8px 0 0;
-    /* Текст строки в макете начинается на 12 px от левого края блока
-       (765 при блоке 753), а не на 16: маркер уже даёт свой отступ. */
-    padding: 0 0 0 12px;
+    /* Текст строки в макете начинается на 31 px от левого края блока
+       (784 при блоке 753): маркер стоит на 765, текст — за ним. Было 12 px,
+       и весь список стоял на 15 px левее макета. */
+    padding: 0 0 0 30px;
     list-style: disc;
     font-size: 20px;
     line-height: 34px;
@@ -776,7 +783,9 @@ const fields = [
   .bformats__legal-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 16px;
+    /* В макете ссылки стоят через 8 px по горизонтали (x=0 и x=128 при
+       ширине первой 120), а не через 16. */
+    gap: 8px;
     margin: 16px 0 0;
     font-size: 13px;
     line-height: 20px;
@@ -784,5 +793,8 @@ const fields = [
 
   .bformats__legal-links a {
     color: var(--color-text-secondary);
+    /* В макете все три ссылки подчёркнуты (textDecoration UNDERLINE). */
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 </style>
