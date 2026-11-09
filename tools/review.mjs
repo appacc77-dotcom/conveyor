@@ -48,6 +48,9 @@ function decodePng(buf) {
     if (type === 'IHDR') {
       width = data.readUInt32BE(0); height = data.readUInt32BE(4);
       bitDepth = data[8]; colorType = data[9];
+      // Interlace (Adam7) — другой порядок строк. Без проверки декодер
+      // молча считает мусор и выдаёт ложные замечания вместо ошибки.
+      if (data[12] !== 0) throw new Error('interlaced PNG не поддержан');
     } else if (type === 'IDAT') idat.push(data);
     else if (type === 'IEND') break;
   }
