@@ -174,7 +174,8 @@
       "decisions": [
         261
       ],
-      "blocksRelease": false
+      "blocksRelease": false,
+      "note": "Заказчик 09.11.2026: тест задуман на 9 вопросов, подпись не меняем. Значит нужны вопросы 2–9 — это работа дизайнера."
     },
     {
       "id": "FI-17",
@@ -303,24 +304,26 @@
       "title": "Цены форматов: файл и старый сайт расходятся",
       "owner": "client",
       "kind": "content",
-      "status": "waiting",
+      "status": "done",
       "source": "docs/decisions.md",
       "decisions": [
         5
       ],
-      "blocksRelease": false
+      "blocksRelease": false,
+      "resolution": "Заказчик 09.11.2026: цены в макете верные. Сайт уже совпадает с файлом ($50/$230/$560/$1050/$110) — правка не нужна."
     },
     {
       "id": "D-6",
       "title": "Длительности практик — заглушки",
       "owner": "client",
       "kind": "content",
-      "status": "waiting",
+      "status": "done",
       "source": "docs/decisions.md",
       "decisions": [
         6
       ],
-      "blocksRelease": false
+      "blocksRelease": false,
+      "resolution": "Заказчик 09.11.2026: везде 52 минуты. В файле так и есть: платные практики 52, бесплатные 9/11/8/14 — они короткие по замыслу, менять не стали."
     },
     {
       "id": "D-7",
