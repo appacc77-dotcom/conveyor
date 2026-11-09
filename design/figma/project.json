@@ -157,5 +157,13 @@
       "267:923",
       "--by-suffix"
     ]
+  },
+  "fonts": {
+    "Literata": "\"Literata\", Georgia, \"Times New Roman\", serif",
+    "Golos Text": "\"Golos Text\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "Lora": "\"Lora\", Georgia, serif",
+    "Cormorant Garamond": "\"Cormorant Garamond\", Georgia, serif",
+    "Great Vibes": "\"Great Vibes\", cursive",
+    "Hurricane": "\"Hurricane\", cursive"
   }
 }

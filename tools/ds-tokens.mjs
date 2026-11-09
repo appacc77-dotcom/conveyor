@@ -58,18 +58,14 @@ const WEIGHT = {
   SemiBold: 600, Bold: 700, ExtraBold: 800, Black: 900,
 };
 
-const STACK = {
-  Literata: '"Literata", Georgia, "Times New Roman", serif',
-  'Golos Text': '"Golos Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-  Lora: '"Lora", Georgia, serif',
-  'Cormorant Garamond': '"Cormorant Garamond", Georgia, serif',
-  'Great Vibes': '"Great Vibes", cursive',
-  Hurricane: '"Hurricane", cursive',
-};
-
 const ds = loadJson(join(live, 'ds.json'));
 const reality = loadJson(join(live, 'reality.json')).result ?? loadJson(join(live, 'reality.json'));
 const project = loadJson(join(root, 'design/figma/project.json'));
+
+// Семейства и их запасные шрифты — данные проекта: в другом проекте другие
+// шрифты, и инструмент не должен знать про них. Если стека нет — собирается
+// простой fallback из имени семейства.
+const STACK = project.fonts ?? {};
 byId = new Map(ds.tokens.map((t) => [t.id, t]));
 const liveName = project.source?.fileName ?? 'live';
 const liveKey = project.source?.fileKey ?? '';
