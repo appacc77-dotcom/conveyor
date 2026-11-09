@@ -11,7 +11,7 @@
     },
     {
       "file": "src/components/Faq.astro",
-      "selector": ".faq__icon-down",
+      "selector": ".faq__icon-down, .faq__icon-up",
       "declaration": "transition: opacity var(--motion-base) var(--ease-out)",
       "status": "invented",
       "decision": 161
@@ -33,7 +33,7 @@
     {
       "file": "src/components/Formats.astro",
       "selector": ".format-tab",
-      "declaration": "transition:",
+      "declaration": "transition:\n      flex-grow var(--motion-base) var(--ease-in-out),\n      background-color var(--motion-base) var(--ease-out)",
       "status": "invented",
       "decision": 141
     },
@@ -53,10 +53,10 @@
     },
     {
       "file": "src/components/FounderHero.astro",
-      "selector": ".bio__title, .bio__num",
+      "selector": ".bio__title, .bio__num, .bio__mark",
       "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
       "status": "invented",
-      "decision": 223
+      "decision": 228
     },
     {
       "file": "src/components/FounderHero.astro",
@@ -89,21 +89,21 @@
     {
       "file": "src/components/Header.astro",
       "selector": ".header__mobile-link",
-      "declaration": "transition:",
+      "declaration": "transition:\n      background-color var(--motion-fast) var(--ease-out),\n      opacity var(--motion-fast) var(--ease-out)",
       "status": "invented",
       "decision": 166
     },
     {
       "file": "src/components/Header.astro",
       "selector": ".header__line",
-      "declaration": "transition:",
+      "declaration": "transition:\n      transform var(--motion-base) var(--ease-out),\n      opacity var(--motion-fast) var(--ease-out)",
       "status": "invented",
       "decision": 166
     },
     {
       "file": "src/components/Hero.astro",
       "selector": ".hero__toast",
-      "declaration": "transition:",
+      "declaration": "transition:\n      opacity var(--motion-fast) var(--ease-out),\n      transform var(--motion-fast) var(--ease-out)",
       "status": "invented",
       "decision": 176
     },
@@ -131,7 +131,7 @@
     {
       "file": "src/components/QuizResult.astro",
       "selector": ".qres__play-note",
-      "declaration": "transition:",
+      "declaration": "transition:\n      opacity var(--motion-fast) var(--ease-out),\n      transform var(--motion-fast) var(--ease-out)",
       "status": "invented",
       "decision": 362
     },
@@ -172,15 +172,29 @@
     },
     {
       "file": "src/components/ds/btn-primary.astro",
+      "selector": "<style> .btn-primary",
+      "declaration": "transition: filter var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 380
+    },
+    {
+      "file": "src/components/ds/btn-primary.astro",
       "selector": ".btn-primary",
-      "declaration": "transition: filter var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out) transition: none",
+      "declaration": "transition: none",
       "status": "invented:baseline",
       "decision": 180
     },
     {
       "file": "src/components/ds/btn-quiet.astro",
+      "selector": "<style> .btn-quiet",
+      "declaration": "transition: opacity var(--motion-fast) var(--ease-out)",
+      "status": "invented",
+      "decision": 380
+    },
+    {
+      "file": "src/components/ds/btn-quiet.astro",
       "selector": ".btn-quiet",
-      "declaration": "transition: opacity var(--motion-fast) var(--ease-out) transition: none",
+      "declaration": "transition: none",
       "status": "invented:baseline",
       "decision": 180
     },
@@ -221,21 +235,42 @@
     },
     {
       "file": "src/styles/motion.css",
-      "selector": "a, button, summary, [role='tab'], [role='button'], input, select",
+      "selector": "a, button, summary, [role='tab'], [role='button'], input, select, textarea",
       "declaration": "transition-property: color, background-color, border-color, opacity, box-shadow, fill, stroke transition-duration: var(--motion-fast)",
-      "status": "invented:baseline",
+      "status": "invented",
       "decision": 180
     },
     {
       "file": "src/styles/motion.css",
-      "selector": "}",
+      "selector": "[data-enhancements='on'] a[href]",
+      "declaration": "transition-property: text-decoration-color, opacity transition-duration: var(--motion-fast)",
+      "status": "invented",
+      "decision": 380
+    },
+    {
+      "file": "src/styles/motion.css",
+      "selector": "[data-enhancements='on'] button:not(:disabled), [data-enhancements='on'] [role='button']:not([aria-disabled='true'])",
+      "declaration": "transition-property: transform, box-shadow, background-color, border-color, color, opacity transition-duration: var(--motion-fast)",
+      "status": "invented",
+      "decision": 380
+    },
+    {
+      "file": "src/styles/motion.css",
+      "selector": "[data-enhancements='on'] .jcard, [data-enhancements='on'] .pcard, [data-enhancements='on'] .fmt",
+      "declaration": "transition-property: transform, box-shadow, background-color transition-duration: var(--motion-base)",
+      "status": "invented",
+      "decision": 380
+    },
+    {
+      "file": "src/styles/motion.css",
+      "selector": "*, *::before, *::after",
       "declaration": "animation-duration: 0.01ms !important transition-duration: 0.01ms !important",
-      "status": "invented:baseline",
+      "status": "invented",
       "decision": 180
     },
     {
       "file": "src/styles/motion.css",
-      "selector": "}, [data-enhancements='off'] *, [data-enhancements='off'] *::before",
+      "selector": "[data-enhancements='off'] *, [data-enhancements='off'] *::before, [data-enhancements='off'] *::after",
       "declaration": "transition-duration: 0s !important animation-duration: 0s !important",
       "status": "invented",
       "decision": 369

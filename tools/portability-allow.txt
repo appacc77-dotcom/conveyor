@@ -7,3 +7,5 @@
 
 tools/check-portability.mjs
 tools/bake-image.mjs
+# check-states.mjs — ключ design-system: компоненты ДС вне карты страниц и приёмки.
+tools/check-states.mjs

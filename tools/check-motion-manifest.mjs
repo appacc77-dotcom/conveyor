@@ -48,58 +48,47 @@ export function scanMotion() {
     const end = isAstro ? source.indexOf('</style>', Math.max(0, start)) : -1;
     if (isAstro && start < 0) continue;
     const body = isAstro ? source.slice(start, end > 0 ? end : undefined) : source;
-    const lines = body.split('\n');
-    let selector = '';
-    let buffer = [];
-    let inComment = false;
-
-    for (let i = 0; i < lines.length; i += 1) {
-      const raw = lines[i];
-      const line = raw.trim();
-
-      // Комментарий — не селектор. Без этого строка из /* … */ попадала в ключ.
-      if (inComment) {
-        if (line.includes('*/')) inComment = false;
+    // Разбор правил: снимаем комментарии и идём по блокам со счётчиком
+    // скобок. Построчный разбор путался на `@media` и на универсальном `*`:
+    // селектором становилось «}, }, [data-enhancements='off'] *».
+    const clean = body.replace(/\/\*[\s\S]*?\*\//g, '');
+    const stack = [];
+    let buf = '';
+    let lineNo = 1;
+    const pending = [];
+    for (let i = 0; i < clean.length; i += 1) {
+      const ch = clean[i];
+      if (ch === '\n') lineNo += 1;
+      if (ch === '{') {
+        stack.push({ selector: buf.trim().replace(/^[},]+/, '').replace(/\s+/g, ' ').trim(), depth: stack.length });
+        buf = '';
         continue;
       }
-      if (line.startsWith('/*') || line.startsWith('//')) {
-        if (!line.includes('*/')) inComment = true;
-        continue;
-      }
-      if (line.startsWith('*')) continue;
-      if (line.startsWith('<')) continue; // сам тег <style>
-
-      // Селектор может занимать несколько строк: копим до открывающей скобки.
-      if (!selector && !line.startsWith('@') && !line.includes('{') && !line.includes(';') && line && !line.startsWith('/*')) {
-        buffer.push(line.replace(/,$/, ''));
-        continue;
-      }
-
-      if (line.endsWith('{')) {
-        if (buffer.length) {
-          selector = buffer.join(', ');
-          buffer = [];
-        } else if (!line.startsWith('@')) {
-          selector = line.slice(0, -1).trim();
+      if (ch === '}') {
+        const ctx = stack.pop();
+        if (ctx && !ctx.selector.startsWith('@')) {
+          for (const decl of pending) {
+            if (decl.depth === ctx.depth + 1) {
+              found.push({ file: relative(root, file), selector: ctx.selector, line: decl.line, declaration: decl.text });
+            }
+          }
         }
+        for (let k = pending.length - 1; k >= 0; k -= 1) if (pending[k].depth > stack.length) pending.splice(k, 1);
+        buf = '';
         continue;
       }
-
-      if (line === '}') {
-        selector = '';
-        buffer = [];
+      if (ch === ';') {
+        const text = buf.trim();
+        if (text && /^(transition|animation)(-property|-duration)?\s*:/.test(text)) {
+          const ctx = stack[stack.length - 1];
+          if (ctx && !ctx.selector.includes('prefers-reduced-motion')) {
+            pending.push({ depth: stack.length, text: text.replace(/;$/, ''), line: lineNo });
+          }
+        }
+        buf = '';
         continue;
       }
-
-      if (/^(transition|animation)(-property|-duration)?\s*:/.test(line)) {
-        if (selector.includes('prefers-reduced-motion')) continue;
-        found.push({
-          file: relative(root, file),
-          selector,
-          line: i + 1,
-          declaration: line.replace(/;$/, ''),
-        });
-      }
+      buf += ch;
     }
   }
   return found;

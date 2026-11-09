@@ -50,7 +50,10 @@ const walk = (dir) => {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) walk(path);
     else if (entry.name === 'spec.json') {
-      units.push(path.split(join(root, 'design/figma/pages/'))[1].replace('/spec.json', ''));
+      const unit = path.split(join(root, 'design/figma/pages/'))[1].replace('/spec.json', '');
+      // Компоненты дизайн-системы живут вне страниц: у них свой адрес /ds,
+      // и в базовой сборке их сравнивать не с чем.
+      if (!unit.startsWith('design-system/')) units.push(unit);
     }
   }
 };

@@ -74,6 +74,77 @@ textarea {
   }
 }
 
+
+/* --- Взаимодействие: курсор и клавиатура ---------------------------------
+   Один язык на весь сайт: ссылка отвечает цветом, кнопка — подъёмом на 1 px
+   и мягкой тенью, фокус — кольцом. Длительность и кривая берутся из токенов
+   выше, поэтому отклик одинаковый везде.
+
+   Всё это живёт только в слое дополнений: в макете состояний наведения нет,
+   и в сборке «только из макета» поведение выключено целиком. */
+
+/* Ссылка отвечает подчёркиванием, а не цветом: цвет наведения зависит от
+   фона, и на тёмном подвале акцентный оттенок давал тёмное на тёмном.
+   Подчёркивание читается на любом фоне и не спорит с макетом. */
+[data-enhancements='on'] a[href] {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition-property: text-decoration-color, opacity;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: var(--ease-out);
+  text-decoration-color: transparent;
+}
+
+[data-enhancements='on'] a[href]:hover {
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  opacity: 0.86;
+}
+
+/* Нажимаемое поднимается на пиксель. transform не влияет на раскладку,
+   поэтому замер и пиксель от этого не меняются. */
+[data-enhancements='on'] button:not(:disabled),
+[data-enhancements='on'] [role='button']:not([aria-disabled='true']) {
+  transition-property: transform, box-shadow, background-color, border-color, color, opacity;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: var(--ease-out);
+}
+
+[data-enhancements='on'] button:not(:disabled):hover,
+[data-enhancements='on'] [role='button']:not([aria-disabled='true']):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgb(45 40 34 / 0.12);
+}
+
+[data-enhancements='on'] button:not(:disabled):active,
+[data-enhancements='on'] [role='button']:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Клавиатура: кольцо вместо смены цвета. Видно всегда, на любом фоне. */
+[data-enhancements='on'] :focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Карточки, внутри которых есть действие, отзываются тем же подъёмом. */
+[data-enhancements='on'] .jcard:hover,
+[data-enhancements='on'] .pcard:hover,
+[data-enhancements='on'] .fmt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgb(45 40 34 / 0.1);
+}
+
+[data-enhancements='on'] .jcard,
+[data-enhancements='on'] .pcard,
+[data-enhancements='on'] .fmt {
+  transition-property: transform, box-shadow, background-color;
+  transition-duration: var(--motion-base);
+  transition-timing-function: var(--ease-out);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

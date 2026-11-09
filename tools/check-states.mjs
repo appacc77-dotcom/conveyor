@@ -59,6 +59,9 @@ const notBuilt = [];
 for (const page of readdirSync(pagesRoot)) {
   const pageDir = join(pagesRoot, page);
   if (!statSync(pageDir).isDirectory()) continue;
+  // Компоненты дизайн-системы живут вне страниц: у них свой адрес /ds,
+  // в карте страниц их нет и в объём приёмки они не входят.
+  if (page === 'design-system') continue;
   for (const name of readdirSync(pageDir)) {
     const dir = join(pageDir, name);
     const statesPath = join(dir, 'states.json');
