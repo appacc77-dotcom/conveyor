@@ -241,6 +241,9 @@ const cards = [
     padding: 32px;
     border-radius: 16px;
     background: var(--color-bg-page);
+    /* Тень из макета: radius 24, offset 2/4, spread 4, #6b6357 @35 %.
+       Геометрия её не видит — карточка без тени проходила ворота. */
+    box-shadow: 2px 4px 24px 4px rgba(107, 99, 87, 0.35);
   }
 
   /* У второй и третьей карточек не заливка, а градиент. */
