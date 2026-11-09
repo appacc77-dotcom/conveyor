@@ -14,10 +14,11 @@ import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
-const dist = join(root, 'dist');
+// base-сборка живёт отдельно: обычный dist не пересобирается ради проверки.
+const dist = join(root, process.env.ASTRO_OUT_DIR ?? 'dist-base');
 
 if (!existsSync(dist)) {
-  console.error('нет dist/ — сначала npm run build:base');
+  console.error(`нет ${process.env.ASTRO_OUT_DIR ?? 'dist-base'}/ — сначала npm run build:base`);
   process.exit(2);
 }
 

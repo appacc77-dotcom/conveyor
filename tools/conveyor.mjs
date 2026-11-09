@@ -165,10 +165,9 @@ const GLOBAL_STEPS = [
     kind: 'gate',
     needsDist: true,
     about: 'base-сборка без дополнений',
-    // Собираем base на время проверки и возвращаем обычную сборку: иначе
-    // следующий шаг смотрел бы на чужой dist.
+    // base-сборка идёт в dist-base: обычный dist не пересобирается, и
+    // возвращать окружение не нужно.
     prepare: () => runSync('npm', ['run', 'build:base']),
-    restore: () => runSync('npm', ['run', 'build']),
   },
 ];
 

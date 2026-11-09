@@ -50,12 +50,12 @@
     "images": "node tools/check-images.mjs",
     "fonts": "node tools/fonts.mjs",
     "fonts:check": "node tools/fonts.mjs --check",
-    "build:figma-only": "FIGMA_ONLY=1 ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build:figma-only": "FIGMA_ONLY=1 ASTRO_OUT_DIR=dist-base ASTRO_TELEMETRY_DISABLED=1 astro build",
     "snapshot:diff": "node tools/snapshot-diff.mjs",
     "changes": "node tools/check-changes.mjs",
     "review": "node tools/review.mjs",
     "tokens:dtcg": "node tools/check-tokens-dtcg.mjs",
-    "build:base": "FIGMA_ONLY=1 ASTRO_TELEMETRY_DISABLED=1 astro build"
+    "build:base": "FIGMA_ONLY=1 ASTRO_OUT_DIR=dist-base ASTRO_TELEMETRY_DISABLED=1 astro build"
   },
   "devDependencies": {
     "astro": "^7.4.5",

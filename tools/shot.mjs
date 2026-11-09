@@ -8,6 +8,11 @@
  * `--node` берёт элемент по `data-figma-node`: имя CSS-класса угадывать не
  * нужно, а id узла есть в спеке и не меняется при переименовании класса.
  *
+ * `--batch jobs.json` — много секций за один запуск: браузер и сервер одни
+ * на всех, страница загружается один раз на адрес. Сорок семь отдельных
+ * запусков Chromium ради сорока семи кадров — та же работа, что уже сделана
+ * для замера.
+ *
  * Поднимает dist/ на локальном порту, ждёт шрифты и картинки, снимает элемент.
  * Требует npm run build и установленный chromium.
  */
@@ -18,6 +23,12 @@ import { chromium } from 'playwright';
 
 const root = process.cwd();
 const dist = join(root, 'dist');
+
+// Пакетный режим: список заданий вместо одного.
+const batchPath = process.argv.includes('--batch') ? process.argv[process.argv.indexOf('--batch') + 1] : null;
+const batchJobs = batchPath
+  ? JSON.parse(readFileSync(isAbsolute(batchPath) ? batchPath : join(root, batchPath), 'utf8'))
+  : null;
 const port = Number(process.env.SHOT_PORT ?? 4330);
 const base = `http://127.0.0.1:${port}`;
 
@@ -28,18 +39,18 @@ const positionals = process.argv.slice(2).filter((a, i, all) => {
   if (all[i - 1] === '--node' || all[i - 1] === '--url') return false;
   return true;
 });
-const selector = nodeArg ? `[data-figma-node~="${nodeArg}"]` : positionals[0] ?? '.hero';
+const selector = batchJobs ? null : nodeArg ? `[data-figma-node~="${nodeArg}"]` : positionals[0] ?? '.hero';
 const urlArg = (() => {
   const i = process.argv.indexOf('--url');
   return i > 0 ? process.argv[i + 1] : '/';
 })();
-const out = nodeArg ? (positionals[0] ?? '.screens/shot.png') : (positionals[1] ?? '.screens/shot.png');
+const out = batchJobs ? null : nodeArg ? (positionals[0] ?? '.screens/shot.png') : (positionals[1] ?? '.screens/shot.png');
 const width = Number(nodeArg ? (positionals[1] ?? 1440) : (positionals[2] ?? 1440));
 
 // Старый снимок удаляем сразу: если съёмка упадёт, сравнение не должно
 // молча взять кадр прошлого прогона.
-const target = isAbsolute(out) ? out : join(root, out);
-rmSync(target, { force: true });
+const target = out ? (isAbsolute(out) ? out : join(root, out)) : null;
+if (target) rmSync(target, { force: true });
 
 if (!existsSync(dist)) {
   console.error('Нет dist/. Сначала: npm run build');
@@ -76,6 +87,66 @@ const server = createServer((req, res) => {
 await new Promise((r) => server.listen(port, '127.0.0.1', r));
 
 const browser = await chromium.launch();
+
+/** Снимает один элемент: общая часть для одиночного и пакетного режима. */
+async function shoot(page, job) {
+  const sel = job.node ? `[data-figma-node~="${job.node}"]` : job.selector;
+  const file = isAbsolute(job.out) ? job.out : join(root, job.out);
+  rmSync(file, { force: true });
+
+  const el = await page.$(sel);
+  if (!el) {
+    console.error(`Не найден селектор ${sel}`);
+    return false;
+  }
+
+  // Оверлеи (шапка поверх секции) прячем, если цель их не содержит.
+  const isOverlayTarget = await el.evaluate(
+    (node) => !!node.closest('[data-overlay]') || !!node.querySelector('[data-overlay]'),
+  );
+  if (!isOverlayTarget) {
+    await page.evaluate(() => {
+      for (const node of document.querySelectorAll('[data-overlay]')) node.style.visibility = 'hidden';
+    });
+  }
+
+  const box = await el.boundingBox();
+  mkdirSync(dirname(file), { recursive: true });
+  await el.screenshot({ path: file });
+  console.log(JSON.stringify({ selector: sel, out: job.out, height: Math.round(box.height), w: Math.round(box.width) }));
+  return true;
+}
+
+if (batchJobs) {
+  // Группируем по адресу: страница грузится один раз на группу.
+  const byUrl = new Map();
+  for (const job of batchJobs) {
+    const url = job.url ?? '/';
+    if (!byUrl.has(url)) byUrl.set(url, []);
+    byUrl.get(url).push(job);
+  }
+  let failed = false;
+  for (const [url, group] of byUrl) {
+    const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
+    await page.goto(base + url, { waitUntil: 'load', timeout: 60000 });
+    await page.evaluate(async () => {
+      const pending = [...document.images].filter((i) => !i.complete);
+      await Promise.race([
+        Promise.all(pending.map((i) => new Promise((r) => { i.onload = i.onerror = r; }))),
+        new Promise((r) => setTimeout(r, 8000)),
+      ]);
+    });
+    await page.evaluate(() => document.fonts.ready);
+    for (const job of group) {
+      if (!(await shoot(page, job))) failed = true;
+    }
+    await page.close();
+  }
+  await browser.close();
+  server.close();
+  process.exit(failed ? 1 : 0);
+}
+
 const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
 // networkidle на странице с десятками картинок не наступает — ждём load,
 // а изображения добираем явно.
