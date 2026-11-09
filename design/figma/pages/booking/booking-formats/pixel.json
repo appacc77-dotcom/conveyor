@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-09T04:48:56.572Z",
+  "at": "2026-11-09T04:56:02.631Z",
   "reference": "design/figma/pages/booking/booking-formats/crop.png",
   "shot": ".screens/booking-booking-formats.png",
   "width": 1440,
   "height": 1546,
-  "mean": 2.91,
-  "over16": 3.97,
-  "over48": 2.11
+  "mean": 2.86,
+  "over16": 3.95,
+  "over48": 2.08
 }
