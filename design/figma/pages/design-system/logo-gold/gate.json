@@ -1,0 +1,19 @@
+{
+  "at": "2026-11-09T19:39:24.076Z",
+  "section": {
+    "id": "29:2054",
+    "name": "logo-gold",
+    "w": 400,
+    "h": 143
+  },
+  "ok": true,
+  "red": 0,
+  "unknown": 0,
+  "missing": [],
+  "marked": 2,
+  "nodes": 2,
+  "coverage": 100,
+  "markedRatio": 100,
+  "tolerance": 1,
+  "worstDelta": 0
+}

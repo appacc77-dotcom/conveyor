@@ -17,10 +17,11 @@ import BtnQuiet from '../components/ds/btn-quiet.astro';
 import ArrowQuiet from '../components/ds/arrow-quiet.astro';
 import Play from '../components/ds/play.astro';
 import ListItem from '../components/ds/list-item.astro';
+import LogoGold from '../components/ds/logo-gold.astro';
 import ds from '../../design/figma/live/ds.json';
 
 const sets = (ds.components ?? []).map((c) => (typeof c === 'string' ? c : c.name));
-const built = ['btn-primary', 'btn-secondary', 'btn-quiet', 'arrow-quiet', 'play', 'list-item'];
+const built = ['btn-primary', 'btn-secondary', 'btn-quiet', 'arrow-quiet', 'play', 'list-item', 'logo-gold'];
 const missing = sets.filter((name) => !built.includes(name));
 const coverage = Math.round((built.length / Math.max(1, sets.length)) * 100);
 
@@ -48,6 +49,17 @@ const primaryVariants = [
         страница собирается из кода, руками не правится
       </p>
     </header>
+
+    <section class="block">
+      <h2>logo-gold</h2>
+      <p class="block__meta">компонент <code>logo-gold</code> · 400×143</p>
+      <div class="row">
+        <div class="cell">
+          <LogoGold />
+          <span class="cell__label">logo-gold</span>
+        </div>
+      </div>
+    </section>
 
     <section class="block">
       <h2>btn-primary</h2>
