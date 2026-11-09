@@ -243,21 +243,21 @@
     {
       "file": "src/styles/motion.css",
       "selector": "[data-enhancements='on'] a[href]",
-      "declaration": "transition-property: text-decoration-color, opacity transition-duration: var(--motion-fast)",
+      "declaration": "transition-property: opacity transition-duration: var(--motion-fast)",
       "status": "invented",
       "decision": 380
     },
     {
       "file": "src/styles/motion.css",
       "selector": "[data-enhancements='on'] button:not(:disabled), [data-enhancements='on'] [role='button']:not([aria-disabled='true'])",
-      "declaration": "transition-property: transform, box-shadow, background-color, border-color, color, opacity transition-duration: var(--motion-fast)",
+      "declaration": "transition-property: box-shadow, background-color, border-color, color, opacity transition-duration: var(--motion-fast)",
       "status": "invented",
       "decision": 380
     },
     {
       "file": "src/styles/motion.css",
       "selector": "[data-enhancements='on'] .jcard, [data-enhancements='on'] .pcard, [data-enhancements='on'] .fmt",
-      "declaration": "transition-property: transform, box-shadow, background-color transition-duration: var(--motion-base)",
+      "declaration": "transition-property: box-shadow, background-color transition-duration: var(--motion-base)",
       "status": "invented",
       "decision": 380
     },

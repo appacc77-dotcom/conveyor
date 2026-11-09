@@ -83,42 +83,35 @@ textarea {
    Всё это живёт только в слое дополнений: в макете состояний наведения нет,
    и в сборке «только из макета» поведение выключено целиком. */
 
-/* Ссылка отвечает подчёркиванием, а не цветом: цвет наведения зависит от
-   фона, и на тёмном подвале акцентный оттенок давал тёмное на тёмном.
-   Подчёркивание читается на любом фоне и не спорит с макетом. */
+/* Ссылка отвечает прозрачностью — без подчёркивания и без смены цвета:
+   подчёркивание при наведении читалось как черновик, а цвет наведения
+   зависит от фона (на тёмном подвале акцент давал тёмное на тёмном). */
 [data-enhancements='on'] a[href] {
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
-  transition-property: text-decoration-color, opacity;
+  transition-property: opacity;
   transition-duration: var(--motion-fast);
   transition-timing-function: var(--ease-out);
-  text-decoration-color: transparent;
 }
 
 [data-enhancements='on'] a[href]:hover {
-  text-decoration-line: underline;
-  text-decoration-color: currentColor;
-  opacity: 0.86;
+  opacity: 0.72;
 }
 
-/* Нажимаемое поднимается на пиксель. transform не влияет на раскладку,
-   поэтому замер и пиксель от этого не меняются. */
+/* Нажимаемое отвечает тенью, но не двигается: подъём трогал даже строки
+   аккордеона и читался как дрожь. */
 [data-enhancements='on'] button:not(:disabled),
 [data-enhancements='on'] [role='button']:not([aria-disabled='true']) {
-  transition-property: transform, box-shadow, background-color, border-color, color, opacity;
+  transition-property: box-shadow, background-color, border-color, color, opacity;
   transition-duration: var(--motion-fast);
   transition-timing-function: var(--ease-out);
 }
 
 [data-enhancements='on'] button:not(:disabled):hover,
 [data-enhancements='on'] [role='button']:not([aria-disabled='true']):hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgb(45 40 34 / 0.12);
+  box-shadow: 0 6px 18px rgb(45 40 34 / 0.1);
 }
 
 [data-enhancements='on'] button:not(:disabled):active,
 [data-enhancements='on'] [role='button']:active {
-  transform: translateY(0);
   box-shadow: none;
 }
 
@@ -129,18 +122,17 @@ textarea {
   border-radius: 2px;
 }
 
-/* Карточки, внутри которых есть действие, отзываются тем же подъёмом. */
+/* Карточки с действием отвечают тенью, без сдвига. */
 [data-enhancements='on'] .jcard:hover,
 [data-enhancements='on'] .pcard:hover,
 [data-enhancements='on'] .fmt:hover {
-  transform: translateY(-2px);
   box-shadow: 0 10px 28px rgb(45 40 34 / 0.1);
 }
 
 [data-enhancements='on'] .jcard,
 [data-enhancements='on'] .pcard,
 [data-enhancements='on'] .fmt {
-  transition-property: transform, box-shadow, background-color;
+  transition-property: box-shadow, background-color;
   transition-duration: var(--motion-base);
   transition-timing-function: var(--ease-out);
 }
