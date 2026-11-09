@@ -116,8 +116,8 @@ const fields = [
             </span>
             <span class="fmt__circle" aria-hidden="true">
               {/* В макете у выбранного формата внутри круга галочка. */}
-              <svg class="fmt__check" width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M2 7.2 5.4 10.6 12 4" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+              <svg class="fmt__check" width="16" height="16" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7.2 5.4 10.6 12 4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </span>
           </button>
@@ -411,7 +411,9 @@ const fields = [
   .fmt__circle {
     position: absolute;
     right: 32px;
-    top: 53px;
+    /* Центр круга в макете на y=236 от верха секции; при top 53 он стоял на
+       32 px выше — ворота этого не видят, круг не размечен. */
+    top: 85px;
     width: 39px;
     height: 39px;
     border: 1px solid var(--color-text-on-image);

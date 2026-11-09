@@ -3,6 +3,10 @@
  * Снимок элемента собранного сайта для сверки с кропом из Figma.
  *
  *   node tools/shot.mjs .hero .screens/hero.png 1440 [--url /structure.html]
+ *   node tools/shot.mjs --node 383:761 .screens/x.png 1440 [--url /booking.html]
+ *
+ * `--node` берёт элемент по `data-figma-node`: имя CSS-класса угадывать не
+ * нужно, а id узла есть в спеке и не меняется при переименовании класса.
  *
  * Поднимает dist/ на локальном порту, ждёт шрифты и картинки, снимает элемент.
  * Требует npm run build и установленный chromium.
@@ -17,13 +21,20 @@ const dist = join(root, 'dist');
 const port = Number(process.env.SHOT_PORT ?? 4330);
 const base = `http://127.0.0.1:${port}`;
 
-const selector = process.argv[2] ?? '.hero';
+const nodeArg = process.argv.includes('--node') ? process.argv[process.argv.indexOf('--node') + 1] : null;
+// С --node позиционные аргументы сдвигаются: файл и ширина, селектора нет.
+const positionals = process.argv.slice(2).filter((a, i, all) => {
+  if (a.startsWith('--')) return false;
+  if (all[i - 1] === '--node' || all[i - 1] === '--url') return false;
+  return true;
+});
+const selector = nodeArg ? `[data-figma-node~="${nodeArg}"]` : positionals[0] ?? '.hero';
 const urlArg = (() => {
   const i = process.argv.indexOf('--url');
   return i > 0 ? process.argv[i + 1] : '/';
 })();
-const out = process.argv[3] ?? '.screens/shot.png';
-const width = Number(process.argv[4] ?? 1440);
+const out = nodeArg ? (positionals[0] ?? '.screens/shot.png') : (positionals[1] ?? '.screens/shot.png');
+const width = Number(nodeArg ? (positionals[1] ?? 1440) : (positionals[2] ?? 1440));
 
 // Старый снимок удаляем сразу: если съёмка упадёт, сравнение не должно
 // молча взять кадр прошлого прогона.

@@ -461,6 +461,17 @@ const stepId = (prefix, unit) => `${prefix}:${unit.replace('/', '-')}`;
 const runSync = (command, args) =>
   spawnSync(command, args, { cwd: root, stdio: 'ignore', env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1' } });
 
+/** id корня секции из её спеки — по нему снимок находит элемент. */
+function rootNodeOf(unit) {
+  const path = join(root, 'design/figma/pages', unit, 'spec.json');
+  if (!existsSync(path)) return unit;
+  try {
+    return JSON.parse(readFileSync(path, 'utf8')).section?.id ?? unit;
+  } catch {
+    return unit;
+  }
+}
+
 const measureBatchStep = (units) => {
   const jobs = units.map((unit) => {
     const root = argsFor(unit);
@@ -500,7 +511,10 @@ const unitSteps = (unit) => [
   {
     id: 'shot',
     tool: 'shot',
-    args: [`.${unit.split('/').pop()}`, `.screens/${unit.replace('/', '-')}.png`, '1440', '--url', unitUrl(unit)],
+    // Корень секции ищется по id из спеки: класс угадывать не нужно, а id
+    // не меняется при переименовании разметки. Раньше селектор собирался из
+    // имени секции, и `.booking-formats` не находился — класс `.bformats`.
+    args: ['--node', rootNodeOf(unit), `.screens/${unit.replace('/', '-')}.png`, '1440', '--url', unitUrl(unit)],
     kind: 'signal',
     needsDist: true,
     about: 'снимок секции',
