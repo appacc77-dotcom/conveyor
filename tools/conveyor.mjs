@@ -214,6 +214,98 @@ function contractTimeout(id) {
 }
 
 /**
+ * Кэш результатов проверок.
+ *
+ * Ключ — содержимое входов из контракта плюс отпечаток самого инструмента и
+ * окружения. Не «тот же код»: если изменился эталон, кроп или браузер, кэш
+ * недействителен. Красный результат не кэшируется никогда — иначе дефект
+ * переживёт своё исправление.
+ *
+ * Чего не кэшируем: сборку, замер, снимки и интеграционные ворота — они
+ * пишут dist и артефакты, их «результат» неотделим от побочного действия.
+ */
+const CACHE_EXCLUDED = new Set(['build', 'measure', 'shot', 'visual', 'base-parity', 'enhancement-off', 'contracts']);
+const cacheDir = join(root, 'reports/cache');
+
+/** Отпечаток файла или дерева по маске: содержимое, не время. */
+function hashInputs(patterns) {
+  const hash = createHash('sha256');
+  let files = 0;
+  for (const pattern of patterns) {
+    const star = pattern.indexOf('*');
+    if (star < 0) {
+      const path = join(root, pattern);
+      if (!existsSync(path) || !statSync(path).isFile()) continue;
+      hash.update(pattern).update(readFileSync(path));
+      files += 1;
+      continue;
+    }
+    const base = join(root, pattern.slice(0, star).replace(/\/$/, ''));
+    if (!existsSync(base)) continue;
+    const suffix = pattern.slice(star).replace(/^\*\*?\/?/, '');
+    const walk = (dir) => {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const path = join(dir, entry.name);
+        if (entry.isDirectory()) walk(path);
+        else if (!suffix || entry.name.endsWith(suffix) || path.endsWith(suffix)) {
+          hash.update(relative(root, path)).update(readFileSync(path));
+          files += 1;
+        }
+      }
+    };
+    walk(base);
+  }
+  return files ? hash.digest('hex').slice(0, 16) : null;
+}
+
+/** Ключ проверки: входы + сам инструмент + окружение. */
+function cacheKey(id) {
+  const path = join(root, 'tools/checks.json');
+  if (!existsSync(path)) return null;
+  const check = JSON.parse(readFileSync(path, 'utf8')).checks?.[id];
+  if (!check) return null;
+  if (CACHE_EXCLUDED.has(id)) return null;
+  const inputs = hashInputs(check.inputs ?? []);
+  if (!inputs) return null;
+  const toolPath = join(root, 'tools', `${id}.mjs`);
+  const tool = existsSync(toolPath)
+    ? createHash('sha256').update(readFileSync(toolPath)).digest('hex').slice(0, 8)
+    : 'bin';
+  // Окружение в ключе: обновился браузер — прежний результат про другой
+  // браузер, и переиспользовать его нельзя.
+  let browser = '';
+  if ((check.resources ?? []).includes('browser')) {
+    try {
+      browser = JSON.parse(readFileSync(join(root, 'node_modules/playwright/package.json'), 'utf8')).version;
+    } catch {
+      browser = 'unknown';
+    }
+  }
+  const env = `${process.version}|${browser}|${check.timeoutMs}|${check.retryPolicy?.attempts ?? 0}`;
+  return createHash('sha256').update(`${inputs}|${tool}|${env}`).digest('hex').slice(0, 16);
+}
+
+function cacheGet(id, key) {
+  const path = join(cacheDir, `${id}.json`);
+  if (!existsSync(path)) return null;
+  try {
+    const entry = JSON.parse(readFileSync(path, 'utf8'));
+    return entry.key === key && entry.status === 'PASS' ? entry : null;
+  } catch {
+    return null;
+  }
+}
+
+function cacheSet(id, key, result) {
+  if (result.status !== 'PASS') return;
+  mkdirSync(cacheDir, { recursive: true });
+  writeFileSync(
+    join(cacheDir, `${id}.json`),
+    JSON.stringify({ key, status: result.status, ms: result.ms, about: result.about, at: new Date().toISOString() }, null, 1) + '\n',
+  );
+}
+
+/**
  * Зависимости проверки из контракта. Пустой список — шаг ни от кого не зависит.
  */
 function contractDeps(id) {
@@ -538,7 +630,7 @@ function assertUniqueIds(steps) {
   }
 }
 
-async function commandCheck(unit, json, all, set = null, resume = null, profileName = null) {
+async function commandCheck(unit, json, all, set = null, resume = null, profileName = null, useCache = false) {
   // Профиль задаёт и объём: приёмка — всегда все секции, регрессия — набор,
   // локальная проверка — одна единица (или всё, если её не назвали).
   const allUnits = profileName === 'accept-stage1' || profileName === 'accept-stage2' || all;
@@ -661,6 +753,20 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
       continue;
     }
 
+    // Кэш: результат с теми же входами и тем же инструментом. Только PASS —
+    // красный результат не кэшируется, иначе дефект переживёт исправление.
+    if (useCache) {
+      const key = cacheKey(step.id);
+      const hit = key ? cacheGet(step.id, key) : null;
+      if (hit) {
+        results.push({ ...step, status: 'PASS', ms: 0, cached: true, note: hit.about });
+        events.push({ at: new Date().toISOString(), step: step.id, status: 'PASS', ms: 0, cached: true });
+        if (!json) process.stdout.write(`  ${step.id.padEnd(idWidth)} ок  (кэш)  ${step.about}\n`);
+        writeFileSync(join(dir, 'results', `${step.id}.json`), JSON.stringify({ ...step, status: 'PASS', ms: 0, cached: true, note: hit.about }, null, 2) + '\n');
+        continue;
+      }
+    }
+
     // Шаг может готовить входные файлы (пакетный замер пишет список заданий)
     // и возвращать окружение обратно (base-сборка вместо обычной).
     step.prepare?.();
@@ -669,6 +775,10 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
     // пульс, и получилась бы задвоенная строка.
     const result = await runStep(step);
     step.restore?.();
+    if (useCache) {
+      const key = cacheKey(step.id);
+      if (key) cacheSet(step.id, key, result);
+    }
     results.push(result);
     events.push({ at: new Date().toISOString(), step: step.id, status: result.status, ms: result.ms });
     if (!json) {
@@ -717,6 +827,7 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
       ms: r.ms,
       kind: r.kind,
       ...(r.resumed ? { resumed: true } : {}),
+      ...(r.cached ? { cached: true } : {}),
     })),
   };
 
@@ -842,6 +953,8 @@ const { values, positionals } = parseArgs({
     set: { type: 'string' },
     resume: { type: 'string' },
     profile: { type: 'string' },
+    cache: { type: 'boolean', default: false },
+    'no-cache': { type: 'boolean', default: false },
     json: { type: 'boolean', default: false },
   },
 });
@@ -850,7 +963,7 @@ const unit = values.unit ?? positionals[0] ?? null;
 
 try {
   let code;
-  if (command === 'check') code = await commandCheck(unit, values.json, values.all, values.set ?? null, values.resume ?? null, values.profile ?? null);
+  if (command === 'check') code = await commandCheck(unit, values.json, values.all, values.set ?? null, values.resume ?? null, values.profile ?? null, values.cache && !values['no-cache']);
   else if (command === 'status') code = commandStatus(values.json);
   else if (command === 'plan') code = commandPlan(unit, values.all);
   else if (command === 'push-ok') code = commandPushOk();
