@@ -159,6 +159,14 @@ function cloudVersion() {
 
 const icons = [];
 const iconErrors = [];
+
+// Компонент может быть одним вектором: логотип, кавычка, декоративная
+// засечка. Плагин считает иконками только инстансы, поэтому такой вектор в
+// список не попадал, и собрать компонент было не из чего.
+if (!(section.icons ?? []).length) {
+  const vector = (section.nodes ?? []).find((n) => n.type === 'VECTOR' && n.depth <= 1);
+  if (vector) section.icons = [{ id: vector.id, name: vector.name, componentName: section.root?.name }];
+}
 const usedNames = new Set();
 for (const icon of section.icons) {
   // Сбой одной иконки не должен убивать секцию: спека и кроп нужны всё равно.
