@@ -217,7 +217,36 @@ for (const section of sections) {
       if (isCovered) covered.push(label);
       continue;
     }
-    await page.waitForTimeout(320);
+    // Ждём не «на всякий случай 320 мс», а изменения разметки: обычный клик
+    // отзывается за десятки миллисекунд, и сто тринадцать фиксированных
+    // ожиданий давали 36 секунд из 42. Предел 400 мс — чтобы медленный
+    // обработчик не был принят за мёртвый.
+    await page
+      .waitForFunction(
+        ([sel, was]) => {
+          const rootEl = document.querySelector(sel);
+          if (!rootEl) return true;
+          const parts = [];
+          const walk = (el) => {
+            const cs = getComputedStyle(el);
+            const text = el.children.length === 0 ? (el.textContent ?? '').trim().slice(0, 60) : '';
+            parts.push(`${el.tagName}|${el.className}|${el.getAttribute('style') ?? ''}|${cs.visibility}|${cs.display}|${cs.opacity}|${text}`);
+            for (const child of el.children) walk(child);
+          };
+          walk(rootEl);
+          return parts.join('\n') !== was;
+        },
+        [section.selector, before],
+        { timeout: 400, polling: 30 },
+      )
+      .catch(() => {
+        // Не изменилось за 400 мс — это и есть повод считать элемент мёртвым;
+        // решение принимает код ниже, а не ожидание.
+      });
+    // Секция уже изменилась, но сам переключатель может доигрывать переход:
+    // computed transform в середине анимации ещё стартовый, и элемент
+    // выглядел бы «меняющим только aria». Даём переходу доиграть.
+    await page.waitForTimeout(150);
     checked += 1;
 
     // Элемент мог увести на другой адрес (кнопка «пройти тест» на экране
