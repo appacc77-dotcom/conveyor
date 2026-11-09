@@ -64,8 +64,21 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function api(path, attempt = 1) {
   const t = token();
   if (!t) throw new Error('нет токена');
-  const res = await fetch(`https://api.figma.com/v1${path}`, { headers: { 'X-Figma-Token': t } });
-  const json = await res.json();
+  // Висевший TCP держал шаг до контрактного таймаута: 120 с ожидания ради
+  // ответа, который уже не придёт.
+  const res = await fetch(`https://api.figma.com/v1${path}`, {
+    headers: { 'X-Figma-Token': t },
+    signal: AbortSignal.timeout(15000),
+  });
+  // Ответ может быть не JSON (прокси, страница ошибки) — тогда res.json()
+  // падает с невнятным «Unexpected token» вместо кода ответа.
+  const text = await res.text();
+  let json;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    throw new Error(`${res.status}: ответ не JSON — ${text.slice(0, 80)}`);
+  }
   if (res.status === 429 && attempt <= 4) {
     await sleep(1000 * 2 ** (attempt - 1));
     return api(path, attempt + 1);
