@@ -89,14 +89,6 @@ await page.evaluate(async () => {
   ]);
 });
 await page.evaluate(() => document.fonts.ready);
-// Ждём картинки, но не бесконечно: битая ссылка не должна вешать съёмку.
-await page.evaluate(async () => {
-  const pending = [...document.images].filter((i) => !i.complete);
-  await Promise.race([
-    Promise.all(pending.map((i) => new Promise((r) => { i.onload = i.onerror = r; }))),
-    new Promise((r) => setTimeout(r, 8000)),
-  ]);
-});
 
 const el = await page.$(selector);
 if (!el) {
