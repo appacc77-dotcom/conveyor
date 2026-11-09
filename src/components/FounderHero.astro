@@ -229,6 +229,7 @@ const items = [
     height: 127px;
     border-radius: 12px;
     background: var(--color-bg-glass-dark);
+    backdrop-filter: blur(10px);
   }
 
   .founder__player-row {
@@ -316,6 +317,9 @@ const items = [
     width: 564px;
     height: 839px;
     background: var(--color-bg-dark);
+    /* BACKGROUND_BLUR 10 из спеки: геометрия его не видит, а без него панель
+       выглядит плотной плитой вместо стекла. */
+    backdrop-filter: blur(10px);
   }
 
   .founder__panel {
