@@ -708,7 +708,11 @@ async function commandCheck(unit, json, all, set = null, resume = null, profileN
   }
 
   const local = profile === 'local' || profile === 'regression';
-  const globalSteps = GLOBAL_STEPS.filter((step) => wanted.has(step.id));
+  // sources-live — единственный профиль, которому нужен живой мост: он и есть
+  // сверка с текущим состоянием Figma. Остальные работают по снимку.
+  const globalSteps = GLOBAL_STEPS.filter((step) => wanted.has(step.id)).map((step) =>
+    step.id === 'sources' && profile === 'sources-live' ? { ...step, args: [] } : step,
+  );
   const steps = [
     ...globalSteps,
     ...(needsSections ? (local ? unitSteps(units[0]) : [measureBatchStep(units)]) : []),
