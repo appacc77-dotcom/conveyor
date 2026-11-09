@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-07T15:18:19.313Z",
-  "reference": "design/figma/pages/quiz/quiz-section/crop.png",
-  "shot": ".screens/qtest.png",
+  "at": "2026-11-09T20:14:18.599Z",
+  "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/quiz/quiz-section/crop.png",
+  "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/quiz-quiz-section.png",
   "width": 1440,
   "height": 857,
-  "mean": 3.15,
-  "over16": 3.23,
-  "over48": 1.75
+  "mean": 3.22,
+  "over16": 3.27,
+  "over48": 1.77
 }

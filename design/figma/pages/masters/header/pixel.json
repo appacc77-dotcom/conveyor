@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-07T13:41:06.132Z",
-  "reference": "design/figma/pages/masters/header/crop.png",
-  "shot": ".screens/m-header.png",
+  "at": "2026-11-09T20:14:14.750Z",
+  "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/masters/header/crop.png",
+  "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/masters-header.png",
   "width": 1424,
   "height": 92,
-  "mean": 3.84,
+  "mean": 3.82,
   "over16": 5.99,
   "over48": 1.9
 }

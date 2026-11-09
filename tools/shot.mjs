@@ -97,7 +97,18 @@ async function shoot(page, job) {
   const el = await page.$(sel);
   if (!el) {
     console.error(`Не найден селектор ${sel}`);
-    return false;
+    return 'missing';
+  }
+  // Скрытая секция (результат квиза до ответов) не снимается: ожидание
+  // стабильности элемента висит до таймаута и роняет весь проход.
+  const visible = await el.evaluate((node) => {
+    const box = node.getBoundingClientRect();
+    const style = getComputedStyle(node);
+    return box.width > 0 && box.height > 0 && style.display !== 'none' && style.visibility !== 'hidden';
+  });
+  if (!visible) {
+    console.error(`Секция скрыта на странице: ${sel}`);
+    return 'hidden';
   }
 
   // Оверлеи (шапка поверх секции) прячем, если цель их не содержит.
@@ -106,15 +117,32 @@ async function shoot(page, job) {
   );
   if (!isOverlayTarget) {
     await page.evaluate(() => {
-      for (const node of document.querySelectorAll('[data-overlay]')) node.style.visibility = 'hidden';
+      for (const node of document.querySelectorAll('[data-overlay]')) {
+        node.dataset.shotWas = node.style.visibility;
+        node.style.visibility = 'hidden';
+      }
     });
   }
 
   const box = await el.boundingBox();
   mkdirSync(dirname(file), { recursive: true });
-  await el.screenshot({ path: file });
+  try {
+    await el.screenshot({ path: file, timeout: 20000 });
+  } catch (error) {
+    console.error(`Снимок не вышел (${sel}): ${String(error.message).split('\n')[0]}`);
+    return 'failed';
+  } finally {
+    // Оверлеи возвращаем: страница переиспользуется, и спрятанная шапка
+    // делала следующую секцию «скрытой» без причины.
+    await page.evaluate(() => {
+      for (const node of document.querySelectorAll('[data-overlay]')) {
+        node.style.visibility = node.dataset.shotWas ?? '';
+        delete node.dataset.shotWas;
+      }
+    });
+  }
   console.log(JSON.stringify({ selector: sel, out: job.out, height: Math.round(box.height), w: Math.round(box.width) }));
-  return true;
+  return 'ok';
 }
 
 if (batchJobs) {
@@ -138,7 +166,12 @@ if (batchJobs) {
     });
     await page.evaluate(() => document.fonts.ready);
     for (const job of group) {
-      if (!(await shoot(page, job))) failed = true;
+      // Одна неснятая секция не обрывает проход: остальные нужны.
+      const status = await shoot(page, job).catch((error) => {
+        console.error(`Снимок упал (${job.out}): ${String(error.message).split('\n')[0]}`);
+        return 'failed';
+      });
+      if (status !== 'ok') failed = true;
     }
     await page.close();
   }

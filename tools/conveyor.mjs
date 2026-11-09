@@ -460,6 +460,19 @@ const stepId = (prefix, unit) => `${prefix}:${unit.replace('/', '-')}`;
 const runSync = (command, args) =>
   spawnSync(command, args, { cwd: root, stdio: 'ignore', env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1' } });
 
+/**
+ * id, по которому секцию искать в DOM.
+ *
+ * У общих секций (шапка, подвал) в спеке страницы свой id инстанса, а в
+ * разметке — id канонического компонента. Тот же выбор, что делает замер:
+ * сначала `unitArgs`, потом `shared`, иначе id из спеки.
+ */
+function domRootOf(unit) {
+  const explicit = (unitArgs[unit] ?? []).indexOf('--root');
+  if (explicit !== -1) return unitArgs[unit][explicit + 1];
+  return sharedNodes[unit.split('/').pop()] ?? rootNodeOf(unit);
+}
+
 /** id корня секции из её спеки — по нему снимок находит элемент. */
 function rootNodeOf(unit) {
   const path = join(root, 'design/figma/pages', unit, 'spec.json');
@@ -912,6 +925,91 @@ function notEligibleReason(report) {
  * отпечаток содержимого совпадает с текущим. Код 0 — можно, 1 — нельзя
  * (причина в stdout). Вызывается хуком post-commit.
  */
+/**
+ * Пиксельная сверка всех секций одним проходом.
+ *
+ * Сорок семь отдельных запусков Chromium ради сорока семи кадров — та же
+ * работа, что уже сделана для замера: один браузер, один сервер, страница
+ * грузится один раз на адрес. Сравнение — чистый JS над PNG.
+ */
+function commandPixels(unit) {
+  const units = unit ? [unit] : acceptedUnits() ?? [];
+  if (!units.length) {
+    console.error('нечего снимать: в project.json нет списка acceptance');
+    return 2;
+  }
+  if (!existsSync(join(root, 'dist'))) {
+    console.error('нет dist/ — сначала npm run build');
+    return 2;
+  }
+
+  const jobs = [];
+  const noCrop = [];
+  for (const item of units) {
+    if (!existsSync(join(root, 'design/figma/pages', item, 'crop.png'))) {
+      noCrop.push(item);
+      continue;
+    }
+    jobs.push({ node: domRootOf(item), out: `.screens/${item.replace('/', '-')}.png`, url: unitUrl(item) });
+  }
+  if (noCrop.length) console.log(`без кропа пропущено: ${noCrop.length} — ${noCrop.slice(0, 3).join(', ')}`);
+
+  const jobsFile = join(runsDir, 'pixels.json');
+  mkdirSync(runsDir, { recursive: true });
+  writeFileSync(jobsFile, JSON.stringify(jobs, null, 1) + '\n');
+
+  const started = Date.now();
+  const shot = spawnSync(process.execPath, [join(root, 'tools/shot.mjs'), '--batch', jobsFile], {
+    cwd: root,
+    stdio: ['ignore', 'ignore', 'inherit'],
+    env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1' },
+  });
+  if (shot.status !== 0) {
+    console.error(`съёмка не прошла (код ${shot.status}) — пиксель не обновлён`);
+    return shot.status === 1 ? 1 : 2;
+  }
+
+  const means = [];
+  const failed = [];
+  for (const item of units) {
+    const crop = join(root, 'design/figma/pages', item, 'crop.png');
+    const shotPath = join(root, '.screens', `${item.replace('/', '-')}.png`);
+    if (!existsSync(crop) || !existsSync(shotPath)) {
+      failed.push(item);
+      continue;
+    }
+    // compare пишет pixel.json рядом с кропом и печатает «средняя разница: N».
+    const run = spawnSync(process.execPath, [join(root, 'tools/compare.mjs'), crop, shotPath], {
+      cwd: root,
+      encoding: 'utf8',
+    });
+    const match = /средняя разница: ([\d.]+)/.exec(run.stdout ?? '');
+    if (run.status !== 0 || !match) {
+      failed.push(item);
+      continue;
+    }
+    means.push({ unit: item, mean: Number(match[1]) });
+  }
+
+  const secs = ((Date.now() - started) / 1000).toFixed(1);
+  if (!means.length) {
+    console.error(`пиксель не посчитан ни для одной секции (${secs} с)`);
+    return 1;
+  }
+  const sorted = [...means].sort((a, b) => b.mean - a.mean);
+  const values = means.map((m) => m.mean).sort((a, b) => a - b);
+  const median = values[Math.floor(values.length / 2)];
+  const threshold = JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).gates?.pixelDelta ?? 16;
+
+  console.log(`снято ${means.length} секций за ${secs} с · медиана ${median.toFixed(2)}`);
+  console.log('худшие пять:');
+  for (const item of sorted.slice(0, 5)) console.log(`  ${item.unit.padEnd(28)} ${item.mean.toFixed(2)}`);
+  const above = sorted.filter((m) => m.mean > threshold);
+  if (above.length) console.log(`выше порога ${threshold}: ${above.length}`);
+  if (failed.length) console.log(`не посчитано: ${failed.length} — ${failed.slice(0, 3).join(', ')}`);
+  return failed.length ? 1 : 0;
+}
+
 function commandPushOk() {
   const report = latestRun();
   if (!report) {
@@ -1008,8 +1106,9 @@ try {
   else if (command === 'status') code = commandStatus(values.json);
   else if (command === 'plan') code = commandPlan(unit, values.all, values.json);
   else if (command === 'push-ok') code = commandPushOk();
+  else if (command === 'pixels') code = commandPixels(unit);
   else {
-    process.stderr.write('команды: check [--unit home/hero | --all] | status | plan | push-ok\n');
+    process.stderr.write('команды: check [--unit home/hero | --all] | pixels [--unit home/hero] | status | plan | push-ok\n');
     code = 2;
   }
   process.exitCode = code;

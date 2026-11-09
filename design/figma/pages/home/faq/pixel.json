@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-07T06:35:42.941Z",
-  "reference": "design/figma/pages/home/faq/crop.png",
-  "shot": ".screens/home-faq.png",
+  "at": "2026-11-09T20:14:11.237Z",
+  "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/home/faq/crop.png",
+  "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/home-faq.png",
   "width": 1440,
   "height": 807,
-  "mean": 4.31,
-  "over16": 1.89,
-  "over48": 0.9
+  "mean": 4.14,
+  "over16": 1.69,
+  "over48": 0.89
 }
