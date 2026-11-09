@@ -292,19 +292,26 @@ console.log(`\nпроверено элементов: ${checked}, притвор
 await browser.close();
 server.close();
 
-if (dead > 0) {
-  console.error('\nэлемент, который меняет только атрибут, и секция без движения — это картинка: добавьте состояние и переход');
-  process.exit(1);
-}
+// Сначала печатаем всё, что собрали, и только потом выносим вердикт.
+// Раньше выход по дефекту стоял выше и съедал список известных долгов и
+// отметку «не проверено»: агент видел одну строку вместо картины.
 if (known.length) {
   console.log(`известные долги (элемент не работает, есть решение): ${known.length}`);
   for (const item of known) console.log(`  ${item.unit} · «${item.label}» — долг ${item.debt}`);
 }
-console.log('все элементы управления меняют то, что видно');
+
 const neverChecked = skipped.filter((name) => !checkedSomewhere.has(name));
 if (neverChecked.length) {
   // Скрытые секции не проверены, а не пройдены: честный ответ — INCOMPLETE.
   console.log(`не проверено (секция скрыта везде): ${neverChecked.length} — ${neverChecked.join(', ')}`);
   console.log('проверить можно после действия, которое её открывает');
-  process.exit(3);
 }
+
+// Вердикт по приоритету, как у конвейера: ERROR (выход выше) > FAIL >
+// INCOMPLETE > PASS. Дефект сильнее «не проверено», но оба видны в отчёте.
+if (dead > 0) {
+  console.error('\nэлемент, который меняет только атрибут, и секция без движения — это картинка: добавьте состояние и переход');
+  process.exit(1);
+}
+if (neverChecked.length) process.exit(3);
+console.log('все элементы управления меняют то, что видно');
