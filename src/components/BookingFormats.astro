@@ -419,6 +419,9 @@ const fields = [
     height: 39px;
     border: 1px solid var(--color-text-on-image);
     border-radius: 50%;
+    /* У невыбранных карточек кружок в макете скрыт (visible: false):
+       белая обводка на светлой карточке читалась бледным кольцом. */
+    display: none;
   }
 
   .fmt.is-active .fmt__circle {
@@ -691,7 +694,9 @@ const fields = [
     width: 608px;
     height: 54px;
     padding: 0 17px;
-    border: 1px solid var(--color-border);
+    /* Обводка полей в макете — accent-muted (#8a8560), а не светлая
+       color-border: с ней поля выглядели почти без рамок. */
+    border: 1px solid var(--color-accent-muted);
     border-radius: 4px;
     background: var(--color-bg-page);
     font-family: var(--font-golos-text);
@@ -719,6 +724,9 @@ const fields = [
     border-radius: 4px;
     background: var(--color-accent);
     font-family: var(--font-literata);
+    /* В макете Literata Light 22: без веса браузер берёт 400, и надпись
+       выглядит крупнее и тяжелее. */
+    font-weight: 300;
     font-size: 22px;
     line-height: 28px;
     color: var(--color-text-on-image);
@@ -755,7 +763,8 @@ const fields = [
   .bformats__legal {
     margin-top: 42px;
     padding: 16px;
-    border: 1px solid var(--color-border);
+    /* Рамка правового блока в макете тоже accent-muted. */
+    border: 1px solid var(--color-accent-muted);
     border-radius: 8px;
   }
 
