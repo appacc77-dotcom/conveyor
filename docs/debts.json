@@ -369,10 +369,13 @@
       "title": "Пиксель как приёмка с калиброванным порогом",
       "owner": "studio",
       "kind": "tool",
-      "status": "open",
+      "status": "done",
       "source": "docs/BACKLOG.md#5",
-      "decisions": [],
-      "blocksRelease": false
+      "decisions": [
+        370
+      ],
+      "blocksRelease": false,
+      "resolution": "Решение 370 (09.11.2026): пиксель остаётся сигналом, пороги не включаются. Разброс задаёт фото в кадре, а не качество вёрстки: порог 3,5 покраснел бы на девяти секциях с совпадающей раскладкой, 6,0 замолчал бы дефект в секции без фото. Данные — docs/PIXEL-CALIBRATION.md."
     },
     {
       "id": "BL-6",
