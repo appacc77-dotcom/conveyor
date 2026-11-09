@@ -10,7 +10,7 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { inflateSync } from 'node:zlib';
-import { join, dirname } from 'node:path';
+import { join, dirname, isAbsolute } from 'node:path';
 
 const PNG_SIG = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
@@ -136,7 +136,10 @@ const pixel = {
   over16: +((over16 / total) * 100).toFixed(2),
   over48: +((over48 / total) * 100).toFixed(2),
 };
-writeFileSync(join(dirname(join(process.cwd(), refPath)), 'pixel.json'), JSON.stringify(pixel, null, 2) + '\n');
+// Абсолютный путь эталона не должен склеиваться с cwd: join('/a', '/b') даёт
+// '/a/b', и pixel.json ложился в несуществующий каталог.
+const refFull = isAbsolute(refPath) ? refPath : join(process.cwd(), refPath);
+writeFileSync(join(dirname(refFull), 'pixel.json'), JSON.stringify(pixel, null, 2) + '\n');
 
 console.log('худшие полосы (средняя, y, % > 16):');
 for (const b of worst) {
