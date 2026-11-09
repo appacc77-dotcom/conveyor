@@ -127,8 +127,9 @@ async function measureJob(job, page, navigate = true) {
   const urlPathname = urlPath.split('?')[0].split('#')[0];
   const distFile = urlPathname === '/' ? 'index.html' : urlPathname.replace(/^\//, '');
   if (!existsSync(join(dist, distFile))) {
+    // Это «не проверено», а не дефект вёрстки: страницы ещё нет в сборке.
     console.error(`Страницы ${urlPath} нет в dist/ (${distFile}) — сначала соберите её: npm run build`);
-    return { ok: false };
+    return { ok: false, incomplete: true };
   }
 
 
@@ -218,7 +219,9 @@ async function measureJob(job, page, navigate = true) {
       tolerance: tol,
       worstDelta: 0,
     });
-    return { ok: false };
+    // Корень не размечен — секция не собрана. Дефект это или нет, решает не
+    // замер: он честно говорит «не измерено».
+    return { ok: false, incomplete: true };
   }
 
   // --- Сверка ---------------------------------------------------------------
@@ -403,17 +406,23 @@ for (const job of jobs) {
 }
 
 let failedAny = false;
+let incompleteAny = false;
 for (const [url, group] of byUrl) {
   const page = await browser.newPage({ viewport: { width, height: 900 }, deviceScaleFactor: 1 });
   let first = true;
   for (const job of group) {
     const result = await measureJob(job, page, first);
     first = false;
-    if (!result.ok) failedAny = true;
+    if (!result.ok) {
+      if (result.incomplete) incompleteAny = true;
+      else failedAny = true;
+    }
   }
   await page.close();
 }
 
 await browser.close();
 server.close();
-process.exit(failedAny ? 1 : 0);
+// Коды как у конвейера: 1 — дефект, 3 — не проверено. Смешивать их значит
+// объявлять несобранную страницу дефектом вёрстки.
+process.exit(failedAny ? 1 : incompleteAny ? 3 : 0);
