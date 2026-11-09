@@ -223,5 +223,12 @@ writeFileSync(join(root, 'src/styles/typography.css'), typo.join('\n'));
 const tokenCount = out.filter((l) => l.trim().startsWith('--')).length;
 console.log(`tokens.css:     ${tokenCount} переменных`);
 console.log(`typography.css: ${reality.textStyles.length} стилей, ${families.size} семейств`);
-if (skipped.length) console.log(`не разрешено: ${skipped.length} — ${skipped.join(', ')}`);
-else console.log('не разрешено: 0');
+if (skipped.length) {
+  // Неразрешённый токен — это не «мелочь»: переменная не создана, а
+  // `var(--x)` без неё молча обнуляет свойство. Это не проверено, а не
+  // проверено и чисто: код 3, как у остальных INCOMPLETE.
+  console.error(`не разрешено: ${skipped.length} — ${skipped.join(', ')}`);
+  console.error('токен не создан: var() без него обнулит свойство');
+  process.exit(3);
+}
+console.log('не разрешено: 0');
