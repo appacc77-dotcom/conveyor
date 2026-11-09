@@ -249,6 +249,17 @@ const fields = [
   if (document.documentElement.dataset.enhancements === 'on') {
     const section = document.querySelector('.bformats');
     if (section) {
+      // Поле комментария растёт под текст. field-sizing есть не везде,
+      // поэтому дублируем скриптом: scrollHeight — это и есть нужная высота.
+      const area = section.querySelector('.bfield__box--area');
+      if (area && !CSS.supports('field-sizing', 'content')) {
+        const grow = () => {
+          area.style.height = 'auto';
+          area.style.height = `${area.scrollHeight}px`;
+        };
+        area.addEventListener('input', grow);
+        grow();
+      }
       const options = [...section.querySelectorAll('[data-format]')];
       const pick = (index) => {
         for (const option of options) {
@@ -748,7 +759,14 @@ const fields = [
   }
 
   .bfield__box--area {
-    height: 86px;
+    /* Поле растёт под текст: в макете высота 86 px, но написанное в нём
+       не должно прятаться за границей. field-sizing — нативно, высота по
+       содержимому; запасной путь — скрипт ниже, который считает scrollHeight. */
+    field-sizing: content;
+    /* height: auto обязательно: базовая .bfield__box задаёт 54 px, и это
+       перебивает field-sizing — поле не росло. */
+    height: auto;
+    min-height: 86px;
     padding: 17px;
     resize: none;
   }
