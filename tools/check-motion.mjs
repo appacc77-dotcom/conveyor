@@ -63,8 +63,20 @@ const server = createServer((req, res) => {
   res.end(readFileSync(file));
 });
 
-const port = Number(process.env.MOTION_PORT ?? 4337);
-await new Promise((r) => server.listen(port, '127.0.0.1', r));
+// Порт по умолчанию может быть занят — например, вторым сайтом на машине.
+// Тогда берём свободный от системы, а не падаем с EADDRINUSE: проверка
+// движения не должна зависеть от того, что ещё запущено.
+const wanted = Number(process.env.MOTION_PORT ?? 4337);
+const port = await new Promise((resolve, reject) => {
+  const onError = (error) => {
+    if (error.code !== 'EADDRINUSE') return reject(error);
+    server.removeListener('error', onError);
+    server.listen(0, '127.0.0.1', () => resolve(server.address().port));
+  };
+  server.once('error', onError);
+  server.listen(wanted, '127.0.0.1', () => resolve(wanted));
+});
+if (port !== wanted) console.log(`порт ${wanted} занят, проверяю на ${port}`);
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });

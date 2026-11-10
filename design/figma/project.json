@@ -66,7 +66,8 @@
   "gates": {
     "geometryTolerancePx": 1,
     "pixelDelta": 16,
-    "overflowPx": 8
+    "overflowPx": 8,
+    "specBoundsPx": 8
   },
   "note": "Всё, что знает про конкретный сайт. Перенос на другой файл — правка этого файла, скилы и скрипты не меняются.",
   "routes": {

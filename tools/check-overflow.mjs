@@ -71,7 +71,16 @@ const server = createServer((req, res) => {
   res.writeHead(200, { 'content-type': mime[extname(file)] ?? 'application/octet-stream' });
   res.end(readFileSync(file));
 });
-await new Promise((r) => server.listen(4398, '127.0.0.1', r));
+// Занятый порт — не повод падать: берём свободный у системы.
+const port = await new Promise((resolve, reject) => {
+  const onError = (error) => {
+    if (error.code !== 'EADDRINUSE') return reject(error);
+    server.removeListener('error', onError);
+    server.listen(0, '127.0.0.1', () => resolve(server.address().port));
+  };
+  server.once('error', onError);
+  server.listen(4398, '127.0.0.1', () => resolve(4398));
+});
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
@@ -80,7 +89,7 @@ const problems = [];
 let checked = 0;
 
 for (const route of pages) {
-  await page.goto(`http://127.0.0.1:4398${route}`, { waitUntil: 'load', timeout: 60000 });
+  await page.goto(`http://127.0.0.1:${port}${route}`, { waitUntil: 'load', timeout: 60000 });
   await page.evaluate(() => document.fonts.ready);
 
   const found = await page.evaluate((limit) => {

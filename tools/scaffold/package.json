@@ -56,7 +56,8 @@
     "review": "node tools/review.mjs",
     "tokens:dtcg": "node tools/check-tokens-dtcg.mjs",
     "build:base": "FIGMA_ONLY=1 ASTRO_OUT_DIR=dist-base ASTRO_TELEMETRY_DISABLED=1 astro build",
-    "fig:kiwi": "node tools/fig-kiwi.mjs"
+    "fig:kiwi": "node tools/fig-kiwi.mjs",
+    "spec:bounds": "node tools/check-spec-bounds.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",

@@ -135,6 +135,13 @@ function coverage(units) {
 
 const GLOBAL_STEPS = [
   {
+    id: 'spec-bounds',
+    tool: 'check-spec-bounds',
+    kind: 'gate',
+    needsDist: false,
+    about: 'координаты спеки сходятся: содержимое внутри рамки секции',
+  },
+  {
     id: 'overflow',
     tool: 'check-overflow',
     kind: 'gate',

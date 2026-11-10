@@ -688,6 +688,32 @@
         "accept-stage1"
       ],
       "about": "содержимое не вылезает за блоки и не заходит на соседние секции"
+    },
+    "spec-bounds": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/pages/**/spec.json",
+        "design/figma/bounds-exceptions.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "accept-stage2",
+        "sources-live"
+      ],
+      "about": "координаты спеки сходятся: содержимое лежит внутри рамки секции"
     }
   }
 }
