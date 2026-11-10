@@ -1,9 +1,12 @@
 {
-  "name": "figma-port",
+  "name": "syntonia",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "version": "0.1.0",
+  "description": "Syntonia: Figma → спецификация → компоненты → страницы. Проект перезапущен 06.11.2026 по процессу docs/system/PROCESS.md.",
   "scripts": {
+    "setup": "npm ci",
+    "setup:browsers": "npx playwright install chromium",
     "intake": "node tools/intake.mjs",
     "document": "node tools/document.mjs",
     "api": "node tools/figma-api.mjs",
@@ -13,7 +16,7 @@
     "export:all": "node tools/export-all.mjs",
     "assets:prune": "node tools/assets-prune.mjs",
     "fig": "node tools/fig-file.mjs",
-    "verify": "node tools/verify-sources.mjs && node tools/check-assets.mjs && node tools/check-tokens.mjs && node tools/check-invented.mjs && node tools/check-portability.mjs && node tools/check-scaffold.mjs && node tools/check-bindings.mjs",
+    "verify": "node tools/conveyor.mjs check --profile accept-stage1 --cache",
     "page": "node tools/page-compare.mjs",
     "structure": "node tools/structure.mjs",
     "ds:tokens": "node tools/ds-tokens.mjs",
@@ -47,16 +50,19 @@
     "images": "node tools/check-images.mjs",
     "fonts": "node tools/fonts.mjs",
     "fonts:check": "node tools/fonts.mjs --check",
+    "build:figma-only": "FIGMA_ONLY=1 ASTRO_OUT_DIR=dist-base ASTRO_TELEMETRY_DISABLED=1 astro build",
     "snapshot:diff": "node tools/snapshot-diff.mjs",
     "changes": "node tools/check-changes.mjs",
     "review": "node tools/review.mjs",
     "tokens:dtcg": "node tools/check-tokens-dtcg.mjs",
-    "build:base": "FIGMA_ONLY=1 ASTRO_TELEMETRY_DISABLED=1 astro build"
-  },
-  "dependencies": {
-    "astro": "7.4.5"
+    "build:base": "FIGMA_ONLY=1 ASTRO_OUT_DIR=dist-base ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "fig:kiwi": "node tools/fig-kiwi.mjs"
   },
   "devDependencies": {
+    "astro": "^7.4.5",
     "playwright": "1.64.1"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
