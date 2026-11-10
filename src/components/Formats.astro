@@ -118,7 +118,7 @@ const { title, lead, note, slide, tabs, slides = [] } = Astro.props;
 
           <div class="format-tab__cta" data-figma-node={tab.nodes?.cta}>
             {/* caps false: в макете кнопка набрана обычным регистром. */}
-            <BtnPrimary href="#" label="Перейти к записи" theme="light" size="L" compact node={tab.nodes?.button} />
+            <BtnPrimary href="/404.html" label="Перейти к записи" theme="light" size="L" compact node={tab.nodes?.button} />
           </div>
         </article>
       ))}

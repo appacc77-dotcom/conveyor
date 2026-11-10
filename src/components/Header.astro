@@ -78,7 +78,7 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
             )}
           </details>
         ) : (
-          <a class="header__link t-body" href="#" data-figma-node={link.node}>{link.text}</a>
+          <a class="header__link t-body" href="/404.html" data-figma-node={link.node}>{link.text}</a>
         ),
       )}
     </nav>
@@ -96,7 +96,7 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
     <div class="header__actions" data-figma-node="I79:104;167:651">
       <div class="header__btn-group" data-figma-node="I79:104;167:652">
         <BtnPrimary
-          href="#"
+          href="/404.html"
           label="личная встреча"
           theme="light"
           size="L"
@@ -132,7 +132,7 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
   <nav class="header__mobile" data-invented="header-mobile-panel" id="mobile-menu" aria-label="Меню" hidden data-mobile>
     <ul class="header__mobile-list">
       <li>
-        <a class="header__mobile-link t-body" href="#">О проекте</a>
+        <a class="header__mobile-link t-body" href="/404.html">О проекте</a>
         <ul class="header__mobile-sub">
           {dropdownItems.map((item) => (
             <li><a class="header__mobile-link t-body" href={item.href}>{item.text}</a></li>
@@ -140,7 +140,7 @@ const { node = '79:104', offsetTop = 8 } = Astro.props;
         </ul>
       </li>
       {links.filter((link) => !link.dropdown).map((link) => (
-        <li><a class="header__mobile-link t-body" href="#">{link.text}</a></li>
+        <li><a class="header__mobile-link t-body" href="/404.html">{link.text}</a></li>
       ))}
     </ul>
   </nav>
