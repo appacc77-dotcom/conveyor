@@ -30,7 +30,9 @@
  *               байт берётся как есть, следующий принадлежит другому полю.
  *               Обычный LEB128 уходит на два байта дальше и разъезжается.
  */
-import { readFileSync, existsSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { zstdDecompressSync, inflateRawSync } from 'node:zlib';
 import { readZip } from './lib/zip.mjs';
 
@@ -233,6 +235,12 @@ const kindOf = (schema, node) => enumName(schema, 'NodeType', node.type);
 const INTERNAL = 'Internal Only Canvas';
 
 // --- Команды ---------------------------------------------------------------
+// Только при прямом запуске: модуль импортируют, чтобы читать .fig из кода.
+
+const isCli = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (!isCli) {
+  // Импорт: отдаём только функции, команд не выполняем.
+} else {
 
 const [command, file, ...rest] = process.argv.slice(2);
 const usage = 'Использование: node tools/fig-kiwi.mjs <inspect|pages|tree> <file.fig> ["страница"] [глубина]';
@@ -283,6 +291,106 @@ if (command === 'pages') {
   process.exit(0);
 }
 
+/** Узел в том же виде, в каком его отдаёт мост: id, тип, размеры, текст, заливки. */
+function toSpecNodes(schema, page, frame) {
+  const nodes = [];
+  const hex = (c) => {
+    const to = (v) => Math.round(Math.max(0, Math.min(1, v ?? 0)) * 255).toString(16).padStart(2, '0');
+    return `#${to(c?.r)}${to(c?.g)}${to(c?.b)}`;
+  };
+  // transform — смещение от родителя: у корня оно и есть его место на
+  // странице, у остальных складывается по цепочке (как у моста).
+  const walk = (node, depth) => {
+    const t = node.transform ?? {};
+    const isText = kindOf(schema, node) === 'TEXT';
+    nodes.push({
+      id: `${node.guid.sessionID}:${node.guid.localID}`,
+      name: node.name,
+      type: kindOf(schema, node),
+      depth,
+      visible: node.visible !== false,
+      x: Math.round(t.m02 ?? 0),
+      y: Math.round(t.m12 ?? 0),
+      w: Math.round(node.size?.x ?? 0),
+      h: Math.round(node.size?.y ?? 0),
+      ...(isText && node.textData?.characters
+        ? {
+            text: node.textData.characters,
+            fontSize: Math.round(node.fontSize ?? 16),
+            // Гарнитура и метрики: без них текст рисуется чужим шрифтом и
+            // наезжает на соседей — в архиве они есть, надо только достать.
+            ...(node.fontName?.family
+              ? {
+                  font: {
+                    family: node.fontName.family,
+                    style: node.fontName.style ?? 'Regular',
+                    weight: /bold/i.test(node.fontName.style ?? '') ? 700 : /light/i.test(node.fontName.style ?? '') ? 300 : 400,
+                    lineHeight: node.lineHeight?.value ? node.lineHeight.value / 100 : null,
+                    tracking: node.textTracking ? node.textTracking / 1000 : 0,
+                    align: node.textAlignHorizontal ?? 0,
+                  },
+                }
+              : {}),
+          }
+        : {}),
+      ...(node.fillPaints?.length
+        ? {
+            fills: node.fillPaints
+              .filter((p) => p.visible !== false)
+              .map((p) =>
+                p.type === 0
+                  ? { type: 'SOLID', visible: true, color: { hex: hex(p.color), a: p.color?.a ?? 1 } }
+                  : // Хеш картинки связывает заливку с файлом в images/ архива.
+                    {
+                      type: 'IMAGE',
+                      visible: true,
+                      imageHash: p.image?.hash?.length ? Buffer.from(p.image.hash).toString('hex').slice(0, 12) : null,
+                      scaleMode: 'FILL',
+                    },
+              ),
+          }
+        : {}),
+    });
+    for (const child of kidsOf(node)) walk(child, depth + 1);
+  };
+  walk(frame, 0);
+  return nodes;
+}
+
+if (command === 'export') {
+  const pageName = rest[0];
+  const frameName = rest[1];
+  const outIndex = rest.indexOf('--out');
+  const outDir = outIndex >= 0 ? rest[outIndex + 1] : null;
+  if (!pageName || !frameName || !outDir) {
+    console.error('Использование: node tools/fig-kiwi.mjs export <file.fig> "<страница>" "<фрейм>" --out <каталог>');
+    process.exit(2);
+  }
+  const page = pages.find((p) => p.name === pageName);
+  const frame = page && kidsOf(page).find((f) => f.name === frameName);
+  if (!frame) {
+    console.error(`нет фрейма "${frameName}" на странице "${pageName}"`);
+    process.exit(1);
+  }
+  const spec = {
+    file: { key: null, name: meta.file_name ?? null },
+    source: 'fig-archive',
+    section: {
+      id: `${frame.guid.sessionID}:${frame.guid.localID}`,
+      name: frame.name,
+      w: Math.round(frame.size?.x ?? 0),
+      h: Math.round(frame.size?.y ?? 0),
+    },
+    nodes: toSpecNodes(schema, page, frame),
+  };
+  mkdirSync(outDir, { recursive: true });
+  writeFileSync(join(outDir, 'spec.json'), JSON.stringify(spec, null, 1) + '\n');
+  console.log(`секция: ${spec.section.name} ${spec.section.w}×${spec.section.h} (${spec.section.id})`);
+  console.log(`узлов:  ${spec.nodes.length} · текстов: ${spec.nodes.filter((n) => n.text).length}`);
+  console.log(`записано: ${join(outDir, 'spec.json')}`);
+  process.exit(0);
+}
+
 if (command === 'tree') {
   const pageName = rest[0];
   if (!pageName) {
@@ -310,3 +418,4 @@ if (command === 'tree') {
 
 console.error(usage);
 process.exit(2);
+}
