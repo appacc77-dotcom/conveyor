@@ -64,7 +64,8 @@
     "report:studio": "node tools/report-studio.mjs",
     "gen": "node tools/gen.mjs",
     "gen:report": "node tools/gen.mjs report --all",
-    "profile": "node tools/profile.mjs"
+    "profile": "node tools/profile.mjs",
+    "publish:check": "node tools/check-publish.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",
