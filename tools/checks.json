@@ -865,6 +865,29 @@
         "accept-stage1"
       ],
       "about": "в публикации нет отладочных страниц, служебные с noindex"
+    },
+    "lib-purity": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "tools/lib/**"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 15000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1"
+      ],
+      "about": "tools/lib — чистые функции формата, без зависимостей от проекта"
     }
   }
 }
