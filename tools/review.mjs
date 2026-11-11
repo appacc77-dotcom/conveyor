@@ -142,7 +142,9 @@ let withFindings = 0;
 
 for (const item of units) {
   const cropPath = join(root, 'design/figma/pages', item, 'crop.png');
-  const shotPath = join(root, '.screens', `${item.replace('/', '-')}.png`);
+    // Снимок можно подменить: калибровка генератора сравнивает свой снимок,
+  // а не тот, что снят с сайта.
+  const shotPath = arg('--shot', null) ?? join(root, '.screens', `${item.replace('/', '-')}.png`);
   if (!existsSync(cropPath)) {
     console.log(`${item}: нет кропа — пропущен`);
     continue;

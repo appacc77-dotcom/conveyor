@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T15:21:01.550Z",
+  "generatedAt": "2026-11-11T16:11:45.326Z",
   "sections": {
     "withGate": 47,
     "coverageMedian": 100,
@@ -20,7 +20,7 @@
     "total": 6
   },
   "lastRun": {
-    "id": "20261111-151956-47737",
+    "id": "20261111-161020-50852",
     "at": null,
     "status": "PASS",
     "profile": null,

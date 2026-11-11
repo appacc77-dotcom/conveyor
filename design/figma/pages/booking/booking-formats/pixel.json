@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-10T09:42:43.608Z",
-  "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/booking/booking-formats/crop.png",
-  "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/booking-booking-formats.png",
+  "at": "2026-11-11T16:06:06.536Z",
+  "reference": "design/figma/pages/booking/booking-formats/crop.png",
+  "shot": ".screens/gen-booking-booking-formats.png",
   "width": 1440,
   "height": 1546,
-  "mean": 2.32,
-  "over16": 3.5,
-  "over48": 1.66
+  "mean": 9.28,
+  "over16": 10.18,
+  "over48": 8.59
 }

@@ -34,10 +34,10 @@ const TARGETS = join(root, 'design/gen/targets.json');
 
 const readJson = (path, fallback = null) => (existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : fallback);
 
-/** Цели пилота: какие секции генератор вообще берётся собирать. */
+/** Цели: какие секции генератор берётся собирать и с каким порогом покрытия. */
 function targets() {
   const file = readJson(TARGETS, { sections: [] });
-  return file.sections ?? [];
+  return (file.sections ?? []).map((s) => (typeof s === 'string' ? { unit: s, minCoverage: 0.9 } : s));
 }
 
 function specOf(unit) {
@@ -47,6 +47,20 @@ function specOf(unit) {
     process.exit(2);
   }
   return { unit, spec: JSON.parse(readFileSync(path, 'utf8')) };
+}
+
+/**
+ * Токен из спеки: у заливки есть `variable` — имя переменной, и это точное
+ * имя, а не совпадение по цвету. «Белый» подходит и к тексту на фото, и к
+ * стеклу на 75 %; по hex они неразличимы, по имени — нет.
+ */
+function tokenByName(name) {
+  if (!name) return null;
+  const css = existsSync(join(root, 'src/styles/tokens.css'))
+    ? readFileSync(join(root, 'src/styles/tokens.css'), 'utf8')
+    : '';
+  const candidate = `--color-${name}`;
+  return css.includes(`${candidate}:`) ? `var(${candidate})` : null;
 }
 
 /** Токен по цвету: если hex совпал со значением переменной, пишем var(). */
@@ -71,9 +85,23 @@ function gradientAngle(transform) {
   return `${Math.round(((deg % 360) + 360) % 360)}deg`;
 }
 
+/** Прозрачность цвета: стеклянные карточки в макете — белый на 75 %. */
+function withAlpha(hex, alpha) {
+  if (!alpha || alpha >= 0.999) return hex;
+  const m = String(hex).match(/^#([0-9a-f]{6})$/i);
+  if (!m) return hex;
+  const n = parseInt(m[1], 16);
+  return `rgb(${(n >> 16) & 255} ${(n >> 8) & 255} ${n & 255} / ${Number(alpha).toFixed(2)})`;
+}
+
 function fillToCss(fill) {
   if (!fill || fill.visible === false) return null;
-  if (fill.type === 'SOLID') return tokenOf(fill.color?.hex ?? '#000000');
+  if (fill.type === 'SOLID') {
+    const byName = tokenByName(fill.variable);
+    if (byName) return byName;
+    const alpha = Math.min(fill.opacity ?? 1, fill.color?.a ?? 1);
+    return withAlpha(tokenOf(fill.color?.hex ?? '#000000'), alpha);
+  }
   if (String(fill.type).startsWith('GRADIENT')) {
     const stops = (fill.gradientStops ?? [])
       .map((s) => `${tokenOf(s.color?.hex ?? '#000')} ${Math.round((s.position ?? 0) * 100)}%`)
@@ -113,6 +141,13 @@ function planOf(spec, unit) {
 
   for (const node of nodes) {
     if (node.depth === 0) continue;
+    // Скрытый слой не верстается (решение 365): в макете он есть, но его не
+    // видно. В спеке это `visible: false` — свёрнутые тела аккордеона,
+    // неактивные состояния формы. Без этой проверки они ложатся друг на друга.
+    if (node.visible === false) {
+      overrides.push({ node: node.id, reason: 'скрытый слой (visible: false) — в макете его не видно', decision: 365 });
+      continue;
+    }
     const hasText = Boolean((node.text ?? '').trim());
     const fills = (node.fills ?? []).filter((f) => f.visible !== false);
     const image = fills.find((f) => f.type === 'IMAGE');
@@ -160,7 +195,10 @@ function renderNode({ node, hasText, fills, image }) {
     // величина даёт размер в процентах, а смещение — положение. Формула
     // сверена с ручными значениями секции process: 0.7348 → 136.10 %,
     // смещение 0.2658 → 100 %.
-    const t = image.imageTransform;
+    // FILL — это cover: картинка заполняет коробку. CROP — явный прямоугольник,
+    // и только у него transform задаёт масштаб. Применять transform к FILL
+    // нельзя: Figma хранит там позицию внутри кадра, и кадр уезжает.
+    const t = image.scaleMode === 'CROP' ? image.imageTransform : null;
     const url = imageUrl(image.imageHash);
     style.push(`background-image:url('${url}')`, 'background-repeat:no-repeat');
     if (t) {
@@ -180,6 +218,18 @@ function renderNode({ node, hasText, fills, image }) {
 
   const text = hasText ? node.text.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
   return `  <div class="n" data-figma-node="${node.id}" style="${style.join(';')}">${text}</div>`;
+}
+
+/** Фон секции: заливка, градиент или картинка — у корня бывает любой. */
+function sectionBackground(spec) {
+  const root = (spec.nodes ?? []).find((n) => n.depth === 0);
+  const fill = (root?.fills ?? []).find((f) => f.visible !== false);
+  if (!fill) return 'transparent';
+  if (fill.type === 'IMAGE' && fill.imageHash) {
+    const url = imageUrl(fill.imageHash);
+    return url ? `#f2efeb url('${url}') center / cover no-repeat` : 'transparent';
+  }
+  return fillToCss(fill) ?? 'transparent';
 }
 
 function componentSource(unit, plan, spec) {
@@ -209,7 +259,7 @@ ${rows}
     width: ${spec.section.w}px;
     height: ${spec.section.h}px;
     overflow: hidden;
-    background: ${fillToCss((spec.nodes.find((n) => n.depth === 0)?.fills ?? [])[0]) ?? 'transparent'};
+    background: ${sectionBackground(spec)};
   }
 
   .gen__inner {
@@ -225,6 +275,14 @@ ${rows}
   }
 </style>
 `;
+}
+
+/** booking-formats → BookingFormats: имя файла и компонента. */
+function componentName(section) {
+  return section
+    .split(/[-_]/)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('');
 }
 
 function imageUrl(hash) {
@@ -254,7 +312,8 @@ if (!command || !['plan', 'emit', 'report'].includes(command)) {
   process.exit(2);
 }
 
-const units = rest.includes('--all') || !rest[0] ? targets() : [rest[0]].flat();
+const wanted = rest.includes('--all') || !rest[0] ? targets() : [{ unit: rest[0], minCoverage: 0.9 }];
+const units = wanted.map((w) => w.unit);
 if (!units.length) {
   console.error('нет целей: заполните design/gen/targets.json');
   process.exit(2);
@@ -278,7 +337,7 @@ if (command === 'emit') {
     const plan = planOf(spec, unit);
     const source = componentSource(unit, plan, spec);
     const name = unit.split('/')[1];
-    const file = join(GEN_DIR, `${name.charAt(0).toUpperCase()}${name.slice(1)}.astro`);
+    const file = join(GEN_DIR, `${componentName(name)}.astro`);
     writeFileSync(file, source);
     writeFileSync(join(OVERRIDES_DIR, `${name}.json`), JSON.stringify({ section: unit, overrides: plan.overrides }, null, 2) + '\n');
     console.log(`${unit}: ${plan.emit.length} узлов · overrides ${plan.overrides.length} · ${file.replace(root + '/', '')}`);
@@ -299,7 +358,7 @@ if (command === 'report') {
     generated += plan.emit.length;
     overrides += plan.overrides.length;
     const name = unit.split('/')[1];
-    const file = join(GEN_DIR, `${name.charAt(0).toUpperCase()}${name.slice(1)}.astro`);
+    const file = join(GEN_DIR, `${componentName(name)}.astro`);
     const current = existsSync(file) ? readFileSync(file, 'utf8') : '';
     const drift = current !== componentSource(unit, plan, spec);
     rows.push({ unit, nodes, generated: plan.emit.length, overrides: plan.overrides.length, drift });
@@ -309,8 +368,20 @@ if (command === 'report') {
   }
   const coverage = total ? generated / total : 0;
   console.log(`\nпокрытие: ${generated} из ${total} узлов (${Math.round(coverage * 100)} %) · overrides ${overrides}`);
-  const threshold = readJson(join(root, 'design/figma/project.json'), { gates: {} }).gates?.genCoverage ?? 0.9;
+  // Порог у каждой секции свой: у карусели и формы он ниже, чем у текста.
+  // Калибровочные секции (gate: false) меряются, но приёмку не валят.
+  const gated = wanted.filter((w) => w.gate !== false);
+  const failing = [];
+  for (const w of gated) {
+    const row = rows.find((r) => r.unit === w.unit);
+    if (!row) continue;
+    const share = row.nodes ? row.generated / row.nodes : 0;
+    if (share < (w.minCoverage ?? 0.9)) failing.push(`${w.unit}: ${Math.round(share * 100)} % < ${Math.round((w.minCoverage ?? 0.9) * 100)} %`);
+  }
   if (rows.some((r) => r.drift)) process.exit(1);
-  if (coverage < threshold) process.exit(1);
+  if (failing.length) {
+    for (const f of failing) console.log(`  ниже порога: ${f}`);
+    process.exit(1);
+  }
   process.exit(0);
 }

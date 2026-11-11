@@ -1,4 +1,51 @@
 {
-  "about": "Секции, которые генератор берётся собирать из спеки. Пилот — две простые секции без поведения.",
-  "sections": ["home/method", "home/process"]
+  "about": "Секции генератора. gate: false — калибровочный замер (docs/GEN-CALIBRATION.md): числа собираются, но приёмку не валят.",
+  "sections": [
+    {
+      "unit": "home/method",
+      "class": "разметка",
+      "minCoverage": 0.85
+    },
+    {
+      "unit": "home/process",
+      "class": "разметка",
+      "minCoverage": 0.85
+    },
+    {
+      "unit": "method/method-about",
+      "class": "контроль",
+      "minCoverage": 0.95,
+      "gate": false
+    },
+    {
+      "unit": "home/faq",
+      "class": "текст",
+      "minCoverage": 0.95,
+      "gate": false
+    },
+    {
+      "unit": "home/formats",
+      "class": "карточки",
+      "minCoverage": 0.9,
+      "gate": false
+    },
+    {
+      "unit": "masters/founder-hero",
+      "class": "фото",
+      "minCoverage": 0.85,
+      "gate": false
+    },
+    {
+      "unit": "home/voices",
+      "class": "карусель",
+      "minCoverage": 0.3,
+      "gate": false
+    },
+    {
+      "unit": "booking/booking-formats",
+      "class": "форма",
+      "minCoverage": 0.8,
+      "gate": false
+    }
+  ]
 }

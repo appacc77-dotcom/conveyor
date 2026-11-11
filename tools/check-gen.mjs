@@ -78,20 +78,20 @@ if (gate === 'drift') {
 }
 
 if (gate === 'coverage') {
-  const { out } = report();
-  const line = out.split('\n').find((l) => l.startsWith('покрытие:'));
-  if (!line) {
-    console.error('покрытие не посчитано');
-    process.exit(2);
-  }
-  const threshold = (JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).gates?.genCoverage ?? 0.9) * 100;
-  const percent = Number(line.match(/\((\d+) %\)/)?.[1] ?? 0);
-  if (percent < threshold) {
-    console.log(line);
-    console.error(`\nпокрытие ниже порога ${Math.round(threshold)} %: генератор перестал брать узлы`);
+  // Порог у каждой секции свой (design/gen/targets.json): у карусели он ниже,
+  // чем у текста. Решение принимает gen.mjs report — здесь только вердикт.
+  const { ok, out } = report();
+  const lines = out.split('\n').filter(Boolean);
+  const fail = lines.filter((l) => l.includes('ниже порога'));
+  const cover = lines.find((l) => l.startsWith('покрытие:'));
+  if (!ok || fail.length) {
+    if (cover) console.log(cover);
+    for (const line of fail) console.log(line.trim());
+    console.error('\nгенератор перестал брать узлы: проверьте design/gen/targets.json и причины overrides');
     process.exit(1);
   }
-  console.log(`${line} · порог ${Math.round(threshold)} %`);
+  console.log(cover ?? 'покрытие посчитано');
+  console.log(`пороги соблюдены: ${targets.filter((t) => t.gate !== false).length} секции с воротами`);
   process.exit(0);
 }
 
