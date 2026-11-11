@@ -12,13 +12,17 @@
  *
  * Коды: 0 — чисто, 1 — выпуск тянет мастерскую, 2 — среда (нет node_modules).
  */
-import { readFileSync, existsSync, rmSync, readdirSync } from 'node:fs';
+import { readFileSync, existsSync, rmSync, readdirSync, mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 const root = process.cwd();
-const outName = '.site-check';
-const out = join(root, outName);
+// Собираем вне рабочего каталога: прогон приёмки сверяет содержимое дерева
+// до и после, и временный каталог внутри проекта делал бы каждый прогон
+// «изменявшимся» — то есть негодным как доказательство коммита.
+const out = mkdtempSync(join(tmpdir(), 'site-check-'));
+const outName = out;
 
 const fail = (message) => {
   console.error(`\nвыпуск не готов: ${message}\n`);
@@ -30,8 +34,6 @@ if (!existsSync(join(root, 'node_modules'))) {
   process.exit(2);
 }
 if (!existsSync(join(root, 'site-files.json'))) fail('нет site-files.json — контракта выпуска');
-
-rmSync(out, { recursive: true, force: true });
 
 // Экспорт сам по себе ценен как проверка: он копирует только разрешённое
 // и собирает результат. Красный код — либо набор неверный, либо сборка
