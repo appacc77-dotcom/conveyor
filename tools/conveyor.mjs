@@ -146,6 +146,8 @@ const GLOBAL_STEPS = [
   { id: 'gen-coverage', tool: 'check-gen', args: ['--gate', 'coverage'], kind: 'gate', needsDist: false, about: 'генератор берёт не меньше узлов, чем порог' },
   { id: 'gen-overrides', tool: 'check-gen', args: ['--gate', 'overrides'], kind: 'gate', needsDist: false, about: 'у каждого пропуска генератора есть причина' },
   { id: 'lib-purity', tool: 'check-lib', kind: 'gate', needsDist: false, about: 'lib/ без зависимостей от проекта' },
+  { id: 'site-clean', tool: 'check-site-clean', kind: 'gate', needsDist: false, about: 'выпуск без мастерской' },
+  { id: 'site-contract', tool: 'check-site-contract', kind: 'gate', needsDist: false, about: 'выпуск связан с прогоном' },
   { id: 'publish', tool: 'check-publish', kind: 'gate', needsDist: true, about: 'в публикации нет отладочных страниц' },
   {
     id: 'spec-contract',

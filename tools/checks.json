@@ -12,7 +12,8 @@
     "regression": "контрольный набор секций и зависимости",
     "accept-stage1": "полная приёмка основы по обязательствам слоя 1",
     "accept-stage2": "дополнения слоя 2 и их совместимость с основой",
-    "sources-live": "сверка выгрузки с текущим состоянием Figma"
+    "sources-live": "сверка выгрузки с текущим состоянием Figma",
+    "release": "выпуск: набор файлов сайта, манифест и связь с зелёным прогоном"
   },
   "checks": {
     "build": {
@@ -888,6 +889,56 @@
         "accept-stage1"
       ],
       "about": "tools/lib — чистые функции формата, без зависимостей от проекта"
+    },
+    "site-clean": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "site-files.json",
+        "src/**",
+        "public/**",
+        "package.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 180000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "release"
+      ],
+      "about": "выпуск собирается без design/ и docs/, студийных страниц нет"
+    },
+    "site-contract": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "site-manifest.json",
+        "site-files.json",
+        "reports/runs/**"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 30000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "release"
+      ],
+      "about": "выпуск связан с зелёным прогоном и не устарел"
     }
   }
 }

@@ -1,0 +1,25 @@
+---
+/**
+ * arrow-quiet — набор Figma `arrow-quiet` (13:120).
+ * Вектор выгружен с живого узла I79:110;695:1532 через figma-agent, не нарисован.
+ */
+import arrow from '../../assets/arrow.svg?raw';
+
+interface Props {
+  /** Размер из спеки: в кнопках 14, в btn-quiet 19. */
+  size?: number;
+}
+
+const { size = 14 } = Astro.props;
+---
+
+<span class="arrow-quiet" style={`--arrow-size:${size}px`}><Fragment set:html={arrow} /></span>
+
+<style>
+  :global(.arrow-quiet) {
+    flex: none;
+    width: var(--arrow-size, 14px);
+    height: var(--arrow-size, 14px);
+    color: inherit;
+  }
+</style>

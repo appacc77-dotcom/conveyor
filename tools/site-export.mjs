@@ -21,7 +21,7 @@
  * затёрта следующим выпуском.
  */
 import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, copyFileSync, symlinkSync, readdirSync } from 'node:fs';
-import { join, dirname, sep } from 'node:path';
+import { join, dirname, resolve, isAbsolute } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 
@@ -33,7 +33,8 @@ const arg = (name, fallback) => {
   return i > 0 ? args[i + 1] : fallback;
 };
 
-const outDir = join(root, arg('--out', '.site'));
+const outArg = arg('--out', '.site');
+const outDir = isAbsolute(outArg) ? outArg : join(root, outArg);
 const pushBranch = arg('--push-branch', 'site');
 const shouldBuild = !has('--no-build');
 const shouldPush = has('--push');
@@ -51,8 +52,9 @@ const manifestPath = join(root, 'site-files.json');
 if (!existsSync(manifestPath)) fail('нет site-files.json — это и есть контракт, без него нечего выпускать');
 const contract = JSON.parse(readFileSync(manifestPath, 'utf8'));
 
+const allowDirty = has('--allow-dirty');
 const dirty = git(['status', '--porcelain']);
-if (dirty) {
+if (dirty && !allowDirty) {
   fail(`дерево мастерской грязное — сначала коммит:\n${dirty.split('\n').slice(0, 8).join('\n')}\n\nвыпуск из незакоммиченного состояния нельзя связать с прогоном приёмки`);
 }
 const sourceCommit = git(['rev-parse', 'HEAD']);
@@ -154,6 +156,12 @@ if (shouldBuild) {
 
 // --- 4. Манифест -----------------------------------------------------------
 const run = latestGreenRun();
+if (run && run.commit && run.commit !== sourceCommit.slice(0, run.commit.length)) {
+  const message = `последний зелёный прогон ${run.runId} снят с коммита ${run.commit}, а выпускается ${sourceCommit.slice(0, 8)}`;
+  if (shouldPush) fail(`${message}\nсначала прогоните приёмку на этом коммите: node tools/conveyor.mjs check --all`);
+  console.warn(`  внимание: ${message} — манифест не связан с прогоном`);
+}
+
 const manifest = {
   schemaVersion: 1,
   createdAt: new Date().toISOString(),
@@ -161,6 +169,7 @@ const manifest = {
   sourceBranch: git(['rev-parse', '--abbrev-ref', 'HEAD']),
   sourceHash,
   runId: run?.runId ?? null,
+  runCommit: run?.commit ?? null,
   runMode: run?.mode ?? null,
   runFinishedAt: run?.finishedAt ?? null,
   files: selected.length,
