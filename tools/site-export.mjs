@@ -209,7 +209,12 @@ if (shouldPush) {
   git(['worktree', 'prune']);
   git(['worktree', 'add', '--detach', worktree]);
   try {
-    execFileSync('sh', ['-c', `rm -rf "${worktree}"/* "${worktree}"/.[!.]* 2>/dev/null || true`]);
+    // Чистим каталог, не трогая .git: в рабочем дереве worktree это файл-
+    // ссылка на репозиторий, и его удаление ломает git worktree remove.
+    execFileSync('sh', [
+      '-c',
+      `find "${worktree}" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +`,
+    ]);
     execFileSync('sh', ['-c', `cd "${outDir}" && tar cf - . | (cd "${worktree}" && tar xf -)`]);
     execFileSync('git', ['add', '-A'], { cwd: worktree });
     execFileSync(
