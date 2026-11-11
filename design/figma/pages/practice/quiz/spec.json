@@ -3,7 +3,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T20:47:30.625Z"
+    "at": "2026-11-11T15:01:09.791Z"
   },
   "section": {
     "id": "410:1365",
@@ -114,7 +114,7 @@
             [
               1,
               0,
-              4.680738129536621e-06
+              0.000004680738129536621
             ],
             [
               0,
@@ -343,6 +343,8 @@
       "styleName": null,
       "fontFamily": null,
       "fontStyle": null,
+      "fontMixed": true,
+      "fontSizeMixed": true,
       "lineHeight": {
         "unit": "PERCENT",
         "value": 170.00000476837158

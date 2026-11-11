@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T14:17:39.770Z",
+  "generatedAt": "2026-11-11T15:03:07.627Z",
   "sections": {
     "withGate": 47,
     "coverageMedian": 100,
@@ -9,10 +9,10 @@
   },
   "debts": {
     "total": 37,
-    "open": 32,
+    "open": 31,
     "openByOwner": {
       "designer": 28,
-      "studio": 2,
+      "studio": 1,
       "owner": 2
     }
   },
@@ -20,7 +20,7 @@
     "total": 6
   },
   "lastRun": {
-    "id": "20261111-141351-44181",
+    "id": "20261111-150202-45926",
     "at": null,
     "status": "PASS",
     "profile": null,

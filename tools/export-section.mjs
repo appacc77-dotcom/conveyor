@@ -178,7 +178,13 @@ for (const icon of section.icons) {
   // connection to Figma») — тогда иконка берётся из готовых или рисуется заново.
   // Короткий таймаут и безопасная выгрузка: нерендерящаяся иконка не должна
   // ни держать выгрузку две минуты, ни убивать процесс.
-  const fetched = runTemplateSafe('fetch-svg.template.js', { __NODE_ID__: icon.id }, 20000);
+  // Таймаут вынесен в переменную: под нагрузкой мост отвечает дольше 20 с,
+  // и иконка молча выпадала из выгрузки.
+  const fetched = runTemplateSafe(
+    'fetch-svg.template.js',
+    { __NODE_ID__: icon.id },
+    Number(process.env.FIGMA_ICON_TIMEOUT_MS ?? 45000),
+  );
   if (!fetched) {
     iconErrors.push({ id: icon.id, name: icon.name, reason: 'svg не выгрузился' });
     continue;
@@ -228,12 +234,41 @@ const spec = {
   assets: { crop: 'crop.png', images, icons },
   nodes: section.nodes,
 };
+
+// --- 6.1 Иконки: не терять молча -------------------------------------------
+// Было так: fetch-svg не ответил за 20 с, иконка выпала из списка, спека
+// записалась, ворота зелёные — а в вёрстке нет стрелки. Сравниваем с прошлой
+// выгрузкой: меньше иконок без объяснения — это отказ выгрузки, а не
+// изменение макета.
+const previousIcons = existsSync(join(dir, 'spec.json'))
+  ? (JSON.parse(readFileSync(join(dir, 'spec.json'), 'utf8')).counts?.icons ?? null)
+  : null;
+
+if (iconErrors.length) {
+  console.error(`иконки не выгрузились: ${iconErrors.length}`);
+  for (const e of iconErrors) console.error(`  ${e.id} ${e.name}: ${e.reason}`);
+  console.error('спека не перезаписана: почините выгрузку иконок или повторите');
+  process.exit(1);
+}
+
+if (previousIcons !== null && icons.length < previousIcons && !process.argv.includes('--allow-icon-loss')) {
+  console.error(`иконок стало меньше: было ${previousIcons}, стало ${icons.length}`);
+  console.error('это потеря при выгрузке, а не изменение макета: спека не перезаписана');
+  console.error('если потеря осознанная — повторите с --allow-icon-loss');
+  process.exit(1);
+}
+
 writeFileSync(join(dir, 'spec.json'), JSON.stringify(spec, null, 2) + '\n');
 
-// --- 6.1 Состояния секции --------------------------------------------------
+// --- 6.2 Состояния секции --------------------------------------------------
 // Секция живёт в файле не в одном виде: у `formats` пять инстансов, по одному
 // на активный формат, и у каждого своя картинка слайдера и свои описания.
 // Один выгруженный инстанс — одно состояние; остальные теряются молча.
+//
+// Исключения (`exclude`) — решения «это не состояние секции, а другая
+// секция с тем же компонентом». Они лежат в states-exclude.json и
+// переносятся в states.json при каждой выгрузке, иначе ручная правка
+// затирается генерацией.
 try {
   const variantsTemplate = readFileSync(join(root, 'tools/figma/variants.template.js'), 'utf8');
   const variantsTmp = join(tmpdir(), `figma-variants-${process.pid}.js`);
@@ -242,6 +277,8 @@ try {
   // отсутствие состояний валило бы всю выгрузку.
   const variantsReply = runFigma(['exec-js', variantsTmp, '--timeout', '120000']);
   if (variantsReply.result && !variantsReply.result.error) {
+    const excludePath = join(dir, 'states-exclude.json');
+    const exclude = existsSync(excludePath) ? (JSON.parse(readFileSync(excludePath, 'utf8')).exclude ?? []) : [];
     writeFileSync(
       join(dir, 'states.json'),
       JSON.stringify(
@@ -251,12 +288,14 @@ try {
           nodeId,
           total: variantsReply.result.total,
           states: variantsReply.result.states,
+          ...(exclude.length ? { exclude } : {}),
         },
         null,
         2,
       ) + '\n',
     );
     spec.counts.states = variantsReply.result.total;
+    // Сохраняем спеку ещё раз: число состояний появилось только сейчас.
     writeFileSync(join(dir, 'spec.json'), JSON.stringify(spec, null, 2) + '\n');
   }
 } catch (error) {

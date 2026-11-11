@@ -3,7 +3,7 @@
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T20:47:43.706Z"
+    "at": "2026-11-11T15:01:38.653Z"
   },
   "section": {
     "id": "414:2107",
@@ -1426,6 +1426,7 @@
       "styleName": "H4",
       "fontFamily": null,
       "fontStyle": null,
+      "fontMixed": true,
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -2788,6 +2789,7 @@
       "styleName": "H4",
       "fontFamily": null,
       "fontStyle": null,
+      "fontMixed": true,
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",
@@ -4532,6 +4534,7 @@
       "styleName": "H4",
       "fontFamily": null,
       "fontStyle": null,
+      "fontMixed": true,
       "fontSize": 29,
       "lineHeight": {
         "unit": "PERCENT",

@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-11T14:02:01.086Z",
+  "at": "2026-11-11T15:01:51.246Z",
   "sections": {
     "booking/booking-formats": {
       "spec": "e4f8225718536168",
       "crop": "d10cf772364f3d48",
-      "states": "65da5b4b6a9cda4d"
+      "states": "d405f0f46d85d0d1"
     },
     "booking/booking-hero": {
       "spec": "1b27abc62536389c",
@@ -94,7 +94,7 @@
     "home/quiz": {
       "spec": "e3e3a68e3b72d48e",
       "crop": "b45497e282394f45",
-      "states": "14fc3ac77c977443"
+      "states": "750fa79152a3671d"
     },
     "home/voices": {
       "spec": "cdb7aa4660e546bb",
@@ -194,7 +194,7 @@
     "practice/info-section": {
       "spec": "8d3ce7f539d25d7c",
       "crop": "96adad8af35f2682",
-      "states": "ccf2b6e23cd22cdd"
+      "states": "ec305fb2b13e796c"
     },
     "practice/kody-practice-pay": {
       "spec": "5649f31a47609a8a",
@@ -207,9 +207,9 @@
       "states": "b30fa9847f570a05"
     },
     "practice/practice-package": {
-      "spec": "a1e49cee5b9b6d53",
+      "spec": "eca380a34bb72fca",
       "crop": "35e80ffcffee419f",
-      "states": "4d3516b2fcba96d7"
+      "states": "06a7fa60c3dc9b8d"
     },
     "practice/practice-pay": {
       "spec": "be77e72ac2d5bc0d",
@@ -217,9 +217,9 @@
       "states": "405b65412d11dbc6"
     },
     "practice/quiz": {
-      "spec": "2498ec154c150b30",
+      "spec": "8f26d0c0bccbaa33",
       "crop": "15ecca8a2e55fd25",
-      "states": "f4672f4f6ff3b3cf"
+      "states": "9ab822a8a0abccd3"
     },
     "quiz/footer": {
       "spec": "6bcf5c01d20300d6",
