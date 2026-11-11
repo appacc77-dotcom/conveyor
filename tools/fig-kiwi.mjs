@@ -49,6 +49,9 @@ const KINDS = ['ENUM', 'STRUCT', 'MESSAGE'];
  */
 const SUPPORTED_KIWI = [106];
 
+/** Последнее прочитанное сообщение: из него берутся словари стилей. */
+let currentMessage = null;
+
 /** Чтение значений из байтов: ровно кодировки спецификации kiwi. */
 class Reader {
   constructor(bytes) {
@@ -195,6 +198,11 @@ function readStruct(r, schema, def) {
 }
 
 /** canvas.fig → { meta, version, schema, data, message } */
+/** Все узлы сообщения — нужны словари стилей и переменных. */
+function allChanges(schema) {
+  return currentMessage?.nodeChanges ?? [];
+}
+
 export function readFig(file) {
   const zip = readZip(file);
   const meta = zip.json('meta.json');
@@ -220,6 +228,7 @@ export function readFig(file) {
   const data = zstdDecompressSync(raw.subarray(pos, pos + dataLen));
 
   const message = readStruct(new Reader(data), schema, schema.byName.get('Message'));
+  currentMessage = message;
   return { meta, version, schema, data, message };
 }
 
@@ -326,6 +335,36 @@ if (command === 'pages') {
 /** Узел в том же виде, в каком его отдаёт мост: id, тип, размеры, текст, заливки. */
 function toSpecNodes(schema, page, frame) {
   const nodes = [];
+
+  // Стили и переменные живут в том же потоке узлов: стиль — это узел с
+  // styleType и именем («H2», «quote»), переменная — узел VARIABLE. Собираем
+  // словари один раз, чтобы у каждого узла было имя стиля и привязки — как
+  // их отдаёт мост.
+  const styleNames = new Map();
+  for (const change of allChanges(schema)) {
+    if (change.styleType === undefined) continue;
+    styleNames.set(`${change.guid.sessionID}:${change.guid.localID}`, change.name);
+  }
+  const styleOf = (ref) => (ref?.guid ? styleNames.get(`${ref.guid.sessionID}:${ref.guid.localID}`) ?? null : null);
+
+  // Привязки: variableConsumptionMap → имя поля и ссылка на переменную.
+  const boundOf = (node) => {
+    const entries = node.variableConsumptionMap?.entries ?? [];
+    if (!entries.length) return null;
+    const out = {};
+    for (const entry of entries) {
+      const guid = entry.variableData?.value?.alias?.guid;
+      if (!guid) continue;
+      // Имена полей приводим к одному виду: STACK_SPACING → stackSpacing.
+      // У моста свои имена (itemSpacing), они отличаются — это записано в
+      // ARCHITECTURE; смешивать две записи в одной спеке нельзя.
+      const field = enumName(schema, 'VariableField', entry.variableField)
+        .toLowerCase()
+        .replace(/_([a-z])/g, (_, c) => c.toUpperCase());
+      out[field] = `VariableID:${guid.sessionID}:${guid.localID}`;
+    }
+    return Object.keys(out).length ? out : null;
+  };
   const hex = (c) => {
     const to = (v) => Math.round(Math.max(0, Math.min(1, v ?? 0)) * 255).toString(16).padStart(2, '0');
     return `#${to(c?.r)}${to(c?.g)}${to(c?.b)}`;
@@ -345,6 +384,8 @@ function toSpecNodes(schema, page, frame) {
       y: Math.round(t.m12 ?? 0),
       w: Math.round(node.size?.x ?? 0),
       h: Math.round(node.size?.y ?? 0),
+      ...(node.styleIdForText || node.styleIdForFill ? { styleName: styleOf(node.styleIdForText) ?? styleOf(node.styleIdForFill) } : {}),
+      ...(boundOf(node) ? { bound: boundOf(node) } : {}),
       ...(isText && node.textData?.characters
         ? {
             text: node.textData.characters,

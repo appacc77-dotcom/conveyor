@@ -241,6 +241,18 @@ node tools/fig-kiwi.mjs tree       <file.fig> "Booking" 2
 node tools/fig-kiwi.mjs crosscheck <file.fig>          # архив ↔ спеки
 ```
 
+Экспорт из архива несёт то же, что мост, кроме состояний и кропа:
+
+| поле | откуда берётся |
+|---|---|
+| `styleName` | узел с `styleType` и именем («H2», «quote») — это и есть стиль, ссылка `styleIdForText`/`styleIdForFill` ведёт на его guid |
+| `bound` | `variableConsumptionMap`: поле и ссылка `VariableID:<s>:<l>` |
+| `font` | `fontName`, `fontSize`, `lineHeight`, `textTracking`, `textAlignHorizontal` |
+
+Имена полей в `bound` приведены к одному виду (`STACK_SPACING` → `stackSpacing`).
+У моста свои имена (`itemSpacing`) — смешивать две записи в одной спеке нельзя,
+поэтому офлайн-спеки и спеки моста не должны складываться в один каталог.
+
 `crosscheck` — сверка с выгрузкой: размеры секций в архиве и в спеках должны
 совпадать. Число узлов не сравнивается: в архиве инстансы не раскрываются
 (634 инстанса, ни у одного нет детей), а спека их раскрывает — счётчик в
