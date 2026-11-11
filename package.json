@@ -60,7 +60,8 @@
     "spec:bounds": "node tools/check-spec-bounds.mjs",
     "spec:contract": "node tools/check-spec-contract.mjs",
     "fig:crosscheck": "node tools/fig-kiwi.mjs crosscheck",
-    "report:designer": "node tools/report-designer.mjs"
+    "report:designer": "node tools/report-designer.mjs",
+    "report:studio": "node tools/report-studio.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",
