@@ -255,6 +255,12 @@ function pushMirror(distDir, mirrorUrl) {
   mkdirSync(temp, { recursive: true });
   execFileSync('sh', ['-c', `cp -R "${distDir}"/. "${temp}"/ && touch "${temp}/.nojekyll"`]);
   execFileSync('git', ['init', '-q', '-b', 'main'], { cwd: temp });
+  // Временный репозиторий не наследует ни личность, ни доступ основного:
+  // без этого push просит пароль, которого в неинтерактивном режиме нет.
+  execFileSync('git', ['config', 'user.name', 'site-export'], { cwd: temp });
+  execFileSync('git', ['config', 'user.email', 'site-export@localhost'], { cwd: temp });
+  const helper = execFileSync('git', ['config', '--get', 'credential.helper'], { cwd: root, encoding: 'utf8' }).trim();
+  if (helper) execFileSync('git', ['config', 'credential.helper', helper], { cwd: temp });
   execFileSync('git', ['add', '-A'], { cwd: temp });
   execFileSync('git', ['commit', '-q', '--no-verify', '-m', `site: из ${sourceCommit.slice(0, 8)} (прогон ${run?.runId ?? '—'})`], { cwd: temp });
   execFileSync('git', ['push', '--force', mirrorUrl, 'HEAD:refs/heads/main'], { cwd: temp, stdio: 'pipe' });
