@@ -40,3 +40,6 @@ design/figma-contention.json
 
 # base-сборка «только из макета» — артефакт проверки
 dist-base/
+
+# Local Netlify folder
+.netlify

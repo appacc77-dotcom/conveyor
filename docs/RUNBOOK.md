@@ -381,3 +381,23 @@ Netlify собирает проверенный коммит и раздаёт `
 accept-stage1` и `accept-stage2`. Сборка в чистом клоне проверена: без моста
 и без Figma `npm run build` даёт 11 страниц за 3.6 с.
 
+### Сайт уже задеплоен
+
+| | |
+|---|---|
+| адрес | https://syntonia-preview-2026.netlify.app |
+| проект | `syntonia-preview-2026`, id `3eb6ec7a-98d8-4b28-bdec-8a32481b77f2` |
+| сборка | локальная: `npm run build`, затем `netlify deploy --prod --dir=dist` |
+
+Два урока этого деплоя:
+
+1. **Новый сайт Netlify отдавал 401.** У аккаунта включён `sso_login` на все
+   сайты — браузер получал «Login Redirect» вместо страницы. Сняли на уровне
+   сайта (`PATCH /api/v1/sites/<id> {"sso_login": false}`); в панели это
+   «Project configuration → Access & security → Visitor access».
+2. **Формы не заработали при деплое файлов.** `data-netlify` в разметке есть,
+   но `GET /sites/<id>/forms` пуст, а POST на `/` отвечает 404: Netlify
+   обнаруживает формы во время своей сборки, а не при загрузке готового
+   `dist`. Значит сайт нужно подключить к репозиторию (Git): тогда Netlify
+   соберёт сам и найдёт форму.
+
