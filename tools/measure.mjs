@@ -140,8 +140,36 @@ async function measureJob(job, page, navigate = true) {
   // Навигация — только при смене адреса: страница на группу загружается один
   // раз, иначе каждая секция заново ждёт networkidle.
   if (navigate) {
-    await page.goto(base + urlPath, { waitUntil: 'networkidle' });
-    await page.evaluate(() => document.fonts.ready);
+    // networkidle ждал 500 мс тишины сети на каждой загрузке — семь страниц
+    // давали 3.5 с. Но совсем без ожидания картинок нельзя: у карусели и
+    // слайдера ширина зависит от загруженного изображения, и замер ловил
+    // их до загрузки (voices давал 24 красных узла). Ждём то, что влияет:
+    // шрифты и декодирование картинок, затем кадр.
+    await page.goto(base + urlPath, { waitUntil: 'load' });
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await Promise.all([...document.images].map((img) => img.decode().catch(() => null)));
+
+      // Скрипты страницы (карусель, слайдер, аккордеон) доводят раскладку
+      // после load. Ждём, пока она перестанет меняться: два одинаковых
+      // замера подряд с паузой 60 мс, потолок 600 мс.
+      const shape = () => {
+        const parts = [document.body.scrollHeight];
+        for (const el of document.querySelectorAll('section, [data-figma-node]')) {
+          const r = el.getBoundingClientRect();
+          parts.push(Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height));
+        }
+        return parts.join(',');
+      };
+      const started = performance.now();
+      let previous = shape();
+      while (performance.now() - started < 600) {
+        await new Promise((resolve) => setTimeout(resolve, 60));
+        const current = shape();
+        if (current === previous) break;
+        previous = current;
+      }
+    });
   }
 
   // Общие секции (шапка, подвал) стоят на каждой странице своим инстансом:
