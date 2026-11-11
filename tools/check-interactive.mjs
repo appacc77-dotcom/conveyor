@@ -243,10 +243,10 @@ for (const section of sections) {
         // Не изменилось за 400 мс — это и есть повод считать элемент мёртвым;
         // решение принимает код ниже, а не ожидание.
       });
-    // Секция уже изменилась, но сам переключатель может доигрывать переход:
-    // computed transform в середине анимации ещё стартовый, и элемент
-    // выглядел бы «меняющим только aria». Даём переходу доиграть.
-    await page.waitForTimeout(150);
+    // Паузы нет: у большинства элементов подпись уже конечная. Ждём только
+    // тогда, когда собираемся обвинить элемент в «меняет лишь атрибут»:
+    // переход мог ещё не дойти до конца, и обвинение было бы ложным.
+    void 0;
     checked += 1;
 
     // Элемент мог увести на другой адрес (кнопка «пройти тест» на экране
@@ -263,7 +263,13 @@ for (const section of sections) {
       continue;
     }
     const ariaAfter = await control.evaluate((el) => el.getAttribute('aria-expanded')).catch(() => null);
-    const selfAfter = await controlSignature(control).catch(() => null);
+    let selfAfter = await controlSignature(control).catch(() => null);
+    if (ariaBefore !== null && ariaAfter !== null && ariaBefore !== ariaAfter && selfBefore === selfAfter) {
+      // Атрибут переключился, а computed-стили ещё стартовые: даём переходу
+      // доиграть и смотрим снова. Платят только подозрительные элементы.
+      await page.waitForTimeout(160);
+      selfAfter = await controlSignature(control).catch(() => null);
+    }
 
     // Переключатель обязан показать своё состояние: крестик вместо полос,
     // повёрнутый шеврон, другая иконка. Иначе открытие не читается.
