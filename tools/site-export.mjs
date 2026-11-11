@@ -231,9 +231,34 @@ if (shouldPush) {
     );
     execFileSync('git', ['push', '--force', 'origin', `HEAD:refs/heads/${pushBranch}`], { cwd: worktree });
     console.log(`ветка:      ${pushBranch} ← ${sourceCommit.slice(0, 8)}`);
+
+    if (contract.mirror) {
+      pushMirror(join(outDir, 'dist'), contract.mirror);
+      console.log(`зеркало:    ${contract.mirror.replace(/\.git$/, '').replace('https://github.com/', '')}`);
+    }
   } finally {
     execFileSync('git', ['worktree', 'remove', '--force', worktree], { cwd: root });
   }
+}
+
+/**
+ * Зеркало: второй адрес того же выпуска.
+ *
+ * Зачем: путь до Netlify из России бывает медленным — с одного маршрута
+ * выпуск отдавался по 13 КБ в минуту, тогда как то же содержимое с GitHub
+ * Pages приходит за 0.2 с. Зеркало не заменяет хостинг и не принимает формы,
+ * но даёт второй адрес для проверки и быстрый показ.
+ */
+function pushMirror(distDir, mirrorUrl) {
+  const temp = join(root, '.site-mirror');
+  rmSync(temp, { recursive: true, force: true });
+  mkdirSync(temp, { recursive: true });
+  execFileSync('sh', ['-c', `cp -R "${distDir}"/. "${temp}"/ && touch "${temp}/.nojekyll"`]);
+  execFileSync('git', ['init', '-q', '-b', 'main'], { cwd: temp });
+  execFileSync('git', ['add', '-A'], { cwd: temp });
+  execFileSync('git', ['commit', '-q', '--no-verify', '-m', `site: из ${sourceCommit.slice(0, 8)} (прогон ${run?.runId ?? '—'})`], { cwd: temp });
+  execFileSync('git', ['push', '--force', mirrorUrl, 'HEAD:refs/heads/main'], { cwd: temp, stdio: 'pipe' });
+  rmSync(temp, { recursive: true, force: true });
 }
 
 /**

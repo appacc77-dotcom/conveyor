@@ -24,5 +24,6 @@
     "src/pages/structure.astro": "студийная карта секций, тянет design/figma/structure.json",
     "src/pages/ds.astro": "студийная страница дизайн-системы, тянет design/figma/live/ds.json",
     "public/structure/**": "превью «Figma / сделано» для студийной карты"
-  }
+  },
+  "mirror": "https://github.com/appacc77-dotcom/appacc77-dotcom.github.io.git"
 }
