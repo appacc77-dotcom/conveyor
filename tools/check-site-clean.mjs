@@ -39,7 +39,7 @@ if (!existsSync(join(root, 'site-files.json'))) fail('нет site-files.json —
 // и собирает результат. Красный код — либо набор неверный, либо сборка
 // требует мастерскую.
 try {
-  execFileSync(process.execPath, [join(root, 'tools/site-export.mjs'), '--allow-dirty', '--out', outName], {
+  execFileSync(process.execPath, [join(root, 'tools/site-export.mjs'), '--allow-dirty', '--no-manifest', '--out', outName], {
     cwd: root,
     stdio: 'pipe',
     encoding: 'utf8',
@@ -109,6 +109,7 @@ if (!existsSync(join(dist, 'index.html'))) problems.push('dist/index.html: гл�
 const manifest = existsSync(join(root, 'site-manifest.json'))
   ? JSON.parse(readFileSync(join(root, 'site-manifest.json'), 'utf8'))
   : null;
+
 
 if (problems.length) {
   console.log(`файлов в выпуске: ${sourceFiles.length} · проблем: ${problems.length}`);

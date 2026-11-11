@@ -38,6 +38,7 @@ const outDir = isAbsolute(outArg) ? outArg : join(root, outArg);
 const pushBranch = arg('--push-branch', 'site');
 const shouldBuild = !has('--no-build');
 const shouldPush = has('--push');
+const writeManifest = !has('--no-manifest');
 
 const fail = (message) => {
   console.error(`\nвыпуск не собран: ${message}\n`);
@@ -181,7 +182,7 @@ const manifest = {
   publish: contract.publish,
 };
 
-writeFileSync(join(root, 'site-manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+if (writeManifest) writeFileSync(join(root, 'site-manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
 
 const mb = (n) => (n === null ? '—' : `${(n / 1048576).toFixed(1)} МБ`);
 console.log(`мастерская: ${sourceCommit.slice(0, 8)} · файлов ${manifest.files} · ${mb(bytes)}`);
