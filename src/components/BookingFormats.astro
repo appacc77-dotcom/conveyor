@@ -80,10 +80,10 @@ const formats = [
 const fields = [
   // У первых трёх полей в макете видна точка-маркер, а «ОПЦИОНАЛЬНО» скрыто
   // (field-optional visible: false). У комментария наоборот.
-  { label: 'Имя', required: true, placeholder: 'Как к вам обращаться', type: 'text', height: 54 },
-  { label: 'Email', required: true, placeholder: 'ваш@email.com', type: 'email', height: 54 },
-  { label: 'Телефон', required: true, placeholder: '+1 (___) ___ ___ ___', type: 'tel', height: 54 },
-  { label: 'комментарий', optional: true, placeholder: 'Что важно знать заранее, ваш запрос или вопросы...', type: 'textarea', height: 86 },
+  { name: 'name', label: 'Имя', required: true, placeholder: 'Как к вам обращаться', type: 'text', height: 54 },
+  { name: 'email', label: 'Email', required: true, placeholder: 'ваш@email.com', type: 'email', height: 54 },
+  { name: 'phone', label: 'Телефон', required: true, placeholder: '+1 (___) ___ ___ ___', type: 'tel', height: 54 },
+  { name: 'comment', label: 'комментарий', optional: true, placeholder: 'Что важно знать заранее, ваш запрос или вопросы...', type: 'textarea', height: 86 },
 ];
 ---
 
@@ -198,7 +198,24 @@ const fields = [
 
         <span class="bformats__panel-divider" aria-hidden="true" />
 
-        <form class="bformats__form" data-figma-node="806:372" novalidate>
+        {/* Форма уходит сервису форм хостинга: атрибуты data-netlify и
+            honeypot читает Netlify при деплое, серверного кода у нас нет.
+            action — страница «спасибо», её в макете нет (invented → 395). */}
+        <form
+          class="bformats__form"
+          data-figma-node="806:372"
+          name="booking"
+          method="POST"
+          action="/spasibo.html"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          novalidate
+        >
+          <input type="hidden" name="form-name" value="booking" />
+          {/* Ловушка для ботов: человек её не видит, робот заполняет. */}
+          <p class="bfield bfield--trap" aria-hidden="true">
+            <label>Не заполняйте это поле<input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
           {fields.map((f) => (
             <label class="bfield">
               <span class="bfield__head">
@@ -207,9 +224,9 @@ const fields = [
                 {f.optional && <span class="bfield__optional">ОПЦИОНАЛЬНО</span>}
               </span>
               {f.type === 'textarea' ? (
-                <textarea class="bfield__box bfield__box--area" placeholder={f.placeholder} rows={3} />
+                <textarea class="bfield__box bfield__box--area" name={f.name} placeholder={f.placeholder} rows={3} />
               ) : (
-                <input class="bfield__box" type={f.type} placeholder={f.placeholder} />
+                <input class="bfield__box" type={f.type} name={f.name} placeholder={f.placeholder} required={f.required} />
               )}
             </label>
           ))}
@@ -220,12 +237,6 @@ const fields = [
           <p class="bformats__consent">
             Нажимая “Отправить заявку”, вы соглашаетесь с условиями обработки данных.
           </p>
-          {/* Подсказка вместо молчания: отправлять некуда, и об этом надо
-              сказать вслух. Исчезает сама — это не сообщение об ошибке формы. */}
-          {!figmaOnly && (
-          <p class="bformats__note" data-invented="booking-form-not-sent" role="status" aria-live="polite" data-note></p>
-          )}
-
           <div class="bformats__legal">
             <span class="bformats__legal-title" data-figma-node="385:1344">Правовая информация</span>
             <p class="bformats__legal-text" data-figma-node="385:1370">
@@ -278,18 +289,6 @@ const fields = [
       }
       section.querySelector('[data-pick-first]')?.addEventListener('click', () => pick(0));
 
-      const note = section.querySelector('[data-note]');
-      section.querySelector('[data-submit]')?.addEventListener('click', (event) => {
-        event.preventDefault();
-        // Отправлять некуда: у формы нет адресата и полей с обязательностью.
-        // Говорим об этом подсказкой, которая исчезает сама, — иначе человек
-        // решит, что заявка ушла.
-        if (!note) return;
-        note.textContent = 'Пока не работает: отправка появится позже';
-        note.classList.add('is-visible');
-        clearTimeout(note.hideTimer);
-        note.hideTimer = setTimeout(() => note.classList.remove('is-visible'), 3200);
-      });
     }
   }
 </script>
@@ -809,6 +808,16 @@ const fields = [
     font-size: 13px;
     line-height: 20px;
     color: var(--color-text-secondary);
+  }
+
+  /* Ловушка для ботов: место в раскладке не занимает, иначе сдвигает
+     кнопку и ломает геометрию формы. */
+  .bfield--trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   .bformats__note {

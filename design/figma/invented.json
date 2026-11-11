@@ -64,21 +64,6 @@
       "enhancement": "package-note"
     },
     {
-      "id": "booking-form-not-sent",
-      "what": "Подсказка «Пока не работает: отправка появится позже» в форме заявки",
-      "file": "src/components/BookingFormats.astro",
-      "selector": ".bformats__note",
-      "marker": true,
-      "origin": "invented",
-      "decisions": [
-        362
-      ],
-      "checkedBy": "interactive",
-      "stage2": "адресат и валидация формы — решение владельца",
-      "billable": true,
-      "enhancement": "form-behaviour"
-    },
-    {
       "id": "motion",
       "what": "Анимации и переходы (лента отзывов, наведение, раскрытие)",
       "file": "design/motion/motion.json",
@@ -92,6 +77,21 @@
       "stage2": "сверить с дизайнером или заменить на прототип Figma",
       "billable": false,
       "enhancement": "motion"
+    },
+    {
+      "id": "booking-thanks-page",
+      "what": "Страница «Заявка отправлена» после формы — в макете её нет",
+      "file": "src/pages/spasibo.astro",
+      "selector": ".thanks",
+      "marker": false,
+      "origin": "invented",
+      "decisions": [
+        395
+      ],
+      "checkedBy": "publish",
+      "stage2": "адрес возврата сервиса форм",
+      "billable": true,
+      "enhancement": "form-behaviour"
     }
   ]
 }

@@ -395,13 +395,15 @@
       "title": "Форма заявки на «Форматах»: сообщение «не отправляется» без записи в журнале решений",
       "owner": "owner",
       "kind": "scope",
-      "status": "waiting",
+      "status": "done",
       "source": "design/figma/invented.json#booking-form-not-sent",
       "decisions": [
         362
       ],
       "blocksRelease": false,
-      "note": "Показываем подсказку «Пока не работает» и убираем её сами. Отправка — этап 2."
+      "note": "Показываем подсказку «Пока не работает» и убираем её сами. Отправка — этап 2.",
+      "fix": "Форма подключена к сервису форм хостинга: data-netlify, honeypot, скрытый form-name, action на страницу «спасибо». Подсказка «пока не работает» удалена вместе с обработчиком (решение 395).",
+      "gate": "interactive: кнопка отправки уводит на /spasibo.html; publish: страница в сборке"
     },
     {
       "id": "INV-quiz-play",
