@@ -142,6 +142,9 @@ const GLOBAL_STEPS = [
     needsDist: false,
     about: 'отчёт дизайнеру совпадает с реестром долгов',
   },
+  { id: 'gen-drift', tool: 'check-gen', args: ['--gate', 'drift'], kind: 'gate', needsDist: false, about: 'сгенерированные файлы совпадают с пересборкой' },
+  { id: 'gen-coverage', tool: 'check-gen', args: ['--gate', 'coverage'], kind: 'gate', needsDist: false, about: 'генератор берёт не меньше узлов, чем порог' },
+  { id: 'gen-overrides', tool: 'check-gen', args: ['--gate', 'overrides'], kind: 'gate', needsDist: false, about: 'у каждого пропуска генератора есть причина' },
   {
     id: 'spec-contract',
     tool: 'check-spec-contract',

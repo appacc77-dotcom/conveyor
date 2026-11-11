@@ -764,6 +764,81 @@
         "accept-stage1"
       ],
       "about": "отчёт дизайнеру совпадает с реестром долгов"
+    },
+    "gen-drift": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/gen/**",
+        "src/components/_gen/**",
+        "design/figma/pages/**/spec.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1"
+      ],
+      "about": "сгенерированные файлы совпадают с пересборкой"
+    },
+    "gen-coverage": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/gen/**",
+        "src/components/_gen/**",
+        "design/figma/pages/**/spec.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1"
+      ],
+      "about": "генератор берёт не меньше узлов, чем порог"
+    },
+    "gen-overrides": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/gen/**",
+        "src/components/_gen/**",
+        "design/figma/pages/**/spec.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1"
+      ],
+      "about": "у каждого пропуска генератора есть причина и решение"
     }
   }
 }

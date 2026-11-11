@@ -230,6 +230,28 @@ accept-stage1 --cache`. Раньше это был свой список из с
 Что из дополнений уже сделано и почему — .
 Реестр — `design/enhancements.json`, выключатель — `data-enhancements=off`.
 
+## Генератор (пилот)
+
+`tools/gen.mjs` собирает вёрстку из спеки абсолютной раскладкой.
+
+```
+node tools/gen.mjs plan   home/method   # что попадёт в вёрстку, что в overrides
+node tools/gen.mjs emit   --all         # src/components/_gen/*.astro
+node tools/gen.mjs report               # покрытие, расхождения, overrides
+```
+
+Правила: генератор пишет только в `src/components/_gen/`; всё, что нельзя
+нарисовать из чисел (вектор, инстанс без детей), уходит в
+`design/gen/overrides/<section>.json` с причиной и номером решения. Витрина —
+`/gen.html`, приёмка сайта не участвует.
+
+Ворота: `gen-drift` (файл поправлен руками), `gen-coverage` (порог
+`project.json.gates.genCoverage`), `gen-overrides` (пропуск без причины).
+
+Чего нет: auto-layout. В спеке только координаты и `sizing` — полей раскладки
+нет, поэтому вёрстка абсолютная. Кроп картинок воспроизводится по
+`imageTransform` точно.
+
 ## Чтение .fig без Figma
 
 `tools/fig-kiwi.mjs` разбирает архив целиком: схему и данные, до дерева узлов.

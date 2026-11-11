@@ -1,0 +1,55 @@
+---
+/**
+ * Витрина генератора: секции, собранные из спеки скриптом.
+ *
+ * Живёт отдельно от сайта: пилот не имеет права менять приёмку 47 секций.
+ * Сюда же смотрит замер — та же спека, что у ручных секций.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Method from '../components/_gen/Method.astro';
+import Process from '../components/_gen/Process.astro';
+import targets from '../../design/gen/targets.json';
+---
+
+<BaseLayout title="Генератор: витрина" noindex>
+  <main class="genpage">
+    <h1 class="genpage__title">Сгенерировано из спеки</h1>
+    <p class="genpage__note">
+      {targets.sections.length} секции · абсолютная раскладка по координатам ·
+      правки — в <code>design/gen/overrides/</code>
+    </p>
+
+    <div class="genpage__item">
+      <Method />
+    </div>
+    <div class="genpage__item">
+      <Process />
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .genpage {
+    padding: 40px 0;
+    background: #e8e4da;
+  }
+
+  .genpage__title {
+    margin: 0 0 8px;
+    padding: 0 40px;
+    font: 400 24px/1.2 'Golos Text', sans-serif;
+    color: #433d34;
+  }
+
+  .genpage__note {
+    margin: 0 0 24px;
+    padding: 0 40px;
+    font: 400 14px/1.5 'Golos Text', sans-serif;
+    color: #6b6455;
+  }
+
+  .genpage__item {
+    margin: 0 0 32px;
+    width: 1440px;
+  }
+</style>
