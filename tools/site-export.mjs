@@ -53,8 +53,19 @@ const manifestPath = join(root, 'site-files.json');
 if (!existsSync(manifestPath)) fail('нет site-files.json — это и есть контракт, без него нечего выпускать');
 const contract = JSON.parse(readFileSync(manifestPath, 'utf8'));
 
+// Артефакты замера переписываются каждый прогон — они не делают мастерскую
+// «грязной»: так же считает и провенанс конвейера.
+const GENERATED = [
+  /^design\/figma\/pages\/.+\/gate\.json$/,
+  /^design\/figma\/pages\/.+\/pixel\.json$/,
+  /^design\/figma-contention\.json$/,
+];
 const allowDirty = has('--allow-dirty');
-const dirty = git(['status', '--porcelain']);
+const dirty = git(['status', '--porcelain'])
+  .split('\n')
+  .filter(Boolean)
+  .filter((line) => !GENERATED.some((re) => re.test(line.slice(3).trim())))
+  .join('\n');
 if (dirty && !allowDirty) {
   fail(`дерево мастерской грязное — сначала коммит:\n${dirty.split('\n').slice(0, 8).join('\n')}\n\nвыпуск из незакоммиченного состояния нельзя связать с прогоном приёмки`);
 }

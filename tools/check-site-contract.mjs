@@ -43,8 +43,9 @@ if (!manifest.runId || !existsSync(verdictPath)) {
 } else {
   const verdict = JSON.parse(readFileSync(verdictPath, 'utf8'));
   if (verdict.status !== 'PASS') problems.push(`прогон ${manifest.runId} не зелёный: ${verdict.status}`);
-  if (verdict.dirty) problems.push(`прогон ${manifest.runId} снят с грязного дерева — он не доказывает коммит`);
-  if (verdict.commit && manifest.sourceCommit && verdict.commit !== manifest.sourceCommit.slice(0, verdict.commit.length)) {
+  if (verdict.dirty !== false) problems.push(`прогон ${manifest.runId} снят с грязного дерева — он не доказывает коммит`);
+  if (!verdict.commit) problems.push(`у прогона ${manifest.runId} нет коммита — связать выпуск не с чем`);
+  else if (verdict.commit !== manifest.sourceCommit.slice(0, verdict.commit.length)) {
     problems.push(`прогон ${manifest.runId} снят с коммита ${verdict.commit}, а выпуск собран из ${manifest.sourceCommit.slice(0, 8)}`);
   }
   if (!['full', 'accept-stage2'].includes(verdict.mode)) {
