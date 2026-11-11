@@ -48,3 +48,6 @@ dist-base/
 .site/
 .site-branch/
 site-manifest.json
+
+# Картинки черновика генератора: копируются по хешу и не публикуются
+public/img/[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].*

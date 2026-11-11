@@ -43,3 +43,33 @@
   for = "/spasibo.html"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Кэш: картинки и шрифты не меняются между выпусками, хеш в имени пока не
+# у всех файлов — поэтому неделя, а не immutable: перезаписанный файл должен
+# доехать до браузера, а не застрять на год (решение 401).
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/svg/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Собранные скрипты и стили содержат хеш в имени — их можно кэшировать надолго.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML не кэшируем: выпуск должен доезжать сразу.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

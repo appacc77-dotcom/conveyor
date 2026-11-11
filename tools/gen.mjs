@@ -290,13 +290,31 @@ function componentName(section) {
     .join('');
 }
 
+// Соответствие «имя ассета из Figma → файл в public/img». Пишется, когда
+// оптимизатор переводит PNG в WebP или дедупликация сводит копии: после
+// этого по хешу файл уже не найти, а ссылка нужна рабочая.
+function assetMap() {
+  const path = join(root, 'design/figma/assets/img-map.json');
+  if (!existsSync(path)) return {};
+  try {
+    return JSON.parse(readFileSync(path, 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
 function imageUrl(hash) {
   // В спеке хеш полный (40 символов), а файлы в assets/img названы первыми
   // 12 — пробуем оба варианта, иначе картинка молча не находится.
   const candidates = [hash, hash.slice(0, 12)];
+  const map = assetMap();
   for (const name of candidates) for (const ext of ['jpg', 'png', 'webp']) {
     const rel = `design/figma/assets/img/${name}.${ext}`;
     if (existsSync(join(root, rel))) {
+      // Если файл уже переименован оптимизатором или дедупликацией —
+      // ссылаемся на итоговое имя, а не создаём копию заново.
+      const mapped = map[name];
+      if (mapped) return `/img/${mapped}`;
       // В public/ копируем коротким именем: так же названы файлы в assets,
       // и одинаковое имя не зависит от того, полный хеш в спеке или нет.
       const short = hash.slice(0, 12);

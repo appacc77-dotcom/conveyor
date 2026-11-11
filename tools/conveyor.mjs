@@ -191,6 +191,7 @@ const GLOBAL_STEPS = [
   { id: 'motion-manifest', tool: 'check-motion-manifest', kind: 'gate', needsDist: false, about: 'движение описано в манифесте' },
   { id: 'layout', tool: 'check-layout', kind: 'gate', needsDist: true, about: 'нет прокрутки на ширине макета' },
   { id: 'stretch', tool: 'check-stretch', kind: 'gate', needsDist: true, about: 'блоки у края тянутся вместе с окном' },
+  { id: 'weight', tool: 'check-weight', kind: 'gate', needsDist: true, about: 'вес картинок и страниц в бюджете' },
   { id: 'images', tool: 'check-images', kind: 'gate', needsDist: true, about: 'картинки не растянуты' },
   // Интеграционные: дополнения не ломают основу. Сборка base отдельная —
   // поэтому шаг собирает её сам и проверяет.
