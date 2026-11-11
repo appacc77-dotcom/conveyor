@@ -84,7 +84,14 @@ const includes = contract.include.map(toMatcher);
 const excludes = (contract.exclude ?? []).map(toMatcher);
 
 const tracked = git(['ls-files', '-z']).split('\0').filter(Boolean);
-const selected = tracked.filter((path) => includes.some((m) => m(path)) && !excludes.some((m) => m(path)));
+const selected = tracked.filter(
+  (path) =>
+    includes.some((m) => m(path)) &&
+    !excludes.some((m) => m(path)) &&
+    // Файл мог быть удалён в мастерской, но ещё числиться в индексе:
+    // копировать нечего, и падать из-за этого не нужно.
+    existsSync(join(root, path)),
+);
 
 if (!selected.length) fail('набор пуст: проверьте include в site-files.json');
 

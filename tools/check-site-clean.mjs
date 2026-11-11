@@ -12,7 +12,7 @@
  *
  * Коды: 0 — чисто, 1 — выпуск тянет мастерскую, 2 — среда (нет node_modules).
  */
-import { readFileSync, existsSync, rmSync, readdirSync, mkdtempSync } from 'node:fs';
+import { readFileSync, existsSync, rmSync, readdirSync, mkdtempSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
@@ -106,9 +106,6 @@ for (const page of ['structure.html', 'ds.html']) {
 }
 if (!existsSync(join(dist, 'index.html'))) problems.push('dist/index.html: главной нет');
 
-const manifest = existsSync(join(root, 'site-manifest.json'))
-  ? JSON.parse(readFileSync(join(root, 'site-manifest.json'), 'utf8'))
-  : null;
 
 
 if (problems.length) {
@@ -118,7 +115,11 @@ if (problems.length) {
   fail('выпуск зависит от мастерской');
 }
 
-const mb = manifest?.distBytes ? (manifest.distBytes / 1048576).toFixed(1) : '?';
+// Вес считаем по собранному набору, а не по манифесту: манифест может быть
+// от прошлого выпуска, и тогда число врёт.
+let distBytes = 0;
+for (const rel of walk(join(out, 'dist'))) distBytes += statSync(join(out, 'dist', rel)).size;
+const mb = (distBytes / 1048576).toFixed(1);
 console.log(`набор: ${allFiles.length} файлов · сборка ${mb} МБ · без design/ и docs/ · студийных страниц нет`);
 rmSync(out, { recursive: true, force: true });
 process.exit(0);
