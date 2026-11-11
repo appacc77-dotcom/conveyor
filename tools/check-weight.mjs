@@ -10,8 +10,11 @@
  * в файле фото лежат PNG. Поэтому бюджет — воротами, а не в голове.
  *
  * Бюджеты:
- *   картинка  ≤ 300 КБ   (исключения — design/figma/weight-exceptions.json)
- *   страница  ≤ 8 МБ     (сумма всего, что она просит у /img и /fonts)
+ *   картинка  ≤ 600 КБ   (исключения — design/figma/weight-exceptions.json)
+ *   страница  ≤ 14 МБ    (сумма всего, что она просит у /img и /fonts)
+ *
+ * Бюджеты подняты решением 405: качество картинок важнее веса. При 300 КБ
+ * WebP q82 «мылил» большие фото на тёмных участках, и это было видно.
  *
  * Коды: 0 — в бюджете, 1 — перевес, 2 — нет сборки.
  */
@@ -26,8 +29,8 @@ if (!existsSync(dist)) {
   process.exit(2);
 }
 
-const IMAGE_BUDGET = 300 * 1024;
-const PAGE_BUDGET = 8 * 1024 * 1024;
+const IMAGE_BUDGET = 600 * 1024;
+const PAGE_BUDGET = 14 * 1024 * 1024;
 
 const exceptionsPath = join(root, 'design/figma/weight-exceptions.json');
 const exceptions = existsSync(exceptionsPath)
