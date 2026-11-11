@@ -27,7 +27,14 @@ const required = [
   { path: 'design/figma/structure.json', step: 'npm run structure', why: 'карта для страницы /structure.html' },
 ];
 
-const missing = required.filter((item) => !existsSync(join(root, item.path)));
+// Выпуск собирается без design/ и docs/ (решение 397): там только файлы
+// сайта. В этом режиме обязательны лишь сгенерированные стили — они лежат
+// в src/ и коммитятся вместе с ним.
+const release = process.env.RELEASE === '1';
+const requiredForRelease = required.filter((item) => item.path.startsWith('src/'));
+const needed = release ? requiredForRelease : required;
+
+const missing = needed.filter((item) => !existsSync(join(root, item.path)));
 
 if (!missing.length) process.exit(0);
 

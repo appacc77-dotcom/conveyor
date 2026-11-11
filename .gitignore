@@ -43,3 +43,8 @@ dist-base/
 
 # Local Netlify folder
 .netlify
+
+# Выпуск: генерируется site-export, в git не живёт
+.site/
+.site-branch/
+site-manifest.json
