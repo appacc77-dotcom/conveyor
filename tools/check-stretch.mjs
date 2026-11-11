@@ -123,12 +123,16 @@ const collect = (page) =>
 
 for (const urlPath of pageList.length ? pageList : ['/']) {
   const atNarrow = await browser.newPage({ viewport: { width: narrow, height: 900 } });
-  await atNarrow.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'networkidle' });
+  // networkidle ждал 500 мс тишины сети на каждой загрузке: 14 загрузок —
+  // восемь секунд на пустом месте. Ширину меряем после шрифтов, этого хватает.
+  await atNarrow.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
+  await atNarrow.evaluate(() => document.fonts.ready);
   const a = await collect(atNarrow);
   await atNarrow.close();
 
   const atWide = await browser.newPage({ viewport: { width: wide, height: 900 } });
-  await atWide.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'networkidle' });
+  await atWide.goto(`http://127.0.0.1:${port}${urlPath}`, { waitUntil: 'load' });
+  await atWide.evaluate(() => document.fonts.ready);
   const b = await collect(atWide);
   await atWide.close();
 
