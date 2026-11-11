@@ -93,6 +93,19 @@ for (const path of selected.sort()) {
 
 const sourceHash = hash.digest('hex');
 
+// package.json выпуска: скрипты мастерской (prebuild из tools/, проверки,
+// экспорт) в выпуске не нужны и не должны работать — tools/ туда не едет.
+// Зависимости оставляем как есть, иначе npm ci разойдётся с package-lock.
+const releasePkgPath = join(outDir, 'package.json');
+if (existsSync(releasePkgPath)) {
+  const pkg = JSON.parse(readFileSync(releasePkgPath, 'utf8'));
+  pkg.scripts = {
+    build: 'astro build',
+    preview: 'astro preview',
+  };
+  writeFileSync(releasePkgPath, JSON.stringify(pkg, null, 2) + '\n');
+}
+
 // --- 3. Сборка выпуска -----------------------------------------------------
 let distBytes = null;
 let distFiles = null;
