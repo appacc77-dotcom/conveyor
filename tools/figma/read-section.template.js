@@ -67,7 +67,12 @@ async function walk(n, depth) {
     o.styleName = n.textStyleId ? styleNames.get(n.textStyleId) ?? null : null;
     o.fontFamily = n.fontName?.family ?? null;
     o.fontStyle = n.fontName?.style ?? null;
-    o.fontSize = n.fontSize;
+    // Смешанные стили внутри одного узла: единого шрифта нет, и Figma отдаёт
+    // символ mixed. Без пометки это выглядело как пропуск в спеке — теперь
+    // видно, что так нарисовано, и дефект файла (FI-5) остаётся на виду.
+    if (n.fontName === figma.mixed) o.fontMixed = true;
+    if (n.fontSize === figma.mixed) o.fontSizeMixed = true;
+    else o.fontSize = n.fontSize;
     o.lineHeight = n.lineHeight;
     o.letterSpacing = n.letterSpacing;
     // Без этого текст расходится с макетом: регистр, выравнивание, подчёркивание.

@@ -109,7 +109,11 @@ const rel = (abs) => abs.slice(root.length + 1);
 // --- 3. Кроп ---------------------------------------------------------------
 const cropPath = join(dir, 'crop.png');
 const cropReply = figma([
-  'export-png', '--node', nodeId, '--out', cropPath, '--scale', '1', '--timeout', '120000',
+  // Таймаут кропа вынесен в переменную: большие секции (practice-package)
+  // не укладываются в 120 с, и выгрузка падала на последнем шаге, оставляя
+  // спеку от прошлого прогона.
+  'export-png', '--node', nodeId, '--out', cropPath, '--scale', '1',
+  '--timeout', String(Number(process.env.FIGMA_CROP_TIMEOUT_MS ?? 120000)),
 ]);
 if (!existsSync(cropPath)) die(3, 'кроп не записался');
 
@@ -212,6 +216,9 @@ for (const icon of section.icons) {
 
 // --- 6. Спека --------------------------------------------------------------
 const spec = {
+  // Версия контракта спеки: по ней ворота spec-contract понимают, как читать
+  // файл. Меняется, только когда меняется сам контракт.
+  schemaVersion: 1,
   file: { name: project.source.fileName, key: fileKey, at: new Date().toISOString() },
   section: section.root,
   // Отпечаток от плагина: он видит дерево целиком, как и раньше.

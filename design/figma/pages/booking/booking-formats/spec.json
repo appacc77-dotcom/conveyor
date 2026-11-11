@@ -1,8 +1,9 @@
 {
+  "schemaVersion": 1,
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-09T19:24:54.274Z"
+    "at": "2026-11-11T11:33:15.078Z"
   },
   "section": {
     "id": "383:761",
@@ -2898,6 +2899,7 @@
       "styleName": null,
       "fontFamily": null,
       "fontStyle": null,
+      "fontMixed": true,
       "fontSize": 20,
       "lineHeight": {
         "unit": "PERCENT",
@@ -5188,6 +5190,7 @@
       "styleName": "caption",
       "fontFamily": null,
       "fontStyle": null,
+      "fontMixed": true,
       "fontSize": 13,
       "lineHeight": {
         "unit": "PERCENT",

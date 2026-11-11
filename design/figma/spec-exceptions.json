@@ -1,0 +1,40 @@
+{
+  "about": "Осознанные отступления от контракта спеки. Ворота spec-contract их пропускают; без записи здесь они красные. Спеки генерируются, поэтому решение живёт отдельным файлом.",
+  "exceptions": [
+    {
+      "unit": "practice/quiz",
+      "id": "410:1411",
+      "field": "fontFamily",
+      "why": "В узле смешаны стили (Figma отдаёт mixed): единого шрифта нет, шрифт задаёт класс компонента. Дефект файла — FI-5.",
+      "source": "проверено мостом 11.11.2026: fontName MIXED, fontSize MIXED"
+    },
+    {
+      "unit": "practice/quiz",
+      "id": "410:1411",
+      "field": "fontSize",
+      "why": "То же: кегль разный в одном узле.",
+      "source": "проверено мостом 11.11.2026"
+    },
+    {
+      "unit": "practice/practice-package",
+      "id": "427:1206",
+      "field": "fontFamily",
+      "why": "Смешанные стили (FI-5), шрифт задаёт класс компонента.",
+      "source": "проверено мостом 11.11.2026: fontName MIXED, fontSize 29"
+    },
+    {
+      "unit": "practice/practice-package",
+      "id": "427:1269",
+      "field": "fontFamily",
+      "why": "Смешанные стили (FI-5).",
+      "source": "проверено мостом 11.11.2026"
+    },
+    {
+      "unit": "practice/practice-package",
+      "id": "427:1302",
+      "field": "fontFamily",
+      "why": "Смешанные стили (FI-5).",
+      "source": "проверено мостом 11.11.2026"
+    }
+  ]
+}

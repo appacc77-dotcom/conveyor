@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 1,
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
@@ -113,7 +114,7 @@
             [
               1,
               0,
-              0.000004680738129536621
+              4.680738129536621e-06
             ],
             [
               0,

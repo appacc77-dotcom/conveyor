@@ -39,6 +39,16 @@ import { readZip } from './lib/zip.mjs';
 const BUILTIN = ['bool', 'byte', 'int', 'uint', 'float', 'string', 'int64', 'uint64'];
 const KINDS = ['ENUM', 'STRUCT', 'MESSAGE'];
 
+/**
+ * Версии kiwi, на которых декодер проверен.
+ *
+ * Формат закрытый и меняется вместе с Figma. Незнакомая версия — это не
+ * «наверное, сойдёт»: при первом разборе рассинхрон был молчаливым (uint64
+ * читался на два байта дальше), дерево собиралось, но врало. Лучше громкий
+ * отказ с кодом 3, чем тихо неверные числа.
+ */
+const SUPPORTED_KIWI = [106];
+
 /** Чтение значений из байтов: ровно кодировки спецификации kiwi. */
 class Reader {
   constructor(bytes) {
@@ -193,6 +203,14 @@ export function readFig(file) {
   if (raw.toString('latin1', 0, 8) !== 'fig-kiwi') throw new Error('canvas.fig не в формате fig-kiwi');
 
   const version = raw.readUInt32LE(8);
+  if (!SUPPORTED_KIWI.includes(version)) {
+    const error = new Error(
+      `формат kiwi v${version} не проверен (декодер знает ${SUPPORTED_KIWI.join(', ')}). ` +
+        'Обновите Figma-файл или проверьте декодер: молчаливый разбор может дать неверные числа.',
+    );
+    error.exitCode = 3;
+    throw error;
+  }
   const schemaLen = raw.readUInt32LE(12);
   const schema = parseSchema(inflateRawSync(raw.subarray(16, 16 + schemaLen)));
 
@@ -259,7 +277,7 @@ try {
   fig = readFig(file);
 } catch (error) {
   console.error(`не прочитан: ${error.message}`);
-  process.exit(1);
+  process.exit(error.exitCode ?? 1);
 }
 
 const { meta, version, schema, message } = fig;
@@ -272,7 +290,7 @@ if (command === 'inspect') {
   const kinds = schema.definitions.reduce((acc, d) => ({ ...acc, [d.kind]: (acc[d.kind] ?? 0) + 1 }), {});
   console.log(`файл:      ${file}`);
   console.log(`имя:       ${meta.file_name ?? '—'} · выгружен ${meta.export_date ?? '—'}`);
-  console.log(`канвас:    kiwi v${version} · определений ${schema.definitions.length} (${Object.entries(kinds).map(([k, v]) => `${k} ${v}`).join(', ')})`);
+  console.log(`канвас:    kiwi v${version} (проверено на ${SUPPORTED_KIWI.join(', ')}) · определений ${schema.definitions.length} (${Object.entries(kinds).map(([k, v]) => `${k} ${v}`).join(', ')})`);
   console.log(`сообщение: ${enumName(schema, 'MessageType', message.type)} · узлов ${(message.nodeChanges ?? []).length}`);
   console.log(`страниц:   ${pages.length} (служебных холстов ${canvases.length - pages.length})`);
   for (const page of pages) console.log(`  ${page.name} — ${kidsOf(page).length}`);
@@ -373,6 +391,7 @@ if (command === 'export') {
     process.exit(1);
   }
   const spec = {
+    schemaVersion: 1,
     file: { key: null, name: meta.file_name ?? null },
     source: 'fig-archive',
     section: {

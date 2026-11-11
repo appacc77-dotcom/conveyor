@@ -57,7 +57,8 @@
     "tokens:dtcg": "node tools/check-tokens-dtcg.mjs",
     "build:base": "FIGMA_ONLY=1 ASTRO_OUT_DIR=dist-base ASTRO_TELEMETRY_DISABLED=1 astro build",
     "fig:kiwi": "node tools/fig-kiwi.mjs",
-    "spec:bounds": "node tools/check-spec-bounds.mjs"
+    "spec:bounds": "node tools/check-spec-bounds.mjs",
+    "spec:contract": "node tools/check-spec-contract.mjs"
   },
   "devDependencies": {
     "astro": "^7.4.5",

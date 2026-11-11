@@ -1,8 +1,9 @@
 {
+  "schemaVersion": 1,
   "file": {
     "name": "Website Syntonia2",
     "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-06T20:46:37.011Z"
+    "at": "2026-11-11T11:33:39.974Z"
   },
   "section": {
     "id": "79:137",
@@ -259,6 +260,8 @@
       "styleName": null,
       "fontFamily": null,
       "fontStyle": null,
+      "fontMixed": true,
+      "fontSizeMixed": true,
       "lineHeight": {
         "unit": "PERCENT",
         "value": 170.00000476837158

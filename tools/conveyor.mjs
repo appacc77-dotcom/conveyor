@@ -135,6 +135,13 @@ function coverage(units) {
 
 const GLOBAL_STEPS = [
   {
+    id: 'spec-contract',
+    tool: 'check-spec-contract',
+    kind: 'gate',
+    needsDist: false,
+    about: 'спека по контракту: версия схемы, поля, типографика',
+  },
+  {
     id: 'spec-bounds',
     tool: 'check-spec-bounds',
     kind: 'gate',
