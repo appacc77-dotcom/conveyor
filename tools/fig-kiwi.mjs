@@ -30,7 +30,7 @@
  *               байт берётся как есть, следующий принадлежит другому полю.
  *               Обычный LEB128 уходит на два байта дальше и разъезжается.
  */
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync, readdirSync, statSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { zstdDecompressSync, inflateRawSync } from 'node:zlib';
@@ -223,6 +223,20 @@ export function readFig(file) {
   return { meta, version, schema, data, message };
 }
 
+/** Спеки: design/figma/pages/<page>/<section>/spec.json */
+function specsOf(base) {
+  const out = [];
+  for (const page of readdirSync(base)) {
+    const pageDir = join(base, page);
+    if (!statSync(pageDir).isDirectory()) continue;
+    for (const section of readdirSync(pageDir)) {
+      const file = join(pageDir, section, 'spec.json');
+      if (existsSync(file)) out.push({ unit: `${page}/${section}`, file });
+    }
+  }
+  return out;
+}
+
 /** Имя значения перечисления по номеру. */
 export function enumName(schema, name, value) {
   return schema.byName.get(name)?.fields.find((f) => f.value === value)?.name ?? String(value);
@@ -261,7 +275,7 @@ if (!isCli) {
 } else {
 
 const [command, file, ...rest] = process.argv.slice(2);
-const usage = 'Использование: node tools/fig-kiwi.mjs <inspect|pages|tree> <file.fig> ["страница"] [глубина]';
+const usage = 'Использование: node tools/fig-kiwi.mjs <inspect|pages|tree|crosscheck|export> <file.fig> …';
 
 if (!command || !file) {
   console.error(usage);
@@ -407,6 +421,79 @@ if (command === 'export') {
   console.log(`секция: ${spec.section.name} ${spec.section.w}×${spec.section.h} (${spec.section.id})`);
   console.log(`узлов:  ${spec.nodes.length} · текстов: ${spec.nodes.filter((n) => n.text).length}`);
   console.log(`записано: ${join(outDir, 'spec.json')}`);
+  process.exit(0);
+}
+
+/** Сколько узлов в поддереве архива — для сверки с числом узлов спеки. */
+function countSubtree(node) {
+  let n = 1;
+  for (const child of kidsOf(node)) n += countSubtree(child);
+  return n;
+}
+
+if (command === 'crosscheck') {
+  // Сверка архива со спеками: потерялось ли что-то при выгрузке.
+  // Мост показывает файл сейчас, архив — что было в момент выгрузки; это
+  // единственная проверка, где источник независим от спеки.
+  //
+  // Сравниваются только размеры секций. Число узлов сравнить нельзя:
+  // в архиве инстансы не раскрываются (634 инстанса, ни у одного нет детей),
+  // а спека, снятая мостом, их раскрывает. Поэтому счётчик в архиве — это
+  // нижняя граница, и врать «узлов меньше — потеря» было бы нечестно.
+  const specsDir = join(process.cwd(), 'design/figma/pages');
+  if (!existsSync(specsDir)) {
+    console.error(`нет каталога спек: ${specsDir}`);
+    process.exit(2);
+  }
+  const tolerance = Number(process.env.CROSSCHECK_TOLERANCE_PX ?? 1);
+
+  const byName = new Map();
+  const collect = (node, pageName) => {
+    for (const child of kidsOf(node)) {
+      if (!byName.has(child.name)) byName.set(child.name, []);
+      byName.get(child.name).push({
+        page: pageName,
+        w: Math.round(child.size?.x ?? 0),
+        h: Math.round(child.size?.y ?? 0),
+        instances: enumName(schema, 'NodeType', child.type) === 'INSTANCE',
+      });
+      collect(child, pageName);
+    }
+  };
+  for (const page of pages) collect(page, page.name);
+
+  const problems = [];
+  let checked = 0;
+  let instancesInSpec = 0;
+  for (const { unit, file } of specsOf(specsDir)) {
+    const spec = JSON.parse(readFileSync(file, 'utf8'));
+    const name = spec.section?.name;
+    const w = Math.round(spec.section?.w ?? 0);
+    const h = Math.round(spec.section?.h ?? 0);
+    checked += 1;
+    instancesInSpec += (spec.nodes ?? []).filter((n) => n.type === 'INSTANCE').length;
+
+    const candidates = byName.get(name) ?? [];
+    if (!candidates.length) {
+      problems.push({ unit, text: `в архиве нет фрейма «${name}»` });
+      continue;
+    }
+    const match = candidates.find((c) => Math.abs(c.w - w) <= tolerance && Math.abs(c.h - h) <= tolerance);
+    if (!match) {
+      const sizes = [...new Set(candidates.map((c) => `${c.w}×${c.h}`))].join(', ');
+      problems.push({ unit, text: `размер разошёлся: спека ${w}×${h}, архив ${sizes}` });
+    }
+  }
+
+  if (problems.length) {
+    console.log(`спек: ${checked} · расхождений: ${problems.length}`);
+    for (const p of problems.slice(0, 20)) console.log(`  ${p.unit}: ${p.text}`);
+    if (problems.length > 20) console.log(`  … и ещё ${problems.length - 20}`);
+    console.error('\nархив и спеки расходятся: либо выгрузка потеряла секции, либо файл изменился');
+    process.exit(1);
+  }
+  console.log(`спек: ${checked} · расхождений: 0`);
+  console.log(`размеры секций в архиве и в спеках совпадают (инстансов в спеках ${instancesInSpec}: их дети в архиве не раскрыты, поэтому число узлов не сравнивается)`);
   process.exit(0);
 }
 

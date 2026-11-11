@@ -135,6 +135,14 @@ function coverage(units) {
 
 const GLOBAL_STEPS = [
   {
+    id: 'designer-report',
+    tool: 'report-designer',
+    args: ['--check'],
+    kind: 'gate',
+    needsDist: false,
+    about: 'отчёт дизайнеру совпадает с реестром долгов',
+  },
+  {
     id: 'spec-contract',
     tool: 'check-spec-contract',
     kind: 'gate',

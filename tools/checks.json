@@ -740,6 +740,30 @@
         "sources-live"
       ],
       "about": "спека по контракту: версия схемы, поля, типографика текста"
+    },
+    "designer-report": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "docs/debts.json",
+        "docs/FIGMA-ISSUES.md"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 30000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1"
+      ],
+      "about": "отчёт дизайнеру совпадает с реестром долгов"
     }
   }
 }
