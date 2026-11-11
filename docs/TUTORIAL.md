@@ -114,7 +114,10 @@ npm run variants -- 102:220 --name formats --write   # записать states.j
 
 ## Шаг 4. Собрать компонент
 
-Читаем спеку и переносим — ничего не додумывая:
+Можно начать с черновика: `npm run gen -- emit <page>/<section>` кладёт скелет
+в `src/components/_gen/`. Он даёт точные координаты и список пропусков, но не
+готовую вёрстку: текст и состояния доводятся руками (решение 388). Так же
+читаем спеку и переносим — ничего не додумывая:
 
 ```bash
 node -e "const d=require('./design/figma/pages/home/entry/spec.json'); for (const n of d.nodes) console.log(n.type, n.x, n.y, n.w+'x'+n.h, n.name, n.autoLayout ? n.autoLayout.mode+' gap='+n.autoLayout.gap : '')"

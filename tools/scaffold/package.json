@@ -61,7 +61,9 @@
     "spec:contract": "node tools/check-spec-contract.mjs",
     "fig:crosscheck": "node tools/fig-kiwi.mjs crosscheck",
     "report:designer": "node tools/report-designer.mjs",
-    "report:studio": "node tools/report-studio.mjs"
+    "report:studio": "node tools/report-studio.mjs",
+    "gen": "node tools/gen.mjs",
+    "gen:report": "node tools/gen.mjs report --all"
   },
   "devDependencies": {
     "astro": "^7.4.5",
