@@ -19,6 +19,7 @@
  */
 import { readFileSync, writeFileSync, readdirSync, statSync, unlinkSync, existsSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 
 const root = process.cwd();
@@ -29,6 +30,10 @@ const arg = (name, fallback) => {
 const maxWidth = arg('--max', 1440);
 const quality = arg('--quality', 82);
 const dry = process.argv.includes('--dry');
+// Формат задаётся флагом: webp (по умолчанию, через Chromium) или avif
+// (через системный sips). AVIF при том же весе даёт заметно меньше
+// артефактов на градиентах — ради этого он и добавлен (решение 407).
+const format = (process.argv.includes('--format') ? process.argv[process.argv.indexOf('--format') + 1] : 'webp');
 
 const dir = join(root, 'public/img');
 if (!existsSync(dir)) {
@@ -39,6 +44,61 @@ if (!existsSync(dir)) {
 const files = readdirSync(dir).filter((f) => /\.(png|jpe?g)$/i.test(f));
 if (!files.length) {
   console.log('нечего оптимизировать');
+  process.exit(0);
+}
+
+if (format === 'avif') {
+  // sips есть только на macOS; на других системах честно говорим, что делать.
+  try {
+    execFileSync('sips', ['--version'], { stdio: 'pipe' });
+  } catch {
+    console.error('AVIF собирается через sips (macOS). На этой системе его нет.');
+    process.exit(2);
+  }
+
+  const results = [];
+  for (const file of files) {
+    const abs = join(dir, file);
+    const before = statSync(abs).size;
+    const isPng = extname(file).toLowerCase() === '.png';
+    // Мелкие JPEG не трогаем: перекодирование мелочи портит картинку.
+    if (!isPng && before < 300 * 1024) {
+      results.push({ file, target: file, before, after: before, skipped: true, out: { sourceWidth: 0, sourceHeight: 0, width: 0, height: 0 } });
+      continue;
+    }
+
+    const width = Number(
+      execFileSync('sips', ['-g', 'pixelWidth', abs], { encoding: 'utf8' }).match(/pixelWidth: (\d+)/)?.[1] ?? 0,
+    );
+    const target = basename(file, extname(file)) + '.avif';
+    const outPath = join(dir, target);
+    const args = ['-s', 'format', 'avif', '-s', 'formatOptions', String(quality)];
+    if (width > maxWidth) args.push('--resampleWidth', String(maxWidth));
+    args.push(abs, '--out', outPath);
+
+    if (!dry) {
+      execFileSync('sips', args, { stdio: 'pipe' });
+      if (target !== file) unlinkSync(abs);
+    }
+    const after = dry ? before : statSync(outPath).size;
+    results.push({ file, target, before, after, out: { sourceWidth: width, sourceHeight: 0, width: Math.min(width, maxWidth), height: 0 } });
+  }
+
+  const mb = (b) => `${(b / 1024 / 1024).toFixed(2)} МБ`;
+  const totalBefore = results.reduce((sum, r) => sum + r.before, 0);
+  const totalAfter = results.reduce((sum, r) => sum + r.after, 0);
+  console.log(`оптимизация в AVIF${dry ? ' (пробный прогон)' : ''}: ширина ≤ ${maxWidth}, качество ${quality}\n`);
+  for (const r of results) {
+    if (r.skipped) continue;
+    const saved = 100 - (r.after / r.before) * 100;
+    console.log(`${(r.target === r.file ? r.file : `${r.file} → ${r.target}`).padEnd(46)} ${mb(r.before).padStart(9)} → ${mb(r.after).padStart(9)}  ${saved.toFixed(0)} %`);
+  }
+  console.log(`\nвсего: ${mb(totalBefore)} → ${mb(totalAfter)} (${(100 - (totalAfter / totalBefore) * 100).toFixed(0)} % меньше)`);
+  const renamed = results.filter((r) => r.changed !== false && r.target !== r.file);
+  if (renamed.length) {
+    console.log('\nобновить ссылки в разметке:');
+    for (const r of renamed) console.log(`  /img/${r.file}  →  /img/${r.target}`);
+  }
   process.exit(0);
 }
 
