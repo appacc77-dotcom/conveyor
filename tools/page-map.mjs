@@ -126,7 +126,10 @@ const totals = rows.reduce(
 );
 
 const result = { schemaVersion: 1, at: new Date().toISOString(), totals, pages: rows };
-writeFileSync(join(root, 'design/figma/page-map.json'), JSON.stringify(result, null, 2) + '\n');
+// В режиме проверки ничего не пишем: прогон приёмки сверяет содержимое
+// дерева до и после, и файл, переписанный воротами, делает прогон негодным
+// как доказательство коммита.
+if (!checkOnly) writeFileSync(join(root, 'design/figma/page-map.json'), JSON.stringify(result, null, 2) + '\n');
 
 const md = [];
 md.push('# Карта страниц: что перенесено');
@@ -173,7 +176,7 @@ if (problems.length) {
   for (const p of problems.slice(0, 40)) md.push(`- ${p}`);
   md.push('');
 }
-writeFileSync(join(root, 'docs/PAGE-MAP.md'), md.join('\n') + '\n');
+if (!checkOnly) writeFileSync(join(root, 'docs/PAGE-MAP.md'), md.join('\n') + '\n');
 
 if (checkOnly) {
   if (problems.length) {
