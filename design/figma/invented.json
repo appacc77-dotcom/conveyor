@@ -92,6 +92,22 @@
       "stage2": "адрес возврата сервиса форм",
       "billable": true,
       "enhancement": "form-behaviour"
+    },
+    {
+      "id": "booking-form-not-sent",
+      "what": "Подсказка «Пока не работает: отправка появится позже» в форме заявки",
+      "file": "src/components/BookingFormats.astro",
+      "selector": ".bformats__note",
+      "marker": true,
+      "origin": "invented",
+      "decisions": [
+        362,
+        415
+      ],
+      "checkedBy": "interactive",
+      "stage2": "сервис форм выключен вместе с Netlify; адресат и валидация — решение владельца",
+      "billable": true,
+      "enhancement": "form-behaviour"
     }
   ]
 }

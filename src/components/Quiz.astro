@@ -26,9 +26,10 @@ interface Props {
   segments: Segment[];
   ctaLabel: string;
   meta: string[];
+  ctaHref?: string;
 }
 
-const { title, segments, ctaLabel, meta } = Astro.props;
+const { title, segments, ctaLabel, meta, ctaHref = '/quiz.html' } = Astro.props;
 ---
 
 <section class="quiz" id="home-quiz" data-figma-node="79:137">
@@ -49,7 +50,7 @@ const { title, segments, ctaLabel, meta } = Astro.props;
 
         <div class="quiz__cta" data-figma-node="79:142">
           <BtnPrimary
-            href="/404.html"
+            href={ctaHref}
             label={ctaLabel}
             theme="light"
             size="L"

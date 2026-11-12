@@ -148,6 +148,7 @@ const GLOBAL_STEPS = [
   { id: 'lib-purity', tool: 'check-lib', kind: 'gate', needsDist: false, about: 'lib/ без зависимостей от проекта' },
   { id: 'site-clean', tool: 'check-site-clean', kind: 'gate', needsDist: false, about: 'выпуск без мастерской' },
   { id: 'site-contract', tool: 'check-site-contract', kind: 'gate', needsDist: false, about: 'выпуск связан с прогоном' },
+  { id: 'links', tool: 'check-links', kind: 'gate', needsDist: true, about: 'внутренние ссылки не ведут в пустоту' },
   { id: 'publish', tool: 'check-publish', kind: 'gate', needsDist: true, about: 'в публикации нет отладочных страниц' },
   {
     id: 'spec-contract',

@@ -12,7 +12,6 @@
     "tsconfig.json",
     "package.json",
     "package-lock.json",
-    "netlify.toml",
     ".gitignore"
   ],
   "exclude": [

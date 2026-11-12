@@ -198,24 +198,10 @@ const fields = [
 
         <span class="bformats__panel-divider" aria-hidden="true" />
 
-        {/* Форма уходит сервису форм хостинга: атрибуты data-netlify и
-            honeypot читает Netlify при деплое, серверного кода у нас нет.
-            action — страница «спасибо», её в макете нет (invented → 395). */}
-        <form
-          class="bformats__form"
-          data-figma-node="806:372"
-          name="booking"
-          method="POST"
-          action="/spasibo.html"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          novalidate
-        >
-          <input type="hidden" name="form-name" value="booking" />
-          {/* Ловушка для ботов: человек её не видит, робот заполняет. */}
-          <p class="bfield bfield--trap" aria-hidden="true">
-            <label>Не заполняйте это поле<input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-          </p>
+        {/* Форма пока не отправляется: сервиса форм больше нет (Netlify
+            отключён, решение 415). Врать «ушло» нельзя — показываем подсказку
+            под кнопкой, как в решении 362. */}
+        <form class="bformats__form" data-figma-node="806:372" novalidate>
           {fields.map((f) => (
             <label class="bfield">
               <span class="bfield__head">
@@ -237,6 +223,10 @@ const fields = [
           <p class="bformats__consent">
             Нажимая “Отправить заявку”, вы соглашаетесь с условиями обработки данных.
           </p>
+          {!figmaOnly && (
+            <p class="bformats__note" data-invented="booking-form-not-sent" role="status" aria-live="polite" data-note></p>
+          )}
+
           <div class="bformats__legal">
             <span class="bformats__legal-title" data-figma-node="385:1344">Правовая информация</span>
             <p class="bformats__legal-text" data-figma-node="385:1370">
@@ -288,6 +278,18 @@ const fields = [
         option.addEventListener('click', () => pick(Number(option.dataset.format)));
       }
       section.querySelector('[data-pick-first]')?.addEventListener('click', () => pick(0));
+
+      // Отправлять некуда: говорим об этом подсказкой, которая исчезает сама,
+      // иначе человек решит, что заявка ушла (решение 362/415).
+      const note = section.querySelector('[data-note]');
+      section.querySelector('[data-submit]')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (!note) return;
+        note.textContent = 'Пока не работает: отправка появится позже';
+        note.classList.add('is-visible');
+        clearTimeout(note.hideTimer);
+        note.hideTimer = setTimeout(() => note.classList.remove('is-visible'), 3200);
+      });
 
     }
   }

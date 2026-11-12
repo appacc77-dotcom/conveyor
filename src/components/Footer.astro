@@ -18,30 +18,40 @@
 
 interface FooterLink {
   text: string;
+  href: string;
   node: string;
 }
 
+/**
+ * Ссылки подвала. В макете адресов нет — только подписи, поэтому адрес
+ * выбирается здесь: если страница существует, ведём на неё; если нет —
+ * на заглушку /404.html (решение 414). Заглушка — не «ошибка», а честный
+ * ответ: страницы пока нет.
+ */
 const navigation: FooterLink[] = [
-  { text: 'О проекте', node: 'I148:561;148:425' },
-  { text: 'Практики', node: 'I148:561;148:426' },
-  { text: 'Библиотека', node: 'I148:561;148:427' },
-  { text: 'Форматы работы', node: 'I148:561;148:428' },
-  { text: 'Отзывы', node: 'I148:561;148:429' },
-  { text: 'Вопросы и ответы', node: 'I148:561;148:430' },
+  { text: 'О проекте', href: '/#home-about-founder', node: 'I148:561;148:425' },
+  { text: 'Практики', href: '/practice.html', node: 'I148:561;148:426' },
+  { text: 'Библиотека', href: '/library.html', node: 'I148:561;148:427' },
+  { text: 'Форматы работы', href: '/booking.html', node: 'I148:561;148:428' },
+  { text: 'Отзывы', href: '/#home-voices', node: 'I148:561;148:429' },
+  { text: 'Вопросы и ответы', href: '/#home-faq', node: 'I148:561;148:430' },
 ];
 
 const contacts: FooterLink[] = [
-  { text: 'Telegram', node: 'I148:561;148:435' },
-  { text: 'Instagram', node: 'I148:561;148:436' },
-  { text: 'YouTube', node: 'I148:561;148:437' },
-  { text: 'hello@syntonia.com', node: 'I148:561;148:438' },
+  // Соцсетей и почты в проекте нет: адреса ведут на заглушку, пока заказчик
+  // не даст реальные. Почту можно было бы сделать mailto, но её тоже не
+  // подтвердили — врать ссылкой хуже, чем показать заглушку.
+  { text: 'Telegram', href: '/404.html', node: 'I148:561;148:435' },
+  { text: 'Instagram', href: '/404.html', node: 'I148:561;148:436' },
+  { text: 'YouTube', href: '/404.html', node: 'I148:561;148:437' },
+  { text: 'hello@syntonia.com', href: '/404.html', node: 'I148:561;148:438' },
 ];
 
 const legal: FooterLink[] = [
-  { text: 'Публичная оферта', node: 'I148:561;148:445' },
-  { text: 'Политика конфиденциальности', node: 'I148:561;148:446' },
-  { text: 'Согласие на обработку персональных данных', node: 'I148:561;148:447' },
-  { text: 'Cookie settings', node: 'I148:561;148:448' },
+  { text: 'Публичная оферта', href: '/404.html', node: 'I148:561;148:445' },
+  { text: 'Политика конфиденциальности', href: '/404.html', node: 'I148:561;148:446' },
+  { text: 'Согласие на обработку персональных данных', href: '/404.html', node: 'I148:561;148:447' },
+  { text: 'Cookie settings', href: '/404.html', node: 'I148:561;148:448' },
 ];
 ---
 
@@ -66,7 +76,7 @@ const legal: FooterLink[] = [
         <p class="footer__title t-eyebrow-xs" data-figma-node="I148:561;147:422">навигация</p>
         <div class="footer__links" data-figma-node="I148:561;148:431">
           {navigation.map((link) => (
-            <a class="footer__link t-caption" href="/404.html" data-figma-node={link.node}>{link.text}</a>
+            <a class="footer__link t-caption" href={link.href} data-figma-node={link.node}>{link.text}</a>
           ))}
         </div>
       </nav>
@@ -75,7 +85,7 @@ const legal: FooterLink[] = [
         <p class="footer__title t-eyebrow-xs" data-figma-node="I148:561;148:433">контакты</p>
         <div class="footer__links" data-figma-node="I148:561;148:434">
           {contacts.map((link) => (
-            <a class="footer__link t-caption" href="/404.html" data-figma-node={link.node}>{link.text}</a>
+            <a class="footer__link t-caption" href={link.href} data-figma-node={link.node}>{link.text}</a>
           ))}
         </div>
       </nav>
@@ -87,7 +97,7 @@ const legal: FooterLink[] = [
       <p class="footer__copy t-caption" data-figma-node="I148:561;148:444">© Syntonia, 2026</p>
       <div class="footer__legal" data-figma-node="I148:561;148:449">
         {legal.map((link) => (
-          <a class="footer__link t-caption" href="/404.html" data-figma-node={link.node}>{link.text}</a>
+          <a class="footer__link t-caption" href={link.href} data-figma-node={link.node}>{link.text}</a>
         ))}
       </div>
     </div>
