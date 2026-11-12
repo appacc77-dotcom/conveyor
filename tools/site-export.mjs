@@ -30,7 +30,10 @@ const args = process.argv.slice(2);
 const has = (name) => args.includes(name);
 const arg = (name, fallback) => {
   const i = args.indexOf(name);
-  return i > 0 ? args[i + 1] : fallback;
+  // i >= 0: флаг может стоять первым в командной строке. С `i > 0` первый
+  // аргумент молча игнорировался — так выпуск с --base ушёл без префикса,
+  // и сайт по адресу /synt-prepublicate/ отдавал 404 на картинки.
+  return i >= 0 ? args[i + 1] : fallback;
 };
 
 const outArg = arg('--out', '.site');
