@@ -1,6 +1,9 @@
 {
-  "at": "2026-11-11T15:01:51.246Z",
+  "at": "2026-11-12T21:55:39.270Z",
   "sections": {
+    "book/book-hero": {
+      "spec": "469bdf9e4170b9a4"
+    },
     "booking/booking-formats": {
       "spec": "e4f8225718536168",
       "crop": "d10cf772364f3d48",
@@ -192,9 +195,9 @@
       "states": "fce2c208f124a13d"
     },
     "practice/info-section": {
-      "spec": "8d3ce7f539d25d7c",
+      "spec": "81fe4904411c05e8",
       "crop": "96adad8af35f2682",
-      "states": "ec305fb2b13e796c"
+      "states": "29358e8fce27aead"
     },
     "practice/kody-practice-pay": {
       "spec": "5649f31a47609a8a",
@@ -202,9 +205,9 @@
       "states": "8a8af59439efc35c"
     },
     "practice/practice-free": {
-      "spec": "5e80bfb509b151ee",
+      "spec": "10715498d480310d",
       "crop": "9863b6afa655e3f7",
-      "states": "b30fa9847f570a05"
+      "states": "7a9ce38cf9534080"
     },
     "practice/practice-package": {
       "spec": "eca380a34bb72fca",
@@ -212,9 +215,9 @@
       "states": "06a7fa60c3dc9b8d"
     },
     "practice/practice-pay": {
-      "spec": "be77e72ac2d5bc0d",
+      "spec": "0097a1e33ca92238",
       "crop": "c2f886a09199cb66",
-      "states": "405b65412d11dbc6"
+      "states": "321eafa939236d68"
     },
     "practice/quiz": {
       "spec": "8f26d0c0bccbaa33",
@@ -242,27 +245,27 @@
       "states": "8491efee214b7980"
     }
   },
-  "fileName": "Website Syntonia2",
-  "fileKey": "NInjODHyOOjIitF3lq4Vpe",
+  "fileName": "Website Syntonia-2",
+  "fileKey": "ZKFou1NieRz33oI4A9oXsL",
   "counts": {
     "pages": 10,
-    "components": 54,
+    "components": 56,
     "tokens": 41,
     "styles": 39,
-    "instances": 1145,
+    "instances": 1142,
     "scaled": 0,
-    "frames1440": 48
+    "frames1440": 49
   },
   "byPage": {
-    "Design system": 95,
+    "Design system": 99,
     "_______________________": 0,
     "Home": 381,
     "Masters": 92,
-    "Library": 136,
-    "Practice": 189,
+    "Library": 156,
+    "Practice": 183,
     "Quiz": 141,
-    "Booking": 99,
-    "Method": 12,
+    "Booking": 79,
+    "Method": 11,
     "______________________": 0
   }
 }

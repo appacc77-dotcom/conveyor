@@ -1,25 +1,52 @@
 ---
 /**
  * arrow-quiet — набор Figma `arrow-quiet` (13:120).
- * Вектор выгружен с живого узла I79:110;695:1532 через figma-agent, не нарисован.
+ *
+ * Вариант — отдельный вектор из файла, а не поворот CSS: у
+ * `arrow-quiet 90/Variant2` (вниз) и `arrow-quiet 180` (вверх) своя геометрия.
+ * Раньше здесь был один общий `arrow.svg`, и в аккордеоне «Бережная практика»
+ * стрелки смотрели не туда и были светлее макета (решение 416).
+ *
+ *   direction: 'right' — вперёд (кнопки), 'up' — закрытый пункт, 'down' — открытый.
  */
-import arrow from '../../assets/arrow.svg?raw';
+import arrowRight from '../../assets/arrow.svg?raw';
+import arrowUp from '../../assets/svg/arrow-up.svg?raw';
+import arrowDown from '../../assets/svg/arrow-down.svg?raw';
+import arrowWhite from '../../assets/svg/arrow-white.svg?raw';
 
 interface Props {
-  /** Размер из спеки: в кнопках 14, в btn-quiet 19. */
+  /** Размер из спеки: в кнопках 14, в btn-quiet 19, в аккордеоне 25–26. */
   size?: number;
+  direction?: 'right' | 'up' | 'down';
+  tone?: 'ink' | 'white';
 }
 
-const { size = 14 } = Astro.props;
+const { size = 14, direction = 'right', tone = 'ink' } = Astro.props;
+
+const markup =
+  tone === 'white'
+    ? arrowWhite
+    : direction === 'up'
+      ? arrowUp
+      : direction === 'down'
+        ? arrowDown
+        : arrowRight;
 ---
 
-<span class="arrow-quiet" style={`--arrow-size:${size}px`}><Fragment set:html={arrow} /></span>
+<span class="arrow-quiet" style={`--arrow-size:${size}px`}><Fragment set:html={markup} /></span>
 
 <style>
   :global(.arrow-quiet) {
+    display: flex;
     flex: none;
     width: var(--arrow-size, 14px);
     height: var(--arrow-size, 14px);
     color: inherit;
+  }
+
+  :global(.arrow-quiet svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 </style>

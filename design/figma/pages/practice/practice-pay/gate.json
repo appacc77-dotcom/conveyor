@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-08T13:21:44.500Z",
+  "at": "2026-11-12T21:54:04.958Z",
   "section": {
     "id": "410:1414",
     "name": "practice-pay",
@@ -11,9 +11,9 @@
   "unknown": 0,
   "missing": [],
   "marked": 16,
-  "nodes": 249,
+  "nodes": 220,
   "coverage": 100,
-  "markedRatio": 6.4,
+  "markedRatio": 7.3,
   "tolerance": 1,
   "worstDelta": 1
 }

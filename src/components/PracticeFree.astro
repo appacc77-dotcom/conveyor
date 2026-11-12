@@ -12,12 +12,25 @@ interface Props {
 
 const { node = '410:1122' } = Astro.props;
 
+/** Figma пишет авторский перенос строки как U+2028 — превращаем в <br>. */
+const breakLines = (text: string) =>
+  text
+    .split('\u2028')
+    .map((line) => line.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'))
+    .join('<br />');
+
 const cards = [
   {
     id: '410:1182',
     height: 471,
     image: '/img/practice-card-9fae.jpg',
-    title: 'Освобождение от чужого и лишнего.',
+    // Кроп из Figma (CROP): transform 0.4774/0.4129 → 209,46 % × 242,19 %,
+    // сдвиг 100 % × 5,49 %. Без него карточка показывает фотографию целиком,
+    // а в макете видна только арка.
+    size: '209.46% 242.19%',
+    position: '100% 5.49%',
+    // U+2028 из Figma — это авторский перенос строки, а не свойство ширины.
+    title: 'Освобождение \u2028от чужого и лишнего.',
     subtitle: 'Практика завершения дня',
     time: '9 минут',
     status: 'Бесплатно',
@@ -26,6 +39,8 @@ const cards = [
     id: '410:1199',
     height: 467,
     image: '/img/practice-card-ce07.webp',
+    size: '209.09% 136.06%',
+    position: '57.63% 50.11%',
     title: 'Когда тревожно',
     subtitle: 'Для балансировки нервной системы',
     time: '11 минут',
@@ -35,7 +50,9 @@ const cards = [
     id: '410:1215',
     height: 471,
     image: '/img/practice-card-4ee7.webp',
-    title: 'Отпустить напряжение',
+    size: 'cover',
+    position: 'center',
+    title: 'Отпустить \u2028напряжение',
     subtitle: 'Телесное расслабление',
     time: '8 минут',
     status: 'Бесплатно',
@@ -44,6 +61,8 @@ const cards = [
     id: '412:1914',
     height: 467,
     image: '/img/practice-card-0ae9.webp',
+    size: 'cover',
+    position: 'center',
     title: 'Вернуть себе силы',
     subtitle: 'При усталости, выгорании, и пустоте',
     time: '14 минут',
@@ -74,9 +93,12 @@ const cards = [
       <div class="pfree__track" data-track>
         {cards.map((card) => (
           <article class="pcard" data-figma-node={card.id} style={`height: ${card.height}px`}>
-            <div class="pcard__media" style={`background-image: url('${card.image}')`} />
+            <div
+              class="pcard__media"
+              style={`background-image: url('${card.image}'); background-size: ${card.size}; background-position: ${card.position}`}
+            />
             <div class="pcard__body">
-              <h3 class="pcard__title">{card.title}</h3>
+              <h3 class="pcard__title" set:html={breakLines(card.title)} />
               <p class="pcard__subtitle">{card.subtitle}</p>
               <div class="pcard__action">
                 <div class="pcard__time">
@@ -89,6 +111,9 @@ const cards = [
                 </div>
                 <button class="pcard__btn" type="button" aria-pressed="false" data-play>
                   <span data-play-label>Прослушать практику</span>
+                  <svg class="pcard__arrow" width="12" height="8" viewBox="0 0 12 8" aria-hidden="true">
+                    <path d="M0 4h10M7 1l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1" />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -241,13 +266,18 @@ const cards = [
   }
 
   .pcard__title {
-    width: 232px;
+    /* В файле рамка 232, но вторая строка «от чужого и лишнего.» ровно 232 px
+       по метрикам браузера — на границе она переносится. 236 даёт тот же
+       перенос, что в макете; перенос строки задаёт сам текст (U+2028). */
+    width: 236px;
     height: 56px;
     margin: 0;
     font-family: var(--font-literata);
     font-size: 22px;
-    line-height: 28px;
-    font-weight: 400;
+    /* Живой узел: Literata 300, межстрочие 125 % (27,5 px). При 400 текст
+       шире и переносится иначе. */
+    line-height: 27.5px;
+    font-weight: 300;
     color: var(--color-text-primary);
   }
 
@@ -279,6 +309,11 @@ const cards = [
     flex: none;
   }
 
+  .pcard__arrow {
+    flex: none;
+    opacity: 0.9;
+  }
+
   .pcard__pill {
     padding: 1px 8px;
     border: 1px solid var(--color-accent-muted);
@@ -286,6 +321,10 @@ const cards = [
   }
 
   .pcard__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     width: 183px;
     height: 33px;
     margin-top: 8px;
@@ -301,9 +340,11 @@ const cards = [
   }
 
   .pfree__arrow {
+    /* Стрелка лежит ПОД карточками: в макете её круг уходит под фото, и
+       видна только выступающая половина. */
+    z-index: 0;
     position: absolute;
     top: 105px;
-    z-index: 1;
     width: 48px;
     height: 48px;
     display: grid;
@@ -331,6 +372,12 @@ const cards = [
   /* Координаты из спеки: 104 и 1336 при контейнере от 80. */
   .pfree__arrow--prev {
     left: 24px;
+  }
+
+  /* Лента карточек выше стрелок: круг стрелки уходит под фото. */
+  .pfree__track {
+    position: relative;
+    z-index: 1;
   }
 
   .pfree__arrow--next {

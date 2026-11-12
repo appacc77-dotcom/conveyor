@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-09T20:31:06.281Z",
-  "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/practice/info-section/crop.png",
-  "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/practice-info-section.png",
+  "at": "2026-11-12T21:51:56.228Z",
+  "reference": "design/figma/pages/practice/info-section/crop.png",
+  "shot": "/tmp/pinfo2.png",
   "width": 1440,
   "height": 952,
-  "mean": 9.81,
-  "over16": 11.06,
+  "mean": 9.92,
+  "over16": 11.07,
   "over48": 3.82
 }

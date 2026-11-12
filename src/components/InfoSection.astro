@@ -40,7 +40,7 @@ const listItems = [
   <button class="info__row" type="button" aria-expanded="true" data-accord data-figma-node="435:485">
     <span class="info__num" data-figma-node="435:429">01</span>
     <span class="info__name" data-figma-node="435:431">С заботой о тебе</span>
-    <span class="info__arrow" data-figma-node="435:479"><ArrowQuiet size={25} /></span>
+    <span class="info__arrow" data-figma-node="435:479"><ArrowQuiet size={25} direction="up" /></span>
   </button>
 
   <div class="info__body" data-figma-node="435:527" data-list>
@@ -55,7 +55,7 @@ const listItems = [
     <span class="info__sub" data-figma-node="435:548">
       Короткий SOS-алгоритм, чтобы вернуться в контакт с собой и пространством.
     </span>
-    <span class="info__arrow info__arrow--second" data-figma-node="435:562"><ArrowQuiet size={26} /></span>
+    <span class="info__arrow info__arrow--second" data-figma-node="435:562"><ArrowQuiet size={26} direction="down" /></span>
   </button>
 
   <p class="info__empty" data-empty hidden>Второй пункт в макете не раскрыт: содержимого нет.</p>
@@ -212,8 +212,7 @@ const listItems = [
     width: 25px;
     height: 25px;
     color: var(--color-bg-inverse);
-    /* В макете это тот же arrow-quiet, повёрнутый: 180° — вверх, 90° — вниз. */
-    transform: rotate(180deg);
+    /* Направление задаёт сам вариант вектора, а не поворот CSS. */
     transition: transform var(--motion-fast) var(--ease-out);
   }
 
@@ -222,11 +221,12 @@ const listItems = [
     top: 54px;
     width: 26px;
     height: 26px;
-    transform: rotate(90deg);
   }
 
+  /* Раскрытый пункт показывает стрелку вниз, закрытый — вверх: меняем знак
+     поворотом на 180°, потому что это один и тот же вектор 90/Variant2. */
   .info__row[aria-expanded='true'] .info__arrow {
-    transform: rotate(0deg);
+    transform: rotate(180deg);
   }
 
   .info__body {

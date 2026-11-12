@@ -86,8 +86,15 @@ const section = read.result;
 if (!section || section.error) die(3, `узел ${nodeId} не найден`);
 
 const fileKey = read.fileContext?.fileKey;
-if (fileKey !== project.source.fileKey) {
-  die(1, `fileKey ${fileKey} ≠ ${project.source.fileKey} — открыт другой файл`);
+// Работать по чужому файлу нельзя, но копия файла — законный случай:
+// дизайнер выгружает копию и продолжает в ней. Флаг делает это осознанным:
+// спека получает ключ того файла, с которого снята, и это видно в отчёте.
+if (fileKey !== project.source.fileKey && !process.argv.includes('--accept-other-file')) {
+  die(
+    1,
+    `fileKey ${fileKey} ≠ ${project.source.fileKey} — открыт другой файл.\n` +
+      'если это копия, с которой теперь работают, — повторите с --accept-other-file',
+  );
 }
 
 // --- 2. Каталог секции -----------------------------------------------------
