@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "at": "2026-11-12T20:05:30.812Z",
+  "at": "2026-11-12T20:18:33.154Z",
   "totals": {
     "sections": 49,
     "nodes": 2200,
-    "marked": 818,
+    "marked": 830,
     "mandatory": 233,
-    "mandatoryMarked": 228,
+    "mandatoryMarked": 231,
     "crops": 48,
-    "measured": 47
+    "measured": 48
   },
   "pages": [
     {
@@ -16,11 +16,11 @@
       "page": "book",
       "section": "book-hero",
       "nodes": 24,
-      "marked": 0,
+      "marked": 12,
       "mandatory": 3,
-      "mandatoryMarked": 0,
+      "mandatoryMarked": 3,
       "crop": false,
-      "measured": false,
+      "measured": true,
       "pixel": null,
       "size": "1440×1866",
       "source": "fig-archive"
