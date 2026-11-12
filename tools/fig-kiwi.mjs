@@ -341,10 +341,20 @@ function toSpecNodes(schema, page, frame) {
   // словари один раз, чтобы у каждого узла было имя стиля и привязки — как
   // их отдаёт мост.
   const styleNames = new Map();
+  const styleData = new Map();
   for (const change of allChanges(schema)) {
     if (change.styleType === undefined) continue;
-    styleNames.set(`${change.guid.sessionID}:${change.guid.localID}`, change.name);
+    const key = `${change.guid.sessionID}:${change.guid.localID}`;
+    styleNames.set(key, change.name);
+    styleData.set(key, change);
   }
+  const styleOfText = (ref) =>
+    ref?.guid ? styleData.get(`${ref.guid.sessionID}:${ref.guid.localID}`) ?? null : null;
+  // В архиве высота строки — доля единицы (`{value: 1.25, units: 0}`), у моста
+  // проценты. Приводим к виду моста: спека должна читаться одинаково, откуда
+  // её ни сняли.
+  const lineHeightOf = (lh) =>
+    lh && typeof lh.value === 'number' ? { unit: 'PERCENT', value: Math.round(lh.value * 100) } : null;
   const styleOf = (ref) => (ref?.guid ? styleNames.get(`${ref.guid.sessionID}:${ref.guid.localID}`) ?? null : null);
 
   // Привязки: variableConsumptionMap → имя поля и ссылка на переменную.
@@ -388,22 +398,37 @@ function toSpecNodes(schema, page, frame) {
       ...(boundOf(node) ? { bound: boundOf(node) } : {}),
       ...(isText && node.textData?.characters
         ? {
+            // Поля — как у моста: спека должна читаться одинаково, откуда её
+            // ни сняли, иначе контракт спеки ругается на «нет fontFamily».
             text: node.textData.characters,
-            fontSize: Math.round(node.fontSize ?? 16),
+            fontFamily: (styleOfText(node.styleIdForText)?.fontName ?? node.fontName)?.family ?? null,
+            fontStyle: (styleOfText(node.styleIdForText)?.fontName ?? node.fontName)?.style ?? null,
+            fontSize: Math.round(styleOfText(node.styleIdForText)?.fontSize ?? node.fontSize ?? 16),
+            ...(lineHeightOf(styleOfText(node.styleIdForText)?.lineHeight ?? node.lineHeight)
+              ? { lineHeight: lineHeightOf(styleOfText(node.styleIdForText)?.lineHeight ?? node.lineHeight) }
+              : {}),
+            letterSpacing: { unit: 'PIXELS', value: (styleOfText(node.styleIdForText)?.textTracking ?? node.textTracking ?? 0) / 1000 * (styleOfText(node.styleIdForText)?.fontSize ?? node.fontSize ?? 16) },
             // Гарнитура и метрики: без них текст рисуется чужим шрифтом и
             // наезжает на соседей — в архиве они есть, надо только достать.
-            ...(node.fontName?.family
-              ? {
-                  font: {
-                    family: node.fontName.family,
-                    style: node.fontName.style ?? 'Regular',
-                    weight: /bold/i.test(node.fontName.style ?? '') ? 700 : /light/i.test(node.fontName.style ?? '') ? 300 : 400,
-                    lineHeight: node.lineHeight?.value ? node.lineHeight.value / 100 : null,
-                    tracking: node.textTracking ? node.textTracking / 1000 : 0,
-                    align: node.textAlignHorizontal ?? 0,
-                  },
-                }
-              : {}),
+            ...(() => {
+              // Стиль главнее: на текстовом узле архива fontName часто устарел,
+              // а актуальная гарнитура лежит в стиле (проверено на hero: у узла
+              // был Cormorant, в стиле — Literata, как в мосте).
+              const style = styleOfText(node.styleIdForText);
+              const fontName = style?.fontName ?? node.fontName;
+              if (!fontName?.family) return {};
+              const lineHeight = lineHeightOf(style?.lineHeight ?? node.lineHeight);
+              return {
+                font: {
+                  family: fontName.family,
+                  style: fontName.style ?? 'Regular',
+                  weight: /bold/i.test(fontName.style ?? '') ? 700 : /light/i.test(fontName.style ?? '') ? 300 : 400,
+                  ...(lineHeight ? { lineHeight } : {}),
+                  tracking: (style?.textTracking ?? node.textTracking ?? 0) / 1000,
+                  align: node.textAlignHorizontal ?? 0,
+                },
+              };
+            })(),
           }
         : {}),
       ...(node.fillPaints?.length

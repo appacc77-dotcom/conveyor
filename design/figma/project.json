@@ -78,7 +78,8 @@
     "practice": "/practice.html",
     "quiz": "/quiz.html",
     "booking": "/booking.html",
-    "method": "/method.html"
+    "method": "/method.html",
+    "book": "/book.html"
   },
   "api": {
     "tokenFile": ".figma-token",

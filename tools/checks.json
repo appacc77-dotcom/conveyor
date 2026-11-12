@@ -968,6 +968,34 @@
         "release"
       ],
       "about": "картинка ≤ 300 КБ, страница ≤ 8 МБ"
+    },
+    "coverage-map": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/pages/**",
+        "design/figma/map-exceptions.json",
+        "src/**"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 30000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [
+        "docs/PAGE-MAP.md"
+      ],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "release"
+      ],
+      "about": "у каждой секции есть кроп, замер и пиксель (или запись об отступлении)"
     }
   }
 }

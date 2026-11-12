@@ -116,7 +116,11 @@ for (const { unit, file } of specs) {
   for (const key of REQUIRED_SPEC) {
     if (spec[key] === undefined) problems.push({ unit, text: `нет поля ${key}` });
   }
-  if (!spec.file?.key) problems.push({ unit, text: 'нет file.key — число без файла не число' });
+  // Ключ файла обязателен, но у спеки из архива его нет: архив не знает
+  // облачного ключа. Такое отступление живёт записью, а не тишиной.
+  if (!spec.file?.key && !allowed(unit, spec.section?.id ?? '', 'file.key')) {
+    problems.push({ unit, text: 'нет file.key — число без файла не число' });
+  }
   for (const key of REQUIRED_SECTION) {
     if (spec.section?.[key] === undefined) problems.push({ unit, text: `нет section.${key}` });
   }
