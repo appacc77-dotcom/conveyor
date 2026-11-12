@@ -2,8 +2,8 @@
 /**
  * Карта страниц: что из файла перенесено, что нет и почему.
  *
- *   node tools/page-map.mjs            # собрать docs/PAGE-MAP.md и JSON
- *   node tools/page-map.mjs --check    # только проверить (для ворот)
+ *   node tools/page-map.mjs --write    # собрать docs/PAGE-MAP.md и JSON
+ *   node tools/page-map.mjs            # только проверить (ворота)
  *
  * Зачем. «Перенесли 100 %» — утверждение, которое надо доказать списком.
  * Структурная страница `/structure.html` показывает пары «Figma / сделано» и
@@ -18,7 +18,9 @@ import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from '
 import { join, relative } from 'node:path';
 
 const root = process.cwd();
-const checkOnly = process.argv.includes('--check');
+// По умолчанию — только проверка: ворота не имеют права менять дерево во
+// время прогона приёмки. Запись карты — явный флаг `--write`.
+const checkOnly = !process.argv.includes('--write');
 
 // Исключения карты: запись = решение + причина. Без них ворота красные.
 const exceptionsPath = join(process.cwd(), 'design/figma/map-exceptions.json');

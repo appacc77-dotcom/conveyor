@@ -72,7 +72,7 @@
     "site:release": "node tools/site-export.mjs --push",
     "site:preview": "npx --yes serve .site/dist -l 4322",
     "weight": "node tools/check-weight.mjs",
-    "map": "node tools/page-map.mjs"
+    "map": "node tools/page-map.mjs --write"
   },
   "devDependencies": {
     "astro": "^7.4.5",
