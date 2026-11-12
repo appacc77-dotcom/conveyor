@@ -86,6 +86,14 @@ console.log(`медиазапросов с шириной: ${found.length}`);
 
 const invented = [];
 for (const query of found) {
+  // Мобильный слой: ширины, разрешённые записью в design/mobile.json,
+  // не считаются выдумкой — это дополнение по решению владельца.
+  const mobile = existsSync(join(root, 'design/mobile.json'))
+    ? JSON.parse(readFileSync(join(root, 'design/mobile.json'), 'utf8'))
+    : null;
+  const allowed = new Set([...(mobile?.breakpoints ?? []), ...designWidths]);
+  if (query.widths.every((w) => allowed.has(w))) continue;
+
   // Кадр один — любой шириный запрос под него не опирается.
   if (designWidths.length === 1) {
     invented.push(query);
