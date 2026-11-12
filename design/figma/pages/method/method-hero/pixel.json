@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-09T20:31:05.673Z",
+  "at": "2026-11-12T21:59:58.373Z",
   "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/method/method-hero/crop.png",
   "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/method-method-hero.png",
   "width": 1440,
   "height": 800,
-  "mean": 1.11,
-  "over16": 0.7,
+  "mean": 1.51,
+  "over16": 0.71,
   "over48": 0.22
 }

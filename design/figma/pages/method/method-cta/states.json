@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-08T17:17:48.052Z",
+  "at": "2026-11-12T21:58:05.778Z",
   "section": "method-cta",
   "nodeId": "334:992",
   "total": 2,
@@ -41,8 +41,10 @@
           "name": "arrow-quiet",
           "changed": {
             "color": {
-              "from": "white",
               "to": "accent"
+            },
+            "direction": {
+              "to": "right"
             }
           }
         }

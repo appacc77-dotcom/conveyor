@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "file": {
-    "name": "Website Syntonia2",
-    "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-07T09:40:27.128Z"
+    "name": "Website Syntonia-2",
+    "key": "ZKFou1NieRz33oI4A9oXsL",
+    "at": "2026-11-12T21:57:00.852Z"
   },
   "section": {
     "id": "102:220",
@@ -11,10 +11,10 @@
     "w": 1440,
     "h": 1164
   },
-  "fingerprint": "643ee5d3",
+  "fingerprint": "f95f393f",
   "cloudVersion": "2418696346917289452",
   "counts": {
-    "nodes": 77,
+    "nodes": 76,
     "images": 3,
     "icons": 3,
     "iconInstances": 3,
@@ -338,7 +338,7 @@
             [
               1,
               0,
-              4.162470577284694e-05
+              0.00004162470577284694
             ],
             [
               0,
@@ -1911,35 +1911,6 @@
       "bound": {
         "fills": [
           "VariableID:2:26"
-        ]
-      }
-    },
-    {
-      "id": "I709:1520;708:1436",
-      "name": "tab-divider",
-      "type": "RECTANGLE",
-      "depth": 4,
-      "visible": false,
-      "x": 0,
-      "y": 10,
-      "w": 1,
-      "h": 296,
-      "fills": [
-        {
-          "type": "SOLID",
-          "visible": true,
-          "opacity": 1,
-          "color": {
-            "hex": "#c9bea4",
-            "a": 1
-          },
-          "variable": "thread"
-        }
-      ],
-      "absolute": true,
-      "bound": {
-        "fills": [
-          "VariableID:49:55"
         ]
       }
     },

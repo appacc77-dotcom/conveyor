@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-09T20:31:03.831Z",
+  "at": "2026-11-12T21:59:56.530Z",
   "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/library/library-journal/crop.png",
   "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/library-library-journal.png",
   "width": 1440,
   "height": 570,
-  "mean": 11.17,
-  "over16": 19.36,
-  "over48": 8.91
+  "mean": 11.11,
+  "over16": 19.24,
+  "over48": 8.86
 }

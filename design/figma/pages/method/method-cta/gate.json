@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-08T17:22:45.665Z",
+  "at": "2026-11-12T22:03:44.205Z",
   "section": {
     "id": "334:992",
     "name": "method-cta",
@@ -11,9 +11,9 @@
   "unknown": 0,
   "missing": [],
   "marked": 8,
-  "nodes": 14,
+  "nodes": 10,
   "coverage": 100,
-  "markedRatio": 57.1,
+  "markedRatio": 80,
   "tolerance": 1,
   "worstDelta": 0
 }

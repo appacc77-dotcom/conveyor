@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-08T13:21:26.281Z",
+  "at": "2026-11-12T22:03:43.848Z",
   "section": {
     "id": "272:1044",
     "name": "library-issues",
@@ -11,9 +11,9 @@
   "unknown": 0,
   "missing": [],
   "marked": 11,
-  "nodes": 63,
+  "nodes": 59,
   "coverage": 100,
-  "markedRatio": 17.5,
+  "markedRatio": 18.6,
   "tolerance": 1,
   "worstDelta": 0
 }

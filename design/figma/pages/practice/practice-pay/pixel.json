@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-12T21:48:16.119Z",
+  "at": "2026-11-12T22:02:47.132Z",
   "reference": "design/figma/pages/practice/practice-pay/crop.png",
-  "shot": ".screens/ppay2.png",
+  "shot": "/tmp/ppay4.png",
   "width": 1440,
   "height": 2001,
-  "mean": 12.39,
-  "over16": 32.86,
-  "over48": 3.66
+  "mean": 12.41,
+  "over16": 32.87,
+  "over48": 3.67
 }

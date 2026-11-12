@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-11T19:10:16.920Z",
+  "at": "2026-11-12T22:03:42.941Z",
   "section": {
     "id": "383:761",
     "name": "booking-formats",
@@ -11,9 +11,9 @@
   "unknown": 0,
   "missing": [],
   "marked": 21,
-  "nodes": 144,
+  "nodes": 130,
   "coverage": 100,
-  "markedRatio": 14.6,
+  "markedRatio": 16.2,
   "tolerance": 1,
   "worstDelta": 0.8000000000000114
 }

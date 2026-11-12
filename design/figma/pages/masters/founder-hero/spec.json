@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "file": {
-    "name": "Website Syntonia2",
-    "key": "NInjODHyOOjIitF3lq4Vpe",
-    "at": "2026-11-07T09:40:40.757Z"
+    "name": "Website Syntonia-2",
+    "key": "ZKFou1NieRz33oI4A9oXsL",
+    "at": "2026-11-12T21:57:46.228Z"
   },
   "section": {
     "id": "217:238",
@@ -11,10 +11,10 @@
     "w": 1440,
     "h": 839
   },
-  "fingerprint": "cd2310ed",
+  "fingerprint": "ead70b3f",
   "cloudVersion": "2418696346917289452",
   "counts": {
-    "nodes": 70,
+    "nodes": 66,
     "images": 3,
     "icons": 3,
     "iconInstances": 3,
@@ -1565,53 +1565,6 @@
       }
     },
     {
-      "id": "I217:256;826:2319",
-      "name": "bio-text",
-      "type": "TEXT",
-      "depth": 5,
-      "visible": false,
-      "x": 0,
-      "y": 53,
-      "w": 452,
-      "h": 156,
-      "text": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
-      "styleName": null,
-      "fontFamily": "Golos Text",
-      "fontStyle": "Regular",
-      "fontSize": 14,
-      "lineHeight": {
-        "unit": "PERCENT",
-        "value": 145.00000476837158
-      },
-      "letterSpacing": {
-        "unit": "PERCENT",
-        "value": 0
-      },
-      "paragraphSpacing": 16,
-      "autoResize": "HEIGHT",
-      "fills": [
-        {
-          "type": "SOLID",
-          "visible": true,
-          "opacity": 1,
-          "color": {
-            "hex": "#ffffff",
-            "a": 1
-          },
-          "variable": "text-on-image"
-        }
-      ],
-      "align": "STRETCH",
-      "bound": {
-        "fills": [
-          "VariableID:2:20"
-        ],
-        "paragraphSpacing": [
-          "VariableID:2:8"
-        ]
-      }
-    },
-    {
       "id": "I217:256;212:224",
       "name": "divider",
       "type": "RECTANGLE",
@@ -1858,53 +1811,6 @@
       "bound": {
         "fills": [
           "VariableID:2:20"
-        ]
-      }
-    },
-    {
-      "id": "I217:257;826:2319",
-      "name": "bio-text",
-      "type": "TEXT",
-      "depth": 5,
-      "visible": false,
-      "x": 0,
-      "y": 53,
-      "w": 452,
-      "h": 156,
-      "text": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
-      "styleName": null,
-      "fontFamily": "Golos Text",
-      "fontStyle": "Regular",
-      "fontSize": 14,
-      "lineHeight": {
-        "unit": "PERCENT",
-        "value": 145.00000476837158
-      },
-      "letterSpacing": {
-        "unit": "PERCENT",
-        "value": 0
-      },
-      "paragraphSpacing": 16,
-      "autoResize": "HEIGHT",
-      "fills": [
-        {
-          "type": "SOLID",
-          "visible": true,
-          "opacity": 1,
-          "color": {
-            "hex": "#ffffff",
-            "a": 1
-          },
-          "variable": "text-on-image"
-        }
-      ],
-      "align": "STRETCH",
-      "bound": {
-        "fills": [
-          "VariableID:2:20"
-        ],
-        "paragraphSpacing": [
-          "VariableID:2:8"
         ]
       }
     },
@@ -2159,53 +2065,6 @@
       }
     },
     {
-      "id": "I217:258;826:2319",
-      "name": "bio-text",
-      "type": "TEXT",
-      "depth": 5,
-      "visible": false,
-      "x": 0,
-      "y": 53,
-      "w": 452,
-      "h": 156,
-      "text": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
-      "styleName": null,
-      "fontFamily": "Golos Text",
-      "fontStyle": "Regular",
-      "fontSize": 14,
-      "lineHeight": {
-        "unit": "PERCENT",
-        "value": 145.00000476837158
-      },
-      "letterSpacing": {
-        "unit": "PERCENT",
-        "value": 0
-      },
-      "paragraphSpacing": 16,
-      "autoResize": "HEIGHT",
-      "fills": [
-        {
-          "type": "SOLID",
-          "visible": true,
-          "opacity": 1,
-          "color": {
-            "hex": "#ffffff",
-            "a": 1
-          },
-          "variable": "text-on-image"
-        }
-      ],
-      "align": "STRETCH",
-      "bound": {
-        "fills": [
-          "VariableID:2:20"
-        ],
-        "paragraphSpacing": [
-          "VariableID:2:8"
-        ]
-      }
-    },
-    {
       "id": "I217:258;212:224",
       "name": "divider",
       "type": "RECTANGLE",
@@ -2452,53 +2311,6 @@
       "bound": {
         "fills": [
           "VariableID:2:20"
-        ]
-      }
-    },
-    {
-      "id": "I217:259;826:2319",
-      "name": "bio-text",
-      "type": "TEXT",
-      "depth": 5,
-      "visible": false,
-      "x": 0,
-      "y": 53,
-      "w": 452,
-      "h": 156,
-      "text": "Меня всегда интересовала глубина человеческой природы: как в одной личности переплетаются сила и уязвимость, осознанность и запутанность, желание жить и при этом разрушать себя.\nПочему человек может искренне хотеть перемен, стараться, искать, пробовать — и всё равно снова упираться в ту же невозможность что-то изменить.",
-      "styleName": null,
-      "fontFamily": "Golos Text",
-      "fontStyle": "Regular",
-      "fontSize": 14,
-      "lineHeight": {
-        "unit": "PERCENT",
-        "value": 145.00000476837158
-      },
-      "letterSpacing": {
-        "unit": "PERCENT",
-        "value": 0
-      },
-      "paragraphSpacing": 16,
-      "autoResize": "HEIGHT",
-      "fills": [
-        {
-          "type": "SOLID",
-          "visible": true,
-          "opacity": 1,
-          "color": {
-            "hex": "#ffffff",
-            "a": 1
-          },
-          "variable": "text-on-image"
-        }
-      ],
-      "align": "STRETCH",
-      "bound": {
-        "fills": [
-          "VariableID:2:20"
-        ],
-        "paragraphSpacing": [
-          "VariableID:2:8"
         ]
       }
     },
