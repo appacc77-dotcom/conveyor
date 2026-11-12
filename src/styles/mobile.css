@@ -225,3 +225,165 @@
     line-height: 1.45 !important;
   }
 }
+
+@media (max-width: 768px) {
+  /* --- Process: этапы в колонку, картинка после текста ------------------- */
+  [data-enhancements='on'] .stage {
+    flex-direction: column !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    gap: 16px !important;
+  }
+
+  /* Чередование сторон в макете — на телефоне оно только путает: всегда
+     текст сверху, картинка снизу. */
+  [data-enhancements='on'] .stage[data-order='image-first'] .stage__image {
+    order: 0 !important;
+  }
+
+  [data-enhancements='on'] .stage__content,
+  [data-enhancements='on'] .stage__title,
+  [data-enhancements='on'] .stage__text {
+    width: 100% !important;
+  }
+
+  [data-enhancements='on'] .stage__image {
+    width: 100% !important;
+    height: 220px !important;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* --- Formats: вкладки в столбик, панель под ними ---------------------- */
+  [data-enhancements='on'] .formats__tabs {
+    flex-direction: column !important;
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+
+  [data-enhancements='on'] .format-tab {
+    width: 100% !important;
+    min-height: 0 !important;
+  }
+
+  /* --- FAQ: интро и список друг под другом ----------------------------- */
+  [data-enhancements='on'] .faq__container {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 24px !important;
+  }
+
+  [data-enhancements='on'] .faq__intro,
+  [data-enhancements='on'] .faq__list,
+  [data-enhancements='on'] .faq__item {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* --- About: карточка фото+текст в колонку ----------------------------- */
+  [data-enhancements='on'] .about__card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-height: 0 !important;
+  }
+
+  [data-enhancements='on'] .about__photo {
+    width: 100% !important;
+    height: 320px !important;
+    background-size: cover !important;
+    background-position: 50% 30% !important;
+  }
+
+  [data-enhancements='on'] .about__text,
+  [data-enhancements='on'] .about__content,
+  [data-enhancements='on'] .about__head {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 24px 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* --- Formats: счётчик форматов не должен висеть справа за экраном ---- */
+  [data-enhancements='on'] .formats__counter {
+    position: static !important;
+    width: 100% !important;
+    text-align: left !important;
+    margin-top: 16px;
+  }
+
+  /* --- Voices: карусель листается по одной карточке --------------------- */
+  /* Окно карусели в макете 1392 и не обрезает: ленту режет край секции.
+     На телефоне окно равно экрану и обрезает само — иначе лента из 12
+     карточек растягивает документ. */
+  [data-enhancements='on'] .voices {
+    overflow: hidden !important;
+  }
+
+  [data-enhancements='on'] .voices__viewport {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  [data-enhancements='on'] .voice {
+    width: min(320px, 82vw) !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  [data-enhancements='on'] .voice__body,
+  [data-enhancements='on'] .voice__head {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Последняя страховка от горизонтальной прокрутки: `clip` обрезает
+     вылезающее по горизонтали, но, в отличие от hidden, не делает страницу
+     скролл-контейнером. Всё, что важнее линии края, обязано быть в потоке —
+     см. правила выше; это не замена им, а защита от случайного сдвига. */
+  [data-enhancements='on'] .page {
+    overflow-x: clip;
+  }
+}
+
+@media (max-width: 768px) {
+  /* В макете подзаголовок входа стоит одной строкой (nowrap 563 px). На
+     телефоне строка обязана переноситься — иначе она уезжает за экран. */
+  [data-enhancements='on'] .entry__lead {
+    white-space: normal !important;
+    width: 100% !important;
+  }
+
+  /* Кнопки в ряд на 390 не помещаются: ставим их друг под друга и на всю
+     ширину — так текст не рвётся по словам, а палец попадает с первого раза. */
+  [data-enhancements='on'] .entry__buttons,
+  [data-enhancements='on'] .hero__content > .btn-primary,
+  [data-enhancements='on'] .formats__actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  [data-enhancements='on'] .btn-primary,
+  [data-enhancements='on'] .btn-quiet {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+    white-space: normal !important;
+    text-align: center;
+  }
+
+  [data-enhancements='on'] .btn-primary__label,
+  [data-enhancements='on'] .btn-quiet__label {
+    overflow-wrap: break-word;
+  }
+}
