@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-12T22:09:44.639Z",
-  "reference": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/design/figma/pages/masters/founder-hero/crop.png",
-  "shot": "/Users/gleb/Documents/deepseek-harness/default-workspace/syntonia/.screens/masters-founder-hero.png",
+  "at": "2026-11-12T22:19:19.790Z",
+  "reference": "design/figma/pages/masters/founder-hero/crop.png",
+  "shot": "/tmp/fhero.png",
   "width": 1440,
   "height": 839,
-  "mean": 5.41,
-  "over16": 4.56,
-  "over48": 2.86
+  "mean": 30.64,
+  "over16": 41.38,
+  "over48": 26.25
 }

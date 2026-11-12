@@ -104,7 +104,9 @@ const { node = '272:1017' } = Astro.props;
     width: 723px;
     height: 442px;
     /* CROP: размер 1/масштаб, позиция e/(1−a). */
-    background: url('/img/issue-3aa9.webp') 22.31% 52.73% / 122.80% 103.19% no-repeat;
+    /* CROP из спеки (I281:665;272:1076): 1/0,684 = 146,2 %, 1/0,977 = 102,4 %,
+       сдвиг 44,4 % × 47,6 %. Прежние 122,8 % были сняты со старой версии файла. */
+    background: url('/img/issue-3aa9.webp') 44.4% 47.6% / 146.2% 102.4% no-repeat;
   }
 
   .ljr__latest {

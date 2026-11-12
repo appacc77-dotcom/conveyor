@@ -1024,6 +1024,61 @@
         "release"
       ],
       "about": "каждая внутренняя ссылка ведёт на существующую страницу"
+    },
+    "crops": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "design/figma/pages/**",
+        "dist/**",
+        "design/figma/project.json"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "resources": [],
+      "timeoutMs": 60000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "release"
+      ],
+      "about": "фон показывает вырезанную часть фото, как в макете"
+    },
+    "issues": {
+      "layers": [
+        "common"
+      ],
+      "scope": "project",
+      "inputs": [
+        "docs/issues.json",
+        "tools/checks.json"
+      ],
+      "dependsOn": [],
+      "resources": [],
+      "timeoutMs": 15000,
+      "retryPolicy": {
+        "codes": [],
+        "attempts": 1
+      },
+      "outputs": [
+        "docs/ISSUES.md"
+      ],
+      "mandatoryFor": [
+        "local",
+        "regression",
+        "accept-stage1",
+        "release"
+      ],
+      "about": "реестр ошибок сходится: у каждой находки есть причина и защита"
     }
   }
 }

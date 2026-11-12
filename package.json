@@ -73,7 +73,10 @@
     "site:preview": "npx --yes serve .site/dist -l 4322",
     "weight": "node tools/check-weight.mjs",
     "map": "node tools/page-map.mjs --write",
-    "links": "node tools/check-links.mjs"
+    "links": "node tools/check-links.mjs",
+    "crops": "node tools/check-crops.mjs",
+    "issues": "node tools/issues.mjs",
+    "issues:write": "node tools/issues.mjs --write"
   },
   "devDependencies": {
     "astro": "^7.4.5",
