@@ -1,248 +1,248 @@
 {
-  "at": "2026-11-12T21:55:39.270Z",
+  "at": "2026-11-12T22:07:46.313Z",
   "sections": {
     "book/book-hero": {
       "spec": "469bdf9e4170b9a4"
     },
     "booking/booking-formats": {
-      "spec": "e4f8225718536168",
+      "spec": "b56d0453f39639e7",
       "crop": "d10cf772364f3d48",
-      "states": "d405f0f46d85d0d1"
+      "states": "203e984fb6f0b86e"
     },
     "booking/booking-hero": {
-      "spec": "1b27abc62536389c",
+      "spec": "0a2e768b2a02245f",
       "crop": "357383f11169ffa5",
-      "states": "a6dc82ed4a471cc9"
+      "states": "a05e05182b20d684"
     },
     "booking/footer": {
-      "spec": "6c1f61dcc86e873f",
+      "spec": "b3e3a3c4007cf020",
       "crop": "24f25c9d91bad890",
-      "states": "6dd48cc955cefddc"
+      "states": "7b6ce456d15aa8c8"
     },
     "booking/header": {
-      "spec": "480a46b4daa3e243",
+      "spec": "c02e08996e72676d",
       "crop": "38ffdb6bcf25c1b7",
-      "states": "f03b3f818376a0a3"
+      "states": "f5c9886545ed334c"
     },
     "design-system/logo-gold": {
-      "spec": "9f8b35b82bb1fc54",
+      "spec": "6d12bee4a5deeea9",
       "crop": "35885d8364d73ba7",
-      "states": "3213b86ea6ea83a4"
+      "states": "0745060ff17ec0d6"
     },
     "home/about-founder": {
-      "spec": "d63a71b5f425b362",
+      "spec": "331de9c30d71081f",
       "crop": "2469685b56485fbe",
-      "states": "860a03713658a4ca"
+      "states": "a3d771c826136f78"
     },
     "home/air-photo": {
-      "spec": "1ff1059a22756783",
+      "spec": "ac5b402d39e7bff1",
       "crop": "a87581eb854c4da7",
-      "states": "d87ef3c3fbd02822"
+      "states": "b77c5653a3d74a8e"
     },
     "home/banner-founder": {
-      "spec": "18e1021581d2aa16",
+      "spec": "74bd890ee9a2fb2f",
       "crop": "40256dbbce03f2c9",
-      "states": "7a7f7d1a05d0c773"
+      "states": "27ed5ddc296fc872"
     },
     "home/entry": {
-      "spec": "7838b773db0e348f",
+      "spec": "28c952813a65f9fa",
       "crop": "09c8dc387c31ee6d",
-      "states": "8db76af2e4a6ffd8"
+      "states": "6e7dfa65704fe332"
     },
     "home/faq": {
-      "spec": "7004cd96fef88b6f",
+      "spec": "1dede4ca98d9fffa",
       "crop": "4c1c7c951672268b",
-      "states": "bddafaa47bc78dec"
+      "states": "c264713dc82a1083"
     },
     "home/footer": {
-      "spec": "f1bd460afba07dd8",
+      "spec": "0774bd98d090305e",
       "crop": "24f25c9d91bad890",
-      "states": "cdb125053070ed43"
+      "states": "69942068cb33fb08"
     },
     "home/formats": {
-      "spec": "e0b48f742f581ee5",
+      "spec": "a1b010bcb01c8a99",
       "crop": "4deae132f8763bde",
-      "states": "2e9cb6ce5af7fd86"
+      "states": "82084d0c4014bf31"
     },
     "home/header": {
-      "spec": "7881ca6cf471c015",
+      "spec": "b175c26db0fa8699",
       "crop": "d0672ffc96a8d698",
-      "states": "112dbc9939c34e87"
+      "states": "352e4ad489d816b7"
     },
     "home/hero": {
-      "spec": "932995f28ddd99cd",
+      "spec": "5b0d319228c657a7",
       "crop": "1d6aa40f0c33c39c",
-      "states": "1b0ba264affc8280"
+      "states": "4672cd7c7c02d6ec"
     },
     "home/library": {
-      "spec": "a259522883e97c83",
+      "spec": "860bc4bbf5181d86",
       "crop": "42777414a9a76c3a",
-      "states": "5e9a09d44937f8bd"
+      "states": "abcf835a4dc7c2fe"
     },
     "home/method": {
-      "spec": "a9cad22601110ca9",
+      "spec": "bf8a6e5249c6d2d7",
       "crop": "818b1c5ba65de446",
-      "states": "eb386f35b49acf8b"
+      "states": "34e3934471e24eb9"
     },
     "home/pain": {
-      "spec": "5816016bd87cfe54",
+      "spec": "56590039a5e614fc",
       "crop": "e72c478cf9144fae",
-      "states": "8fb1e4b3fb855513"
+      "states": "0a572f8b814cabb2"
     },
     "home/process": {
-      "spec": "a10230f38419a2b4",
+      "spec": "331fbbcc7b80a5fe",
       "crop": "4e60e5e4e19b33db",
-      "states": "acf58f628bf03b3c"
+      "states": "4c93c3ade48f51ac"
     },
     "home/quiz": {
-      "spec": "e3e3a68e3b72d48e",
+      "spec": "891e0f3725ab103c",
       "crop": "b45497e282394f45",
-      "states": "750fa79152a3671d"
+      "states": "d10982453da87a53"
     },
     "home/voices": {
-      "spec": "cdb7aa4660e546bb",
+      "spec": "9acbcf189edbc16d",
       "crop": "1d6b044afebde230",
-      "states": "2de0efeeb9f5f843"
+      "states": "fd580337d6d7d99b"
     },
     "library/footer": {
-      "spec": "f94500fd58fdd8f5",
+      "spec": "7e50bce28578ade5",
       "crop": "70854b03cfdc5a65",
-      "states": "e8bc4b383d2de4e6"
+      "states": "b76d47550311e657"
     },
     "library/header": {
-      "spec": "938e9190f6745019",
-      "crop": "126ba57d4c736461",
-      "states": "3c2b872e747a7df8"
+      "spec": "51d58de0aa3951a8",
+      "crop": "0a98bdac9a8cc932",
+      "states": "c52ff471733981d9"
     },
     "library/library-book": {
-      "spec": "e93f7ecbc78e1167",
+      "spec": "773c806b766097ad",
       "crop": "bc27313d2c341017",
-      "states": "263ea17eb67a94df"
+      "states": "80384ca08a7d20ab"
     },
     "library/library-hero": {
-      "spec": "54489ccd52944bef",
+      "spec": "146105992e7ee3f9",
       "crop": "0e76097144b64934",
-      "states": "7777ffa7d905d034"
+      "states": "0b7fce6adf4214f1"
     },
     "library/library-issues": {
-      "spec": "f40e7fbd52c7f412",
+      "spec": "33c9baf24b780b8d",
       "crop": "030ca9cb4125a7e7",
-      "states": "54e3fae589d8ad08"
+      "states": "b02df4c1cf446677"
     },
     "library/library-journal": {
-      "spec": "cbc114024a71d51b",
+      "spec": "069a04101d6b0e6e",
       "crop": "8648ed49e5918320",
-      "states": "2a40c308d7d799c9"
+      "states": "957ad2ff969755d7"
     },
     "masters/footer": {
-      "spec": "b0ba445eea6b9312",
+      "spec": "25152785633423bb",
       "crop": "24f25c9d91bad890",
-      "states": "e640d2e7fcb37fdf"
+      "states": "a4d38a3e01ab57dc"
     },
     "masters/founder-hero": {
-      "spec": "3f3bb611e0fa54cf",
+      "spec": "27e83a7343ba86c1",
       "crop": "2754f2112ae9b831",
-      "states": "3eca82a723a6cf8e"
+      "states": "e118f9e5096ad942"
     },
     "masters/header": {
-      "spec": "7a5d0b24ab0a2f51",
+      "spec": "b65282fe628aa11b",
       "crop": "b8ab1339dd530d31",
-      "states": "4af501388649fdbb"
+      "states": "571bfc46a933650a"
     },
     "masters/masters-more": {
-      "spec": "9f55742717199e90",
+      "spec": "02d6fa174a4f0dc6",
       "crop": "a0788f641a3d41aa",
-      "states": "10a30a5e5d07be00"
+      "states": "f562a22bf9430141"
     },
     "masters/masters-team": {
-      "spec": "bf3a7f4dedd7e0be",
+      "spec": "2e092c94f700ae2b",
       "crop": "09a827b9f11f3a58",
-      "states": "e4de75ae464083cd"
+      "states": "114cfee8f22c0832"
     },
     "method/footer": {
-      "spec": "a4aadbc9921eeaad",
+      "spec": "1411d900a651df49",
       "crop": "24f25c9d91bad890",
-      "states": "518a63bed181184e"
+      "states": "25f8f2f9cf0f379b"
     },
     "method/header": {
-      "spec": "8442ed9f24b1e39f",
+      "spec": "9394e055b60d1505",
       "crop": "14d4b1345402a41e",
-      "states": "a5ecf25174fec782"
+      "states": "a327f18f2c8034b6"
     },
     "method/method-about": {
-      "spec": "caabf4ed0d0358a5",
+      "spec": "536d4ac8c769607d",
       "crop": "ce0296f71abd317e",
-      "states": "b0f40a898ac2dd2b"
+      "states": "c8df6fec0abef2b3"
     },
     "method/method-cta": {
-      "spec": "1dd96d327231897e",
+      "spec": "e5763a488f41375f",
       "crop": "4fe0d7f9218d420b",
-      "states": "1e0f1d14144d3c0d"
+      "states": "a72f01f5452526bf"
     },
     "method/method-hero": {
-      "spec": "2381b1e703ca31cd",
+      "spec": "8ece0b9e0b1d64ed",
       "crop": "8cc0264394ce41eb",
-      "states": "ddf11069a0038dc5"
+      "states": "f128cfd3776bcf42"
     },
     "practice/footer": {
-      "spec": "e6eef58b126744b0",
+      "spec": "9450cdeda11aa334",
       "crop": "24f25c9d91bad890",
-      "states": "460a085e3c348672"
+      "states": "2e88205fb340ec59"
     },
     "practice/hero": {
-      "spec": "b0134e58deb21807",
+      "spec": "8eb1ff2f2e2212f2",
       "crop": "b71c878fd67f9765",
-      "states": "fce2c208f124a13d"
+      "states": "bb3870d9f692d755"
     },
     "practice/info-section": {
-      "spec": "81fe4904411c05e8",
+      "spec": "37d520d1fca5b7c7",
       "crop": "96adad8af35f2682",
-      "states": "29358e8fce27aead"
+      "states": "0c4b72b015ee880a"
     },
     "practice/kody-practice-pay": {
-      "spec": "5649f31a47609a8a",
+      "spec": "3f0c11dd6e26cc44",
       "crop": "ff410a0ee1547c87",
-      "states": "8a8af59439efc35c"
+      "states": "d0a9f7de3260e2d6"
     },
     "practice/practice-free": {
-      "spec": "10715498d480310d",
+      "spec": "076649f3b54e624a",
       "crop": "9863b6afa655e3f7",
-      "states": "7a9ce38cf9534080"
+      "states": "c33316532d778089"
     },
     "practice/practice-package": {
-      "spec": "eca380a34bb72fca",
+      "spec": "3c728edfbdae0d3e",
       "crop": "35e80ffcffee419f",
-      "states": "06a7fa60c3dc9b8d"
+      "states": "71435d74d880b3ab"
     },
     "practice/practice-pay": {
-      "spec": "0097a1e33ca92238",
+      "spec": "6b7869b06f191e40",
       "crop": "c2f886a09199cb66",
-      "states": "321eafa939236d68"
+      "states": "f9fb33b790d86eb9"
     },
     "practice/quiz": {
-      "spec": "8f26d0c0bccbaa33",
+      "spec": "e11727f49b7eddd8",
       "crop": "15ecca8a2e55fd25",
-      "states": "9ab822a8a0abccd3"
+      "states": "62d4e7b52b48255b"
     },
     "quiz/footer": {
-      "spec": "6bcf5c01d20300d6",
+      "spec": "485385017b22d8b3",
       "crop": "24f25c9d91bad890",
-      "states": "371d23288a79097e"
+      "states": "25141524576b745e"
     },
     "quiz/header": {
-      "spec": "2a2c25ff097e4d06",
-      "crop": "5e632e0317b8d03e",
-      "states": "bc60d7f6a1cb131f"
+      "spec": "b82e6c495ed1c9fc",
+      "crop": "7d804e46e83904ac",
+      "states": "8777ddb56a950e12"
     },
     "quiz/quiz-result": {
-      "spec": "ffeb3ce386b57528",
+      "spec": "17ad6db6caf48a92",
       "crop": "fe6d99df72b1f482",
-      "states": "126ab961ff4fda3e"
+      "states": "0222c2b45bd9af08"
     },
     "quiz/quiz-section": {
-      "spec": "462e3102fe2270c2",
+      "spec": "bfd0913b36a53b8a",
       "crop": "53033f2074d9fee4",
-      "states": "8491efee214b7980"
+      "states": "8e9801bb6e74b189"
     }
   },
   "fileName": "Website Syntonia-2",
