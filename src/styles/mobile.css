@@ -387,3 +387,146 @@
     overflow-wrap: break-word;
   }
 }
+
+@media (max-width: 768px) {
+  /* --- Hero внутренних страниц (booking, practice, masters, library,
+         method): заголовок и подзаголовок стоят абсолютом друг на друге,
+         потому что высоты в макете фиксированные. На телефоне — поток. --- */
+  [data-enhancements='on'] .bhero,
+  [data-enhancements='on'] .phero,
+  [data-enhancements='on'] .mhero,
+  [data-enhancements='on'] .lhero,
+  [data-enhancements='on'] .method-hero {
+    height: auto !important;
+    min-height: 360px !important;
+    padding: 32px 20px !important;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  [data-enhancements='on'] .bhero__container,
+  [data-enhancements='on'] .phero__container,
+  [data-enhancements='on'] .mhero__content,
+  [data-enhancements='on'] .lhero__container,
+  [data-enhancements='on'] .lhero__content {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    left: auto !important;
+    top: auto !important;
+  }
+
+  [data-enhancements='on'] .bhero__content,
+  [data-enhancements='on'] .mhero__title,
+  [data-enhancements='on'] .mhero__desc,
+  [data-enhancements='on'] .bhero__title,
+  [data-enhancements='on'] .bhero__lead,
+  [data-enhancements='on'] .lhero__title,
+  [data-enhancements='on'] .lhero__lead {
+    width: 100% !important;
+    height: auto !important;
+    font-size: clamp(32px, 9vw, 44px) !important;
+    line-height: 1.1 !important;
+  }
+
+  [data-enhancements='on'] .bhero__lead,
+  [data-enhancements='on'] .lhero__lead {
+    margin-top: 16px !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* --- Шкала форматов: подписи расходятся по краям --------------------- */
+  [data-enhancements='on'] .bformats__scale {
+    padding: 0 !important;
+    gap: 8px;
+  }
+
+  [data-enhancements='on'] .bformats__scale-label {
+    font-size: 10px !important;
+    letter-spacing: 0.08em !important;
+    white-space: nowrap;
+  }
+
+  /* Внутренние отступы панели форматов на телефоне уже: в макете 96 px. */
+  [data-enhancements='on'] .bformats__container,
+  [data-enhancements='on'] .bformats__layout,
+  [data-enhancements='on'] .bformats__list {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* --- Страница книги: обложка сверху, текст под ней -------------------- */
+  [data-enhancements='on'] .book {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  [data-enhancements='on'] .book__frame,
+  [data-enhancements='on'] .book__container,
+  [data-enhancements='on'] .book__intro,
+  [data-enhancements='on'] .book__info,
+  [data-enhancements='on'] .book__toc {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    left: auto !important;
+    top: auto !important;
+    padding: 0 !important;
+  }
+
+  [data-enhancements='on'] .book__container {
+    padding: 24px 20px 40px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  [data-enhancements='on'] .book__cover {
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 4;
+    background-size: contain !important;
+    background-position: 50% 50% !important;
+    background-color: var(--color-bg-page);
+  }
+
+  /* Тексты в макете стоят абсолютом по y из 1440: на телефоне — поток. */
+  [data-enhancements='on'] .book__eyebrow,
+  [data-enhancements='on'] .book__title,
+  [data-enhancements='on'] .book__author,
+  [data-enhancements='on'] .book__desc,
+  [data-enhancements='on'] .book__cta {
+    position: static !important;
+    width: 100% !important;
+    margin: 0 0 12px !important;
+  }
+
+  [data-enhancements='on'] .book__title {
+    font-size: clamp(30px, 8.5vw, 40px) !important;
+    line-height: 1.1 !important;
+  }
+
+  [data-enhancements='on'] .book__toc {
+    padding: 24px 16px !important;
+    margin-top: 16px;
+  }
+
+  [data-enhancements='on'] .book__toc-title {
+    position: static !important;
+    margin: 0 0 12px !important;
+    font-size: 28px !important;
+  }
+
+  [data-enhancements='on'] .book__toc-list {
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}

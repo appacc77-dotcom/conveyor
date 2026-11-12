@@ -2,7 +2,7 @@
   "about": "Осознанные отступления карты страниц. Каждая запись — номер решения и причина; без неё ворота coverage-map красные.",
   "exceptions": [
     {
-      "unit": "library/book-hero",
+      "unit": "book/book-hero",
       "fields": [
         "crop",
         "pixel"

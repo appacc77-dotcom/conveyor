@@ -1,5 +1,9 @@
 [
  {
+  "spec": "design/figma/pages/book/book-hero/spec.json",
+  "url": "/book.html"
+ },
+ {
   "spec": "design/figma/pages/booking/booking-formats/spec.json",
   "url": "/booking.html"
  },

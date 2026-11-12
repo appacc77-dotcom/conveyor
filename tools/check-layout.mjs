@@ -36,7 +36,15 @@ const routes = existsSync(join(root, 'design/figma/project.json'))
   ? (JSON.parse(readFileSync(join(root, 'design/figma/project.json'), 'utf8')).routes ?? {})
   : {};
 const pageList = onlyUrl ? [onlyUrl] : [...new Set(Object.values(routes))];
-const widths = arg('--widths', '1440')
+// Ширины по умолчанию: макет 1440 и, если мобильный слой объявлен записью
+// (design/mobile.json), ещё 768 и 390. Ворота не должны «забывать» про
+// телефон, когда слой уже в сборке.
+const mobileFile = join(root, 'design/mobile.json');
+const mobileWidths = existsSync(mobileFile)
+  ? JSON.parse(readFileSync(mobileFile, 'utf8')).breakpoints ?? []
+  : [];
+const defaultWidths = [1440, ...mobileWidths].join(',');
+const widths = arg('--widths', defaultWidths)
   .split(',')
   .map((w) => Number(w.trim()))
   .filter(Boolean);
